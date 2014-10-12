@@ -1,0 +1,7 @@
+<form action="{% url "insert_premise" contention.slug premise.pk %}" method="get">
+    <input type="submit" value="önerme ekle"/>
+</form>
+<form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="kaldır"/>
+</form>

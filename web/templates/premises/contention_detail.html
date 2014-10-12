@@ -1,26 +1,76 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    <header class="sticky-header">
+        <div id="logo"><a href="/"><img src="{% static "img/logo.png" %}" /></a></div>
+        <nav>
+            <ul>
+                <li>
+                    ekleyen: <a href="#">{{ contention.user }}</a>
+                </li>
+                <li>
+                    paylaş: <a href="#">twitter</a>, <a href="#">facebook</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+{% endblock %}
 
 {% block content %}
-<div class="container">
     <div class="story" id="contention-story">
         <ul class="main-contention">
             <li>
-                <a href="#">{{ contention.title }}</a>
-                <ul>
+                <div class="premise {{ premise.premise_class }}">
+                    <div class="contention premise-content">
+                    {{ contention.title }}
+                </div>
+                {% if user.is_authenticated %}
+                    <div class="contention-actions">
+                    <form action="{% url "new_premise" contention.slug %}" method="get">
+                    <input type="submit" value="önerme ekle"/>
+                    </form>
+                </div>
+                {% endif %}
+                </div>
+                <ul class="tree">
                     {% for premise in contention.published_premises.all %}
-                    <li class="base-premises"><a href="#">{{ premise.text }}</a>
+                    <li class="base-premise">
+                        <div class="premise {{ premise.premise_class }}">
+                            <div class="premise-content">
+                                {{ premise.text }}
+                            </div>
+                            {% if user.is_authenticated %}
+                            <div class="actions">
+                                {% include "premises/actions.html" %}
+                            </div>
+                            {% endif %}
+                        </div>
                         {% if premise.children.exists %}
-                        {% with template_name="premises/tree_view.html" %}
-                        {% include template_name %}
-                        {% endwith %}
+                            {% with template_name="premises/tree_view.html" %}
+                                {% include template_name %}
+                            {% endwith %}
                         {% endif %}
                     </li>
                     {% empty %}
-                    <li class="new-premise"><a hidden="{% url "new_premise" contention.slug %}" class="button" href="#">Bir önerme ekle</a></li>
+                    <li class="new-premise">Henüz hiç ama'sı ya da çünkü'sü yok</li>
                     {% endfor %}
                 </ul>
             </li>
         </ul>
     </div>
-</div>
+{% endblock %}
+
+{% block extra-scripts %}
+<script type="text/javascript">
+    $(function () {
+        var width = $(".base-premise")
+                .map(function (i,p) {return $(p).width()})
+                .toArray()
+                .reduce(function (a,b) {return a+b}),
+            offset = 120,
+            minWidth = window.innerWidth - offset;
+        $(".main-contention").width(Math.max(width + offset, minWidth));
+    });
+</script>
 {% endblock %}

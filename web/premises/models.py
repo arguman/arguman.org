@@ -82,6 +82,13 @@ class Premise(models.Model):
     def published_children(self):
         return self.children.filter(is_approved=True)
 
+    def premise_class(self):
+        return {
+            OBJECTION: "but",
+            SUPPORT: "because",
+            SITUATION: "however"
+        }.get(self.premise_type)
+
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)

@@ -1,7 +1,11 @@
-from django.views.generic import DetailView, TemplateView, CreateView
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import DetailView, TemplateView, CreateView, DeleteView, View
+from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import BaseDeleteView
 
-from premises.models import Contention
-from premises.forms import ArgumentCreationForm
+from premises.models import Contention, Premise
+from premises.forms import ArgumentCreationForm, PremiseCreationForm
 
 
 class ContentionDetailView(DetailView):
@@ -27,10 +31,45 @@ class ArgumentCreationView(CreateView):
         return super(ArgumentCreationView, self).form_valid(form)
 
 
-class PremiseCreationView(PremiseCreationView):
-    template_name = "premises/new_contention.html"
-    form_class = ArgumentCreationForm
+class PremiseCreationView(CreateView):
+    template_name = "premises/new_premise.html"
+    form_class = PremiseCreationForm
+
+    def get_context_data(self, **kwargs):
+        return super(PremiseCreationView, self).get_context_data(
+            contention=self.get_contention(),
+            **kwargs)
 
     def form_valid(self, form):
+        contention = self.get_contention()
         form.instance.user = self.request.user
-        return super(PremiseCreationView, self).form_valid(form)
+        form.instance.argument = contention
+        form.instance.parent = self.get_parent()
+        form.instance.is_approved = contention.user == self.request.user
+        form.save()
+        return redirect(contention)
+
+    def get_contention(self):
+        return get_object_or_404(Contention, slug=self.kwargs['slug'])
+
+    def get_parent(self):
+        parent_pk = self.kwargs.get("pk")
+        if parent_pk:
+            return get_object_or_404(Premise, pk=parent_pk)
+
+
+class PremiseDeleteView(View):
+    def get_premise(self):
+        return get_object_or_404(Premise,
+                                 user=self.request.user,
+                                 pk=self.kwargs['pk'])
+
+    def delete(self, request, *args, **kwargs):
+        contention = self.get_premise()
+        contention.delete()
+        return redirect(self.get_contention())
+
+    post = delete
+
+    def get_contention(self):
+        return get_object_or_404(Contention, slug=self.kwargs['slug'])

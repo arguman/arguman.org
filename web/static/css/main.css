@@ -204,9 +204,15 @@ form textarea {
     height: 80px;
 }
 
-.main-contention {
-    width: 800px;
-    magin: auto;
+#contention-story {
+    padding-bottom: 100px;
+    overflow: hidden;
+}
+
+.story .main-contention {
+    margin-left: 80px;
+    padding-top: 70px;
+    min-width: 900px;
 }
 
 .story ul {
@@ -218,11 +224,17 @@ form textarea {
     -moz-transition: all 0.5s;
     margin: 0;
 
+    /*text-align: left;*/
+
+
 }
 
 .story li {
     margin: 0;
     float: left;
+        /*display: table-cell;*/
+
+display: inline-block;
     text-align: center;
     list-style-type: none;
     position: relative;
@@ -249,7 +261,8 @@ form textarea {
     border-left: 3px solid #ccc;
 }
 
-.story li:only-child::after, .story li:only-child::before {
+.story li:only-child::after,
+.story li:only-child::before {
     display: none;
 }
 
@@ -276,17 +289,81 @@ form textarea {
     height: 50px;
 }
 
-.story li a {
-    border: 3px solid #ccc;
-    font-weight: bold;
-    padding: 5px 10px;
-    text-decoration: none;
-    color: #666;
+.story li .premise {
     font-size: 20px;
     display: inline-block;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
+    /*max-width: 300px;*/
+}
+
+.premise-content {
+    padding: 15px 8px 13px;
+    min-width: 100px;
+}
+
+.tree .premise-content  {
+    width: 200px;
+    padding-top: 20px;
+}
+
+.tree .premise .actions {
+    background-color: transparent;
+    overflow: hidden;
+    /*margin-top: -15px;*/
+    visibility: hidden;
+    position: absolute;
+    z-index: 9;
+    width: 216px;
+}
+
+.tree .premise:hover .actions {
+    background: gray;
+    visibility: visible;
+}
+
+
+.premise .actions form {
+    margin: 0 0 0 15px;
+    padding: 0 0;
+    float: left;
+}
+
+.premise .actions input {
+    border: none;
+    background-color: transparent;
+    /*font-family: sans-serif;*/
+    font-size: 17px;
+    font-weight: normal;
+    color: #fff;
+}
+
+.story .because {
+    background: #bcf4b3;
+}
+
+.story .but {
+    background: #f4c0aa;
+}
+
+.story .however {
+   background: #fff1a4;
+}
+
+.contention {
+    /*background: #d3d3d3;*/
+    font-size: 50px;
+    width: 100%;
+}
+
+.contention-actions {
+    background: white;
+    visibility: visible;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.contention-actions form {
+    margin: 0;
+    padding: 0;
 }
 
 .story li a.button {
@@ -295,9 +372,36 @@ form textarea {
 }
 
 .story li.new-premise {
-    width: 800px;
+    /*width: 1000px;*/
+    /*text-align: center;*/
 }
 
 li.base-premises {
     padding: 50px 40px;
+}
+
+.sticky-header {
+    margin: 0;
+    background: #f4f4f4;
+    /*border-bottom: 1px solid #c5c5c5;*/
+}
+
+.sticky-header #logo img {
+    height: 40px;
+    /*border-right: 1px solid #c5c5c5;*/
+}
+
+.sticky-header {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+.sticky-header nav {
+    margin-top: -3px;
+}
+
+.sticky-header nav li {
+    float: left;
+}
+
+.sticky-header nav li a {
+    font-size: 16px;
 }
