@@ -1,0 +1,11 @@
+<ul>
+    {% for premise in premise.published_children.all %}
+        <li class="premise {{ premise.premise_type }}">
+            <a href="#">{{ premise.text }}</a>
+        {% if premise.children.exists %}
+            {% with template_name="premises/tree_view.html" %}
+                {% include template_name %}
+            {% endwith %}
+        {% endif %}</li>
+    {% endfor %}
+</ul>

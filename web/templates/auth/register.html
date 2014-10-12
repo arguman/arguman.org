@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="container">
+        <form action="{% url "auth_registration" %}" method="post">
+            {% include "profiles/social_providers.html" %}
+            <h2>Kayıt ol</h2>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Kaydol" class="submit">
+        </form>
+    </section>
+{% endblock %}

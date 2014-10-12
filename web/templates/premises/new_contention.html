@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="container">
+        <form action="{% url "new_argument" %}" method="post">
+            <h2>Yeni argüman</h2>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Kaydet ve düzenlemeye devam et" class="submit">
+        </form>
+    </section>
+{% endblock %}
