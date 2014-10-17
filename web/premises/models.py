@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from unidecode import unidecode
 
-from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
@@ -24,7 +24,7 @@ class Contention(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, blank=True)
     description = models.TextField(null=True, blank=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     owner = models.CharField(max_length=255, null=True, blank=True)
     sources = models.TextField(null=True, blank=True)
     is_featured = models.BooleanField(default=False)
@@ -68,7 +68,7 @@ class Contention(models.Model):
 
 class Premise(models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
                                null=True, blank=True)
     premise_type = models.IntegerField(choices=PREMISE_TYPES)
@@ -92,7 +92,7 @@ class Premise(models.Model):
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     text = models.TextField()
     date_creation = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)

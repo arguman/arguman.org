@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.views.generic import FormView, CreateView, RedirectView, DetailView
 
 from profiles.forms import RegistrationForm
+from profiles.models import Profile
 from profiles.signals import follow_done, unfollow_done
 from premises.models import Contention
 
@@ -57,15 +58,19 @@ class ProfileDetailView(DetailView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
     context_object_name = "profile"
-    model = User
+    model = Profile
 
     def get_context_data(self, **kwargs):
         """
         Adds extra context to template
         """
         user = self.get_object()
-        contentions = Contention.objects.published(user=user)
+        contentions = Contention.objects.filter(user=user)
+        can_follow = self.request.user != user
+        is_followed = self.request.user.following.filter(pk=user.id).exists()
         return super(ProfileDetailView, self).get_context_data(
+            can_follow=can_follow,
+            is_followed=is_followed,
             contentions=contentions)
 
     def delete(self, request, **kwargs):
@@ -74,7 +79,8 @@ class ProfileDetailView(DetailView):
         - Fires unfollow_done signal
         """
         user = self.get_object()
-        user.followers.filter(follower=request.user).delete()
+
+        request.user.following.remove(user)
 
         unfollow_done.send(sender=self, follower=request.user, following=user)
 
@@ -89,12 +95,12 @@ class ProfileDetailView(DetailView):
         """
         user = self.get_object()
 
-        if user.followers.filter(follower=request.user).exists():
+        if user.followers.filter(pk=request.user.pk).exists():
             return HttpResponse(json.dumps({
                 "error": "You already following this people."
             }))
 
-        user.followers.create(follower=request.user)
+        request.user.following.add(user)
 
         follow_done.send(sender=self, follower=request.user, following=user)
 

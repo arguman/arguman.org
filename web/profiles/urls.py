@@ -12,7 +12,7 @@ urlpatterns = patterns('',
         template_name="auth/register.html"), name='auth_registration'),
     url(r'^complete/$', TemplateView.as_view(
         template_name="auth/complete.html"), name='auth_registration_complete'),
-    url(r'^profile/(?P<username>[\w\._-]+)$', ProfileDetailView.as_view(
+    url(r'^users/(?P<username>[\w\._-]+)$', ProfileDetailView.as_view(
         template_name="auth/profile.html"), name='auth_profile'),
 
 )

@@ -39,6 +39,8 @@ INSTALLED_APPS = (
 
     'social_auth',
     'premises',
+    'django_gravatar',
+    'profiles',
 
 )
 
@@ -100,6 +102,9 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+
+AUTH_USER_MODEL = 'profiles.Profile'
 
 
 TWITTER_CONSUMER_KEY = None # defined in settings_local.py

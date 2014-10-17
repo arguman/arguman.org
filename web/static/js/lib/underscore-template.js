@@ -48,7 +48,7 @@
     var tmpl = function (selector, data, objectName) {
         settings.variable = objectName;
 
-        var text = $(selector).html();
+        var text = $(selector).html() || "";
  
         // Compile the template source, taking care to escape characters that
         // cannot be included in a string literal and then unescape them in code

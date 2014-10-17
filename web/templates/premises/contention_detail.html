@@ -7,7 +7,7 @@
         <nav>
             <ul>
                 <li>
-                    ekleyen: <a href="#">{{ contention.user }}</a>
+                    ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user }}</a>
                 </li>
                 <li>
                     orijinal söylem:
@@ -104,7 +104,7 @@
         });
 
         app.contention.onRender(function () {
-            $(".sticky-header").width(Math.max(
+            $(".sticky-header, footer").width(Math.max(
                     app.canvas.domElement.width,
                     window.innerWidth
             ));

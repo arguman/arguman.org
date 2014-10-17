@@ -1,74 +1,68 @@
 {% extends "base.html" %}
-{% load gravatar document_tags %}
-
-{% block body-id %}profile-detail{% endblock %}
+{% load gravatar %}
 
 {% block content %}
-    <div id="profile" class="content">
+    <div id="profile" class="container">
         <aside>
             <h3>{{ profile.username }}</h3>
-            <a class="gravatar profile-image" href="{% url auth_profile profile.username %}">
-                <img alt="gravatar of {{ profile.username }}" width="160" height="160" src="{% gravatar_for_user profile 160 %}">
+            <a class="gravatar profile-image" href="{% url "auth_profile" profile.username %}">
+                {% gravatar profile 160 %}
             </a>
 
             {% if can_follow %}
             <nav class="actions">
                 {% if is_followed %}
-                    <a href="{% url auth_profile profile.username %}" class="anchor unfollow" data-method="delete">Unfollow</a>
+                    <a href="{% url "auth_profile" profile.username %}" class="anchor unfollow" data-method="delete">Unfollow</a>
                 {% else %}
-                    <a href="{% url auth_profile profile.username %}" class="anchor follow" data-method="post">Follow</a>
+                    <a href="{% url "auth_profile" profile.username %}" class="anchor follow" data-method="post">Follow</a>
                 {% endif %}
             </nav>
             {% endif %}
 
-            <h2>following ({{ profile.following.count }})</h2>
+            <section class="user-contentions">
+                <h2>Katkıda bulunduğu argümanlar</h2>
+                <ul>
+                    {% for contention in contentions %}
+                        <li>
+                            <a href="{{ contention.get_absolute_url }}">{{ contention.title }}</a>
+                        </li>
+                    {% empty %}
+                        <li>hiç katkıda bulunduğu bir argüman yok.</li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <h2>Takip ettikleri ({{ profile.following.count }})</h2>
             <ul class="following">
-                {% for relationship in profile.following.all %}
+                {% for followee in profile.following.all %}
                     <li>
-                        <a href="{% url auth_profile relationship.following.username %}">
-                        <img alt="{{ profile.username }} following {{ relationship.following }}"
-                             src="{% gravatar_for_user relationship.following 40 %}">
+                        <a href="{% url "auth_profile" followee.username %}">
+                        {% gravatar followee 40 %}
                         </a>
                     </li>
                 {% empty %}
-                    <li class="empty">{{ profile }} is not following anyone.</li>
+                    <li class="empty">Kimseyi takip etmiyor.</li>
                 {% endfor %}
             </ul>
 
-            <h2>followers ({{ profile.followers.count }})</h2>
+            <h2>Takipçileri ({{ profile.followers.count }})</h2>
             <ul class="following">
-                {% for relationship in profile.followers.all %}
+                {% for follower in profile.followers.all %}
                     <li>
-                        <a href="{% url auth_profile relationship.follower.username %}">
-                            <img alt="{{ relationship.follower }} following {{ profile.username }}"
-                                 src="{% gravatar_for_user relationship.follower 40 %}">
+                        <a href="{% url "auth_profile" follower.username %}">
+                            {% gravatar follower 40 %}
                         </a>
                     </li>
                 {% empty %}
-                    <li class="empty">{{ profile }} has no follower.</li>
+                    <li class="empty">{{ profile }} hiç takipçiye sahip değil.</li>
                 {% endfor %}
             </ul>
         </aside>
-        <section class="documents">
-            <h2>Documents</h2>
-            <ul>
-                {% for document in documents %}
-                    <li>
-                        <a href="{{ document.get_absolute_url }}">{{ document.title }}</a>
-                        <div class="info">
-                            <span class="icon fork">{{ document.get_fork_count }} fork</span>
-                            <span class="icon star">{{ document.star_count }} star</span>
-                        </div>
-                    </li>
-                {% empty %}
-                    <li>{{ profile }} does not have any pattern yet.</li>
-                {% endfor %}
-            </ul>
-        </section>
+
     </div>
 {% endblock %}
 
-{% block scripts %}
+{% block extra-scripts %}
     {{ block.super }}
     <script type="text/javascript">
         $(function () {
