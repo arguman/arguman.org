@@ -21,7 +21,7 @@
     <!-- templates -->
     <script id="main-contention-template" type="text/template">
         <div class="main-premise-content">
-            <%= name %>
+            <%= marked(name) %>
         </div>
     </script>
 
@@ -30,8 +30,14 @@
             <%= {"but": "ama", "because": "çünkü", "however": "ancak"}[premise_type] %>
         </div>
         <div class="premise-content <%= premise_type %>">
-            <%= name %>
+            <%= marked(name) %>
         </div>
+        <% if (sources) { %>
+        <div class="premise-sources">
+        <strong>kaynaklar:</strong>
+        <%= marked(sources) %>
+        </div>
+        <% } %>
     </script>
 
     <div id="app"></div>

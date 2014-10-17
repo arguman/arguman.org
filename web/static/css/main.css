@@ -338,7 +338,13 @@ li.base-premises {
     padding: 10px 15px;
     font-size: 24px;
     border-radius: 5px;
+    z-index: 1;
 }
+
+    .premise-content p {
+        margin: 0;
+        padding: 0;
+    }
 
     .premise-content.but {
         background: #ffd8d5;
@@ -374,6 +380,42 @@ li.base-premises {
     .premise-type.however {
         color: #ffbe86;
     }
+
+    .premise-sources {
+        width: 262px;
+        margin: -5px auto auto 14px;
+        background: #e9e9e9;
+        z-index: 1;
+        /*position: absolute;*/
+        border-radius: 0 0 5px 5px;
+        border-top: 1px solid #bcbcbc;
+    }
+
+    .premise-sources strong {
+        text-align: left;
+        display: block;
+        padding: 4px 10px;
+        color: gray;
+        /*font-size: 20px;*/
+    }
+
+    .premise-sources p {
+        margin: 0;
+        padding: 0 10px 10px;
+        text-overflow: ellipsis;
+        text-align: left;
+        color: #a9a9a9;
+    }
+
+    .premise-sources a {
+        color: #b5b5b5;
+        width: 240px;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
 
 #app .main-premise-content {
     padding-top: 50px;

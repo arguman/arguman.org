@@ -27,6 +27,8 @@ class ContentionJsonView(DetailView):
         return {
             "name": contention.title,
             "parent": None,
+            "owner": contention.owner,
+            "sources": contention.sources,
             "children": self.get_premises(contention)
         }
 
@@ -34,6 +36,7 @@ class ContentionJsonView(DetailView):
         children = [{
             "name": premise.text,
             "parent": parent.text if parent else None,
+            "sources": premise.sources,
             "premise_type": premise.premise_class(),
             "children": (self.get_premises(contention, parent=premise)
                          if premise.published_children().exists() else [])
