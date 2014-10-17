@@ -18,7 +18,12 @@
 {% endblock %}
 
 {% block content %}
+    <div id="app"></div>
     <div class="story" id="contention-story">
+        <!--
+            Simplified version (just an unordered list)
+            Does not affects the interactive map.
+        -->
         <ul class="main-contention">
             <li>
                 <div class="premise {{ premise.premise_class }}">
@@ -58,19 +63,17 @@
                 </ul>
             </li>
         </ul>
+        <!-- End of simplified version -->
     </div>
 {% endblock %}
 
 {% block extra-scripts %}
 <script type="text/javascript">
-    $(function () {
-        var width = $(".base-premise")
-                .map(function (i,p) {return $(p).width()})
-                .toArray()
-                .reduce(function (a,b) {return a+b}),
-            offset = 120,
-            minWidth = window.innerWidth - offset;
-        $(".main-contention").width(Math.max(width + offset, minWidth));
+    $.getJSON(location.href + ".json", function (response) {
+        new arguman.Map({
+            model: response.nodes,
+            container: "#app"
+        }).render()
     });
 </script>
 {% endblock %}

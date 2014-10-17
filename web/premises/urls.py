@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
-                            PremiseDeleteView)
+                            PremiseDeleteView, ContentionJsonView)
 
 
 urlpatterns = patterns('',
@@ -10,6 +10,9 @@ urlpatterns = patterns('',
    url(r'^new-argument$',
        ArgumentCreationView.as_view(),
        name='new_argument'),
+   url(r'^(?P<slug>[\w-]+)\.json$',
+        ContentionJsonView.as_view(),
+        name='contention_detail_json'),
    url(r'^(?P<slug>[\w-]+)$',
         ContentionDetailView.as_view(),
         name='contention_detail'),

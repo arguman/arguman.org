@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, TemplateView, CreateView, DeleteView, View
@@ -11,6 +12,32 @@ from premises.forms import ArgumentCreationForm, PremiseCreationForm
 class ContentionDetailView(DetailView):
     template_name = "premises/contention_detail.html"
     model = Contention
+
+
+class ContentionJsonView(DetailView):
+    model = Contention
+
+    def render_to_response(self, context, **response_kwargs):
+        contention = self.get_object(self.get_queryset())
+        return HttpResponse(json.dumps({
+            "nodes": self.build_tree(contention)
+        }), content_type="application/json")
+
+    def build_tree(self, contention):
+        return {
+            "name": contention.title,
+            "parent": None,
+            "children": self.get_premises(contention)
+        }
+
+    def get_premises(self, contention, parent=None):
+        children = [{
+            "name": premise.text,
+            "parent": parent.text if parent else None,
+            "children": (self.get_premises(contention, parent=premise)
+                         if premise.published_children().exists() else [])
+        } for premise in contention.published_premises(parent)]
+        return children
 
 
 class HomeView(TemplateView):

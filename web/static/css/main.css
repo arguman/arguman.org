@@ -205,120 +205,13 @@ form textarea {
 }
 
 #contention-story {
-    padding-bottom: 100px;
-    overflow: hidden;
+
 }
 
 .story .main-contention {
-    margin-left: 80px;
-    padding-top: 70px;
-    min-width: 900px;
-}
-
-.story ul {
-    padding: 0;
-    padding-top: 50px;
-    position: relative;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    margin: 0;
-
-    /*text-align: left;*/
-
-
-}
-
-.story li {
-    margin: 0;
-    float: left;
-        /*display: table-cell;*/
-
-display: inline-block;
-    text-align: center;
-    list-style-type: none;
-    position: relative;
-    padding: 50px 5px 0 5px;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-}
-
-
-.story li::before, .story li::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 50%;
-    border-top: 3px solid #ccc;
-    width: 50%;
-    height: 50px;
-}
-
-.story li::after {
-    right: auto;
-    left: 50%;
-    border-left: 3px solid #ccc;
-}
-
-.story li:only-child::after,
-.story li:only-child::before {
     display: none;
 }
 
-.story li:only-child {
-    padding-top: 0;
-}
-
-.story li:first-child::before,
-.story li:last-child::after {
-    border: 0 none;
-}
-
-.story li:last-child::before {
-    border-right: 3px solid #ccc;
-}
-
-.story ul ul::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    border-left: 3px solid #ccc;
-    width: 0;
-    height: 50px;
-}
-
-.story li .premise {
-    font-size: 20px;
-    display: inline-block;
-    /*max-width: 300px;*/
-}
-
-.premise-content {
-    padding: 15px 8px 13px;
-    min-width: 100px;
-}
-
-.tree .premise-content  {
-    width: 200px;
-    padding-top: 20px;
-}
-
-.tree .premise .actions {
-    background-color: transparent;
-    overflow: hidden;
-    /*margin-top: -15px;*/
-    visibility: hidden;
-    position: absolute;
-    z-index: 9;
-    width: 216px;
-}
-
-.tree .premise:hover .actions {
-    background: gray;
-    visibility: visible;
-}
 
 
 .premise .actions form {
@@ -381,6 +274,8 @@ li.base-premises {
 }
 
 .sticky-header {
+    position: fixed;
+    display: none;
     margin: 0;
     background: #f4f4f4;
     /*border-bottom: 1px solid #c5c5c5;*/
@@ -404,4 +299,40 @@ li.base-premises {
 
 .sticky-header nav li a {
     font-size: 16px;
+}
+
+
+/* Interactive App */
+
+#app {
+    position: absolute;
+    width: 100%;
+}
+
+#app canvas {
+    /*background: #eeeeee;*/
+    position: absolute;
+    background: transparent;
+
+    /*left: 50%;*/
+}
+
+#app .main-contention {
+    position: absolute;
+    /*margin-left: 400px;*/
+    font-size: 50px;
+    text-align: center;
+    /*width: 100%;*/
+}
+
+#app .premise {
+    position: absolute;
+    /*border: 1px solid black;*/
+    text-align: center;
+}
+
+#app .premise .premise-content {
+    width: 80%;
+    margin: auto;
+    border: 1px solid black;
 }

@@ -55,8 +55,8 @@ class Contention(models.Model):
                 self.slug = slug
         return super(Contention, self).save(*args, **kwargs)
 
-    def published_premises(self):
-        return self.premises.filter(is_approved=True, parent=None)
+    def published_premises(self, parent=None):
+        return self.premises.filter(is_approved=True, parent=parent)
 
     def children_by_premise_type(self, premise_type=None):
         return self.published_premises().filter(premise_type=premise_type)
