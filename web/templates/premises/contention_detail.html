@@ -10,7 +10,12 @@
                     ekleyen: <a href="#">{{ contention.user }}</a>
                 </li>
                 <li>
-                    paylaş: <a href="#">twitter</a>, <a href="#">facebook</a>
+                    orijinal söylem:
+                    {% if contention.sources %}
+                    {{ contention.sources|urlize }}
+                    {% else %}
+                     Belirtilmemiş
+                    {% endif %}
                 </li>
             </ul>
         </nav>
@@ -93,10 +98,20 @@
 {% block extra-scripts %}
 <script type="text/javascript">
     $.getJSON(location.href + ".json", function (response) {
-        new arguman.Map({
+        var app = new arguman.Map({
             model: response.nodes,
             container: "#app"
-        }).render()
+        });
+
+        app.contention.onRender(function () {
+            $(".sticky-header").width(Math.max(
+                    app.canvas.domElement.width,
+                    window.innerWidth
+            ));
+        });
+
+        app.render();
+
     });
 </script>
 {% endblock %}

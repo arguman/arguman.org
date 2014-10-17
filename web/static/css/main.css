@@ -138,7 +138,7 @@ header nav ul li {
     padding: 0 15px;
 }
 
-header nav ul li a {
+header nav #main-navigation li a {
     color: #4e4e4e;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     text-decoration: none;
@@ -274,31 +274,35 @@ li.base-premises {
 }
 
 .sticky-header {
-    position: fixed;
-    display: none;
+    position: absolute;
+    width: 100%;
     margin: 0;
     background: #f4f4f4;
+    z-index: 1;
     /*border-bottom: 1px solid #c5c5c5;*/
 }
 
 .sticky-header #logo img {
-    height: 40px;
+    height: 80px;
     /*border-right: 1px solid #c5c5c5;*/
 }
 
 .sticky-header {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    /*font-family: Helvetica Neue, Helvetica, Arial, sans-serif;*/
 }
 .sticky-header nav {
     margin-top: -3px;
 }
 
 .sticky-header nav li {
-    float: left;
+    margin-top: 5px;
+    font-size: 20px;
+    display: block;
+    color: #a0a0a0;
 }
 
 .sticky-header nav li a {
-    font-size: 16px;
+    color: #464646;
 }
 
 
@@ -418,9 +422,14 @@ li.base-premises {
 
 
 #app .main-premise-content {
-    padding-top: 50px;
+    padding-top: 120px;
+    padding-bottom: 20px;
     max-width: 800px;
     line-height: 1em;
-    padding-bottom: 20px;
     margin: auto;
+}
+
+#app .main-premise-content p {
+    margin: 0;
+    padding: 0;
 }

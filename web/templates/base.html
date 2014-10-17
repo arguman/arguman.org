@@ -15,7 +15,7 @@
         <a href="/"><img src="{% static "img/logo.png" %}" alt=""/></a>
     </div>
     <nav>
-        <ul>
+        <ul id="main-navigation">
             <li><a href="#">nedir?</a></li>
             {% if user.is_anonymous %}
             <li><a href="{% url "auth_registration" %}">kayıt ol</a></li>
