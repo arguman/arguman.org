@@ -9,6 +9,8 @@
         level: 0,
         maxY: 0,
 
+        template: template("#main-contention-template"),
+
         init: function (options) {
             $.extend(this, options);
             var model = options.model,
@@ -35,10 +37,13 @@
                 .reduce(arguman.utils.adder);
             return nodesWidth;
         },
+        renderPremiseContent: function () {
+            return this.template(this.model)
+        },
         render: function () {
             this.domElement = $("<div>", {
                 "class": "main-contention"
-            }).html(this.model.name)
+            }).html(this.renderPremiseContent())
               .width(this.getWidth());
             return this.domElement;
         },
@@ -58,14 +63,16 @@
             // add edge to main premises
             var firstPremise = this.children[0],
                 lastPremise = this.children[this.children.length-1];
-            context.moveTo(firstPremise.getCenterX(), firstPremise.y - 60);
+            context.moveTo(firstPremise.getCenterX() , firstPremise.y - 60);
             context.lineTo(lastPremise.getCenterX() + 4, lastPremise.y - 60);
             context.stroke();
             this.children.forEach(function (premise) {
                 context.moveTo(premise.getCenterX() + 2, firstPremise.y - 60);
                 context.lineTo(premise.getCenterX() + 2, lastPremise.y);
                 context.stroke();
-                premise.renderEdges(context);
+                if (premise.children.length) {
+                    premise.renderEdges(context);
+                }
             });
         },
 
@@ -78,7 +85,9 @@
     arguman.Premise = Class.extend({
 
         minWidth: 150,
-        maxWidth: 200,
+        maxWidth: 290,
+
+        template: template("#premise-template"),
 
         parent: null,
         level: 0,
@@ -107,12 +116,6 @@
         },
         getWidth: function () {
             return this.maxWidth;
-
-//            if (this.model.name.length > 50) {
-//                return this.minWidth;
-//            } else {
-//                return this.maxWidth;
-//            }
         },
         getTreeWidth: function () {
             var total;
@@ -125,18 +128,13 @@
             }
             return total;
         },
-        getHeight: function () {
-//            return parseInt(this.model.name.length / 30)
-        },
 
         getCenterX: function () {
             return this.x + (this.getWidth()/2)
         },
 
         renderPremiseContent: function () {
-            return $("<div>", {
-                "class": "premise-content"
-            }).html(this.model.name)
+            return this.template(this.model);
         },
 
         render: function (columnLeft, rowTop) {
@@ -184,7 +182,7 @@
                 lastPremise = this.children[this.children.length-1];
 
                 context.moveTo(firstPremise.getCenterX() -2, firstPremise.y - 60);
-                context.lineTo(lastPremise.getCenterX() + 2, lastPremise.y - 60);
+                context.lineTo(lastPremise.getCenterX() + 2 , lastPremise.y - 60);
                 context.stroke();
             }
 
@@ -216,14 +214,15 @@
             canvas.width = this.width;
             canvas.height = this.height;
 //            canvas.style.marginLeft = -(this.width/2) + "px";
-
             this.domElement = canvas;
-
             return canvas;
         }
     });
 
     arguman.Map = Class.extend({
+
+        edgeColor: "#858585",
+
         init: function (options) {
             $.extend(this, options);
             this.contention = new arguman.Contention({
@@ -247,9 +246,18 @@
             this.contention.renderPremises(this.$container);
 
         },
+        centerMap: function () {
+            if (this.contention.getWidth() < window.innerWidth) {
+                var left = (window.innerWidth/2) - (this.contention.getWidth()/2);
+                this.$container.css({
+                    "margin-left": left + "px"
+                })
+            }
+        },
         onRenderFinish: function () {
             this.canvas.domElement.height = this.contention.maxY;
             this.renderEdges();
+            this.centerMap();
         },
         renderEdges: function () {
             var canvas = this.canvas.domElement,
@@ -262,21 +270,12 @@
             context.arc(
                 canvas.width / 2,
                 $(this.contention.domElement).height() + 10,
-                12,
-                0,
-                2 * Math.PI,
-                false
-            );
+                12, 0, 2 * Math.PI, false);
 
-
-            context.fillStyle = 'gray';
-
+            context.fillStyle = context.strokeStyle = this.edgeColor;
             context.fill();
             context.beginPath();
-
-            context.strokeStyle = "gray";
-            context.lineWidth = 4;
-
+            context.lineWidth = 5;
             context.moveTo(
                 (canvas.width / 2),
                 $(this.contention.domElement).height() + 21

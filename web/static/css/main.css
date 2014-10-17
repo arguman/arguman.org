@@ -306,13 +306,14 @@ li.base-premises {
 
 #app {
     position: absolute;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 #app canvas {
     /*background: #eeeeee;*/
     position: absolute;
     background: transparent;
+    margin-bottom: 100px;
 
     /*left: 50%;*/
 }
@@ -320,7 +321,7 @@ li.base-premises {
 #app .main-contention {
     position: absolute;
     /*margin-left: 400px;*/
-    font-size: 50px;
+    font-size: 60px;
     text-align: center;
     /*width: 100%;*/
 }
@@ -334,5 +335,50 @@ li.base-premises {
 #app .premise .premise-content {
     width: 80%;
     margin: auto;
-    border: 1px solid black;
+    padding: 10px 15px;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+    .premise-content.but {
+        background: #ffd8d5;
+        /*border: 3px solid gray;*/
+    }
+
+    .premise-content.because {
+        background: #c8ffb3;
+        /*border: 3px solid gray;*/
+    }
+
+    .premise-content.however {
+        background: #fff1a4;
+        /*border: 3px solid gray;*/
+    }
+
+    .premise .premise-type {
+        position: absolute;
+        margin-top: -34px;
+        text-align: right;
+        width: 135px;
+        font-size: 24px;
+    }
+
+    .premise-type.but {
+        color: #d07d7d;
+    }
+
+    .premise-type.because {
+        color: #85ad63;
+    }
+
+    .premise-type.however {
+        color: #ffbe86;
+    }
+
+#app .main-premise-content {
+    padding-top: 50px;
+    max-width: 800px;
+    line-height: 1em;
+    padding-bottom: 20px;
+    margin: auto;
 }

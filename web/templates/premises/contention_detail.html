@@ -18,11 +18,28 @@
 {% endblock %}
 
 {% block content %}
+    <!-- templates -->
+    <script id="main-contention-template" type="text/template">
+        <div class="main-premise-content">
+            <%= name %>
+        </div>
+    </script>
+
+    <script id="premise-template" type="text/template">
+        <div class="premise-type <%= premise_type %>">
+            <%= {"but": "ama", "because": "çünkü", "however": "ancak"}[premise_type] %>
+        </div>
+        <div class="premise-content <%= premise_type %>">
+            <%= name %>
+        </div>
+    </script>
+
     <div id="app"></div>
     <div class="story" id="contention-story">
         <!--
             Simplified version (just an unordered list)
             Does not affects the interactive map.
+            It was done for by crawlers and browsers which disabled javascript.
         -->
         <ul class="main-contention">
             <li>

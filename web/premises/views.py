@@ -34,6 +34,7 @@ class ContentionJsonView(DetailView):
         children = [{
             "name": premise.text,
             "parent": parent.text if parent else None,
+            "premise_type": premise.premise_class(),
             "children": (self.get_premises(contention, parent=premise)
                          if premise.published_children().exists() else [])
         } for premise in contention.published_premises(parent)]
