@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}{{ contention.title }}{% endblock %}
+
 {% block header %}
     <header class="sticky-header">
         <div id="logo"><a href="/"><img src="{% static "img/logo.png" %}" /></a></div>
