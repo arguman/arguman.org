@@ -595,3 +595,24 @@ ul [for='id_premise_type_2'] { color: #ffcc64; }
 #id_premise_type li {
     list-style: none;
 }
+
+footer {
+    font-size: 22px;
+    margin: 50px auto auto;
+    background: #ebebeb;
+    color: #3d3d3d;
+}
+
+footer .container {
+    margin: auto;
+    padding: 20px;
+}
+
+footer p {
+    margin: 0;
+    padding: 5px 20px;
+}
+
+footer a {
+    color: #ff167b;
+}
