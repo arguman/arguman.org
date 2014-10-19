@@ -1,21 +1,25 @@
 from django import forms
 
+from premises.mixins import FormRenderer
 from premises.models import Contention, Premise
 
 
-class ArgumentCreationForm(forms.ModelForm):
+class ArgumentCreationForm(FormRenderer, forms.ModelForm):
     class Meta:
         model = Contention
-        fields = ['title', 'description', 'owner', 'sources']
+        fields = ['title', 'owner', 'sources']
 
 
-class PremiseCreationForm(forms.ModelForm):
+class PremiseCreationForm(FormRenderer, forms.ModelForm):
     class Meta:
         model = Premise
         fields = ['premise_type', 'text', 'sources']
+        widgets = {
+            'premise_type': forms.RadioSelect
+        }
 
 
-class PremiseEditForm(forms.ModelForm):
+class PremiseEditForm(FormRenderer, forms.ModelForm):
     class Meta:
         model = Premise
         fields = ['premise_type', 'text', 'sources', 'is_approved']

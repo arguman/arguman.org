@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
+from django.template.loader import render_to_string
 from unidecode import unidecode
 
 from django.db import models
@@ -14,19 +15,28 @@ SUPPORT = 1
 SITUATION = 2
 
 PREMISE_TYPES = (
-    (OBJECTION, u"İtiraz"),
-    (SUPPORT, u"Destek"),
-    (SITUATION, u"Bilgilendirme"),
+    (OBJECTION, u"ama"),
+    (SUPPORT, u"çünkü"),
+    (SITUATION, u"ancak"),
 )
 
 
 class Contention(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(
+        max_length=255, verbose_name="Argüman",
+        help_text=render_to_string("premises/examples/contention.html"))
     slug = models.SlugField(max_length=255, blank=True)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(
+        null=True, blank=True, verbose_name="Ek bilgiler",)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    owner = models.CharField(max_length=255, null=True, blank=True)
-    sources = models.TextField(null=True, blank=True)
+    owner = models.CharField(
+        max_length=255, null=True, blank=True,
+        verbose_name="Orijinal söylem",
+        help_text=render_to_string("premises/examples/owner.html"))
+    sources = models.TextField(
+        null=True, blank=True,
+        verbose_name="Kaynaklar",
+        help_text=render_to_string("premises/examples/sources.html"))
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
@@ -72,9 +82,17 @@ class Premise(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
                                null=True, blank=True)
-    premise_type = models.IntegerField(choices=PREMISE_TYPES)
-    text = models.TextField(null=True, blank=True)
-    sources = models.TextField(null=True, blank=True)
+    premise_type = models.IntegerField(
+        default=SUPPORT,
+        choices=PREMISE_TYPES, verbose_name="Önerme Tipi",
+        help_text=render_to_string("premises/examples/premise_type.html"))
+    text = models.TextField(
+        null=True, blank=True,
+        verbose_name="Önermenin İçeriği",
+        help_text=render_to_string("premises/examples/premise.html"))
+    sources = models.TextField(
+        null=True, blank=True, verbose_name="Kaynaklar",
+        help_text=render_to_string("premises/examples/premise_source.html"))
     is_approved = models.BooleanField(default=False)
 
     def __unicode__(self):

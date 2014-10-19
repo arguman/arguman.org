@@ -3,7 +3,6 @@
 {% block content %}
     <section class="container">
         <form action="?" method="post">
-            <h2>Yeni argüman</h2>
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Kaydet ve düzenlemeye devam et" class="submit">

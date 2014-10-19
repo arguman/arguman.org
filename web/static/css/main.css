@@ -172,9 +172,9 @@ form {
 }
 
 form label {
-    width: 180px;
+    width: 100%;
     display: inline-block;
-    font-size: 24px;
+    font-size: 28px;
 }
 
 form a {
@@ -196,7 +196,17 @@ form .submit {
 form .helptext {
     color: #bcbcbc;
     display: block;
-    margin-left: 185px;
+    /*margin-left: 185px;*/
+}
+
+form label {
+    display: block;
+}
+
+.helptext ul {
+    /*color: gray;*/
+    margin: 0 20px;
+    padding: 10px;
 }
 
 form textarea {
@@ -563,4 +573,25 @@ li.base-premises {
     text-decoration: underline;
     font-size: 20px;
     color: #474747;
+}
+
+#id_premise_type {
+    margin: -10px 0 15px 20px;
+    padding: 0;
+}
+
+p [for='id_premise_type_0'] {
+
+}
+
+ul [for='id_premise_type_0'] { color: #ff7895; }
+ul [for='id_premise_type_1'] { color: #72ffa0; }
+ul [for='id_premise_type_2'] { color: #ffcc64; }
+
+#id_premise_type li label input {
+    margin-right: 10px;
+}
+
+#id_premise_type li {
+    list-style: none;
 }
