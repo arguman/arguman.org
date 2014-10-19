@@ -2,7 +2,7 @@
 {% load gravatar %}
 
 {% block content %}
-    <div id="profile" class="container">
+    <div class="container user-profile">
         <aside>
             <h3>{{ profile.username }}</h3>
             <a class="gravatar profile-image" href="{% url "auth_profile" profile.username %}">
@@ -12,14 +12,16 @@
             {% if can_follow %}
             <nav class="actions">
                 {% if is_followed %}
-                    <a href="{% url "auth_profile" profile.username %}" class="anchor unfollow" data-method="delete">Unfollow</a>
+                    <a href="{% url "auth_profile" profile.username %}" class="anchor unfollow" data-method="delete">Takibi bırak</a>
                 {% else %}
-                    <a href="{% url "auth_profile" profile.username %}" class="anchor follow" data-method="post">Follow</a>
+                    <a href="{% url "auth_profile" profile.username %}" class="anchor follow" data-method="post">Takip et</a>
                 {% endif %}
             </nav>
             {% endif %}
+        </aside>
 
-            <section class="user-contentions">
+        <div class="user-detail">
+                  <section class="user-contentions">
                 <h2>Katkıda bulunduğu argümanlar</h2>
                 <ul>
                     {% for contention in contentions %}
@@ -57,8 +59,8 @@
                     <li class="empty">{{ profile }} hiç takipçiye sahip değil.</li>
                 {% endfor %}
             </ul>
-        </aside>
 
+        </div>
     </div>
 {% endblock %}
 

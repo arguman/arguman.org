@@ -433,3 +433,134 @@ li.base-premises {
     margin: 0;
     padding: 0;
 }
+
+
+.user-profile aside {
+    width: 200px;
+    float: left;
+    text-align: center;
+}
+
+.user-profile aside img {
+    border-radius: 50%;
+}
+
+.user-profile nav {
+    margin-top: 15px;
+}
+
+.user-profile nav a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 4px 20px;
+    background-color: #f4ebb0;
+    border-radius: 5px;
+    color: #181818;
+    font-size: 21px;
+}
+
+.user-profile nav a:hover {
+    background-color: #464242;
+    color: white;
+}
+
+.user-profile .user-detail {
+    width: 500px;
+    float: left;
+    margin-left: 10px;
+}
+
+.container h2 {
+    font-size: 30px;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.user-profile h3 {
+    font-size: 28px;
+}
+
+.user-profile .user-contentions ul {
+    margin: 0 0 20px 20px;
+    padding: 0;
+}
+
+.user-profile .user-contentions li {
+    list-style: none;
+    border-bottom: 1px solid #c1c1c1;
+}
+
+.user-profile .user-contentions li a {
+    color: #525252;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.following  {
+    margin: 0 0 0 20px;
+    padding: 0 0 20px 0;
+    overflow: hidden;
+}
+
+.following li {
+    list-style: none;
+    float: left;
+    margin-right: 2px;
+    margin-bottom: 2px;
+}
+
+
+.main-contention-actions .new-premise {
+    position: absolute;
+    font-size: 20px;
+    margin-left: 17px;
+    margin-top: -4px;
+    text-decoration: underline;
+    color: #505050;
+}
+
+.premise-actions {
+    width: 262px;
+    margin: -5px auto auto 14px;
+    background: #d6d6d6;
+    z-index: 1;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid #bcbcbc;
+    font-size: 18px;
+    padding-bottom: 3px;
+}
+
+.premise-actions a {
+    color: #474747;
+    margin-left: 3px;
+}
+
+.premise-actions form {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.premise-actions input {
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    font-size: 20px;
+    color: #474747;
+}
+
+.contention-admin-menu form {
+    margin: -6px 0 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.contention-admin-menu input {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    font-size: 20px;
+    color: #474747;
+}

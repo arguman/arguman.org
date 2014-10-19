@@ -4,6 +4,26 @@
 {% block header %}
     <header class="sticky-header">
         <div id="logo"><a href="/"><img src="{% static "img/logo.png" %}" /></a></div>
+        {% if edit_mode %}
+        <nav class="contention-admin-menu">
+            <ul>
+                <li><a href="{% url "contention_edit" contention.slug %}">Düzenle</a></li>
+                <li>
+                    {% if contention.is_published %}
+                    <form action="{% url "contention_unpublish" contention.slug %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Yayından kaldır"/>
+                    </form>
+                    {% else %}
+                    <form action="{% url "contention_publish" contention.slug %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Argümanı yayınla"/>
+                    </form>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+        {% else %}
         <nav>
             <ul>
                 <li>
@@ -19,6 +39,7 @@
                 </li>
             </ul>
         </nav>
+        {% endif %}
     </header>
 {% endblock %}
 
@@ -27,6 +48,9 @@
     <script id="main-contention-template" type="text/template">
         <div class="main-premise-content">
             <%= marked(name) %>
+        </div>
+        <div class="main-contention-actions">
+            <a class="new-premise" href="{% url "new_premise" contention.slug %}">önerme ekle</a>
         </div>
     </script>
 
@@ -43,6 +67,16 @@
         <%= marked(sources) %>
         </div>
         <% } %>
+        {% if edit_mode %}
+        <div class="premise-actions">
+            <a href="{{ path }}/premises/<%= pk %>/new">önerme ekle</a>
+            <a href="{{ path }}/premises/<%= pk %>">düzenle</a>
+            <form action="{{ path }}/premises/<%= pk %>/delete" method="post">
+                {% csrf_token %}
+                <input type="submit" value="sil"/>
+            </form>
+        </div>
+        {% endif %}
     </script>
 
     <div id="app"></div>

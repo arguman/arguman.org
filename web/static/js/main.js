@@ -123,6 +123,7 @@
                 total = this.children
                     .map(function (child) {return child.getTreeWidth()})
                     .reduce(arguman.utils.adder);
+
             } else {
                 total = this.getWidth();
             }

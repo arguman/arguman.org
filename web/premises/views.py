@@ -1,17 +1,27 @@
+# -*- coding:utf-8 -*-
+
 import json
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import DetailView, TemplateView, CreateView, DeleteView, View
-from django.views.generic.detail import SingleObjectMixin
-from django.views.generic.edit import BaseDeleteView
+from django.views.generic import DetailView, TemplateView, CreateView, View
+from django.views.generic.edit import UpdateView
 
 from premises.models import Contention, Premise
-from premises.forms import ArgumentCreationForm, PremiseCreationForm
+from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
 
 
 class ContentionDetailView(DetailView):
     template_name = "premises/contention_detail.html"
     model = Contention
+
+    def get_context_data(self, **kwargs):
+        contention = self.get_object()
+        edit_mode = contention.user == self.request.user
+        return super(ContentionDetailView, self).get_context_data(
+            path=contention.get_absolute_url(),
+            edit_mode=edit_mode,
+            **kwargs)
 
 
 class ContentionJsonView(DetailView):
@@ -20,13 +30,14 @@ class ContentionJsonView(DetailView):
     def render_to_response(self, context, **response_kwargs):
         contention = self.get_object(self.get_queryset())
         return HttpResponse(json.dumps({
-            "nodes": self.build_tree(contention)
+            "nodes": self.build_tree(contention),
         }), content_type="application/json")
 
     def build_tree(self, contention):
         return {
             "name": contention.title,
             "parent": None,
+            "pk": contention.pk,
             "owner": contention.owner,
             "sources": contention.sources,
             "children": self.get_premises(contention)
@@ -34,6 +45,7 @@ class ContentionJsonView(DetailView):
 
     def get_premises(self, contention, parent=None):
         children = [{
+            "pk": premise.pk,
             "name": premise.text,
             "parent": parent.text if parent else None,
             "sources": premise.sources,
@@ -60,6 +72,74 @@ class ArgumentCreationView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(ArgumentCreationView, self).form_valid(form)
+
+
+class ArgumentUpdateView(UpdateView):
+    template_name = "premises/edit_contention.html"
+    form_class = ArgumentCreationForm
+
+    def get_queryset(self):
+        return Contention.objects.filter(user=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(ArgumentUpdateView, self).form_valid(form)
+
+
+class ArgumentPublishView(DetailView):
+
+    def get_queryset(self):
+        return Contention.objects.filter(user=self.request.user)
+
+    def post(self, request, slug):
+        contention = self.get_object()
+        contention.is_published = True
+        contention.save()
+        messages.info(request, u"Argüman yayına alındı.")
+        return redirect(contention)
+
+
+class ArgumentUnpublishView(DetailView):
+
+    def get_queryset(self):
+        return Contention.objects.filter(user=self.request.user)
+
+    def post(self, request, slug):
+        contention = self.get_object()
+        contention.is_published = False
+        contention.save()
+        messages.info(request, u"Argüman yayından kaldırıldı.")
+        return redirect(contention)
+
+
+class ArgumentDeleteView(DetailView):
+
+    def get_queryset(self):
+        return Contention.objects.filter(user=self.request.user)
+
+    def post(self, request, slug):
+        contention = self.get_object()
+        contention.delete()
+        messages.info(request, u"Argümanınız silindi.")
+        return redirect("home")
+
+    delete = post
+
+
+class PremiseEditView(UpdateView):
+    template_name = "premises/edit_premise.html"
+    form_class = PremiseEditForm
+
+    def get_queryset(self):
+        return Premise.objects.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        return super(PremiseEditView, self).get_context_data(
+            #contention=self.get_contention(),
+            **kwargs)
+
+    #def get_contention(self):
+    #    return get_object_or_404(Contention, slug=self.kwargs['slug'])
 
 
 class PremiseCreationView(CreateView):

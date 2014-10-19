@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="container">
+        <form action="?" method="post">
+            <h2>Argüman güncelle</h2>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Kaydet" class="submit">
+        </form>
+    </section>
+{% endblock %}

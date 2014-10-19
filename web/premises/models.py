@@ -28,6 +28,7 @@ class Contention(models.Model):
     owner = models.CharField(max_length=255, null=True, blank=True)
     sources = models.TextField(null=True, blank=True)
     is_featured = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
 
     objects = ContentionManager()
@@ -78,6 +79,10 @@ class Premise(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.text)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'contention_detail', [self.argument.slug]
 
     def published_children(self):
         return self.children.filter(is_approved=True)

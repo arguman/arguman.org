@@ -13,3 +13,9 @@ class PremiseCreationForm(forms.ModelForm):
     class Meta:
         model = Premise
         fields = ['premise_type', 'text', 'sources']
+
+
+class PremiseEditForm(forms.ModelForm):
+    class Meta:
+        model = Premise
+        fields = ['premise_type', 'text', 'sources', 'is_approved']
