@@ -34,7 +34,8 @@
                 <li>
                     orijinal söylem:
                     {% if contention.sources or contention.owner %}
-                    {{ contention.owner }} {{ contention.sources|urlize }}
+                    {{ contention.owner }}
+                    {# {{ contention.sources|urlize }} #}
                     {% else %}
                      Belirtilmemiş
                     {% endif %}
