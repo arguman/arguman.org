@@ -9,6 +9,8 @@
         level: 0,
         maxY: 0,
 
+        isSingular: false,
+
         template: template("#main-contention-template"),
 
         init: function (options) {
@@ -33,7 +35,10 @@
         },
         getWidth: function () {
             var nodesWidth;
-            if (this.children.length) {
+            if (this.isSingular) {
+                nodesWidth = 700;
+            }
+            else if (this.children.length) {
                 nodesWidth = this.children
                     .map(function (child) {return child.getTreeWidth()})
                     .reduce(arguman.utils.adder);
@@ -97,6 +102,8 @@
         parent: null,
         level: 0,
 
+        singularOffset: 203,
+
         init: function (options) {
             $.extend(this, options);
             var model = options.model;
@@ -153,6 +160,10 @@
             });
 
             var centerOffset = this.getTreeWidth() / 2 - (this.getWidth()/2);
+
+            if (this.contention.isSingular) {
+                columnLeft += this.singularOffset;
+            }
 
             this.x = columnLeft + centerOffset;
             this.y = rowTop;
@@ -236,6 +247,7 @@
             });
             this.$container = $(this.container);
             this.contention.onRender(this.onRenderFinish.bind(this));
+            this.contention.isSingular = options.isSingular;
         },
         calculateWidth: function () {
             return this.contention.getWidth()

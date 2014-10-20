@@ -95,12 +95,24 @@ class Premise(models.Model):
         help_text=render_to_string("premises/examples/premise_source.html"))
     is_approved = models.BooleanField(default=False)
 
+    sibling_count = models.IntegerField(default=1)  # denormalized field
+
     def __unicode__(self):
         return smart_unicode(self.text)
 
     @models.permalink
     def get_absolute_url(self):
         return 'contention_detail', [self.argument.slug]
+
+    def save(self, *args, **kwargs):
+        super(Premise, self).save(*args, **kwargs)
+        count = self.get_siblings().count()
+        self.get_siblings().update(sibling_count=count)
+
+    def get_siblings(self):
+        return Premise.objects.filter(parent=self.parent,
+                                      argument=self.argument,
+                                      is_approved=True)
 
     def published_children(self):
         return self.children.filter(is_approved=True)

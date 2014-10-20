@@ -144,7 +144,8 @@
     $.getJSON(location.href + ".json", function (response) {
         var app = new arguman.Map({
             model: response.nodes,
-            container: "#app"
+            container: "#app",
+            isSingular: response.nodes.is_singular
         });
 
         app.contention.onRender(function () {

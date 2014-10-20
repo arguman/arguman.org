@@ -328,7 +328,7 @@ li.base-premises {
     /*background: #eeeeee;*/
     position: absolute;
     background: transparent;
-    margin-bottom: 450px;
+    margin-bottom: 150px;
     /*left: 50%;*/
 }
 
@@ -344,6 +344,7 @@ li.base-premises {
     position: absolute;
     /*border: 1px solid black;*/
     text-align: center;
+    margin-bottom: 20px;
 }
 
 #app .premise .premise-content {

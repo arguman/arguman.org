@@ -2,6 +2,7 @@
 
 import json
 from django.contrib import messages
+from django.db.models import Max
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
@@ -42,6 +43,7 @@ class ContentionJsonView(DetailView):
             "pk": contention.pk,
             "owner": contention.owner,
             "sources": contention.sources,
+            "is_singular": self.is_singular(contention),
             "children": self.get_premises(contention)
         }
 
@@ -56,6 +58,12 @@ class ContentionJsonView(DetailView):
                          if premise.published_children().exists() else [])
         } for premise in contention.published_premises(parent)]
         return children
+
+    def is_singular(self, contention):
+        result = (contention
+                   .published_premises()
+                   .aggregate(max_sibling=Max('sibling_count')))
+        return result['max_sibling'] <= 1
 
 
 class HomeView(TemplateView):
