@@ -2,6 +2,12 @@
 
 {% block content %}
     <section class="container">
+        {% ifnotequal contention.user user %}
+            <div class="form-info">
+                Göndereceğiniz önerme argümanın sahibi tarafından
+                onaylandıktan sonra yayına alınacaktır.
+            </div>
+        {% endifnotequal %}
         <form action="?" method="post">
             {% csrf_token %}
             {{ form.as_p }}

@@ -1,12 +1,16 @@
 from django.conf.urls import patterns, url
+from django.views.generic import TemplateView
 
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
-                            PremiseDeleteView, ContentionJsonView, PremiseEditView, ArgumentUpdateView, ArgumentPublishView, ArgumentUnpublishView, ArgumentDeleteView)
+                            PremiseDeleteView, ContentionJsonView, PremiseEditView, ArgumentUpdateView, ArgumentPublishView, ArgumentUnpublishView, ArgumentDeleteView, AboutView)
 
 
 urlpatterns = patterns('',
    url(r'^$', HomeView.as_view(), name='home'),
+   url(r'^about$',
+       AboutView.as_view(),
+       name='about'),
    url(r'^new-argument$',
        ArgumentCreationView.as_view(),
        name='new_argument'),

@@ -52,7 +52,9 @@
             <%= marked(name) %>
         </div>
         <div class="main-contention-actions">
+            {% if user.is_authenticated %}
             <a class="new-premise" href="{% url "new_premise" contention.slug %}">önerme ekle</a>
+            {% endif %}
         </div>
     </script>
 
@@ -78,6 +80,12 @@
                 <input type="submit" value="sil"/>
             </form>
         </div>
+        {% else %}
+            {% if user.is_authenticated %}
+                <div class="premise-actions">
+                <a href="{{ path }}/premises/<%= pk %>/new">önerme gönder</a>
+                </div>
+            {% endif %}
         {% endif %}
     </script>
 

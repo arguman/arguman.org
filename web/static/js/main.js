@@ -32,9 +32,14 @@
             return total;
         },
         getWidth: function () {
-            var nodesWidth = this.children
-                .map(function (child) {return child.getTreeWidth()})
-                .reduce(arguman.utils.adder);
+            var nodesWidth;
+            if (this.children.length) {
+                nodesWidth = this.children
+                    .map(function (child) {return child.getTreeWidth()})
+                    .reduce(arguman.utils.adder);
+            } else {
+                nodesWidth = 0;
+            }
             return nodesWidth;
         },
         renderPremiseContent: function () {

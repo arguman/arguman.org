@@ -4,10 +4,12 @@ import json
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
+from markdown2 import markdown
 
-from premises.models import Contention, Premise
+from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
 
 
@@ -65,13 +67,39 @@ class HomeView(TemplateView):
             contentions=contentions, **kwargs)
 
 
+class AboutView(TemplateView):
+    template_name = "about.html"
+
+    def get_context_data(self, **kwargs):
+        content = markdown(render_to_string("about.md"))
+        return super(AboutView, self).get_context_data(
+            content=content, **kwargs)
+
+
 class ArgumentCreationView(CreateView):
     template_name = "premises/new_contention.html"
     form_class = ArgumentCreationForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(ArgumentCreationView, self).form_valid(form)
+        response = super(ArgumentCreationView, self).form_valid(form)
+        self.create_demo_premises(form.instance)
+        return response
+
+    def create_demo_premises(self, instance):
+        demo = [
+            [SUPPORT, "Çünkü şu ...", "Bir kitap"],
+            [OBJECTION, "Yanlıştır, çünkü ...", "Bir URL"],
+            [SITUATION, "Ancak yine de şu ....", "Bir gazete"],
+        ]
+        for (premise_type, text, source) in demo:
+            Premise.objects.create(
+                argument=instance,
+                user=self.request.user,
+                premise_type=premise_type,
+                text=text,
+                sources=source,
+                is_approved=True)
 
 
 class ArgumentUpdateView(UpdateView):

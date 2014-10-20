@@ -16,7 +16,7 @@
     </div>
     <nav>
         <ul id="main-navigation">
-            <li><a href="#">nedir?</a></li>
+            <li><a href="{% url "about" %}">nedir?</a></li>
             {% if user.is_anonymous %}
             <li><a href="{% url "auth_registration" %}">kayıt ol</a></li>
             <li><a href="{% url "auth_login" %}">giriş yap</a></li>
@@ -33,7 +33,7 @@
 {% block footer %}
 <footer>
     <div class="container">
-        <p>Arguman.org henüz geliştirilme aşamasındadır. Ancak yine de platformu gönül rahatlığıyla kullanabilirsiniz.</p>
+        <p>Arguman.org henüz geliştirilme aşamasındadır. Ancak bu platformu kullanamayacağınız anlamına gelmiyor.</p>
     <p>Öneri ve şikayet için <a href="https://github.com/fatiherikli/arguman.org/issues">bu bağlantıyı</a> kullanabilirsiniz.</p>
     </div>
 </footer>

@@ -38,9 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'social_auth',
-    'premises',
     'django_gravatar',
+
     'profiles',
+    'premises',
 
 )
 

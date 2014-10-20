@@ -187,7 +187,8 @@ form p {
 }
 
 form .submit {
-    margin-left: 180px;
+    margin-left: -5px;
+    margin-top: 10px;
     background: white;
     border: none;
     color: #ff4b29;
@@ -444,6 +445,10 @@ li.base-premises {
     padding: 0;
 }
 
+.user-profile {
+    overflow: hidden;
+}
+
 
 .user-profile aside {
     width: 200px;
@@ -477,7 +482,7 @@ li.base-premises {
 .user-profile .user-detail {
     width: 500px;
     float: left;
-    margin-left: 10px;
+    margin-left: 30px;
 }
 
 .container h2 {
@@ -615,4 +620,19 @@ footer p {
 
 footer a {
     color: #ff167b;
+}
+
+.about {
+    font-size: 20px;
+    color: gray;
+}
+
+.about h2 {
+    color: #2b2b2b;
+}
+
+.form-info {
+    background: #f5f5f5;
+    font-size: 23px;
+    padding: 20px;
 }
