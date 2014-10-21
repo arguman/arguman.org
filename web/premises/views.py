@@ -96,9 +96,8 @@ class ArgumentCreationView(CreateView):
 
     def create_demo_premises(self, instance):
         demo = [
-            [SUPPORT, "Çünkü şu ...", "Bir kitap"],
-            [OBJECTION, "Yanlıştır, çünkü ...", "Bir URL"],
-            [SITUATION, "Ancak yine de şu ....", "Bir gazete"],
+            [SUPPORT, "Bu metin örnektir. Düzenleyiniz",
+                      "Buraya bir URL girilebilir"],
         ]
         for (premise_type, text, source) in demo:
             Premise.objects.create(
