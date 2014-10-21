@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
-from django.template.loader import render_to_string
+from uuid import uuid4
 from unidecode import unidecode
 
+from django.conf import settings
+from django.template.loader import render_to_string
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
@@ -59,9 +60,9 @@ class Contention(models.Model):
         """
         if not self.slug:
             slug = slugify(unidecode(self.title))
-            duplications = Contention.objects.filter(slug=slug).count()
-            if duplications > 0:
-                self.slug = "%s-%s" % (slug, duplications + 1)
+            duplications = Contention.objects.filter(slug=slug)
+            if duplications.exists():
+                self.slug = "%s-%s" % (slug, uuid4().hex)
             else:
                 self.slug = slug
         return super(Contention, self).save(*args, **kwargs)
