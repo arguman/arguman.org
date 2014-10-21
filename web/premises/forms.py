@@ -23,3 +23,6 @@ class PremiseEditForm(FormRenderer, forms.ModelForm):
     class Meta:
         model = Premise
         fields = ['premise_type', 'text', 'sources', 'is_approved']
+        widgets = {
+            'premise_type': forms.RadioSelect
+        }
