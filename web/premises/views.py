@@ -2,6 +2,7 @@
 
 import json
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.db.models import Max
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
@@ -48,10 +49,17 @@ class ContentionJsonView(DetailView):
         }
 
     def get_premises(self, contention, parent=None):
+
+
         children = [{
             "pk": premise.pk,
             "name": premise.text,
             "parent": parent.text if parent else None,
+            "user": {
+                "username": premise.user.username,
+                "absolute_url": reverse("auth_profile",
+                                        args=[premise.user.username])
+            },
             "sources": premise.sources,
             "premise_type": premise.premise_class(),
             "children": (self.get_premises(contention, parent=premise)

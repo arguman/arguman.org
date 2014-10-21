@@ -66,12 +66,14 @@
         <div class="premise-content <%= premise_type %>">
             <%= marked(name) %>
         </div>
-        <% if (sources) { %>
         <div class="premise-sources">
+        <% if (sources) { %>
         <strong>kaynaklar:</strong>
         <%= marked(sources) %>
-        </div>
         <% } %>
+        <strong>gönderen:</strong>
+        <p><a href="<%= user.absolute_url %>"><%= user.username %></a></p>
+        </div>
         {% if edit_mode %}
         <div class="premise-actions">
             <a href="{{ path }}/premises/<%= pk %>/new">önerme ekle</a>
