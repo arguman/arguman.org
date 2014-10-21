@@ -12,7 +12,8 @@ body {
     font-family: AmericanTypewriter, Georgia, serif;
 }
 
-form input[type='submit'] {
+form input[type='submit'],
+form select {
     font-family: AmericanTypewriter, Georgia, serif;
 }
 
@@ -635,4 +636,10 @@ footer a {
     background: #f5f5f5;
     font-size: 23px;
     padding: 20px;
+}
+
+#id_parent {
+    width: 600px;
+    -webkit-appearance: menulist-button;
+    font-family: AmericanTypewriter, Georgia, serif;
 }

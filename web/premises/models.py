@@ -86,7 +86,10 @@ class Premise(models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
-                               null=True, blank=True)
+                               null=True, blank=True,
+                               verbose_name="Öncülü",
+                               help_text="Önermenin öncülü. Eğer boş bırakılırsa"
+                                         "ana argümanın bir önermesi olur.")
     premise_type = models.IntegerField(
         default=SUPPORT,
         choices=PREMISE_TYPES, verbose_name="Önerme Tipi",
@@ -98,7 +101,7 @@ class Premise(models.Model):
     sources = models.TextField(
         null=True, blank=True, verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/premise_source.html"))
-    is_approved = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=False, verbose_name="Yayınla")
 
     sibling_count = models.IntegerField(default=1)  # denormalized field
 

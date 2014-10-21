@@ -22,7 +22,15 @@ class PremiseCreationForm(FormRenderer, forms.ModelForm):
 class PremiseEditForm(FormRenderer, forms.ModelForm):
     class Meta:
         model = Premise
-        fields = ['premise_type', 'text', 'sources', 'is_approved']
+        fields = ['premise_type', 'text', 'sources', 'parent', 'is_approved']
         widgets = {
             'premise_type': forms.RadioSelect
         }
+
+    def __init__(self, *args, **kwargs):
+        super(PremiseEditForm, self).__init__(*args, **kwargs)
+        queryset = (self.instance
+          .argument
+          .premises
+          .exclude(pk=self.instance.pk))  # avoid self-loop
+        self.fields['parent'].queryset = queryset
