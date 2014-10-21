@@ -49,8 +49,6 @@ class ContentionJsonView(DetailView):
         }
 
     def get_premises(self, contention, parent=None):
-
-
         children = [{
             "pk": premise.pk,
             "name": premise.text,
@@ -69,7 +67,8 @@ class ContentionJsonView(DetailView):
 
     def is_singular(self, contention):
         result = (contention
-                   .published_premises()
+                   .premises
+                   .all()
                    .aggregate(max_sibling=Max('sibling_count')))
         return result['max_sibling'] <= 1
 
@@ -100,6 +99,7 @@ class ArgumentCreationView(CreateView):
         form.instance.user = self.request.user
         response = super(ArgumentCreationView, self).form_valid(form)
         self.create_demo_premises(form.instance)
+        form.instance.update_sibling_counts()
         return response
 
     def create_demo_premises(self, instance):
@@ -126,7 +126,9 @@ class ArgumentUpdateView(UpdateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(ArgumentUpdateView, self).form_valid(form)
+        response = super(ArgumentUpdateView, self).form_valid(form)
+        form.instance.update_sibling_counts()
+        return response
 
 
 class ArgumentPublishView(DetailView):
@@ -175,6 +177,11 @@ class PremiseEditView(UpdateView):
 
     def get_queryset(self):
         return Premise.objects.filter(user=self.request.user)
+    
+    def form_valid(self, form):
+        response = super(PremiseEditView, self).form_valid(form)
+        form.instance.contention.update_sibling_counts()
+        return response
 
     def get_context_data(self, **kwargs):
         return super(PremiseEditView, self).get_context_data(
@@ -201,6 +208,7 @@ class PremiseCreationView(CreateView):
         form.instance.parent = self.get_parent()
         form.instance.is_approved = contention.user == self.request.user
         form.save()
+        contention.update_sibling_counts()
         return redirect(contention)
 
     def get_contention(self):
@@ -221,6 +229,7 @@ class PremiseDeleteView(View):
     def delete(self, request, *args, **kwargs):
         contention = self.get_premise()
         contention.delete()
+        contention.update_sibling_counts()
         return redirect(self.get_contention())
 
     post = delete

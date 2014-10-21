@@ -77,6 +77,10 @@ class Contention(models.Model):
     but = curry(children_by_premise_type, premise_type=OBJECTION)
     however = curry(children_by_premise_type, premise_type=SITUATION)
 
+    def update_sibling_counts(self):
+        for premise in self.premises.filter():
+            premise.update_sibling_counts()
+
 
 class Premise(models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
@@ -105,15 +109,13 @@ class Premise(models.Model):
     def get_absolute_url(self):
         return 'contention_detail', [self.argument.slug]
 
-    def save(self, *args, **kwargs):
-        super(Premise, self).save(*args, **kwargs)
+    def update_sibling_counts(self):
         count = self.get_siblings().count()
         self.get_siblings().update(sibling_count=count)
 
     def get_siblings(self):
         return Premise.objects.filter(parent=self.parent,
-                                      argument=self.argument,
-                                      is_approved=True)
+                                      argument=self.argument)
 
     def published_children(self):
         return self.children.filter(is_approved=True)
