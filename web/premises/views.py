@@ -21,7 +21,9 @@ class ContentionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         contention = self.get_object()
-        edit_mode = contention.user == self.request.user
+        edit_mode = (
+                self.request.user.is_superuser or
+                contention.user == self.request.user)
         return super(ContentionDetailView, self).get_context_data(
             path=contention.get_absolute_url(),
             edit_mode=edit_mode,
@@ -122,7 +124,10 @@ class ArgumentUpdateView(UpdateView):
     form_class = ArgumentCreationForm
 
     def get_queryset(self):
-        return Contention.objects.filter(user=self.request.user)
+        premises = Premise.objects.all()
+        if self.request.user.is_superuser:
+            return premises
+        return premises.filter(user=self.request.user)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -176,11 +181,14 @@ class PremiseEditView(UpdateView):
     form_class = PremiseEditForm
 
     def get_queryset(self):
-        return Premise.objects.filter(user=self.request.user)
+        premises = Premise.objects.all()
+        if self.request.user.is_superuser:
+            return premises
+        return premises.filter(user=self.request.user)
     
     def form_valid(self, form):
         response = super(PremiseEditView, self).form_valid(form)
-        form.instance.contention.update_sibling_counts()
+        form.instance.argument.update_sibling_counts()
         return response
 
     def get_context_data(self, **kwargs):
