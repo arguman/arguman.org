@@ -124,10 +124,10 @@ class ArgumentUpdateView(UpdateView):
     form_class = ArgumentCreationForm
 
     def get_queryset(self):
-        premises = Premise.objects.all()
+        contentions = Contention.objects.all()
         if self.request.user.is_superuser:
-            return premises
-        return premises.filter(user=self.request.user)
+            return contentions
+        return contentions.filter(user=self.request.user)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
