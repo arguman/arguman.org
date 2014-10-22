@@ -286,7 +286,7 @@ li.base-premises {
 }
 
 .sticky-header {
-    position: absolute;
+    position: fixed;
     width: 100%;
     margin: 0;
     background: #f4f4f4;
