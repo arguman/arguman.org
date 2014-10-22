@@ -22,7 +22,10 @@
             <li><a href="{% url "auth_login" %}">giriş yap</a></li>
             {% else %}
             <li><a href="{% url "new_argument" %}"><strong>argüman gönder</strong></a></li>
-            <li><a href="{% url "auth_logout" %}">çıkış yap ({{ user }})</a></li>
+            <li>
+              <a href="{% url "auth_profile" user.username %}">argümanlarım ({{ user }})</a> /
+              <a href="{% url "auth_logout" %}">çıkış yap</a>
+            </li>
             {% endif %}
         </ul>
     </nav>
