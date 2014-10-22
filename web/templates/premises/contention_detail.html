@@ -120,11 +120,6 @@
                             <div class="premise-content">
                                 {{ premise.text }}
                             </div>
-                            {% if user.is_authenticated %}
-                            <div class="actions">
-                                {% include "premises/actions.html" %}
-                            </div>
-                            {% endif %}
                         </div>
                         {% if premise.children.exists %}
                             {% with template_name="premises/tree_view.html" %}
