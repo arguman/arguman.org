@@ -3,5 +3,5 @@
 </form>
 <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
     {% csrf_token %}
-    <input type="submit" value="kaldır"/>
+    <input type="submit" value="kaldır" class="delete_premise"/>
 </form>
