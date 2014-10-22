@@ -66,6 +66,10 @@ class ProfileDetailView(DetailView):
         """
         user = self.get_object()
         contentions = Contention.objects.filter(user=user)
+
+        if self.request.user != user:
+            contentions = contentions.filter(is_published=True)
+
         can_follow = self.request.user != user
         if self.request.user.is_authenticated():
             is_followed = self.request.user.following.filter(pk=user.id).exists()
