@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="container">
+    <section class="container new-premise">
         {% ifnotequal contention.user user %}
             <div class="form-info">
                 Göndereceğiniz önerme direkt olarak yayına alınacaktır,
@@ -10,6 +10,12 @@
             </div>
         {% endifnotequal %}
         <form action="?" method="post">
+            {% if parent %}
+                <div class="parent-premise">
+                    <strong>Ekleyeceğiniz önermenin öncülü:</strong>
+                    <p>{{ parent.text }}</p>
+                </div>
+            {% endif %}
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Kaydet ve düzenlemeye devam et" class="submit">

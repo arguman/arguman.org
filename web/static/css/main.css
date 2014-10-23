@@ -666,3 +666,19 @@ footer a {
     color: gray;
     text-decoration: none;
 }
+
+form .contention-link {
+    color: #a5a5a5;
+    font-weight: normal;
+}
+
+form .parent-premise {
+    color: #a5a5a5;
+    padding: 5px;
+}
+
+form .parent-premise strong {
+    font-weight: normal;
+    color: gray;
+    display: block;
+}

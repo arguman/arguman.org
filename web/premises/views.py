@@ -220,9 +220,6 @@ class PremiseEditView(UpdateView):
             #contention=self.get_contention(),
             **kwargs)
 
-    #def get_contention(self):
-    #    return get_object_or_404(Contention, slug=self.kwargs['slug'])
-
 
 class PremiseCreationView(CreateView):
     template_name = "premises/new_premise.html"
@@ -231,6 +228,7 @@ class PremiseCreationView(CreateView):
     def get_context_data(self, **kwargs):
         return super(PremiseCreationView, self).get_context_data(
             contention=self.get_contention(),
+            parent=self.get_parent(),
             **kwargs)
 
     def form_valid(self, form):
