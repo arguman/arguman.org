@@ -24,6 +24,7 @@ class ContentionDetailView(DetailView):
         contention = self.get_object()
         edit_mode = (
                 self.request.user.is_superuser or
+                self.request.user.is_staff or
                 contention.user == self.request.user)
         return super(ContentionDetailView, self).get_context_data(
             path=contention.get_absolute_url(),
