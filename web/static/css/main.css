@@ -659,7 +659,7 @@ footer a {
 }
 
 .tabs li.active {
-    border-bottom: 4px solid #fcffc4;
+    border-bottom: 4px solid gray;
 }
 
 .tabs li a {
