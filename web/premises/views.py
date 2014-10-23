@@ -214,9 +214,7 @@ class PremiseCreationView(CreateView):
         form.instance.user = self.request.user
         form.instance.argument = contention
         form.instance.parent = self.get_parent()
-        form.instance.is_approved = (
-            self.request.user.is_superuser or
-            contention.user == self.request.user)
+        form.instance.is_approved = True
         form.save()
         contention.update_sibling_counts()
         return redirect(contention)
