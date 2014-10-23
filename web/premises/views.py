@@ -58,6 +58,7 @@ class ContentionJsonView(DetailView):
             "name": premise.text,
             "parent": parent.text if parent else None,
             "user": {
+                "id": premise.user.id,
                 "username": premise.user.username,
                 "absolute_url": reverse("auth_profile",
                                         args=[premise.user.username])

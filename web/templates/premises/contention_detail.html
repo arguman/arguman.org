@@ -74,7 +74,7 @@
         <strong>gönderen:</strong>
         <p><a href="<%= user.absolute_url %>"><%= user.username %></a></p>
         </div>
-        {% if edit_mode %}
+        <% if (editMode || authenticatedUser.id == user.id ) { %>
         <div class="premise-actions">
             <a href="{{ path }}/premises/<%= pk %>/new">önerme ekle</a>
             <a href="{{ path }}/premises/<%= pk %>">düzenle</a>
@@ -83,13 +83,13 @@
                 <input type="submit" value="sil" class="delete_premise"/>
             </form>
         </div>
-        {% else %}
-            {% if user.is_authenticated %}
+        <% } else { %>
+            <% if (authenticatedUser.id) { %>
                 <div class="premise-actions">
                 <a href="{{ path }}/premises/<%= pk %>/new">önerme gönder</a>
                 </div>
-            {% endif %}
-        {% endif %}
+            <% } %>
+        <% } %>
     </script>
 
     <div id="app"></div>
@@ -139,7 +139,14 @@
 
 {% block extra-scripts %}
 <script type="text/javascript">
+
+    arguman.editMode = {{ edit_mode|yesno:"true,false" }};
+    arguman.authenticatedUser = {
+        "id": {{ user.id }}
+    };
+
     $.getJSON(location.href + ".json", function (response) {
+
         var app = new arguman.Map({
             model: response.nodes,
             container: "#app",

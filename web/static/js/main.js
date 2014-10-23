@@ -147,7 +147,12 @@
         },
 
         renderPremiseContent: function () {
-            return this.template(this.model);
+            var bundle = {
+                "authenticatedUser": arguman.authenticatedUser,
+                "editMode": arguman.editMode
+            };
+            $.extend(bundle, this.model);
+            return this.template(bundle);
         },
 
         render: function (columnLeft, rowTop) {
