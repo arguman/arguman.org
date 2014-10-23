@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
 from markdown2 import markdown
+from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 
 from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
@@ -23,6 +24,7 @@ class ContentionDetailView(DetailView):
         contention = self.get_object()
         edit_mode = (
                 self.request.user.is_superuser or
+                self.request.user.is_staff or
                 contention.user == self.request.user)
         return super(ContentionDetailView, self).get_context_data(
             path=contention.get_absolute_url(),
@@ -56,6 +58,7 @@ class ContentionJsonView(DetailView):
             "name": premise.text,
             "parent": parent.text if parent else None,
             "user": {
+                "id": premise.user.id,
                 "username": premise.user.username,
                 "absolute_url": reverse("auth_profile",
                                         args=[premise.user.username])
@@ -77,11 +80,33 @@ class ContentionJsonView(DetailView):
 
 class HomeView(TemplateView):
     template_name = "index.html"
+    tab_class = "featured"
 
     def get_context_data(self, **kwargs):
-        contentions = Contention.objects.featured()
+        contentions = self.get_contentions()
         return super(HomeView, self).get_context_data(
+            tab_class=self.tab_class,
             contentions=contentions, **kwargs)
+
+    def get_contentions(self):
+        return Contention.objects.featured()
+
+
+class NewsView(HomeView):
+    tab_class = "news"
+
+    def get_contentions(self):
+        return Contention.objects.all()[:NEWS_CONTENT_COUNT]
+
+
+class UpdatedArgumentsView(HomeView):
+    tab_class = "updated"
+
+    def get_contentions(self):
+        return (Contention
+                .objects
+                .order_by('-date_modification')
+                [:UPDATED_CONTENT_COUNT])
 
 
 class AboutView(TemplateView):
@@ -196,9 +221,6 @@ class PremiseEditView(UpdateView):
             #contention=self.get_contention(),
             **kwargs)
 
-    #def get_contention(self):
-    #    return get_object_or_404(Contention, slug=self.kwargs['slug'])
-
 
 class PremiseCreationView(CreateView):
     template_name = "premises/new_premise.html"
@@ -207,6 +229,7 @@ class PremiseCreationView(CreateView):
     def get_context_data(self, **kwargs):
         return super(PremiseCreationView, self).get_context_data(
             contention=self.get_contention(),
+            parent=self.get_parent(),
             **kwargs)
 
     def form_valid(self, form):
@@ -214,9 +237,7 @@ class PremiseCreationView(CreateView):
         form.instance.user = self.request.user
         form.instance.argument = contention
         form.instance.parent = self.get_parent()
-        form.instance.is_approved = (
-            self.request.user.is_superuser or
-            contention.user == self.request.user)
+        form.instance.is_approved = True
         form.save()
         contention.update_sibling_counts()
         return redirect(contention)
@@ -232,8 +253,11 @@ class PremiseCreationView(CreateView):
 
 class PremiseDeleteView(View):
     def get_premise(self):
-        return get_object_or_404(Premise,
-                                 user=self.request.user,
+        if self.request.user.is_staff:
+            premises = Premise.objects.all()
+        else:
+            premises = Premise.objects.filter(user=self.request.user)
+        return get_object_or_404(premises,
                                  pk=self.kwargs['pk'])
 
     def delete(self, request, *args, **kwargs):

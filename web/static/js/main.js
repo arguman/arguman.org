@@ -70,6 +70,10 @@
             });
         },
         renderEdges: function (context) {
+            if (!this.children.length) {
+                return;
+            }
+
             // add edge to main premises
             var firstPremise = this.children[0],
                 lastPremise = this.children[this.children.length-1];
@@ -147,7 +151,12 @@
         },
 
         renderPremiseContent: function () {
-            return this.template(this.model);
+            var bundle = {
+                "authenticatedUser": arguman.authenticatedUser,
+                "editMode": arguman.editMode
+            };
+            $.extend(bundle, this.model);
+            return this.template(bundle);
         },
 
         render: function (columnLeft, rowTop) {

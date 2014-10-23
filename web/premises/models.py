@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from uuid import uuid4
+from django.core import validators
 from unidecode import unidecode
 
 from django.conf import settings
@@ -8,6 +9,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
+from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.managers import ContentionManager
 
@@ -41,6 +43,8 @@ class Contention(models.Model):
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
+    date_modification = models.DateTimeField(auto_now_add=True,
+                                             auto_now=True)
 
     objects = ContentionManager()
 
@@ -67,15 +71,22 @@ class Contention(models.Model):
                 self.slug = slug
         return super(Contention, self).save(*args, **kwargs)
 
-    def published_premises(self, parent=None):
-        return self.premises.filter(is_approved=True, parent=parent)
+    def published_premises(self, parent=None, ignore_parent=False):
+        premises = self.premises.filter(is_approved=True)
+        if ignore_parent:
+            return premises
+        return premises.filter(parent=parent)
 
-    def children_by_premise_type(self, premise_type=None):
-        return self.published_premises().filter(premise_type=premise_type)
+    def children_by_premise_type(self, premise_type=None, ignore_parent=False):
+        return (self.published_premises(ignore_parent=ignore_parent)
+                .filter(premise_type=premise_type))
 
-    because = curry(children_by_premise_type, premise_type=SUPPORT)
-    but = curry(children_by_premise_type, premise_type=OBJECTION)
-    however = curry(children_by_premise_type, premise_type=SITUATION)
+    because = curry(children_by_premise_type,
+                    premise_type=SUPPORT, ignore_parent=True)
+    but = curry(children_by_premise_type,
+                premise_type=OBJECTION, ignore_parent=True)
+    however = curry(children_by_premise_type,
+                    premise_type=SITUATION, ignore_parent=True)
 
     def update_sibling_counts(self):
         for premise in self.premises.filter():
@@ -97,7 +108,8 @@ class Premise(models.Model):
     text = models.TextField(
         null=True, blank=True,
         verbose_name="Önermenin İçeriği",
-        help_text=render_to_string("premises/examples/premise.html"))
+        help_text=render_to_string("premises/examples/premise.html"),
+        validators=[validators.MaxLengthValidator(MAX_PREMISE_CONTENT_LENGTH)])
     sources = models.TextField(
         null=True, blank=True, verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/premise_source.html"))

@@ -1,17 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="container">
+    <section class="container new-premise">
         {% ifnotequal contention.user user %}
             <div class="form-info">
-                Göndereceğiniz önerme argümanın sahibi tarafından
-                onaylandıktan sonra yayına alınacaktır.
+                Göndereceğiniz önerme direkt olarak yayına alınacaktır,
+                ancak yayında kalacağının garantisi yoktur. Uygun görülmeyen
+                içerikler moderatörler tarafından silinecektir.
             </div>
         {% endifnotequal %}
         <form action="?" method="post">
+            {% if parent %}
+                <div class="parent-premise">
+                    <strong>Ekleyeceğiniz önermenin öncülü:</strong>
+                    <p>{{ parent.text }}</p>
+                </div>
+            {% endif %}
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Kaydet ve düzenlemeye devam et" class="submit">
         </form>
     </section>
+{% endblock %}
+
+{% block extra-scripts %}
+    <script type="text/javascript">
+    $(function () {
+        var textarea = $("#id_text"),
+            container = $("<div>", {
+                "class": "remained-char"
+            }).appendTo(textarea.parent())
+              .html("Kalan karakter sayısı: "),
+            remained = $("<span>").appendTo(container);
+        var update = function (event) {
+            var max = parseInt(textarea.attr("maxlength")),
+                _remained = max - textarea.val().length;
+            remained.html(_remained);
+        };
+        textarea.keyup(update);
+        update();
+    });
+    </script>
 {% endblock %}
