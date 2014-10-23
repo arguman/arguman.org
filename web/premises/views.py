@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
 from markdown2 import markdown
+from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 
 from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
@@ -77,11 +78,33 @@ class ContentionJsonView(DetailView):
 
 class HomeView(TemplateView):
     template_name = "index.html"
+    tab_class = "featured"
 
     def get_context_data(self, **kwargs):
-        contentions = Contention.objects.featured()
+        contentions = self.get_contentions()
         return super(HomeView, self).get_context_data(
+            tab_class=self.tab_class,
             contentions=contentions, **kwargs)
+
+    def get_contentions(self):
+        return Contention.objects.featured()
+
+
+class NewsView(HomeView):
+    tab_class = "news"
+
+    def get_contentions(self):
+        return Contention.objects.all()[:NEWS_CONTENT_COUNT]
+
+
+class UpdatedArgumentsView(HomeView):
+    tab_class = "updated"
+
+    def get_contentions(self):
+        return (Contention
+                .objects
+                .order_by('-date_modification')
+                [:UPDATED_CONTENT_COUNT])
 
 
 class AboutView(TemplateView):

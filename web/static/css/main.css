@@ -74,7 +74,7 @@ form select {
     display: inline-block;
     font-size: 45px;
     padding-bottom: 4px;
-    border-bottom: 7px solid #cdcdcd;
+    border-bottom: 3px solid #e3e3e5;
 }
 
 .argument-list li .main-contention:before {
@@ -643,4 +643,28 @@ footer a {
     width: 600px;
     -webkit-appearance: menulist-button;
     font-family: AmericanTypewriter, Georgia, serif;
+}
+
+.tabs {
+    font-size: 28px;
+    overflow: hidden;
+    margin: 7px;
+    padding: 0;
+}
+
+.tabs li {
+    margin: 0 20px 4px 20px;
+    text-align: center;
+    padding: 0;
+    float: left;
+    list-style: none;
+}
+
+.tabs li.active {
+    border-bottom: 4px solid #fffd9c;
+}
+
+.tabs li a {
+    color: gray;
+    text-decoration: none;
 }
