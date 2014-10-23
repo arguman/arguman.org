@@ -579,9 +579,7 @@ li.base-premises {
     font-size: 20px;
     color: #474747;
 }
-.delete_premise{
-    color:red !important;
-}
+
 #id_premise_type {
     margin: -10px 0 15px 20px;
     padding: 0;

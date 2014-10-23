@@ -254,8 +254,11 @@ class PremiseCreationView(CreateView):
 
 class PremiseDeleteView(View):
     def get_premise(self):
-        return get_object_or_404(Premise,
-                                 user=self.request.user,
+        if self.request.user.is_staff:
+            premises = Premise.objects.all()
+        else:
+            premises = Premise.objects.filter(user=self.request.user)
+        return get_object_or_404(premises,
                                  pk=self.kwargs['pk'])
 
     def delete(self, request, *args, **kwargs):
