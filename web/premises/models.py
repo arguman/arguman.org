@@ -69,15 +69,22 @@ class Contention(models.Model):
                 self.slug = slug
         return super(Contention, self).save(*args, **kwargs)
 
-    def published_premises(self, parent=None):
-        return self.premises.filter(is_approved=True, parent=parent)
+    def published_premises(self, parent=None, ignore_parent=False):
+        premises = self.premises.filter(is_approved=True)
+        if ignore_parent:
+            return premises
+        return premises.filter(parent=parent)
 
-    def children_by_premise_type(self, premise_type=None):
-        return self.published_premises().filter(premise_type=premise_type)
+    def children_by_premise_type(self, premise_type=None, ignore_parent=False):
+        return (self.published_premises(ignore_parent=ignore_parent)
+                .filter(premise_type=premise_type))
 
-    because = curry(children_by_premise_type, premise_type=SUPPORT)
-    but = curry(children_by_premise_type, premise_type=OBJECTION)
-    however = curry(children_by_premise_type, premise_type=SITUATION)
+    because = curry(children_by_premise_type,
+                    premise_type=SUPPORT, ignore_parent=True)
+    but = curry(children_by_premise_type,
+                premise_type=OBJECTION, ignore_parent=True)
+    however = curry(children_by_premise_type,
+                    premise_type=SITUATION, ignore_parent=True)
 
     def update_sibling_counts(self):
         for premise in self.premises.filter():
