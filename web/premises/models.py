@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from uuid import uuid4
+from django.core import validators
 from unidecode import unidecode
 
 from django.conf import settings
@@ -8,6 +9,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
+from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.managers import ContentionManager
 
@@ -106,7 +108,8 @@ class Premise(models.Model):
     text = models.TextField(
         null=True, blank=True,
         verbose_name="Önermenin İçeriği",
-        help_text=render_to_string("premises/examples/premise.html"))
+        help_text=render_to_string("premises/examples/premise.html"),
+        validators=[validators.MaxLengthValidator(MAX_PREMISE_CONTENT_LENGTH)])
     sources = models.TextField(
         null=True, blank=True, verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/premise_source.html"))

@@ -1,4 +1,5 @@
 from django import forms
+from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.mixins import FormRenderer
 from premises.models import Contention, Premise
@@ -11,11 +12,15 @@ class ArgumentCreationForm(FormRenderer, forms.ModelForm):
 
 
 class PremiseCreationForm(FormRenderer, forms.ModelForm):
+
     class Meta:
         model = Premise
         fields = ['premise_type', 'text', 'sources']
         widgets = {
-            'premise_type': forms.RadioSelect
+            'premise_type': forms.RadioSelect,
+            'text': forms.Textarea(attrs={
+                'maxlength': MAX_PREMISE_CONTENT_LENGTH
+            })
         }
 
 

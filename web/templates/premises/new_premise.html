@@ -22,3 +22,23 @@
         </form>
     </section>
 {% endblock %}
+
+{% block extra-scripts %}
+    <script type="text/javascript">
+    $(function () {
+        var textarea = $("#id_text"),
+            container = $("<div>", {
+                "class": "remained-char"
+            }).appendTo(textarea.parent())
+              .html("Kalan karakter sayısı: "),
+            remained = $("<span>").appendTo(container);
+        var update = function (event) {
+            var max = parseInt(textarea.attr("maxlength")),
+                _remained = max - textarea.val().length;
+            remained.html(_remained);
+        };
+        textarea.keyup(update);
+        update();
+    });
+    </script>
+{% endblock %}

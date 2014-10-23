@@ -682,3 +682,7 @@ form .parent-premise strong {
     color: gray;
     display: block;
 }
+
+#id_text {
+    height: 200px;
+}
