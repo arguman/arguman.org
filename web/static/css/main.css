@@ -8,6 +8,13 @@
     src: url('/static/fonts/AmericanTypewriterBold.ttf');
 }
 
+@import url("http://weloveiconfonts.com/api/?family=typicons");
+
+/* typicons */
+[class*="typicons-"]:before {
+  font-family: 'Typicons', sans-serif;
+}
+
 body {
     font-family: AmericanTypewriter, Georgia, serif;
 }
@@ -546,9 +553,30 @@ li.base-premises {
     padding-bottom: 3px;
 }
 
+
 .premise-actions a {
     color: #474747;
     margin-left: 3px;
+}
+
+.premise-vote a {
+    color: #f1f1f1;
+    margin-left: 0;
+    width: 48%;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+
+.premise-vote a.like{
+    background: #608aff;
+}
+
+.premise-vote a.unlike{
+    background: #ff3a24;
+    padding-left: 5px;
 }
 
 .premise-actions form {

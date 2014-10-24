@@ -270,3 +270,9 @@ class PremiseDeleteView(View):
 
     def get_contention(self):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
+
+
+class VoteAjaxView(View):
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponse("ok")

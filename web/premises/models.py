@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from uuid import uuid4
 from django.core import validators
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 from unidecode import unidecode
 
 from django.conf import settings
@@ -116,6 +118,8 @@ class Premise(models.Model):
     is_approved = models.BooleanField(default=False, verbose_name="Yayınla")
 
     sibling_count = models.IntegerField(default=1)  # denormalized field
+    like_count = models.PositiveIntegerField(default=0, db_index=True, editable=False)
+    unlike_count = models.PositiveIntegerField(default=0, db_index=True, editable=False)
 
     def __unicode__(self):
         return smart_unicode(self.text)
@@ -152,3 +156,26 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.text)
+
+
+class Vote(models.Model):
+    premise = models.ForeignKey(Premise)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    like = models.BooleanField(default=False, db_index=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return smart_unicode(self.premise)
+
+    class Meta:
+        ordering = ("date_created",)
+        unique_together = ("premise", "user")
+
+
+@receiver(post_save, sender=Vote)
+@receiver(post_delete, sender=Vote)
+def update_premises_like_and_unlike_count(sender, instance, **kwargs):
+    premises_like_count = Vote.objects.filter(premise_id=instance.premise_id, like=True).count()
+    premises_unlike_count = Vote.objects.filter(premise_id=instance.premise_id, like=False).count()
+    Premise.objects.filter(id=instance.premise_id).update(like_count=premises_like_count,
+                                                          unlike_count=premises_unlike_count)
