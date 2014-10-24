@@ -159,10 +159,19 @@
             return this.template(bundle);
         },
 
+        bringToFront: function (premise) {
+            if (!arguman.maxZIndex) {
+                arguman.maxZIndex = 0;
+            }
+            premise.css("z-index", arguman.maxZIndex++);
+        },
+
         render: function (columnLeft, rowTop) {
             var premise = $("<div>", {
                 "class": "premise"
             }).html(this.renderPremiseContent());
+
+            premise.on('mouseover', this.bringToFront.bind(this, premise));
 
             premise.css({
                 "width": this.getWidth()
