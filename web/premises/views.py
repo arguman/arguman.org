@@ -14,7 +14,7 @@ from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 
 from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
-
+from django.db.models import Count
 
 class ContentionDetailView(DetailView):
     template_name = "premises/contention_detail.html"
@@ -107,6 +107,16 @@ class UpdatedArgumentsView(HomeView):
         return (Contention
                 .objects
                 .order_by('-date_modification')
+                [:UPDATED_CONTENT_COUNT])
+
+class ControversialArgumentsView(HomeView):
+    tab_class = "controversial"
+
+    def get_contentions(self):
+        return (Contention
+                .objects
+                .annotate(num_children=Count('premises'))
+                .order_by('-num_children')
                 [:UPDATED_CONTENT_COUNT])
 
 
