@@ -5,7 +5,7 @@ from premises.views import (ContentionDetailView, HomeView,
                             PremiseEditView, ArgumentUpdateView,
                             ArgumentPublishView, ArgumentUnpublishView,
                             ArgumentDeleteView, AboutView, NewsView,
-                            UpdatedArgumentsView, ReportView, ControversialArgumentsView)
+                            UpdatedArgumentsView, ReportView, ControversialArgumentsView, TosView)
 
 
 urlpatterns = patterns('',
@@ -22,7 +22,9 @@ urlpatterns = patterns('',
    url(r'^report$',
        ReportView.as_view(),
        name='report'),
-
+   url(r'^tos$',
+       TosView.as_view(),
+       name='tos'),
    url(r'^new-argument$',
        ArgumentCreationView.as_view(),
        name='new_argument'),
