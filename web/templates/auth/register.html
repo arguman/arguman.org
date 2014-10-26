@@ -7,7 +7,9 @@
             <h2>Kayıt ol</h2>
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Kaydol" class="submit">
+            Bu siteyi kullanarak <a href="/tos">Kullanım Koşulları</a>'nı kabul etmiş olursunuz.
+            <br />
+            <input type="submit" value="Siteye Üye ol" class="submit">
         </form>
     </section>
 {% endblock %}
