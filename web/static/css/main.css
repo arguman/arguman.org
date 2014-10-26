@@ -74,7 +74,7 @@ form select {
     display: inline-block;
     font-size: 45px;
     padding-bottom: 4px;
-    border-bottom: 7px solid #cdcdcd;
+    border-bottom: 3px solid #e3e3e5;
 }
 
 .argument-list li .main-contention:before {
@@ -579,9 +579,7 @@ li.base-premises {
     font-size: 20px;
     color: #474747;
 }
-.delete_premise{
-    color:red !important;
-}
+
 #id_premise_type {
     margin: -10px 0 15px 20px;
     padding: 0;
@@ -643,4 +641,48 @@ footer a {
     width: 600px;
     -webkit-appearance: menulist-button;
     font-family: AmericanTypewriter, Georgia, serif;
+}
+
+.tabs {
+    font-size: 28px;
+    overflow: hidden;
+    margin: 7px;
+    padding: 0;
+}
+
+.tabs li {
+    margin: 0 20px 4px 20px;
+    text-align: center;
+    padding: 0;
+    float: left;
+    list-style: none;
+}
+
+.tabs li.active {
+    border-bottom: 4px solid gray;
+}
+
+.tabs li a {
+    color: gray;
+    text-decoration: none;
+}
+
+form .contention-link {
+    color: #a5a5a5;
+    font-weight: normal;
+}
+
+form .parent-premise {
+    color: #a5a5a5;
+    padding: 5px;
+}
+
+form .parent-premise strong {
+    font-weight: normal;
+    color: gray;
+    display: block;
+}
+
+#id_text {
+    height: 200px;
 }
