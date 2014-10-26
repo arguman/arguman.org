@@ -127,6 +127,13 @@ class AboutView(TemplateView):
         return super(AboutView, self).get_context_data(
             content=content, **kwargs)
 
+class TosView(TemplateView):
+    template_name = "tos.html"
+
+    def get_context_data(self, **kwargs):
+        content = markdown(render_to_string("tos.md"))
+        return super(TosView, self).get_context_data(
+            content=content, **kwargs)
 
 class ArgumentCreationView(CreateView):
     template_name = "premises/new_contention.html"

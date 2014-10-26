@@ -5,7 +5,11 @@
         <form action="{% url "new_argument" %}" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Kaydet ve düzenlemeye devam et" class="submit">
+            <p>
+                Bu argümanı göndererek <a href="/tos">kullanım koşullarını</a> kabul etmiş olacaksınız ve uygun görülmeyen
+                içerikler moderatörler tarafından yayından kaldırılacaktır.
+            </p>
+            <input type="submit" value="Gönder ve düzenlemeye devam et" class="submit">
         </form>
     </section>
 {% endblock %}
