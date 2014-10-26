@@ -1,13 +1,11 @@
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
-
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
                             PremiseDeleteView, ContentionJsonView,
                             PremiseEditView, ArgumentUpdateView,
                             ArgumentPublishView, ArgumentUnpublishView,
                             ArgumentDeleteView, AboutView, NewsView,
-                            UpdatedArgumentsView, ReportView)
+                            UpdatedArgumentsView, ReportView, ControversialArgumentsView)
 
 
 urlpatterns = patterns('',
@@ -16,6 +14,8 @@ urlpatterns = patterns('',
        name='contentions_latest'),
    url(r'^updated$', UpdatedArgumentsView.as_view(),
        name='contentions_updated'),
+   url(r'^controversial', ControversialArgumentsView.as_view(),
+       name='contentions_controversial'),
    url(r'^about$',
        AboutView.as_view(),
        name='about'),

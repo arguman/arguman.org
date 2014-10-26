@@ -286,7 +286,7 @@ li.base-premises {
 }
 
 .sticky-header {
-    position: absolute;
+    position: fixed;
     width: 100%;
     margin: 0;
     background: #f4f4f4;
@@ -644,7 +644,7 @@ footer a {
 }
 
 .tabs {
-    font-size: 28px;
+    font-size: 27px;
     overflow: hidden;
     margin: 7px;
     padding: 0;
@@ -686,3 +686,12 @@ form .parent-premise strong {
 #id_text {
     height: 200px;
 }
+
+/* Media Queries */
+@media (max-width: 800px){
+  header nav ul li {
+    float: left;
+    margin-top: 23px;
+    }
+}
+

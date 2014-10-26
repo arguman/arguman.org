@@ -89,7 +89,7 @@
             <a href="{{ path }}/premises/<%= pk %>">düzenle</a>
             <form action="{{ path }}/premises/<%= pk %>/delete" method="post">
                 {% csrf_token %}
-                <input type="submit" value="sil" class="delete_premise"/>
+                <input type="submit" value="sil" onclick="return confirm('Önermeyi silmek istediğinize emin misiniz?');" class="delete_premise"/>
             </form>
         </div>
         <% } else { %>
