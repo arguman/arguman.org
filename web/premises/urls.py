@@ -3,7 +3,11 @@ from django.views.generic import TemplateView
 
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
-                            PremiseDeleteView, ContentionJsonView, PremiseEditView, ArgumentUpdateView, ArgumentPublishView, ArgumentUnpublishView, ArgumentDeleteView, AboutView, NewsView, UpdatedArgumentsView)
+                            PremiseDeleteView, ContentionJsonView,
+                            PremiseEditView, ArgumentUpdateView,
+                            ArgumentPublishView, ArgumentUnpublishView,
+                            ArgumentDeleteView, AboutView, NewsView,
+                            UpdatedArgumentsView, ReportView)
 
 
 urlpatterns = patterns('',

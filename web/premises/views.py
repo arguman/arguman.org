@@ -4,7 +4,7 @@ import json
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
@@ -14,7 +14,7 @@ from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 
 from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
-
+from profiles.models import Profile
 
 class ContentionDetailView(DetailView):
     template_name = "premises/contention_detail.html"
@@ -52,12 +52,18 @@ class ContentionJsonView(DetailView):
             "children": self.get_premises(contention, user)
         }
 
+    def not_reported(self, premise, user):
+        if user.report.filter(premise=premise).exists() or user == premise.user:
+            return 'none'
+        else:
+            return 'true'
+
     def get_premises(self, contention, user, parent=None):
         children = [{
             "pk": premise.pk,
-            "reported": user.report.filter(premise=premise).exists(),
             "name": premise.text,
             "parent": parent.text if parent else None,
+            "not_reported": self.not_reported(premise, user),
             "user": {
                 "id": premise.user.id,
                 "username": premise.user.username,
@@ -66,7 +72,7 @@ class ContentionJsonView(DetailView):
             },
             "sources": premise.sources,
             "premise_type": premise.premise_class(),
-            "children": (self.get_premises(contention, parent=premise)
+            "children": (self.get_premises(contention, user, parent=premise)
                          if premise.published_children().exists() else [])
         } for premise in contention.published_premises(parent)]
         return children
@@ -279,14 +285,21 @@ class ReportView(View):
         if request.user.is_authenticated():
             data = request.POST
             premise = data.get('premise')
+            if premise:
+                premise = Premise.objects.get(id=premise)
             user = data.get('user')
+            if user:
+                user = Profile.objects.get(id=user)
             contention = data.get('contention')
+            if contention:
+                contention = Contention.objects.get(id=contention)
             try:
                 Report.objects.create(reporter=request.user,
                                       premise=premise,
                                       user=user,
                                       contention=contention)
+                return HttpResponse(json.dumps({'message': 'OK'}))
             except Exception as e:
-                return HttpResponse(json.dumps({'message': e.message}))
+                return HttpResponseBadRequest(json.dumps({'message': e.message}))
         else:
-            return HttpResponse(json.dumps({'message': 'You are not authenticated'}))
+            return HttpResponseForbidden(json.dumps({'message': 'You are not authenticated'}))
