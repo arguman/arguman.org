@@ -10,7 +10,7 @@ from django.views.generic import FormView, CreateView, RedirectView, DetailView
 from profiles.forms import RegistrationForm
 from profiles.models import Profile
 from profiles.signals import follow_done, unfollow_done
-from premises.models import Contention
+from premises.models import Contention, Report
 
 
 class RegistrationView(CreateView):
@@ -71,12 +71,16 @@ class ProfileDetailView(DetailView):
             contentions = contentions.filter(is_published=True)
 
         can_follow = self.request.user != user
+
         if self.request.user.is_authenticated():
             is_followed = self.request.user.following.filter(pk=user.id).exists()
+            is_reported = Report.objects.filter(reporter=self.request.user, user=user).exists()
         else:
             is_followed = False
+            is_reported = False
         return super(ProfileDetailView, self).get_context_data(
             can_follow=can_follow,
+            is_reported=is_reported,
             is_followed=is_followed,
             contentions=contentions)
 

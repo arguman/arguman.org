@@ -298,7 +298,7 @@ class ReportView(View):
                                       premise=premise,
                                       user=user,
                                       contention=contention)
-                return HttpResponse(json.dumps({'message': 'OK'}))
+                return HttpResponse({'message': 'OK'})
             except Exception as e:
                 return HttpResponseBadRequest(json.dumps({'message': e.message}))
         else:

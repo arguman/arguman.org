@@ -16,6 +16,13 @@
                 {% else %}
                     <a href="{% url "auth_profile" profile.username %}" class="anchor follow" data-method="post">Takip et</a>
                 {% endif %}
+                <p></p>
+                {% if not is_reported %}
+                    <a href="" style="background:#8b0000" class="report" onclick="report(this)" data-profile="{{profile.id}}"> Sikayet et</a>
+                {% else%}
+                    <a href="" style="background:darkslateblue"" class="report" data-profile="{{profile.id}}"> Sikayet edildi</a>
+                {% endif %}
+
             </nav>
             {% endif %}
         </aside>
@@ -83,5 +90,17 @@
                 });
             });
         });
+    var  report = function (that) {
+                    $.ajax({
+                        url: '/report',
+                        type: 'POST',
+                        data: {'user': $(that).data('profile')},
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                        }
+                    }).complete(function () {
+                        window.location.reload()
+                    }.bind(this))}
     </script>
+
 {% endblock %}
