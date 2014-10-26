@@ -174,14 +174,14 @@ class Report(models.Model):
 
     def save(self, *args, **kwargs):
         if self.premise:
-            if self.premise.premise_report.length() > settings.REPORT_DEACTIVATE_SIZE:
-                self.premise.update(is_active=False)
+            if self.premise.premise_report.length() > settings.REPORT_DEACTIVATE_COUNT:
+                self.premise.update(is_approved=False)
         elif self.user:
-            if self.user.premise_report.length() > settings.REPORT_DEACTIVATE_SIZE:
+            if self.user.premise_report.length() > settings.REPORT_DEACTIVATE_COUNT:
                 self.user.update(is_active=False)
         elif self.contention:
-            if self.user.premise_report.length() > settings.REPORT_DEACTIVATE_SIZE:
-                self.user.update(is_active=False)
+            if self.user.premise_report.length() > settings.REPORT_DEACTIVATE_COUNT:
+                self.user.update(is_published=False)
         return super(Report, self).save(*args, **kwargs)
 
     class Meta:
