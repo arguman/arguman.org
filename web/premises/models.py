@@ -13,9 +13,6 @@ from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.managers import ContentionManager
 
-from profiles.models import Profile
-
-
 OBJECTION = 0
 SUPPORT = 1
 SITUATION = 2
@@ -67,11 +64,6 @@ class Contention(models.Model):
         """
         if not self.slug:
             slug = slugify(unidecode(self.title))
-
-            num_results = Profile.objects.filter(username=slug).exists()
-            if(num_results):
-                slug = "%s-%s" % (slug, uuid4().hex)
-
             duplications = Contention.objects.filter(slug=slug)
             if duplications.exists():
                 self.slug = "%s-%s" % (slug, uuid4().hex)
