@@ -3,7 +3,10 @@ from django.views.generic import TemplateView
 
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
-                            PremiseDeleteView, ContentionJsonView, PremiseEditView, ArgumentUpdateView, ArgumentPublishView, ArgumentUnpublishView, ArgumentDeleteView, AboutView)
+                            PremiseDeleteView, ContentionJsonView,
+                            PremiseEditView, ArgumentUpdateView,
+                            ArgumentPublishView, ArgumentUnpublishView,
+                            ArgumentDeleteView, AboutView, ReportView)
 
 
 urlpatterns = patterns('',
@@ -11,6 +14,10 @@ urlpatterns = patterns('',
    url(r'^about$',
        AboutView.as_view(),
        name='about'),
+   url(r'^report$',
+       ReportView.as_view(),
+       name='report'),
+
    url(r'^new-argument$',
        ArgumentCreationView.as_view(),
        name='new_argument'),

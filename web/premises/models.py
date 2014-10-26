@@ -39,7 +39,7 @@ class Contention(models.Model):
         verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/sources.html"))
     is_featured = models.BooleanField(default=False)
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=True)
     date_creation = models.DateTimeField(auto_now_add=True)
 
     objects = ContentionManager()
@@ -101,7 +101,7 @@ class Premise(models.Model):
     sources = models.TextField(
         null=True, blank=True, verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/premise_source.html"))
-    is_approved = models.BooleanField(default=False, verbose_name="Yayınla")
+    is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
 
     sibling_count = models.IntegerField(default=1)  # denormalized field
 
@@ -140,3 +140,39 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.text)
+
+
+class Report(models.Model):
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='report')
+    premise = models.ForeignKey(Premise,
+                                related_name='premise_report',
+                                blank=True,
+                                null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='user_report',
+                             blank=True,
+                             null=True)
+    contention = models.ForeignKey(Contention,
+                                   related_name='contention_report',
+                                   blank=True,
+                                   null=True)
+
+    def __unicode__(self):
+        return str(self.id)
+
+    def save(self, *args, **kwargs):
+        if self.premise:
+            if self.premise.premise_report.length() > settings.REPORT_DEACTIVATE_SIZE:
+                self.premise.update(is_active=False)
+        elif self.user:
+            if self.user.premise_report.length() > settings.REPORT_DEACTIVATE_SIZE:
+                self.user.update(is_active=False)
+        elif self.contention:
+            if self.user.premise_report.length() > settings.REPORT_DEACTIVATE_SIZE:
+                self.user.update(is_active=False)
+        return super(Report, self).save(*args, **kwargs)
+
+    class Meta:
+        unique_together = (('reporter', 'premise'),
+                           ('reporter', 'user'),
+                           ('reporter', 'contention'))

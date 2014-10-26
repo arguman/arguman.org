@@ -11,7 +11,7 @@ from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
 from markdown2 import markdown
 
-from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT
+from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
 
 
@@ -36,10 +36,10 @@ class ContentionJsonView(DetailView):
     def render_to_response(self, context, **response_kwargs):
         contention = self.get_object(self.get_queryset())
         return HttpResponse(json.dumps({
-            "nodes": self.build_tree(contention),
+            "nodes": self.build_tree(contention, self.request.user),
         }), content_type="application/json")
 
-    def build_tree(self, contention):
+    def build_tree(self, contention, user):
         return {
             "name": contention.title,
             "parent": None,
@@ -47,12 +47,13 @@ class ContentionJsonView(DetailView):
             "owner": contention.owner,
             "sources": contention.sources,
             "is_singular": self.is_singular(contention),
-            "children": self.get_premises(contention)
+            "children": self.get_premises(contention, user)
         }
 
-    def get_premises(self, contention, parent=None):
+    def get_premises(self, contention, user, parent=None):
         children = [{
             "pk": premise.pk,
+            "reported": user.report.filter(premise=premise).exists(),
             "name": premise.text,
             "parent": parent.text if parent else None,
             "user": {
@@ -246,3 +247,22 @@ class PremiseDeleteView(View):
 
     def get_contention(self):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
+
+
+class ReportView(View):
+
+    def post(self, request):
+        if request.user.is_authenticated():
+            data = request.POST
+            premise = data.get('premise')
+            user = data.get('user')
+            contention = data.get('contention')
+            try:
+                Report.objects.create(reporter=request.user,
+                                      premise=premise,
+                                      user=user,
+                                      contention=contention)
+            except Exception as e:
+                return HttpResponse(json.dumps({'message': e.message}))
+        else:
+            return HttpResponse(json.dumps({'message': 'You are not authenticated'}))
