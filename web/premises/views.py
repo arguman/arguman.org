@@ -12,7 +12,7 @@ from django.views.generic.edit import UpdateView
 from markdown2 import markdown
 from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 
-from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT
+from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Vote
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
 
 
@@ -23,9 +23,9 @@ class ContentionDetailView(DetailView):
     def get_context_data(self, **kwargs):
         contention = self.get_object()
         edit_mode = (
-                self.request.user.is_superuser or
-                self.request.user.is_staff or
-                contention.user == self.request.user)
+            self.request.user.is_superuser or
+            self.request.user.is_staff or
+            contention.user == self.request.user)
         return super(ContentionDetailView, self).get_context_data(
             path=contention.get_absolute_url(),
             edit_mode=edit_mode,
@@ -54,27 +54,48 @@ class ContentionJsonView(DetailView):
 
     def get_premises(self, contention, parent=None):
         children = [{
-            "pk": premise.pk,
-            "name": premise.text,
-            "parent": parent.text if parent else None,
-            "user": {
-                "id": premise.user.id,
-                "username": premise.user.username,
-                "absolute_url": reverse("auth_profile",
-                                        args=[premise.user.username])
-            },
-            "sources": premise.sources,
-            "premise_type": premise.premise_class(),
-            "children": (self.get_premises(contention, parent=premise)
-                         if premise.published_children().exists() else [])
-        } for premise in contention.published_premises(parent)]
+                        "pk": premise.pk,
+                        "name": premise.text,
+                        "parent": parent.text if parent else None,
+                        "user": {
+                            "id": premise.user.id,
+                            "username": premise.user.username,
+                            "absolute_url": reverse("auth_profile",
+                                                    args=[premise.user.username])
+                        },
+                        "sources": premise.sources,
+                        "vote": self.get_user_vote_data(premise.pk),
+                        "like_count": premise.like_count,
+                        "unlike_count": premise.unlike_count,
+                        "premise_type": premise.premise_class(),
+                        "children": (self.get_premises(contention, parent=premise)
+                                     if premise.published_children().exists() else [])
+                    } for premise in contention.published_premises(parent)]
         return children
+
+    def get_user_vote_data(self, premise_id):
+        """
+        Validate the premise_id is voted for authenticated user
+        """
+        vote_data = dict()
+        user = self.request.user
+        if user.is_authenticated():
+            try:
+                vote = Vote.objects.get(premise_id=premise_id, user_id=user.id)
+                if vote.like:
+                    vote_data["like"] = True
+                else:
+                    vote_data["unlike"] = True
+            except Vote.DoesNotExist:
+                pass
+
+        return vote_data
 
     def is_singular(self, contention):
         result = (contention
-                   .premises
-                   .all()
-                   .aggregate(max_sibling=Max('sibling_count')))
+                  .premises
+                  .all()
+                  .aggregate(max_sibling=Max('sibling_count')))
         return result['max_sibling'] <= 1
 
 
@@ -132,7 +153,7 @@ class ArgumentCreationView(CreateView):
     def create_demo_premises(self, instance):
         demo = [
             [SUPPORT, "Bu metin örnektir. Düzenleyiniz",
-                      "Buraya bir URL girilebilir"],
+             "Buraya bir URL girilebilir"],
         ]
         for (premise_type, text, source) in demo:
             Premise.objects.create(
@@ -210,7 +231,7 @@ class PremiseEditView(UpdateView):
         if self.request.user.is_superuser:
             return premises
         return premises.filter(user=self.request.user)
-    
+
     def form_valid(self, form):
         response = super(PremiseEditView, self).form_valid(form)
         form.instance.argument.update_sibling_counts()
@@ -218,7 +239,7 @@ class PremiseEditView(UpdateView):
 
     def get_context_data(self, **kwargs):
         return super(PremiseEditView, self).get_context_data(
-            #contention=self.get_contention(),
+            # contention=self.get_contention(),
             **kwargs)
 
 
@@ -251,6 +272,46 @@ class PremiseCreationView(CreateView):
             return get_object_or_404(Premise, pk=parent_pk)
 
 
+class PremiseVoteView(View):
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            return HttpResponse('Unauthorized', status=401)
+
+        user = request.user
+        like = request.POST.get("like")
+        premise_id = request.POST.get("premise")
+
+        if not (like and premise_id):
+            return HttpResponse("Invalid Data", status=400)
+
+        response_data = dict()
+
+        premise = get_object_or_404(Premise, pk=premise_id)
+        like = bool(int(like))
+        user_premise_vote = Vote.objects.filter(user_id=user.id, premise_id=premise_id, like=like)
+
+        if user_premise_vote.exists():
+            user_premise_vote = user_premise_vote[0]
+            user_premise_vote.delete()
+            response_data["added"] = False
+        else:
+            Vote.objects.filter(user_id=user.id, premise_id=premise_id).delete()
+            vote = Vote(**{
+                "user": user,
+                "premise": premise,
+                "like": bool(like)
+            })
+            vote.save()
+            response_data["added"] = True
+
+        premise = Premise.objects.get(pk=premise.id)  # reload premise model instance data
+        response_data["like_count"] = premise.like_count
+        response_data["unlike_count"] = premise.unlike_count
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
 class PremiseDeleteView(View):
     def get_premise(self):
         if self.request.user.is_staff:
@@ -271,8 +332,3 @@ class PremiseDeleteView(View):
     def get_contention(self):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
 
-
-class VoteAjaxView(View):
-
-    def post(self, request, *args, **kwargs):
-        return HttpResponse("ok")

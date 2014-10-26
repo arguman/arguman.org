@@ -3,7 +3,8 @@ from django.views.generic import TemplateView
 
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
-                            PremiseDeleteView, ContentionJsonView, PremiseEditView, ArgumentUpdateView, ArgumentPublishView, ArgumentUnpublishView, ArgumentDeleteView, AboutView, NewsView, UpdatedArgumentsView)
+                            PremiseDeleteView, ContentionJsonView, PremiseEditView, ArgumentUpdateView, ArgumentPublishView, ArgumentUnpublishView, ArgumentDeleteView, AboutView, NewsView, UpdatedArgumentsView,
+                            PremiseVoteView)
 
 
 urlpatterns = patterns('',
@@ -27,6 +28,9 @@ urlpatterns = patterns('',
    url(r'^(?P<slug>[\w-]+)$',
         ContentionDetailView.as_view(),
         name='contention_detail'),
+   url(r'^(?P<slug>[\w-]+)/premises/vote',
+        PremiseVoteView.as_view(),
+        name='vote_premise'),
    url(r'^(?P<slug>[\w-]+)/premises/(?P<pk>[0-9]+)/delete',
         PremiseDeleteView.as_view(),
         name='delete_premise'),

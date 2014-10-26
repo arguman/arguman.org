@@ -117,7 +117,8 @@ class Premise(models.Model):
         help_text=render_to_string("premises/examples/premise_source.html"))
     is_approved = models.BooleanField(default=False, verbose_name="Yayınla")
 
-    sibling_count = models.IntegerField(default=1)  # denormalized field
+    # denormalized fields
+    sibling_count = models.IntegerField(default=1)
     like_count = models.PositiveIntegerField(default=0, db_index=True, editable=False)
     unlike_count = models.PositiveIntegerField(default=0, db_index=True, editable=False)
 

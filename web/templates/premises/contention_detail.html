@@ -66,9 +66,15 @@
         <div class="premise-content <%= premise_type %>">
             <%= marked(name) %>
         </div>
-        <div class="premise-actions premise-vote">
-            <a href="#" class="like">katılıyorum</a>
-            <a href="#" class="unlike">katilmıyorum</a>
+        <div class="premise-vote {% if not user.is_authenticated %}inactive{% endif %}" id="premise-vote">
+            <a class="unlike <% if (vote.unlike) { %> voted <% } %>" data-premise="<%= pk %>"  data-like="0">
+                <i class="fa fa-thumbs-down fa-lg"></i>
+                <span class="count"><%= unlike_count %></span>
+            </a>
+            <a class="like {<% if (vote.like) { %> voted <% } %>" data-premise="<%= pk %>"  data-like="1">
+                <i class="fa fa-thumbs-up fa-lg"></i>
+                <span class="count"><%= like_count %></span>
+            </a>
         </div>
         <div class="premise-sources">
         <% if (sources) { %>
@@ -168,6 +174,61 @@
 
     });
 </script>
+<script type="text/javascript">
+
+    $(function(){
+        var clicked = false;
+        $("body").on("click", ".premise-vote:not('.inactive') a", function(e){
+            if (clicked){
+                return false;
+            }
+            clicked = true;
+            var elem = $(e.target).closest("a");
+            var premise_id = elem.data("premise");
+            var like = parseInt(elem.data("like"));
+            elem.find("i").animate(
+                    {
+                        "font-size": '1.6em',
+                    },
+                    {
+                        duration: 300,
+                        complete: function() {
+                            $(this).animate({
+                                "font-size": "1.33333333em"
+                            }, {
+                                duration: 200,
+                                complete: function() {
+                                    clicked = false;
+                                }
+                            });
+                        }
+                    });
+
+            $.ajax({
+                url: "{% url "vote_premise" contention.slug %}",
+                type: "post",
+                data: {
+                    "premise": premise_id,
+                    "like": like,
+                    "csrfmiddlewaretoken": "{{ csrf_token }}"
+                },
+                success: function(data, textStatus){
+                    var elem_closest = $(elem).closest(".premise-vote");
+                    elem_closest.find("a").removeClass("voted");
+                    if (data.added){
+                        $(elem).addClass("voted");
+                    }else{
+                        $(elem).removeClass("voted");
+                    }
+                    $(".like .count", elem_closest).text(data.like_count);
+                    $(".unlike .count", elem_closest).text(data.unlike_count);
+                }
+            });
+
+        });
+    });
+</script>
+
 {% endblock %}
 
 
