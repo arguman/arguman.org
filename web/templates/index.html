@@ -7,7 +7,18 @@
         arguman.org bir <a href="{% url "about" %}">argüman analizi</a> platformudur.
     </div>
 
-    <h3><span>⦾</span>Seçilmiş Argümanlar</h3>
+    <ul class="tabs">
+        <li class="featured{% ifequal tab_class "featured" %} active{% endifequal %}">
+            <a href="/">Seçilmişler</a></li>
+        <li class="news{% ifequal tab_class "news" %} active{% endifequal %}">
+            <a href="{% url "contentions_latest" %}">Yeniler</a></li>
+        <li class="updated{% ifequal tab_class "updated" %} active{% endifequal %}">
+            <a href="{% url "contentions_updated" %}">Güncellenenler</a></li>
+        <li class="controversial{% ifequal tab_class "controversial" %} active{% endifequal %}">
+            <a href="{% url "contentions_controversial" %}">Tartışılanlar</a>
+        </li>
+
+    </ul>
 
     <ul class="argument-list">
         {% for contention in contentions %}

@@ -70,6 +70,10 @@
             });
         },
         renderEdges: function (context) {
+            if (!this.children.length) {
+                return;
+            }
+
             // add edge to main premises
             var firstPremise = this.children[0],
                 lastPremise = this.children[this.children.length-1];
@@ -147,13 +151,27 @@
         },
 
         renderPremiseContent: function () {
-            return this.template(this.model);
+            var bundle = {
+                "authenticatedUser": arguman.authenticatedUser,
+                "editMode": arguman.editMode
+            };
+            $.extend(bundle, this.model);
+            return this.template(bundle);
+        },
+
+        bringToFront: function (premise) {
+            if (!arguman.maxZIndex) {
+                arguman.maxZIndex = 0;
+            }
+            premise.css("z-index", arguman.maxZIndex++);
         },
 
         render: function (columnLeft, rowTop) {
             var premise = $("<div>", {
                 "class": "premise"
             }).html(this.renderPremiseContent());
+
+            premise.on('mouseover', this.bringToFront.bind(this, premise));
 
             premise.css({
                 "width": this.getWidth()
