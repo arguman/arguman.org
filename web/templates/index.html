@@ -14,6 +14,10 @@
             <a href="{% url "contentions_latest" %}">Yeniler</a></li>
         <li class="updated{% ifequal tab_class "updated" %} active{% endifequal %}">
             <a href="{% url "contentions_updated" %}">Güncellenenler</a></li>
+        <li class="controversial{% ifequal tab_class "controversial" %} active{% endifequal %}">
+            <a href="{% url "contentions_controversial" %}">Tartışılanlar</a>
+        </li>
+
     </ul>
 
     <ul class="argument-list">
