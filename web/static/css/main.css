@@ -686,3 +686,12 @@ form .parent-premise strong {
 #id_text {
     height: 200px;
 }
+
+/* Media Queries */
+@media (max-width: 800px){
+  header nav ul li {
+    float: left;
+    margin-top: 23px;
+    }
+}
+
