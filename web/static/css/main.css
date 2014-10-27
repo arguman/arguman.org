@@ -648,14 +648,14 @@ footer a {
 }
 
 .tabs {
-    font-size: 22px;
+    font-size: 25px;
     overflow: hidden;
     margin: 7px;
     padding: 0;
 }
 
 .tabs li {
-    margin: 0 20px 4px 20px;
+    margin: 0 20px 4px 14px;
     text-align: center;
     padding: 0;
     float: left;

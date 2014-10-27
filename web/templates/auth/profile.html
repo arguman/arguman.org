@@ -8,7 +8,6 @@
             <a class="gravatar profile-image" href="{% url "auth_profile" profile.username %}">
                 {% gravatar profile 160 %}
             </a>
-
             {% if can_follow %}
             <nav class="actions">
                 {% if is_followed %}
