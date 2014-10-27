@@ -329,4 +329,33 @@
         }
     });
 
+    arguman.Zoom = Class.extend({
+        canvas: '#app',
+        currentSize: function(){
+            return parseFloat($(this.canvas).css('zoom')) || 1
+        },
+        zoomIn: function(){
+            var current = this.currentSize();
+            $(this.canvas).css('zoom', current - 0.1);
+            $('#zoomOut').show();
+            $(this.canvas).css('padding-top', function(index, curValue){
+                return parseInt(curValue, 10) + 40 + 'px';
+            });
+        },
+        zoomOut: function(){
+            var current = this.currentSize();
+            $('#app').css('zoom', current + 0.1);
+            if(parseFloat($(this.canvas).css('zoom')) >= 1){
+                $('#zoomOut').hide();
+            }
+            $(this.canvas).css('padding-top', function(index, curValue){
+                return parseInt(curValue, 10) - 40 + 'px';
+            });
+        },
+        init: function(){
+            $('#zoomIn').on('click', $.proxy(this, 'zoomIn'));
+            $('#zoomOut').on('click', $.proxy(this, 'zoomOut'));
+        }
+    });
+
 })(window.arguman || (window.arguman = {}));
