@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
-    'social_auth',
+    'social.apps.django_app.default',
     'django_gravatar',
 
     'profiles',
@@ -98,32 +98,53 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "../templates"),
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.contrib.messages.context_processors.messages',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
 
 # Social Auth Settings
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.github.GithubOAuth2',
+    'social.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-
 AUTH_USER_MODEL = 'profiles.Profile'
+SOCIAL_AUTH_USER_MODEL = 'profiles.Profile'
 
+SOCIAL_AUTH_TWITTER_KEY = None  # defined in settings_local.py
+SOCIAL_AUTH_TWITTER_SECRET = None  # defined in settings_local.py
 
-TWITTER_CONSUMER_KEY = None # defined in settings_local.py
-TWITTER_CONSUMER_SECRET = None # defined in settings_local.py
+SOCIAL_AUTH_GITHUB_KEY = None  # defined in settings_local.py
+SOCIAL_AUTH_GITHUB_SECRET = None  # defined in settings_local.py
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = None  # defined in settings_local.py
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = None  # defined in settings_local.py
 
 LOGIN_REDIRECT_URL = '/'
-SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
-SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
 SOCIAL_AUTH_PIPELINE = (
-    'social_auth.backends.pipeline.social.social_auth_user',
-    'social_auth.backends.pipeline.associate.associate_by_email',
-    'social_auth.backends.pipeline.user.get_username',
-    'social_auth.backends.pipeline.user.create_user',
-    'social_auth.backends.pipeline.social.associate_user',
-    'social_auth.backends.pipeline.social.load_extra_data',
-    'social_auth.backends.pipeline.user.update_user_details',
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.mail.mail_validation',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.debug.debug',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
 )
+
 REPORT_DEACTIVATE_COUNT = 200
 try:
     from settings_local import *

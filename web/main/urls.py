@@ -6,6 +6,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^', include('premises.urls')),
     url(r'^', include('profiles.urls')),
-    url(r'^', include('social_auth.urls')),
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', include(admin.site.urls)),
 )
