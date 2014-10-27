@@ -7,3 +7,4 @@ python-openid==2.2.5
 wsgiref==0.1.2
 django-gravatar2==1.1.4
 markdown2==2.3.0
+django-extensions==1.4.4

@@ -9,6 +9,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
+from django_extensions.db.fields import AutoSlugField
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.managers import ContentionManager
@@ -28,7 +29,8 @@ class Contention(models.Model):
     title = models.CharField(
         max_length=255, verbose_name="Argüman",
         help_text=render_to_string("premises/examples/contention.html"))
-    slug = models.SlugField(max_length=255, blank=True)
+    slug = AutoSlugField(populate_from='title', blank=True, max_length=255)
+
     description = models.TextField(
         null=True, blank=True, verbose_name="Ek bilgiler",)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -57,19 +59,6 @@ class Contention(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'contention_detail', [self.slug]
-
-    def save(self, *args, **kwargs):
-        """
-        - Make unique slug if it is not given.
-        """
-        if not self.slug:
-            slug = slugify(unidecode(self.title))
-            duplications = Contention.objects.filter(slug=slug)
-            if duplications.exists():
-                self.slug = "%s-%s" % (slug, uuid4().hex)
-            else:
-                self.slug = slug
-        return super(Contention, self).save(*args, **kwargs)
 
     def published_premises(self, parent=None, ignore_parent=False):
         premises = self.premises.filter(is_approved=True)
