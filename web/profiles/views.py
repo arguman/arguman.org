@@ -5,9 +5,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.views.generic import FormView, CreateView, RedirectView, DetailView
+from django.views.generic import FormView, CreateView, RedirectView, DetailView, UpdateView
 
-from profiles.forms import RegistrationForm
+from profiles.forms import RegistrationForm, ProfileUpdateForm
 from profiles.models import Profile
 from profiles.signals import follow_done, unfollow_done
 from premises.models import Contention, Report
@@ -117,3 +117,14 @@ class ProfileDetailView(DetailView):
         return HttpResponse(json.dumps({
             "success": True
         }))
+
+
+class ProfileUpdateView(UpdateView):
+    template_name = "auth/update.html"
+    form_class = ProfileUpdateForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse("auth_profile", args=[self.request.user.username])

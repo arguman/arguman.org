@@ -725,6 +725,12 @@ form .parent-premise strong {
     font-size: 29px;
 }
 
+.profile-update-button {
+    font-size: 20px;
+    color: #232323;
+    text-decoration: none;
+}
+
 
 /* Media Queries */
 @media (max-width: 800px){
