@@ -2,3 +2,4 @@ db.sqlite3
 settings_local.py
 *.pyc
 .DS_Store
+web/premises/migrations/*
