@@ -643,7 +643,7 @@ footer a {
 }
 
 .tabs {
-    font-size: 27px;
+    font-size: 22px;
     overflow: hidden;
     margin: 7px;
     padding: 0;
@@ -717,3 +717,9 @@ form .parent-premise strong {
     }
 }
 
+input.searchfield {
+    width: 200px;
+    font-family: AmericanTypewriter, Georgia, serif;
+    font-size: 22px;
+    margin-top: 40px;
+}

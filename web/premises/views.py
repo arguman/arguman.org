@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 from django.db.models import Max
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
@@ -16,6 +18,7 @@ from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, 
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
 from profiles.models import Profile
 from django.db.models import Count
+
 
 class ContentionDetailView(DetailView):
     template_name = "premises/contention_detail.html"
@@ -99,6 +102,22 @@ class HomeView(TemplateView):
 
     def get_contentions(self):
         return Contention.objects.featured()
+
+
+class SearchView(HomeView):
+    tab_class = 'search'
+
+    def get_contentions(self):
+        return None
+
+    def get(self, request, *args, **kwargs):
+        if request.GET.get('ara'):
+            keyword = request.GET.get('ara')
+            contentions = Contention.objects.filter(title__icontains=keyword)
+            rendered = render_to_string('premises/contention.html', {'contentions': contentions})
+            return HttpResponse(rendered)
+        else:
+            return super(SearchView, self).get(request, *args, **kwargs)
 
 
 class NewsView(HomeView):
