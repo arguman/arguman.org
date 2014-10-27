@@ -65,7 +65,9 @@ class ProfileDetailView(DetailView):
         Adds extra context to template
         """
         user = self.get_object()
-        contentions = Contention.objects.filter(user=user)
+        contentions = Contention.objects.filter(
+            premises__user=user
+        ).distinct()
 
         if self.request.user != user:
             contentions = contentions.filter(is_published=True)
