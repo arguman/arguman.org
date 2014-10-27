@@ -90,15 +90,17 @@
         <% } %>
         <strong>gönderen:</strong>
         <p><a href="<%= user.absolute_url %>"><%= user.username %></a></p>
-
+        <% if (report_count) { %>
+        <div class="reported_as_fallacy {% if user.is_anonymous %}last-node{% endif %}">
+        <%= report_count %> kişi tarafından
+        safsata olarak işaretlendi.</div>
+        <% } %>
         {% if user.is_authenticated %}
-        <% if (!reported_by_authenticated_user) { %>
-            <p class="report">
-            <form action="{{ path }}/premises/<%= pk %>/report" method="post">
-                {% csrf_token %}
-                <input type="submit" value="safsata olarak işaretle" class="report_premise"/>
-            </form>
-            </p>
+        <% if (reportable_by_authenticated_user) { %>
+            <form action="{{ path }}/premises/<%= pk %>/report" method="post" class="report-form">
+            {% csrf_token %}
+            <input type="submit" value="safsata olarak işaretle" class="report"/>
+        </form>
         <% } %>
         {% endif %}
 

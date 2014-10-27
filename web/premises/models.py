@@ -142,6 +142,9 @@ class Premise(models.Model):
             SITUATION: "however"
         }.get(self.premise_type)
 
+    def reported_by(self, user):
+        return self.reports.filter(reporter=user).exists()
+
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)
@@ -155,21 +158,16 @@ class Comment(models.Model):
 
 
 class Report(models.Model):
-    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='report')
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 related_name='reports')
     premise = models.ForeignKey(Premise,
-                                related_name='premise_report',
+                                related_name='reports',
                                 blank=True,
                                 null=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             related_name='user_report',
-                             blank=True,
-                             null=True)
     contention = models.ForeignKey(Contention,
-                                   related_name='contention_report',
+                                   related_name='reports',
                                    blank=True,
                                    null=True)
 
     class Meta:
-        unique_together = (('reporter', 'premise'),
-                           ('reporter', 'user'),
-                           ('reporter', 'contention'))
+        unique_together = (('reporter', 'premise'),)

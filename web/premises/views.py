@@ -53,20 +53,13 @@ class ContentionJsonView(DetailView):
             "children": self.get_premises(contention, user)
         }
 
-    def not_reported(self, premise, user):
-        if (user.is_authenticated()
-                and (user.report.filter(premise=premise).exists()
-                or user == premise.user)):
-            return json.dumps(None)
-        else:
-            return json.dumps(True)
-
     def get_premises(self, contention, user, parent=None):
         children = [{
             "pk": premise.pk,
             "name": premise.text,
             "parent": parent.text if parent else None,
-            "not_reported": self.not_reported(premise, user),
+            "reportable_by_authenticated_user": self.user_can_report(premise, user),
+            "report_count": premise.reports.count(),
             "user": {
                 "id": premise.user.id,
                 "username": premise.user.username,
@@ -79,6 +72,12 @@ class ContentionJsonView(DetailView):
                          if premise.published_children().exists() else [])
         } for premise in contention.published_premises(parent)]
         return children
+
+    def user_can_report(self, premise, user):
+        if user.is_authenticated() and user != premise.user:
+            return not premise.reported_by(user)
+
+        return False
 
     def is_singular(self, contention):
         result = (contention
@@ -168,7 +167,6 @@ class ArgumentCreationView(CreateView):
                 user=self.request.user,
                 premise_type=premise_type,
                 text=text,
-                sources=source,
                 is_approved=True)
 
 
@@ -302,25 +300,28 @@ class PremiseDeleteView(View):
 
 class ReportView(View):
 
-    def post(self, request):
+    def get_contention(self):
+        return get_object_or_404(Contention, slug=self.kwargs['slug'])
+
+    def get_premise(self):
+        return get_object_or_404(Premise, pk=self.kwargs['pk'])
+
+    def post(self, request, slug, pk):
         if request.user.is_authenticated():
-            data = request.POST
-            premise = data.get('premise')
-            if premise:
-                premise = Premise.objects.get(id=premise)
-            user = data.get('user')
-            if user:
-                user = Profile.objects.get(id=user)
-            contention = data.get('contention')
-            if contention:
-                contention = Contention.objects.get(id=contention)
+            premise = self.get_premise()
+            contention = self.get_contention()
             try:
                 Report.objects.create(reporter=request.user,
                                       premise=premise,
-                                      user=user,
                                       contention=contention)
-                return HttpResponse({'message': 'OK'})
+                return HttpResponse(json.dumps({
+                    "report_count": premise.reports.count()
+                }), status=201)
             except Exception as e:
-                return HttpResponseBadRequest(json.dumps({'message': e.message}))
+                return HttpResponseBadRequest(json.dumps({
+                    'message': e.message
+                }))
         else:
-            return HttpResponseForbidden(json.dumps({'message': 'You are not authenticated'}))
+            return HttpResponseForbidden(json.dumps({
+                'message': 'Authentication error.'
+            }))

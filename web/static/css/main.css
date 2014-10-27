@@ -686,6 +686,29 @@ form .parent-premise strong {
     height: 200px;
 }
 
+.report-form {
+    margin: -2px 0 0;
+    padding: 0;
+    padding-bottom: 10px;
+    font-size: 17px;
+}
+
+.report-form .report {
+    background: transparent;
+    border: none;
+    font-size: 17px;
+    color: #99969a;
+}
+
+.reported_as_fallacy {
+    background: #ffb6c0;
+    padding: 10px 20px;
+}
+
+.reported_as_fallacy.last-node {
+    border-radius: 0 0 5px 5px;
+}
+
 /* Media Queries */
 @media (max-width: 800px){
   header nav ul li {

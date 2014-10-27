@@ -193,7 +193,28 @@
                 "margin-top": this.y + "px"
             });
 
+            this.renderReportView(premise);
+
             return premise;
+        },
+        renderReportView: function (premise) {
+            var form = premise.find(".report-form");
+            if (!this.model.reportable_by_authenticated_user) {
+                form.hide();
+            }
+            form.on('submit', function (event) {
+                window.confirm('Emin misiniz?') && $.ajax({
+                    url: form.attr("action"),
+                    method: "POST",
+                    data: form.serialize(),
+                    statusCode: {
+                        201: function () {
+                            form.html("Safsata olarak işaretlendi.");
+                        }
+                    }
+                });
+                event.preventDefault();
+            });
         },
         renderLevel: function (container, columnLeft, rowTop) {
             var attached = this.render(columnLeft, rowTop);

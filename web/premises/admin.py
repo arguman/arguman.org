@@ -4,7 +4,7 @@ from premises.models import Contention, Premise, Comment, Report
 
 
 class ReportAdmin(admin.ModelAdmin):
-    list_display = ('reporter', 'premise', 'user', 'contention')
+    list_display = ('reporter', 'premise', 'contention')
 
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Contention)
