@@ -5,15 +5,15 @@ from premises.views import (ContentionDetailView, HomeView,
                             PremiseEditView, ArgumentUpdateView,
                             ArgumentPublishView, ArgumentUnpublishView,
                             ArgumentDeleteView, AboutView, NewsView,
-                            UpdatedArgumentsView, ReportView, ControversialArgumentsView, TosView)
+                            UpdatedArgumentsView, ReportView, ControversialArgumentsView, TosView, SearchView)
 
 
 urlpatterns = patterns('',
    url(r'^$', HomeView.as_view(), name='home'),
    url(r'^news$', NewsView.as_view(),
        name='contentions_latest'),
-   url(r'^search', NewsView.as_view(),
-       name='contentions_latest'),
+   url(r'^search', SearchView.as_view(),
+       name='contentions_search'),
    url(r'^updated$', UpdatedArgumentsView.as_view(),
        name='contentions_updated'),
    url(r'^controversial', ControversialArgumentsView.as_view(),

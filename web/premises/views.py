@@ -104,18 +104,17 @@ class HomeView(TemplateView):
 
 
 class SearchView(HomeView):
-    template_name = 'index.html'
     tab_class = 'search'
 
     def get_contentions(self):
         return None
 
     def get(self, request, *args, **kwargs):
-        if request.GET.get('search') and request.GET.get('ajax'):
-            keyword = request.GET.get('search')
+        if request.GET.get('ara'):
+            keyword = request.GET.get('ara')
             contentions = Contention.objects.filter(title__icontains=keyword)
-            rendered = render(request, 'contention.html', {contentions: contentions})
-            return HttpResponse({'results': rendered})
+            rendered = render_to_string('premises/contention.html', {'contentions': contentions})
+            return HttpResponse(rendered)
         else:
             return super(SearchView, self).get(request, *args, **kwargs)
 
