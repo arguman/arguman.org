@@ -54,10 +54,12 @@ class ContentionJsonView(DetailView):
         }
 
     def not_reported(self, premise, user):
-        if user.report.filter(premise=premise).exists() or user == premise.user:
-            return 'none'
+        if (user.is_authenticated()
+                and (user.report.filter(premise=premise).exists()
+                or user == premise.user)):
+            return json.dumps(None)
         else:
-            return 'true'
+            return json.dumps(True)
 
     def get_premises(self, contention, user, parent=None):
         children = [{
