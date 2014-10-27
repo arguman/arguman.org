@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 from django.db.models import Max
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
@@ -15,6 +17,7 @@ from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
 from django.db.models import Count
+
 
 class ContentionDetailView(DetailView):
     template_name = "premises/contention_detail.html"
@@ -91,6 +94,23 @@ class HomeView(TemplateView):
 
     def get_contentions(self):
         return Contention.objects.featured()
+
+
+class SearchView(HomeView):
+    template_name = 'index.html'
+    tab_class = 'search'
+
+    def get_contentions(self):
+        return None
+
+    def get(self, request, *args, **kwargs):
+        if request.GET.get('search') and request.GET.get('ajax'):
+            keyword = request.GET.get('search')
+            contentions = Contention.objects.filter(title__icontains=keyword)
+            rendered = render(request, 'contention.html', {contentions: contentions})
+            return HttpResponse({'results': rendered})
+        else:
+            return super(SearchView, self).get(request, *args, **kwargs)
 
 
 class NewsView(HomeView):

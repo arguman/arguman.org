@@ -1,16 +1,18 @@
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
-
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
-                            PremiseDeleteView, ContentionJsonView, PremiseEditView, ArgumentUpdateView, ArgumentPublishView,
-                            ArgumentUnpublishView, ArgumentDeleteView, AboutView, NewsView, UpdatedArgumentsView,
-                            ControversialArgumentsView)
-
+                            PremiseDeleteView, ContentionJsonView,
+                            PremiseEditView, ArgumentUpdateView,
+                            ArgumentPublishView, ArgumentUnpublishView,
+                            ArgumentDeleteView, AboutView, NewsView,
+                            UpdatedArgumentsView, ReportView, ControversialArgumentsView, TosView)
 
 urlpatterns = patterns('',
    url(r'^$', HomeView.as_view(), name='home'),
    url(r'^news$', NewsView.as_view(),
+       name='contentions_latest'),
+   url(r'^search', NewsView.as_view(),
        name='contentions_latest'),
    url(r'^updated$', UpdatedArgumentsView.as_view(),
        name='contentions_updated'),
