@@ -128,6 +128,9 @@ SOCIAL_AUTH_GITHUB_SECRET = None  # defined in settings_local.py
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = None  # defined in settings_local.py
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = None  # defined in settings_local.py
 
+SOCIAL_AUTH_FACEBOOK_KEY = None  # defined in settings_local.py
+SOCIAL_AUTH_FACEBOOK_SECRET = None  # defined in settings_local.py
+
 LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
