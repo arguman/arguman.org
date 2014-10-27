@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
                             PremiseDeleteView, ContentionJsonView,
@@ -25,7 +24,9 @@ urlpatterns = patterns('',
    url(r'^report$',
        ReportView.as_view(),
        name='report'),
-
+   url(r'^tos$',
+       TosView.as_view(),
+       name='tos'),
    url(r'^new-argument$',
        ArgumentCreationView.as_view(),
        name='new_argument'),

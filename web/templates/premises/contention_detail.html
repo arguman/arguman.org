@@ -43,6 +43,23 @@
             </ul>
         </nav>
         {% endif %}
+
+        <nav>
+        <ul>
+            <li>
+                <a href="javascript:void(0)" id="zoomIn">
+                    <img src="{% static "img/zoom-in.png" %}">
+                    Yakınlaştır
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" id="zoomOut" style="display:none">
+                    <img src="{% static "img/zoom-out.png" %}">
+                    Uzaklaştır
+                </a>
+            </li>
+        </ul>
+        </nav>
     </header>
 {% endblock %}
 
@@ -73,6 +90,15 @@
         <% } %>
         <strong>gönderen:</strong>
         <p><a href="<%= user.absolute_url %>"><%= user.username %></a></p>
+
+        {% with "<%= not_reported %>" as not_reported %}
+            {% if user.is_authenticated %}
+                <p class="report">
+                    <a href="" style="display:{{not_reported}}; color:red" data-premise='<%= pk %>' onclick="report(this)" style="color:red">şikayet et</button>
+                </p>
+            {% endif %}
+        {% endwith %}
+
         </div>
         <% if (editMode || authenticatedUser.id == user.id ) { %>
         <div class="premise-actions">
@@ -162,7 +188,13 @@
 
         app.render();
 
+        var zoom = new arguman.Zoom();
+
     });
+    var  report = function (that) {
+        $.post('/report', {'premise': $(that).data('premise'),
+                           'csrfmiddlewaretoken': document.getElementsByName('csrfmiddlewaretoken')[0].value}, function(){
+        })}
 </script>
 {% endblock %}
 
