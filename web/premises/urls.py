@@ -8,6 +8,7 @@ from premises.views import (ContentionDetailView, HomeView,
                             ArgumentDeleteView, AboutView, NewsView,
                             UpdatedArgumentsView, ReportView, ControversialArgumentsView, TosView)
 
+
 urlpatterns = patterns('',
    url(r'^$', HomeView.as_view(), name='home'),
    url(r'^news$', NewsView.as_view(),
