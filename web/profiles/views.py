@@ -74,13 +74,10 @@ class ProfileDetailView(DetailView):
 
         if self.request.user.is_authenticated():
             is_followed = self.request.user.following.filter(pk=user.id).exists()
-            is_reported = Report.objects.filter(reporter=self.request.user, user=user).exists()
         else:
             is_followed = False
-            is_reported = False
         return super(ProfileDetailView, self).get_context_data(
             can_follow=can_follow,
-            is_reported=is_reported,
             is_followed=is_followed,
             contentions=contentions)
 
