@@ -8,7 +8,9 @@
             <a class="gravatar profile-image" href="{% url "auth_profile" profile.username %}">
                 {% gravatar profile 160 %}
             </a>
-
+            {% ifequal profile user %}
+            <a class="profile-update-button" href="{% url "auth_profile_update" %}">(güncelle)</a>
+            {% endifequal %}
             {% if can_follow %}
             <nav class="actions">
                 {% if is_followed %}
@@ -83,5 +85,17 @@
                 });
             });
         });
+    var  report = function (that) {
+                    $.ajax({
+                        url: '/report',
+                        type: 'POST',
+                        data: {'user': $(that).data('profile')},
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                        }
+                    }).complete(function () {
+                        window.location.reload()
+                    }.bind(this))}
     </script>
+
 {% endblock %}

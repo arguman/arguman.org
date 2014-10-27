@@ -98,6 +98,11 @@ form select {
     border-bottom: none;
 }
 
+.argument-list .user time {
+    font-weight: normal;
+    color: #8f8f8f;
+}
+
 .argument-list .stats {
     line-height: 23px;
     width: 100px;
@@ -286,7 +291,6 @@ li.base-premises {
 }
 
 .sticky-header {
-    position: fixed;
     width: 100%;
     margin: 0;
     background: #f4f4f4;
@@ -352,7 +356,7 @@ li.base-premises {
     width: 80%;
     margin: auto;
     padding: 10px 15px;
-    font-size: 24px;
+    font-size: 20px;
     border-radius: 5px;
     z-index: 1;
 }
@@ -434,7 +438,7 @@ li.base-premises {
 
 
 #app .main-premise-content {
-    padding-top: 120px;
+    padding-top: 60px;
     padding-bottom: 20px;
     max-width: 800px;
     line-height: 1em;
@@ -644,14 +648,14 @@ footer a {
 }
 
 .tabs {
-    font-size: 27px;
+    font-size: 25px;
     overflow: hidden;
     margin: 7px;
     padding: 0;
 }
 
 .tabs li {
-    margin: 0 20px 4px 20px;
+    margin: 0 20px 4px 14px;
     text-align: center;
     padding: 0;
     float: left;
@@ -686,3 +690,53 @@ form .parent-premise strong {
 #id_text {
     height: 200px;
 }
+
+.report-form {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    font-size: 17px;
+}
+
+.report-form .report {
+    background: transparent;
+    border: none;
+    font-size: 17px;
+    color: #99969a;
+}
+
+.reported_as_fallacy {
+    border-top: 1px solid #bcbcbc;
+    background: #ffd8d5;
+    padding: 10px 20px;
+}
+
+.reported_as_fallacy.last-node {
+    border-radius: 0 0 5px 5px;
+}
+
+.search-form {
+    padding: 30px;
+    color: #4f4f4f;
+}
+
+.search-form input {
+    width: 200px;
+    font-size: 29px;
+}
+
+.profile-update-button {
+    font-size: 20px;
+    color: #232323;
+    text-decoration: none;
+}
+
+
+/* Media Queries */
+@media (max-width: 800px){
+  header nav ul li {
+    float: left;
+    margin-top: 23px;
+    }
+}
+

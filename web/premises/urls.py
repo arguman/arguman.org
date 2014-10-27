@@ -1,17 +1,19 @@
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
-
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
-                            PremiseDeleteView, ContentionJsonView, PremiseEditView, ArgumentUpdateView, ArgumentPublishView,
-                            ArgumentUnpublishView, ArgumentDeleteView, AboutView, TosView, NewsView, UpdatedArgumentsView,
-                            ControversialArgumentsView)
+                            PremiseDeleteView, ContentionJsonView,
+                            PremiseEditView, ArgumentUpdateView,
+                            ArgumentPublishView, ArgumentUnpublishView,
+                            ArgumentDeleteView, AboutView, NewsView,
+                            UpdatedArgumentsView, ReportView, ControversialArgumentsView, TosView, SearchView)
 
 
 urlpatterns = patterns('',
    url(r'^$', HomeView.as_view(), name='home'),
    url(r'^news$', NewsView.as_view(),
        name='contentions_latest'),
+   url(r'^search', SearchView.as_view(),
+       name='contentions_search'),
    url(r'^updated$', UpdatedArgumentsView.as_view(),
        name='contentions_updated'),
    url(r'^controversial', ControversialArgumentsView.as_view(),
@@ -37,6 +39,9 @@ urlpatterns = patterns('',
    url(r'^(?P<slug>[\w-]+)/premises/(?P<pk>[0-9]+)/delete',
         PremiseDeleteView.as_view(),
         name='delete_premise'),
+   url(r'^(?P<slug>[\w-]+)/premises/(?P<pk>[0-9]+)/report',
+        ReportView.as_view(),
+        name='report_premise'),
    url(r'^(?P<slug>[\w-]+)/premises/(?P<pk>[0-9]+)/new',
         PremiseCreationView.as_view(),
         name='insert_premise'),

@@ -193,7 +193,28 @@
                 "margin-top": this.y + "px"
             });
 
+            this.renderReportView(premise);
+
             return premise;
+        },
+        renderReportView: function (premise) {
+            var form = premise.find(".report-form");
+            if (!this.model.reportable_by_authenticated_user) {
+                form.hide();
+            }
+            form.on('submit', function (event) {
+                window.confirm('Emin misiniz?') && $.ajax({
+                    url: form.attr("action"),
+                    method: "POST",
+                    data: form.serialize(),
+                    statusCode: {
+                        201: function () {
+                            form.html("Safsata olarak işaretlendi.");
+                        }
+                    }
+                });
+                event.preventDefault();
+            });
         },
         renderLevel: function (container, columnLeft, rowTop) {
             var attached = this.render(columnLeft, rowTop);
@@ -326,6 +347,35 @@
 
             this.contention.renderEdges(context);
 
+        }
+    });
+
+    arguman.Zoom = Class.extend({
+        canvas: '#app',
+        currentSize: function(){
+            return parseFloat($(this.canvas).css('zoom')) || 1
+        },
+        zoomOut: function(){
+            var current = this.currentSize();
+            $(this.canvas).css('zoom', current - 0.1);
+            $('#zoomIn').show();
+            $(this.canvas).css('padding-top', function(index, curValue){
+                return parseInt(curValue, 10) + 40 + 'px';
+            });
+        },
+        zoomIn: function(){
+            var current = this.currentSize();
+            $('#app').css('zoom', current + 0.1);
+            if(parseFloat($(this.canvas).css('zoom')) >= 1){
+                $('#zoomIn').hide();
+            }
+            $(this.canvas).css('padding-top', function(index, curValue){
+                return parseInt(curValue, 10) - 40 + 'px';
+            });
+        },
+        init: function(){
+            $('#zoomIn').on('click', $.proxy(this, 'zoomIn'));
+            $('#zoomOut').on('click', $.proxy(this, 'zoomOut'));
         }
     });
 

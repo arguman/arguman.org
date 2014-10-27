@@ -4,17 +4,21 @@ import json
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
 from markdown2 import markdown
 from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 
-from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT
+from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
+from profiles.models import Profile
 from django.db.models import Count
+
 
 class ContentionDetailView(DetailView):
     template_name = "premises/contention_detail.html"
@@ -38,10 +42,10 @@ class ContentionJsonView(DetailView):
     def render_to_response(self, context, **response_kwargs):
         contention = self.get_object(self.get_queryset())
         return HttpResponse(json.dumps({
-            "nodes": self.build_tree(contention),
+            "nodes": self.build_tree(contention, self.request.user),
         }), content_type="application/json")
 
-    def build_tree(self, contention):
+    def build_tree(self, contention, user):
         return {
             "name": contention.title,
             "parent": None,
@@ -49,14 +53,16 @@ class ContentionJsonView(DetailView):
             "owner": contention.owner,
             "sources": contention.sources,
             "is_singular": self.is_singular(contention),
-            "children": self.get_premises(contention)
+            "children": self.get_premises(contention, user)
         }
 
-    def get_premises(self, contention, parent=None):
+    def get_premises(self, contention, user, parent=None):
         children = [{
             "pk": premise.pk,
             "name": premise.text,
             "parent": parent.text if parent else None,
+            "reportable_by_authenticated_user": self.user_can_report(premise, user),
+            "report_count": premise.reports.count(),
             "user": {
                 "id": premise.user.id,
                 "username": premise.user.username,
@@ -65,10 +71,16 @@ class ContentionJsonView(DetailView):
             },
             "sources": premise.sources,
             "premise_type": premise.premise_class(),
-            "children": (self.get_premises(contention, parent=premise)
+            "children": (self.get_premises(contention, user, parent=premise)
                          if premise.published_children().exists() else [])
         } for premise in contention.published_premises(parent)]
         return children
+
+    def user_can_report(self, premise, user):
+        if user.is_authenticated() and user != premise.user:
+            return not premise.reported_by(user)
+
+        return False
 
     def is_singular(self, contention):
         result = (contention
@@ -92,11 +104,28 @@ class HomeView(TemplateView):
         return Contention.objects.featured()
 
 
+class SearchView(HomeView):
+    tab_class = 'search'
+
+    def get_contentions(self):
+        return None
+
+    def get(self, request, *args, **kwargs):
+        if request.GET.get('ara'):
+            keyword = request.GET.get('ara')
+            contentions = Contention.objects.filter(title__icontains=keyword)
+            rendered = render_to_string('premises/contention.html', {'contentions': contentions})
+            return HttpResponse(rendered)
+        else:
+            return super(SearchView, self).get(request, *args, **kwargs)
+
+
 class NewsView(HomeView):
     tab_class = "news"
 
     def get_contentions(self):
-        return Contention.objects.all()[:NEWS_CONTENT_COUNT]
+        return Contention.objects.filter(
+            is_published=True)[:NEWS_CONTENT_COUNT]
 
 
 class UpdatedArgumentsView(HomeView):
@@ -105,6 +134,7 @@ class UpdatedArgumentsView(HomeView):
     def get_contentions(self):
         return (Contention
                 .objects
+                .filter(is_published=True)
                 .order_by('-date_modification')
                 [:UPDATED_CONTENT_COUNT])
 
@@ -148,16 +178,14 @@ class ArgumentCreationView(CreateView):
 
     def create_demo_premises(self, instance):
         demo = [
-            [SUPPORT, "Bu metin örnektir. Düzenleyiniz",
-                      "Buraya bir URL girilebilir"],
+            [SUPPORT, "Bu metin örnektir. Düzenleyiniz"],
         ]
-        for (premise_type, text, source) in demo:
+        for (premise_type, text) in demo:
             Premise.objects.create(
                 argument=instance,
                 user=self.request.user,
                 premise_type=premise_type,
                 text=text,
-                sources=source,
                 is_approved=True)
 
 
@@ -287,3 +315,32 @@ class PremiseDeleteView(View):
 
     def get_contention(self):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
+
+
+class ReportView(View):
+
+    def get_contention(self):
+        return get_object_or_404(Contention, slug=self.kwargs['slug'])
+
+    def get_premise(self):
+        return get_object_or_404(Premise, pk=self.kwargs['pk'])
+
+    def post(self, request, slug, pk):
+        if request.user.is_authenticated():
+            premise = self.get_premise()
+            contention = self.get_contention()
+            try:
+                Report.objects.create(reporter=request.user,
+                                      premise=premise,
+                                      contention=contention)
+                return HttpResponse(json.dumps({
+                    "report_count": premise.reports.count()
+                }), status=201)
+            except Exception as e:
+                return HttpResponseBadRequest(json.dumps({
+                    'message': e.message
+                }))
+        else:
+            return HttpResponseForbidden(json.dumps({
+                'message': 'Authentication error.'
+            }))

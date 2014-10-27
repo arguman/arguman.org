@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     'social_auth',
     'django_gravatar',
@@ -123,7 +124,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.load_extra_data',
     'social_auth.backends.pipeline.user.update_user_details',
 )
-
+REPORT_DEACTIVATE_COUNT = 200
 try:
     from settings_local import *
 except ImportError:

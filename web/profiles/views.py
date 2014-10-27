@@ -5,12 +5,12 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.views.generic import FormView, CreateView, RedirectView, DetailView
+from django.views.generic import FormView, CreateView, RedirectView, DetailView, UpdateView
 
-from profiles.forms import RegistrationForm
+from profiles.forms import RegistrationForm, ProfileUpdateForm
 from profiles.models import Profile
 from profiles.signals import follow_done, unfollow_done
-from premises.models import Contention
+from premises.models import Contention, Report
 
 
 class RegistrationView(CreateView):
@@ -65,12 +65,15 @@ class ProfileDetailView(DetailView):
         Adds extra context to template
         """
         user = self.get_object()
-        contentions = Contention.objects.filter(user=user)
+        contentions = Contention.objects.filter(
+            premises__user=user
+        ).distinct()
 
         if self.request.user != user:
             contentions = contentions.filter(is_published=True)
 
         can_follow = self.request.user != user
+
         if self.request.user.is_authenticated():
             is_followed = self.request.user.following.filter(pk=user.id).exists()
         else:
@@ -114,3 +117,14 @@ class ProfileDetailView(DetailView):
         return HttpResponse(json.dumps({
             "success": True
         }))
+
+
+class ProfileUpdateView(UpdateView):
+    template_name = "auth/update.html"
+    form_class = ProfileUpdateForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse("auth_profile", args=[self.request.user.username])

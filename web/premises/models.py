@@ -41,7 +41,7 @@ class Contention(models.Model):
         verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/sources.html"))
     is_featured = models.BooleanField(default=False)
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=True)
     date_creation = models.DateTimeField(auto_now_add=True)
     date_modification = models.DateTimeField(auto_now_add=True,
                                              auto_now=True)
@@ -92,6 +92,16 @@ class Contention(models.Model):
         for premise in self.premises.filter():
             premise.update_sibling_counts()
 
+    def last_user(self):
+        try:
+            # add date_creation
+            premise = self.premises.order_by("-pk")[0]
+        except IndexError:
+            user = self.user
+        else:
+            user = premise.user
+        return user
+
 
 class Premise(models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
@@ -113,7 +123,7 @@ class Premise(models.Model):
     sources = models.TextField(
         null=True, blank=True, verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/premise_source.html"))
-    is_approved = models.BooleanField(default=False, verbose_name="Yayınla")
+    is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
 
     sibling_count = models.IntegerField(default=1)  # denormalized field
 
@@ -142,6 +152,9 @@ class Premise(models.Model):
             SITUATION: "however"
         }.get(self.premise_type)
 
+    def reported_by(self, user):
+        return self.reports.filter(reporter=user).exists()
+
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)
@@ -152,3 +165,17 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.text)
+
+
+class Report(models.Model):
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 related_name='reports')
+    premise = models.ForeignKey(Premise,
+                                related_name='reports',
+                                blank=True,
+                                null=True)
+    contention = models.ForeignKey(Contention,
+                                   related_name='reports',
+                                   blank=True,
+                                   null=True)
+
