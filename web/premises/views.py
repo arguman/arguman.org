@@ -104,7 +104,8 @@ class NewsView(HomeView):
     tab_class = "news"
 
     def get_contentions(self):
-        return Contention.objects.all()[:NEWS_CONTENT_COUNT]
+        return Contention.objects.filter(
+            is_published=True)[:NEWS_CONTENT_COUNT]
 
 
 class UpdatedArgumentsView(HomeView):
@@ -113,6 +114,7 @@ class UpdatedArgumentsView(HomeView):
     def get_contentions(self):
         return (Contention
                 .objects
+                .filter(is_published=True)
                 .order_by('-date_modification')
                 [:UPDATED_CONTENT_COUNT])
 
