@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load humanize %}
+
 {% block content %}
     <div class="container">
 
@@ -38,8 +40,10 @@
                     <div class="info">
                         <a class="main-contention" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a>
 
-                        <div class="user">gönderen: <a
-                                href="{% url "auth_profile" contention.user.username %}">{{ contention.user }}</a></div>
+                        <div class="user">son gönderen: <a
+                                href="{% url "auth_profile" contention.last_user.username %}">{{ contention.last_user }}</a>
+                            <time datetime="{{ contention.date_modification }}">({{ contention.date_modification|naturaltime }})</time>
+                        </div>
                     </div>
                 </li>
             {% endfor %}

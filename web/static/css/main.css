@@ -98,6 +98,11 @@ form select {
     border-bottom: none;
 }
 
+.argument-list .user time {
+    font-weight: normal;
+    color: #8f8f8f;
+}
+
 .argument-list .stats {
     line-height: 23px;
     width: 100px;

@@ -92,6 +92,16 @@ class Contention(models.Model):
         for premise in self.premises.filter():
             premise.update_sibling_counts()
 
+    def last_user(self):
+        try:
+            # add date_creation
+            premise = self.premises.order_by("-pk")[0]
+        except IndexError:
+            user = self.user
+        else:
+            user = premise.user
+        return user
+
 
 class Premise(models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
