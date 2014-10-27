@@ -179,5 +179,3 @@ class Report(models.Model):
                                    blank=True,
                                    null=True)
 
-    class Meta:
-        unique_together = (('reporter', 'premise'),)
