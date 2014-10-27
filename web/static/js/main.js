@@ -355,19 +355,19 @@
         currentSize: function(){
             return parseFloat($(this.canvas).css('zoom')) || 1
         },
-        zoomIn: function(){
+        zoomOut: function(){
             var current = this.currentSize();
             $(this.canvas).css('zoom', current - 0.1);
-            $('#zoomOut').show();
+            $('#zoomIn').show();
             $(this.canvas).css('padding-top', function(index, curValue){
                 return parseInt(curValue, 10) + 40 + 'px';
             });
         },
-        zoomOut: function(){
+        zoomIn: function(){
             var current = this.currentSize();
             $('#app').css('zoom', current + 0.1);
             if(parseFloat($(this.canvas).css('zoom')) >= 1){
-                $('#zoomOut').hide();
+                $('#zoomIn').hide();
             }
             $(this.canvas).css('padding-top', function(index, curValue){
                 return parseInt(curValue, 10) - 40 + 'px';

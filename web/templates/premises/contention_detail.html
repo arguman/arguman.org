@@ -43,6 +43,24 @@
             </ul>
         </nav>
         {% endif %}
+
+        <nav>
+        <ul>
+            <li>
+                <a href="javascript:void(0)" id="zoomOut">
+                    <img src="{% static "img/zoom-out.png" %}">
+                    Uzaklaştır
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" id="zoomIn" style="display:none">
+                    <img src="{% static "img/zoom-in.png" %}">
+                    Yakınlaştır
+                </a>
+            </li>
+        </ul>
+        </nav>
+
     </header>
 {% endblock %}
 
@@ -176,6 +194,7 @@
 
         app.render();
 
+        var zoom = new arguman.Zoom();
     });
 </script>
 {% endblock %}
