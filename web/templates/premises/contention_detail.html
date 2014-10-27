@@ -91,13 +91,16 @@
         <strong>gönderen:</strong>
         <p><a href="<%= user.absolute_url %>"><%= user.username %></a></p>
 
-        {% with "<%= not_reported %>" as not_reported %}
-            {% if user.is_authenticated %}
-                <p class="report">
-                    <a href="" style="display:{{not_reported}}; color:red" data-premise='<%= pk %>' onclick="report(this)" style="color:red">şikayet et</button>
-                </p>
-            {% endif %}
-        {% endwith %}
+
+        {% if user.is_authenticated %}
+        <p class="report">
+        <form action="{{ path }}/premises/<%= pk %>/report" method="post">
+            {% csrf_token %}
+            <input type="submit" value="safsata olarak bildir" class="report_premise"/>
+        </form>
+        </p>
+        {% endif %}
+
 
         </div>
         <% if (editMode || authenticatedUser.id == user.id ) { %>
@@ -191,10 +194,6 @@
         var zoom = new arguman.Zoom();
 
     });
-    var  report = function (that) {
-        $.post('/report', {'premise': $(that).data('premise'),
-                           'csrfmiddlewaretoken': document.getElementsByName('csrfmiddlewaretoken')[0].value}, function(){
-        })}
 </script>
 {% endblock %}
 
