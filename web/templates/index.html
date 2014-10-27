@@ -20,12 +20,12 @@
             <li class="search{% ifequal tab_class "search" %} active{% endifequal %}">
                 <a href="{% url "contentions_search" %}">Ara</a>
             </li>
-
-
         </ul>
         {% ifequal tab_class 'search' %}
-            <p><label  style="font-size: 22px; margin-left:20px">Ara:</label>
-            <input type="text" class="searchfield" name="ara" id="id_q"/>
+            <form action="#" class="search-form">
+                <label for="id_q">Kelime: </label>
+                <input type="text" class="searchfield" name="ara" id="id_q"/>
+            </form>
         {% endifequal %}
         <ul class="argument-list">
             {% for contention in contentions %}

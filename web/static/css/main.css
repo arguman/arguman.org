@@ -709,6 +709,17 @@ form .parent-premise strong {
     border-radius: 0 0 5px 5px;
 }
 
+.search-form {
+    padding: 30px;
+    color: #4f4f4f;
+}
+
+.search-form input {
+    width: 200px;
+    font-size: 29px;
+}
+
+
 /* Media Queries */
 @media (max-width: 800px){
   header nav ul li {
@@ -717,9 +728,3 @@ form .parent-premise strong {
     }
 }
 
-input.searchfield {
-    width: 200px;
-    font-family: AmericanTypewriter, Georgia, serif;
-    font-size: 22px;
-    margin-top: 40px;
-}
