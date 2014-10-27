@@ -169,12 +169,6 @@ class Report(models.Model):
                                    blank=True,
                                    null=True)
 
-    def __unicode__(self):
-        return str(self.id)
-
-    def save(self, *args, **kwargs):
-        return super(Report, self).save(*args, **kwargs)
-
     class Meta:
         unique_together = (('reporter', 'premise'),
                            ('reporter', 'user'),

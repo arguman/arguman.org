@@ -91,16 +91,16 @@
         <strong>gönderen:</strong>
         <p><a href="<%= user.absolute_url %>"><%= user.username %></a></p>
 
-
         {% if user.is_authenticated %}
-        <p class="report">
-        <form action="{{ path }}/premises/<%= pk %>/report" method="post">
-            {% csrf_token %}
-            <input type="submit" value="safsata olarak bildir" class="report_premise"/>
-        </form>
-        </p>
+        <% if (!reported_by_authenticated_user) { %>
+            <p class="report">
+            <form action="{{ path }}/premises/<%= pk %>/report" method="post">
+                {% csrf_token %}
+                <input type="submit" value="safsata olarak işaretle" class="report_premise"/>
+            </form>
+            </p>
+        <% } %>
         {% endif %}
-
 
         </div>
         <% if (editMode || authenticatedUser.id == user.id ) { %>
