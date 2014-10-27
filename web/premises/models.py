@@ -10,6 +10,7 @@ from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
+from datetime import datetime
 
 from premises.managers import ContentionManager
 
@@ -45,6 +46,8 @@ class Contention(models.Model):
     date_creation = models.DateTimeField(auto_now_add=True)
     date_modification = models.DateTimeField(auto_now_add=True,
                                              auto_now=True)
+    is_deleted = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField(null=True, blank=True)
 
     objects = ContentionManager()
 
@@ -70,6 +73,11 @@ class Contention(models.Model):
             else:
                 self.slug = slug
         return super(Contention, self).save(*args, **kwargs)
+
+    def delete(self, using=None):
+        self.is_deleted = True
+        self.deleted_at = datetime.now()
+        self.save()
 
     def published_premises(self, parent=None, ignore_parent=False):
         premises = self.premises.filter(is_approved=True)
