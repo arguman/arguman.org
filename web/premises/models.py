@@ -11,7 +11,8 @@ from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
-from premises.managers import ContentionManager
+from premises.managers import ContentionManager, DeletePreventionManager
+from premises.mixins import DeletePreventionMixin
 
 OBJECTION = 0
 SUPPORT = 1
@@ -24,7 +25,7 @@ PREMISE_TYPES = (
 )
 
 
-class Contention(models.Model):
+class Contention(DeletePreventionMixin, models.Model):
     title = models.CharField(
         max_length=255, verbose_name="Argüman",
         help_text=render_to_string("premises/examples/contention.html"))
@@ -103,7 +104,7 @@ class Contention(models.Model):
         return user
 
 
-class Premise(models.Model):
+class Premise(DeletePreventionMixin, models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
@@ -126,6 +127,8 @@ class Premise(models.Model):
     is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
 
     sibling_count = models.IntegerField(default=1)  # denormalized field
+
+    objects = DeletePreventionManager()
 
     def __unicode__(self):
         return smart_unicode(self.text)
