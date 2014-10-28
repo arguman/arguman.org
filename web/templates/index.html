@@ -47,35 +47,11 @@
                     </div>
                 </li>
             {% empty %}
-            <li>Sonuç bulunamadı.</li>
+            {% if keywords %}
+                <li>Sonuç bulunamadı.</li>
+            {% endif %}
             {% endfor %}
         </ul>
 
     </div>
-{% endblock %}
-{% block extra-scripts %}
-    <script>
-        var delay = (function () {
-            var timer = 0;
-            return function (callback, ms) {
-                clearTimeout(timer);
-                timer = setTimeout(callback, ms);
-            };
-        })();
-        $(function () {
-            $('.searchfield').keyup(function () {
-                delay(function () {
-                    $('.argument-list').html('');
-                    if ($('.searchfield').val().length >= 3) {
-                        $.get('/search', {'ara': $('.searchfield').val()}, function (data) {
-                            $('.argument-list').html(data)
-                        })
-                    }
-                }, 500)
-            })
-        });
-        $('.search-form').submit(function(){
-            return false;
-        });
-    </script>
 {% endblock %}
