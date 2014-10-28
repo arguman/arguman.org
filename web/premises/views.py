@@ -107,17 +107,19 @@ class HomeView(TemplateView):
 class SearchView(HomeView):
     tab_class = 'search'
 
-    def get_contentions(self):
-        return None
+    def get_context_data(self, **kwargs):
+        return super(SearchView, self).get_context_data(
+            keywords=self.request.GET.get('keywords') or "",
+            **kwargs
+        )
 
-    def get(self, request, *args, **kwargs):
-        if request.GET.get('ara'):
-            keyword = request.GET.get('ara')
-            contentions = Contention.objects.filter(title__icontains=keyword)
-            rendered = render_to_string('premises/contention.html', {'contentions': contentions})
-            return HttpResponse(rendered)
+    def get_contentions(self):
+        keywords = self.request.GET.get('keywords')
+        if not keywords or len(keywords) < 2:
+            result = []
         else:
-            return super(SearchView, self).get(request, *args, **kwargs)
+            result = Contention.objects.filter(title__icontains=keywords)
+        return result
 
 
 class NewsView(HomeView):

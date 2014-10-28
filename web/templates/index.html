@@ -24,9 +24,9 @@
             </li>
         </ul>
         {% ifequal tab_class 'search' %}
-            <form action="#" class="search-form">
+            <form action="{% url "contentions_search" %}" class="search-form">
                 <label for="id_q">Kelime: </label>
-                <input type="text" class="searchfield" name="ara" id="id_q"/>
+                <input type="text" class="searchfield" value="{{ keywords }}" name="keywords" id="id_q"/>
             </form>
         {% endifequal %}
         <ul class="argument-list">
@@ -46,6 +46,8 @@
                         </div>
                     </div>
                 </li>
+            {% empty %}
+            <li>Sonuç bulunamadı.</li>
             {% endfor %}
         </ul>
 
