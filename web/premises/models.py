@@ -78,6 +78,8 @@ class Contention(DeletePreventionMixin, models.Model):
             return premises
         return premises.filter(parent=parent)
 
+    published_children = published_premises
+
     def children_by_premise_type(self, premise_type=None, ignore_parent=False):
         return (self.published_premises(ignore_parent=ignore_parent)
                 .filter(premise_type=premise_type))
@@ -127,6 +129,8 @@ class Premise(DeletePreventionMixin, models.Model):
     is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
 
     sibling_count = models.IntegerField(default=1)  # denormalized field
+    child_count = models.IntegerField(default=1)  # denormalized field
+    max_sibling_count = models.IntegerField(default=1)  # denormalized field
 
     objects = DeletePreventionManager()
 

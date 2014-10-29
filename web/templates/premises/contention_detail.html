@@ -68,107 +68,32 @@
 {% endblock %}
 
 {% block content %}
-    <!-- templates -->
-    <script id="main-contention-template" type="text/template">
-        <div class="main-premise-content">
-            <%= marked(name) %>
-        </div>
-        <div class="main-contention-actions">
-            {% if user.is_authenticated %}
-            <a class="new-premise" href="{% url "new_premise" contention.slug %}">önerme ekle</a>
-            {% endif %}
-        </div>
-    </script>
+    <div id="app">
 
-    <script id="premise-template" type="text/template">
-        <div class="premise-type <%= premise_type %>">
-            <%= {"but": "ama", "because": "çünkü", "however": "ancak"}[premise_type] %>
-        </div>
-        <div class="premise-content <%= premise_type %>">
-            <%= marked(name) %>
-        </div>
-        <div class="premise-sources">
-        <% if (sources) { %>
-        <strong>kaynaklar:</strong>
-        <%= marked(sources) %>
-        <% } %>
-        <strong>gönderen:</strong>
-        <p><a href="<%= user.absolute_url %>"><%= user.username %></a></p>
-        <% if (report_count) { %>
-        <div class="reported_as_fallacy {% if user.is_anonymous %}last-node{% endif %}">
-        <%= report_count %> kişi tarafından
-        safsata olarak işaretlendi.</div>
-        <% } %>
-        {% if user.is_authenticated %}
-        <% if (reportable_by_authenticated_user) { %>
-            <form action="{{ path }}/premises/<%= pk %>/report" method="post" class="report-form">
-            {% csrf_token %}
-            <input type="submit" value="safsata olarak işaretle" class="report"/>
-        </form>
-        <% } %>
-        {% endif %}
+            <div class="main-contention">
+                <div class="main-premise-content">
+                {{ contention }}
+                <div class="main-contention-actions">
+                    {% if user.is_authenticated %}
+                    <a class="new-main-premise" href="{% url "new_premise" contention.slug %}">önerme ekle</a>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
 
-        </div>
-        <% if (editMode || authenticatedUser.id == user.id ) { %>
-        <div class="premise-actions">
-            <a href="{{ path }}/premises/<%= pk %>/new">önerme ekle</a>
-            <a href="{{ path }}/premises/<%= pk %>">düzenle</a>
-            <form action="{{ path }}/premises/<%= pk %>/delete" method="post">
-                {% csrf_token %}
-                <input type="submit" value="sil" onclick="return confirm('Önermeyi silmek istediğinize emin misiniz?');" class="delete_premise"/>
-            </form>
-        </div>
-        <% } else { %>
-            <% if (authenticatedUser.id) { %>
-                <div class="premise-actions">
-                <a href="{{ path }}/premises/<%= pk %>/new">önerme gönder</a>
-                </div>
-            <% } %>
-        <% } %>
-    </script>
-
-    <div id="app"></div>
-    <div class="story" id="contention-story">
-        <!--
-            Simplified version (just an unordered list)
-            Does not affects the interactive map.
-            It was done for by crawlers and browsers which disabled javascript.
-        -->
-        <ul class="main-contention">
-            <li>
-                <div class="premise {{ premise.premise_class }}">
-                    <div class="contention premise-content">
-                    {{ contention.title }}
-                </div>
-                {% if user.is_authenticated %}
-                    <div class="contention-actions">
-                    <form action="{% url "new_premise" contention.slug %}" method="get">
-                    <input type="submit" value="önerme ekle"/>
-                    </form>
-                </div>
-                {% endif %}
-                </div>
-                <ul class="tree">
-                    {% for premise in contention.published_premises.all %}
-                    <li class="base-premise">
-                        <div class="premise {{ premise.premise_class }}">
-                            <div class="premise-content">
-                                {{ premise.text }}
-                            </div>
-                        </div>
-                        {% if premise.children.exists %}
-                            {% with template_name="premises/tree_view.html" %}
+            <div class="tree">
+                <ul>
+                    <li>
+                        <div class="root"></div>
+                        {% with template_name="premises/tree_view.html"%}
+                            {% with premises=contention.published_premises.all %}
                                 {% include template_name %}
                             {% endwith %}
-                        {% endif %}
+                        {% endwith %}
                     </li>
-                    {% empty %}
-                    <li class="new-premise">Henüz hiç ama'sı ya da çünkü'sü yok</li>
-                    {% endfor %}
                 </ul>
-            </li>
-        </ul>
-        <!-- End of simplified version -->
+            </div>
+
     </div>
 {% endblock %}
 
@@ -180,25 +105,17 @@
         "id": {{ user.id|default:"null" }}
     };
 
-    $.getJSON(location.href + ".json", function (response) {
-
-        var app = new arguman.Map({
-            model: response.nodes,
-            container: "#app",
-            isSingular: response.nodes.is_singular
-        });
-
-        app.contention.onRender(function () {
-            $(".sticky-header, footer").width(Math.max(
-                    app.canvas.domElement.width,
-                    window.innerWidth
-            ));
-        });
-
-        app.render();
-
-        var zoom = new arguman.Zoom();
+    var tree = new arguman.CollapsibleTree({
+        "el": ".tree",
+        "mainContention": ".main-contention"
     });
+
+    tree.render();
+
+    $(".sticky-header").width(
+        Math.max(window.innerWidth, tree.width)
+    );
+
 </script>
 {% endblock %}
 

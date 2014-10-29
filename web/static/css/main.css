@@ -221,15 +221,6 @@ form textarea {
     height: 80px;
 }
 
-#contention-story {
-
-}
-
-.story .main-contention {
-    display: none;
-}
-
-
 
 .premise .actions form {
     margin: 0 0 0 15px;
@@ -325,35 +316,27 @@ li.base-premises {
 /* Interactive App */
 
 #app {
+    margin-bottom: 40px;
     position: absolute;
-    /*width: 100%;*/
 }
 
 #app canvas {
-    /*background: #eeeeee;*/
     position: absolute;
     background: transparent;
     margin-bottom: 150px;
-    /*left: 50%;*/
 }
 
 #app .main-contention {
-    position: absolute;
+    /*position: absolute;*/
     /*margin-left: 400px;*/
+    width: 800px;
     font-size: 60px;
     text-align: center;
+    margin-bottom: -80px;
     /*width: 100%;*/
 }
 
-#app .premise {
-    position: absolute;
-    /*border: 1px solid black;*/
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 #app .premise .premise-content {
-    width: 80%;
     margin: auto;
     padding: 10px 15px;
     font-size: 20px;
@@ -382,10 +365,10 @@ li.base-premises {
     }
 
     .premise .premise-type {
-        position: absolute;
         margin-top: -34px;
+        float: left;
         text-align: right;
-        width: 135px;
+        width: 115px;
         font-size: 24px;
     }
 
@@ -402,8 +385,7 @@ li.base-premises {
     }
 
     .premise-sources {
-        width: 262px;
-        margin: -5px auto auto 14px;
+        margin: -3px 0 0;
         background: #e9e9e9;
         z-index: 1;
         /*position: absolute;*/
@@ -530,18 +512,18 @@ li.base-premises {
 }
 
 
-.main-contention-actions .new-premise {
-    position: absolute;
+.main-contention-actions .new-main-premise {
     font-size: 20px;
-    margin-left: 17px;
-    margin-top: -4px;
     text-decoration: underline;
     color: #505050;
+    z-index: 9;
+    position: absolute;
+    margin-left: 28px;
+    margin-top: 3px;
 }
 
 .premise-actions {
-    width: 262px;
-    margin: -5px auto auto 14px;
+    margin: -3px 0 0;
     background: #d6d6d6;
     z-index: 1;
     border-radius: 0 0 5px 5px;
@@ -691,27 +673,25 @@ form .parent-premise strong {
     height: 200px;
 }
 
-.report-form {
-    margin: 0;
-    padding: 0;
-    padding-bottom: 10px;
-    font-size: 17px;
+.report {
+    position: absolute;
+    margin: 7px 0 0 130px;
+    z-index: 999;
 }
 
-.report-form .report {
-    background: transparent;
-    border: none;
+.report a {
+    color: #aeaeae;
     font-size: 17px;
-    color: #99969a;
+    width: 120px;
+    line-height: 17px;
+    display: inline-block;
+    white-space: normal;
 }
 
 .reported_as_fallacy {
     border-top: 1px solid #bcbcbc;
     background: #ffd8d5;
     padding: 10px 20px;
-}
-
-.reported_as_fallacy.last-node {
     border-radius: 0 0 5px 5px;
 }
 
@@ -728,6 +708,105 @@ form .parent-premise strong {
 .profile-update-button {
     font-size: 20px;
     color: #232323;
+    text-decoration: none;
+}
+
+
+
+/* Tree View */
+
+.tree ul, .tree li {
+    margin: 0;
+    padding: 0;
+}
+
+.tree ul {
+    margin: 0;
+	padding-top: 80px; position: relative;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+.tree li {
+	float: left;
+    text-align: center;
+	list-style-type: none;
+	position: relative;
+	padding: 84px 5px 0 5px;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+
+.tree li::before, .tree li::after{
+	content: '';
+	position: absolute; top: 0; right: 50%;
+	border-top: 4px solid #e1e1e1;
+	width: 50%; height: 80px;
+}
+.tree li::after{
+	right: auto; left: 50%;
+	border-left: 4px solid #e1e1e1;
+}
+
+.tree li:only-child::after, .tree li:only-child::before {
+	display: none;
+}
+
+.tree li:only-child{ padding-top: 0;}
+
+.tree li:first-child::before, .tree li:last-child::after{
+	border: 0 none;
+}
+.tree li:last-child::before{
+	border-right: 4px solid #e1e1e1;
+	border-radius: 0 5px 0 0;
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after{
+	border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+}
+
+.tree ul ul::before{
+	content: '';
+	position: absolute; top: 0; left: 50%;
+	border-left: 4px solid #e1e1e1;
+	width: 0; height: 80px;
+}
+
+
+.tree li .premise {
+	text-decoration: none;
+    width: 250px;
+	display: inline-block;
+}
+
+.root {
+    display: inline-block;
+    width: 30px;
+    z-index: 2;
+    position: absolute;
+    height: 30px;
+    margin-left: -13px;
+    text-align: center;
+    background: gray;
+    border-radius: 50%;
+}
+
+.collapse-button {
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    color: white;
+    width: 20px;
+    height: 20px;
+    margin-top: -70px;
+    z-index: 9;
     text-decoration: none;
 }
 
