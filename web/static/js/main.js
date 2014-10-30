@@ -23,6 +23,12 @@
                 "margin-left": (root.position().left) - (mainContention.width() / 2)
             });
 
+            var mainPremises = root.next().children(),
+                lastPremise = mainPremises.last();
+
+            this.width = (lastPremise.position().left + this.premiseWidth + 60);
+            this.$el.width(this.width);
+
             if (this.width < window.innerWidth) {
                 this.$el.css({
                     "margin-left": (window.innerWidth/2) - (this.width/2)
@@ -31,15 +37,6 @@
                     "margin-left": (window.innerWidth/2) - (mainContention.width() / 2)
                 });
             }
-
-            var mainPremises = root.next().children(),
-                lastPremise = mainPremises.last();
-
-            this.width = (lastPremise.position().left + this.premiseWidth + 60);
-            this.$el.width(this.width);
-
-            this.onRender();
-
 
         },
 

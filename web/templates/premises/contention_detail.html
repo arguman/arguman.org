@@ -6,7 +6,26 @@
 {% block header %}
     <header class="sticky-header">
         <div id="logo"><a href="/"><img src="{% static "img/logo.png" %}" /></a></div>
-        {% if edit_mode %}
+
+        <nav>
+            <ul>
+                <li>
+                    ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user }}</a>
+                </li>
+                <li>
+                    orijinal söylem:
+                    {% if contention.sources or contention.owner %}
+                    {{ contention.owner }}
+                    {# {{ contention.sources|urlize }} #}
+                    {% else %}
+                     Belirtilmemiş
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+
+        <div class="contention-main-actions">
+            {% if edit_mode %}
         <nav class="contention-admin-menu">
             <ul>
                 <li><a href="{% url "contention_edit" contention.slug %}">Düzenle</a></li>
@@ -25,54 +44,26 @@
                 </li>
             </ul>
         </nav>
-        {% else %}
-        <nav>
-            <ul>
-                <li>
-                    ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user }}</a>
-                </li>
-                <li>
-                    orijinal söylem:
-                    {% if contention.sources or contention.owner %}
-                    {{ contention.owner }}
-                    {# {{ contention.sources|urlize }} #}
-                    {% else %}
-                     Belirtilmemiş
-                    {% endif %}
-                </li>
-            </ul>
-        </nav>
         {% endif %}
 
-    {% comment %}
-     # Disabled for now; glitches the tree view.
-        <nav>
-        <ul>
-            <li>
-                <a href="javascript:void(0)" id="zoomOut">
-                    <img src="{% static "img/zoom-out.png" %}">
-                    Uzaklaştır
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" id="zoomIn" style="display:none">
-                    <img src="{% static "img/zoom-in.png" %}">
-                    Yakınlaştır
-                </a>
-            </li>
-        </ul>
+         <nav>
+            <ul id="view-switcher">
+                <li>Görünüm</li>
+                <li><a href="?" class="tree-view active">Ağaç</a> |
+                    <a href="?view=list" class="list-view">Liste</a></li>
+            </ul>
         </nav>
-    {% endcomment %}
+        </div>
 
     </header>
 {% endblock %}
 
 {% block content %}
-    <div id="app" {% if not contention.published_premises.exists %}class="empty"{% endif %}>
+    <div class="{{ view }}" id="app" {% if not contention.published_premises.exists %}class="empty"{% endif %}>
 
             <div class="main-contention">
                 <div class="main-premise-content">
-                {{ contention.width }}{{ contention }}
+                {{ contention }}
                 <div class="main-contention-actions">
                     {% if user.is_authenticated %}
                     <a class="new-main-premise" href="{% url "new_premise" contention.slug %}">önerme ekle</a>
@@ -99,7 +90,7 @@
 
 {% block extra-scripts %}
 <script type="text/javascript">
-
+    {% if view == "tree-view" %}
     arguman.editMode = {{ edit_mode|yesno:"true,false" }};
     arguman.authenticatedUser = {
         "id": {{ user.id|default:"null" }}
@@ -110,15 +101,8 @@
         "mainContention": ".main-contention"
     });
 
-    tree.onRender = function () {
-        $(".sticky-header").width(
-            Math.max(window.innerWidth, tree.width)
-        );
-    };
-
     tree.render();
-
-
+    {% endif %}
 </script>
 {% endblock %}
 

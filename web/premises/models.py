@@ -2,6 +2,7 @@
 import operator
 
 from uuid import uuid4
+from markdown2 import markdown
 from unidecode import unidecode
 
 from django.core import validators
@@ -111,7 +112,7 @@ class Contention(DeletePreventionMixin, models.Model):
         children = self.published_children()
         return children.count() + reduce(operator.add,
                                          map(operator.methodcaller("width"),
-                                            children))
+                                            children), 0)
 
 
 class Premise(DeletePreventionMixin, models.Model):
@@ -180,6 +181,12 @@ class Premise(DeletePreventionMixin, models.Model):
 
     def reported_by(self, user):
         return self.reports.filter(reporter=user).exists()
+
+    def formatted_sources(self):
+        return markdown(self.sources)
+
+    def formatted_text(self):
+        return markdown(self.text)
 
 
 class Comment(models.Model):

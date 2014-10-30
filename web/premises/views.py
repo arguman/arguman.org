@@ -26,11 +26,14 @@ class ContentionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         contention = self.get_object()
+        view = ("list-view" if self.request.GET.get("view") == "list"
+                            else "tree-view")
         edit_mode = (
                 self.request.user.is_superuser or
                 self.request.user.is_staff or
                 contention.user == self.request.user)
         return super(ContentionDetailView, self).get_context_data(
+            view=view,
             path=contention.get_absolute_url(),
             edit_mode=edit_mode,
             **kwargs)

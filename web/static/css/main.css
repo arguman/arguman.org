@@ -282,10 +282,12 @@ li.base-premises {
 }
 
 .sticky-header {
+    position: fixed;
     width: 100%;
     margin: 0;
     background: #f4f4f4;
-    z-index: 1;
+    z-index: 9999;
+    top: 0;
     /*border-bottom: 1px solid #c5c5c5;*/
 }
 
@@ -326,9 +328,10 @@ li.base-premises {
     margin-bottom: 150px;
 }
 
-#app .main-contention {
+#app.tree-view .main-contention {
     /*position: absolute;*/
     /*margin-left: 400px;*/
+    margin-top: 60px;
     width: 800px;
     font-size: 60px;
     text-align: center;
@@ -411,15 +414,17 @@ li.base-premises {
 
     .premise-sources a {
         color: #b5b5b5;
-        width: 240px;
         display: block;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
 
+    .tree-view .premise-sources a { width: 240px; }
+    .list-view .premise-sources a { width: 440px; }
 
-#app .main-premise-content {
+
+.tree-view .main-premise-content {
     padding-top: 60px;
     padding-bottom: 20px;
     max-width: 800px;
@@ -673,10 +678,15 @@ form .parent-premise strong {
     height: 200px;
 }
 
-.report {
+.tree-view .report {
     position: absolute;
     margin: 7px 0 0 130px;
     z-index: 999;
+}
+
+.list-view .report {
+    margin-left: 480px;
+    margin-top: 10px;
 }
 
 .report a {
@@ -715,78 +725,81 @@ form .parent-premise strong {
 
 /* Tree View */
 
-.tree ul, .tree li {
+.tree-view .tree ul, .tree li {
     margin: 0;
     padding: 0;
 }
 
-.tree ul {
+.tree-view .tree ul {
     margin: 0;
-	padding-top: 80px; position: relative;
+	padding-top: 60px; position: relative;
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
 }
 
-.tree li {
+.tree-view .tree li {
 	float: left;
     text-align: center;
 	list-style-type: none;
 	position: relative;
-	padding: 84px 5px 0 5px;
+	padding: 64px 5px 0 5px;
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
 }
 
 
-.tree li::before, .tree li::after{
+.tree-view .tree li::before,
+.tree-view .tree li::after{
 	content: '';
 	position: absolute; top: 0; right: 50%;
 	border-top: 4px solid #e1e1e1;
-	width: 50%; height: 80px;
+	width: 50%; height: 60px;
 }
-.tree li::after{
+.tree-view .tree li::after{
 	right: auto; left: 50%;
 	border-left: 4px solid #e1e1e1;
 }
 
-.tree li:only-child::after, .tree li:only-child::before {
+.tree-view .tree li:only-child::after,
+.tree-view .tree li:only-child::before {
 	display: none;
 }
 
-.tree li:only-child{ padding-top: 0;}
+.tree-view .tree li:only-child{ padding-top: 0;}
 
-.tree li:first-child::before, .tree li:last-child::after{
+.tree-view .tree li:first-child::before,
+.tree-view .tree li:last-child::after{
 	border: 0 none;
 }
-.tree li:last-child::before{
+.tree-view .tree li:last-child::before{
 	border-right: 4px solid #e1e1e1;
 	border-radius: 0 5px 0 0;
 	-webkit-border-radius: 0 5px 0 0;
 	-moz-border-radius: 0 5px 0 0;
 }
-.tree li:first-child::after{
+.tree-view .tree li:first-child::after{
 	border-radius: 5px 0 0 0;
 	-webkit-border-radius: 5px 0 0 0;
 	-moz-border-radius: 5px 0 0 0;
 }
 
-.tree ul ul::before{
+.tree-view .tree ul ul::before{
 	content: '';
 	position: absolute; top: 0; left: 50%;
 	border-left: 4px solid #e1e1e1;
-	width: 0; height: 80px;
+	width: 0; height: 60px;
 }
 
 
-.tree li .premise {
+.tree-view .tree li .premise {
 	text-decoration: none;
     width: 250px;
 	display: inline-block;
 }
 
-.root {
+.tree-view .root {
     display: inline-block;
     width: 30px;
     z-index: 2;
@@ -827,7 +840,7 @@ form .parent-premise strong {
 }
 
 .collapsed {
-    display: none;
+    /*display: none;*/
 }
 
 .uncollapse-button {
@@ -835,6 +848,57 @@ form .parent-premise strong {
     display: block;
     margin-top: 50px;
 }
+
+
+#app.list-view {
+    position: static;
+}
+
+.list-view li {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.list-view .child-premise {
+    border-left: 3px solid #eaeaea;
+}
+
+/*.list-view ul:first-child {*/
+    /*border: none;*/
+/*}*/
+
+.list-view .premise {
+    width: 600px;
+    margin-bottom: 100px;
+}
+
+.list-view .main-contention {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.list-view .main-contention {
+    font-size: 60px;
+    padding-bottom: 70px;
+    margin-top: 160px;
+}
+
+.list-view .main-premise-content {
+    margin: 50px;
+    width: 900px;
+    line-height: 1em;
+}
+
+.list-view .premise-actions {
+    padding-left: 10px;
+}
+
+.contention-main-actions {
+    float: right;
+    padding-right: 50px;
+}
+
+
 
 
 /* Media Queries */
