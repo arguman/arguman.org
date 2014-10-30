@@ -21,8 +21,15 @@
 
                     {% if premise.reports.exists %}
                         <div class="reported_as_fallacy">
-                        {{ premise.reports.count }} kişi tarafından
-                        safsata olarak işaretlendi.</div>
+                        {{ premise.reports.count }} safsata bildirimi yapıldı.
+
+                        {% if premise.fallacies %}
+                            {% for fallacy in premise.fallacies %}
+                            <div class="fallacy">{{ fallacy }}</div>
+                            {% endfor %}
+                        {% endif %}
+
+                        </div>
                     {% endif %}
                 </div>
                 {% if edit_mode or user == premise.user %}

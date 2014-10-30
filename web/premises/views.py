@@ -15,7 +15,7 @@ from markdown2 import markdown
 from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 
 from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
-from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
+from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm, ReportForm
 from profiles.models import Profile
 from django.db.models import Count
 
@@ -322,7 +322,14 @@ class PremiseDeleteView(View):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
 
 
-class ReportView(View):
+class ReportView(CreateView):
+    form_class = ReportForm
+    template_name = "premises/report.html"
+
+    def get_context_data(self, **kwargs):
+        return super(ReportView, self).get_context_data(
+            premise=self.get_premise(),
+            **kwargs)
 
     def get_contention(self):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
@@ -330,22 +337,11 @@ class ReportView(View):
     def get_premise(self):
         return get_object_or_404(Premise, pk=self.kwargs['pk'])
 
-    def post(self, request, slug, pk):
-        if request.user.is_authenticated():
-            premise = self.get_premise()
-            contention = self.get_contention()
-            try:
-                Report.objects.create(reporter=request.user,
-                                      premise=premise,
-                                      contention=contention)
-                return HttpResponse(json.dumps({
-                    "report_count": premise.reports.count()
-                }), status=201)
-            except Exception as e:
-                return HttpResponseBadRequest(json.dumps({
-                    'message': e.message
-                }))
-        else:
-            return HttpResponseForbidden(json.dumps({
-                'message': 'Authentication error.'
-            }))
+    def form_valid(self, form):
+        contention = self.get_contention()
+        premise = self.get_premise()
+        form.instance.contention = contention
+        form.instance.premise = premise
+        form.instance.reporter = self.request.user
+        form.save()
+        return redirect(contention)

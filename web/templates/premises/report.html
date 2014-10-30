@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="container">
+        <form action="?" method="post">
+            <label>Safsata bildirimi yapacağınız önerme:</label>
+            <div class="fallacy-premise">
+                <p>{{ premise.text }}</p>
+            </div>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Safsatayı Bildir" class="submit">
+        </form>
+    </section>
+{% endblock %}

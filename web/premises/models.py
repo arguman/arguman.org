@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+import json
 import operator
+import os
 
 from uuid import uuid4
 from markdown2 import markdown
@@ -117,14 +119,6 @@ class Contention(DeletePreventionMixin, models.Model):
 
 class Premise(DeletePreventionMixin, models.Model):
 
-    def width(self):
-        total = self.published_children().count()
-
-        for child in self.published_children():
-            total += child.width()
-
-        return total
-
     argument = models.ForeignKey(Contention, related_name="premises")
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
@@ -188,6 +182,20 @@ class Premise(DeletePreventionMixin, models.Model):
     def formatted_text(self):
         return markdown(self.text)
 
+    def width(self):
+        total = self.published_children().count()
+
+        for child in self.published_children():
+            total += child.width()
+
+        return total
+
+    def fallacies(self):
+        fallacies = set(self.reports.values_list("fallacy_type", flat=True))
+        mapping = dict(get_fallacy_types())
+        fallacy_list = [mapping.get(fallacy) for fallacy in fallacies]
+        return filter(None, fallacy_list)
+
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)
@@ -198,6 +206,17 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.text)
+
+
+def get_fallacy_types():
+    if hasattr(get_fallacy_types, "cache"):
+        return get_fallacy_types.cache
+
+    get_fallacy_types.cache = json.load(
+        open(os.path.join(os.path.dirname(__file__),
+                          "fallacies.json")))
+
+    return get_fallacy_types.cache
 
 
 class Report(models.Model):
@@ -211,4 +230,11 @@ class Report(models.Model):
                                    related_name='reports',
                                    blank=True,
                                    null=True)
+    fallacy_type = models.CharField(
+        "Safsata Tipi", choices=get_fallacy_types(), null=True, blank=False,
+        max_length=255, default="Wrong Direction",
+        help_text=render_to_string("premises/examples/fallacy.html"))
 
+
+    def __unicode__(self):
+        return smart_unicode(self.fallacy_type)

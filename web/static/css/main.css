@@ -206,6 +206,10 @@ form .helptext {
     /*margin-left: 185px;*/
 }
 
+form .helptext a {
+    color: gray;
+}
+
 form label {
     display: block;
 }
@@ -628,10 +632,15 @@ footer a {
     padding: 20px;
 }
 
-#id_parent {
+#id_parent, #id_fallacy_type {
     width: 600px;
     -webkit-appearance: menulist-button;
     font-family: AmericanTypewriter, Georgia, serif;
+}
+
+#id_fallacy_type {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .tabs {
@@ -666,6 +675,11 @@ form .contention-link {
 form .parent-premise {
     color: #a5a5a5;
     padding: 5px;
+}
+
+form .fallacy-premise {
+    color: #bcbcbc;
+    padding: 0;
 }
 
 form .parent-premise strong {
@@ -703,6 +717,13 @@ form .parent-premise strong {
     background: #ffd8d5;
     padding: 10px 20px;
     border-radius: 0 0 5px 5px;
+    text-align: left;
+    color: #e09396;
+}
+
+.reported_as_fallacy .fallacy {
+    font-size: 17px;
+    color: #676568;
 }
 
 .search-form {
