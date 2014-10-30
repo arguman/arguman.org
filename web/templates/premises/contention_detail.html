@@ -59,7 +59,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="{{ view }}" id="app" {% if not contention.published_premises.exists %}class="empty"{% endif %}>
+    <div id="app" class="{{ view }}{% if not contention.published_premises.exists %} empty{% endif %}">
 
             <div class="main-contention">
                 <div class="main-premise-content">
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="tree" data-width="{{ contention.width }}">
+            <div class="tree{% if not contention.published_premises.exists %} empty{% endif %}" data-width="{{ contention.width }}">
                 <ul>
                     <li>
                         <div class="root"></div>

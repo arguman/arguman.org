@@ -528,7 +528,7 @@ li.base-premises {
     z-index: 9;
     position: absolute;
     margin-left: 28px;
-    margin-top: 3px;
+    margin-top: -10px;
 }
 
 .premise-actions {
@@ -850,6 +850,7 @@ form .parent-premise strong {
 
 #app.empty {
     position: static;
+    margin-top: 90px;
 }
 
 #app.empty .main-contention {
@@ -919,7 +920,9 @@ form .parent-premise strong {
     padding-right: 50px;
 }
 
-
+#view-switcher li {
+    text-align: center;
+}
 
 
 /* Media Queries */

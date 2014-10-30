@@ -18,7 +18,12 @@
             * Set full width to container, and reduce the width with
             * positions of last premise.
             * */
-            var root = this.$el.find(".root"),
+
+            if (this.$el.hasClass("empty")) {
+                return;
+            }
+
+             var root = this.$el.find(".root"),
                 mainContention = $(this.mainContention);
             var treeWidth = parseInt(this.$el.data("width")) * this.premiseWidth;
             this.width = treeWidth;
