@@ -6,6 +6,8 @@
 
     arguman.CollapsibleTree = Class.extend({
 
+        premiseWidth: 260,
+
         init: function (options) {
             $.extend(this, options);
             this.$el = $(this.el);
@@ -13,11 +15,8 @@
 
         setTreeWidth: function () {
             var root = this.$el.find(".root"),
-                mainPremises = root.next().children(),
                 mainContention = $(this.mainContention);
-            var treeWidth = mainPremises.map(function (_, el) {
-                return $(el).width() + 50;
-            }).toArray().reduce(arguman.utils.adder);
+            var treeWidth = parseInt(this.$el.data("width")) * this.premiseWidth;
             this.width = treeWidth;
             this.$el.width(treeWidth);
             mainContention.css({
@@ -33,10 +32,25 @@
                 });
             }
 
+            var mainPremises = root.next().children(),
+                lastPremise = mainPremises.last();
+
+            this.width = (lastPremise.position().left + this.premiseWidth + 60);
+            this.$el.width(this.width);
+
+            this.onRender();
+
+
         },
 
         render: function () {
             this.setTreeWidth();
+            this.$el.find(".uncollapse-button").on("click", function (event) {
+                var branch = $(event.target).next();
+                this.$el.width(this.width + branch.width());
+                branch.toggleClass("collapsed");
+                event.preventDefault();
+            }.bind(this));
         }
     });
 

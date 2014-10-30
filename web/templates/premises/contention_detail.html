@@ -68,11 +68,11 @@
 {% endblock %}
 
 {% block content %}
-    <div id="app">
+    <div id="app" {% if not contention.published_premises.exists %}class="empty"{% endif %}>
 
             <div class="main-contention">
                 <div class="main-premise-content">
-                {{ contention }}
+                {{ contention.width }}{{ contention }}
                 <div class="main-contention-actions">
                     {% if user.is_authenticated %}
                     <a class="new-main-premise" href="{% url "new_premise" contention.slug %}">önerme ekle</a>
@@ -81,7 +81,7 @@
                 </div>
             </div>
 
-            <div class="tree">
+            <div class="tree" data-width="{{ contention.width }}">
                 <ul>
                     <li>
                         <div class="root"></div>
@@ -110,11 +110,14 @@
         "mainContention": ".main-contention"
     });
 
+    tree.onRender = function () {
+        $(".sticky-header").width(
+            Math.max(window.innerWidth, tree.width)
+        );
+    };
+
     tree.render();
 
-    $(".sticky-header").width(
-        Math.max(window.innerWidth, tree.width)
-    );
 
 </script>
 {% endblock %}

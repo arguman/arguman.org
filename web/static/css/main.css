@@ -810,6 +810,32 @@ form .parent-premise strong {
     text-decoration: none;
 }
 
+#app.empty .root {
+    display: none;
+}
+
+#app.empty {
+    position: static;
+}
+
+#app.empty .main-contention {
+    margin: auto;
+}
+
+#app.empty .new-main-premise {
+    margin-left: -54px;
+}
+
+.collapsed {
+    display: none;
+}
+
+.uncollapse-button {
+    width: 100%;
+    display: block;
+    margin-top: 50px;
+}
+
 
 /* Media Queries */
 @media (max-width: 800px){

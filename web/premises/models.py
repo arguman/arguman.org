@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+import operator
+
 from uuid import uuid4
-from django.core import validators
 from unidecode import unidecode
 
+from django.core import validators
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.db import models
@@ -105,8 +107,23 @@ class Contention(DeletePreventionMixin, models.Model):
             user = premise.user
         return user
 
+    def width(self):
+        children = self.published_children()
+        return children.count() + reduce(operator.add,
+                                         map(operator.methodcaller("width"),
+                                            children))
+
 
 class Premise(DeletePreventionMixin, models.Model):
+
+    def width(self):
+        total = self.published_children().count()
+
+        for child in self.published_children():
+            total += child.width()
+
+        return total
+
     argument = models.ForeignKey(Contention, related_name="premises")
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
@@ -127,6 +144,8 @@ class Premise(DeletePreventionMixin, models.Model):
         null=True, blank=True, verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/premise_source.html"))
     is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
+
+    collapsed = models.BooleanField(default=False)
 
     sibling_count = models.IntegerField(default=1)  # denormalized field
     child_count = models.IntegerField(default=1)  # denormalized field
