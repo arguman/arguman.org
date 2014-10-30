@@ -29,15 +29,21 @@
             this.width = treeWidth;
             this.$el.width(treeWidth);
 
-            mainContention.css({
-                "margin-left": (root.position().left) - (mainContention.width() / 2)
-            });
+            var mainPremises = root.next().children();
 
-            var mainPremises = root.next().children(),
-                lastPremise = mainPremises.last();
+            if (mainPremises.length > 1) {
+                var premises = root.parent().find("li");
 
-            this.width = (lastPremise.position().left + this.premiseWidth + 60);
-            this.$el.width(this.width);
+                var maxPosition = Math.max.apply(this,
+                                    premises.toArray().map(function (premise) {
+                                        return $(premise).position().left}));
+
+                this.width = (maxPosition + this.premiseWidth + 350);
+                this.$el.width(this.width);
+                mainContention.css({
+                    "margin-left": (root.position().left) - (mainContention.width() / 2)
+                });
+            }
 
             if (this.width < window.innerWidth) {
                 this.$el.css({
