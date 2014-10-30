@@ -52,14 +52,9 @@
 
             </div>
             {% if premise.children.exists %}
-                {% if premise.collapsed %}
-                    <a class="uncollapse-button" href="#">Devamını göster</a>
-                {% endif %}
-                <div class="{% if premise.collapsed %}collapsed{% endif %}">
                 {% with template_name="premises/tree_view.html" premises=premise.published_children %}
                     {% include template_name %}
                 {% endwith %}
-                </div>
             {% endif %}
         </li>
     {% endfor %}

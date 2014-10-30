@@ -19,6 +19,7 @@
             var treeWidth = parseInt(this.$el.data("width")) * this.premiseWidth;
             this.width = treeWidth;
             this.$el.width(treeWidth);
+
             mainContention.css({
                 "margin-left": (root.position().left) - (mainContention.width() / 2)
             });
@@ -42,12 +43,6 @@
 
         render: function () {
             this.setTreeWidth();
-            this.$el.find(".uncollapse-button").on("click", function (event) {
-                var branch = $(event.target).next();
-                this.$el.width(this.width + branch.width());
-                branch.toggleClass("collapsed");
-                event.preventDefault();
-            }.bind(this));
         }
     });
 
