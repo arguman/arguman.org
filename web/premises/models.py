@@ -177,10 +177,10 @@ class Premise(DeletePreventionMixin, models.Model):
         return self.reports.filter(reporter=user).exists()
 
     def formatted_sources(self):
-        return markdown(self.sources)
+        return markdown(self.sources, safe_mode=True)
 
     def formatted_text(self):
-        return markdown(self.text)
+        return markdown(self.text, safe_mode=True)
 
     def width(self):
         total = self.published_children().count()
