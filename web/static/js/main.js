@@ -25,7 +25,7 @@
 
              var root = this.$el.find(".root"),
                 mainContention = $(this.mainContention);
-            var treeWidth = parseInt(this.$el.data("width")) * this.premiseWidth;
+            var treeWidth = parseInt(this.$el.data("width")) * (this.premiseWidth*2);
             this.width = treeWidth;
             this.$el.width(treeWidth);
 
@@ -36,9 +36,9 @@
 
                 var maxPosition = Math.max.apply(this,
                                     premises.toArray().map(function (premise) {
-                                        return $(premise).position().left}));
+                                        return $(premise).offset().left}));
 
-                this.width = (maxPosition + this.premiseWidth + 350);
+                this.width = (maxPosition + this.premiseWidth + 50);
                 this.$el.width(this.width);
                 mainContention.css({
                     "margin-left": (root.position().left) - (mainContention.width() / 2)
