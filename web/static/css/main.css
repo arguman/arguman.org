@@ -1001,6 +1001,12 @@ form .parent-premise strong {
 }
 
 
+/* Loading */
+
+.loading {
+    visibility: hidden;
+}
+
 /* Media Queries */
 @media (max-width: 800px){
   header nav ul li {

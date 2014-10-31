@@ -31,7 +31,7 @@
 
             var mainPremises = root.next().children();
 
-            if (mainPremises.length > 1) {
+            if (mainPremises.length) {
                 var premises = root.parent().find("li");
 
                 var maxPosition = Math.max.apply(this,
@@ -58,6 +58,7 @@
 
         render: function () {
             this.setTreeWidth();
+            this.$el.css("visibility", "visible");
         }
     });
 
