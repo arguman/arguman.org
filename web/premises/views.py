@@ -170,6 +170,7 @@ class TosView(TemplateView):
         return super(TosView, self).get_context_data(
             content=content, **kwargs)
 
+
 class ArgumentCreationView(CreateView):
     template_name = "premises/new_contention.html"
     form_class = ArgumentCreationForm
@@ -177,21 +178,8 @@ class ArgumentCreationView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         response = super(ArgumentCreationView, self).form_valid(form)
-        self.create_demo_premises(form.instance)
         form.instance.update_sibling_counts()
         return response
-
-    def create_demo_premises(self, instance):
-        demo = [
-            [SUPPORT, "Bu metin örnektir. Düzenleyiniz"],
-        ]
-        for (premise_type, text) in demo:
-            Premise.objects.create(
-                argument=instance,
-                user=self.request.user,
-                premise_type=premise_type,
-                text=text,
-                is_approved=True)
 
 
 class ArgumentUpdateView(UpdateView):
