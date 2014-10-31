@@ -2,10 +2,12 @@
 
 import json
 from markdown2 import markdown
+from datetime import date, timedelta
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max
+from django.utils.timezone import now
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
@@ -181,10 +183,12 @@ class ControversialArgumentsView(HomeView):
     tab_class = "controversial"
 
     def get_contentions(self):
+        last_week = now() - timedelta(days=3)
         return (Contention
                 .objects
                 .annotate(num_children=Count('premises'))
                 .order_by('-num_children')
+                .filter(date_modification__gte=last_week)
                 [:UPDATED_CONTENT_COUNT])
 
 
