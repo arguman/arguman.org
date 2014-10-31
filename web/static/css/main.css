@@ -1007,6 +1007,31 @@ form .parent-premise strong {
     visibility: hidden;
 }
 
+
+/* Content Pages */
+
+.content {
+    margin-top: 30px;
+    line-height: 1.6em;
+}
+
+.content h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.content a {
+    color: gray;
+    text-decoration: none;
+    border-bottom: 4px solid #81ffdd;
+    padding-bottom: 1px;
+}
+
+.content li {
+    padding-bottom: 8px;
+}
+
+
 /* Media Queries */
 @media (max-width: 800px){
   header nav ul li {
