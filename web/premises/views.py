@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 
 import json
+from markdown2 import markdown
+
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max
@@ -11,13 +13,13 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
-from markdown2 import markdown
-from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
+from django.db.models import Count
 
+from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
 from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
 from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm, ReportForm
+from premises.signals import added_premise_for_premise, added_premise_for_contention, reported_as_fallacy
 from profiles.models import Profile
-from django.db.models import Count
 
 
 class ContentionDetailView(DetailView):
@@ -99,12 +101,44 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         contentions = self.get_contentions()
+        if self.request.user.is_authenticated():
+            notifications_qs = self.get_unread_notifications()
+            notifications = list(notifications_qs)
+            self.mark_as_read(notifications_qs)
+        else:
+            notifications = None
         return super(HomeView, self).get_context_data(
             tab_class=self.tab_class,
+            notifications=notifications,
             contentions=contentions, **kwargs)
+
+    def get_unread_notifications(self):
+        return (self.request.user
+                    .notifications
+                    .filter(is_read=False)
+                    [:5])
+
+    def mark_as_read(self, notifications):
+        pks = notifications.values_list("id", flat=True)
+        (self.request.user
+             .notifications
+             .filter(id__in=pks)
+             .update(is_read=True))
 
     def get_contentions(self):
         return Contention.objects.featured()
+
+
+class NotificationsView(HomeView):
+    template_name = "notifications.html"
+
+    def get_context_data(self, **kwargs):
+        notifications_qs = self.request.user.notifications.all()[:40]
+        notifications = list(notifications_qs)
+        self.mark_as_read(notifications_qs)
+        return super(HomeView, self).get_context_data(
+            notifications=notifications,
+            **kwargs)
 
 
 class SearchView(HomeView):
@@ -278,6 +312,14 @@ class PremiseCreationView(CreateView):
         form.instance.is_approved = True
         form.save()
         contention.update_sibling_counts()
+
+        if form.instance.parent:
+            added_premise_for_premise.send(sender=self,
+                                           premise=form.instance)
+        else:
+            added_premise_for_contention.send(sender=self,
+                                              premise=form.instance)
+
         return redirect(contention)
 
     def get_contention(self):
@@ -332,4 +374,5 @@ class ReportView(CreateView):
         form.instance.premise = premise
         form.instance.reporter = self.request.user
         form.save()
+        reported_as_fallacy.send(sender=self, report=form.instance)
         return redirect(contention)

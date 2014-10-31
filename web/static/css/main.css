@@ -924,6 +924,82 @@ form .parent-premise strong {
     text-align: center;
 }
 
+/* Notificatons */
+
+.notifications {
+    font-size: 22px;
+}
+
+.notifications .empty {
+    font-size: 20px;
+    padding: 0 20px;
+    color: #9b9b9b;
+    margin-bottom: -20px;
+}
+
+.notifications a {
+    color: gray;
+}
+
+.notifications ul {
+    margin: 0;
+    padding: 5px;
+}
+
+.notifications li {
+    list-style: none;
+    padding: 0;
+    padding-left: 15px;
+    margin: 0;
+    color: #9e9e9e;
+    border-left: 5px solid #e7e7e7;
+    margin-bottom: 20px;
+}
+
+.notifications .see-more {
+    border: none;
+    margin: 0;
+}
+
+.notifications li time {
+    display: block;
+    font-size: 17px;
+    margin-left: 5px;
+    color: #c0c0c0;
+}
+
+.notifications .user {
+    background: #fde3ff;
+    text-decoration: none;
+    color: #222222;
+    padding: 1px 10px;
+}
+
+.notifications .contention-link {
+    background: #e6ffff;
+    text-decoration: none;
+    color: #222222;
+    padding: 1px 10px;
+}
+
+.notifications .premise-type {
+    padding: 1px 10px;
+    color: #222222;
+}
+
+.notifications .premise-type.but { background: #ffcdd7; }
+.notifications .premise-type.however { background: #fffbd4; }
+.notifications .premise-type.because { background: #d6ffd4; }
+
+.notifications strong {
+    background: #ffebe6;
+    text-decoration: none;
+    color: #222222;
+    font-weight: normal;
+    padding: 1px 10px;
+    white-space: nowrap;
+}
+
 
 /* Media Queries */
 @media (max-width: 800px){

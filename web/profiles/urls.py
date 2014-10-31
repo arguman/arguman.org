@@ -5,7 +5,6 @@ from profiles.views import (RegistrationView, LoginView, LogoutView,
 
 
 urlpatterns = patterns('',
-
     url(r'^login/$', LoginView.as_view(template_name="auth/login.html"), name='auth_login'),
     url(r'^logout/$', LogoutView.as_view(), name='auth_logout'),
     url(r'^auth/profile$', ProfileUpdateView.as_view(), name='auth_profile_update'),
