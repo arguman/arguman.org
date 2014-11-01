@@ -1101,6 +1101,9 @@ form .parent-premise strong {
     line-height: 1em;
 }
 
+.news-item.premise_entry {
+    color: #c4c4c4;
+}
 
 .news-item.premise_entry .contention-link {
     color: #464646;
