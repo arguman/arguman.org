@@ -41,3 +41,4 @@ Eğer siz de bir şeyler yapmak isterseniz yukarıdaki github adresini inceleyeb
 - [Bahattin Çiniç](http://bahattincinic.com/) (geliştirme)
 - [Can Göktaş](https://twitter.com/cangokt) (arayüz geliştirme)
 - [Kağan Yaldızkaya](https://dribbble.com/kagan) (yeni tasarım üzerinde çalışmakta)
+- [Mehmet İnce](https://twitter.com/mdisec) (güvenlik, sızma testi)
