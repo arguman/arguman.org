@@ -1162,6 +1162,11 @@ form .parent-premise strong {
     margin: 10px;
 }
 
+h3.newsfeed-title {
+    padding: 10px 30px 0;
+    color: #a0a0a0;
+}
+
 
 /* Media Queries */
 @media (max-width: 800px){

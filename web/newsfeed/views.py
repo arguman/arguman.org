@@ -8,8 +8,12 @@ class NewsfeedView(HomeView):
     template_name = "newsfeed.html"
 
     def get_context_data(self, **kwargs):
+        if self.request.user.is_authenticated():
+            newsfeed = self.get_private_newsfeed()
+        else:
+            newsfeed = self.get_public_newsfeed()
         return super(NewsfeedView, self).get_context_data(
-            news_entries=self.get_private_newsfeed(),
+            news_entries=newsfeed,
             **kwargs)
 
     def get_private_newsfeed(self, offset=0, limit=40):
@@ -31,6 +35,28 @@ class NewsfeedView(HomeView):
                     .objects
                     .collection
                     .find(parameters)
-                    .sort([("date_created", -1)]))
+                    .sort([("date_created", -1)])
+                    .skip(offset)
+                    .limit(limit))
 
-        return map(Entry, newsfeed[offset:offset + limit])
+        return map(Entry, newsfeed)
+
+    def get_public_newsfeed(self, offset=0, limit=40):
+        """
+        Fetches news items from the newsfeed database
+        """
+        parameters = {
+            "news_type": {
+                "$in": [NEWS_TYPE_CONTENTION,
+                        NEWS_TYPE_PREMISE]
+        }}
+
+        newsfeed = (Entry
+                    .objects
+                    .collection
+                    .find(parameters)
+                    .sort([("date_created", -1)])
+                    .skip(offset)
+                    .limit(limit))
+
+        return map(Entry, newsfeed)

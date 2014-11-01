@@ -193,6 +193,6 @@ def remove_from_recipients(follower, following, **kwargs):
 @receiver(post_delete, sender=Premise)
 def remove_news_entry(instance, **kwargs):
     Entry.objects.delete(
-        object_type=instance.get_news_type(),
-        object_id=instance._id
+        object_type=instance.get_newsfeed_type(),
+        object_id=instance.id
     )

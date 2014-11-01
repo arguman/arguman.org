@@ -7,6 +7,9 @@
     <div class="container home">
         {% include "home.html" %}
         {% include "tabs.html" %}
+        {% if user.is_anonymous %}
+        <h3 class="newsfeed-title">neler oluyor burada:</h3>
+        {% endif %}
         <div class="newsfeed-container">
             {% for entry in news_entries %}
               <div class="news-item {{ entry.entry_class }}">
