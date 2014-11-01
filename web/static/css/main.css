@@ -982,6 +982,13 @@ form .parent-premise strong {
     padding: 1px 10px;
 }
 
+.notifications .followed-profile {
+    background: #ffe6eb;
+    text-decoration: none;
+    color: #222222;
+    padding: 1px 10px;
+}
+
 .notifications .premise-type {
     padding: 1px 10px;
     color: #222222;

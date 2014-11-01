@@ -8,6 +8,7 @@ from django.dispatch import receiver
 from django.template.loader import render_to_string
 from premises.models import Contention, Report, Premise
 from premises.signals import reported_as_fallacy, added_premise_for_premise, added_premise_for_contention
+from profiles.signals import follow_done
 
 
 class Profile(AbstractUser):
@@ -106,3 +107,16 @@ def create_contention_contribution_notification(sender, premise, *args, **kwargs
             notification_type=NOTIFICATION_ADDED_PREMISE_FOR_CONTENTION,
             target_object_id=premise.id
         )
+
+
+@receiver(follow_done)
+def create_following_notification(following, follower, **kwargs):
+    """
+    Sends notification to the followed user from the follower.
+    """
+    Notification.objects.create(
+        target_object_id=follower.id,
+        notification_type=NOTIFICATION_FOLLOWED_A_PROFILE,
+        sender=follower,
+        recipient_id=following.id
+    )
