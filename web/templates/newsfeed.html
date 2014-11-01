@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+{% load gravatar %}
+
+{% block content %}
+    <div class="container home">
+        {% include "home.html" %}
+        {% include "tabs.html" %}
+        <div class="newsfeed-container">
+            {% for entry in news_entries %}
+              <div class="news-item {{ entry.entry_class }}">
+                <div class="sender">
+                    {% gravatar entry.sender.email %}
+                    <a href="{% url "auth_profile" entry.sender.username %}">{{ entry.sender.username|lower }}</a>
+                </div>
+                <div class="news-item-content">
+                    {{ entry.render }}
+                    <time datetime="{{ entry.date_created }}">{{ entry.date_created|naturaltime }}</time>
+                </div>
+             </div>
+            {% empty %}
+                <p class="empty-newsfeed">Haber kaynağınız boş. Birilerini takip edebilirsiniz.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

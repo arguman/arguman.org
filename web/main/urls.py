@@ -4,6 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^', include('newsfeed.urls')),
     url(r'^', include('premises.urls')),
     url(r'^', include('profiles.urls')),
     url(r'^', include('social_auth.urls')),

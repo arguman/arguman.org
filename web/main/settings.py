@@ -43,6 +43,7 @@ INSTALLED_APPS = (
 
     'profiles',
     'premises',
+    'newsfeed',
 
 )
 
@@ -124,6 +125,9 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.load_extra_data',
     'social_auth.backends.pipeline.user.update_user_details',
 )
+
+MONGODB_HOST = "localhost"
+MONGODB_DATABASE = "arguman"
 
 try:
     from settings_local import *

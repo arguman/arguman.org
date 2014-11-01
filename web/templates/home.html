@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+    {% include "partials/notifications.html" with show_see_more_button=True %}
+{% endif %}
+
+<div class="landing">
+    arguman.org bir <a href="{% url "about" %}">argüman analizi</a> platformudur.
+</div>

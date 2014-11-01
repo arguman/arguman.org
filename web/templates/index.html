@@ -4,28 +4,10 @@
 
 {% block content %}
     <div class="container home">
-        {% if user.is_authenticated %}
-            {% include "partials/notifications.html" with show_see_more_button=True %}
-        {% endif %}
 
-        <div class="landing">
-            arguman.org bir <a href="{% url "about" %}">argüman analizi</a> platformudur.
-        </div>
+        {% include "home.html" %}
+        {% include "tabs.html" %}
 
-        <ul class="tabs">
-            <li class="featured{% ifequal tab_class "featured" %} active{% endifequal %}">
-                <a href="/">Seçilmişler</a></li>
-            <li class="news{% ifequal tab_class "news" %} active{% endifequal %}">
-                <a href="{% url "contentions_latest" %}">Yeniler</a></li>
-            <li class="updated{% ifequal tab_class "updated" %} active{% endifequal %}">
-                <a href="{% url "contentions_updated" %}">Güncellenenler</a></li>
-            <li class="controversial{% ifequal tab_class "controversial" %} active{% endifequal %}">
-                <a href="{% url "contentions_controversial" %}">Tartışılanlar</a>
-            </li>
-            <li class="search{% ifequal tab_class "search" %} active{% endifequal %}">
-                <a href="{% url "contentions_search" %}">Ara</a>
-            </li>
-        </ul>
         {% ifequal tab_class 'search' %}
             <form action="{% url "contentions_search" %}" class="search-form">
                 <label for="id_q">Kelime: </label>

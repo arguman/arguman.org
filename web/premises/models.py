@@ -15,6 +15,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
+from newsfeed.constants import NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.managers import ContentionManager, DeletePreventionManager
@@ -117,9 +118,24 @@ class Contention(DeletePreventionMixin, models.Model):
                                          map(operator.methodcaller("width"),
                                             children), 0)
 
+    def get_actor(self):
+        """
+        Encapsulated for newsfeed app.
+        """
+        return self.user
+
+    def get_newsfeed_type(self):
+        return NEWS_TYPE_CONTENTION
+
+    def get_newsfeed_bundle(self):
+        return {
+            "title": self.title,
+            "owner": self.owner,
+            "uri": self.get_absolute_url()
+        }
+
 
 class Premise(DeletePreventionMixin, models.Model):
-
     argument = models.ForeignKey(Contention, related_name="premises")
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
@@ -197,6 +213,24 @@ class Premise(DeletePreventionMixin, models.Model):
         fallacy_list = [mapping.get(fallacy) for fallacy in fallacies]
         return filter(None, fallacy_list)
 
+    def get_actor(self):
+        """
+        Encapsulated for newsfeed app.
+        """
+        return self.user
+
+    def get_newsfeed_type(self):
+        return NEWS_TYPE_PREMISE
+
+    def get_newsfeed_bundle(self):
+        return {
+            "premise_type": self.premise_type,
+            "premise_class": self.premise_class(),
+            "text": self.text,
+            "sources": self.sources,
+            "contention": self.argument.get_newsfeed_bundle()
+        }
+
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)
@@ -239,3 +273,19 @@ class Report(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.fallacy_type)
+
+    def get_actor(self):
+        """
+        Encapsulated for newsfeed app.
+        """
+        return self.reporter
+
+    def get_newsfeed_type(self):
+        return NEWS_TYPE_FALLACY
+
+    def get_newsfeed_bundle(self):
+        return {
+            "fallacy_type": self.fallacy_type,
+            "premise": self.premise.get_newsfeed_bundle(),
+            "contention": self.contention.get_newsfeed_bundle()
+        }
