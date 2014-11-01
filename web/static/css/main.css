@@ -1062,6 +1062,7 @@ form .parent-premise strong {
 
     .news-item .sender a {
         color: #666666;
+        display: block;
         text-decoration: none;
     }
 
