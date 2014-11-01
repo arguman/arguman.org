@@ -10,7 +10,7 @@
         <nav>
             <ul>
                 <li>
-                    ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user }}</a>
+                    ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user|lower }}</a>
                 </li>
                 <li>
                     orijinal söylem:
