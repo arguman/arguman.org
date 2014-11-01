@@ -1061,7 +1061,7 @@ form .parent-premise strong {
     }
 
     .news-item .sender a {
-        color: #ff722e;
+        color: #666666;
         text-decoration: none;
     }
 
@@ -1144,7 +1144,7 @@ form .parent-premise strong {
 
 .news-item.premise_entry p a.because { color: #7bc370; }
 .news-item.premise_entry p a.but { color: #ff858e; }
-.news-item.premise_entry p a.however { color: #ffbe39; }
+.news-item.premise_entry p a.however { color: #ff6a00; }
 
 .news-item.fallacy_entry a {
     color: #464646;
