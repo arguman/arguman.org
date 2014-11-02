@@ -1,10 +1,8 @@
-import json
-
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views.generic import FormView, CreateView, RedirectView, DetailView, UpdateView
 
 from profiles.forms import RegistrationForm, ProfileUpdateForm
@@ -94,9 +92,9 @@ class ProfileDetailView(DetailView):
 
         unfollow_done.send(sender=self, follower=request.user, following=user)
 
-        return HttpResponse(json.dumps({
+        return JsonResponse({
             "success": True
-        }))
+        })
 
     def post(self, request, **kwargs):
         """
@@ -106,17 +104,17 @@ class ProfileDetailView(DetailView):
         user = self.get_object()
 
         if user.followers.filter(pk=request.user.pk).exists():
-            return HttpResponse(json.dumps({
+            return JsonResponse({
                 "error": "You already following this people."
-            }))
+            })
 
         request.user.following.add(user)
 
         follow_done.send(sender=self, follower=request.user, following=user)
 
-        return HttpResponse(json.dumps({
+        return JsonResponse({
             "success": True
-        }))
+        })
 
 
 class ProfileUpdateView(UpdateView):

@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 
-import json
 from markdown2 import markdown
 from datetime import date, timedelta
 
@@ -8,9 +7,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max
 from django.utils.timezone import now
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
@@ -48,9 +45,9 @@ class ContentionJsonView(DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         contention = self.get_object(self.get_queryset())
-        return HttpResponse(json.dumps({
+        return JsonResponse({
             "nodes": self.build_tree(contention, self.request.user),
-        }), content_type="application/json")
+        })
 
     def build_tree(self, contention, user):
         return {
