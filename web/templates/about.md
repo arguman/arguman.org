@@ -23,3 +23,22 @@ resmedebilmektir.
 Argüman.org'un amacı ise argümanların birden çok kullanıcı tarafından
 tarafsız bir şekilde haritalanabilmesidir.
 
+
+## Biz kimiz
+
+Arguman.org açık kaynak bir proje olup topluluk tarafından geliştirilmektedir.
+
+<https://github.com/arguman>
+
+Eğer siz de bir şeyler yapmak isterseniz yukarıdaki github adresini inceleyebilirsiniz.
+
+## Katkıda bulunanlar ve yaptıkları
+
+- [Fatih Erikli](http://fatiherikli.com) (kurucu, geliştirme)
+- [Hüseyin Mert](http://hmert.com) (proje yönetimi)
+- [Aybars Badur](https://twitter.com/aybarsbadur) (geliştirme)
+- [Tuna Vargı](http://tunavargi.com/) (geliştirme)
+- [Bahattin Çiniç](http://bahattincinic.com/) (geliştirme)
+- [Can Göktaş](https://twitter.com/cangokt) (arayüz geliştirme)
+- [Kağan Yaldızkaya](https://dribbble.com/kagan) (yeni tasarım üzerinde çalışmakta)
+- [Mehmet İnce](https://twitter.com/mdisec) (güvenlik testi)

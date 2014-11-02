@@ -1,0 +1,25 @@
+{% load humanize %}
+{% if user.notifications.exists %}
+<div class="notifications">
+{% if notifications %}
+    <ul>
+        {% for notification in notifications %}
+            <li>
+                <time>{{ notification.date_created|naturaltime }}</time>
+                {{ notification.render }}
+            </li>
+        {% endfor %}
+        {% if show_see_more_button %}
+            <li class="see-more"><a href="{% url "notifications" %}" class="notifications-link">Tümünü gör</a></li>
+        {% endif %}
+    </ul>
+{% else %}
+    <div class="empty">
+        Hiç yeni bildiriminiz yok.
+        {% if show_see_more_button %}
+            <a href="{% url "notifications" %}" class="notifications-link">Eskilerini görüntüle</a>
+        {% endif %}
+    </div>
+{% endif %}
+</div>
+{% endif %}

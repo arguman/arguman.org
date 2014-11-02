@@ -1,17 +1,25 @@
 # -*- coding: utf-8 -*-
+import json
+import operator
+import os
+
 from uuid import uuid4
-from django.core import validators
+from django.utils.html import escape
+from markdown2 import markdown
 from unidecode import unidecode
 
+from django.core import validators
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
+from newsfeed.constants import NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
-from premises.managers import ContentionManager
+from premises.managers import ContentionManager, DeletePreventionManager
+from premises.mixins import DeletePreventionMixin
 
 OBJECTION = 0
 SUPPORT = 1
@@ -24,7 +32,7 @@ PREMISE_TYPES = (
 )
 
 
-class Contention(models.Model):
+class Contention(DeletePreventionMixin, models.Model):
     title = models.CharField(
         max_length=255, verbose_name="Argüman",
         help_text=render_to_string("premises/examples/contention.html"))
@@ -77,6 +85,8 @@ class Contention(models.Model):
             return premises
         return premises.filter(parent=parent)
 
+    published_children = published_premises
+
     def children_by_premise_type(self, premise_type=None, ignore_parent=False):
         return (self.published_premises(ignore_parent=ignore_parent)
                 .filter(premise_type=premise_type))
@@ -102,8 +112,30 @@ class Contention(models.Model):
             user = premise.user
         return user
 
+    def width(self):
+        children = self.published_children()
+        return children.count() + reduce(operator.add,
+                                         map(operator.methodcaller("width"),
+                                            children), 0)
 
-class Premise(models.Model):
+    def get_actor(self):
+        """
+        Encapsulated for newsfeed app.
+        """
+        return self.user
+
+    def get_newsfeed_type(self):
+        return NEWS_TYPE_CONTENTION
+
+    def get_newsfeed_bundle(self):
+        return {
+            "title": self.title,
+            "owner": self.owner,
+            "uri": self.get_absolute_url()
+        }
+
+
+class Premise(DeletePreventionMixin, models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
@@ -125,7 +157,13 @@ class Premise(models.Model):
         help_text=render_to_string("premises/examples/premise_source.html"))
     is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
 
+    collapsed = models.BooleanField(default=False)
+
     sibling_count = models.IntegerField(default=1)  # denormalized field
+    child_count = models.IntegerField(default=1)  # denormalized field
+    max_sibling_count = models.IntegerField(default=1)  # denormalized field
+
+    objects = DeletePreventionManager()
 
     def __unicode__(self):
         return smart_unicode(self.text)
@@ -155,6 +193,44 @@ class Premise(models.Model):
     def reported_by(self, user):
         return self.reports.filter(reporter=user).exists()
 
+    def formatted_sources(self):
+        return markdown(escape(self.sources), safe_mode=True)
+
+    def formatted_text(self):
+        return markdown(escape(self.text), safe_mode=True)
+
+    def width(self):
+        total = self.published_children().count()
+
+        for child in self.published_children():
+            total += child.width()
+
+        return total
+
+    def fallacies(self):
+        fallacies = set(self.reports.values_list("fallacy_type", flat=True))
+        mapping = dict(get_fallacy_types())
+        fallacy_list = [mapping.get(fallacy) for fallacy in fallacies]
+        return filter(None, fallacy_list)
+
+    def get_actor(self):
+        """
+        Encapsulated for newsfeed app.
+        """
+        return self.user
+
+    def get_newsfeed_type(self):
+        return NEWS_TYPE_PREMISE
+
+    def get_newsfeed_bundle(self):
+        return {
+            "premise_type": self.premise_type,
+            "premise_class": self.premise_class(),
+            "text": self.text,
+            "sources": self.sources,
+            "contention": self.argument.get_newsfeed_bundle()
+        }
+
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)
@@ -165,6 +241,17 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.text)
+
+
+def get_fallacy_types():
+    if hasattr(get_fallacy_types, "cache"):
+        return get_fallacy_types.cache
+
+    get_fallacy_types.cache = json.load(
+        open(os.path.join(os.path.dirname(__file__),
+                          "fallacies.json")))
+
+    return get_fallacy_types.cache
 
 
 class Report(models.Model):
@@ -178,4 +265,27 @@ class Report(models.Model):
                                    related_name='reports',
                                    blank=True,
                                    null=True)
+    fallacy_type = models.CharField(
+        "Safsata Tipi", choices=get_fallacy_types(), null=True, blank=False,
+        max_length=255, default="Wrong Direction",
+        help_text=render_to_string("premises/examples/fallacy.html"))
 
+
+    def __unicode__(self):
+        return smart_unicode(self.fallacy_type)
+
+    def get_actor(self):
+        """
+        Encapsulated for newsfeed app.
+        """
+        return self.reporter
+
+    def get_newsfeed_type(self):
+        return NEWS_TYPE_FALLACY
+
+    def get_newsfeed_bundle(self):
+        return {
+            "fallacy_type": self.fallacy_type,
+            "premise": self.premise.get_newsfeed_bundle(),
+            "contention": self.contention.get_newsfeed_bundle()
+        }

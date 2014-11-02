@@ -2,7 +2,7 @@ from django import forms
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.mixins import FormRenderer
-from premises.models import Contention, Premise
+from premises.models import Contention, Premise, Report
 
 
 class ArgumentCreationForm(FormRenderer, forms.ModelForm):
@@ -39,3 +39,9 @@ class PremiseEditForm(FormRenderer, forms.ModelForm):
           .premises
           .exclude(pk=self.instance.pk))  # avoid self-loop
         self.fields['parent'].queryset = queryset
+
+
+class ReportForm(forms.ModelForm):
+    class Meta:
+        model = Report
+        fields = ["fallacy_type"]

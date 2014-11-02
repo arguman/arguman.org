@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+
+{% block content %}
+    <div class="container">
+        <h3>Bildirimler</h3>
+        {% if user.is_authenticated %}
+            {% include "partials/notifications.html" %}
+        {% endif %}
+    </div>
+{% endblock %}

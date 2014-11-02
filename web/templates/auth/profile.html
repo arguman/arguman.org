@@ -85,17 +85,6 @@
                 });
             });
         });
-    var  report = function (that) {
-                    $.ajax({
-                        url: '/report',
-                        type: 'POST',
-                        data: {'user': $(that).data('profile')},
-                        beforeSend: function(xhr, settings) {
-                            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
-                        }
-                    }).complete(function () {
-                        window.location.reload()
-                    }.bind(this))}
     </script>
 
 {% endblock %}

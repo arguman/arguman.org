@@ -3,30 +3,15 @@
 {% load humanize %}
 
 {% block content %}
-    <div class="container">
+    <div class="container home">
 
-        <div class="landing">
-            arguman.org bir <a href="{% url "about" %}">argüman analizi</a> platformudur.
-        </div>
+        {% include "home.html" %}
+        {% include "tabs.html" %}
 
-        <ul class="tabs">
-            <li class="featured{% ifequal tab_class "featured" %} active{% endifequal %}">
-                <a href="/">Seçilmişler</a></li>
-            <li class="news{% ifequal tab_class "news" %} active{% endifequal %}">
-                <a href="{% url "contentions_latest" %}">Yeniler</a></li>
-            <li class="updated{% ifequal tab_class "updated" %} active{% endifequal %}">
-                <a href="{% url "contentions_updated" %}">Güncellenenler</a></li>
-            <li class="controversial{% ifequal tab_class "controversial" %} active{% endifequal %}">
-                <a href="{% url "contentions_controversial" %}">Tartışılanlar</a>
-            </li>
-            <li class="search{% ifequal tab_class "search" %} active{% endifequal %}">
-                <a href="{% url "contentions_search" %}">Ara</a>
-            </li>
-        </ul>
         {% ifequal tab_class 'search' %}
-            <form action="#" class="search-form">
+            <form action="{% url "contentions_search" %}" class="search-form">
                 <label for="id_q">Kelime: </label>
-                <input type="text" class="searchfield" name="ara" id="id_q"/>
+                <input type="text" class="searchfield" value="{{ keywords }}" name="keywords" id="id_q"/>
             </form>
         {% endifequal %}
         <ul class="argument-list">
@@ -46,34 +31,12 @@
                         </div>
                     </div>
                 </li>
+            {% empty %}
+            {% if keywords %}
+                <li>Sonuç bulunamadı.</li>
+            {% endif %}
             {% endfor %}
         </ul>
 
     </div>
-{% endblock %}
-{% block extra-scripts %}
-    <script>
-        var delay = (function () {
-            var timer = 0;
-            return function (callback, ms) {
-                clearTimeout(timer);
-                timer = setTimeout(callback, ms);
-            };
-        })();
-        $(function () {
-            $('.searchfield').keyup(function () {
-                delay(function () {
-                    $('.argument-list').html('');
-                    if ($('.searchfield').val().length >= 3) {
-                        $.get('/search', {'ara': $('.searchfield').val()}, function (data) {
-                            $('.argument-list').html(data)
-                        })
-                    }
-                }, 500)
-            })
-        });
-        $('.search-form').submit(function(){
-            return false;
-        });
-    </script>
 {% endblock %}

@@ -6,7 +6,10 @@
             <h2>Bilgilerim</h2>
             {% csrf_token %}
             {{ form.as_p }}
-            <br />
+            <p class="helptext">
+                Avatar yüklemek için <a target="_blank" href="//gravatar.com">gravatar.com</a>
+                adresini kullanabilirsiniz.
+            </p>
             <input type="submit" value="Güncelle" class="submit">
         </form>
     </section>

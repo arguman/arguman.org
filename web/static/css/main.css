@@ -206,6 +206,10 @@ form .helptext {
     /*margin-left: 185px;*/
 }
 
+form .helptext a {
+    color: gray;
+}
+
 form label {
     display: block;
 }
@@ -220,15 +224,6 @@ form textarea {
     width: 500px;
     height: 80px;
 }
-
-#contention-story {
-
-}
-
-.story .main-contention {
-    display: none;
-}
-
 
 
 .premise .actions form {
@@ -291,10 +286,12 @@ li.base-premises {
 }
 
 .sticky-header {
+    position: fixed;
     width: 100%;
     margin: 0;
     background: #f4f4f4;
-    z-index: 1;
+    z-index: 9999;
+    top: 0;
     /*border-bottom: 1px solid #c5c5c5;*/
 }
 
@@ -325,35 +322,28 @@ li.base-premises {
 /* Interactive App */
 
 #app {
+    margin-bottom: 40px;
     position: absolute;
-    /*width: 100%;*/
 }
 
 #app canvas {
-    /*background: #eeeeee;*/
     position: absolute;
     background: transparent;
     margin-bottom: 150px;
-    /*left: 50%;*/
 }
 
-#app .main-contention {
-    position: absolute;
+#app.tree-view .main-contention {
+    /*position: absolute;*/
     /*margin-left: 400px;*/
+    margin-top: 60px;
+    width: 800px;
     font-size: 60px;
     text-align: center;
+    margin-bottom: -70px;
     /*width: 100%;*/
 }
 
-#app .premise {
-    position: absolute;
-    /*border: 1px solid black;*/
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 #app .premise .premise-content {
-    width: 80%;
     margin: auto;
     padding: 10px 15px;
     font-size: 20px;
@@ -382,10 +372,10 @@ li.base-premises {
     }
 
     .premise .premise-type {
-        position: absolute;
         margin-top: -34px;
+        float: left;
         text-align: right;
-        width: 135px;
+        width: 115px;
         font-size: 24px;
     }
 
@@ -402,8 +392,7 @@ li.base-premises {
     }
 
     .premise-sources {
-        width: 262px;
-        margin: -5px auto auto 14px;
+        margin: -3px 0 0;
         background: #e9e9e9;
         z-index: 1;
         /*position: absolute;*/
@@ -429,15 +418,17 @@ li.base-premises {
 
     .premise-sources a {
         color: #b5b5b5;
-        width: 240px;
         display: block;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
 
+    .tree-view .premise-sources a { width: 240px; }
+    .list-view .premise-sources a { width: 440px; }
 
-#app .main-premise-content {
+
+.tree-view .main-premise-content {
     padding-top: 60px;
     padding-bottom: 20px;
     max-width: 800px;
@@ -530,18 +521,18 @@ li.base-premises {
 }
 
 
-.main-contention-actions .new-premise {
-    position: absolute;
+.main-contention-actions .new-main-premise {
     font-size: 20px;
-    margin-left: 17px;
-    margin-top: -4px;
     text-decoration: underline;
     color: #505050;
+    z-index: 9;
+    position: absolute;
+    margin-left: 28px;
+    margin-top: -10px;
 }
 
 .premise-actions {
-    width: 262px;
-    margin: -5px auto auto 14px;
+    margin: -3px 0 0;
     background: #d6d6d6;
     z-index: 1;
     border-radius: 0 0 5px 5px;
@@ -641,21 +632,26 @@ footer a {
     padding: 20px;
 }
 
-#id_parent {
+#id_parent, #id_fallacy_type {
     width: 600px;
     -webkit-appearance: menulist-button;
     font-family: AmericanTypewriter, Georgia, serif;
 }
 
+#id_fallacy_type {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .tabs {
-    font-size: 25px;
+    font-size: 22px;
     overflow: hidden;
     margin: 7px;
     padding: 0;
 }
 
 .tabs li {
-    margin: 0 20px 4px 14px;
+    margin: 0 10px 4px 14px;
     text-align: center;
     padding: 0;
     float: left;
@@ -681,6 +677,11 @@ form .parent-premise {
     padding: 5px;
 }
 
+form .fallacy-premise {
+    color: #bcbcbc;
+    padding: 0;
+}
+
 form .parent-premise strong {
     font-weight: normal;
     color: gray;
@@ -691,28 +692,38 @@ form .parent-premise strong {
     height: 200px;
 }
 
-.report-form {
-    margin: 0;
-    padding: 0;
-    padding-bottom: 10px;
-    font-size: 17px;
+.tree-view .report {
+    position: absolute;
+    margin: 7px 0 0 130px;
+    z-index: 999;
 }
 
-.report-form .report {
-    background: transparent;
-    border: none;
+.list-view .report {
+    margin-left: 480px;
+    margin-top: 10px;
+}
+
+.report a {
+    color: #aeaeae;
     font-size: 17px;
-    color: #99969a;
+    width: 120px;
+    line-height: 17px;
+    display: inline-block;
+    white-space: normal;
 }
 
 .reported_as_fallacy {
     border-top: 1px solid #bcbcbc;
     background: #ffd8d5;
     padding: 10px 20px;
+    border-radius: 0 0 5px 5px;
+    text-align: left;
+    color: #e09396;
 }
 
-.reported_as_fallacy.last-node {
-    border-radius: 0 0 5px 5px;
+.reported_as_fallacy .fallacy {
+    font-size: 17px;
+    color: #676568;
 }
 
 .search-form {
@@ -729,6 +740,432 @@ form .parent-premise strong {
     font-size: 20px;
     color: #232323;
     text-decoration: none;
+}
+
+
+
+/* Tree View */
+
+.tree-view .tree ul, .tree li {
+    margin: 0;
+    padding: 0;
+}
+
+.tree-view .tree ul {
+    margin: 0;
+	padding-top: 60px; position: relative;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+.tree-view .tree li {
+	float: left;
+    text-align: center;
+	list-style-type: none;
+	position: relative;
+	padding: 64px 5px 0 5px;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+
+.tree-view .tree li::before,
+.tree-view .tree li::after{
+	content: '';
+	position: absolute; top: 0; right: 50%;
+	border-top: 4px solid #e1e1e1;
+	width: 50%; height: 60px;
+}
+.tree-view .tree li::after{
+	right: auto; left: 50%;
+	border-left: 4px solid #e1e1e1;
+}
+
+.tree-view .tree li:only-child::after,
+.tree-view .tree li:only-child::before {
+	display: none;
+}
+
+.tree-view .tree li:only-child{ padding-top: 0;}
+
+.tree-view .tree li:first-child::before,
+.tree-view .tree li:last-child::after{
+	border: 0 none;
+}
+.tree-view .tree li:last-child::before{
+	border-right: 4px solid #e1e1e1;
+	border-radius: 0 5px 0 0;
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+}
+.tree-view .tree li:first-child::after{
+	border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+}
+
+.tree-view .tree ul ul::before{
+	content: '';
+	position: absolute; top: 0; left: 50%;
+	border-left: 4px solid #e1e1e1;
+	width: 0; height: 60px;
+}
+
+
+.tree-view .tree li .premise {
+	text-decoration: none;
+    width: 250px;
+	display: inline-block;
+}
+
+.tree-view .root {
+    display: inline-block;
+    width: 30px;
+    z-index: 2;
+    position: absolute;
+    height: 30px;
+    margin-left: -13px;
+    text-align: center;
+    background: gray;
+    border-radius: 50%;
+}
+
+.collapse-button {
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    color: white;
+    width: 20px;
+    height: 20px;
+    margin-top: -70px;
+    z-index: 9;
+    text-decoration: none;
+}
+
+#app.empty .root {
+    display: none;
+}
+
+#app.empty {
+    position: static;
+    margin-top: 90px;
+}
+
+#app.empty .main-contention {
+    margin: auto;
+}
+
+#app.empty .new-main-premise {
+    margin-left: -54px;
+}
+
+.collapsed {
+    /*display: none;*/
+}
+
+.uncollapse-button {
+    width: 100%;
+    display: block;
+    margin-top: 50px;
+}
+
+
+#app.list-view {
+    position: static;
+}
+
+.list-view li {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.list-view .child-premise {
+    border-left: 3px solid #eaeaea;
+}
+
+/*.list-view ul:first-child {*/
+    /*border: none;*/
+/*}*/
+
+.list-view .premise {
+    width: 600px;
+    margin-bottom: 100px;
+}
+
+.list-view .main-contention {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.list-view .main-contention {
+    font-size: 60px;
+    padding-bottom: 70px;
+    margin-top: 160px;
+}
+
+.list-view .main-premise-content {
+    margin: 50px;
+    width: 900px;
+    line-height: 1em;
+}
+
+.list-view .premise-actions {
+    padding-left: 10px;
+}
+
+.contention-main-actions {
+    float: right;
+    padding-right: 50px;
+}
+
+#view-switcher li {
+    text-align: center;
+}
+
+/* Notificatons */
+
+.notifications {
+    font-size: 22px;
+}
+
+.notifications .empty {
+    font-size: 20px;
+    padding: 0 20px;
+    color: #9b9b9b;
+    margin-bottom: -10px;
+}
+
+.notifications a {
+    color: gray;
+}
+
+.notifications ul {
+    margin: 0;
+    padding: 5px;
+}
+
+.notifications li {
+    list-style: none;
+    padding: 0;
+    padding-left: 15px;
+    margin: 0;
+    color: #9e9e9e;
+    border-left: 5px solid #e7e7e7;
+    margin-bottom: 20px;
+}
+
+.notifications .see-more {
+    border: none;
+    margin: 0;
+}
+
+.notifications li time {
+    display: block;
+    font-size: 17px;
+    margin-left: 5px;
+    color: #c0c0c0;
+}
+
+.notifications .user {
+    background: #fde3ff;
+    text-decoration: none;
+    color: #222222;
+    padding: 1px 10px;
+}
+
+.notifications .contention-link {
+    background: #e6ffff;
+    text-decoration: none;
+    color: #222222;
+    padding: 1px 10px;
+}
+
+.notifications .followed-profile {
+    background: #ffe6eb;
+    text-decoration: none;
+    color: #222222;
+    padding: 1px 10px;
+}
+
+.notifications .premise-type {
+    padding: 1px 10px;
+    color: #222222;
+}
+
+.notifications .premise-type.but { background: #ffcdd7; }
+.notifications .premise-type.however { background: #fffbd4; }
+.notifications .premise-type.because { background: #d6ffd4; }
+
+.notifications strong {
+    background: #ffebe6;
+    text-decoration: none;
+    color: #222222;
+    font-weight: normal;
+    padding: 1px 10px;
+    white-space: nowrap;
+}
+
+
+/* Loading */
+
+.loading {
+    visibility: hidden;
+}
+
+
+/* Content Pages */
+
+.content {
+    margin-top: 30px;
+    line-height: 1.6em;
+}
+
+.content h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.content a {
+    color: gray;
+    text-decoration: none;
+    border-bottom: 4px solid #81ffdd;
+    padding-bottom: 1px;
+}
+
+.content li {
+    padding-bottom: 8px;
+}
+
+/* Newsfeed */
+
+.newsfeed-container .news-item {
+    overflow: hidden;
+    font-size: 22px;
+    margin-top: 40px;
+    color: gray;
+}
+
+.news-item .sender {
+    width: 160px;
+    float: left;
+    text-align: center;
+    margin-top: 5px;
+}
+
+    .news-item .sender img {
+        background: #fafafa;
+        padding: 8px;
+        border-radius: 50%;
+    }
+
+    .news-item .sender a {
+        color: #666666;
+        display: block;
+        text-decoration: none;
+    }
+
+.news-item .news-item-content:before {
+    width: 68px;
+    margin-left: -92px;
+    margin-top: 19px;
+    height: 2px;
+    background: #e9e9e9;
+    content: "";
+    display: inline-block;
+    position: absolute;
+}
+
+.news-item .news-item-content {
+    margin-top: 7px;
+    float: left;
+    width: 500px;
+    margin-left: 35px;
+    padding: 25px 25px;
+    background: #f6f6f6;
+    border-radius: 10px;
+}
+
+.news-item time {
+    display: block;
+    font-size: 19px;
+    color: #c4c4c4;
+    margin-top: 5px;
+}
+
+.news-item.contention_entry .contention-link {
+    color: #464646;
+    display: block;
+    font-size: 40px;
+    text-decoration: none;
+    line-height: 1em;
+}
+
+.news-item.premise_entry {
+    color: #c4c4c4;
+}
+
+.news-item.premise_entry .contention-link {
+    color: #464646;
+    font-size: 22px;
+    text-decoration: none;
+    line-height: 1em;
+}
+
+.news-item.fallacy_entry .contention-link {
+    font-size: 22px;
+    text-decoration: none;
+    line-height: 1.2em;
+    display: block;
+    padding: 10px;
+}
+
+.news-item.fallacy_entry strong {
+    color: #ff858e;
+    font-weight: normal;
+}
+
+.news-item.following_entry .news-item-content a {
+    color: #464646;
+    font-size: 22px;
+    text-decoration: none;
+    line-height: 1em;
+}
+
+.news-item.premise_entry p {
+    padding: 13px 20px;
+    margin: 0;
+}
+
+.news-item.premise_entry p a {
+    color: #464646;
+    text-decoration: none;
+}
+
+.news-item.premise_entry p a.because { color: #7bc370; }
+.news-item.premise_entry p a.but { color: #ff858e; }
+.news-item.premise_entry p a.however { color: #ff6a00; }
+
+.news-item.fallacy_entry a {
+    color: #464646;
+    text-decoration: none;
+}
+
+
+.empty-newsfeed {
+    padding: 30px;
+    color: #464646;
+}
+
+.rules {
+    color: #bbbbbb;
+    margin: 10px;
+}
+
+h3.newsfeed-title {
+    padding: 10px 30px 0;
+    color: #a0a0a0;
 }
 
 

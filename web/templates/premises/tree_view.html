@@ -1,13 +1,65 @@
 <ul>
-    {% for premise in premise.published_children.all %}
-        <li>
-            <div class="premise {{ premise.premise_class }}">
-                <div class="premise-content">
-                    {{ premise.text }}
+    {% for premise in premises %}
+        <li class="child-premise">
+            <div class="premise">
+                <div class="premise-type {{ premise.premise_class }}">
+                    {{ premise.get_premise_type_display }}
                 </div>
+
+                <div class="premise-content {{ premise.premise_class }}">
+                    {{ premise.formatted_text|safe }}
+                </div>
+
+                <div class="premise-sources">
+                    {% if premise.sources %}
+                    <strong>kaynaklar:</strong>
+                    <p>{{ premise.sources|urlize }}</p>
+                    {% endif %}
+                    <strong>gönderen:</strong>
+                    <p><a href="{% url "auth_profile" premise.user.username %}">
+                        {{ premise.user }}</a></p>
+
+                    {% if premise.reports.exists %}
+                        <div class="reported_as_fallacy">
+                        {{ premise.reports.count }} safsata bildirimi yapıldı.
+
+                        {% if premise.fallacies %}
+                            {% for fallacy in premise.fallacies %}
+                            <div class="fallacy">{{ fallacy }}</div>
+                            {% endfor %}
+                        {% endif %}
+
+                        </div>
+                    {% endif %}
+                </div>
+                {% if edit_mode or user == premise.user %}
+                    <div class="premise-actions">
+                        <a href="{% url "insert_premise" contention.slug premise.pk %}">önerme ekle</a>
+                        <a href="{% url "edit_premise" contention.slug premise.pk %}">düzenle</a>
+                        <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="sil"
+                                   onclick="return confirm('Önermeyi silmek istediğinize emin misiniz?');"
+                                   class="delete_premise"/>
+                        </form>
+                    </div>
+                {% else %}
+                    {% if user.is_authenticated %}
+                        <div class="premise-actions">
+                        <a href="{% url "insert_premise" contention.slug premise.pk %}">önerme gönder</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <div class="report">
+                        <a href="{% url 'report_premise' contention.slug premise.pk %}">safsata bildir</a>
+                    </div>
+                {% endif %}
+
             </div>
             {% if premise.children.exists %}
-                {% with template_name="premises/tree_view.html" %}
+                {% with template_name="premises/tree_view.html" premises=premise.published_children %}
                     {% include template_name %}
                 {% endwith %}
             {% endif %}
