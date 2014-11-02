@@ -7,8 +7,11 @@
             <h2>Kayıt ol</h2>
             {% csrf_token %}
             {{ form.as_p }}
-            Bu siteyi kullanarak <a href="/tos">Kullanım Koşulları</a>'nı kabul etmiş olursunuz.
-            <br />
+            <ul class="rules">
+            <li>Bu siteyi kullanarak <a href="/tos">kullanım koşulları</a>nı kabul etmiş olursunuz.</li>
+            <li>Avatar yüklemek için <a target="_blank" href="//gravatar.com">gravatar.com</a>
+                adresini kullanabilirsiniz.</li>
+            </ul>
             <input type="submit" value="Siteye Üye ol" class="submit">
         </form>
     </section>

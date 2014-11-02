@@ -1,0 +1,4 @@
+{% load premise_tags %}
+
+bir önerme için <strong>{{ related_object.fallacy_type|humanize_fallacy_type }}</strong> bildirimi yaptı:
+<a class="contention-link" href="{{ related_object.contention.uri }}">{{ related_object.premise.text }}</a>

@@ -1,0 +1,18 @@
+<ul class="tabs">
+    <li class="newsfeed{% ifequal tab_class "newsfeed" %} active{% endifequal %}">
+        <a href="{% url "newsfeed" %}">Haber Kaynağı</a></li>
+    <li class="featured{% ifequal tab_class "featured" %} active{% endifequal %}">
+        <a href="/">Seçilmişler</a></li>
+    <li class="news{% ifequal tab_class "news" %} active{% endifequal %}">
+        <a href="{% url "contentions_latest" %}">Yeniler</a></li>
+    <li class="updated{% ifequal tab_class "updated" %} active{% endifequal %}">
+        <a href="{% url "contentions_updated" %}">Güncellenenler</a></li>
+    {% comment %}
+    <li class="controversial{% ifequal tab_class "controversial" %} active{% endifequal %}">
+        <a href="{% url "contentions_controversial" %}">Tartışılanlar</a>
+    </li>
+    {% endcomment %}
+    <li class="search{% ifequal tab_class "search" %} active{% endifequal %}">
+        <a href="{% url "contentions_search" %}">Arama</a>
+    </li>
+</ul>

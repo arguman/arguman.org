@@ -1,9 +1,13 @@
 # -*- coding:utf-8 -*-
 
 import json
+from markdown2 import markdown
+from datetime import date, timedelta
+
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max
+from django.utils.timezone import now
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
@@ -11,13 +15,13 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
-from markdown2 import markdown
-from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
-
-from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
-from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm
-from profiles.models import Profile
 from django.db.models import Count
+
+from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
+from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
+from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm, ReportForm
+from premises.signals import added_premise_for_premise, added_premise_for_contention, reported_as_fallacy
+from profiles.models import Profile
 
 
 class ContentionDetailView(DetailView):
@@ -26,11 +30,14 @@ class ContentionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         contention = self.get_object()
+        view = ("list-view" if self.request.GET.get("view") == "list"
+                            else "tree-view")
         edit_mode = (
                 self.request.user.is_superuser or
                 self.request.user.is_staff or
                 contention.user == self.request.user)
         return super(ContentionDetailView, self).get_context_data(
+            view=view,
             path=contention.get_absolute_url(),
             edit_mode=edit_mode,
             **kwargs)
@@ -96,28 +103,62 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         contentions = self.get_contentions()
+        if self.request.user.is_authenticated():
+            notifications_qs = self.get_unread_notifications()
+            notifications = list(notifications_qs)
+            self.mark_as_read(notifications_qs)
+        else:
+            notifications = None
         return super(HomeView, self).get_context_data(
             tab_class=self.tab_class,
+            notifications=notifications,
             contentions=contentions, **kwargs)
+
+    def get_unread_notifications(self):
+        return (self.request.user
+                    .notifications
+                    .filter(is_read=False)
+                    [:5])
+
+    def mark_as_read(self, notifications):
+        pks = notifications.values_list("id", flat=True)
+        (self.request.user
+             .notifications
+             .filter(id__in=pks)
+             .update(is_read=True))
 
     def get_contentions(self):
         return Contention.objects.featured()
 
 
+class NotificationsView(HomeView):
+    template_name = "notifications.html"
+
+    def get_context_data(self, **kwargs):
+        notifications_qs = self.request.user.notifications.all()[:40]
+        notifications = list(notifications_qs)
+        self.mark_as_read(notifications_qs)
+        return super(HomeView, self).get_context_data(
+            notifications=notifications,
+            **kwargs)
+
+
 class SearchView(HomeView):
     tab_class = 'search'
 
-    def get_contentions(self):
-        return None
+    def get_context_data(self, **kwargs):
+        return super(SearchView, self).get_context_data(
+            keywords=self.request.GET.get('keywords') or "",
+            **kwargs
+        )
 
-    def get(self, request, *args, **kwargs):
-        if request.GET.get('ara'):
-            keyword = request.GET.get('ara')
-            contentions = Contention.objects.filter(title__icontains=keyword)
-            rendered = render_to_string('premises/contention.html', {'contentions': contentions})
-            return HttpResponse(rendered)
+    def get_contentions(self):
+        keywords = self.request.GET.get('keywords')
+        if not keywords or len(keywords) < 2:
+            result = []
         else:
-            return super(SearchView, self).get(request, *args, **kwargs)
+            result = Contention.objects.filter(title__icontains=keywords)
+        return result
 
 
 class NewsView(HomeView):
@@ -142,10 +183,12 @@ class ControversialArgumentsView(HomeView):
     tab_class = "controversial"
 
     def get_contentions(self):
+        last_week = now() - timedelta(days=3)
         return (Contention
                 .objects
                 .annotate(num_children=Count('premises'))
                 .order_by('-num_children')
+                .filter(date_modification__gte=last_week)
                 [:UPDATED_CONTENT_COUNT])
 
 
@@ -165,6 +208,7 @@ class TosView(TemplateView):
         return super(TosView, self).get_context_data(
             content=content, **kwargs)
 
+
 class ArgumentCreationView(CreateView):
     template_name = "premises/new_contention.html"
     form_class = ArgumentCreationForm
@@ -172,21 +216,8 @@ class ArgumentCreationView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         response = super(ArgumentCreationView, self).form_valid(form)
-        self.create_demo_premises(form.instance)
         form.instance.update_sibling_counts()
         return response
-
-    def create_demo_premises(self, instance):
-        demo = [
-            [SUPPORT, "Bu metin örnektir. Düzenleyiniz"],
-        ]
-        for (premise_type, text) in demo:
-            Premise.objects.create(
-                argument=instance,
-                user=self.request.user,
-                premise_type=premise_type,
-                text=text,
-                is_approved=True)
 
 
 class ArgumentUpdateView(UpdateView):
@@ -285,6 +316,14 @@ class PremiseCreationView(CreateView):
         form.instance.is_approved = True
         form.save()
         contention.update_sibling_counts()
+
+        if form.instance.parent:
+            added_premise_for_premise.send(sender=self,
+                                           premise=form.instance)
+        else:
+            added_premise_for_contention.send(sender=self,
+                                              premise=form.instance)
+
         return redirect(contention)
 
     def get_contention(self):
@@ -317,7 +356,14 @@ class PremiseDeleteView(View):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
 
 
-class ReportView(View):
+class ReportView(CreateView):
+    form_class = ReportForm
+    template_name = "premises/report.html"
+
+    def get_context_data(self, **kwargs):
+        return super(ReportView, self).get_context_data(
+            premise=self.get_premise(),
+            **kwargs)
 
     def get_contention(self):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
@@ -325,22 +371,12 @@ class ReportView(View):
     def get_premise(self):
         return get_object_or_404(Premise, pk=self.kwargs['pk'])
 
-    def post(self, request, slug, pk):
-        if request.user.is_authenticated():
-            premise = self.get_premise()
-            contention = self.get_contention()
-            try:
-                Report.objects.create(reporter=request.user,
-                                      premise=premise,
-                                      contention=contention)
-                return HttpResponse(json.dumps({
-                    "report_count": premise.reports.count()
-                }), status=201)
-            except Exception as e:
-                return HttpResponseBadRequest(json.dumps({
-                    'message': e.message
-                }))
-        else:
-            return HttpResponseForbidden(json.dumps({
-                'message': 'Authentication error.'
-            }))
+    def form_valid(self, form):
+        contention = self.get_contention()
+        premise = self.get_premise()
+        form.instance.contention = contention
+        form.instance.premise = premise
+        form.instance.reporter = self.request.user
+        form.save()
+        reported_as_fallacy.send(sender=self, report=form.instance)
+        return redirect(contention)
