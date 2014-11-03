@@ -156,9 +156,9 @@ class Premise(DeletePreventionMixin, models.Model):
         null=True, blank=True, verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/premise_source.html"))
     is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
-
     collapsed = models.BooleanField(default=False)
-
+    supporters = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                        related_name="supporting")
     sibling_count = models.IntegerField(default=1)  # denormalized field
     child_count = models.IntegerField(default=1)  # denormalized field
     max_sibling_count = models.IntegerField(default=1)  # denormalized field
@@ -214,9 +214,7 @@ class Premise(DeletePreventionMixin, models.Model):
         return filter(None, fallacy_list)
 
     def get_actor(self):
-        """
-        Encapsulated for newsfeed app.
-        """
+        # Encapsulated for newsfeed app.
         return self.user
 
     def get_newsfeed_type(self):
@@ -231,6 +229,8 @@ class Premise(DeletePreventionMixin, models.Model):
             "contention": self.argument.get_newsfeed_bundle()
         }
 
+    def recent_supporters(self):
+        return self.supporters.all()[0:5]
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)

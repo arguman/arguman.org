@@ -20,7 +20,8 @@ from premises.models import Contention, Premise
 from premises.forms import (ArgumentCreationForm, PremiseCreationForm,
                             PremiseEditForm, ReportForm)
 from premises.signals import (added_premise_for_premise,
-                              added_premise_for_contention, reported_as_fallacy)
+                              added_premise_for_contention, reported_as_fallacy,
+                              supported_a_premise)
 
 
 class ContentionDetailView(DetailView):
@@ -389,6 +390,29 @@ class PremiseCreationView(CreateView):
         parent_pk = self.kwargs.get("pk")
         if parent_pk:
             return get_object_or_404(Premise, pk=parent_pk)
+
+class PremiseSupportView(View):
+    def get_premise(self):
+        premises = Premise.objects.exclude(user=self.request.user)
+        return get_object_or_404(premises, pk=self.kwargs['pk'])
+
+    def post(self, request, *args, **kwargs):
+        premise = self.get_premise()
+        supported_a_premise.send(sender=self, premise=premise,
+                                 user=self.request.user)
+        return redirect(self.get_contention())
+
+    def get_contention(self):
+        return get_object_or_404(Contention, slug=self.kwargs['slug'])
+
+
+class PremiseUnsupportView(PremiseSupportView):
+    def delete(self, request, *args, **kwargs):
+        premise = self.get_premise()
+        premise.supporters.remove(self.request.user)
+        return redirect(self.get_contention())
+
+    post = delete
 
 
 class PremiseDeleteView(View):

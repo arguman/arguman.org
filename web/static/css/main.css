@@ -537,13 +537,18 @@ li.base-premises {
     z-index: 1;
     border-radius: 0 0 5px 5px;
     border-top: 1px solid #bcbcbc;
-    font-size: 18px;
-    padding-bottom: 3px;
+    font-size: 17px;
+    padding-top: 2px;
+    padding-bottom: 5px;
 }
 
 .premise-actions a {
     color: #474747;
     margin-left: 3px;
+    text-decoration: none;
+    display: inline-block;
+    height: 18px;
+    margin-right: 5px;
 }
 
 .premise-actions form {
@@ -552,12 +557,18 @@ li.base-premises {
     margin: 0;
 }
 
+.premise-actions .support {
+    border-left: 1px solid #c7c7c7;
+    padding-left: 5px;
+    margin-left: 2px;
+}
+
 .premise-actions input {
     background: transparent;
     border: none;
-    text-decoration: underline;
-    font-size: 20px;
+    font-size: 17px;
     color: #474747;
+    height: 24px;
 }
 .contention-admin-menu form {
     margin: -6px 0 0;
@@ -725,6 +736,22 @@ form .parent-premise strong {
     font-size: 17px;
     color: #676568;
 }
+
+.supporters {
+    border-top: 1px solid #bcbcbc;
+    background: #d7ffcf;
+    padding: 10px 20px;
+    border-radius: 0 0 5px 5px;
+    text-align: left;
+    color: #73b752;
+}
+
+.supporters .supporter-list a {
+    display: inline;
+    color: #5e5d5b;
+    text-decoration: none;
+}
+
 
 .search-form {
     padding: 30px;
