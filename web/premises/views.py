@@ -398,6 +398,7 @@ class PremiseSupportView(View):
 
     def post(self, request, *args, **kwargs):
         premise = self.get_premise()
+        premise.supporters.add(self.request.user)
         supported_a_premise.send(sender=self, premise=premise,
                                  user=self.request.user)
         return redirect(self.get_contention())
