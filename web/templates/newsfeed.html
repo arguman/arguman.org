@@ -9,6 +9,14 @@
         {% include "tabs.html" %}
         {% if user.is_anonymous %}
         <h3 class="newsfeed-title">neler oluyor burada:</h3>
+        {% else %}
+            <div class="newsfeed-actions">
+            {% if newsfeed_is_public %}
+                <a href="{% url "newsfeed" %}" class="switch-newsfeed">Sadece takip ettiklerini görüntüle</a>
+            {% else %}
+                <a href="{% url "public_newsfeed" %}" class="switch-newsfeed">Herkesin haberlerini görüntüle</a>
+            {% endif %}
+            </div>
         {% endif %}
         <div class="newsfeed-container">
             {% for entry in news_entries %}
@@ -25,6 +33,22 @@
             {% empty %}
                 <p class="empty-newsfeed">Haber kaynağınız boş. Birilerini takip edebilirsiniz.</p>
             {% endfor %}
+        {% if has_next_page %}
+            <div class="load-more">
+                <a class="next" href="{{ next_page_url }}">Daha fazla yükle</a>
+            </div>
+        {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block extra-scripts %}
+<script type="text/javascript">
+    new hipo.InfinityScroll({
+        "pagination_selector": ".load-more",
+        "next_link_selector": ".next",
+        "content_selector": ".newsfeed-container",
+        "max_page": 5
+    })
+</script>
 {% endblock %}

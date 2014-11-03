@@ -31,6 +31,19 @@
 
                         </div>
                     {% endif %}
+
+                    {% if premise.supporters.exists %}
+                        <div class="supporters">
+                        {{ premise.supporters.count }} destekleyen var:
+                        <div class="supporter-list">
+                        {% for supporter in premise.recent_supporters %}{% if not forloop.first %}, {% endif %}
+                        <a href="{% url "auth_profile" supporter.username %}">{{ supporter.username }}</a>{% endfor %}
+                        {% if premise.supporters.count > 5 %}
+                        ve diğerleri.
+                        {% endif %}
+                        </div>
+                        </div>
+                    {% endif %}
                 </div>
                 {% if edit_mode or user == premise.user %}
                     <div class="premise-actions">
@@ -47,6 +60,19 @@
                     {% if user.is_authenticated %}
                         <div class="premise-actions">
                         <a href="{% url "insert_premise" contention.slug premise.pk %}">önerme gönder</a>
+                        {% if premise.user != user %}
+                            {% if user in premise.supporters.all %}
+                            <form class="support" action="{% url "unsupport_premise" contention.slug premise.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" value="geri al"/>
+                            </form>
+                            {% else %}
+                            <form class="support" action="{% url "support_premise" contention.slug premise.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" value="destekle"/>
+                            </form>
+                            {% endif %}
+                        {% endif %}
                         </div>
                     {% endif %}
                 {% endif %}

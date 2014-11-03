@@ -156,7 +156,7 @@ header nav ul li a:hover {
 }
 
 header #logo {
-    float: left;
+    float: left;;
 }
 
 header #logo a {
@@ -537,13 +537,18 @@ li.base-premises {
     z-index: 1;
     border-radius: 0 0 5px 5px;
     border-top: 1px solid #bcbcbc;
-    font-size: 18px;
-    padding-bottom: 3px;
+    font-size: 17px;
+    padding-top: 2px;
+    padding-bottom: 5px;
 }
 
 .premise-actions a {
     color: #474747;
     margin-left: 3px;
+    text-decoration: none;
+    display: inline-block;
+    height: 18px;
+    margin-right: 5px;
 }
 
 .premise-actions form {
@@ -552,12 +557,18 @@ li.base-premises {
     margin: 0;
 }
 
+.premise-actions .support {
+    border-left: 1px solid #c7c7c7;
+    padding-left: 5px;
+    margin-left: 2px;
+}
+
 .premise-actions input {
     background: transparent;
     border: none;
-    text-decoration: underline;
-    font-size: 20px;
+    font-size: 17px;
     color: #474747;
+    height: 24px;
 }
 .contention-admin-menu form {
     margin: -6px 0 0;
@@ -725,6 +736,22 @@ form .parent-premise strong {
     font-size: 17px;
     color: #676568;
 }
+
+.supporters {
+    border-top: 1px solid #bcbcbc;
+    background: #d7ffcf;
+    padding: 10px 20px;
+    border-radius: 0 0 5px 5px;
+    text-align: left;
+    color: #73b752;
+}
+
+.supporters .supporter-list a {
+    display: inline;
+    color: #5e5d5b;
+    text-decoration: none;
+}
+
 
 .search-form {
     padding: 30px;
@@ -917,11 +944,15 @@ form .parent-premise strong {
 
 .contention-main-actions {
     float: right;
-    padding-right: 50px;
+    padding-right: 20px;
 }
 
 #view-switcher li {
     text-align: center;
+}
+
+.original-discourse {
+    max-width: 300px;
 }
 
 /* Notificatons */
@@ -1168,6 +1199,36 @@ h3.newsfeed-title {
     color: #a0a0a0;
 }
 
+.switch-newsfeed {
+    color: #949494;
+    font-size: 20px;
+    float: left;
+    margin-left: 30px;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 3px solid #f2f2f2;
+    height: 22px;
+}
+
+.newsfeed-actions {
+    padding-top: 12px;
+    padding-bottom: 15px;
+}
+
+li.load-more {
+    margin-left: 170px;
+    margin-top: 30px;
+}
+
+div.load-more {
+    margin-left: 200px;
+    margin-top: 30px;
+}
+
+.load-more .next {
+    color: #a0a0a0;
+}
+
 
 /* Media Queries */
 @media (max-width: 800px){
@@ -1175,5 +1236,18 @@ h3.newsfeed-title {
     float: left;
     margin-top: 23px;
     }
+}
+
+@media (max-width: 1140px){
+  .contention-main-actions {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #e8e8e8;
+  }
+
+  .share {
+      float: right;
+  }
 }
 

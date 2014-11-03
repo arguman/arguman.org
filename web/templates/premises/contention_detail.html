@@ -12,7 +12,7 @@
                 <li>
                     ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user|lower }}</a>
                 </li>
-                <li>
+                <li class="original-discourse">
                     orijinal söylem:
                     {% if contention.sources or contention.owner %}
                     {{ contention.owner }}
@@ -53,6 +53,15 @@
                     <a href="?view=list" class="list-view">Liste</a></li>
             </ul>
         </nav>
+
+        <nav class="share">
+            <ul id="view-switcher">
+                <li>Paylaş</li>
+                <li><a target="_blank" href="https://www.facebook.com/sharer.php?u={{ contention.get_full_url }}" class="tree-view active">Facebook</a> |
+                    <a target="_blank" href="http://twitter.com/home?status={{ contention.title }} {{ contention.get_full_url }}" class="list-view">Twitter</a></li>
+            </ul>
+        </nav>
+
         </div>
 
     </header>

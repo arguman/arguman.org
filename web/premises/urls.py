@@ -5,7 +5,9 @@ from premises.views import (ContentionDetailView, HomeView,
                             PremiseEditView, ArgumentUpdateView,
                             ArgumentPublishView, ArgumentUnpublishView,
                             ArgumentDeleteView, AboutView, NewsView,
-                            UpdatedArgumentsView, ReportView, ControversialArgumentsView, TosView, SearchView, NotificationsView)
+                            UpdatedArgumentsView, ReportView,
+                            ControversialArgumentsView, TosView, SearchView,
+                            NotificationsView, PremiseSupportView, PremiseUnsupportView)
 
 
 urlpatterns = patterns('',
@@ -37,6 +39,12 @@ urlpatterns = patterns('',
    url(r'^(?P<slug>[\w-]+)$',
         ContentionDetailView.as_view(),
         name='contention_detail'),
+   url(r'^(?P<slug>[\w-]+)/premises/(?P<pk>[0-9]+)/unsupport',
+        PremiseUnsupportView.as_view(),
+        name='unsupport_premise'),
+   url(r'^(?P<slug>[\w-]+)/premises/(?P<pk>[0-9]+)/support',
+        PremiseSupportView.as_view(),
+        name='support_premise'),
    url(r'^(?P<slug>[\w-]+)/premises/(?P<pk>[0-9]+)/delete',
         PremiseDeleteView.as_view(),
         name='delete_premise'),
