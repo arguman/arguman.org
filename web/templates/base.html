@@ -12,7 +12,8 @@
 {% block header %}
 <header class="container">
     <div id="logo">
-        <a href="/"><img src="{% static "img/logo.png" %}" alt=""/></a>
+        <a href="{% if user.is_anonymous %}/{% else %}{% url "newsfeed" %}{% endif %}">
+            <img src="{% static "img/logo.png" %}" alt=""/></a>
     </div>
     <nav>
         <ul id="main-navigation">
