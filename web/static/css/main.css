@@ -1169,10 +1169,33 @@ h3.newsfeed-title {
 }
 
 .switch-newsfeed {
-    color: #6cbfff;
-    margin-left: 20px;
+    color: #949494;
+    font-size: 20px;
+    float: left;
+    margin-left: 30px;
     display: inline-block;
-    margin-top: 5px;
+    text-decoration: none;
+    border-bottom: 3px solid #f2f2f2;
+    height: 22px;
+}
+
+.newsfeed-actions {
+    padding-top: 12px;
+    padding-bottom: 15px;
+}
+
+li.load-more {
+    margin-left: 170px;
+    margin-top: 30px;
+}
+
+div.load-more {
+    margin-left: 200px;
+    margin-top: 30px;
+}
+
+.load-more .next {
+    color: #a0a0a0;
 }
 
 

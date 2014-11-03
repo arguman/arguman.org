@@ -30,4 +30,4 @@ class DeletePreventionManager(models.Manager):
 
 class ContentionManager(DeletePreventionManager):
     def featured(self):
-        return self.filter(is_featured=True)[:FEATURED_CONTENT_COUNT]
+        return self.filter(is_featured=True)

@@ -1,27 +1,26 @@
 # -*- coding:utf-8 -*-
 
 import json
-from markdown2 import markdown
-from datetime import date, timedelta
+from datetime import timedelta
 
+from markdown2 import markdown
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max
 from django.utils.timezone import now
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
 from django.db.models import Count
 
-from premises.constants import NEWS_CONTENT_COUNT, UPDATED_CONTENT_COUNT
-from premises.models import Contention, Premise, SITUATION, OBJECTION, SUPPORT, Report
-from premises.forms import ArgumentCreationForm, PremiseCreationForm, PremiseEditForm, ReportForm
-from premises.signals import added_premise_for_premise, added_premise_for_contention, reported_as_fallacy
-from profiles.models import Profile
+from premises.utils import int_or_zero
+from premises.models import Contention, Premise
+from premises.forms import (ArgumentCreationForm, PremiseCreationForm,
+                            PremiseEditForm, ReportForm)
+from premises.signals import (added_premise_for_premise,
+                              added_premise_for_contention, reported_as_fallacy)
 
 
 class ContentionDetailView(DetailView):
@@ -33,9 +32,9 @@ class ContentionDetailView(DetailView):
         view = ("list-view" if self.request.GET.get("view") == "list"
                             else "tree-view")
         edit_mode = (
-                self.request.user.is_superuser or
-                self.request.user.is_staff or
-                contention.user == self.request.user)
+            self.request.user.is_superuser or
+            self.request.user.is_staff or
+            contention.user == self.request.user)
         return super(ContentionDetailView, self).get_context_data(
             view=view,
             path=contention.get_absolute_url(),
@@ -101,6 +100,8 @@ class HomeView(TemplateView):
     template_name = "index.html"
     tab_class = "featured"
 
+    paginate_by = 20
+
     def get_context_data(self, **kwargs):
         contentions = self.get_contentions()
         if self.request.user.is_authenticated():
@@ -110,9 +111,27 @@ class HomeView(TemplateView):
         else:
             notifications = None
         return super(HomeView, self).get_context_data(
+            next_page_url=self.get_next_page_url(),
             tab_class=self.tab_class,
             notifications=notifications,
+            has_next_page=self.has_next_page(),
             contentions=contentions, **kwargs)
+
+    def get_offset(self):
+        return int_or_zero(self.request.GET.get("offset"))
+
+    def get_limit(self):
+        return self.get_offset() + self.paginate_by
+
+    def has_next_page(self):
+        total = self.get_contentions(paginate=False).count()
+        return total > (self.get_offset() + self.paginate_by)
+
+    def get_next_page_url(self):
+        offset = self.get_offset() + self.paginate_by
+        return '?offset=%(offset)s' % {
+            "offset": offset
+        }
 
     def get_unread_notifications(self):
         return (self.request.user
@@ -127,8 +146,15 @@ class HomeView(TemplateView):
              .filter(id__in=pks)
              .update(is_read=True))
 
-    def get_contentions(self):
-        return Contention.objects.featured()
+    def get_contentions(self, paginate=True):
+        contentions = (Contention
+                       .objects
+                       .featured())
+
+        if paginate:
+            contentions = (contentions[self.get_offset(): self.get_limit()])
+
+        return contentions
 
 
 class NotificationsView(HomeView):
@@ -148,48 +174,78 @@ class SearchView(HomeView):
 
     def get_context_data(self, **kwargs):
         return super(SearchView, self).get_context_data(
-            keywords=self.request.GET.get('keywords') or "",
+            keywords=self.get_keywords(),
             **kwargs
         )
 
-    def get_contentions(self):
+    def get_keywords(self):
+        return self.request.GET.get('keywords') or ""
+
+    def get_next_page_url(self):
+        offset = self.get_offset() + self.paginate_by
+        return '?offset=%(offset)s&keywords=%(keywords)s' % {
+            "offset": offset,
+            "keywords": self.get_keywords()
+        }
+
+
+    def get_contentions(self, paginate=True):
         keywords = self.request.GET.get('keywords')
         if not keywords or len(keywords) < 2:
-            result = []
+            result = Contention.objects.none()
         else:
-            result = Contention.objects.filter(title__icontains=keywords)
+            result = (Contention
+                      .objects
+                      .filter(title__icontains=keywords))
+
+            if paginate:
+                result = result[self.get_offset():self.get_limit()]
+
         return result
 
 
 class NewsView(HomeView):
     tab_class = "news"
 
-    def get_contentions(self):
-        return Contention.objects.filter(
-            is_published=True)[:NEWS_CONTENT_COUNT]
+    def get_contentions(self, paginate=True):
+        contentions = Contention.objects.filter(
+            is_published=True)
+
+        if paginate:
+            contentions = contentions[self.get_offset():self.get_limit()]
+
+        return contentions
 
 
 class UpdatedArgumentsView(HomeView):
     tab_class = "updated"
 
-    def get_contentions(self):
-        return (Contention
-                .objects
-                .filter(is_published=True)
-                .order_by('-date_modification')
-                [:UPDATED_CONTENT_COUNT])
+    def get_contentions(self, paginate=True):
+        contentions =  (Contention
+                        .objects
+                        .filter(is_published=True)
+                        .order_by('-date_modification'))
+
+        if paginate:
+            contentions = contentions[self.get_offset():self.get_limit()]
+
+        return contentions
+
 
 class ControversialArgumentsView(HomeView):
     tab_class = "controversial"
 
-    def get_contentions(self):
+    def get_contentions(self, paginate=True):
         last_week = now() - timedelta(days=3)
-        return (Contention
-                .objects
-                .annotate(num_children=Count('premises'))
-                .order_by('-num_children')
-                .filter(date_modification__gte=last_week)
-                [:UPDATED_CONTENT_COUNT])
+        contentions = (Contention
+                       .objects
+                       .annotate(num_children=Count('premises'))
+                       .order_by('-num_children')
+                       .filter(date_modification__gte=last_week))
+        if paginate:
+            return contentions[self.get_offset():self.get_limit()]
+
+        return contentions
 
 
 class AboutView(TemplateView):
