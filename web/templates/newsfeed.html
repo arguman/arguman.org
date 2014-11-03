@@ -9,6 +9,12 @@
         {% include "tabs.html" %}
         {% if user.is_anonymous %}
         <h3 class="newsfeed-title">neler oluyor burada:</h3>
+        {% else %}
+            {% if newsfeed_is_public %}
+                <a href="{% url "newsfeed" %}" class="switch-newsfeed">Sadece takip ettiklerini görüntüle</a>
+            {% else %}
+                <a href="{% url "public_newsfeed" %}" class="switch-newsfeed">Herkesin haberlerini görüntüle</a>
+            {% endif %}
         {% endif %}
         <div class="newsfeed-container">
             {% for entry in news_entries %}

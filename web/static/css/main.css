@@ -1168,6 +1168,13 @@ h3.newsfeed-title {
     color: #a0a0a0;
 }
 
+.switch-newsfeed {
+    color: #6cbfff;
+    margin-left: 20px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
 
 /* Media Queries */
 @media (max-width: 800px){

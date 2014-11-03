@@ -60,3 +60,11 @@ class NewsfeedView(HomeView):
                     .limit(limit))
 
         return map(Entry, newsfeed)
+
+
+class PublicNewsfeedView(NewsfeedView):
+    def get_context_data(self, **kwargs):
+        return super(NewsfeedView, self).get_context_data(
+            news_entries=self.get_public_newsfeed(),
+            newsfeed_is_public=True,
+            **kwargs)
