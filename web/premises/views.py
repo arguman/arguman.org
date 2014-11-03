@@ -2,10 +2,11 @@
 
 import json
 from datetime import timedelta
-
 from markdown2 import markdown
+
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from django.db.models import Max
 from django.utils.timezone import now
 from django.http import HttpResponse
@@ -380,6 +381,9 @@ class PremiseCreationView(CreateView):
         else:
             added_premise_for_contention.send(sender=self,
                                               premise=form.instance)
+
+        contention.date_modification = timezone.now()
+        contention.save()
 
         return redirect(contention)
 
