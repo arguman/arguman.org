@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500&subset=latin,latin-ext);
 @font-face {
     font-family: 'AmericanTypewriter';
     src: url('/static/fonts/AmericanTypewriter.ttf');
@@ -72,9 +73,10 @@ form select {
     color: #3f3f3f;
     line-height: 43px;
     display: inline-block;
-    font-size: 45px;
+    font-size: 25px;
     padding-bottom: 4px;
     border-bottom: 3px solid #e3e3e5;
+    font-family: 'Roboto medium', sans-serif;
 }
 
 .argument-list li .main-contention:before {
