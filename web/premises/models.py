@@ -66,6 +66,12 @@ class Contention(DeletePreventionMixin, models.Model):
     def get_absolute_url(self):
         return 'contention_detail', [self.slug]
 
+    def get_full_url(self):
+        return "http://%(site_url)s%(path)s" % {
+            "site_url": settings.SITE_URL,
+            "path": self.get_absolute_url()
+        }
+
     def save(self, *args, **kwargs):
         """
         - Make unique slug if it is not given.

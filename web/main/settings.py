@@ -129,6 +129,8 @@ SOCIAL_AUTH_PIPELINE = (
 MONGODB_HOST = "localhost"
 MONGODB_DATABASE = "arguman"
 
+SITE_URL = "arguman.org"
+
 try:
     from settings_local import *
 except ImportError:

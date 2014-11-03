@@ -156,7 +156,7 @@ header nav ul li a:hover {
 }
 
 header #logo {
-    float: left;
+    float: left;;
 }
 
 header #logo a {
@@ -944,11 +944,15 @@ form .parent-premise strong {
 
 .contention-main-actions {
     float: right;
-    padding-right: 50px;
+    padding-right: 20px;
 }
 
 #view-switcher li {
     text-align: center;
+}
+
+.original-discourse {
+    max-width: 300px;
 }
 
 /* Notificatons */
@@ -1232,5 +1236,18 @@ div.load-more {
     float: left;
     margin-top: 23px;
     }
+}
+
+@media (max-width: 1140px){
+  .contention-main-actions {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #e8e8e8;
+  }
+
+  .share {
+      float: right;
+  }
 }
 
