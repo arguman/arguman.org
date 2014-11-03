@@ -115,16 +115,17 @@ class Entry(dict):
 
 
 @receiver(post_save, sender=Contention)
-def create_news_entry(instance, **kwargs):
+def create_contention_entry(instance, created, **kwargs):
     """
     Creates news entries for contentions.
     """
-    Entry.objects.create(
-        object_id=instance.id,
-        news_type=instance.get_newsfeed_type(),
-        sender=instance.get_actor(),
-        related_object=instance.get_newsfeed_bundle()
-    )
+    if created:
+        Entry.objects.create(
+            object_id=instance.id,
+            news_type=instance.get_newsfeed_type(),
+            sender=instance.get_actor(),
+            related_object=instance.get_newsfeed_bundle()
+        )
 
 
 @receiver(added_premise_for_contention)
