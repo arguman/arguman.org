@@ -1,0 +1,5 @@
+{% if is_paginated %}
+    {% if page_obj.has_next %}
+        <a class="more" href="?page={{ page_obj.next_page_number }}">Show more</a>
+    {% endif %}
+{% endif %}

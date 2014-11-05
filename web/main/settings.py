@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'profiles',
     'premises',
     'newsfeed',
+    'blog',
 
 )
 
@@ -130,6 +131,14 @@ MONGODB_HOST = "localhost"
 MONGODB_DATABASE = "arguman"
 
 SITE_URL = "arguman.org"
+
+# Markitup Settings
+MARKITUP_SET = 'markitup/sets/markdown'
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': False})
+
+BLOG_FEED_TITLE = "Arguman.org Blog'u"
+BLOG_FEED_DESCRIPTION = "Arguman analizi platformu"
+BLOG_URL = "http://arguman.org/blog"
 
 try:
     from settings_local import *

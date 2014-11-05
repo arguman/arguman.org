@@ -64,12 +64,14 @@ hipo.InfinityScroll = Class.extend({
 
                 // events
                 this.on_page_load();
-            };
+            }.bind(this);
 
             $.get(next_page, paginate.bind(this), 'html');
             this.active_page++;
 
         }
+
+        this.on_page_load && this.on_page_load();
 
     },
 

@@ -1229,6 +1229,76 @@ div.load-more {
     color: #a0a0a0;
 }
 
+/* Blog */
+
+.post {
+    font-size: 24px;
+    line-height: 1.5em;
+}
+
+.post time {
+    color: #bfbfbf;
+}
+
+.post h3 {
+    font-size: 30px;
+    height: auto;
+    display: block;
+    border-bottom: 3px solid #fff6af;
+    padding: 5px 0 4px;
+    /*width: 640px;*/
+}
+
+.post h3 a {
+    border-bottom: none;
+    line-height: 1.2em;
+}
+
+.post p {
+    color: #4b4b4b;
+}
+
+.post table {
+    background: #ffffff;
+    width: 80%
+}
+
+.post table td,
+.post table th {
+    text-align: center;
+    padding: 10px 3px;
+    border: 3px solid #f4f4f4;
+    color: #616161;
+}
+
+.post table th {
+    font-weight: normal;
+}
+
+/* Announcements */
+
+.announcements {
+    background: #ffffd8;
+    margin: 0 0 20px;
+    padding: 0 12px;
+    font-size: 21px;
+    color: #f8b146;
+}
+
+.announcements li {
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+}
+
+.announcements li a {
+    color: #4f4f4f;
+    text-decoration: none;
+}
+
+.announcements strong {
+    font-weight: normal;
+}
 
 /* Media Queries */
 @media (max-width: 800px){

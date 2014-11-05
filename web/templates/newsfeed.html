@@ -43,12 +43,5 @@
 {% endblock %}
 
 {% block extra-scripts %}
-<script type="text/javascript">
-    new hipo.InfinityScroll({
-        "pagination_selector": ".load-more",
-        "next_link_selector": ".next",
-        "content_selector": ".newsfeed-container",
-        "max_page": 5
-    })
-</script>
+{% include "infinity-pagination.html" %}
 {% endblock %}

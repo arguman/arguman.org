@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <section class="content container">
+    {% for post in posts %}
+        {% include "blog/post.html" %}
+    {%  endfor %}
+    {% include "blog/pagination.html" %}
+    </section>
+{% endblock %}

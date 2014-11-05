@@ -12,6 +12,13 @@
 <body>
 {% block header %}
 <header class="container">
+    {% if announcements.exists %}
+    <ul class="announcements">
+        {% for announcement in announcements %}
+            <li><strong>Bir duyuru: </strong> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <div id="logo">
         <a href="{% if user.is_anonymous %}/{% else %}{% url "newsfeed" %}{% endif %}">
             <img src="{% static "img/logo.png" %}" alt=""/></a>
@@ -25,7 +32,7 @@
             {% else %}
             <li><a href="{% url "new_argument" %}"><strong>argüman gönder</strong></a></li>
             <li>
-              <a href="{% url "auth_profile" user.username %}">{{ user }}</a>
+              <a href="{% url "auth_profile" user.username %}">profilim</a>
               <a href="{% url "auth_logout" %}">(çıkış yap)</a>
             </li>
             {% endif %}
