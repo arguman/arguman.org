@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    new hipo.InfinityScroll({
+        "pagination_selector": ".load-more",
+        "next_link_selector": ".next",
+        "content_selector": ".argument-list, .newsfeed-container",
+        "max_page": 5,
+        "on_page_load": function () {
+            $("footer").css({
+                "position": "fixed",
+                "bottom": 0,
+                "width": "100%"
+            });
+            $("body").css({
+                "margin-bottom": "220px"
+            });
+        }
+    });
+    $(window).scroll(function () {
+        if ($(this).scrollTop() < 100) {
+            $("footer").css({
+                "position": "static"
+            });
+            $("body").css({
+                "margin-bottom": 0
+            });
+        }
+    });
+</script>

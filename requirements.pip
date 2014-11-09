@@ -8,3 +8,5 @@ wsgiref==0.1.2
 django-gravatar2==1.1.4
 markdown2==2.3.0
 pymongo==2.6.3
+django-markitup==2.2.2
+Markdown==2.5.1

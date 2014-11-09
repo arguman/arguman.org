@@ -53,6 +53,7 @@ class Contention(DeletePreventionMixin, models.Model):
     date_creation = models.DateTimeField(auto_now_add=True)
     date_modification = models.DateTimeField(auto_now_add=True,
                                              auto_now=True)
+    ip_address = models.IPAddressField(null=True, blank=True)
 
     objects = ContentionManager()
 
@@ -168,6 +169,8 @@ class Premise(DeletePreventionMixin, models.Model):
     sibling_count = models.IntegerField(default=1)  # denormalized field
     child_count = models.IntegerField(default=1)  # denormalized field
     max_sibling_count = models.IntegerField(default=1)  # denormalized field
+    date_creation = models.DateTimeField(auto_now_add=True)
+    ip_address = models.IPAddressField(null=True, blank=True)
 
     objects = DeletePreventionManager()
 

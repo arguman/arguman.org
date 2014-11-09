@@ -1,0 +1,9 @@
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <aside><time datetime="{{ post.date_created }}">{{ post.date_created|date }}</time></aside>
+    <header>
+        <h3><a itemprop="url" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+    </header>
+    <section itemprop="articleBody">
+        {{ post.content }}
+    </section>
+</article>

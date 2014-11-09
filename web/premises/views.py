@@ -16,6 +16,7 @@ from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
 from django.db.models import Count
 
+from blog.models import Post
 from premises.utils import int_or_zero
 from premises.models import Contention, Premise
 from premises.forms import (ArgumentCreationForm, PremiseCreationForm,
@@ -117,7 +118,11 @@ class HomeView(TemplateView):
             tab_class=self.tab_class,
             notifications=notifications,
             has_next_page=self.has_next_page(),
+            announcements=self.get_announcements(),
             contentions=contentions, **kwargs)
+
+    def get_announcements(self):
+        return Post.objects.filter(is_announcement=True)
 
     def get_offset(self):
         return int_or_zero(self.request.GET.get("offset"))
@@ -273,6 +278,7 @@ class ArgumentCreationView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.ip_address = self.request.META['REMOTE_ADDR']
         response = super(ArgumentCreationView, self).form_valid(form)
         form.instance.update_sibling_counts()
         return response
@@ -372,6 +378,7 @@ class PremiseCreationView(CreateView):
         form.instance.argument = contention
         form.instance.parent = self.get_parent()
         form.instance.is_approved = True
+        form.instance.ip_address = self.request.META['REMOTE_ADDR']
         form.save()
         contention.update_sibling_counts()
 
