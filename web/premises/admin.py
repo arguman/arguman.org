@@ -1,6 +1,7 @@
 from django.contrib import admin
+from django.db.models import Count
 
-from premises.models import Contention, Premise, Comment, Report
+from premises.models import Contention, Premise, Comment, Report, Channel
 
 
 class ReportAdmin(admin.ModelAdmin):
@@ -8,11 +9,16 @@ class ReportAdmin(admin.ModelAdmin):
 
 
 class ContentionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_deleted')
-    list_filter = ('is_deleted',)
+    list_display = ('title', 'channel')
+    list_editable = ('channel', )
+    list_per_page = 10
 
     def get_queryset(self, request):
-        return Contention.objects.all_with_deleted()
+        return Contention.objects.annotate(
+            report_count=Count("reports")
+        ).filter(
+            report_count__gt=0
+        )
 
 
 class PremiseAdmin(admin.ModelAdmin):
@@ -26,3 +32,4 @@ admin.site.register(Report, ReportAdmin)
 admin.site.register(Contention, ContentionAdmin)
 admin.site.register(Premise, PremiseAdmin)
 admin.site.register(Comment)
+admin.site.register(Channel)

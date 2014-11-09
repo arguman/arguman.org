@@ -32,7 +32,16 @@ PREMISE_TYPES = (
 )
 
 
+class Channel(models.Model):
+    title = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return smart_unicode(self.title)
+
+
 class Contention(DeletePreventionMixin, models.Model):
+    channel = models.ForeignKey(Channel, related_name='contentions',
+                                null=True, blank=True)
     title = models.CharField(
         max_length=255, verbose_name="Argüman",
         help_text=render_to_string("premises/examples/contention.html"))
