@@ -68,6 +68,16 @@
 {% endblock %}
 
 {% block content %}
+
+    <div id="keyboard-manager-info">
+    <span class="keys">
+        <span class="left">←</span>
+        <span class="up-down">↑<br />↓</span>
+        <span class="right">→</span>
+    </span>
+    <p>harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz.</p>
+    </div>
+
     <div id="app" class="{{ view }}{% if not contention.published_premises.exists %} empty{% endif %}">
 
             <div class="main-contention">
@@ -82,8 +92,8 @@
             </div>
 
             <div class="tree{% if not contention.published_premises.exists %} empty{% endif %}{% if view == "tree-view" %} loading{% endif %}" data-width="{{ contention.width }}">
-                <ul>
-                    <li>
+                <ul class="premise-list">
+                    <li class="premise-item">
                         <div class="root"></div>
                         {% with template_name="premises/tree_view.html"%}
                             {% with premises=contention.published_premises.all %}
@@ -111,6 +121,12 @@
     });
 
     tree.render();
+
+    var keyboardManager = new arguman.KeyboardManager({
+        "el": ".tree",
+        "info": "#keyboard-manager-info"
+    });
+
     {% endif %}
 </script>
 {% endblock %}
