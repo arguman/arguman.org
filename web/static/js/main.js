@@ -16,31 +16,36 @@
         },
         up: function () {
             this.select(
-                this.currentElement.parent().parent()
+                this.currentElement.parent().parent(),
+                true
             )
         },
         down: function () {
             this.select(
-                this.currentElement.find("ul").find(".child-premise").first()
+                this.currentElement.find("ul").find(".child-premise").first(),
+                true
             )
         },
         left: function () {
             this.select(
-                this.currentElement.prev()
+                this.currentElement.prev(),
+                true
             );
         },
         right: function () {
             this.select(
-                this.currentElement.next()
+                this.currentElement.next(),
+                true
             );
         },
-        select: function (leaf) {
-            console.log('ok')
+        select: function (leaf, scroll) {
             if (leaf.is(".child-premise")) {
                 this.$el.find(".premise").removeClass("focused");
                 this.currentElement = leaf;
                 leaf.find(".premise").first().addClass("focused");
-                this.scrollTo(leaf);
+                if (scroll) {
+                    this.scrollTo(leaf);
+                }
             }
         },
         needsScroll: function () {
@@ -65,7 +70,7 @@
         },
         setInitial: function () {
             if (this.needsScroll()) {
-                this.select(this.$el.find(".child-premise").first());
+                this.select(this.$el.find(".child-premise").first(), false);
             }
         },
         bindEvents: function () {
@@ -96,10 +101,10 @@
                 this.$el.find(".premise-content").on('click', function (event) {
                     this.select($(event.target).parents(".child-premise").eq(0))
                 }.bind(this));
+                $(this.info).show();
                 $(window).on("scroll", function () {
                     $(this.info).fadeOut(100);
                 }.bind(this));
-                $(this.info).show();
             } else {
                 $(this.info).hide();
             }
