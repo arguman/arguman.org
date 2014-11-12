@@ -79,6 +79,13 @@
     </div>
 
     <div id="app" class="{{ view }}{% if not contention.published_premises.exists %} empty{% endif %}">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
 
             <div class="main-contention">
                 <div class="main-premise-content">
