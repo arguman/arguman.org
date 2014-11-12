@@ -1308,14 +1308,14 @@ div.load-more {
 .announcements {
     background: #ffffd8;
     margin: 0 0 20px;
-    padding: 0 12px;
+    padding: 13px 12px;
     font-size: 21px;
     color: #f8b146;
 }
 
 .announcements li {
     margin: 0;
-    padding: 10px;
+    padding: 3px 10px;
     list-style: none;
 }
 

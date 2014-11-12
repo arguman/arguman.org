@@ -16,7 +16,7 @@
     {% if announcements.exists %}
     <ul class="announcements">
         {% for announcement in announcements %}
-            <li><strong>Bir duyuru: </strong> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></li>
+            <li><strong>Duyuru: </strong> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
