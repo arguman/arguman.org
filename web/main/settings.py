@@ -114,7 +114,9 @@ AUTH_USER_MODEL = 'profiles.Profile'
 TWITTER_CONSUMER_KEY = None # defined in settings_local.py
 TWITTER_CONSUMER_SECRET = None # defined in settings_local.py
 
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
+
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 SOCIAL_AUTH_PIPELINE = (
