@@ -1326,6 +1326,7 @@ div.load-more {
 
 .announcements strong {
     font-weight: normal;
+    display: none;
 }
 
 /* Keyboard Manager */

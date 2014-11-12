@@ -99,7 +99,7 @@
                 $(window).on("scroll", function () {
                     $(this.info).fadeOut(100);
                 }.bind(this));
-
+                $(this.info).show();
             } else {
                 $(this.info).hide();
             }
