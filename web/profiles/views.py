@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.views.generic import FormView, CreateView, RedirectView, DetailView, UpdateView
-
+from django.db.models import Q
 from profiles.forms import RegistrationForm, ProfileUpdateForm
 from profiles.models import Profile
 from profiles.signals import follow_done, unfollow_done
@@ -66,7 +66,7 @@ class ProfileDetailView(DetailView):
         """
         user = self.get_object()
         contentions = Contention.objects.filter(
-            premises__user=user
+            Q(premises__user=user) | Q(user=user)
         ).distinct()
 
         if self.request.user != user:
