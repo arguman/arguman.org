@@ -35,6 +35,7 @@
             );
         },
         select: function (leaf) {
+            console.log('ok')
             if (leaf.is(".child-premise")) {
                 this.$el.find(".premise").removeClass("focused");
                 this.currentElement = leaf;
@@ -42,17 +43,30 @@
                 this.scrollTo(leaf);
             }
         },
+        needsScroll: function () {
+            var maxHeight = Math.max.apply(this,
+                this.$el.find(".premise")
+                    .toArray()
+                    .map(function (el) {
+                    return $(el).offset().top + $(el).height();
+            }));
+
+            return (this.$el.width() > window.innerWidth ||
+                    maxHeight > window.innerHeight)
+        },
         scrollTo: function (el) {
-           if (this.$el.width() > window.innerWidth) {
+           if (this.needsScroll()) {
                var center = el.offset().left +  (el.width()/2);
                $('html, body').animate({
                    scrollTop: el.offset().top - 200,
-                   scrollLeft: center - (window.innerWidth/2)
-               }, 300);
+                   scrollLeft: center - (window.innerWidth / 2)
+               }, 150);
            }
         },
         setInitial: function () {
-            this.select(this.$el.find(".child-premise").first());
+            if (this.needsScroll()) {
+                this.select(this.$el.find(".child-premise").first());
+            }
         },
         bindEvents: function () {
             $(document).keydown(function(e) {
@@ -78,13 +92,17 @@
                 e.preventDefault(); // prevent the default action (scroll / move caret)
             }.bind(this));
 
-            this.$el.find(".premise-content").on('click', function (event) {
-                this.select($(event.target).parents(".child-premise").eq(0))
-            }.bind(this));
+            if (this.needsScroll()) {
+                this.$el.find(".premise-content").on('click', function (event) {
+                    this.select($(event.target).parents(".child-premise").eq(0))
+                }.bind(this));
+                $(window).on("scroll", function () {
+                    $(this.info).fadeOut(100);
+                }.bind(this));
 
-            $(window).on("scroll", function () {
-                $(this.info).fadeOut(100);
-            }.bind(this));
+            } else {
+                $(this.info).hide();
+            }
 
         }
     });
