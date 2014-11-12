@@ -120,7 +120,6 @@ class ProfileDetailView(DetailView):
 
 
 class ProfileUpdateView(UpdateView):
-    template_name = "auth/update.html"
     form_class = ProfileUpdateForm
 
     def get_object(self, queryset=None):
