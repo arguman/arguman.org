@@ -9,8 +9,8 @@ class PublishedManager(models.Manager):
     """
     Returns published blog posts.
     """
-    def get_query_set(self):
-        queryset = super(PublishedManager, self).get_query_set()
+    def get_queryset(self):
+        queryset = super(PublishedManager, self).get_queryset()
         return queryset.filter(is_published=True)
 
 

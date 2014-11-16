@@ -32,7 +32,16 @@ PREMISE_TYPES = (
 )
 
 
+class Channel(models.Model):
+    title = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return smart_unicode(self.title)
+
+
 class Contention(DeletePreventionMixin, models.Model):
+    channel = models.ForeignKey(Channel, related_name='contentions',
+                                null=True, blank=True)
     title = models.CharField(
         max_length=255, verbose_name="Argüman",
         help_text=render_to_string("premises/examples/contention.html"))
@@ -49,7 +58,7 @@ class Contention(DeletePreventionMixin, models.Model):
         verbose_name="Kaynaklar",
         help_text=render_to_string("premises/examples/sources.html"))
     is_featured = models.BooleanField(default=False)
-    is_published = models.BooleanField(default=True)
+    is_published = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
     date_modification = models.DateTimeField(auto_now_add=True,
                                              auto_now=True)

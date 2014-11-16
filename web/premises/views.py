@@ -308,9 +308,13 @@ class ArgumentPublishView(DetailView):
 
     def post(self, request, slug):
         contention = self.get_object()
-        contention.is_published = True
-        contention.save()
-        messages.info(request, u"Argüman yayına alındı.")
+        if contention.premises.exists():
+            contention.is_published = True
+            contention.save()
+            messages.info(request, u"Argüman yayına alındı.")
+        else:
+            messages.info(request, u"Argümanı yayına almadan önce en az 1 "
+                                   u"önerme ekleyin.")
         return redirect(contention)
 
 
@@ -350,7 +354,7 @@ class PremiseEditView(UpdateView):
         if self.request.user.is_superuser:
             return premises
         return premises.filter(user=self.request.user)
-    
+
     def form_valid(self, form):
         response = super(PremiseEditView, self).form_valid(form)
         form.instance.argument.update_sibling_counts()
@@ -437,10 +441,14 @@ class PremiseDeleteView(View):
                                  pk=self.kwargs['pk'])
 
     def delete(self, request, *args, **kwargs):
-        contention = self.get_premise()
-        contention.delete()
-        contention.update_sibling_counts()
-        return redirect(self.get_contention())
+        premise = self.get_premise()
+        premise.delete()
+        premise.update_sibling_counts()
+        contention = self.get_contention()
+        if not contention.premises.exists():
+            contention.is_published = False
+            contention.save()
+        return redirect(contention)
 
     post = delete
 

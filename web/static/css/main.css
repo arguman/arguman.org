@@ -17,6 +17,10 @@ form select {
     font-family: AmericanTypewriter, Georgia, serif;
 }
 
+body {
+    /*-webkit-font-smoothing: antialiased;*/
+}
+
 .container {
     width: 800px;
     margin: 20px auto;
@@ -343,17 +347,42 @@ li.base-premises {
     /*width: 100%;*/
 }
 
+#app .premise.focused {
+    /*border: 3px solid #f4f4f4;*/
+    /*border-radius: 8px;*/
+    /*transform: scale(1.2);*/
+    border-radius: 5px;
+    z-index: 99999;
+    box-shadow: 0 0 4px #5b5b5b;
+
+}
+
+/* todo: make an ab test for that */
+#app .premise, #app .premise input, #keyboard-manager-info {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*text-shadow: 0 0 1px rgba(45, 45, 45, 0.10);*/
+}
+
 #app .premise .premise-content {
     margin: auto;
     padding: 10px 15px;
-    font-size: 20px;
+    font-size: 17px;
     border-radius: 5px;
     z-index: 1;
+    color: #353535;
 }
 
     .premise-content p {
         margin: 0;
         padding: 0;
+        cursor: pointer;
+    }
+
+    .premise-content ul {
+        text-align: left;
     }
 
     .premise-content.but {
@@ -773,12 +802,12 @@ form .parent-premise strong {
 
 /* Tree View */
 
-.tree-view .tree ul, .tree li {
+.tree-view .tree ul.premise-list, .tree li.premise-item {
     margin: 0;
     padding: 0;
 }
 
-.tree-view .tree ul {
+.tree-view .tree ul.premise-list {
     margin: 0;
 	padding-top: 60px; position: relative;
 	transition: all 0.5s;
@@ -786,7 +815,7 @@ form .parent-premise strong {
 	-moz-transition: all 0.5s;
 }
 
-.tree-view .tree li {
+.tree-view .tree li.premise-item {
 	float: left;
     text-align: center;
 	list-style-type: none;
@@ -798,45 +827,44 @@ form .parent-premise strong {
 }
 
 
-.tree-view .tree li::before,
-.tree-view .tree li::after{
+.tree-view .tree li.premise-item::before,
+.tree-view .tree li.premise-item::after{
 	content: '';
+    z-index: -999;
 	position: absolute; top: 0; right: 50%;
 	border-top: 4px solid #e1e1e1;
 	width: 50%; height: 60px;
 }
-.tree-view .tree li::after{
+.tree-view .tree li.premise-item::after{
 	right: auto; left: 50%;
 	border-left: 4px solid #e1e1e1;
+    z-index: -999;
 }
 
-.tree-view .tree li:only-child::after,
-.tree-view .tree li:only-child::before {
+.tree-view .tree li.premise-item:only-child::after,
+.tree-view .tree li.premise-item:only-child::before {
 	display: none;
 }
 
-.tree-view .tree li:only-child{ padding-top: 0;}
+.tree-view .tree li.premise-item:only-child{ padding-top: 0;}
 
-.tree-view .tree li:first-child::before,
-.tree-view .tree li:last-child::after{
+.tree-view .tree li.premise-item:first-child::before,
+.tree-view .tree li.premise-item:last-child::after{
 	border: 0 none;
 }
-.tree-view .tree li:last-child::before{
+.tree-view .tree li.premise-item:last-child::before{
+    z-index: -999;
 	border-right: 4px solid #e1e1e1;
-	border-radius: 0 5px 0 0;
-	-webkit-border-radius: 0 5px 0 0;
-	-moz-border-radius: 0 5px 0 0;
 }
-.tree-view .tree li:first-child::after{
-	border-radius: 5px 0 0 0;
-	-webkit-border-radius: 5px 0 0 0;
-	-moz-border-radius: 5px 0 0 0;
+.tree-view .tree li.premise-item:first-child::after{
+    z-index: -999;
 }
 
 .tree-view .tree ul ul::before{
 	content: '';
 	position: absolute; top: 0; left: 50%;
 	border-left: 4px solid #e1e1e1;
+    z-index: -999;
 	width: 0; height: 60px;
 }
 
@@ -1280,14 +1308,14 @@ div.load-more {
 .announcements {
     background: #ffffd8;
     margin: 0 0 20px;
-    padding: 0 12px;
+    padding: 13px 12px;
     font-size: 21px;
     color: #f8b146;
 }
 
 .announcements li {
     margin: 0;
-    padding: 10px;
+    padding: 3px 10px;
     list-style: none;
 }
 
@@ -1298,7 +1326,50 @@ div.load-more {
 
 .announcements strong {
     font-weight: normal;
+    display: none;
 }
+
+/* Keyboard Manager */
+#keyboard-manager-info {
+    position: absolute;
+    left: 40px;
+    top: 150px;
+    width: 300px;
+    z-index: 999;
+    color: gray;
+}
+
+
+#keyboard-manager-info .keys {
+    display: block;
+    float: left;
+    width: 40px;
+}
+
+#keyboard-manager-info  p {
+    float: left;
+    width: 120px;
+    padding: 0;
+    margin: -10px 0 0 10px;
+}
+
+#keyboard-manager-info .keys .up-down {
+    width: 10px;
+    display: inline-block;
+    margin-top: -12px;
+    margin-left: 15px;
+}
+
+#keyboard-manager-info .keys .left,
+#keyboard-manager-info .keys .right {
+    display: inline-block;
+    position: absolute;
+}
+
+#keyboard-manager-info .keys .right {
+    margin-left: -3px;
+}
+
 
 /* Media Queries */
 @media (max-width: 800px){

@@ -6,12 +6,13 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.views.generic import FormView, CreateView, RedirectView, DetailView, UpdateView
+from django.db.models import Q
 
+from profiles.mixins import LoginRequiredMixin
 from profiles.forms import RegistrationForm, ProfileUpdateForm
 from profiles.models import Profile
 from profiles.signals import follow_done, unfollow_done
 from premises.models import Contention, Report
-
 
 class RegistrationView(CreateView):
     form_class = RegistrationForm
@@ -66,7 +67,7 @@ class ProfileDetailView(DetailView):
         """
         user = self.get_object()
         contentions = Contention.objects.filter(
-            premises__user=user
+            Q(premises__user=user) | Q(user=user)
         ).distinct()
 
         if self.request.user != user:
@@ -119,8 +120,7 @@ class ProfileDetailView(DetailView):
         }))
 
 
-class ProfileUpdateView(UpdateView):
-    template_name = "auth/update.html"
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProfileUpdateForm
 
     def get_object(self, queryset=None):

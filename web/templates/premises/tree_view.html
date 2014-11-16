@@ -1,6 +1,6 @@
-<ul>
+<ul class="premise-list">
     {% for premise in premises %}
-        <li class="child-premise">
+        <li class="child-premise premise-item">
             <div class="premise">
                 <div class="premise-type {{ premise.premise_class }}">
                     {{ premise.get_premise_type_display }}
