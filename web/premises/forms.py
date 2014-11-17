@@ -45,3 +45,13 @@ class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = ["fallacy_type"]
+        
+    def save(self, commit=True):
+        is_report_exist = Report.objects.filter(
+            reporter=self.instance.reporter_id,
+            premise=self.instance.premise_id,
+            contention=self.instance.contention_id,
+            fallacy_type=self.instance.fallacy_type
+        ).exists()
+        if not is_report_exist:
+            super(ReportForm, self).save(commit)
