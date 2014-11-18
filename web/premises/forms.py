@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from django import forms
+from django.core.exceptions import ValidationError
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.mixins import FormRenderer
@@ -45,3 +47,15 @@ class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = ["fallacy_type"]
+
+    def clean(self):
+        is_report_exist = Report.objects.filter(
+            reporter=self.initial['reporter'],
+            premise=self.initial['premise'],
+            contention=self.initial['contention'],
+            fallacy_type=self.cleaned_data['fallacy_type']
+        ).exists()
+        if is_report_exist:
+            raise ValidationError(u'Bu safsata bildirimini zaten yaptınız.')
+
+        super(ReportForm, self).clean()

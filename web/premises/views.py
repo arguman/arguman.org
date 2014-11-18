@@ -471,6 +471,13 @@ class ReportView(CreateView):
     def get_premise(self):
         return get_object_or_404(Premise, pk=self.kwargs['pk'])
 
+    def get_initial(self):
+        return {
+            'contention': self.get_contention(),
+            'premise': self.get_premise(),
+            'reporter': self.request.user
+        }
+
     def form_valid(self, form):
         contention = self.get_contention()
         premise = self.get_premise()

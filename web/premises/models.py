@@ -288,6 +288,8 @@ class Report(models.Model):
         max_length=255, default="Wrong Direction",
         help_text=render_to_string("premises/examples/fallacy.html"))
 
+    class Meta:
+        unique_together = ("reporter", "premise", "contention", "fallacy_type")
 
     def __unicode__(self):
         return smart_unicode(self.fallacy_type)
