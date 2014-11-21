@@ -13,13 +13,6 @@ class ContentionAdmin(admin.ModelAdmin):
     list_editable = ('channel', )
     list_per_page = 10
 
-    def get_queryset(self, request):
-        return Contention.objects.annotate(
-            report_count=Count("reports")
-        ).filter(
-            report_count__gt=0
-        )
-
 
 class PremiseAdmin(admin.ModelAdmin):
     list_display = ('text', 'argument', 'is_deleted')
