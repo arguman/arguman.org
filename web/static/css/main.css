@@ -963,6 +963,7 @@ form .parent-premise strong {
 
 .list-view .main-premise-content {
     margin: 0 50px -30px;
+    padding-bottom: 20px;
     width: 900px;
     line-height: 1em;
 }
