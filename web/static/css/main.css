@@ -947,6 +947,7 @@ form .parent-premise strong {
 .list-view .premise {
     width: 600px;
     margin-bottom: 100px;
+    margin-left: 30px;
 }
 
 .list-view .main-contention {
@@ -957,14 +958,15 @@ form .parent-premise strong {
 .list-view .main-contention {
     font-size: 60px;
     padding-bottom: 70px;
-    margin-top: 160px;
+    margin-top: 130px;
 }
 
 .list-view .main-premise-content {
-    margin: 50px;
+    margin: 0 50px -30px;
     width: 900px;
     line-height: 1em;
 }
+
 
 .list-view .premise-actions {
     padding-left: 10px;
