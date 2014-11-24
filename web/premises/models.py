@@ -288,7 +288,6 @@ class Report(models.Model):
         max_length=255, default="Wrong Direction",
         help_text=render_to_string("premises/examples/fallacy.html"))
 
-
     def __unicode__(self):
         return smart_unicode(self.fallacy_type)
 

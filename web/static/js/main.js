@@ -63,7 +63,7 @@
            if (this.needsScroll()) {
                var center = el.offset().left +  (el.width()/2);
                $('html, body').animate({
-                   scrollTop: el.offset().top - 200,
+                   scrollTop: el.is('.main-premise') ? 0 : el.offset().top - 200,
                    scrollLeft: center - (window.innerWidth / 2)
                }, 150);
            }

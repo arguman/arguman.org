@@ -24,6 +24,8 @@ from premises.forms import (ArgumentCreationForm, PremiseCreationForm,
 from premises.signals import (added_premise_for_premise,
                               added_premise_for_contention, reported_as_fallacy,
                               supported_a_premise)
+from premises.templatetags.premise_tags import check_content_deletion
+from newsfeed.models import Entry
 
 
 class ContentionDetailView(DetailView):
@@ -338,9 +340,15 @@ class ArgumentDeleteView(DetailView):
 
     def post(self, request, slug):
         contention = self.get_object()
-        contention.delete()
-        messages.info(request, u"Argümanınız silindi.")
-        return redirect("home")
+        if check_content_deletion(contention):
+            # remove notification
+            Entry.objects.delete(contention.get_newsfeed_type(), contention.id)
+            contention.delete()
+            messages.info(request, u"Argümanınız silindi.")
+            return redirect("home")
+        else:
+            messages.info(request, u"Argümanınız silinecek durumda değil.")
+            return redirect(contention)
 
     delete = post
 
@@ -470,6 +478,13 @@ class ReportView(CreateView):
 
     def get_premise(self):
         return get_object_or_404(Premise, pk=self.kwargs['pk'])
+
+    def get_initial(self):
+        return {
+            'contention': self.get_contention(),
+            'premise': self.get_premise(),
+            'reporter': self.request.user
+        }
 
     def form_valid(self, form):
         contention = self.get_contention()
