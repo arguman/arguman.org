@@ -600,6 +600,25 @@ li.base-premises {
     color: #474747;
     height: 24px;
 }
+.premise-link:before {
+border: 1px dashed;
+border-radius: 3px;
+display: inline-block;
+margin: 0 10px 0 0;
+padding: 0 5px;
+}
+
+.premise-link.but:before {
+content: "ama";
+}
+
+.premise-link.because:before {
+content: "çünkü";
+}
+
+.premise-link.however:before {
+content: "ancak";
+}
 .contention-admin-menu form {
     margin: -6px 0 0;
     padding: 0;
