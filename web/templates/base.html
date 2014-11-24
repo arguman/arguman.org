@@ -33,8 +33,9 @@
             {% else %}
             <li><a href="{% url "new_argument" %}"><strong>argüman gönder</strong></a></li>
             <li>
-              <a href="{% url "auth_profile" user.username %}">profilim</a>
-              <a href="{% url "auth_logout" %}">(çıkış yap)</a>
+              <a href="{% url "auth_profile" user.username %}">profilim</a> &middot;
+              <a href="{% url "auth_profile_update" %}">güncelle</a> &middot;
+              <a href="{% url "auth_logout" %}">çıkış yap</a>
             </li>
             {% endif %}
         </ul>

@@ -463,6 +463,7 @@ li.base-premises {
     max-width: 800px;
     line-height: 1em;
     margin: auto;
+    word-wrap: break-word;
 }
 
 #app .main-premise-content p {
@@ -983,7 +984,7 @@ form .parent-premise strong {
 }
 
 .original-discourse {
-    max-width: 300px;
+    max-width: 350px;
 }
 
 /* Notificatons */
