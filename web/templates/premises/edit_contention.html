@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load premise_tags %}
+
 {% block content %}
     <section class="container">
         <form action="?" method="post">
@@ -8,5 +10,11 @@
             {{ form.as_p }}
             <input type="submit" value="Kaydet" class="submit">
         </form>
+        {% if form.instance|check_content_deletion %}
+            <form action="{% url "contention_delete" form.instance.slug %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Argümanı Sil" class="submit">
+        </form>
+        {% endif %}
     </section>
 {% endblock %}
