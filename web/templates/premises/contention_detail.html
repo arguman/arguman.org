@@ -69,6 +69,7 @@
 
 {% block content %}
 
+    {% if view == "tree-view" %}
     <div id="keyboard-manager-info">
     <span class="keys">
         <span class="left">←</span>
@@ -77,6 +78,7 @@
     </span>
     <p>harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz.</p>
     </div>
+    {% endif %}
 
     <div id="app" class="{{ view }}{% if not contention.published_premises.exists %} empty{% endif %}">
             {% if messages %}
