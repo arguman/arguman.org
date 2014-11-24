@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+from datetime import timedelta
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -110,6 +111,13 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_USER_MODEL = 'profiles.Profile'
 
+
+# Rules
+CONTENT_DELETION = {
+    'MAX_PREMISE_COUNT': 2,
+    'HAS_EMPTY_CONTENT_DELETION': True,
+    'LAST_DELETION_DATE': timedelta(hours=1)
+}
 
 TWITTER_CONSUMER_KEY = None # defined in settings_local.py
 TWITTER_CONSUMER_SECRET = None # defined in settings_local.py
