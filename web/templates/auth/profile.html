@@ -11,7 +11,7 @@
             {% ifequal profile user %}
             <a class="profile-update-button" href="{% url "auth_profile_update" %}">(güncelle)</a>
             {% endifequal %}
-            {% if can_follow %}
+            {% if not user.is_anonymous and can_follow %}
             <nav class="actions">
                 {% if is_followed %}
                     <a href="{% url "auth_profile" profile.username %}" class="anchor unfollow" data-method="delete">Takibi bırak</a>
