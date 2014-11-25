@@ -7,6 +7,17 @@
             <div class="fallacy-premise">
                 <p>{{ premise.text }}</p>
             </div>
+            <!--
+            <label>Safsata Tipi:</label>
+            <dl>
+                <dt><label><input type="radio" value="s" name="fallacy_type" /> Safsata</label></dt>
+                <dd>asdas sdasdas</dd>
+                <dt><input type="radio" value="d" name="fallacy_type" /> Safsata</dt>
+                <dd>asdas sdasdas</dd>
+                <dt><input type="radio" value="f" name="fallacy_type" /> Safsata</dt>
+                <dd>asdas sdasdas</dd>
+            </dl>
+            -->
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Safsatayı Bildir" class="submit">
