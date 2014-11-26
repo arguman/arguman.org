@@ -229,6 +229,10 @@ form textarea {
     height: 80px;
 }
 
+#id_title,#id_owner{
+    width: 100%
+}
+
 
 .premise .actions form {
     margin: 0 0 0 15px;
