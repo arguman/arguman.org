@@ -7,3 +7,4 @@ markdown2==2.3.0
 pymongo==2.6.3
 django-markitup==2.2.2
 Markdown==2.5.1
+djangorestframework==2.4.4

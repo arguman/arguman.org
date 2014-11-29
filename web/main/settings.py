@@ -41,7 +41,8 @@ INSTALLED_APPS = (
 
     'social.apps.django_app.default',
     'django_gravatar',
-
+    'rest_framework',
+    'rest_framework.authtoken',
     'profiles',
     'premises',
     'newsfeed',
@@ -161,6 +162,17 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
 )
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 
 MONGODB_HOST = "localhost"
