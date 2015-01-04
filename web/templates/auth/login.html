@@ -8,7 +8,9 @@
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" class="submit" value="Giriş">
+            <a href="{% url "password_reset" %}">
+              Şifremi Unuttum!
+            </a>
         </form>
-
     </section>
 {% endblock %}
