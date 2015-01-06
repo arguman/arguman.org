@@ -26,7 +26,7 @@ class RegistrationForm(UserCreationForm):
         # but it sets a nicer error message than the ORM. See #13147.
         username = self.cleaned_data["username"]
         try:
-            Profile._default_manager.get(username=username)
+            Profile._default_manager.get(username__iexact=username)
         except Profile.DoesNotExist:
             return username
         raise forms.ValidationError(

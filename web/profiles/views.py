@@ -58,7 +58,7 @@ class LogoutView(LoginRequiredMixin, RedirectView):
 
 
 class ProfileDetailView(DetailView):
-    slug_field = 'username'
+    slug_field = 'username__iexact'
     slug_url_kwarg = 'username'
     context_object_name = "profile"
     model = Profile
