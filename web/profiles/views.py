@@ -1,6 +1,8 @@
 import json
 
 from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -46,7 +48,7 @@ class LoginView(FormView):
         return context
 
 
-class LogoutView(RedirectView):
+class LogoutView(LoginRequiredMixin, RedirectView):
     def get(self, request, *args, **kwargs):
         logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)
@@ -84,6 +86,7 @@ class ProfileDetailView(DetailView):
             is_followed=is_followed,
             contentions=contentions)
 
+    @method_decorator(login_required)
     def delete(self, request, **kwargs):
         """
         - Removes `FollowedProfile` object for authenticated user.
@@ -99,6 +102,7 @@ class ProfileDetailView(DetailView):
             "success": True
         }))
 
+    @method_decorator(login_required)
     def post(self, request, **kwargs):
         """
         - Creates `FollowedProfile` object for authenticated user.
