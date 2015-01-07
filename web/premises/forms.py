@@ -15,6 +15,10 @@ class ArgumentCreationForm(FormRenderer, forms.ModelForm):
 
 class PremiseCreationForm(FormRenderer, forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(PremiseCreationForm, self).__init__(*args, **kwargs)
+        self.fields['text'].required = True
+
     class Meta:
         model = Premise
         fields = ['premise_type', 'text', 'sources']
