@@ -3,7 +3,7 @@ from functools import partial
 
 def int_or_default(value, default=None):
     try:
-        return int(value)
+        return abs(int(value))
     except (ValueError, TypeError):
         return default
 
