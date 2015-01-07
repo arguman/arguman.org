@@ -15,7 +15,7 @@ class RegistrationForm(UserCreationForm):
         help_text = "30 karakterden az, ascii, - ve boşluk kullanabileceginiz kullanıcı adı",
         error_messages = {'invalid': "ascii, - boşluk karakterleri dışında karakter girmeyiniz."}
         )
-        
+
     class Meta(UserCreationForm.Meta):
         fields = ("username", "email")
         model = Profile
@@ -66,3 +66,13 @@ class ProfileUpdateForm(forms.ModelForm):
         if self.cleaned_data.get("new_password1"):
             self.instance.set_password(self.cleaned_data['new_password1'])
         return super(ProfileUpdateForm, self).save(commit)
+
+    def clean_username(self):
+        username = self.cleaned_data["username"]
+        try:
+            Profile._default_manager.exclude(id=self.instance.id).get(
+                username__iexact=username)
+        except Profile.DoesNotExist:
+            return username
+        raise forms.ValidationError(
+            'Bu isimde bir kullanıcı zaten mevcuttur.')
