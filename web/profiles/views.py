@@ -94,6 +94,12 @@ class ProfileDetailView(DetailView):
         """
         user = self.get_object()
 
+        if not request.user.following.filter(id=user.id).exists():
+            return HttpResponse(json.dumps({
+                "error": "Takibi birakmadan once takip etmen gerekiyor.",
+                "success": False
+            }))
+
         request.user.following.remove(user)
 
         unfollow_done.send(sender=self, follower=request.user, following=user)
@@ -110,9 +116,16 @@ class ProfileDetailView(DetailView):
         """
         user = self.get_object()
 
+        if user.id == self.request.user.id:
+            return HttpResponse(json.dumps({
+                "error": "Kedini takip edemezsin.",
+                "success": False
+            }))
+
         if user.followers.filter(pk=request.user.pk).exists():
             return HttpResponse(json.dumps({
-                "error": "You already following this people."
+                "error": "Zaten bu kullaniciyi takip ediyorsun",
+                "success": False
             }))
 
         request.user.following.add(user)
