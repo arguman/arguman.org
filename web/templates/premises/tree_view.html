@@ -46,7 +46,8 @@
                     {% endif %}
                 </div>
 
-                <div class="premise-actions">
+                {% if user.is_authenticated %}
+                    <div class="premise-actions">
                 {% if user == premise.user %}
                         <a href="{% url "edit_premise" contention.slug premise.pk %}">düzenle</a>
                         <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
@@ -74,8 +75,6 @@
                     {% endif %}
                 {% endif %}
                 </div>
-
-                {% if user.is_authenticated %}
                     <div class="report">
                         <a href="{% url 'report_premise' contention.slug premise.pk %}">safsata bildir</a>
                     </div>
