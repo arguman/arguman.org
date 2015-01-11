@@ -1378,6 +1378,16 @@ div.load-more {
     margin-left: -3px;
 }
 
+#login-form .reset-password-link {
+    color: #c1c1c1;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.form-footer {
+
+}
+
 
 /* Media Queries */
 @media (max-width: 800px){
