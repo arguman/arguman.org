@@ -1,6 +1,8 @@
 import json
 
 from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -46,7 +48,7 @@ class LoginView(FormView):
         return context
 
 
-class LogoutView(RedirectView):
+class LogoutView(LoginRequiredMixin, RedirectView):
     def get(self, request, *args, **kwargs):
         logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)
@@ -56,7 +58,7 @@ class LogoutView(RedirectView):
 
 
 class ProfileDetailView(DetailView):
-    slug_field = 'username'
+    slug_field = 'username__iexact'
     slug_url_kwarg = 'username'
     context_object_name = "profile"
     model = Profile
@@ -84,12 +86,19 @@ class ProfileDetailView(DetailView):
             is_followed=is_followed,
             contentions=contentions)
 
+    @method_decorator(login_required)
     def delete(self, request, **kwargs):
         """
         - Removes `FollowedProfile` object for authenticated user.
         - Fires unfollow_done signal
         """
         user = self.get_object()
+
+        if not request.user.following.filter(id=user.id).exists():
+            return HttpResponse(json.dumps({
+                "error": "Takibi birakmadan once takip etmen gerekiyor.",
+                "success": False
+            }))
 
         request.user.following.remove(user)
 
@@ -99,6 +108,7 @@ class ProfileDetailView(DetailView):
             "success": True
         }))
 
+    @method_decorator(login_required)
     def post(self, request, **kwargs):
         """
         - Creates `FollowedProfile` object for authenticated user.
@@ -106,9 +116,16 @@ class ProfileDetailView(DetailView):
         """
         user = self.get_object()
 
+        if user.id == self.request.user.id:
+            return HttpResponse(json.dumps({
+                "error": "Kedini takip edemezsin.",
+                "success": False
+            }))
+
         if user.followers.filter(pk=request.user.pk).exists():
             return HttpResponse(json.dumps({
-                "error": "You already following this people."
+                "error": "Zaten bu kullaniciyi takip ediyorsun",
+                "success": False
             }))
 
         request.user.following.add(user)

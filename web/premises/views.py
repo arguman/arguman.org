@@ -26,6 +26,7 @@ from premises.signals import (added_premise_for_premise,
                               supported_a_premise)
 from premises.templatetags.premise_tags import check_content_deletion
 from newsfeed.models import Entry
+from profiles.mixins import LoginRequiredMixin
 
 
 class ContentionDetailView(DetailView):
@@ -166,7 +167,7 @@ class HomeView(TemplateView):
         return contentions
 
 
-class NotificationsView(HomeView):
+class NotificationsView(LoginRequiredMixin, HomeView):
     template_name = "notifications.html"
 
     def get_context_data(self, **kwargs):
@@ -274,7 +275,7 @@ class TosView(TemplateView):
             content=content, **kwargs)
 
 
-class ArgumentCreationView(CreateView):
+class ArgumentCreationView(LoginRequiredMixin, CreateView):
     template_name = "premises/new_contention.html"
     form_class = ArgumentCreationForm
 
@@ -286,7 +287,7 @@ class ArgumentCreationView(CreateView):
         return response
 
 
-class ArgumentUpdateView(UpdateView):
+class ArgumentUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "premises/edit_contention.html"
     form_class = ArgumentCreationForm
 
@@ -303,7 +304,7 @@ class ArgumentUpdateView(UpdateView):
         return response
 
 
-class ArgumentPublishView(DetailView):
+class ArgumentPublishView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
@@ -320,7 +321,7 @@ class ArgumentPublishView(DetailView):
         return redirect(contention)
 
 
-class ArgumentUnpublishView(DetailView):
+class ArgumentUnpublishView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
@@ -333,7 +334,7 @@ class ArgumentUnpublishView(DetailView):
         return redirect(contention)
 
 
-class ArgumentDeleteView(DetailView):
+class ArgumentDeleteView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
@@ -353,7 +354,7 @@ class ArgumentDeleteView(DetailView):
     delete = post
 
 
-class PremiseEditView(UpdateView):
+class PremiseEditView(LoginRequiredMixin, UpdateView):
     template_name = "premises/edit_premise.html"
     form_class = PremiseEditForm
 
@@ -374,7 +375,7 @@ class PremiseEditView(UpdateView):
             **kwargs)
 
 
-class PremiseCreationView(CreateView):
+class PremiseCreationView(LoginRequiredMixin, CreateView):
     template_name = "premises/new_premise.html"
     form_class = PremiseCreationForm
 
@@ -414,7 +415,7 @@ class PremiseCreationView(CreateView):
         if parent_pk:
             return get_object_or_404(Premise, pk=parent_pk)
 
-class PremiseSupportView(View):
+class PremiseSupportView(LoginRequiredMixin, View):
     def get_premise(self):
         premises = Premise.objects.exclude(user=self.request.user)
         return get_object_or_404(premises, pk=self.kwargs['pk'])
@@ -439,7 +440,7 @@ class PremiseUnsupportView(PremiseSupportView):
     post = delete
 
 
-class PremiseDeleteView(View):
+class PremiseDeleteView(LoginRequiredMixin, View):
     def get_premise(self):
         if self.request.user.is_staff:
             premises = Premise.objects.all()
@@ -464,7 +465,7 @@ class PremiseDeleteView(View):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
 
 
-class ReportView(CreateView):
+class ReportView(LoginRequiredMixin, CreateView):
     form_class = ReportForm
     template_name = "premises/report.html"
 

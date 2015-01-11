@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container about content">
+    <h1>Söz konusu sayfayı bulamadık.</h1>
+    <p>
+        Ancak yine de aradıgınız şeyi bulmanız için size yardımcı olabiliriz.
+    </p>
+
+    <form action="{% url "contentions_search" %}" class="search-form" style="padding: 0px">
+        <label for="id_q">Kelime: </label>
+        <input type="text" class="searchfield" style="width: 370px" name="keywords" />
+        </br></br>
+        <a href="{{ request.get_full_path }}" class="submit">Tekrar Dene</a> |
+        <a href='{% url "home" %}' class="submit">Anasayfaya Git</a>
+    </form>
+</div>
+{% endblock %}

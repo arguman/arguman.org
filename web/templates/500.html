@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="container about content">
+    <h2>Maalesef! Beklenmeyen bir sorun oluştu.</h2>
+    <p>
+      <a href="{{ request.get_full_path }}" class="submit">Tekrar Dene</a> |
+      <a href="https://github.com/arguman/arguman.org/issues/" class="submit">Hata Olarak Bildir</a> |
+      <a href="{% url "home" %}" class="submit">Anasayfaya Dön</a> |
+    </p>
+</div>
+{% endblock %}
