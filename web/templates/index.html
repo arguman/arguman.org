@@ -8,12 +8,7 @@
         {% include "home.html" %}
         {% include "tabs.html" %}
 
-        {% ifequal tab_class 'search' %}
-            <form action="{% url "contentions_search" %}" class="search-form">
-                <label for="id_q">Kelime: </label>
-                <input type="text" class="searchfield" value="{{ keywords }}" name="keywords" id="id_q"/>
-            </form>
-        {% endifequal %}
+        {% block tab_content %}
         <ul class="argument-list">
             {% for contention in contentions %}
                 <li>
@@ -42,6 +37,7 @@
             </li>
             {% endif %}
         </ul>
+        {% endblock %}
 
     </div>
 {% endblock %}

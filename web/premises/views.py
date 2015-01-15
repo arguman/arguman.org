@@ -7,9 +7,9 @@ from markdown2 import markdown
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django.db.models import Max
+from django.db.models import Max, Sum
 from django.utils.timezone import now
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
@@ -27,6 +27,7 @@ from premises.signals import (added_premise_for_premise,
 from premises.templatetags.premise_tags import check_content_deletion
 from newsfeed.models import Entry
 from profiles.mixins import LoginRequiredMixin
+from profiles.models import Profile
 
 
 class ContentionDetailView(DetailView):
@@ -181,6 +182,7 @@ class NotificationsView(LoginRequiredMixin, HomeView):
 
 class SearchView(HomeView):
     tab_class = 'search'
+    template_name = 'search.html'
 
     def get_context_data(self, **kwargs):
         return super(SearchView, self).get_context_data(
@@ -225,6 +227,119 @@ class NewsView(HomeView):
             contentions = contentions[self.get_offset():self.get_limit()]
 
         return contentions
+
+
+class StatsView(HomeView):
+    tab_class = "stats"
+    template_name = "stats.html"
+    
+    partial_templates = {
+        Profile: "stats/profile.html",
+        Contention: "stats/contention.html",
+        Premise: "stats/premise.html",
+    }
+
+    method_mapping = {
+        "active_users": "get_active_users",
+        "supported_users": "get_supported_users",
+        "disgraced_users": "get_disgraced_users",
+        "supported_premises": "get_supported_premises",
+        "fallacy_premises": "get_fallacy_premises",
+        "crowded_contentions": "get_crowded_contentions",
+    }
+
+    time_ranges = [7, 30]
+
+    def get_context_data(self, **kwargs):
+        return super(StatsView, self).get_context_data(
+            stats=self.get_stats_bundle(),
+            stats_type=self.get_stats_type(),
+            days=self.days,
+            **kwargs)
+
+    def get_stats_type(self):
+        return self.request.GET.get("what")
+
+    def build_time_filters(self, date_field="date_creation"):
+        days = self.request.GET.get("days")
+
+        if not days or days == "all":
+            self.days = None
+            return {}
+
+        try:
+            days = int(days)
+        except (TypeError, ValueError):
+            days = None
+
+        if not days or not days in self.time_ranges:
+            raise Http404()
+
+        self.days = days
+
+        field_expression = "%s__gt" % date_field
+
+        return {
+            field_expression: timezone.now() - timedelta(days=days)
+        }
+
+    def get_stats_bundle(self):
+        stat_type = self.get_stats_type()
+        if not stat_type in self.method_mapping:
+            raise Http404()
+        method = getattr(self, self.method_mapping[stat_type])
+        return [{
+            "template": self.partial_templates[type(item)],
+            "object": item
+        } for item in method()]
+
+    def get_active_users(self):
+        return Profile.objects.annotate(
+            premise_count=Sum("premise"),
+        ).filter(
+            premise_count__gt=0,
+            **self.build_time_filters(date_field="premise__date_creation")
+        ).order_by("-premise_count")[:10]
+
+    def get_supported_users(self):
+        return Profile.objects.annotate(
+            supporter_count=Sum("premise__supporters"),
+        ).filter(
+            supporter_count__gt=0,
+            **self.build_time_filters(date_field="premise__date_creation")
+        ).order_by("-supporter_count")[:10]
+
+    def get_disgraced_users(self):
+        return Profile.objects.annotate(
+            report_count=Sum("premise__reports"),
+        ).filter(
+            report_count__gt=0,
+            **self.build_time_filters(date_field="premise__date_creation")
+        ).order_by("-report_count")[:10]
+
+    def get_supported_premises(self):
+        return Premise.objects.annotate(
+            supporter_count=Sum("supporters"),
+        ).filter(
+            supporter_count__gt=0,
+            **self.build_time_filters(date_field="date_creation")
+        ).order_by("-supporter_count")[:50]
+
+    def get_fallacy_premises(self):
+        return Premise.objects.annotate(
+            report_count=Sum("reports"),
+        ).filter(
+            report_count__gt=0,
+            **self.build_time_filters(date_field="date_creation")
+        ).order_by("-report_count")[:10]
+
+    def get_crowded_contentions(self):
+        return Contention.objects.annotate(
+            premise_count=Sum("premises"),
+        ).filter(
+            premise_count__gt=0,
+            **self.build_time_filters(date_field="date_creation")
+        ).order_by("-premise_count")[:10]
 
 
 class UpdatedArgumentsView(HomeView):

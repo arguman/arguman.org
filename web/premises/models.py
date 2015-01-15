@@ -150,6 +150,14 @@ class Contention(DeletePreventionMixin, models.Model):
             "uri": self.get_absolute_url()
         }
 
+    def contributors(self):
+        from profiles.models import Profile
+        # avoid circular import
+
+        return Profile.objects.filter(
+            id__in=self.premises.values_list("user_id", flat=True)
+        )
+
 
 class Premise(DeletePreventionMixin, models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")

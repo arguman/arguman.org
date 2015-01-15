@@ -1,0 +1,22 @@
+{% load gravatar %}
+<div class="contention-stats">
+	<h2><a href="{% url "contention_detail" object.slug %}">{{ object.title }}</a></h2>
+    <div class="stats-bar">
+		<span>
+			{{ object.contributors|length }} <br/>
+			KATILIMCI
+		</span>
+		<span>
+			{{ object.because.count }} <br>
+			ÇÜNKÜ
+		</span>
+        <span>
+			{{ object.but.count }} <br>
+			AMA
+		</span>
+        <span>
+			{{ object.however.count }} <br>
+			ANCAK
+		</span>
+	</div>
+</div>
