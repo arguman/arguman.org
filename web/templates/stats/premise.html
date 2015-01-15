@@ -1,6 +1,6 @@
 {% load gravatar %}
 <div class="premise-stats">
-	<h2><a href="#">{{ object.argument.title }}</a></h2>
+	<h2><a href="{% url "contention_detail" object.argument.slug %}">{{ object.argument.title }}</a></h2>
     <span class="premise-type {{ object.premise_class }}">{{ object.get_premise_type_display }}</span>
 	<div class="premise-content {{ object.premise_class }}">
         {{ object.text }}
