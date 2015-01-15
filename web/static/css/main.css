@@ -1427,7 +1427,7 @@ div.load-more {
 }
 
 .stat-item {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .user-stats h2 {
@@ -1524,7 +1524,8 @@ div.load-more {
 }
 
 .premise-stats {
-
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f4f4f4;
 }
 
 .premise-stats h2 {
@@ -1548,9 +1549,14 @@ div.load-more {
 }
 
 .premise-stats .premise-content {
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
+    line-height: 1.5em;
 }
+
+.premise-stats .premise-content.because { background: #e0ffdc; }
+.premise-stats .premise-content.but { background: #ffeae8; }
+.premise-stats .premise-content.however { background: #fff8e1; }
 
 .premise-stats .supporter-count {
     margin-left: 20px;
