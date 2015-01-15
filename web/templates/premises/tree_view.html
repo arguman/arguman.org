@@ -45,9 +45,10 @@
                         </div>
                     {% endif %}
                 </div>
-                {% if edit_mode or user == premise.user %}
+
+                {% if user.is_authenticated %}
                     <div class="premise-actions">
-                        <a href="{% url "insert_premise" contention.slug premise.pk %}">önerme ekle</a>
+                {% if user == premise.user %}
                         <a href="{% url "edit_premise" contention.slug premise.pk %}">düzenle</a>
                         <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
                             {% csrf_token %}
@@ -55,29 +56,25 @@
                                    onclick="return confirm('Önermeyi silmek istediğinize emin misiniz?');"
                                    class="delete_premise"/>
                         </form>
-                    </div>
-                {% else %}
-                    {% if user.is_authenticated %}
-                        <div class="premise-actions">
-                        <a href="{% url "insert_premise" contention.slug premise.pk %}">önerme gönder</a>
-                        {% if premise.user != user %}
-                            {% if user in premise.supporters.all %}
-                            <form class="support" action="{% url "unsupport_premise" contention.slug premise.pk %}" method="post">
-                                {% csrf_token %}
-                                <input type="submit" value="geri al"/>
-                            </form>
-                            {% else %}
-                            <form class="support" action="{% url "support_premise" contention.slug premise.pk %}" method="post">
-                                {% csrf_token %}
-                                <input type="submit" value="destekle"/>
-                            </form>
-                            {% endif %}
-                        {% endif %}
-                        </div>
-                    {% endif %}
                 {% endif %}
 
                 {% if user.is_authenticated %}
+                    <a href="{% url "insert_premise" contention.slug premise.pk %}">önerme gönder</a>
+                    {% if premise.user != user %}
+                        {% if user in premise.supporters.all %}
+                        <form class="support" action="{% url "unsupport_premise" contention.slug premise.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="geri al"/>
+                        </form>
+                        {% else %}
+                        <form class="support" action="{% url "support_premise" contention.slug premise.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="destekle"/>
+                        </form>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+                </div>
                     <div class="report">
                         <a href="{% url 'report_premise' contention.slug premise.pk %}">safsata bildir</a>
                     </div>

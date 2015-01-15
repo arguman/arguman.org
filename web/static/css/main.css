@@ -604,25 +604,7 @@ li.base-premises {
     color: #474747;
     height: 24px;
 }
-.premise-link:before {
-border: 1px dashed;
-border-radius: 3px;
-display: inline-block;
-margin: 0 10px 0 0;
-padding: 0 5px;
-}
 
-.premise-link.but:before {
-content: "ama";
-}
-
-.premise-link.because:before {
-content: "çünkü";
-}
-
-.premise-link.however:before {
-content: "ancak";
-}
 .contention-admin-menu form {
     margin: -6px 0 0;
     padding: 0;
@@ -1396,6 +1378,197 @@ div.load-more {
     margin-left: -3px;
 }
 
+#login-form .reset-password-link {
+    color: #c1c1c1;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Stats */
+.stats-content {
+    padding: 4px 20px;
+    overflow: hidden;
+}
+
+.stats-sidebar {
+    width: 230px;
+    background: #f1f1f1;
+    float: left;
+}
+
+.stats-sidebar ul {
+    margin: 0;
+    padding: 10px 0 10px 20px;
+}
+
+.stats-sidebar li {
+    list-style: none;
+    padding: 3px 20px 3px 14px;
+    border-left: 10px solid #d6d6d6;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.stats-sidebar li.active {
+    border-color: #ffd461;
+}
+
+.stats-sidebar li a {
+    text-decoration: none;
+    color: #3d3d3d;
+    font-size: 25px;
+    line-height: 1em;
+}
+
+.stats-list {
+    width: 510px;
+    float: left;
+    margin-left: 20px;
+}
+
+.stat-item {
+    margin-bottom: 20px;
+}
+
+.user-stats h2 {
+    margin: 0;
+    padding: 0;
+    margin-left: 110px;
+    
+}
+
+.user-stats h2 a {
+    color: gray;
+    text-decoration: none;
+}
+
+.stats-bar {
+    overflow: hidden;
+}
+
+.stats-bar span {
+    width: 90px;
+    float: left;
+    display: block;
+    font-size: 15px;
+    text-align: center;
+    margin: 2px 3px;
+    padding: 2px 3px;
+    color: #808080;
+}
+
+.stats-bar span {
+    border-left: 1px solid #d1d1d1;
+}
+
+.stats-bar span:first-child {
+    border: none;
+}
+
+.user-stats img {
+    float: left;
+    border-radius: 50%;
+    margin-top: 7px;
+}
+
+.time-filter {
+    margin: 0 0 20px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.time-filter li {
+    float: left;
+    list-style-type: none;
+    padding: 0 10px;
+}
+
+.time-filter li a {
+    text-decoration: none;
+    color: gray;
+    border-bottom: 4px solid #e1e1e1;
+    display: inline-block;
+    padding: 0 3px;
+    font-size: 22px;
+}
+
+.time-filter li.active a {
+    border-color: #252626;
+}
+
+.contention-stats h2 {
+    margin: 0;
+    padding: 3px;
+    line-height: 1.2em;
+}
+
+.contention-stats h2 a {
+    text-decoration: none;
+    color: #5e5e5e;
+}
+
+.contention-stats .contributors {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.contention-stats .contributors li {
+    list-style-type: none;
+    float: left;
+    margin: 3px;
+}
+
+.contention-stats .contributors li img {
+    border-radius: 50%;
+}
+
+.premise-stats {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f4f4f4;
+}
+
+.premise-stats h2 {
+    margin: 0;
+    padding: 0;
+    margin-left: 4px;
+    line-height: 1.1em;
+}
+
+.premise-stats h2 a {
+    color: #414141;
+    text-decoration: none;
+}
+
+.premise-stats .premise-type {
+    padding: 5px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 3px;
+    font-size: 20px;
+}
+
+.premise-stats .premise-content {
+    padding: 15px;
+    border-radius: 10px;
+    line-height: 1.5em;
+}
+
+.premise-stats .premise-content.because { background: #e0ffdc; }
+.premise-stats .premise-content.but { background: #ffeae8; }
+.premise-stats .premise-content.however { background: #fff8e1; }
+
+.premise-stats .supporter-count {
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #b7b7b5;
+}
+
+.premise-stats .reported_as_fallacy {
+    border: none;
+    border-radius: 5px;
+    background: white;
+}
 
 /* Media Queries */
 @media (max-width: 800px){

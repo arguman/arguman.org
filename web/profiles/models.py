@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+from django.db.models import Count
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from premises.models import Contention, Report, Premise
@@ -20,6 +21,11 @@ class Profile(AbstractUser):
         # todo: find a way to make reverse relationships
         # with symmetrical false option
         return Profile.objects.filter(following=self)
+
+    @property
+    def supported_premise_count(self):
+        return self.premise_set.aggregate(Count('supporters'))[
+            'supporters__count']
 
 
 NOTIFICATION_ADDED_PREMISE_FOR_CONTENTION = 0

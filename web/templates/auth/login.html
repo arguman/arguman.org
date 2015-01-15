@@ -2,13 +2,15 @@
 
 {% block content %}
     <section class="container">
-        <form action="{% url "auth_login" %}?next={{ next }}" method="post">
+        <form id="login-form" action="{% url "auth_login" %}?next={{ next }}" method="post">
             {% include "profiles/social_providers.html" %}
-            <h2>Kullanıcı adınla giriş yap</h2>
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" class="submit" value="Giriş">
+            <div class="form-footer">
+                <input type="submit" class="submit" value="Giriş">
+                <br/>
+                <a class="reset-password-link" href="{% url "password_reset" %}">Şifremi Unuttum!</a>
+            </div>
         </form>
-
     </section>
 {% endblock %}

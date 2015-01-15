@@ -1,0 +1,25 @@
+{% load gravatar %}
+<div class="premise-stats">
+	<h2><a href="{% url "contention_detail" object.argument.slug %}">{{ object.argument.title }}</a></h2>
+    <span class="premise-type {{ object.premise_class }}">{{ object.get_premise_type_display }}</span>
+	<div class="premise-content {{ object.premise_class }}">
+        {{ object.text }}
+    </div>
+    {% if object.supporters.exists %}
+	<div class="supporter-count">
+	{{ object.supporters.count }} destekleyen var.
+	</div>
+	{% endif %}
+	{% if object.reports.exists %}
+		<div class="reported_as_fallacy">
+		{{ object.reports.count }} safsata bildirimi yapıldı.
+
+		{% if object.fallacies %}
+			{% for fallacy in object.fallacies %}
+			<div class="fallacy">{{ fallacy }}</div>
+			{% endfor %}
+		{% endif %}
+
+		</div>
+	{% endif %}
+</div>

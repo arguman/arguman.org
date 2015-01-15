@@ -1,0 +1,8 @@
+{% extends "index.html" %}
+
+{% block tab_content %}
+<form action="{% url "contentions_search" %}" class="search-form">
+    <label for="id_q">Kelime: </label>
+    <input type="text" class="searchfield" value="{{ keywords }}" name="keywords" id="id_q"/>
+</form>
+{% endblock %}
