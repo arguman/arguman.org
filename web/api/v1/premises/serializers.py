@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from rest_framework import serializers
 
 from premises.models import Contention, Premise, Report
+from premises.signals import reported_as_fallacy
 from api.v1.account.serializers import UserProfileSerializer
 
 
@@ -43,11 +44,11 @@ class PremiseReportSerializer(serializers.ModelSerializer):
         model = Report
         fields = ('fallacy_type', 'reporter', 'premise', 'contention',)
 
-
     def create(self, validated_data):
         instance = Report(**validated_data)
         instance.reporter = self.initial['reporter']
         instance.premise = self.initial['premise']
         instance.contention = self.initial['contention']
         instance.save()
+        reported_as_fallacy.send(sender=self, report=instance)
         return instance
