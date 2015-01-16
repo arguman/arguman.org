@@ -9,6 +9,7 @@ from premises.models import Contention, Premise
 from .serializers import (ContentionSerializer, PremisesSerializer,
                           PremiseReportSerializer)
 from premises.utils import int_or_default
+from premises.signals import supported_a_premise
 
 
 class ContentionViewset(viewsets.ModelViewSet):
@@ -56,9 +57,31 @@ class PremiseDetailView(viewsets.ModelViewSet):
                             status=status.HTTP_400_BAD_REQUEST)
 
 
+    @detail_route(methods=['post'])
+    def support(self, request, pk=None, premise_id=None):
+        premise = self.get_object()
+        if premise.supporters.filter(id=request.user.id).exists():
+            return Response({'message': "premise already supported"},
+                            status=status.HTTP_400_BAD_REQUEST)
+        premise.supporters.add(request.user)
+        supported_a_premise.send(sender=self, premise=premise,
+                                 user=self.request.user)
+        return Response(status=status.HTTP_201_CREATED)
+
+    @detail_route(methods=['delete'])
+    def unsupport(self, request, pk=None, premise_id=None):
+        premise = self.get_object()
+        if not premise.supporters.filter(id=request.user.id).exists():
+            return Response({'message': "premise not supported"},
+                            status=status.HTTP_400_BAD_REQUEST)
+        premise.supporters.remove(request.user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 contention_list = ContentionViewset.as_view({'get': 'list'})
 contention_detail = ContentionViewset.as_view({'get': 'retrieve'})
 premises_list = ContentionViewset.as_view({'get': 'premises'})
 premise_detail = PremiseDetailView.as_view({'get': 'retrieve'})
 premise_report = PremiseDetailView.as_view({'post': 'report'})
+premise_support = PremiseDetailView.as_view({'post': 'support',
+                                             'delete': 'unsupport'})
