@@ -1,10 +1,14 @@
 from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
+from rest_framework import filters, status
 
-from premises.models import Contention
-from .serializers import ContentionSerializer, PremisesSerializer
+from premises.models import Contention, Premise
+from .serializers import (ContentionSerializer, PremisesSerializer,
+                          PremiseReportSerializer)
+from premises.utils import int_or_default
 
 
 class ContentionViewset(viewsets.ModelViewSet):
@@ -15,6 +19,8 @@ class ContentionViewset(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     serializer_class = ContentionSerializer
     paginate_by = 20
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
 
     @detail_route()
     def premises(self, request, pk=None):
@@ -23,6 +29,36 @@ class ContentionViewset(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+class PremiseDetailView(viewsets.ModelViewSet):
+    queryset = Premise.objects.filter(is_approved=True)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = PremisesSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'premise_id'
+
+    def filter_queryset(self, queryset):
+        argument_id = int_or_default(self.kwargs.get('pk'), default=0)
+        return queryset.filter(argument__id=argument_id,
+                               argument__is_published=True)
+
+    @detail_route(methods=['post'])
+    def report(self, request, pk=None, premise_id=None):
+        premise = self.get_object()
+        serializer = PremiseReportSerializer(
+            data=request.DATA, initial={'reporter': request.user,
+                                        'premise': premise,
+                                        'contention': premise.argument})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+
+
+
 contention_list = ContentionViewset.as_view({'get': 'list'})
 contention_detail = ContentionViewset.as_view({'get': 'retrieve'})
 premises_list = ContentionViewset.as_view({'get': 'premises'})
+premise_detail = PremiseDetailView.as_view({'get': 'retrieve'})
+premise_report = PremiseDetailView.as_view({'post': 'report'})
