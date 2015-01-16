@@ -60,13 +60,13 @@
                     maxHeight > window.innerHeight)
         },
         scrollTo: function (el) {
-           if (this.needsScroll()) {
-               var center = el.offset().left +  (el.width()/2);
-               $('html, body').animate({
-                   scrollTop: el.is('.main-premise') ? 0 : el.offset().top - 200,
-                   scrollLeft: center - (window.innerWidth / 2)
-               }, 150);
-           }
+            if (this.needsScroll()) {
+                var center = el.offset().left +  (el.width()/2);
+                $('html, body').animate({
+                    scrollTop: el.is('.main-premise') ? 0 : el.offset().top - 200,
+                    scrollLeft: center - (window.innerWidth / 2)
+                }, 150);
+            }
         },
         setInitial: function () {
             if (this.needsScroll()) {
@@ -123,9 +123,9 @@
 
         setTreeWidth: function () {
             /*
-             * Set full width to container, and reduce the width with
-             * positions of last premise.
-             * */
+            * Set full width to container, and reduce the width with
+            * positions of last premise.
+            * */
 
             if (this.$el.hasClass("empty")) {
                 return;
@@ -197,6 +197,54 @@
         init: function () {
             $('#zoomIn').on('click', $.proxy(this, 'zoomIn'));
             $('#zoomOut').on('click', $.proxy(this, 'zoomOut'));
+        }
+    });
+
+    arguman.DraggablePage = Class.extend({
+        el: '#app',
+        clicked: false,
+        click: {
+            x: 0,
+            y: 0
+        },
+        updateScrollPosition: function (e) {
+            $(window)
+            .scrollTop($(window).scrollTop() + (this.click.y - e.pageY))
+            .scrollLeft($(window).scrollLeft() + (this.click.x - e.pageX));
+        },
+        setCursor: function (cursor) {
+            $('html').css('cursor', cursor);
+        },
+        disableUserSelect: function () {
+            $('body').addClass('no-user-select');
+        },
+        enableUserSelect: function () {
+            $('body').removeClass('no-user-select');
+        },
+        bindEvents: function () {
+            self = this;
+
+            $(this.el).on({
+                'mousemove': function (e) {
+                    self.clicked && self.updateScrollPosition(e);
+                },
+                'mousedown': function (e) {
+                    self.disableUserSelect();
+                    self.clicked = e;
+                    self.click.x = e.pageX;
+                    self.click.y = e.pageY;
+                    self.setCursor('move');
+                },
+                'mouseup': function (e) {
+                    self.enableUserSelect();
+                    self.clicked = false;
+                    self.setCursor('auto');
+                }
+            });
+        },
+        init: function (options) {
+            $.extend(this, options);
+            this.bindEvents();
         }
     });
 
