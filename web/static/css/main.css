@@ -21,6 +21,15 @@ body {
     /*-webkit-font-smoothing: antialiased;*/
 }
 
+.no-user-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .container {
     width: 800px;
     margin: 20px auto;
@@ -1434,7 +1443,7 @@ div.load-more {
     margin: 0;
     padding: 0;
     margin-left: 110px;
-    
+
 }
 
 .user-stats h2 a {
@@ -1590,4 +1599,3 @@ div.load-more {
       float: right;
   }
 }
-
