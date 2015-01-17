@@ -1,18 +1,29 @@
+{% load i18n %}
+
 <ul class="tabs">
     <li class="newsfeed{% ifequal tab_class "newsfeed" %} active{% endifequal %}">
-        <a href="{% url "newsfeed" %}">Haber Kaynağı</a></li>
-    <li class="featured{% ifequal tab_class "featured" %} active{% endifequal %}">
-        <a href="/">Seçilmişler</a></li>
-    <li class="news{% ifequal tab_class "news" %} active{% endifequal %}">
-        <a href="{% url "contentions_latest" %}">Yeniler</a></li>
-    <li class="stats{% ifequal tab_class "stats" %} active{% endifequal %}">
-        <a href="{% url "contentions_stats" %}?what=active_users&days=7">İstatistikler</a></li>
-    {% comment %}
-    <li class="controversial{% ifequal tab_class "controversial" %} active{% endifequal %}">
-        <a href="{% url "contentions_controversial" %}">Tartışılanlar</a>
+      <a href="{% url "newsfeed" %}">
+        {% trans "Haber Kaynağı" %}
+      </a>
     </li>
-    {% endcomment %}
+    <li class="featured{% ifequal tab_class "featured" %} active{% endifequal %}">
+      <a href="/">
+        {% trans "Seçilmişler" %}
+      </a>
+    </li>
+    <li class="news{% ifequal tab_class "news" %} active{% endifequal %}">
+      <a href="{% url "contentions_latest" %}">
+        {% trans "Yeniler" %}
+      </a>
+    </li>
+    <li class="stats{% ifequal tab_class "stats" %} active{% endifequal %}">
+      <a href="{% url "contentions_stats" %}?what=active_users&days=7">
+        {% trans "İstatistikler" %}
+      </a>
+    </li>
     <li class="search{% ifequal tab_class "search" %} active{% endifequal %}">
-        <a href="{% url "contentions_search" %}">Arama</a>
+      <a href="{% url "contentions_search" %}">
+        {% trans "Arama" %}
+      </a>
     </li>
 </ul>

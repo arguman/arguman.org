@@ -1,7 +1,8 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Argüman Analizi Platformu{% endblock %}</title>
+    <title>{% block title %}{% trans "Argüman Analizi Platformu" %}{% endblock %}</title>
     <meta charset="utf-8">
     {% load static %}
     <link rel="stylesheet" href="{% static "css/h5bp.css" %}" />
@@ -16,7 +17,7 @@
     {% if announcements.exists %}
     <ul class="announcements">
         {% for announcement in announcements %}
-            <li><strong>Duyuru: </strong> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></li>
+            <li><strong>{% trans "Duyuru:" %} </strong> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -26,16 +27,16 @@
     </div>
     <nav>
         <ul id="main-navigation">
-            <li><a href="{% url "about" %}">nedir?</a></li>
+            <li><a href="{% url "about" %}">{% trans "nedir?" %}</a></li>
             {% if user.is_anonymous %}
-            <li><a href="{% url "auth_registration" %}">kayıt ol</a></li>
-            <li><a href="{% url "auth_login" %}">giriş yap</a></li>
+            <li><a href="{% url "auth_registration" %}">{% trans "kayıt ol" %}</a></li>
+            <li><a href="{% url "auth_login" %}">{% trans "giriş yap" %}</a></li>
             {% else %}
-            <li><a href="{% url "new_argument" %}"><strong>argüman gönder</strong></a></li>
+            <li><a href="{% url "new_argument" %}"><strong>{% trans "argüman gönder" %}</strong></a></li>
             <li>
-              <a href="{% url "auth_profile" user.username %}">profilim</a> &middot;
-              <a href="{% url "auth_profile_update" %}">güncelle</a> &middot;
-              <a href="{% url "auth_logout" %}">çıkış yap</a>
+              <a href="{% url "auth_profile" user.username %}">{% trans "profilim" %}</a> &middot;
+              <a href="{% url "auth_profile_update" %}">{% trans "güncelle" %}</a> &middot;
+              <a href="{% url "auth_logout" %}">{% trans "çıkış yap" %}</a>
             </li>
             {% endif %}
         </ul>
@@ -47,9 +48,9 @@
 {% block footer %}
 <footer>
     <div class="container">
-        <p>Arguman.org henüz geliştirilme aşamasındadır. Ancak bu platformu kullanamayacağınız anlamına gelmiyor.</p>
-    <p><a href="/tos">Kullanım Koşulları</a> |
-       <a href="https://github.com/fatiherikli/arguman.org/issues">Öneri ve şikayet</a> |
+        <p>{% trans "Arguman.org henüz geliştirilme aşamasındadır. Ancak bu platformu kullanamayacağınız anlamına gelmiyor." %}</p>
+    <p><a href="/tos">{% trans "Kullanım Koşulları" %}</a> |
+       <a href="https://github.com/fatiherikli/arguman.org/issues">{% trans "Öneri ve şikayet" %}</a> |
        <a href="mailto:argumananalizi@gmail.com">argumananalizi@gmail.com</a>
     </p>
     </div>

@@ -1,3 +1,5 @@
+from django.utils.translation import ugettext_lazy as _
+
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework import permissions
@@ -21,12 +23,14 @@ class UserProfileViewset(viewsets.ModelViewSet):
     def follow(self, request, username=None):
         user = self.get_object()
         if user.id == request.user.id:
-            return Response({'message': "Kedini takip edemezsin."},
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'message': _("Kedini takip edemezsin.")},
+                status=status.HTTP_400_BAD_REQUEST)
 
         if user.followers.filter(pk=request.user.pk).exists():
-            return Response({'message': "Zaten bu kullaniciyi takip ediyorsun"},
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'message': _("Zaten bu kullaniciyi takip ediyorsun")},
+                status=status.HTTP_400_BAD_REQUEST)
 
         request.user.following.add(user)
         follow_done.send(sender=self, follower=request.user, following=user)
@@ -37,7 +41,7 @@ class UserProfileViewset(viewsets.ModelViewSet):
         user = self.get_object()
         if not request.user.following.filter(id=user.id).exists():
             return Response(
-                {'message': "Takibi birakmadan once takip etmen gerekiyor."},
+                {'message': _("Takibi birakmadan once takip etmen gerekiyor.")},
                 status=status.HTTP_400_BAD_REQUEST)
 
         request.user.following.remove(user)
