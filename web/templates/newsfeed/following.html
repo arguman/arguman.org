@@ -1,7 +1,8 @@
 {% load i18n %}
 
-{% blocktrans with username=related_object.username %}
-  <a href="{% url "auth_profile" username %}" class="contention-link">
+{% url "auth_profile" related_object.username as auth_profile_url %}
+{% blocktrans %}
+  <a href="{{ auth_profile_url }}" class="contention-link">
     {{ related_object.username }}
   </a>
   kişisini takip ediyor.

@@ -4,5 +4,8 @@
 {% endif %}
 
 <div class="landing">
-  {% blocktrans %}arguman.org bir <a href="{% url "about" %}">argüman analizi</a> platformudur.{% endblocktrans %}
+  {% url "about" as about_url %}
+  {% blocktrans %}
+    arguman.org bir <a href="{{ about_url }}">argüman analizi</a> platformudur.
+  {% endblocktrans %}
 </div>

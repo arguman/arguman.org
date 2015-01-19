@@ -2,8 +2,9 @@
 
 {% with contention=target_object.argument %}
 {% if notification.sender and contention %}
+{% url "auth_profile" notification.sender.username as auth_profile_url %}
 {% blocktrans %}
-  <a class="user" href="{% url "auth_profile" notification.sender.username %}">
+  <a class="user" href="{{ auth_profile_url }}">
     {{ notification.sender.username }}
   </a>
   <a href="{{ contention.get_absolute_url }}" class="contention-link">

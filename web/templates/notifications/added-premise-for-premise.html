@@ -1,7 +1,8 @@
 {% with contention=target_object.argument %}
 {% if target_object.user and contention %}
+{% url "auth_profile" target_object.user.username as auth_profile_url %}
 {% blocktrans %}
-  <a class="user" href="{% url "auth_profile" target_object.user.username %}">
+  <a class="user" href="{{ auth_profile_url }}">
     {{ target_object.user.username }}
   </a>
   <a href="{{ contention.get_absolute_url }}" class="contention-link">
