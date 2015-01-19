@@ -1,1 +1,7 @@
-<a class="followed-profile" href="{% url "auth_profile" notification.sender.username %}">{{ notification.sender }}</a> sizi takip ediyor.
+{% load i18n %}
+
+{% blocktrans %}
+<a class="followed-profile" href="{% url "auth_profile" notification.sender.username %}">
+  {{ notification.sender }}
+</a> sizi takip ediyor.
+{% endblocktrans %}

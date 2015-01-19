@@ -1,23 +1,25 @@
 {% load gravatar %}
+{% load i18n %}
+
 <div class="user-stats">
 	{% gravatar object.email 90 %}
 	<h2><a href="{% url "auth_profile" object.username %}">{{ object.username }}</a></h2>
 	<div class="stats-bar">
 		<span>
 			{{ object.followers.count }} <br/>
-			TAKİPÇİ
+			{% trans "TAKİPÇİ" %}
 		</span>
 		<span>
 			{{ object.contention_set.count }} <br>
-			ARGÜMAN
+			{% trans "ARGÜMAN" %}
 		</span>
 		<span>
 			{{ object.premise_set.count }} <br>
-			ÖNERME
+			{% trans "ÖNERME" %}
 		</span>
 		<span>
 			{{ object.supported_premise_count }} <br>
-			DESTEK
+			{% trans "DESTEK" %}
 		</span>
 	</div>
 </div>

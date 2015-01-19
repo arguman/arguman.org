@@ -1,22 +1,24 @@
 {% load gravatar %}
+{% load i18n %}
+
 <div class="contention-stats">
 	<h2><a href="{% url "contention_detail" object.slug %}">{{ object.title }}</a></h2>
     <div class="stats-bar">
 		<span>
 			{{ object.contributors|length }} <br/>
-			KATILIMCI
+			{% trans "KATILIMCI" %}
 		</span>
 		<span>
 			{{ object.because.count }} <br>
-			ÇÜNKÜ
+			{% trans "ÇÜNKÜ" %}
 		</span>
         <span>
 			{{ object.but.count }} <br>
-			AMA
+			{% trans "AMA" %}
 		</span>
-        <span>
+    <span>
 			{{ object.however.count }} <br>
-			ANCAK
+			{% trans "ANCAK" %}
 		</span>
 	</div>
 </div>
