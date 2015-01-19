@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block content %}
     <section class="container new-premise">
         {% ifnotequal contention.user user %}
             <div class="form-info">
-                Göndereceğiniz önerme direkt olarak yayına alınacaktır,
-                ancak yayında kalacağının garantisi yoktur. <a href="/tos">Kullanım Koşullarına</a> uygun görülmeyen
-                içerikler moderatörler tarafından yayından kaldırılacaktır.
+            {% blocktrans %}
+              Göndereceğiniz önerme direkt olarak yayına alınacaktır,
+              ancak yayında kalacağının garantisi yoktur. <a href="/tos">Kullanım Koşullarına</a> uygun görülmeyen
+              içerikler moderatörler tarafından yayından kaldırılacaktır.
+            {% endblocktrans %}
             </div>
         {% endifnotequal %}
         <form action="?" method="post">
             {% if parent %}
                 <div class="parent-premise">
-                    <strong>Ekleyeceğiniz önermenin öncülü:</strong>
+                    <strong>{% trans "Ekleyeceğiniz önermenin öncülü" %}:</strong>
                     <p>{{ parent.text }}</p>
                 </div>
             {% endif %}
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Kaydet ve düzenlemeye devam et" class="submit">
+            <input type="submit" value="{% trans "Kaydet ve düzenlemeye devam et" %}" class="submit">
         </form>
     </section>
 {% endblock %}
@@ -30,7 +34,7 @@
             container = $("<div>", {
                 "class": "remained-char"
             }).appendTo(textarea.parent())
-              .html("Kalan karakter sayısı: "),
+              .html("{% trans "Kalan karakter sayısı" %}: "),
             remained = $("<span>").appendTo(container);
         var update = function (event) {
             var max = parseInt(textarea.attr("maxlength")),
