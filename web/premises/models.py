@@ -45,7 +45,7 @@ class Contention(DeletePreventionMixin, models.Model):
                                 null=True, blank=True)
     title = models.CharField(
         max_length=255, verbose_name=_(u"Argüman"),
-        help_text=_(render_to_string("premises/examples/contention.html")))
+        help_text=render_to_string("premises/examples/contention.html"))
     slug = models.SlugField(max_length=255, blank=True)
     description = models.TextField(
         null=True, blank=True, verbose_name=_(u"Ek bilgiler"))
@@ -53,11 +53,11 @@ class Contention(DeletePreventionMixin, models.Model):
     owner = models.CharField(
         max_length=255, null=True, blank=True,
         verbose_name=_(u"Orijinal söylem"),
-        help_text=_(render_to_string("premises/examples/owner.html")))
+        help_text=render_to_string("premises/examples/owner.html"))
     sources = models.TextField(
         null=True, blank=True,
         verbose_name=_(u"Kaynaklar"),
-        help_text=_(render_to_string("premises/examples/sources.html")))
+        help_text=render_to_string("premises/examples/sources.html"))
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
@@ -171,15 +171,15 @@ class Premise(DeletePreventionMixin, models.Model):
     premise_type = models.IntegerField(
         default=SUPPORT,
         choices=PREMISE_TYPES, verbose_name=_(u"Önerme Tipi"),
-        help_text=_(render_to_string("premises/examples/premise_type.html")))
+        help_text=render_to_string("premises/examples/premise_type.html"))
     text = models.TextField(
         null=True, blank=True,
         verbose_name=_(u"Önermenin İçeriği"),
-        help_text=_(render_to_string("premises/examples/premise.html")),
+        help_text=render_to_string("premises/examples/premise.html")),
         validators=[validators.MaxLengthValidator(MAX_PREMISE_CONTENT_LENGTH)])
     sources = models.TextField(
         null=True, blank=True, verbose_name=_(u"Kaynaklar"),
-        help_text=_(render_to_string("premises/examples/premise_source.html")))
+        help_text=render_to_string("premises/examples/premise_source.html"))
     is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
     collapsed = models.BooleanField(default=False)
     supporters = models.ManyToManyField(settings.AUTH_USER_MODEL,
@@ -276,7 +276,7 @@ def get_fallacy_types():
 
     get_fallacy_types.cache = json.load(
         open(os.path.join(os.path.dirname(__file__),
-                          "fallacies.json")))
+                          "fallacies.json"))
 
     return get_fallacy_types.cache
 
@@ -295,7 +295,7 @@ class Report(models.Model):
     fallacy_type = models.CharField(
         _("Safsata Tipi"), choices=get_fallacy_types(), null=True, blank=False,
         max_length=255, default="Wrong Direction",
-        help_text=_(render_to_string("premises/examples/fallacy.html")))
+        help_text=render_to_string("premises/examples/fallacy.html"))
 
     def __unicode__(self):
         return smart_unicode(self.fallacy_type)

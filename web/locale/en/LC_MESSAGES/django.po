@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 19:59+0200\n"
+"POT-Creation-Date: 2015-01-20 10:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -589,6 +589,108 @@ msgstr ""
 #: templates/premises/edit_premise.html:11
 #: templates/premises/new_premise.html:25
 msgid "Kaydet ve düzenlemeye devam et"
+msgstr ""
+
+#: templates/premises/examples/contention.html:3
+msgid ""
+"\n"
+"Önermeleriyle birlikte tartışılabilecek, desteklenebilecek, ispatlanabilecek "
+"ya da çürütülebilecek bir argüman.\n"
+"Örnekler:\n"
+msgstr ""
+
+#: templates/premises/examples/contention.html:8
+msgid "Sanat toplum içindir."
+msgstr ""
+
+#: templates/premises/examples/contention.html:9
+msgid "Bisiklet bir ulaşım aracıdır."
+msgstr ""
+
+#: templates/premises/examples/contention.html:10
+msgid "Bisikletçiler trafikte bulunduğu tüm şeridi kaplamalıdır."
+msgstr ""
+
+#: templates/premises/examples/contention.html:11
+msgid "Python'ın ilerlemesinde GIL büyük bir engeldir."
+msgstr ""
+
+#: templates/premises/examples/fallacy.html:3
+msgid ""
+"\n"
+"Safsata tipi belirtilmesi gereklidir. Bunlar hakkında daha fazla\n"
+"bilgi için <a href=\"http://safsatakilavuzu.com\">safsatakilavuzu.com</a> "
+"adresini\n"
+"ziyaret edebilirsiniz.\n"
+msgstr ""
+
+#: templates/premises/examples/owner.html:3
+msgid ""
+"\n"
+"Argümanın sahibi. Bir kurum, kitap ya da kişi olabilir.\n"
+"Örnekler:\n"
+msgstr ""
+
+#: templates/premises/examples/owner.html:8
+msgid "T.C. Anayasası"
+msgstr ""
+
+#: templates/premises/examples/owner.html:9
+msgid "Türk Dil Kurumu"
+msgstr ""
+
+#: templates/premises/examples/owner.html:10
+msgid "Friedrich Nietzsche"
+msgstr ""
+
+#: templates/premises/examples/owner.html:11
+msgid "Piet Mondiran"
+msgstr ""
+
+#: templates/premises/examples/owner.html:12
+msgid "Aziz Nesin"
+msgstr ""
+
+#: templates/premises/examples/owner.html:15
+msgid ""
+"Eğer bir değer girilmemişse argümanın sahibi argümanı ekleyen olarak görülür."
+msgstr ""
+
+#: templates/premises/examples/premise.html:3
+msgid ""
+"\n"
+"Örnek: Bisiklet sürücüsü karayolunda en sağ şeridi kullanır ve diğer "
+"taşıtlar ile aynı sorumlulukla hareket eder.\n"
+msgstr ""
+
+#: templates/premises/examples/premise_source.html:3
+msgid ""
+"\n"
+"Örnek: T.C. Karayolları Trafik Kanunu 2918/46. Maddesi\n"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:3
+msgid "Önermenin tipi belirtilmesi gerekir. Değerler şunlardır:"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:6
+msgid "ama: itiraz ve çürütme için kullanılır"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:9
+msgid "çünkü: destek/kanıt için kullanılır"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:12
+msgid "ancak: bir önermeye ek bilgi ya da durum belirtilmesi için kullanılır."
+msgstr ""
+
+#: templates/premises/examples/sources.html:3
+msgid ""
+"\n"
+"Argümanın kaynağı. Bir URL, kitap adı ya da dergi adı olabilir.\n"
+"Bu alan önemlidir, kaynaksız ve tartışmalı bir argüman/önerme yayından "
+"kaldırılır.\n"
 msgstr ""
 
 #: templates/premises/new_contention.html:11

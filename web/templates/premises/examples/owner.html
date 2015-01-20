@@ -1,10 +1,15 @@
+{% load i18n %}
+
+{% blocktrans %}
 Argümanın sahibi. Bir kurum, kitap ya da kişi olabilir.
 Örnekler:
+{% endblocktrans %}
 <ul>
-    <li>T.C. Anayasası</li>
-    <li>Türk Dil Kurumu</li>
-    <li>Friedrich Nietzsche</li>
-    <li>Piet Mondiran</li>
-    <li>Aziz Nesin</li>
+    <li>{% trans "T.C. Anayasası" %}</li>
+    <li>{% trans "Türk Dil Kurumu" %}</li>
+    <li>{% trans "Friedrich Nietzsche" %}</li>
+    <li>{% trans "Piet Mondiran" %}</li>
+    <li>{% trans "Aziz Nesin" %}</li>
 </ul>
-Eğer bir değer girilmemişse argümanın sahibi argümanı ekleyen olarak görülür.
+
+{% trans "Eğer bir değer girilmemişse argümanın sahibi argümanı ekleyen olarak görülür." %}
