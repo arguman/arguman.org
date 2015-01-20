@@ -32,6 +32,7 @@ Argüman haritalarını görsel olarak hiyerarşi haritaları olarak düşünebi
 - Cumhur Korkut
 - Serdar Dalgıç
 - Emir Karşıyakalı
+- Ali Barın
 
 ## Ayrıca teşekkürler
 - Burak Arıkan
