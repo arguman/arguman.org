@@ -175,7 +175,7 @@ class Premise(DeletePreventionMixin, models.Model):
     text = models.TextField(
         null=True, blank=True,
         verbose_name=_(u"Önermenin İçeriği"),
-        help_text=render_to_string("premises/examples/premise.html")),
+        help_text=render_to_string("premises/examples/premise.html"),
         validators=[validators.MaxLengthValidator(MAX_PREMISE_CONTENT_LENGTH)])
     sources = models.TextField(
         null=True, blank=True, verbose_name=_(u"Kaynaklar"),
@@ -276,7 +276,7 @@ def get_fallacy_types():
 
     get_fallacy_types.cache = json.load(
         open(os.path.join(os.path.dirname(__file__),
-                          "fallacies.json"))
+                          "fallacies.json")))
 
     return get_fallacy_types.cache
 
