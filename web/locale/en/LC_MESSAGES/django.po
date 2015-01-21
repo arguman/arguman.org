@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-20 10:56+0200\n"
+"POT-Creation-Date: 2015-01-21 09:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,19 +61,19 @@ msgstr ""
 msgid "Published"
 msgstr ""
 
-#: main/settings.py:83
+#: main/settings.py:84
 msgid "Ingilizce"
 msgstr ""
 
-#: main/settings.py:84
+#: main/settings.py:85
 msgid "Turkce"
 msgstr ""
 
-#: main/settings.py:176
+#: main/settings.py:177
 msgid "Arguman.org Blog'u"
 msgstr ""
 
-#: main/settings.py:177
+#: main/settings.py:178
 msgid "Arguman analizi platformu"
 msgstr ""
 
@@ -127,23 +127,23 @@ msgstr ""
 msgid "Safsata Tipi"
 msgstr ""
 
-#: premises/views.py:433
+#: premises/views.py:416
 msgid "Argüman yayına alındı."
 msgstr ""
 
-#: premises/views.py:435
+#: premises/views.py:418
 msgid "Argümanı yayına almadan önce en az 1 önerme ekleyin."
 msgstr ""
 
-#: premises/views.py:449
+#: premises/views.py:432
 msgid "Argüman yayından kaldırıldı."
 msgstr ""
 
-#: premises/views.py:464
+#: premises/views.py:447
 msgid "Argümanınız silindi."
 msgstr ""
 
-#: premises/views.py:467
+#: premises/views.py:450
 msgid "Argümanınız silinecek durumda değil."
 msgstr ""
 
@@ -189,6 +189,108 @@ msgstr ""
 
 #: templates/500.html:13
 msgid "Anasayfaya Dön"
+msgstr ""
+
+#: templates/about.html:7
+msgid "Eleştirel düşünme"
+msgstr ""
+
+#: templates/about.html:10
+msgid ""
+"\n"
+"    Eleştirel düşünme, bir bir bilginin tarafsız, gerçekçi ve etkin bir "
+"şekilde\n"
+"    değerlendirilmesi ile alakalı beceriler bütünüdür. Günlük hayatımızda\n"
+"    her ne kadar inkar etsek de doğamız gereği öznel yargılar yapabiliyoruz. "
+"Eleştirel\n"
+"    düşünmede amaç bir veriyi değerlendirirken bu öznel/taraflı yargılardan "
+"kurtulabilmektir.\n"
+"    "
+msgstr ""
+
+#: templates/about.html:18
+msgid "Argüman haritaları"
+msgstr ""
+
+#: templates/about.html:21
+msgid ""
+"\n"
+"      Eleştirel düşünmenin temeli argümanlardır. Değerlendirme bir argüman "
+"ve\n"
+"      bu argümanın önermeleri, destekleyicileri, itirazları, çürütmeleri "
+"üzerinden yapılır.\n"
+"      Argüman haritaları ise bu öğelerin görselleştirilmiş halidir.\n"
+"      "
+msgstr ""
+
+#: templates/about.html:28
+msgid ""
+"Argüman haritalarını görsel olarak hiyerarşi haritaları olarak "
+"düşünebilirsiniz."
+msgstr ""
+
+#: templates/about.html:32
+msgid ""
+"Temel hedef argümanın tüm öğelerini tarafsız ve safsatadan uzak bir şekilde "
+"resmedebilmektir."
+msgstr ""
+
+#: templates/about.html:34
+msgid "Argüman analizi platformu"
+msgstr ""
+
+#: templates/about.html:36
+msgid ""
+"Argüman.org'un amacı ise argümanların birden çok kullanıcı tarafından "
+"tarafsız bir şekilde haritalanabilmesidir."
+msgstr ""
+
+#: templates/about.html:38
+msgid "Biz kimiz"
+msgstr ""
+
+#: templates/about.html:40
+msgid ""
+"Arguman.org açık kaynak bir proje olup topluluk tarafından "
+"geliştirilmektedir."
+msgstr ""
+
+#: templates/about.html:44
+msgid ""
+"Eğer siz de bir şeyler yapmak isterseniz yukarıdaki github adresini "
+"inceleyebilirsiniz."
+msgstr ""
+
+#: templates/about.html:46
+msgid "Katkıda bulunanlar ve yaptıkları"
+msgstr ""
+
+#: templates/about.html:49
+msgid "(kurucu, geliştirme)"
+msgstr ""
+
+#: templates/about.html:50
+msgid "(proje yönetimi)"
+msgstr ""
+
+#: templates/about.html:51 templates/about.html.py:52 templates/about.html:53
+msgid "(geliştirme)"
+msgstr ""
+
+#: templates/about.html:54
+msgid "(arayüz geliştirme)"
+msgstr ""
+
+#: templates/about.html:55
+msgid "(yeni tasarım üzerinde çalışmakta)"
+msgstr ""
+
+#: templates/about.html:56
+msgid "(güvenlik testi)"
+msgstr ""
+
+#: templates/about.html:59
+msgid "İletişim için argumananalizi@gmail.com adresine yazabilirsiniz."
 msgstr ""
 
 #: templates/auth/complete.html:7
@@ -364,7 +466,7 @@ msgid ""
 "kullanamayacağınız anlamına gelmiyor."
 msgstr ""
 
-#: templates/base.html:52
+#: templates/base.html:52 templates/tos.html:7
 msgid "Kullanım Koşulları"
 msgstr ""
 
@@ -879,4 +981,203 @@ msgstr ""
 
 #: templates/tabs.html:26
 msgid "Arama"
+msgstr ""
+
+#: templates/tos.html:9
+msgid ""
+"Arguman.org'u ziyaretiniz ve arguman.org içeriğini kullanımınız aşağıdaki "
+"kullanım şartlarına tabidir:"
+msgstr ""
+
+#: templates/tos.html:11
+msgid "Uygunsuz İçerik"
+msgstr ""
+
+#: templates/tos.html:13
+msgid ""
+"arguman.org içeriği önceden kontrol edilmiyor olması nedeniyle 18 yaşından "
+"küçüklere uygun olmayabilir. çocuklarınızın gelişimini olumsuz etkileyecek "
+"içeriklerden uzak durmasını sağlayabileceğiniz filtre yazılımları "
+"bulunmaktadır, bunları kullanmanızı tavsiye ederiz. internet'in çocuklarca "
+"güvenli kullanımı konusunda bilgilendirme için: (http://www.guvenliweb.org."
+"tr/annebabakilavuz/)"
+msgstr ""
+
+#: templates/tos.html:15
+msgid "Hukuka aykırı içerik ve şikayet"
+msgstr ""
+
+#: templates/tos.html:17
+msgid ""
+"arguman.org(site), arguman.org'a ait olup, 5651 sayılı kanun çerçevesinde "
+"yer sağlayıcı sıfatı’yla(yer sağlayıcı belge no:XXXX t:XX/XX/20XX) hizmet "
+"vermektedir. kullanıcılar tarafından oluşturulan içerikler herhangi bir ön "
+"incelemeye tabi olmaksızın ve doğrudan kullanıcılar tarafından yayına "
+"alınmaktadır. tarafımıza başvurulmadığı müddetçe, yayınlanan içeriğin hukuka "
+"uygunluğunu denetleme yükümlülüğümüz bulunmamaktadır. ancak, arguman.org yer "
+"sağladığı içeriğin hukuka uygunluğunu sağlamaya özen göstermekte, bu nedenle "
+"yapılan her başvuruyu dikkatle değerlendirmektedir."
+msgstr ""
+
+#: templates/tos.html:19
+msgid ""
+"bir argümanda yer alan önermeler genelde farklı kullanıcılara ait "
+"olmaktadır. bu nedenle, başlıklarda yer alan her bir yazı 'şikayet' butonu "
+"kullanılarak ayrı ayrı şikayet edilebilmektedir. bunun haricinde, sitede yer "
+"alan iletişim arabiriminden bize ulaşabilirsiniz."
+msgstr ""
+
+#: templates/tos.html:21
+msgid ""
+"şikayetleriniz kişisel haberleşme niteliğinde olmayıp, şikayetiniz ve "
+"iletişim bilgileriniz gerekli görüldüğü takdirde yayınlanabilir, üçüncü "
+"kişilerle ve/veya yasal mercilerle paylaşılabilir. bu nedenle "
+"şikayetlerinizde ifşa edilmesini istemediğiniz beyanlarda bulunmamanızı "
+"tavsiye ederiz."
+msgstr ""
+
+#: templates/tos.html:23
+msgid "Kullanım"
+msgstr ""
+
+#: templates/tos.html:25
+msgid ""
+"sitede yer alan hizmetler ve içeriklerden şahsi kullanımınız için "
+"faydalanmanız gerekmektedir. site tarafından sunulan hizmetlerin ve arguman."
+"org’tan yazılı izin alınmadığı müddetçe ticari amaçla kullanılması yasaktır."
+msgstr ""
+
+#: templates/tos.html:27
+msgid ""
+"sitemize çeşitli yazılımlar veya aletler kullanarak; izinsiz giriş yapma, "
+"veri değiştirme veya başka işlemlerle sitenin işleyişine müdahale etme veya "
+"engelleme, sitenin işleyişini kasıtlı olarak yavaşlatma, virüs vs. zararlı "
+"içerik yüklemek suretiyle arguman.org’e zarar verme girişiminde bulunduğunuz "
+"takdirde arguman.org’un yasal yollara başvurma hakkı saklıdır."
+msgstr ""
+
+#: templates/tos.html:29
+msgid "İçerik"
+msgstr ""
+
+#: templates/tos.html:31
+msgid ""
+"arguman.org’te yer alan içeriğin doğru ve/veya güncel olduğu hiçbir şekilde "
+"iddia veya garanti edilmemektedir. aksine, kullanıcılar tamamen gerçekdışı "
+"içerik dahi üretebilirler. arguman.org’te yer alan içeriğe yukarıda 'hukuka "
+"aykırı içerik ve şikayet' kısmında belirtilen haller dışında müdahale "
+"edilmediğinden, arguman.org’te yer alan herhangi bir bilgi, yorum, öneri, "
+"tecrübe paylaşımı ve benzeri içeriğin referans alınması nedeniyle "
+"oluşabilecek (dolaylı veya doğrudan)maddi ve/veya manevi herhangi bir "
+"kaybınızdan sorumlu olmadığımızı belirtmek isteriz."
+msgstr ""
+
+#: templates/tos.html:33
+msgid ""
+"arguman.org’te yer alan bağlantılara/yönlendirmelere (link) ilişkin hiçbir "
+"sorumluluğumuz bulunmamaktadır. arguman.org bağlantı ve yönlendirmelerin "
+"içeriğini kontrol etmediği gibi, içeriğin doğruluğu, yönlendirilen adreste "
+"virüs, trojan, phishing ve benzeri zararlı bir unsur olmadığı veya "
+"yönlendirilen sitenin hukuka uygun olduğu gibi veya benzeri hiçbir bir "
+"garanti vermemektedir."
+msgstr ""
+
+#: templates/tos.html:35
+msgid "Telif hakları ve alıntı"
+msgstr ""
+
+#: templates/tos.html:37
+msgid ""
+"arguman.org bir derleme eser olup, derleme esere (içerik) ve site kodlarına "
+"ilişkin tüm haklar(kopyalama, çoğaltma, işleme, yayma) arguman.org’ye "
+"aittir. içeriğe ilişkin kullanıcılar ile arguman.org arasında yapılmış "
+"sözleşme hükümleri saklıdır."
+msgstr ""
+
+#: templates/tos.html:39
+msgid ""
+"arguman.org içeriğini, içeriği değiştirmemek, ilgili kullanıcıya ve arguman."
+"org’e aktif link vererek atıfta bulunmak ve ticari amaç gütmeden kullanmak "
+"kaydıyla alıntılamanız mümkündür ancak tüm bu kurallara uyulsa dahi "
+"alıntılama eserin, konularının veya başlıklarının tümünü kapsamayacak ve tam "
+"içeriğe ulaşmak için arguman.org'ün ziyaret edilmesi ihtiyacını ortadan "
+"kaldırmayacak düzeyde olmalıdır."
+msgstr ""
+
+#: templates/tos.html:41
+msgid ""
+"aksi yönde açık yazılı izin olmadığı müddetçe site içeriğinin kısmen veya "
+"tamamen ticari amaçla ve/veya reklam ve benzeri gelir elde edecek şekilde "
+"kullanılması yasaktır."
+msgstr ""
+
+#: templates/tos.html:43
+msgid ""
+"arguman.org’nin dilediği zaman, dilediği kişi veya kurumun yukarıdaki "
+"kurallara uyarak dahi alıntı yapmasını engelleme hakkı saklıdır."
+msgstr ""
+
+#: templates/tos.html:45
+msgid "Gizlilik"
+msgstr ""
+
+#: templates/tos.html:47
+msgid ""
+"arguman.org’te bulunduğunuz süre boyunca 'cookie' olarak da adlandırılan "
+"çerezlerin ve buna benzer unsurların bilgisayarınıza yerleştirilmesi söz "
+"konusu olabilir. çerezler basit metin dosyalarından ibaret olup, kimlik ve "
+"sair özel bilgiler içermez, bu nevi kişisel bilgi içermemekle beraber, "
+"oturum bilgileri ve benzeri veriler saklanır ve sizi tekrar tanımak ve "
+"benzeri hizmetler için kullanılabilir. bu konuda daha fazla bilgiyi (http://"
+"www.allaboutcookies.org/) (http://en.wikipedia.org/wiki/http<em>cookie) ve "
+"http://tr.wikipedia.org/wiki/çerez</em>(internet) adreslerinden "
+"edinebilirsiniz. (verilen linklerden ulaşacağınız içeriğin güvenilirliğine "
+"ilişkin sorumluluğumuz bulunmamaktadır.)"
+msgstr ""
+
+#: templates/tos.html:49
+msgid ""
+"arguman.org'ü ziyaretiniz esnasında ip adresiniz ve bilgisayarınız "
+"aracılığıyla toplanabilen diğer veriler arguman.org tarafından anonim olarak "
+"kaydedilmektedir."
+msgstr ""
+
+#: templates/tos.html:51
+msgid "arguman.org’un hak ve yükümlülükleri"
+msgstr ""
+
+#: templates/tos.html:53
+msgid ""
+"arguman.org kullanım koşullarını önceden bildirmeksizin değiştirebilir. bu "
+"nedenle kullanım koşullarını belirli aralıklarla incelemeniz öneririz."
+msgstr ""
+
+#: templates/tos.html:55
+msgid ""
+"arguman.org, arguman.org'u oluşturan tüm unsurları önceden haber vermeksizin "
+"değiştirme, sona erdirme, yenilerini ekleme, ücretlendirme haklarını saklı "
+"tutmaktadır."
+msgstr ""
+
+#: templates/tos.html:57
+msgid ""
+"arguman.org, gerekli gördüğü takdirde belli kişilerin, kurumların, ip "
+"numaralarının veya ip bloklarının arguman.org'e erişimini geçici veya kalıcı "
+"olarak durdurma hakkını saklı tutar."
+msgstr ""
+
+#: templates/tos.html:59
+msgid ""
+"sitenin virüs ve sair zararlı içerik barındırmaması için özen sarf edilmekle "
+"birlikte, gelişen teknoloji, teknik sorun ve diğer nedenlerle "
+"bilgisayarınıza virüs, trojan gibi zararlı yazılımların bulaşması ihtimali "
+"bulunmaktadır. bu gibi risklere karşı antivirüs programları ve benzeri "
+"uygulamalar kullanmanızı tavsiye ederiz. sitemizde gezinmeniz dolayısıyla "
+"karşılaşabileceğiniz yazılımsal ve donanımsal dahil olmak üzere hiçbir "
+"zarara ilişkin sorumluluk kabul etmemekteyiz. bu nedenlerle sitemizden "
+"talepte bulunmayacağınızı peşinen kabul etmektesiniz."
+msgstr ""
+
+#: templates/tos.html:61
+msgid "bu belge son olarak 26.10.2014 tarihinde güncellenmiştir."
 msgstr ""

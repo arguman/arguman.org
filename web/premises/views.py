@@ -374,23 +374,6 @@ class ControversialArgumentsView(HomeView):
         return contentions
 
 
-class AboutView(TemplateView):
-    template_name = "about.html"
-
-    def get_context_data(self, **kwargs):
-        content = markdown(render_to_string("about.md"))
-        return super(AboutView, self).get_context_data(
-            content=content, **kwargs)
-
-class TosView(TemplateView):
-    template_name = "tos.html"
-
-    def get_context_data(self, **kwargs):
-        content = markdown(render_to_string("tos.md"))
-        return super(TosView, self).get_context_data(
-            content=content, **kwargs)
-
-
 class ArgumentCreationView(LoginRequiredMixin, CreateView):
     template_name = "premises/new_contention.html"
     form_class = ArgumentCreationForm

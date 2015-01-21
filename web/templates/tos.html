@@ -1,7 +1,64 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 <div class="container tos">
-    {{ content|safe }}
+  <h2>{% trans "Kullanım Koşulları" %}</h2>
+
+  <p>{% trans "Arguman.org'u ziyaretiniz ve arguman.org içeriğini kullanımınız aşağıdaki kullanım şartlarına tabidir:" %}</p>
+
+  <h3>{% trans "Uygunsuz İçerik" %}</h3>
+
+  <p>{% trans "arguman.org içeriği önceden kontrol edilmiyor olması nedeniyle 18 yaşından küçüklere uygun olmayabilir. çocuklarınızın gelişimini olumsuz etkileyecek içeriklerden uzak durmasını sağlayabileceğiniz filtre yazılımları bulunmaktadır, bunları kullanmanızı tavsiye ederiz. internet'in çocuklarca güvenli kullanımı konusunda bilgilendirme için: (http://www.guvenliweb.org.tr/annebabakilavuz/)" %} </p>
+
+  <h3>{% trans "Hukuka aykırı içerik ve şikayet" %}</h3>
+
+  <p>{% trans "arguman.org(site), arguman.org'a ait olup, 5651 sayılı kanun çerçevesinde yer sağlayıcı sıfatı’yla(yer sağlayıcı belge no:XXXX t:XX/XX/20XX) hizmet vermektedir. kullanıcılar tarafından oluşturulan içerikler herhangi bir ön incelemeye tabi olmaksızın ve doğrudan kullanıcılar tarafından yayına alınmaktadır. tarafımıza başvurulmadığı müddetçe, yayınlanan içeriğin hukuka uygunluğunu denetleme yükümlülüğümüz bulunmamaktadır. ancak, arguman.org yer sağladığı içeriğin hukuka uygunluğunu sağlamaya özen göstermekte, bu nedenle yapılan her başvuruyu dikkatle değerlendirmektedir." %}</p>
+
+  <p>{% trans "bir argümanda yer alan önermeler genelde farklı kullanıcılara ait olmaktadır. bu nedenle, başlıklarda yer alan her bir yazı 'şikayet' butonu kullanılarak ayrı ayrı şikayet edilebilmektedir. bunun haricinde, sitede yer alan iletişim arabiriminden bize ulaşabilirsiniz." %}</p>
+
+  <p>{% trans "şikayetleriniz kişisel haberleşme niteliğinde olmayıp, şikayetiniz ve iletişim bilgileriniz gerekli görüldüğü takdirde yayınlanabilir, üçüncü kişilerle ve/veya yasal mercilerle paylaşılabilir. bu nedenle şikayetlerinizde ifşa edilmesini istemediğiniz beyanlarda bulunmamanızı tavsiye ederiz." %}</p>
+
+  <h2>{% trans "Kullanım" %}</h2>
+
+  <p>{% trans "sitede yer alan hizmetler ve içeriklerden şahsi kullanımınız için faydalanmanız gerekmektedir. site tarafından sunulan hizmetlerin ve arguman.org’tan yazılı izin alınmadığı müddetçe ticari amaçla kullanılması yasaktır." %} </p>
+
+  <p>{% trans "sitemize çeşitli yazılımlar veya aletler kullanarak; izinsiz giriş yapma, veri değiştirme veya başka işlemlerle sitenin işleyişine müdahale etme veya engelleme, sitenin işleyişini kasıtlı olarak yavaşlatma, virüs vs. zararlı içerik yüklemek suretiyle arguman.org’e zarar verme girişiminde bulunduğunuz takdirde arguman.org’un yasal yollara başvurma hakkı saklıdır." %}</p>
+
+  <h1>{% trans "İçerik" %}</h1>
+
+  <p>{% trans "arguman.org’te yer alan içeriğin doğru ve/veya güncel olduğu hiçbir şekilde iddia veya garanti edilmemektedir. aksine, kullanıcılar tamamen gerçekdışı içerik dahi üretebilirler. arguman.org’te yer alan içeriğe yukarıda 'hukuka aykırı içerik ve şikayet' kısmında belirtilen haller dışında müdahale edilmediğinden, arguman.org’te yer alan herhangi bir bilgi, yorum, öneri, tecrübe paylaşımı ve benzeri içeriğin referans alınması nedeniyle oluşabilecek (dolaylı veya doğrudan)maddi ve/veya manevi herhangi bir kaybınızdan sorumlu olmadığımızı belirtmek isteriz." %}</p>
+
+  <p>{% trans "arguman.org’te yer alan bağlantılara/yönlendirmelere (link) ilişkin hiçbir sorumluluğumuz bulunmamaktadır. arguman.org bağlantı ve yönlendirmelerin içeriğini kontrol etmediği gibi, içeriğin doğruluğu, yönlendirilen adreste virüs, trojan, phishing ve benzeri zararlı bir unsur olmadığı veya yönlendirilen sitenin hukuka uygun olduğu gibi veya benzeri hiçbir bir garanti vermemektedir." %}</p>
+
+  <h2>{% trans "Telif hakları ve alıntı" %}</h2>
+
+  <p>{% trans "arguman.org bir derleme eser olup, derleme esere (içerik) ve site kodlarına ilişkin tüm haklar(kopyalama, çoğaltma, işleme, yayma) arguman.org’ye aittir. içeriğe ilişkin kullanıcılar ile arguman.org arasında yapılmış sözleşme hükümleri saklıdır." %}</p>
+
+  <p>{% trans "arguman.org içeriğini, içeriği değiştirmemek, ilgili kullanıcıya ve arguman.org’e aktif link vererek atıfta bulunmak ve ticari amaç gütmeden kullanmak kaydıyla alıntılamanız mümkündür ancak tüm bu kurallara uyulsa dahi alıntılama eserin, konularının veya başlıklarının tümünü kapsamayacak ve tam içeriğe ulaşmak için arguman.org'ün ziyaret edilmesi ihtiyacını ortadan kaldırmayacak düzeyde olmalıdır." %}</p>
+
+  <p>{% trans "aksi yönde açık yazılı izin olmadığı müddetçe site içeriğinin kısmen veya tamamen ticari amaçla ve/veya reklam ve benzeri gelir elde edecek şekilde kullanılması yasaktır." %} </p>
+
+  <p>{% trans "arguman.org’nin dilediği zaman, dilediği kişi veya kurumun yukarıdaki kurallara uyarak dahi alıntı yapmasını engelleme hakkı saklıdır." %}</p>
+
+  <h2>{% trans "Gizlilik" %}</h2>
+
+  <p>{% trans "arguman.org’te bulunduğunuz süre boyunca 'cookie' olarak da adlandırılan çerezlerin ve buna benzer unsurların bilgisayarınıza yerleştirilmesi söz konusu olabilir. çerezler basit metin dosyalarından ibaret olup, kimlik ve sair özel bilgiler içermez, bu nevi kişisel bilgi içermemekle beraber, oturum bilgileri ve benzeri veriler saklanır ve sizi tekrar tanımak ve benzeri hizmetler için kullanılabilir. bu konuda daha fazla bilgiyi (http://www.allaboutcookies.org/) (http://en.wikipedia.org/wiki/http<em>cookie) ve http://tr.wikipedia.org/wiki/çerez</em>(internet) adreslerinden edinebilirsiniz. (verilen linklerden ulaşacağınız içeriğin güvenilirliğine ilişkin sorumluluğumuz bulunmamaktadır.)" %}</p>
+
+  <p>{% trans "arguman.org'ü ziyaretiniz esnasında ip adresiniz ve bilgisayarınız aracılığıyla toplanabilen diğer veriler arguman.org tarafından anonim olarak kaydedilmektedir." %}</p>
+
+  <h2>{% trans "arguman.org’un hak ve yükümlülükleri" %}</h2>
+
+  <p>{% trans "arguman.org kullanım koşullarını önceden bildirmeksizin değiştirebilir. bu nedenle kullanım koşullarını belirli aralıklarla incelemeniz öneririz." %}</p>
+
+  <p>{% trans "arguman.org, arguman.org'u oluşturan tüm unsurları önceden haber vermeksizin değiştirme, sona erdirme, yenilerini ekleme, ücretlendirme haklarını saklı tutmaktadır." %}</p>
+
+  <p>{% trans "arguman.org, gerekli gördüğü takdirde belli kişilerin, kurumların, ip numaralarının veya ip bloklarının arguman.org'e erişimini geçici veya kalıcı olarak durdurma hakkını saklı tutar." %}</p>
+
+  <p>{% trans "sitenin virüs ve sair zararlı içerik barındırmaması için özen sarf edilmekle birlikte, gelişen teknoloji, teknik sorun ve diğer nedenlerle bilgisayarınıza virüs, trojan gibi zararlı yazılımların bulaşması ihtimali bulunmaktadır. bu gibi risklere karşı antivirüs programları ve benzeri uygulamalar kullanmanızı tavsiye ederiz. sitemizde gezinmeniz dolayısıyla karşılaşabileceğiniz yazılımsal ve donanımsal dahil olmak üzere hiçbir zarara ilişkin sorumluluk kabul etmemekteyiz. bu nedenlerle sitemizden talepte bulunmayacağınızı peşinen kabul etmektesiniz." %}</p>
+
+  <p>{% trans "bu belge son olarak 26.10.2014 tarihinde güncellenmiştir." %}</p>
+
 </div>
 {% endblock %}
