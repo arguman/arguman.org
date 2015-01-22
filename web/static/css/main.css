@@ -1584,7 +1584,7 @@ div.load-more {
   position: fixed;
   right: 10px;
   top: 90px;
-  z-index: 100;
+  z-index: 9999999;
 }
 
 #minimap .map {
@@ -1592,7 +1592,7 @@ div.load-more {
   background-size: 100% auto;
   bottom: 20px;
   left: 20px;
-  position: absolute;
+  position: absolute !important;
   right: 20px;
   top: 20px;
 }

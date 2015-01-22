@@ -297,7 +297,7 @@
         setDimensions: function () {
           height = Math.ceil(this.width * this.$captureEl.height() / this.$captureEl.width());
 
-          $(this.el).css({
+          this.$el.css({
             'height': height,
             'width': this.width
           });
@@ -307,62 +307,29 @@
             width: $(window).width() * this.$map.width() / this.$captureEl.width()
           });
 
-          this.ratio.x = this.$captureEl.height() / height;
-          this.ratio.y = this.$captureEl.width() / this.width;
+          this.ratio.x = this.$captureEl.width() / this.$map.width();
+          this.ratio.y = this.$captureEl.height() / this.$map.height();
         },
         setDraggable: function () {
           var self = this;
 
-          mouseX = 0;
-          mouseY = 0;
+          this.$navigator.pep({
+            useCSSTranslation: true,
+            constrainTo: 'parent',
+            cssEaseDuration: 100,
+            grid: [1, 1],
+            velocityMultiplier: 1,
+            allowDragEventPropagation: true,
+            drag: function(e, obj) {
+                var scrollX = self.$navigator.position().left * 100 / (self.$map.width() - self.$navigator.width());
+                var scrollY = self.$navigator.position().top * 100 / (self.$map.height() - self.$navigator.height());
 
-          isDragging = false;
+                scrollX *= self.$captureEl.width() / 100;
+                scrollY *= self.$captureEl.height() / 100;
 
-          this.$navigator
-              .on('mousedown', function (e) {
-                  isDragging = true;
-
-                  mouseX = e.pageX - self.$navigator.offset().left;
-                  mouseY = e.pageY - self.$navigator.offset().top;
-              })
-              .on('mouseup', function () {
-                  isDragging = false;
-
-                  self.keepBound();
-              })
-              .on('mousemove', function (e) {
-                  if (isDragging
-                    && parseFloat(self.$navigator.css('top')) < parseInt(self.$map.height()) -self. $navigator.height()
-                    && parseFloat(self.$navigator.css('left')) < parseInt(self.$map.width()) -self. $navigator.width()
-                    && parseFloat(self.$navigator.css('top')) > 0
-                    && parseFloat(self.$navigator.css('left')) > 0
-                    ) {
-                      self.$navigator.css({
-                          left: (e.pageX - self.$map.offset().left) - mouseX,
-                          top: (e.pageY - self.$map.offset().top) - mouseY
-                      });
-
-                      var scrollX = parseFloat(self.$navigator.css('left')) * self.ratio.x;
-                      var scrollY = parseFloat(self.$navigator.css('top')) * self.ratio.x;
-
-                      console.log(scrollX);
-                      console.log(scrollY);
-
-                      self.setScrollPosition(scrollX, scrollY);
-                  } else if(isDragging) {
-                    mouseX = e.pageX - self.$navigator.offset().left;
-                    mouseY = e.pageY - self.$navigator.offset().top;
-
-                    self.keepBound();
-                  }
-              })
-              .on('mouseleave', function () {
-                  if (isDragging) {
-                    isDragging = false;
-
-                    self.keepBound();
-                  }
-              });
+                self.setScrollPosition(scrollX, scrollY);
+            }
+          });
         },
         keepBound: function () {
           leftLimit = parseFloat(this.$navigator.css('left'));

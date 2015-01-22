@@ -124,6 +124,7 @@
 
 {% block extra-scripts %}
 <script type="text/javascript" src="{% static "js/lib/html2canvas.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/lib/jquery.pep.js" %}"></script>
 <script type="text/javascript">
     {% if view == "tree-view" %}
     arguman.editMode = {{ edit_mode|yesno:"true,false" }};
