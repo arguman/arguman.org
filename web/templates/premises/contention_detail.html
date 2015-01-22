@@ -114,9 +114,16 @@
             </div>
 
     </div>
+
+    <div id="minimap" class="no-user-select">
+      <div class="map">
+        <div class="navigator no-user-select"></div>
+      </div>
+    </div>
 {% endblock %}
 
 {% block extra-scripts %}
+<script type="text/javascript" src="{% static "js/lib/html2canvas.min.js" %}"></script>
 <script type="text/javascript">
     {% if view == "tree-view" %}
     arguman.editMode = {{ edit_mode|yesno:"true,false" }};
@@ -136,9 +143,9 @@
         "info": "#keyboard-manager-info"
     });
 
-    new arguman.DraggablePage({
-        "el": "#app"
-    });
+    new arguman.DraggablePage();
+
+    new arguman.Minimap();
 
     {% endif %}
 </script>
