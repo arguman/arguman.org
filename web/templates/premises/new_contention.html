@@ -8,8 +8,9 @@
             {% csrf_token %}
             {{ form.as_p }}
             <p>
+              {% url "tos" as tos_url %}
               {% blocktrans %}
-                Bu argümanı göndererek <a href="/tos">kullanım koşullarını</a> kabul etmiş olacaksınız ve uygun görülmeyen
+                Bu argümanı göndererek <a href="{{ tos_url }}">kullanım koşullarını</a> kabul etmiş olacaksınız ve uygun görülmeyen
                 içerikler moderatörler tarafından yayından kaldırılacaktır.
               {% endblocktrans %}
             </p>
