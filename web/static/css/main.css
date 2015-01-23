@@ -1579,6 +1579,31 @@ div.load-more {
     background: white;
 }
 
+#minimap {
+  background: rgba(200, 200, 200, .3);
+  position: fixed;
+  right: 10px;
+  top: 90px;
+  z-index: 9999999;
+}
+
+#minimap .map {
+  background: center center no-repeat;
+  background-size: 100% auto;
+  bottom: 20px;
+  left: 20px;
+  position: absolute !important;
+  right: 20px;
+  top: 20px;
+}
+
+#minimap .navigator {
+  background: rgba(0, 0, 0, .2);
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
 /* Media Queries */
 @media (max-width: 800px){
   header nav ul li {

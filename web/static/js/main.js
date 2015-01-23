@@ -207,10 +207,10 @@
             x: 0,
             y: 0
         },
-        updateScrollPosition: function (e) {
+        setScrollPosition: function (e) {
             $(window)
-            .scrollTop($(window).scrollTop() + (this.click.y - e.pageY))
-            .scrollLeft($(window).scrollLeft() + (this.click.x - e.pageX));
+                .scrollLeft($(window).scrollLeft() + (this.click.x - e.pageX))
+                .scrollTop($(window).scrollTop() + (this.click.y - e.pageY));
         },
         setCursor: function (cursor) {
             $('html').css('cursor', cursor);
@@ -222,13 +222,14 @@
             $('body').removeClass('no-user-select');
         },
         bindEvents: function () {
-            self = this;
+            var self = this;
 
             $(this.el).on({
                 'mousemove': function (e) {
-                    self.clicked && self.updateScrollPosition(e);
+                    self.clicked && self.setScrollPosition(e);
                 },
                 'mousedown': function (e) {
+                  console.log(self);
                     self.disableUserSelect();
                     self.clicked = e;
                     self.click.x = e.pageX;
@@ -236,15 +237,108 @@
                     self.setCursor('move');
                 },
                 'mouseup': function (e) {
-                    self.enableUserSelect();
-                    self.clicked = false;
-                    self.setCursor('auto');
+                    if (self.clicked) {
+                        self.enableUserSelect();
+                        self.clicked = false;
+                        self.setCursor('auto');
+                    }
                 }
             });
         },
         init: function (options) {
             $.extend(this, options);
             this.bindEvents();
+        }
+    });
+
+    arguman.Minimap = Class.extend({
+        el: '#minimap',
+        map: '#minimap .map',
+        captureEl: '#app',
+        width: 250,
+        ratio: {
+          x: null,
+          y: null
+        },
+        navigator: '#minimap .navigator',
+        setScrollPosition: function (x, y) {
+          $(window)
+              .scrollLeft(x)
+              .scrollTop(y);
+        },
+        init: function (options) {
+          $.extend(this, options);
+
+          var self = this;
+
+          this.$el = $(this.el);
+          this.$map = $(this.map);
+          this.$captureEl = $(this.captureEl);
+          this.$navigator = $(this.navigator);
+
+          this.capture();
+          this.setDraggable();
+
+          $(window).on('resize', function () {
+              self.setDimensions();
+          });
+        },
+        capture: function () {
+          var self = this;
+
+          html2canvas(this.$captureEl, {
+            onrendered: function (canvas) {
+              imageData = canvas.toDataURL();
+              self.$map.css('backgroundImage', 'url(' + imageData + ')');
+              self.setDimensions();
+            }
+          });
+        },
+        setDimensions: function () {
+          height = Math.ceil(this.width * this.$captureEl.height() / this.$captureEl.width());
+
+          this.$el.css({
+            'height': height,
+            'width': this.width
+          });
+
+          this.$navigator.css({
+            height: $(window).height() * this.$map.height() / this.$captureEl.height(),
+            width: $(window).width() * this.$map.width() / this.$captureEl.width()
+          });
+
+          this.ratio.x = this.$captureEl.width() / this.$map.width();
+          this.ratio.y = this.$captureEl.height() / this.$map.height();
+        },
+        setDraggable: function () {
+          var self = this;
+
+          this.$navigator.pep({
+            useCSSTranslation: true,
+            constrainTo: 'parent',
+            cssEaseDuration: 100,
+            grid: [1, 1],
+            velocityMultiplier: 1,
+            allowDragEventPropagation: true,
+            drag: function(e, obj) {
+                var scrollX = self.$navigator.position().left * 100 / (self.$map.width() - self.$navigator.width());
+                var scrollY = self.$navigator.position().top * 100 / (self.$map.height() - self.$navigator.height());
+
+                scrollX *= self.$captureEl.width() / 100;
+                scrollY *= self.$captureEl.height() / 100;
+
+                self.setScrollPosition(scrollX, scrollY);
+            }
+          });
+        },
+        keepBound: function () {
+          leftLimit = parseFloat(this.$navigator.css('left'));
+          topLimit = parseFloat(this.$navigator.css('top'));
+
+          this.$navigator.css({
+            left: leftLimit <= 0 ? 1 : (leftLimit >= (this.$map.width() - this.$navigator.width()) ? (this.$map.width() - this.$navigator.width()) - 1 : leftLimit),
+            top: topLimit <= 0 ? 1 : (topLimit >= (this.$map.height() - this.$navigator.height()) ? (this.$map.height() - this.$navigator.height()) - 1 : topLimit)
+          });
         }
     });
 
