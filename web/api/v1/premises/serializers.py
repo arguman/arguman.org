@@ -10,10 +10,12 @@ from api.v1.account.serializers import UserProfileSerializer
 class PremisesSerializer(serializers.ModelSerializer):
     user = UserProfileSerializer()
     absolute_url = serializers.SerializerMethodField()
+    premise_type = serializers.ReadOnlyField(source='get_premise_type_display')
 
     class Meta:
         model = Premise
-        fields = ('id', 'user', 'text', 'sources', 'parent', 'absolute_url',)
+        fields = ('id', 'user', 'text', 'sources', 'parent',
+                  'absolute_url', 'premise_type', 'date_creation',)
 
     def get_absolute_url(self, obj):
         return reverse("api-premise-detail", args=[obj.argument.id, obj.id])
@@ -28,7 +30,7 @@ class ContentionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contention
         fields = ('id', 'user', 'title', 'slug', 'description',
-                  'owner', 'sources', 'premises',
+                  'owner', 'sources', 'premises', 'date_creation',
                   'absolute_url', 'report_count')
 
     def get_absolute_url(self, obj):
