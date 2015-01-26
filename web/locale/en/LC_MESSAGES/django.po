@@ -1,0 +1,1183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-21 09:06+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: api/v1/account/views.py:27 profiles/views.py:122
+msgid "Kedini takip edemezsin."
+msgstr ""
+
+#: api/v1/account/views.py:32 profiles/views.py:128
+msgid "Zaten bu kullaniciyi takip ediyorsun"
+msgstr ""
+
+#: api/v1/account/views.py:44 profiles/views.py:100
+msgid "Takibi birakmadan once takip etmen gerekiyor."
+msgstr ""
+
+#: api/v1/premises/views.py:66
+msgid "Onermeyi Zaten destekliyorsun"
+msgstr ""
+
+#: api/v1/premises/views.py:78
+msgid "Once onermeyi desteklemen gerekiyor"
+msgstr ""
+
+#: blog/admin.py:18
+msgid "Publish selected posts"
+msgstr ""
+
+#: blog/admin.py:22
+msgid "Mark as draft selected posts"
+msgstr ""
+
+#: blog/models.py:21
+msgid "Name"
+msgstr ""
+
+#: blog/models.py:22
+msgid "Slug"
+msgstr ""
+
+#: blog/models.py:23
+msgid "Content"
+msgstr ""
+
+#: blog/models.py:26
+msgid "Published"
+msgstr ""
+
+#: main/settings.py:84
+msgid "Ingilizce"
+msgstr ""
+
+#: main/settings.py:85
+msgid "Turkce"
+msgstr ""
+
+#: main/settings.py:177
+msgid "Arguman.org Blog'u"
+msgstr ""
+
+#: main/settings.py:178
+msgid "Arguman analizi platformu"
+msgstr ""
+
+#: premises/models.py:30 templates/premises/contention.html:10
+msgid "ama"
+msgstr ""
+
+#: premises/models.py:31 templates/index.html:17
+#: templates/premises/contention.html:7
+msgid "çünkü"
+msgstr ""
+
+#: premises/models.py:32 templates/index.html:19
+#: templates/premises/contention.html:13
+msgid "ancak"
+msgstr ""
+
+#: premises/models.py:47
+msgid "Argüman"
+msgstr ""
+
+#: premises/models.py:51
+msgid "Ek bilgiler"
+msgstr ""
+
+#: premises/models.py:55
+msgid "Orijinal söylem"
+msgstr ""
+
+#: premises/models.py:59 premises/models.py:181
+msgid "Kaynaklar"
+msgstr ""
+
+#: premises/models.py:168
+msgid "Öncülü"
+msgstr ""
+
+#: premises/models.py:169
+msgid "Önermenin öncülü. Eğer boş bırakılırsa ana argümanın bir önermesi olur."
+msgstr ""
+
+#: premises/models.py:173
+msgid "Önerme Tipi"
+msgstr ""
+
+#: premises/models.py:177
+msgid "Önermenin İçeriği"
+msgstr ""
+
+#: premises/models.py:296
+msgid "Safsata Tipi"
+msgstr ""
+
+#: premises/views.py:416
+msgid "Argüman yayına alındı."
+msgstr ""
+
+#: premises/views.py:418
+msgid "Argümanı yayına almadan önce en az 1 önerme ekleyin."
+msgstr ""
+
+#: premises/views.py:432
+msgid "Argüman yayından kaldırıldı."
+msgstr ""
+
+#: premises/views.py:447
+msgid "Argümanınız silindi."
+msgstr ""
+
+#: premises/views.py:450
+msgid "Argümanınız silinecek durumda değil."
+msgstr ""
+
+#: profiles/forms.py:40
+msgid "The two password fields didn't match."
+msgstr ""
+
+#: profiles/forms.py:47
+msgid "New password"
+msgstr ""
+
+#: profiles/forms.py:51
+msgid "New password confirmation"
+msgstr ""
+
+#: templates/404.html:7
+msgid "Söz konusu sayfayı bulamadık."
+msgstr ""
+
+#: templates/404.html:9
+msgid "Ancak yine de aradıgınız şeyi bulmanız için size yardımcı olabiliriz."
+msgstr ""
+
+#: templates/404.html:13 templates/search.html:7
+msgid "Kelime:"
+msgstr ""
+
+#: templates/404.html:16 templates/500.html:11
+msgid "Tekrar Dene"
+msgstr ""
+
+#: templates/404.html:17
+msgid "Anasayfaya Git"
+msgstr ""
+
+#: templates/500.html:9
+msgid "Maalesef! Beklenmeyen bir sorun oluştu."
+msgstr ""
+
+#: templates/500.html:12
+msgid "Hata Olarak Bildir"
+msgstr ""
+
+#: templates/500.html:13
+msgid "Anasayfaya Dön"
+msgstr ""
+
+#: templates/about.html:7
+msgid "Eleştirel düşünme"
+msgstr ""
+
+#: templates/about.html:10
+msgid ""
+"\n"
+"    Eleştirel düşünme, bir bir bilginin tarafsız, gerçekçi ve etkin bir "
+"şekilde\n"
+"    değerlendirilmesi ile alakalı beceriler bütünüdür. Günlük hayatımızda\n"
+"    her ne kadar inkar etsek de doğamız gereği öznel yargılar yapabiliyoruz. "
+"Eleştirel\n"
+"    düşünmede amaç bir veriyi değerlendirirken bu öznel/taraflı yargılardan "
+"kurtulabilmektir.\n"
+"    "
+msgstr ""
+
+#: templates/about.html:18
+msgid "Argüman haritaları"
+msgstr ""
+
+#: templates/about.html:21
+msgid ""
+"\n"
+"      Eleştirel düşünmenin temeli argümanlardır. Değerlendirme bir argüman "
+"ve\n"
+"      bu argümanın önermeleri, destekleyicileri, itirazları, çürütmeleri "
+"üzerinden yapılır.\n"
+"      Argüman haritaları ise bu öğelerin görselleştirilmiş halidir.\n"
+"      "
+msgstr ""
+
+#: templates/about.html:28
+msgid ""
+"Argüman haritalarını görsel olarak hiyerarşi haritaları olarak "
+"düşünebilirsiniz."
+msgstr ""
+
+#: templates/about.html:32
+msgid ""
+"Temel hedef argümanın tüm öğelerini tarafsız ve safsatadan uzak bir şekilde "
+"resmedebilmektir."
+msgstr ""
+
+#: templates/about.html:34
+msgid "Argüman analizi platformu"
+msgstr ""
+
+#: templates/about.html:36
+msgid ""
+"Argüman.org'un amacı ise argümanların birden çok kullanıcı tarafından "
+"tarafsız bir şekilde haritalanabilmesidir."
+msgstr ""
+
+#: templates/about.html:38
+msgid "Biz kimiz"
+msgstr ""
+
+#: templates/about.html:40
+msgid ""
+"Arguman.org açık kaynak bir proje olup topluluk tarafından "
+"geliştirilmektedir."
+msgstr ""
+
+#: templates/about.html:44
+msgid ""
+"Eğer siz de bir şeyler yapmak isterseniz yukarıdaki github adresini "
+"inceleyebilirsiniz."
+msgstr ""
+
+#: templates/about.html:46
+msgid "Katkıda bulunanlar ve yaptıkları"
+msgstr ""
+
+#: templates/about.html:49
+msgid "(kurucu, geliştirme)"
+msgstr ""
+
+#: templates/about.html:50
+msgid "(proje yönetimi)"
+msgstr ""
+
+#: templates/about.html:51 templates/about.html.py:52 templates/about.html:53
+msgid "(geliştirme)"
+msgstr ""
+
+#: templates/about.html:54
+msgid "(arayüz geliştirme)"
+msgstr ""
+
+#: templates/about.html:55
+msgid "(yeni tasarım üzerinde çalışmakta)"
+msgstr ""
+
+#: templates/about.html:56
+msgid "(güvenlik testi)"
+msgstr ""
+
+#: templates/about.html:59
+msgid "İletişim için argumananalizi@gmail.com adresine yazabilirsiniz."
+msgstr ""
+
+#: templates/auth/complete.html:7
+msgid "Kayıt Başarılı"
+msgstr ""
+
+#: templates/auth/complete.html:9
+msgid "Giriş yapmak için tıklayın"
+msgstr ""
+
+#: templates/auth/login.html:15
+msgid "Şifremi Unuttum!"
+msgstr ""
+
+#: templates/auth/password_reset_complete.html:9
+msgid "Şifreniz başarıyla değistirildi. "
+msgstr ""
+
+#: templates/auth/password_reset_complete.html:11
+msgid "Giriş yap"
+msgstr ""
+
+#: templates/auth/password_reset_confirm.html:8
+msgid "iki kez yeni şifrenizi giriniz."
+msgstr ""
+
+#: templates/auth/password_reset_confirm.html:13
+msgid "Yeni Şifre"
+msgstr ""
+
+#: templates/auth/password_reset_confirm.html:18
+msgid "Yeni Şifre Tekrar"
+msgstr ""
+
+#: templates/auth/password_reset_confirm.html:22
+msgid "Şifremi Değiştir"
+msgstr ""
+
+#: templates/auth/password_reset_confirm.html:26
+msgid "Şifre sıfırlama linki geçersiz veya daha önce kullanılmış olabilir."
+msgstr ""
+
+#: templates/auth/password_reset_done.html:9
+msgid ""
+"\n"
+"    Şifrenizin ayarlanması ile ilgili talimatlar, belirtmiş olduğunuz e-"
+"posta adresine gönderildi. Yakın zamanda ulaşması bekleniyor.\n"
+"    <br><br>\n"
+"    Eğer bir e-posta almadıysanız, lütfen kayıt olurken kullandığınız e-"
+"posta adresini girdiğinizden emin olun. Spam klasörünü kontrol edin.\n"
+"    "
+msgstr ""
+
+#: templates/auth/password_reset_form.html:8
+msgid "Şifremi Unuttum"
+msgstr ""
+
+#: templates/auth/password_reset_form.html:11
+msgid "Gönder"
+msgstr ""
+
+#: templates/auth/profile.html:15
+msgid "(güncelle)"
+msgstr ""
+
+#: templates/auth/profile.html:22
+msgid "Takibi bırak"
+msgstr ""
+
+#: templates/auth/profile.html:26
+msgid "Takip et"
+msgstr ""
+
+#: templates/auth/profile.html:35
+msgid "Katkıda bulunduğu argümanlar"
+msgstr ""
+
+#: templates/auth/profile.html:42
+msgid "hiç katkıda bulunduğu bir argüman yok."
+msgstr ""
+
+#: templates/auth/profile.html:47
+msgid "Takip ettikleri"
+msgstr ""
+
+#: templates/auth/profile.html:56
+msgid "Kimseyi takip etmiyor."
+msgstr ""
+
+#: templates/auth/profile.html:70
+#, python-format
+msgid ""
+"\n"
+"                        %(profile)s hiç takipçiye sahip değil.\n"
+"                      "
+msgstr ""
+
+#: templates/auth/register.html:9
+msgid "Kayıt ol"
+msgstr ""
+
+#: templates/auth/register.html:14
+msgid ""
+"\n"
+"            <li>Bu siteyi kullanarak <a href=\"/tos\">kullanım koşulları</"
+"a>nı kabul etmiş olursunuz.</li>\n"
+"            <li>Avatar yüklemek için <a target=\"_blank\" href=\"//gravatar."
+"com\">gravatar.com</a>\n"
+"                adresini kullanabilirsiniz.</li>\n"
+"            "
+msgstr ""
+
+#: templates/auth/register.html:20
+msgid "Siteye Üye ol"
+msgstr ""
+
+#: templates/auth/update.html:8
+msgid "Bilgilerim"
+msgstr ""
+
+#: templates/auth/update.html:12
+msgid ""
+"\n"
+"                Avatar yüklemek için <a target=\"_blank\" href=\"//gravatar."
+"com\">gravatar.com</a>\n"
+"                adresini kullanabilirsiniz.\n"
+"              "
+msgstr ""
+
+#: templates/auth/update.html:17
+msgid "Güncelle"
+msgstr ""
+
+#: templates/base.html:5
+msgid "Argüman Analizi Platformu"
+msgstr ""
+
+#: templates/base.html:20
+msgid "Duyuru:"
+msgstr ""
+
+#: templates/base.html:30
+msgid "nedir?"
+msgstr ""
+
+#: templates/base.html:32
+msgid "kayıt ol"
+msgstr ""
+
+#: templates/base.html:33
+msgid "giriş yap"
+msgstr ""
+
+#: templates/base.html:35
+msgid "argüman gönder"
+msgstr ""
+
+#: templates/base.html:37
+msgid "profilim"
+msgstr ""
+
+#: templates/base.html:38
+msgid "güncelle"
+msgstr ""
+
+#: templates/base.html:39
+msgid "çıkış yap"
+msgstr ""
+
+#: templates/base.html:51
+msgid ""
+"Arguman.org henüz geliştirilme aşamasındadır. Ancak bu platformu "
+"kullanamayacağınız anlamına gelmiyor."
+msgstr ""
+
+#: templates/base.html:52 templates/tos.html:7
+msgid "Kullanım Koşulları"
+msgstr ""
+
+#: templates/base.html:53
+msgid "Öneri ve şikayet"
+msgstr ""
+
+#: templates/home.html:8
+#, python-format
+msgid ""
+"\n"
+"    arguman.org bir <a href=\"%(about_url)s\">argüman analizi</a> "
+"platformudur.\n"
+"  "
+msgstr ""
+
+#: templates/index.html:24
+msgid "son gönderen:"
+msgstr ""
+
+#: templates/index.html:32
+msgid "Sonuç bulunamadı."
+msgstr ""
+
+#: templates/index.html:37 templates/newsfeed.html:46
+msgid "Daha fazla yükle"
+msgstr ""
+
+#: templates/newsfeed.html:12
+msgid "neler oluyor burada:"
+msgstr ""
+
+#: templates/newsfeed.html:17
+msgid "Sadece takip ettiklerini görüntüle"
+msgstr ""
+
+#: templates/newsfeed.html:21
+msgid "Herkesin haberlerini görüntüle"
+msgstr ""
+
+#: templates/newsfeed.html:40
+msgid "Haber kaynağınız boş. Birilerini takip edebilirsiniz."
+msgstr ""
+
+#: templates/newsfeed/contention.html:2
+msgid "bir argüman oluşturdu:"
+msgstr ""
+
+#: templates/newsfeed/fallacy.html:4
+#, python-format
+msgid ""
+"\n"
+"bir önerme için <strong>%(fallacy_type|humanize_fallacy_type)s</strong> "
+"bildirimi yaptı:\n"
+msgstr ""
+
+#: templates/newsfeed/following.html:4
+#, python-format
+msgid ""
+"\n"
+"  <a href=\"%(auth_profile_url)s\" class=\"contention-link\">\n"
+"    %(related_object.username)s\n"
+"  </a>\n"
+"  kişisini takip ediyor.\n"
+msgstr ""
+
+#: templates/notifications.html:8
+msgid "Bildirimler"
+msgstr ""
+
+#: templates/notifications/added-premise-for-contention.html:7
+#, python-format
+msgid ""
+"\n"
+"  <a class=\"user\" href=\"%(auth_profile_url)s\">\n"
+"    %(target_object.user.username)s\n"
+"  </a>\n"
+"  başlattığınız argüman\n"
+"  <a href=\"%(contention.get_absolute_url)s\" class=\"contention-link\">\n"
+"    %(contention.title|truncatechars:50)s\n"
+"  </a>\n"
+"  için bir\n"
+"  <span class=\"premise-type %(target_object.premise_class)s\">\n"
+"    %(target_object.get_premise_type_display)s\n"
+"  </span>\n"
+"  önermesi gönderdi.\n"
+msgstr ""
+
+#: templates/notifications/added-premise-for-premise.html:4
+#, python-format
+msgid ""
+"\n"
+"  <a class=\"user\" href=\"%(auth_profile_url)s\">\n"
+"    %(target_object.user.username)s\n"
+"  </a>\n"
+"  <a href=\"%(contention.get_absolute_url)s\" class=\"contention-link\">\n"
+"    %(contention.title|truncatechars:50)s\n"
+"  </a>\n"
+"  argümanındaki önermeniz için başka bir\n"
+"  <span class=\"premise-type %(target_object.premise_class)s\">\n"
+"    %(target_object.get_premise_type_display)s\n"
+"  </span>\n"
+"  önermesi gönderdi.\n"
+"  "
+msgstr ""
+
+#: templates/notifications/followed.html:4
+#, python-format
+msgid ""
+"\n"
+"<a class=\"followed-profile\" href=\"%(auth_profile_url)s\">\n"
+"  %(notification.sender)s\n"
+"</a> sizi takip ediyor.\n"
+msgstr ""
+
+#: templates/notifications/reported-as-fallacy.html:5
+#, python-format
+msgid ""
+"\n"
+"  <a href=\"%(contention.get_absolute_url)s\" class=\"contention-link\">\n"
+"    %(contention.title|truncatechars:50)s\n"
+"  </a>\n"
+"  argümanındaki önermeniz\n"
+"  <strong>%(target_object.get_fallacy_type_display)s</strong> olarak "
+"bildirildi.\n"
+msgstr ""
+
+#: templates/notifications/supported-a-premise.html:6
+#, python-format
+msgid ""
+"\n"
+"  <a class=\"user\" href=\"%(auth_profile_url)s\">\n"
+"    %(notification.sender.username)s\n"
+"  </a>\n"
+"  <a href=\"%(contention.get_absolute_url)s\" class=\"contention-link\">\n"
+"    %(contention.title|truncatechars:50)s\n"
+"  </a>\n"
+"  argümanındaki önermeni destekledi.\n"
+msgstr ""
+
+#: templates/partials/notifications.html:16
+msgid "Tümünü gör"
+msgstr ""
+
+#: templates/partials/notifications.html:22
+msgid "Hiç yeni bildiriminiz yok."
+msgstr ""
+
+#: templates/partials/notifications.html:25
+msgid "Eskilerini görüntüle"
+msgstr ""
+
+#: templates/premises/actions.html:4
+#: templates/premises/contention_detail.html:104
+msgid "önerme ekle"
+msgstr ""
+
+#: templates/premises/actions.html:8
+msgid "kaldır"
+msgstr ""
+
+#: templates/premises/contention.html:21 templates/premises/tree_view.html:20
+msgid "gönderen"
+msgstr ""
+
+#: templates/premises/contention_detail.html:14
+msgid "ekleyen"
+msgstr ""
+
+#: templates/premises/contention_detail.html:20
+msgid "orijinal söylem"
+msgstr ""
+
+#: templates/premises/contention_detail.html:25
+msgid "Belirtilmemiş"
+msgstr ""
+
+#: templates/premises/contention_detail.html:36
+msgid "Düzenle"
+msgstr ""
+
+#: templates/premises/contention_detail.html:42
+msgid "Yayından kaldır"
+msgstr ""
+
+#: templates/premises/contention_detail.html:47
+msgid "Argümanı yayınla"
+msgstr ""
+
+#: templates/premises/contention_detail.html:58
+msgid "Ağaç"
+msgstr ""
+
+#: templates/premises/contention_detail.html:59
+msgid "Liste"
+msgstr ""
+
+#: templates/premises/contention_detail.html:65
+msgid "Paylaş"
+msgstr ""
+
+#: templates/premises/contention_detail.html:85
+msgid "harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz."
+msgstr ""
+
+#: templates/premises/edit_contention.html:9
+msgid "Argüman güncelle"
+msgstr ""
+
+#: templates/premises/edit_contention.html:12
+msgid "Kaydet"
+msgstr ""
+
+#: templates/premises/edit_contention.html:17
+msgid "Argümanı Sil"
+msgstr ""
+
+#: templates/premises/edit_premise.html:8
+msgid "Önermeyi Güncelle"
+msgstr ""
+
+#: templates/premises/edit_premise.html:11
+#: templates/premises/new_premise.html:25
+msgid "Kaydet ve düzenlemeye devam et"
+msgstr ""
+
+#: templates/premises/examples/contention.html:3
+msgid ""
+"\n"
+"Önermeleriyle birlikte tartışılabilecek, desteklenebilecek, ispatlanabilecek "
+"ya da çürütülebilecek bir argüman.\n"
+"Örnekler:\n"
+msgstr ""
+
+#: templates/premises/examples/contention.html:8
+msgid "Sanat toplum içindir."
+msgstr ""
+
+#: templates/premises/examples/contention.html:9
+msgid "Bisiklet bir ulaşım aracıdır."
+msgstr ""
+
+#: templates/premises/examples/contention.html:10
+msgid "Bisikletçiler trafikte bulunduğu tüm şeridi kaplamalıdır."
+msgstr ""
+
+#: templates/premises/examples/contention.html:11
+msgid "Python'ın ilerlemesinde GIL büyük bir engeldir."
+msgstr ""
+
+#: templates/premises/examples/fallacy.html:3
+msgid ""
+"\n"
+"Safsata tipi belirtilmesi gereklidir. Bunlar hakkında daha fazla\n"
+"bilgi için <a href=\"http://safsatakilavuzu.com\">safsatakilavuzu.com</a> "
+"adresini\n"
+"ziyaret edebilirsiniz.\n"
+msgstr ""
+
+#: templates/premises/examples/owner.html:3
+msgid ""
+"\n"
+"Argümanın sahibi. Bir kurum, kitap ya da kişi olabilir.\n"
+"Örnekler:\n"
+msgstr ""
+
+#: templates/premises/examples/owner.html:8
+msgid "T.C. Anayasası"
+msgstr ""
+
+#: templates/premises/examples/owner.html:9
+msgid "Türk Dil Kurumu"
+msgstr ""
+
+#: templates/premises/examples/owner.html:10
+msgid "Friedrich Nietzsche"
+msgstr ""
+
+#: templates/premises/examples/owner.html:11
+msgid "Piet Mondiran"
+msgstr ""
+
+#: templates/premises/examples/owner.html:12
+msgid "Aziz Nesin"
+msgstr ""
+
+#: templates/premises/examples/owner.html:15
+msgid ""
+"Eğer bir değer girilmemişse argümanın sahibi argümanı ekleyen olarak görülür."
+msgstr ""
+
+#: templates/premises/examples/premise.html:3
+msgid ""
+"\n"
+"Örnek: Bisiklet sürücüsü karayolunda en sağ şeridi kullanır ve diğer "
+"taşıtlar ile aynı sorumlulukla hareket eder.\n"
+msgstr ""
+
+#: templates/premises/examples/premise_source.html:3
+msgid ""
+"\n"
+"Örnek: T.C. Karayolları Trafik Kanunu 2918/46. Maddesi\n"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:3
+msgid "Önermenin tipi belirtilmesi gerekir. Değerler şunlardır:"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:6
+msgid "ama: itiraz ve çürütme için kullanılır"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:9
+msgid "çünkü: destek/kanıt için kullanılır"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:12
+msgid "ancak: bir önermeye ek bilgi ya da durum belirtilmesi için kullanılır."
+msgstr ""
+
+#: templates/premises/examples/sources.html:3
+msgid ""
+"\n"
+"Argümanın kaynağı. Bir URL, kitap adı ya da dergi adı olabilir.\n"
+"Bu alan önemlidir, kaynaksız ve tartışmalı bir argüman/önerme yayından "
+"kaldırılır.\n"
+msgstr ""
+
+#: templates/premises/new_contention.html:11
+msgid ""
+"\n"
+"                Bu argümanı göndererek <a href=\"/tos\">kullanım "
+"koşullarını</a> kabul etmiş olacaksınız ve uygun görülmeyen\n"
+"                içerikler moderatörler tarafından yayından kaldırılacaktır.\n"
+"              "
+msgstr ""
+
+#: templates/premises/new_contention.html:16
+msgid "Gönder ve düzenlemeye devam et"
+msgstr ""
+
+#: templates/premises/new_premise.html:9
+msgid ""
+"\n"
+"              Göndereceğiniz önerme direkt olarak yayına alınacaktır,\n"
+"              ancak yayında kalacağının garantisi yoktur. <a href=\"/tos"
+"\">Kullanım Koşullarına</a> uygun görülmeyen\n"
+"              içerikler moderatörler tarafından yayından kaldırılacaktır.\n"
+"            "
+msgstr ""
+
+#: templates/premises/new_premise.html:19
+msgid "Ekleyeceğiniz önermenin öncülü"
+msgstr ""
+
+#: templates/premises/new_premise.html:37
+msgid "Kalan karakter sayısı"
+msgstr ""
+
+#: templates/premises/report.html:7
+msgid "Safsata bildirimi yapacağınız önerme"
+msgstr ""
+
+#: templates/premises/report.html:13
+msgid "Safsatayı Bildir"
+msgstr ""
+
+#: templates/premises/tree_view.html:17
+msgid "kaynaklar"
+msgstr ""
+
+#: templates/premises/tree_view.html:26
+#, python-format
+msgid ""
+"\n"
+"                        %(premise.reports.count)s safsata bildirimi "
+"yapıldı.\n"
+"                        "
+msgstr ""
+
+#: templates/premises/tree_view.html:41
+#, python-format
+msgid ""
+"\n"
+"                        %(premise.supporters.count)s destekleyen var:\n"
+"                        "
+msgstr ""
+
+#: templates/premises/tree_view.html:48
+msgid "ve diğerleri."
+msgstr ""
+
+#: templates/premises/tree_view.html:59
+msgid "düzenle"
+msgstr ""
+
+#: templates/premises/tree_view.html:64
+msgid "Önermeyi silmek istediğinize emin misiniz?"
+msgstr ""
+
+#: templates/premises/tree_view.html:75
+msgid "geri al"
+msgstr ""
+
+#: templates/premises/tree_view.html:80
+msgid "destekle"
+msgstr ""
+
+#: templates/premises/tree_view.html:88
+msgid "safsata bildir"
+msgstr ""
+
+#: templates/profiles/social_providers.html:5
+msgid "Twitter ile bağlan"
+msgstr ""
+
+#: templates/stats.html:12
+msgid "en katılımcı üyeler"
+msgstr ""
+
+#: templates/stats.html:15
+msgid "en desteklenen üyeler"
+msgstr ""
+
+#: templates/stats.html:18
+msgid "en kalabalık argümanlar"
+msgstr ""
+
+#: templates/stats.html:21
+msgid "en çok desteklenen önermeler"
+msgstr ""
+
+#: templates/stats.html:24
+msgid "en safsata önermeler"
+msgstr ""
+
+#: templates/stats.html:31
+msgid "bu hafta"
+msgstr ""
+
+#: templates/stats.html:34
+msgid "bu ay"
+msgstr ""
+
+#: templates/stats.html:37
+msgid "tüm zamanlar"
+msgstr ""
+
+#: templates/stats/contention.html:9
+msgid "KATILIMCI"
+msgstr ""
+
+#: templates/stats/contention.html:13
+msgid "ÇÜNKÜ"
+msgstr ""
+
+#: templates/stats/contention.html:17
+msgid "AMA"
+msgstr ""
+
+#: templates/stats/contention.html:21
+msgid "ANCAK"
+msgstr ""
+
+#: templates/stats/premise.html:12
+#, python-format
+msgid ""
+"\n"
+"\t%(object.supporters.count)s destekleyen var.\n"
+"\t"
+msgstr ""
+
+#: templates/stats/premise.html:20
+#, python-format
+msgid ""
+"\n"
+"\t\t\t%(object.reports.count)s safsata bildirimi yapıldı.\n"
+"\t\t"
+msgstr ""
+
+#: templates/stats/profile.html:10
+msgid "TAKİPÇİ"
+msgstr ""
+
+#: templates/stats/profile.html:14
+msgid "ARGÜMAN"
+msgstr ""
+
+#: templates/stats/profile.html:18
+msgid "ÖNERME"
+msgstr ""
+
+#: templates/stats/profile.html:22
+msgid "DESTEK"
+msgstr ""
+
+#: templates/tabs.html:6
+msgid "Haber Kaynağı"
+msgstr ""
+
+#: templates/tabs.html:11
+msgid "Seçilmişler"
+msgstr ""
+
+#: templates/tabs.html:16
+msgid "Yeniler"
+msgstr ""
+
+#: templates/tabs.html:21
+msgid "İstatistikler"
+msgstr ""
+
+#: templates/tabs.html:26
+msgid "Arama"
+msgstr ""
+
+#: templates/tos.html:9
+msgid ""
+"Arguman.org'u ziyaretiniz ve arguman.org içeriğini kullanımınız aşağıdaki "
+"kullanım şartlarına tabidir:"
+msgstr ""
+
+#: templates/tos.html:11
+msgid "Uygunsuz İçerik"
+msgstr ""
+
+#: templates/tos.html:13
+msgid ""
+"arguman.org içeriği önceden kontrol edilmiyor olması nedeniyle 18 yaşından "
+"küçüklere uygun olmayabilir. çocuklarınızın gelişimini olumsuz etkileyecek "
+"içeriklerden uzak durmasını sağlayabileceğiniz filtre yazılımları "
+"bulunmaktadır, bunları kullanmanızı tavsiye ederiz. internet'in çocuklarca "
+"güvenli kullanımı konusunda bilgilendirme için: (http://www.guvenliweb.org."
+"tr/annebabakilavuz/)"
+msgstr ""
+
+#: templates/tos.html:15
+msgid "Hukuka aykırı içerik ve şikayet"
+msgstr ""
+
+#: templates/tos.html:17
+msgid ""
+"arguman.org(site), arguman.org'a ait olup, 5651 sayılı kanun çerçevesinde "
+"yer sağlayıcı sıfatı’yla(yer sağlayıcı belge no:XXXX t:XX/XX/20XX) hizmet "
+"vermektedir. kullanıcılar tarafından oluşturulan içerikler herhangi bir ön "
+"incelemeye tabi olmaksızın ve doğrudan kullanıcılar tarafından yayına "
+"alınmaktadır. tarafımıza başvurulmadığı müddetçe, yayınlanan içeriğin hukuka "
+"uygunluğunu denetleme yükümlülüğümüz bulunmamaktadır. ancak, arguman.org yer "
+"sağladığı içeriğin hukuka uygunluğunu sağlamaya özen göstermekte, bu nedenle "
+"yapılan her başvuruyu dikkatle değerlendirmektedir."
+msgstr ""
+
+#: templates/tos.html:19
+msgid ""
+"bir argümanda yer alan önermeler genelde farklı kullanıcılara ait "
+"olmaktadır. bu nedenle, başlıklarda yer alan her bir yazı 'şikayet' butonu "
+"kullanılarak ayrı ayrı şikayet edilebilmektedir. bunun haricinde, sitede yer "
+"alan iletişim arabiriminden bize ulaşabilirsiniz."
+msgstr ""
+
+#: templates/tos.html:21
+msgid ""
+"şikayetleriniz kişisel haberleşme niteliğinde olmayıp, şikayetiniz ve "
+"iletişim bilgileriniz gerekli görüldüğü takdirde yayınlanabilir, üçüncü "
+"kişilerle ve/veya yasal mercilerle paylaşılabilir. bu nedenle "
+"şikayetlerinizde ifşa edilmesini istemediğiniz beyanlarda bulunmamanızı "
+"tavsiye ederiz."
+msgstr ""
+
+#: templates/tos.html:23
+msgid "Kullanım"
+msgstr ""
+
+#: templates/tos.html:25
+msgid ""
+"sitede yer alan hizmetler ve içeriklerden şahsi kullanımınız için "
+"faydalanmanız gerekmektedir. site tarafından sunulan hizmetlerin ve arguman."
+"org’tan yazılı izin alınmadığı müddetçe ticari amaçla kullanılması yasaktır."
+msgstr ""
+
+#: templates/tos.html:27
+msgid ""
+"sitemize çeşitli yazılımlar veya aletler kullanarak; izinsiz giriş yapma, "
+"veri değiştirme veya başka işlemlerle sitenin işleyişine müdahale etme veya "
+"engelleme, sitenin işleyişini kasıtlı olarak yavaşlatma, virüs vs. zararlı "
+"içerik yüklemek suretiyle arguman.org’e zarar verme girişiminde bulunduğunuz "
+"takdirde arguman.org’un yasal yollara başvurma hakkı saklıdır."
+msgstr ""
+
+#: templates/tos.html:29
+msgid "İçerik"
+msgstr ""
+
+#: templates/tos.html:31
+msgid ""
+"arguman.org’te yer alan içeriğin doğru ve/veya güncel olduğu hiçbir şekilde "
+"iddia veya garanti edilmemektedir. aksine, kullanıcılar tamamen gerçekdışı "
+"içerik dahi üretebilirler. arguman.org’te yer alan içeriğe yukarıda 'hukuka "
+"aykırı içerik ve şikayet' kısmında belirtilen haller dışında müdahale "
+"edilmediğinden, arguman.org’te yer alan herhangi bir bilgi, yorum, öneri, "
+"tecrübe paylaşımı ve benzeri içeriğin referans alınması nedeniyle "
+"oluşabilecek (dolaylı veya doğrudan)maddi ve/veya manevi herhangi bir "
+"kaybınızdan sorumlu olmadığımızı belirtmek isteriz."
+msgstr ""
+
+#: templates/tos.html:33
+msgid ""
+"arguman.org’te yer alan bağlantılara/yönlendirmelere (link) ilişkin hiçbir "
+"sorumluluğumuz bulunmamaktadır. arguman.org bağlantı ve yönlendirmelerin "
+"içeriğini kontrol etmediği gibi, içeriğin doğruluğu, yönlendirilen adreste "
+"virüs, trojan, phishing ve benzeri zararlı bir unsur olmadığı veya "
+"yönlendirilen sitenin hukuka uygun olduğu gibi veya benzeri hiçbir bir "
+"garanti vermemektedir."
+msgstr ""
+
+#: templates/tos.html:35
+msgid "Telif hakları ve alıntı"
+msgstr ""
+
+#: templates/tos.html:37
+msgid ""
+"arguman.org bir derleme eser olup, derleme esere (içerik) ve site kodlarına "
+"ilişkin tüm haklar(kopyalama, çoğaltma, işleme, yayma) arguman.org’ye "
+"aittir. içeriğe ilişkin kullanıcılar ile arguman.org arasında yapılmış "
+"sözleşme hükümleri saklıdır."
+msgstr ""
+
+#: templates/tos.html:39
+msgid ""
+"arguman.org içeriğini, içeriği değiştirmemek, ilgili kullanıcıya ve arguman."
+"org’e aktif link vererek atıfta bulunmak ve ticari amaç gütmeden kullanmak "
+"kaydıyla alıntılamanız mümkündür ancak tüm bu kurallara uyulsa dahi "
+"alıntılama eserin, konularının veya başlıklarının tümünü kapsamayacak ve tam "
+"içeriğe ulaşmak için arguman.org'ün ziyaret edilmesi ihtiyacını ortadan "
+"kaldırmayacak düzeyde olmalıdır."
+msgstr ""
+
+#: templates/tos.html:41
+msgid ""
+"aksi yönde açık yazılı izin olmadığı müddetçe site içeriğinin kısmen veya "
+"tamamen ticari amaçla ve/veya reklam ve benzeri gelir elde edecek şekilde "
+"kullanılması yasaktır."
+msgstr ""
+
+#: templates/tos.html:43
+msgid ""
+"arguman.org’nin dilediği zaman, dilediği kişi veya kurumun yukarıdaki "
+"kurallara uyarak dahi alıntı yapmasını engelleme hakkı saklıdır."
+msgstr ""
+
+#: templates/tos.html:45
+msgid "Gizlilik"
+msgstr ""
+
+#: templates/tos.html:47
+msgid ""
+"arguman.org’te bulunduğunuz süre boyunca 'cookie' olarak da adlandırılan "
+"çerezlerin ve buna benzer unsurların bilgisayarınıza yerleştirilmesi söz "
+"konusu olabilir. çerezler basit metin dosyalarından ibaret olup, kimlik ve "
+"sair özel bilgiler içermez, bu nevi kişisel bilgi içermemekle beraber, "
+"oturum bilgileri ve benzeri veriler saklanır ve sizi tekrar tanımak ve "
+"benzeri hizmetler için kullanılabilir. bu konuda daha fazla bilgiyi (http://"
+"www.allaboutcookies.org/) (http://en.wikipedia.org/wiki/http<em>cookie) ve "
+"http://tr.wikipedia.org/wiki/çerez</em>(internet) adreslerinden "
+"edinebilirsiniz. (verilen linklerden ulaşacağınız içeriğin güvenilirliğine "
+"ilişkin sorumluluğumuz bulunmamaktadır.)"
+msgstr ""
+
+#: templates/tos.html:49
+msgid ""
+"arguman.org'ü ziyaretiniz esnasında ip adresiniz ve bilgisayarınız "
+"aracılığıyla toplanabilen diğer veriler arguman.org tarafından anonim olarak "
+"kaydedilmektedir."
+msgstr ""
+
+#: templates/tos.html:51
+msgid "arguman.org’un hak ve yükümlülükleri"
+msgstr ""
+
+#: templates/tos.html:53
+msgid ""
+"arguman.org kullanım koşullarını önceden bildirmeksizin değiştirebilir. bu "
+"nedenle kullanım koşullarını belirli aralıklarla incelemeniz öneririz."
+msgstr ""
+
+#: templates/tos.html:55
+msgid ""
+"arguman.org, arguman.org'u oluşturan tüm unsurları önceden haber vermeksizin "
+"değiştirme, sona erdirme, yenilerini ekleme, ücretlendirme haklarını saklı "
+"tutmaktadır."
+msgstr ""
+
+#: templates/tos.html:57
+msgid ""
+"arguman.org, gerekli gördüğü takdirde belli kişilerin, kurumların, ip "
+"numaralarının veya ip bloklarının arguman.org'e erişimini geçici veya kalıcı "
+"olarak durdurma hakkını saklı tutar."
+msgstr ""
+
+#: templates/tos.html:59
+msgid ""
+"sitenin virüs ve sair zararlı içerik barındırmaması için özen sarf edilmekle "
+"birlikte, gelişen teknoloji, teknik sorun ve diğer nedenlerle "
+"bilgisayarınıza virüs, trojan gibi zararlı yazılımların bulaşması ihtimali "
+"bulunmaktadır. bu gibi risklere karşı antivirüs programları ve benzeri "
+"uygulamalar kullanmanızı tavsiye ederiz. sitemizde gezinmeniz dolayısıyla "
+"karşılaşabileceğiniz yazılımsal ve donanımsal dahil olmak üzere hiçbir "
+"zarara ilişkin sorumluluk kabul etmemekteyiz. bu nedenlerle sitemizden "
+"talepte bulunmayacağınızı peşinen kabul etmektesiniz."
+msgstr ""
+
+#: templates/tos.html:61
+msgid "bu belge son olarak 26.10.2014 tarihinde güncellenmiştir."
+msgstr ""

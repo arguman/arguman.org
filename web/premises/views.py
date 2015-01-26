@@ -15,6 +15,7 @@ from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
 from django.db.models import Count
+from django.utils.translation import ugettext_lazy as _
 
 from blog.models import Post
 from premises.utils import int_or_zero
@@ -232,7 +233,7 @@ class NewsView(HomeView):
 class StatsView(HomeView):
     tab_class = "stats"
     template_name = "stats.html"
-    
+
     partial_templates = {
         Profile: "stats/profile.html",
         Contention: "stats/contention.html",
@@ -373,23 +374,6 @@ class ControversialArgumentsView(HomeView):
         return contentions
 
 
-class AboutView(TemplateView):
-    template_name = "about.html"
-
-    def get_context_data(self, **kwargs):
-        content = markdown(render_to_string("about.md"))
-        return super(AboutView, self).get_context_data(
-            content=content, **kwargs)
-
-class TosView(TemplateView):
-    template_name = "tos.html"
-
-    def get_context_data(self, **kwargs):
-        content = markdown(render_to_string("tos.md"))
-        return super(TosView, self).get_context_data(
-            content=content, **kwargs)
-
-
 class ArgumentCreationView(LoginRequiredMixin, CreateView):
     template_name = "premises/new_contention.html"
     form_class = ArgumentCreationForm
@@ -429,10 +413,10 @@ class ArgumentPublishView(LoginRequiredMixin, DetailView):
         if contention.premises.exists():
             contention.is_published = True
             contention.save()
-            messages.info(request, u"Argüman yayına alındı.")
+            messages.info(request, _(u"Argüman yayına alındı."))
         else:
-            messages.info(request, u"Argümanı yayına almadan önce en az 1 "
-                                   u"önerme ekleyin.")
+            messages.info(request, _(u"Argümanı yayına almadan önce en az 1 "
+                                   u"önerme ekleyin."))
         return redirect(contention)
 
 
@@ -445,7 +429,7 @@ class ArgumentUnpublishView(LoginRequiredMixin, DetailView):
         contention = self.get_object()
         contention.is_published = False
         contention.save()
-        messages.info(request, u"Argüman yayından kaldırıldı.")
+        messages.info(request, _(u"Argüman yayından kaldırıldı."))
         return redirect(contention)
 
 
@@ -460,10 +444,10 @@ class ArgumentDeleteView(LoginRequiredMixin, DetailView):
             # remove notification
             Entry.objects.delete(contention.get_newsfeed_type(), contention.id)
             contention.delete()
-            messages.info(request, u"Argümanınız silindi.")
+            messages.info(request, _(u"Argümanınız silindi."))
             return redirect("home")
         else:
-            messages.info(request, u"Argümanınız silinecek durumda değil.")
+            messages.info(request, _(u"Argümanınız silinecek durumda değil."))
             return redirect(contention)
 
     delete = post

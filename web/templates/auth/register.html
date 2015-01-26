@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block content %}
     <section class="container">
         <form action="{% url "auth_registration" %}" method="post">
             {% include "profiles/social_providers.html" %}
-            <h2>Kayıt ol</h2>
+            <h2>{% trans "Kayıt ol" %}</h2>
             {% csrf_token %}
             {{ form.as_p }}
             <ul class="rules">
-            <li>Bu siteyi kullanarak <a href="/tos">kullanım koşulları</a>nı kabul etmiş olursunuz.</li>
+
+            {% blocktrans %}
+            <li>Bu siteyi kullanarak <a href="{% url "tos" %}">kullanım koşulları</a>nı kabul etmiş olursunuz.</li>
             <li>Avatar yüklemek için <a target="_blank" href="//gravatar.com">gravatar.com</a>
                 adresini kullanabilirsiniz.</li>
+            {% endblocktrans %}
             </ul>
-            <input type="submit" value="Siteye Üye ol" class="submit">
+            <input type="submit" value="{% trans "Siteye Üye ol" %}" class="submit">
         </form>
     </section>
 {% endblock %}

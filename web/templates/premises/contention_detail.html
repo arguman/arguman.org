@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}{{ contention.title }}{% endblock %}
 
@@ -10,15 +11,18 @@
         <nav>
             <ul>
                 <li>
-                    ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user|lower }}</a>
+                  {% trans "ekleyen" %}:
+                  <a href="{% url "auth_profile" contention.user.username %}">
+                    {{ contention.user|lower }}
+                  </a>
                 </li>
                 <li class="original-discourse">
-                    orijinal söylem:
+                    {% trans "orijinal söylem" %}:
                     {% if contention.sources or contention.owner %}
                     {{ contention.owner }}
                     {# {{ contention.sources|urlize }} #}
                     {% else %}
-                     Belirtilmemiş
+                    {% trans "Belirtilmemiş" %}
                     {% endif %}
                 </li>
             </ul>
@@ -28,17 +32,19 @@
             {% if edit_mode %}
         <nav class="contention-admin-menu">
             <ul>
-                <li><a href="{% url "contention_edit" contention.slug %}">Düzenle</a></li>
+                <li><a href="{% url "contention_edit" contention.slug %}">
+                  {% trans "Düzenle" %}
+                </a></li>
                 <li>
                     {% if contention.is_published %}
                     <form action="{% url "contention_unpublish" contention.slug %}" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Yayından kaldır"/>
+                        <input type="submit" value="{% trans "Yayından kaldır" %}"/>
                     </form>
                     {% else %}
                     <form action="{% url "contention_publish" contention.slug %}" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Argümanı yayınla"/>
+                        <input type="submit" value="{% trans "Argümanı yayınla" %}"/>
                     </form>
                     {% endif %}
                 </li>
@@ -49,14 +55,14 @@
          <nav>
             <ul id="view-switcher">
                 <li>Görünüm</li>
-                <li><a href="?" class="tree-view active">Ağaç</a> |
-                    <a href="?view=list" class="list-view">Liste</a></li>
+                <li><a href="?" class="tree-view active">{% trans "Ağaç" %}</a> |
+                    <a href="?view=list" class="list-view">{% trans "Liste" %}</a></li>
             </ul>
         </nav>
 
         <nav class="share">
             <ul id="view-switcher">
-                <li>Paylaş</li>
+                <li>{% trans "Paylaş" %}</li>
                 <li><a target="_blank" href="https://www.facebook.com/sharer.php?u={{ contention.get_full_url }}" class="tree-view active">Facebook</a> |
                     <a target="_blank" href="http://twitter.com/home?status={{ contention.title }} {{ contention.get_full_url }}" class="list-view">Twitter</a></li>
             </ul>
@@ -76,7 +82,7 @@
         <span class="up-down">↑<br />↓</span>
         <span class="right">→</span>
     </span>
-    <p>harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz.</p>
+    <p>{% trans "harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz." %}</p>
     </div>
     {% endif %}
 
@@ -94,7 +100,9 @@
                 {{ contention }}
                 <div class="main-contention-actions">
                     {% if user.is_authenticated %}
-                    <a class="new-main-premise" href="{% url "new_premise" contention.slug %}">önerme ekle</a>
+                    <a class="new-main-premise" href="{% url "new_premise" contention.slug %}">
+                      {% trans "önerme ekle" %}
+                    </a>
                     {% endif %}
                 </div>
                 </div>

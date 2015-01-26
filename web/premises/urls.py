@@ -1,14 +1,16 @@
 from django.conf.urls import patterns, url
+from django.views.generic import TemplateView
+
 from premises.views import (ContentionDetailView, HomeView,
                             ArgumentCreationView, PremiseCreationView,
                             PremiseDeleteView, ContentionJsonView,
                             PremiseEditView, ArgumentUpdateView,
                             ArgumentPublishView, ArgumentUnpublishView,
-                            ArgumentDeleteView, AboutView, NewsView,
+                            ArgumentDeleteView, NewsView,
                             UpdatedArgumentsView, ReportView,
-                            ControversialArgumentsView, TosView, SearchView,
-                            NotificationsView, PremiseSupportView, PremiseUnsupportView,
-                            StatsView)
+                            ControversialArgumentsView, SearchView,
+                            NotificationsView, PremiseSupportView,
+                            PremiseUnsupportView, StatsView)
 
 
 urlpatterns = patterns('',
@@ -25,10 +27,10 @@ urlpatterns = patterns('',
    url(r'^stats$', StatsView.as_view(),
        name='contentions_stats'),
    url(r'^about$',
-       AboutView.as_view(),
+       TemplateView.as_view(template_name='about.html'),
        name='about'),
    url(r'^tos$',
-       TosView.as_view(),
+       TemplateView.as_view(template_name='tos.html'),
        name='tos'),
    url(r'^new-argument$',
        ArgumentCreationView.as_view(),

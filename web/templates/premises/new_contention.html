@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block content %}
     <section class="container">
         <form action="{% url "new_argument" %}" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <p>
-                Bu argümanı göndererek <a href="/tos">kullanım koşullarını</a> kabul etmiş olacaksınız ve uygun görülmeyen
+              {% url "tos" as tos_url %}
+              {% blocktrans %}
+                Bu argümanı göndererek <a href="{{ tos_url }}">kullanım koşullarını</a> kabul etmiş olacaksınız ve uygun görülmeyen
                 içerikler moderatörler tarafından yayından kaldırılacaktır.
+              {% endblocktrans %}
             </p>
-            <input type="submit" value="Gönder ve düzenlemeye devam et" class="submit">
+            <input type="submit" value="{% trans "Gönder ve düzenlemeye devam et" %}" class="submit">
         </form>
     </section>
 {% endblock %}

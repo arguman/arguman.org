@@ -1,7 +1,11 @@
+{% load i18n %}
 {% if user.is_authenticated %}
     {% include "partials/notifications.html" with show_see_more_button=True %}
 {% endif %}
 
 <div class="landing">
-    arguman.org bir <a href="{% url "about" %}">argüman analizi</a> platformudur.
+  {% url "about" as about_url %}
+  {% blocktrans %}
+    arguman.org bir <a href="{{ about_url }}">argüman analizi</a> platformudur.
+  {% endblocktrans %}
 </div>

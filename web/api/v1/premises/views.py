@@ -1,3 +1,5 @@
+from django.utils.translation import ugettext_lazy as _
+
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework import permissions
@@ -61,7 +63,7 @@ class PremiseDetailView(viewsets.ModelViewSet):
     def support(self, request, pk=None, premise_id=None):
         premise = self.get_object()
         if premise.supporters.filter(id=request.user.id).exists():
-            return Response({'message': "Onermeyi Zaten destekliyorsun"},
+            return Response({'message': _("Onermeyi Zaten destekliyorsun")},
                             status=status.HTTP_400_BAD_REQUEST)
         premise.supporters.add(request.user)
         supported_a_premise.send(sender=self, premise=premise,
@@ -72,8 +74,9 @@ class PremiseDetailView(viewsets.ModelViewSet):
     def unsupport(self, request, pk=None, premise_id=None):
         premise = self.get_object()
         if not premise.supporters.filter(id=request.user.id).exists():
-            return Response({'message': "Once onermeyi desteklemen gerekiyor"},
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'message': _("Once onermeyi desteklemen gerekiyor")},
+                status=status.HTTP_400_BAD_REQUEST)
         premise.supporters.remove(request.user)
         return Response(status=status.HTTP_204_NO_CONTENT)
 

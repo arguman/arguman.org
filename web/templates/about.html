@@ -1,7 +1,62 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 <div class="container about content">
-    {{ content|safe }}
-</div>
+  <h2>{% trans "Eleştirel düşünme" %}</h2>
+
+  <p>
+    {% blocktrans %}
+    Eleştirel düşünme, bir bir bilginin tarafsız, gerçekçi ve etkin bir şekilde
+    değerlendirilmesi ile alakalı beceriler bütünüdür. Günlük hayatımızda
+    her ne kadar inkar etsek de doğamız gereği öznel yargılar yapabiliyoruz. Eleştirel
+    düşünmede amaç bir veriyi değerlendirirken bu öznel/taraflı yargılardan kurtulabilmektir.
+    {% endblocktrans %}
+  </p>
+
+    <h2>{% trans "Argüman haritaları" %}</h2>
+
+    <p>
+      {% blocktrans %}
+      Eleştirel düşünmenin temeli argümanlardır. Değerlendirme bir argüman ve
+      bu argümanın önermeleri, destekleyicileri, itirazları, çürütmeleri üzerinden yapılır.
+      Argüman haritaları ise bu öğelerin görselleştirilmiş halidir.
+      {% endblocktrans %}
+    </p>
+
+      <p>{% trans "Argüman haritalarını görsel olarak hiyerarşi haritaları olarak düşünebilirsiniz." %}</p>
+
+      <p><img style="width: 70%; margin-left: 4%;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Whatley.png/800px-Whatley.png"></p>
+
+      <p>{% trans "Temel hedef argümanın tüm öğelerini tarafsız ve safsatadan uzak bir şekilde resmedebilmektir." %}</p>
+
+        <h2>{% trans "Argüman analizi platformu" %}</h2>
+
+        <p>{% trans "Argüman.org'un amacı ise argümanların birden çok kullanıcı tarafından tarafsız bir şekilde haritalanabilmesidir." %}</p>
+
+          <h2>{% trans "Biz kimiz" %}</h2>
+
+          <p>{% trans "Arguman.org açık kaynak bir proje olup topluluk tarafından geliştirilmektedir." %}</p>
+
+          <p><a href="https://github.com/arguman">https://github.com/arguman</a></p>
+
+          <p>{% trans "Eğer siz de bir şeyler yapmak isterseniz yukarıdaki github adresini inceleyebilirsiniz." %}</p>
+
+          <h2>{% trans "Katkıda bulunanlar ve yaptıkları" %}</h2>
+
+          <ul>
+            <li><a href="http://fatiherikli.com">Fatih Erikli</a> {% trans "(kurucu, geliştirme)" %}</li>
+            <li><a href="http://hmert.com">Hüseyin Mert</a> {% trans "(proje yönetimi)" %}</li>
+            <li><a href="https://twitter.com/aybarsbadur">Aybars Badur</a> {% trans "(geliştirme)" %}</li>
+            <li><a href="http://tunavargi.com/">Tuna Vargı</a> {% trans "(geliştirme)" %}</li>
+            <li><a href="http://bahattincinic.com/">Bahattin Çiniç</a> {% trans "(geliştirme)" %}</li>
+            <li><a href="https://twitter.com/cangokt">Can Göktaş</a> {% trans "(arayüz geliştirme)" %}</li>
+            <li><a href="https://dribbble.com/kagan">Kağan Yaldızkaya</a> {% trans "(yeni tasarım üzerinde çalışmakta)" %}</li>
+            <li><a href="https://twitter.com/mdisec">Mehmet İnce</a> {% trans "(güvenlik testi)" %}</li>
+          </ul>
+
+          <p>{% trans "İletişim için argumananalizi@gmail.com adresine yazabilirsiniz." %}</p>
+
+  </div>
 {% endblock %}

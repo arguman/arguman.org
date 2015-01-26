@@ -1,12 +1,14 @@
-Önermenin tipi belirtilmesi gerekir. Değerler şunlardır:
+{% load i18n %}
+
+{% trans "Önermenin tipi belirtilmesi gerekir. Değerler şunlardır:" %}
 <ul>
     <li>
-        ama: itiraz ve çürütme için kullanılır
+      {% trans "ama: itiraz ve çürütme için kullanılır" %}
     </li>
     <li>
-        çünkü: destek/kanıt için kullanılır
+      {% trans "çünkü: destek/kanıt için kullanılır" %}
     </li>
     <li>
-        ancak: bir önermeye ek bilgi ya da durum belirtilmesi için kullanılır.
+      {% trans "ancak: bir önermeye ek bilgi ya da durum belirtilmesi için kullanılır." %}
     </li>
 </ul>

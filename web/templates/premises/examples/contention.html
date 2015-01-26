@@ -1,8 +1,12 @@
+{% load i18n %}
+
+{% blocktrans %}
 Önermeleriyle birlikte tartışılabilecek, desteklenebilecek, ispatlanabilecek ya da çürütülebilecek bir argüman.
 Örnekler:
+{% endblocktrans %}
 <ul>
-    <li>Sanat toplum içindir.</li>
-    <li>Bisiklet bir ulaşım aracıdır.</li>
-    <li>Bisikletçiler trafikte bulunduğu tüm şeridi kaplamalıdır.</li>
-    <li>Python'ın ilerlemesinde GIL büyük bir engeldir.</li>
+    <li>{% trans "Sanat toplum içindir." %}</li>
+    <li>{% trans "Bisiklet bir ulaşım aracıdır." %}</li>
+    <li>{% trans "Bisikletçiler trafikte bulunduğu tüm şeridi kaplamalıdır." %}</li>
+    <li>{% trans "Python'ın ilerlemesinde GIL büyük bir engeldir." %}</li>
 </ul>
