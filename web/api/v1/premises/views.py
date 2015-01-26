@@ -10,6 +10,7 @@ from .serializers import (ContentionSerializer, PremisesSerializer,
                           PremiseReportSerializer)
 from premises.utils import int_or_default
 from premises.signals import supported_a_premise
+from api.v1.account.serializers import UserProfileSerializer
 
 
 class ContentionViewset(viewsets.ModelViewSet):
@@ -68,6 +69,13 @@ class PremiseDetailView(viewsets.ModelViewSet):
                                  user=self.request.user)
         return Response(status=status.HTTP_201_CREATED)
 
+    @detail_route(methods=['get'])
+    def supporters(self, request, pk=None, premise_id=None):
+        premise = self.get_object()
+        page = self.paginate_queryset(premise.supporters.all())
+        serializer = self.get_pagination_serializer(page)
+        return Response(serializer.data)
+
     @detail_route(methods=['delete'])
     def unsupport(self, request, pk=None, premise_id=None):
         premise = self.get_object()
@@ -85,3 +93,6 @@ premise_detail = PremiseDetailView.as_view({'get': 'retrieve'})
 premise_report = PremiseDetailView.as_view({'post': 'report'})
 premise_support = PremiseDetailView.as_view({'post': 'support',
                                              'delete': 'unsupport'})
+premise_supporters = PremiseDetailView.as_view(
+    {'get': 'supporters'},
+    serializer_class=UserProfileSerializer)
