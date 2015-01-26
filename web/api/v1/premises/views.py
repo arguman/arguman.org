@@ -15,7 +15,8 @@ from api.v1.account.serializers import UserProfileSerializer
 
 class ContentionViewset(viewsets.ModelViewSet):
     queryset = Contention.objects.filter(is_published=True)\
-                                 .prefetch_related('premises')\
+                                 .prefetch_related('premises',
+                                                   'premises__supporters')\
                                  .select_related('user', 'premises__parent',
                                                  'premises__user')
     permission_classes = (permissions.AllowAny,)
@@ -27,7 +28,8 @@ class ContentionViewset(viewsets.ModelViewSet):
     @detail_route()
     def premises(self, request, pk=None):
         contention = self.get_object()
-        serializer = PremisesSerializer(contention.premises.all(), many=True)
+        serializer = PremisesSerializer(
+            contention.premises.select_related('user').all(), many=True)
         return Response(serializer.data)
 
 

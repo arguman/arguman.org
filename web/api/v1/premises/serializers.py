@@ -11,11 +11,13 @@ class PremisesSerializer(serializers.ModelSerializer):
     user = UserProfileSerializer()
     absolute_url = serializers.SerializerMethodField()
     premise_type = serializers.ReadOnlyField(source='get_premise_type_display')
+    supporters = UserProfileSerializer(many=True)
 
     class Meta:
         model = Premise
         fields = ('id', 'user', 'text', 'sources', 'parent',
-                  'absolute_url', 'premise_type', 'date_creation',)
+                  'absolute_url', 'premise_type',
+                  'date_creation', 'supporters')
 
     def get_absolute_url(self, obj):
         return reverse("api-premise-detail", args=[obj.argument.id, obj.id])
