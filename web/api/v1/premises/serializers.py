@@ -17,7 +17,7 @@ class PremisesSerializer(serializers.ModelSerializer):
         model = Premise
         fields = ('id', 'user', 'text', 'sources', 'parent',
                   'absolute_url', 'premise_type',
-                  'date_creation', 'supporters')
+                  'date_creation', 'supporters',)
 
     def get_absolute_url(self, obj):
         return reverse("api-premise-detail", args=[obj.argument.id, obj.id])
@@ -33,7 +33,7 @@ class ContentionSerializer(serializers.ModelSerializer):
         model = Contention
         fields = ('id', 'user', 'title', 'slug', 'description',
                   'owner', 'sources', 'premises', 'date_creation',
-                  'absolute_url', 'report_count')
+                  'absolute_url', 'report_count', 'is_featured')
 
     def get_absolute_url(self, obj):
         return reverse("api-contention-detail", args=[obj.id])

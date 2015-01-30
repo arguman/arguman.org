@@ -22,8 +22,11 @@ class ContentionViewset(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     serializer_class = ContentionSerializer
     paginate_by = 20
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter, filters.DjangoFilterBackend,
+                       filters.OrderingFilter)
     search_fields = ('title',)
+    filter_fields = ('is_featured',)
+    ordering_fields = ('date_creation',)
 
     @detail_route()
     def premises(self, request, pk=None):
