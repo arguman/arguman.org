@@ -10,7 +10,7 @@ from .serializers import (ContentionSerializer, PremisesSerializer,
                           PremiseReportSerializer)
 from premises.utils import int_or_default
 from premises.signals import supported_a_premise
-from api.v1.account.serializers import UserProfileSerializer
+from api.v1.users.serializers import UserProfileSerializer
 
 
 class ContentionViewset(viewsets.ModelViewSet):

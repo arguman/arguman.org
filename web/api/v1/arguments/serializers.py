@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 from premises.models import Contention, Premise, Report
 from premises.signals import reported_as_fallacy
-from api.v1.account.serializers import UserProfileSerializer
+from api.v1.users.serializers import UserProfileSerializer
 
 
 class PremisesSerializer(serializers.ModelSerializer):
