@@ -156,6 +156,8 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10,
     'PAGINATE_BY_PARAM': 'page_size',
     'MAX_PAGINATE_BY': 100,
+    'UNICODE_JSON': False,
+    'DATETIME_FORMAT': '%d-%m-%Y %H:%m'
 }
 
 MONGODB_HOST = "localhost"
