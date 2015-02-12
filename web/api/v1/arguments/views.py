@@ -10,23 +10,29 @@ from .serializers import (ContentionSerializer, PremisesSerializer,
                           PremiseReportSerializer)
 from premises.utils import int_or_default
 from premises.signals import supported_a_premise
+from api.v1.users.serializers import UserProfileSerializer
 
 
 class ContentionViewset(viewsets.ModelViewSet):
     queryset = Contention.objects.filter(is_published=True)\
-                                 .prefetch_related('premises')\
+                                 .prefetch_related('premises',
+                                                   'premises__supporters')\
                                  .select_related('user', 'premises__parent',
                                                  'premises__user')
     permission_classes = (permissions.AllowAny,)
     serializer_class = ContentionSerializer
     paginate_by = 20
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter, filters.DjangoFilterBackend,
+                       filters.OrderingFilter)
     search_fields = ('title',)
+    filter_fields = ('is_featured',)
+    ordering_fields = ('date_creation',)
 
     @detail_route()
     def premises(self, request, pk=None):
         contention = self.get_object()
-        serializer = PremisesSerializer(contention.premises.all(), many=True)
+        serializer = PremisesSerializer(
+            contention.premises.select_related('user').all(), many=True)
         return Response(serializer.data)
 
 
@@ -68,6 +74,13 @@ class PremiseDetailView(viewsets.ModelViewSet):
                                  user=self.request.user)
         return Response(status=status.HTTP_201_CREATED)
 
+    @detail_route(methods=['get'])
+    def supporters(self, request, pk=None, premise_id=None):
+        premise = self.get_object()
+        page = self.paginate_queryset(premise.supporters.all())
+        serializer = self.get_pagination_serializer(page)
+        return Response(serializer.data)
+
     @detail_route(methods=['delete'])
     def unsupport(self, request, pk=None, premise_id=None):
         premise = self.get_object()
@@ -85,3 +98,6 @@ premise_detail = PremiseDetailView.as_view({'get': 'retrieve'})
 premise_report = PremiseDetailView.as_view({'post': 'report'})
 premise_support = PremiseDetailView.as_view({'post': 'support',
                                              'delete': 'unsupport'})
+premise_supporters = PremiseDetailView.as_view(
+    {'get': 'supporters'},
+    serializer_class=UserProfileSerializer)
