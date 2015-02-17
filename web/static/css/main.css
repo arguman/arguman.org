@@ -1418,8 +1418,24 @@ div.load-more {
     margin-bottom: 14px;
 }
 
-.stats-sidebar li.active {
-    border-color: #ffd461;
+/*
+ .stats-sidebar li.active {border-color: #ffd461;} 
+*/
+
+.stats-sidebar li:nth-child(1).active {
+    border-color: #FFF8B2;
+}
+.stats-sidebar li:nth-child(2).active {
+    border-color: #D7FFCF;
+}
+.stats-sidebar li:nth-child(3).active {
+    border-color: #808080;
+}
+.stats-sidebar li:nth-child(4).active {
+    border-color: #C8FFB3;
+}
+.stats-sidebar li:nth-last-child(1).active {
+    border-color: #E09396;
 }
 
 .stats-sidebar li a {
