@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% load gravatar %}
+{% load i18n %}
 
 {% block content %}
     <div class="container user-profile">
@@ -9,34 +11,40 @@
                 {% gravatar profile 160 %}
             </a>
             {% ifequal profile user %}
-            <a class="profile-update-button" href="{% url "auth_profile_update" %}">(güncelle)</a>
+            <a class="profile-update-button" href="{% url "auth_profile_update" %}">
+              {% trans "(güncelle)" %}
+            </a>
             {% endifequal %}
             {% if not user.is_anonymous and can_follow %}
             <nav class="actions">
                 {% if is_followed %}
-                    <a href="{% url "auth_profile" profile.username %}" class="anchor unfollow" data-method="delete">Takibi bırak</a>
+                    <a href="{% url "auth_profile" profile.username %}" class="anchor unfollow" data-method="delete">
+                      {% trans "Takibi bırak" %}
+                    </a>
                 {% else %}
-                    <a href="{% url "auth_profile" profile.username %}" class="anchor follow" data-method="post">Takip et</a>
+                    <a href="{% url "auth_profile" profile.username %}" class="anchor follow" data-method="post">
+                      {% trans "Takip et" %}
+                    </a>
                 {% endif %}
             </nav>
             {% endif %}
         </aside>
 
         <div class="user-detail">
-                  <section class="user-contentions">
-                <h2>Katkıda bulunduğu argümanlar</h2>
+                <section class="user-contentions">
+                <h2>{% trans "Katkıda bulunduğu argümanlar" %}</h2>
                 <ul>
                     {% for contention in contentions %}
                         <li>
                             <a href="{{ contention.get_absolute_url }}">{{ contention.title }}</a>
                         </li>
                     {% empty %}
-                        <li>hiç katkıda bulunduğu bir argüman yok.</li>
+                        <li>{% trans "hiç katkıda bulunduğu bir argüman yok." %}</li>
                     {% endfor %}
                 </ul>
             </section>
 
-            <h2>Takip ettikleri ({{ profile.following.count }})</h2>
+            <h2>{% trans "Takip ettikleri" %} ({{ profile.following.count }})</h2>
             <ul class="following">
                 {% for followee in profile.following.all %}
                     <li>
@@ -45,7 +53,7 @@
                         </a>
                     </li>
                 {% empty %}
-                    <li class="empty">Kimseyi takip etmiyor.</li>
+                    <li class="empty">{% trans "Kimseyi takip etmiyor." %}</li>
                 {% endfor %}
             </ul>
 
@@ -58,7 +66,11 @@
                         </a>
                     </li>
                 {% empty %}
-                    <li class="empty">{{ profile }} hiç takipçiye sahip değil.</li>
+                    <li class="empty">
+                      {% blocktrans with amount=profile %}
+                        {{ profile }} hiç takipçiye sahip değil.
+                      {% endblocktrans %}
+                    </li>
                 {% endfor %}
             </ul>
 

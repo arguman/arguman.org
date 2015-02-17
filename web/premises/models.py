@@ -15,6 +15,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
+from django.utils.translation import ugettext_lazy as _
 from newsfeed.constants import NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
@@ -26,9 +27,9 @@ SUPPORT = 1
 SITUATION = 2
 
 PREMISE_TYPES = (
-    (OBJECTION, u"ama"),
-    (SUPPORT, u"çünkü"),
-    (SITUATION, u"ancak"),
+    (OBJECTION, _(u"ama")),
+    (SUPPORT, _(u"çünkü")),
+    (SITUATION, _(u"ancak")),
 )
 
 
@@ -43,20 +44,20 @@ class Contention(DeletePreventionMixin, models.Model):
     channel = models.ForeignKey(Channel, related_name='contentions',
                                 null=True, blank=True)
     title = models.CharField(
-        max_length=255, verbose_name="Argüman",
-        help_text=render_to_string("premises/examples/contention.html"))
+        max_length=255, verbose_name=_(u"Argüman"),
+        help_text=_(render_to_string("premises/examples/contention.html")))
     slug = models.SlugField(max_length=255, blank=True)
     description = models.TextField(
-        null=True, blank=True, verbose_name="Ek bilgiler",)
+        null=True, blank=True, verbose_name=_(u"Ek bilgiler"))
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     owner = models.CharField(
         max_length=255, null=True, blank=True,
-        verbose_name="Orijinal söylem",
-        help_text=render_to_string("premises/examples/owner.html"))
+        verbose_name=_(u"Orijinal söylem"),
+        help_text=_(render_to_string("premises/examples/owner.html")))
     sources = models.TextField(
         null=True, blank=True,
-        verbose_name="Kaynaklar",
-        help_text=render_to_string("premises/examples/sources.html"))
+        verbose_name=_(u"Kaynaklar"),
+        help_text=_(render_to_string("premises/examples/sources.html")))
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
@@ -164,21 +165,21 @@ class Premise(DeletePreventionMixin, models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
                                null=True, blank=True,
-                               verbose_name="Öncülü",
-                               help_text="Önermenin öncülü. Eğer boş bırakılırsa"
-                                         "ana argümanın bir önermesi olur.")
+                               verbose_name=_(u"Öncülü"),
+                               help_text=_(u"Önermenin öncülü. Eğer boş bırakılırsa "
+                                           u"ana argümanın bir önermesi olur."))
     premise_type = models.IntegerField(
         default=SUPPORT,
-        choices=PREMISE_TYPES, verbose_name="Önerme Tipi",
-        help_text=render_to_string("premises/examples/premise_type.html"))
+        choices=PREMISE_TYPES, verbose_name=_(u"Önerme Tipi"),
+        help_text=_(render_to_string("premises/examples/premise_type.html")))
     text = models.TextField(
         null=True, blank=True,
-        verbose_name="Önermenin İçeriği",
-        help_text=render_to_string("premises/examples/premise.html"),
+        verbose_name=_(u"Önermenin İçeriği"),
+        help_text=_(render_to_string("premises/examples/premise.html")),
         validators=[validators.MaxLengthValidator(MAX_PREMISE_CONTENT_LENGTH)])
     sources = models.TextField(
-        null=True, blank=True, verbose_name="Kaynaklar",
-        help_text=render_to_string("premises/examples/premise_source.html"))
+        null=True, blank=True, verbose_name=_(u"Kaynaklar"),
+        help_text=_(render_to_string("premises/examples/premise_source.html")))
     is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
     collapsed = models.BooleanField(default=False)
     supporters = models.ManyToManyField(settings.AUTH_USER_MODEL,
@@ -292,9 +293,9 @@ class Report(models.Model):
                                    blank=True,
                                    null=True)
     fallacy_type = models.CharField(
-        "Safsata Tipi", choices=get_fallacy_types(), null=True, blank=False,
+        _("Safsata Tipi"), choices=get_fallacy_types(), null=True, blank=False,
         max_length=255, default="Wrong Direction",
-        help_text=render_to_string("premises/examples/fallacy.html"))
+        help_text=_(render_to_string("premises/examples/fallacy.html")))
 
     def __unicode__(self):
         return smart_unicode(self.fallacy_type)

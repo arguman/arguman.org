@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <ul class="premise-list">
     {% for premise in premises %}
         <li class="child-premise premise-item">
@@ -12,16 +14,18 @@
 
                 <div class="premise-sources">
                     {% if premise.sources %}
-                    <strong>kaynaklar:</strong>
+                    <strong>{% trans "kaynaklar" %}:</strong>
                     <p>{{ premise.sources|urlize }}</p>
                     {% endif %}
-                    <strong>gönderen:</strong>
+                    <strong>{% trans "gönderen" %}:</strong>
                     <p><a href="{% url "auth_profile" premise.user.username %}">
                         {{ premise.user }}</a></p>
 
                     {% if premise.reports.exists %}
                         <div class="reported_as_fallacy">
+                        {% blocktrans %}
                         {{ premise.reports.count }} safsata bildirimi yapıldı.
+                        {% endblocktrans %}
 
                         {% if premise.fallacies %}
                             {% for fallacy in premise.fallacies %}
@@ -34,12 +38,14 @@
 
                     {% if premise.supporters.exists %}
                         <div class="supporters">
+                        {% blocktrans %}
                         {{ premise.supporters.count }} destekleyen var:
+                        {% endblocktrans %}
                         <div class="supporter-list">
                         {% for supporter in premise.recent_supporters %}{% if not forloop.first %}, {% endif %}
                         <a href="{% url "auth_profile" supporter.username %}">{{ supporter.username }}</a>{% endfor %}
                         {% if premise.supporters.count > 5 %}
-                        ve diğerleri.
+                        {% trans "ve diğerleri." %}
                         {% endif %}
                         </div>
                         </div>
@@ -49,11 +55,13 @@
                 {% if user.is_authenticated %}
                     <div class="premise-actions">
                 {% if user == premise.user %}
-                        <a href="{% url "edit_premise" contention.slug premise.pk %}">düzenle</a>
+                        <a href="{% url "edit_premise" contention.slug premise.pk %}">
+                          {% trans "düzenle" %}
+                        </a>
                         <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
                             {% csrf_token %}
                             <input type="submit" value="sil"
-                                   onclick="return confirm('Önermeyi silmek istediğinize emin misiniz?');"
+                                   onclick="return confirm('{% trans "Önermeyi silmek istediğinize emin misiniz?" %}');"
                                    class="delete_premise"/>
                         </form>
                 {% endif %}
@@ -64,19 +72,21 @@
                         {% if user in premise.supporters.all %}
                         <form class="support" action="{% url "unsupport_premise" contention.slug premise.pk %}" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="geri al"/>
+                            <input type="submit" value="{% trans "geri al" %}"/>
                         </form>
                         {% else %}
                         <form class="support" action="{% url "support_premise" contention.slug premise.pk %}" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="destekle"/>
+                            <input type="submit" value="{% trans "destekle" %}"/>
                         </form>
                         {% endif %}
                     {% endif %}
                 {% endif %}
                 </div>
                     <div class="report">
-                        <a href="{% url 'report_premise' contention.slug premise.pk %}">safsata bildir</a>
+                        <a href="{% url 'report_premise' contention.slug premise.pk %}">
+                          {% trans "safsata bildir" %}
+                        </a>
                     </div>
                 {% endif %}
 

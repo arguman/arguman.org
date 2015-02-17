@@ -13,6 +13,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 from datetime import timedelta
+from django.utils.translation import ugettext_lazy as _
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -78,7 +79,16 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'TR-tr'
+LANGUAGES = (
+    ('en', _('Ingilizce')),
+    ('tr', _('Turkce')),
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+LANGUAGE_CODE = 'tr'
 
 TIME_ZONE = 'UTC'
 
@@ -163,8 +173,8 @@ SITE_URL = "arguman.org"
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': False})
 
-BLOG_FEED_TITLE = "Arguman.org Blog'u"
-BLOG_FEED_DESCRIPTION = "Arguman analizi platformu"
+BLOG_FEED_TITLE = _("Arguman.org Blog'u")
+BLOG_FEED_DESCRIPTION = _("Arguman analizi platformu")
 BLOG_URL = "http://arguman.org/blog"
 
 try:

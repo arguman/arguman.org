@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 
 {% load premise_tags %}
+{% load i18n %}
 
 {% block content %}
     <section class="container">
         <form action="?" method="post">
-            <h2>Argüman güncelle</h2>
+            <h2>{% trans "Argüman güncelle" %}</h2>
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Kaydet" class="submit">
+            <input type="submit" value="{% trans "Kaydet" %}" class="submit">
         </form>
         {% if form.instance|check_content_deletion %}
             <form action="{% url "contention_delete" form.instance.slug %}" method="POST">
             {% csrf_token %}
-            <input type="submit" value="Argümanı Sil" class="submit">
+            <input type="submit" value="{% trans "Argümanı Sil" %}" class="submit">
         </form>
         {% endif %}
     </section>

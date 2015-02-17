@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.views.generic import FormView, CreateView, RedirectView, DetailView, UpdateView
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 
 from profiles.mixins import LoginRequiredMixin
 from profiles.forms import RegistrationForm, ProfileUpdateForm
@@ -96,7 +97,7 @@ class ProfileDetailView(DetailView):
 
         if not request.user.following.filter(id=user.id).exists():
             return HttpResponse(json.dumps({
-                "error": "Takibi birakmadan once takip etmen gerekiyor.",
+                "error": _("Takibi birakmadan once takip etmen gerekiyor."),
                 "success": False
             }))
 
@@ -118,13 +119,13 @@ class ProfileDetailView(DetailView):
 
         if user.id == self.request.user.id:
             return HttpResponse(json.dumps({
-                "error": "Kedini takip edemezsin.",
+                "error": _("Kedini takip edemezsin."),
                 "success": False
             }))
 
         if user.followers.filter(pk=request.user.pk).exists():
             return HttpResponse(json.dumps({
-                "error": "Zaten bu kullaniciyi takip ediyorsun",
+                "error": _("Zaten bu kullaniciyi takip ediyorsun"),
                 "success": False
             }))
 

@@ -1,8 +1,16 @@
+{% load i18n %}
+
 {% with contention=target_object.argument %}
 {% if notification.sender and contention %}
-<a class="user" href="{% url "auth_profile" notification.sender.username %}">
-{{ notification.sender.username }}</a>
-<a href="{{ contention.get_absolute_url }}" class="contention-link">{{ contention.title|truncatechars:50 }}</a>
-argümanındaki önermeni destekledi.
+{% url "auth_profile" notification.sender.username as auth_profile_url %}
+{% blocktrans %}
+  <a class="user" href="{{ auth_profile_url }}">
+    {{ notification.sender.username }}
+  </a>
+  <a href="{{ contention.get_absolute_url }}" class="contention-link">
+    {{ contention.title|truncatechars:50 }}
+  </a>
+  argümanındaki önermeni destekledi.
+{% endblocktrans %}
 {% endif %}
 {% endwith %}

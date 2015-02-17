@@ -1,4 +1,8 @@
 {% load premise_tags %}
+{% load i18n %}
 
-bir önerme için <strong>{{ related_object.fallacy_type|humanize_fallacy_type }}</strong> bildirimi yaptı:
+{% blocktrans with fallacy_type=related_object.fallacy_type %}
+bir önerme için <strong>{{ fallacy_type|humanize_fallacy_type }}</strong> bildirimi yaptı:
+{% endblocktrans %}
+
 <a class="contention-link" href="{{ related_object.contention.uri }}">{{ related_object.premise.text }}</a>
