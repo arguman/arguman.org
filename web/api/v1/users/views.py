@@ -1,13 +1,14 @@
 from rest_framework import viewsets
-from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.decorators import detail_route
 from rest_framework import status
 from rest_framework.response import Response
 
 from profiles.models import Profile
-from .serializers import UserProfileSerializer, UserRegisterSerializer
+from .serializers import UserProfileSerializer
 from profiles.signals import follow_done, unfollow_done
+from api.v1.arguments.serializers import ContentionSerializer
+from premises.models import Contention
 
 
 class UserProfileViewset(viewsets.ModelViewSet):
@@ -58,15 +59,55 @@ class UserProfileViewset(viewsets.ModelViewSet):
         serializer = self.get_pagination_serializer(page)
         return Response(serializer.data)
 
+    @detail_route(methods=['get'])
+    def me(self, request, username=None):
+        user = request.user
+        serializer = self.serializer_class(user)
+        return Response(serializer.data)
 
-class UserRegisterView(generics.CreateAPIView):
+
+class UserArgumentsView(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
-    serializer_class = UserRegisterSerializer
-    permissions_classes = (permissions.AllowAny,)
+    serializer_class = ContentionSerializer
+    lookup_field = 'username__iexact'
+    lookup_url_kwarg = 'username'
 
+    @detail_route(methods=['get'])
+    def user_arguments(self, request, username=None):
+        user = self.get_object()
+        page = self.paginate_queryset(user.contention_set.filter(
+            is_published=True))
+        serializer = self.get_pagination_serializer(page)
+        return Response(serializer.data)
 
-profile_detail = UserProfileViewset.as_view({'get': 'retrieve'})
-profile_followers = UserProfileViewset.as_view({'get': 'followers'})
-profile_followings = UserProfileViewset.as_view({'get': 'followings'})
-profile_follow = UserProfileViewset.as_view({'post': 'follow',
-                                             'delete': 'unfollow'})
+    @detail_route(methods=['get'])
+    def user_contributed(self, request, username=None):
+        user = self.get_object()
+        page = self.paginate_queryset(Contention.objects.filter(
+            premises__user=user, is_published=True).exclude(user=user))
+        serializer = self.get_pagination_serializer(page)
+        return Response(serializer.data)
+
+profile_detail = UserProfileViewset.as_view(
+    {'get': 'retrieve'}
+)
+profile_me = UserProfileViewset.as_view(
+    {'get': 'me'},
+    permission_classes=(permissions.IsAuthenticated,)
+)
+profile_followers = UserProfileViewset.as_view(
+    {'get': 'followers'}
+)
+profile_followings = UserProfileViewset.as_view(
+    {'get': 'followings'}
+)
+profile_follow = UserProfileViewset.as_view(
+    {'post': 'follow', 'delete': 'unfollow'},
+    permission_classes=(permissions.IsAuthenticated,)
+)
+user_arguments = UserArgumentsView.as_view(
+    {'get': 'user_arguments'},
+)
+user_contributed_arguments = UserArgumentsView.as_view(
+    {'get': 'user_contributed'}
+)

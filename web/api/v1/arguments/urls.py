@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 from .views import (contention_list, contention_detail, premise_detail,
-                    premises_list, premise_report, premise_support)
+                    premises_list, premise_report, premise_support,
+                    premise_supporters)
 
 
 urlpatterns = patterns(
@@ -17,4 +18,6 @@ urlpatterns = patterns(
         premise_report, name='api-premise-detail'),
     url(r'^(?P<pk>[0-9]+)/premises/(?P<premise_id>[0-9]+)/support/$',
         premise_support, name='api-premise-detail'),
+    url(r'^(?P<pk>[0-9]+)/premises/(?P<premise_id>[0-9]+)/supporters/$',
+        premise_supporters, name='api-premise-supporters'),
 )
