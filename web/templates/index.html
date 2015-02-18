@@ -27,9 +27,7 @@
                     </div>
                 </li>
             {% empty %}
-                {% if keywords %}
-                    <li>Sonuç bulunamadı.</li>
-                {% endif %}
+                <li>Sonuç bulunamadı.</li>
             {% endfor %}
             {% if has_next_page %}
             <li class="load-more">
