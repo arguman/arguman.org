@@ -25,7 +25,7 @@ https://github.com/arguman/arguman.org/blob/master/web/premises/fallacies.json
 curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
               -H "Content-Type: application/json"
               -d '{"fallacy_type":"Appeal To Authority"}'
-              http://arguman.org/api/v1/argugments/1/premises/1/report/
+              http://arguman.org/api/v1/arguments/1/premises/1/report/
 ```
 
 #### Response
