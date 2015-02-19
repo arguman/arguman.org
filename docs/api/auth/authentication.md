@@ -39,5 +39,6 @@ Authentication sonucunda donen Token bilgisini Header e koymaniz gerekiyor.
 
 ```bash
 curl -X GET  -H "Authorization: Token 173f758803eb1fb0ffaf36a782caaa885bd42af2"
-     http://arguman.org/api/v1/user/
+             -H "Content-Type: application/json"
+             http://arguman.org/api/v1/user/
 ```
