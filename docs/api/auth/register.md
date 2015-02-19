@@ -16,7 +16,7 @@ User Registration
 | Password      | String   | min_length=4          |
 | E-Mail        | String   | EmailField            |
 
-#####Request ([Other request types](../example.md))
+#####Request
 
 ```bash
 curl -X POST  -H "Content-Type: application/json"

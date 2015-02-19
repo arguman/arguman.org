@@ -11,7 +11,7 @@ Argüman Listesini Almak
 #####Request
 
 ```bash
-curl -X DELETE  -H "Content-Type: application/json"
+curl -X GET  -H "Content-Type: application/json"
               http://arguman.org/api/v1/arguments/
 ```
 

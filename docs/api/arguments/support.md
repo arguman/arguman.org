@@ -57,7 +57,7 @@ curl -X DELETE  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f23990
 #####Request
 
 ```bash
-curl -X DELETE  -H "Content-Type: application/json"
+curl -X GET  -H "Content-Type: application/json"
               http://arguman.org/api/v1/arguments/1/premises/1/supporters/
 ```
 
