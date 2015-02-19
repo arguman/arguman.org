@@ -51,8 +51,12 @@ class PremiseDetailView(viewsets.ModelViewSet):
     @detail_route(methods=['post'])
     def report(self, request, pk=None, premise_id=None):
         premise = self.get_object()
+        if premise.reports.filter(reporter=request.user).exists():
+            return Response({'message': 'Onermeyi Zaten Rapor ettin.'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
         serializer = PremiseReportSerializer(
-            data=request.DATA, initial={'reporter': request.user,
+            data=request.data, initial={'reporter': request.user,
                                         'premise': premise,
                                         'contention': premise.argument})
         if serializer.is_valid():
