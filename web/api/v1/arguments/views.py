@@ -43,9 +43,6 @@ class ContentionViewset(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def create_premise(self, request):
-        pass
-
 
 class PremiseViewset(viewsets.ModelViewSet):
     queryset = Premise.objects.filter(is_approved=True)
@@ -113,7 +110,7 @@ contention_detail = ContentionViewset.as_view(
     {'get': 'retrieve'}
 )
 premises_list = ContentionViewset.as_view(
-    {'get': 'premises', 'post': 'create_premise'}
+    {'get': 'premises'}
 )
 premise_detail = PremiseViewset.as_view(
     {'get': 'retrieve'}
