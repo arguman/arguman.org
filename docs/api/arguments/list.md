@@ -232,7 +232,7 @@ Argümanları En son eklenmişlere göre sıralamak
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
-              http://arguman.org/api/v1/arguments/1/?ordering=-date_creation
+              http://arguman.org/api/v1/arguments/?ordering=-date_creation
 ```
 
 
@@ -251,7 +251,7 @@ Argümanların arasında seçilmişleri almak
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
-              http://arguman.org/api/v1/arguments/1/?is_featured=True
+              http://arguman.org/api/v1/arguments/?is_featured=True
 ```
 
 
@@ -269,5 +269,5 @@ Argümanların arasında arama yapmak
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
-              http://arguman.org/api/v1/arguments/1/?search=hede
+              http://arguman.org/api/v1/arguments/?search=hede
 ```

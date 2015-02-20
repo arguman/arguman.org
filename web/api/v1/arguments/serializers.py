@@ -24,8 +24,8 @@ class PremisesSerializer(serializers.ModelSerializer):
 
 
 class ContentionSerializer(serializers.ModelSerializer):
-    user = UserProfileSerializer()
-    premises = PremisesSerializer(many=True)
+    user = UserProfileSerializer(read_only=True)
+    premises = PremisesSerializer(many=True, read_only=True)
     absolute_url = serializers.SerializerMethodField()
     report_count = serializers.ReadOnlyField(source='reports.count')
 
@@ -34,6 +34,15 @@ class ContentionSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'title', 'slug', 'description',
                   'owner', 'sources', 'premises', 'date_creation',
                   'absolute_url', 'report_count', 'is_featured')
+        read_only_fields = ('id', 'slug', 'absolute_url',
+                            'is_featured', 'date_creation')
+
+    def create(self, validated_data):
+        instance = Contention(**validated_data)
+        instance.user = self.initial['user']
+        instance.ip_address = self.initial['ip']
+        instance.save()
+        return instance
 
     def get_absolute_url(self, obj):
         return reverse("api-contention-detail", args=[obj.id])
