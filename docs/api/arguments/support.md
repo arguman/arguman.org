@@ -6,6 +6,7 @@
 | URL             | /api/v1/arguments/`<id>`/premises/`<id>`/support/|
 | Method          | POST               |
 | Content-Type    | application/json   |
+| Authentication  | Evet               |
 
 
 #####Request
@@ -29,6 +30,7 @@ curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
 | URL             | /api/v1/arguments/`<id>`/premises/`<id>`/support/|
 | Method          | DELETE               |
 | Content-Type    | application/json   |
+| Authentication  | Evet               |
 
 
 #####Request

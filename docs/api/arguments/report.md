@@ -5,13 +5,14 @@
 | URL             | /api/v1/arguments/`<id>`/premises/`<id>`/report/|
 | Method          | POST               |
 | Content-Type    | application/json   |
+| Authentication  | Evet               |
 
 
 #####Payload - Raw
 
-| Paramether    | Type     |
-| ------------- | ---------|
-| fallacy_type      | String   |
+| Paramether    | Type     | Zorunlu Alan |
+| ------------- | ---------| ------------ |
+| fallacy_type  | String   | Evet         |
 
 
 **Saftasat tipleri için:**
