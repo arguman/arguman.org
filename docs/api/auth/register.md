@@ -10,11 +10,11 @@ User Registration
 
 #####Payload - raw
 
-| Paramether    | Type     | Validator
+| Paramether    | Type     | Zorunlu Alan
 | ------------- | ---------|-----------------------|
-| Username      | String   | ^[A-Za-z0-9-_]{4,25}$ |
-| Password      | String   | min_length=4          |
-| E-Mail        | String   | EmailField            |
+| Username      | String   | Evet                  |
+| Password      | String   | Evet                  |
+| E-Mail        | String   | Hayir                 |
 
 #####Request
 

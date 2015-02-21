@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
@@ -19,7 +18,7 @@ class ContentionViewset(viewsets.ModelViewSet):
                                                    'premises__supporters')\
                                  .select_related('user', 'premises__parent',
                                                  'premises__user')
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = ContentionSerializer
     paginate_by = 20
     filter_backends = (filters.SearchFilter, filters.DjangoFilterBackend,
@@ -35,8 +34,17 @@ class ContentionViewset(viewsets.ModelViewSet):
             contention.premises.select_related('user').all(), many=True)
         return Response(serializer.data)
 
+    def create_argument(self, request):
+        serializer = self.serializer_class(
+            data=request.data, initial={'ip': request.META['REMOTE_ADDR'],
+                                        'user': request.user})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class PremiseDetailView(viewsets.ModelViewSet):
+
+class PremiseViewset(viewsets.ModelViewSet):
     queryset = Premise.objects.filter(is_approved=True)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = PremisesSerializer
@@ -62,10 +70,10 @@ class PremiseDetailView(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(serializer.errors,
-                            status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class PremiseSupportViewset(PremiseViewset):
 
     @detail_route(methods=['post'])
     def support(self, request, pk=None, premise_id=None):
@@ -95,13 +103,25 @@ class PremiseDetailView(viewsets.ModelViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-contention_list = ContentionViewset.as_view({'get': 'list'})
-contention_detail = ContentionViewset.as_view({'get': 'retrieve'})
-premises_list = ContentionViewset.as_view({'get': 'premises'})
-premise_detail = PremiseDetailView.as_view({'get': 'retrieve'})
-premise_report = PremiseDetailView.as_view({'post': 'report'})
-premise_support = PremiseDetailView.as_view({'post': 'support',
-                                             'delete': 'unsupport'})
-premise_supporters = PremiseDetailView.as_view(
+contention_list = ContentionViewset.as_view(
+    {'get': 'list', 'post': 'create_argument'}
+)
+contention_detail = ContentionViewset.as_view(
+    {'get': 'retrieve'}
+)
+premises_list = ContentionViewset.as_view(
+    {'get': 'premises'}
+)
+premise_detail = PremiseViewset.as_view(
+    {'get': 'retrieve'}
+)
+premise_report = PremiseViewset.as_view(
+    {'post': 'report'}
+)
+premise_support = PremiseSupportViewset.as_view(
+    {'post': 'support', 'delete': 'unsupport'}
+)
+premise_supporters = PremiseSupportViewset.as_view(
     {'get': 'supporters'},
-    serializer_class=UserProfileSerializer)
+    serializer_class=UserProfileSerializer
+)

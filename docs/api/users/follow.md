@@ -78,6 +78,7 @@ Kullanıcıyı Takip Etmek
 | Method          | POST                                                  |
 | Status Codes    | 201                                                   |
 | Content-Type    | application/json                                      |
+| Authentication  | Evet                                                  |
 
 #####Request
 
@@ -99,6 +100,7 @@ Kullanıcıyı Takipten Çıkartmak
 | Method          | DELETE                                                |
 | Status Codes    | 204                                                   |
 | Content-Type    | application/json                                      |
+| Authentication  | Evet                                                  |
 
 #####Request
 

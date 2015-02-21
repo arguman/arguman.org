@@ -9,10 +9,10 @@ Authentication
 
 #####Payload - Raw
 
-| Paramether    | Type     |
-| ------------- | ---------|
-| Username      | String   |
-| Password      | String   |
+| Paramether    | Type     | Zorunlu Alan |
+| ------------- | ---------| ------------ |
+| Username      | String   | Evet         |
+| Password      | String   | Evet         |
 
 
 #####Request
