@@ -43,6 +43,18 @@ class ContentionViewset(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @detail_route()
+    def create_premise(self, request, pk=None):
+        contention = self.get_object()
+        serializer = PremisesSerializer(
+            data=request.data, initial={'ip': request.META['REMOTE_ADDR'],
+                                        'user': request.user,
+                                        'argument': contention})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class PremiseViewset(viewsets.ModelViewSet):
     queryset = Premise.objects.filter(is_approved=True)
@@ -110,7 +122,7 @@ contention_detail = ContentionViewset.as_view(
     {'get': 'retrieve'}
 )
 premises_list = ContentionViewset.as_view(
-    {'get': 'premises'}
+    {'get': 'premises', 'post': 'create_premise'}
 )
 premise_detail = PremiseViewset.as_view(
     {'get': 'retrieve'}

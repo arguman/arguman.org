@@ -2,22 +2,38 @@ from django.core.urlresolvers import reverse
 
 from rest_framework import serializers
 
-from premises.models import Contention, Premise, Report, get_fallacy_types
+from premises.models import (
+    Contention, Premise, Report, get_fallacy_types, PREMISE_TYPES)
 from premises.signals import reported_as_fallacy
 from api.v1.users.serializers import UserProfileSerializer
 
 
 class PremisesSerializer(serializers.ModelSerializer):
-    user = UserProfileSerializer()
+    user = UserProfileSerializer(read_only=True)
     absolute_url = serializers.SerializerMethodField()
     premise_type = serializers.ReadOnlyField(source='get_premise_type_display')
-    supporters = UserProfileSerializer(many=True)
+    supporters = UserProfileSerializer(many=True, read_only=True)
+    parent = serializers.PrimaryKeyRelatedField(
+        queryset=Premise.objects.all(), required=False)
+    text = serializers.CharField(required=True, max_length=300)
+    premise_type = serializers.ChoiceField(
+        required=True, choices=PREMISE_TYPES)
 
     class Meta:
         model = Premise
         fields = ('id', 'user', 'text', 'sources', 'parent',
                   'absolute_url', 'premise_type',
                   'date_creation', 'supporters',)
+        read_only_fields = ('id', 'absolute_url', 'date_creation')
+
+    def create(self, validated_data):
+        instance = Premise(**validated_data)
+        instance.user = self.initial['user']
+        instance.is_approved = True
+        instance.ip_address = self.initial['ip']
+        instance.argument = self.initial['argument']
+        instance.save()
+        return instance
 
     def get_absolute_url(self, obj):
         return reverse("api-premise-detail", args=[obj.argument.id, obj.id])
