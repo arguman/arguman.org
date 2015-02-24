@@ -10,7 +10,9 @@ from premises.signals import (
     reported_as_fallacy, added_premise_for_premise,
     added_premise_for_contention)
 from profiles.signals import follow_done, unfollow_done
-from newsfeed.constants import *
+from newsfeed.constants import (
+    NEWS_TYPE_CONTENTION, NEWS_TYPE_PREMISE,
+    NEWS_TYPE_FALLACY, NEWS_TYPE_FOLLOWING)
 
 RELATED_MODELS = {
     NEWS_TYPE_CONTENTION: Contention,
