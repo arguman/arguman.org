@@ -1,7 +1,4 @@
-from django.views.generic import View, TemplateView
-from newsfeed.constants import NEWS_TYPE_CONTENTION, NEWS_TYPE_PREMISE, NEWS_TYPE_FALLACY, NEWS_TYPE_FOLLOWING
 from newsfeed.models import Entry
-from premises.utils import int_or_zero
 from premises.views import HomeView
 
 
@@ -17,9 +14,12 @@ class NewsfeedView(HomeView):
 
     def get_news_entries(self):
         if self.request.user.is_authenticated():
-            newsfeed = self.get_private_newsfeed()
+            newsfeed = Entry.objects.get_private_newsfeed(
+                offset=self.get_offset(), limit=self.paginate_by,
+                user=self.request.user)
         else:
-            newsfeed = self.get_public_newsfeed()
+            newsfeed = Entry.objects.get_public_newsfeed(
+                offset=self.get_offset(), limit=self.paginate_by)
         return newsfeed
 
     def has_next_page(self):
@@ -29,54 +29,11 @@ class NewsfeedView(HomeView):
         # it's more effortless instead of get all collection for now.
         return (len(self.get_news_entries()) == self.paginate_by)
 
-    def get_private_newsfeed(self):
-        """
-        Fetches news items from the newsfeed database
-        """
-        parameters = {
-            "recipients": {
-                "$in": [self.request.user.id]
-            },
-            "news_type": {
-                "$in": [NEWS_TYPE_CONTENTION,
-                        NEWS_TYPE_PREMISE,
-                        NEWS_TYPE_FALLACY,
-                        NEWS_TYPE_FOLLOWING]
-        }}
-
-        newsfeed = (Entry
-                    .objects
-                    .collection
-                    .find(parameters)
-                    .sort([("date_created", -1)])
-                    .skip(self.get_offset())
-                    .limit(self.paginate_by))
-
-        return map(Entry, newsfeed)
-
-    def get_public_newsfeed(self):
-        """
-        Fetches news items from the newsfeed database
-        """
-        parameters = {
-            "news_type": {
-                "$in": [NEWS_TYPE_CONTENTION,
-                        NEWS_TYPE_PREMISE]
-        }}
-
-        newsfeed = (Entry
-                    .objects
-                    .collection
-                    .find(parameters)
-                    .sort([("date_created", -1)])
-                    .skip(self.get_offset())
-                    .limit(self.paginate_by))
-
-        return map(Entry, newsfeed)
-
 
 class PublicNewsfeedView(NewsfeedView):
-    get_news_entries = NewsfeedView.get_public_newsfeed
+    def get_news_entries(self):
+        return Entry.objects.get_public_newsfeed(
+            offset=self.get_offset(), limit=self.paginate_by)
 
     def get_context_data(self, **kwargs):
         return super(PublicNewsfeedView, self).get_context_data(

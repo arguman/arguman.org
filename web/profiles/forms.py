@@ -3,7 +3,7 @@
 import re
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 from profiles.models import Profile
 
@@ -12,14 +12,17 @@ class RegistrationForm(UserCreationForm):
     username = forms.RegexField(
         label="Kullanıcı adınız",
         max_length=30, regex=re.compile(r'^[\w\s-]+$', re.LOCALE),
-        help_text = "30 karakterden az, ascii, - ve boşluk kullanabileceginiz kullanıcı adı",
-        error_messages = {'invalid': "ascii, - boşluk karakterleri dışında karakter girmeyiniz."}
-        )
+        help_text="30 karakterden az, ascii, - ve boşluk kullanabileceginiz "
+                  "kullanıcı adı",
+        error_messages={
+            'invalid': "ascii, - boşluk karakterleri dışında "
+                       "karakter girmeyiniz."
+        }
+    )
 
     class Meta(UserCreationForm.Meta):
         fields = ("username", "email")
         model = Profile
-
 
     def clean_username(self):
         # Since User.username is unique, this check is redundant,

@@ -1,4 +1,3 @@
-from bson import ObjectId
 from datetime import datetime
 from django.db.models.signals import post_delete, post_save
 
@@ -7,9 +6,13 @@ from django.template.loader import render_to_string
 
 from newsfeed.utils import get_collection
 from premises.models import Contention, Premise, Report
-from premises.signals import reported_as_fallacy, added_premise_for_premise, added_premise_for_contention
+from premises.signals import (
+    reported_as_fallacy, added_premise_for_premise,
+    added_premise_for_contention)
 from profiles.signals import follow_done, unfollow_done
-from newsfeed.constants import *
+from newsfeed.constants import (
+    NEWS_TYPE_CONTENTION, NEWS_TYPE_PREMISE,
+    NEWS_TYPE_FALLACY, NEWS_TYPE_FOLLOWING)
 
 RELATED_MODELS = {
     NEWS_TYPE_CONTENTION: Contention,
@@ -60,7 +63,8 @@ class EntryManager(object):
 
     def add_to_recipients(self, following, follower):
         """
-        Adds the id of follower to the recipients of followed profile's entries.
+        Adds the id of follower to the recipients of
+        followed profile's entries.
         """
         self.collection.update(
             {"sender.username": following.username},
@@ -81,6 +85,51 @@ class EntryManager(object):
         self.collection.remove({
             "news_type": object_type,
             "object_id": object_id})
+
+    def get_private_newsfeed(self, offset, limit, user):
+        """
+        Fetches news items from the newsfeed database
+        """
+        parameters = {
+            "recipients": {
+                "$in": [user.id]
+            },
+            "news_type": {
+                "$in": [NEWS_TYPE_CONTENTION,
+                        NEWS_TYPE_PREMISE,
+                        NEWS_TYPE_FALLACY,
+                        NEWS_TYPE_FOLLOWING]
+            }
+        }
+
+        newsfeed = (Entry
+                    .objects
+                    .collection
+                    .find(parameters)
+                    .sort([("date_created", -1)])
+                    .skip(offset)
+                    .limit(limit))
+        return map(Entry, newsfeed)
+
+    def get_public_newsfeed(self, offset, limit):
+        """
+        Fetches news items from the newsfeed database
+        """
+        parameters = {
+            "news_type": {
+                "$in": [NEWS_TYPE_CONTENTION,
+                        NEWS_TYPE_PREMISE]
+            }
+        }
+
+        newsfeed = (Entry
+                    .objects
+                    .collection
+                    .find(parameters)
+                    .sort([("date_created", -1)])
+                    .skip(offset)
+                    .limit(limit))
+        return map(Entry, newsfeed)
 
 
 class Entry(dict):

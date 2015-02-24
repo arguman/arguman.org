@@ -10,7 +10,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     absolute_url = serializers.SerializerMethodField()
     avatar = serializers.SerializerMethodField()
 
-
     class Meta:
         model = Profile
         fields = ('id', 'username', 'absolute_url', 'avatar',)
