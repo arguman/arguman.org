@@ -8,4 +8,5 @@ urlpatterns = patterns(
     url(r'^user/$', profile_me, name='api-me'),
     url(r'^users/', include('api.v1.users.urls')),
     url(r'^arguments/', include('api.v1.arguments.urls')),
+    url(r'^newsfeed/', include('api.v1.newsfeed.urls')),
 )

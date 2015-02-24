@@ -9,6 +9,7 @@ from .serializers import UserProfileSerializer
 from profiles.signals import follow_done, unfollow_done
 from api.v1.arguments.serializers import ContentionSerializer
 from premises.models import Contention
+from profiles.forms import ProfileUpdateForm
 
 
 class UserProfileViewset(viewsets.ModelViewSet):
@@ -60,10 +61,18 @@ class UserProfileViewset(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @detail_route(methods=['get'])
-    def me(self, request, username=None):
+    def me(self, request):
         user = request.user
         serializer = self.serializer_class(user)
         return Response(serializer.data)
+
+    @detail_route(methods=['post'])
+    def update_profile(self, request):
+        form = ProfileUpdateForm(request.DATA, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return Response(self.serializer_class(request.user))
+        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserArgumentsView(viewsets.ModelViewSet):
@@ -92,7 +101,7 @@ profile_detail = UserProfileViewset.as_view(
     {'get': 'retrieve'}
 )
 profile_me = UserProfileViewset.as_view(
-    {'get': 'me'},
+    {'get': 'me', 'post': 'update_profile'},
     permission_classes=(permissions.IsAuthenticated,)
 )
 profile_followers = UserProfileViewset.as_view(
