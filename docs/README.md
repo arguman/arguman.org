@@ -4,7 +4,7 @@ Api Dökümantasyonu
 1. [Oturum](api/auth)
   1. [Üye Giriş](api/auth/authentication.md)
   2. [Üye Kayıt](api/auth/register.md)
-2. [Argüman](api/snippet)
+2. [Argüman](api/arguments)
   1. [Argüman Listesi](api/arguments/list.md)
   2. [Yeni Argüman Eklemek](api/arguments/create_argument.md)
   3. [Yeni Önerme Eklemek](api/arguments/create_premise.md)

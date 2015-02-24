@@ -23,7 +23,7 @@ Argüman Eklemek
 curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
               -H "Content-Type: application/json"
               -d '{"title":"Sanat toplum içindir.", "sources": "Türk Dil Kurumu", "owner": "http://google.com/"}'
-              http://localhost:8080/api/v1/arguments/
+              http://arguman.org/api/v1/arguments/
 ```
 
 #### Response (201 Created)
