@@ -19,6 +19,28 @@ class UserProfileViewset(viewsets.ModelViewSet):
     lookup_field = 'username__iexact'
     lookup_url_kwarg = 'username'
 
+    @detail_route(methods=['get'])
+    def authenticated_user(self, request):
+        user = request.user
+        serializer = self.serializer_class(user)
+        return Response(serializer.data)
+
+    @detail_route(methods=['put'])
+    def update_profile(self, request):
+        form = ProfileUpdateForm(request.DATA, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return Response(self.serializer_class(request.user).data)
+        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserFollowViewset(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = UserProfileSerializer
+    lookup_field = 'username__iexact'
+    lookup_url_kwarg = 'username'
+
     @detail_route(methods=['post'])
     def follow(self, request, username=None):
         user = self.get_object()
@@ -27,8 +49,9 @@ class UserProfileViewset(viewsets.ModelViewSet):
                             status=status.HTTP_400_BAD_REQUEST)
 
         if user.followers.filter(pk=request.user.pk).exists():
-            return Response({'message': "Zaten bu kullaniciyi takip ediyorsun"},
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'message': "Zaten bu kullaniciyi takip ediyorsun"},
+                status=status.HTTP_400_BAD_REQUEST)
 
         request.user.following.add(user)
         follow_done.send(sender=self, follower=request.user, following=user)
@@ -60,20 +83,6 @@ class UserProfileViewset(viewsets.ModelViewSet):
         serializer = self.get_pagination_serializer(page)
         return Response(serializer.data)
 
-    @detail_route(methods=['get'])
-    def me(self, request):
-        user = request.user
-        serializer = self.serializer_class(user)
-        return Response(serializer.data)
-
-    @detail_route(methods=['post'])
-    def update_profile(self, request):
-        form = ProfileUpdateForm(request.DATA, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return Response(self.serializer_class(request.user))
-        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class UserArgumentsView(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -101,16 +110,16 @@ profile_detail = UserProfileViewset.as_view(
     {'get': 'retrieve'}
 )
 profile_me = UserProfileViewset.as_view(
-    {'get': 'me', 'post': 'update_profile'},
+    {'get': 'authenticated_user', 'put': 'update_profile'},
     permission_classes=(permissions.IsAuthenticated,)
 )
-profile_followers = UserProfileViewset.as_view(
+profile_followers = UserFollowViewset.as_view(
     {'get': 'followers'}
 )
-profile_followings = UserProfileViewset.as_view(
+profile_followings = UserFollowViewset.as_view(
     {'get': 'followings'}
 )
-profile_follow = UserProfileViewset.as_view(
+profile_follow = UserFollowViewset.as_view(
     {'post': 'follow', 'delete': 'unfollow'},
     permission_classes=(permissions.IsAuthenticated,)
 )
