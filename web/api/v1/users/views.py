@@ -93,8 +93,11 @@ class UserArgumentsView(viewsets.ModelViewSet):
     @detail_route(methods=['get'])
     def user_arguments(self, request, username=None):
         user = self.get_object()
-        page = self.paginate_queryset(user.contention_set.filter(
-            is_published=True))
+        arguments = user.contention_set.filter()
+        if not(self.request.user.is_authenticated() and
+                user == self.request.user):
+            arguments = arguments.filter(is_published=True)
+        page = self.paginate_queryset(arguments)
         serializer = self.get_pagination_serializer(page)
         return Response(serializer.data)
 
