@@ -31,6 +31,7 @@ class PremisesSerializer(serializers.ModelSerializer):
         instance.user = self.initial['user']
         instance.ip_address = self.initial['ip']
         instance.argument = self.initial['argument']
+        instance.is_approved = True
         instance.save()
         return instance
 
@@ -58,7 +59,6 @@ class ContentionSerializer(serializers.ModelSerializer):
         instance = Contention(**validated_data)
         instance.user = self.initial['user']
         instance.ip_address = self.initial['ip']
-        instance.is_published = True
         instance.save()
         return instance
 
