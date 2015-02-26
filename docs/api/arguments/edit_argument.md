@@ -1,9 +1,9 @@
-Argüman Eklemek
+Argüman Düzenlemek
 =======================
 | Key             | Value              |
 | ----------------|--------------------|
-| URL             | /api/v1/arguments/ |
-| Method          | POST               |
+| URL             | /api/v1/arguments/`<id>`/ |
+| Method          | PUT               |
 | Content-Type    | application/json   |
 | Authentication  | Evet               |
 
@@ -17,17 +17,19 @@ Argüman Eklemek
 | owner         | String   |  Hayır        |
 | is_published  | Boolean  |  Evet         |
 
+#####Ek Bilgi
+Argümanı sadece ekleyen kişi düzenleyebilir.
 
 #####Request
 
 ```bash
-curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
+curl -X PUT  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
               -H "Content-Type: application/json"
               -d '{"title":"Sanat toplum içindir.", "sources": "Türk Dil Kurumu", "owner": "http://google.com/", "is_published": true}'
-              http://arguman.org/api/v1/arguments/
+              http://arguman.org/api/v1/arguments/9/
 ```
 
-#### Response (201 Created)
+#### Response (200 OK)
 
 ```json
 {

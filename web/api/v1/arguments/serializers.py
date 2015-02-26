@@ -29,9 +29,9 @@ class PremisesSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         instance = Premise(**validated_data)
         instance.user = self.initial['user']
-        instance.is_approved = True
         instance.ip_address = self.initial['ip']
         instance.argument = self.initial['argument']
+        instance.is_approved = True
         instance.save()
         return instance
 
@@ -44,12 +44,14 @@ class ContentionSerializer(serializers.ModelSerializer):
     premises = PremisesSerializer(many=True, read_only=True)
     absolute_url = serializers.SerializerMethodField()
     report_count = serializers.ReadOnlyField(source='reports.count')
+    is_published = serializers.BooleanField(required=True)
 
     class Meta:
         model = Contention
         fields = ('id', 'user', 'title', 'slug', 'description',
                   'owner', 'sources', 'premises', 'date_creation',
-                  'absolute_url', 'report_count', 'is_featured')
+                  'absolute_url', 'report_count',
+                  'is_featured', 'is_published',)
         read_only_fields = ('id', 'slug', 'absolute_url',
                             'is_featured', 'date_creation')
 
@@ -57,7 +59,6 @@ class ContentionSerializer(serializers.ModelSerializer):
         instance = Contention(**validated_data)
         instance.user = self.initial['user']
         instance.ip_address = self.initial['ip']
-        instance.is_published = True
         instance.save()
         return instance
 

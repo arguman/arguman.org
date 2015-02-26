@@ -22,7 +22,8 @@ from premises.models import Contention, Premise
 from premises.forms import (ArgumentCreationForm, PremiseCreationForm,
                             PremiseEditForm, ReportForm)
 from premises.signals import (added_premise_for_premise,
-                              added_premise_for_contention, reported_as_fallacy,
+                              added_premise_for_contention,
+                              reported_as_fallacy,
                               supported_a_premise)
 from premises.templatetags.premise_tags import check_content_deletion
 from newsfeed.models import Entry
@@ -36,8 +37,8 @@ class ContentionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         contention = self.get_object()
-        view = ("list-view" if self.request.GET.get("view") == "list"
-                            else "tree-view")
+        GET = self.request.GET
+        view = ("list-view" if GET.get("view") == "list" else "tree-view")
         edit_mode = (
             self.request.user.is_superuser or
             self.request.user.is_staff or
@@ -74,7 +75,8 @@ class ContentionJsonView(DetailView):
             "pk": premise.pk,
             "name": premise.text,
             "parent": parent.text if parent else None,
-            "reportable_by_authenticated_user": self.user_can_report(premise, user),
+            "reportable_by_authenticated_user": self.user_can_report(
+                premise, user),
             "report_count": premise.reports.count(),
             "user": {
                 "id": premise.user.id,
@@ -96,10 +98,8 @@ class ContentionJsonView(DetailView):
         return False
 
     def is_singular(self, contention):
-        result = (contention
-                   .premises
-                   .all()
-                   .aggregate(max_sibling=Max('sibling_count')))
+        result = contention.premises.all().aggregate(
+            max_sibling=Max('sibling_count'))
         return result['max_sibling'] <= 1
 
 
@@ -147,8 +147,7 @@ class HomeView(TemplateView):
     def get_unread_notifications(self):
         return (self.request.user
                     .notifications
-                    .filter(is_read=False)
-                    [:5])
+                    .filter(is_read=False)[:5])
 
     def mark_as_read(self, notifications):
         pks = notifications.values_list("id", flat=True)
@@ -200,7 +199,6 @@ class SearchView(HomeView):
             "keywords": self.get_keywords()
         }
 
-
     def get_contentions(self, paginate=True):
         keywords = self.request.GET.get('keywords')
         if not keywords or len(keywords) < 2:
@@ -232,7 +230,6 @@ class NewsView(HomeView):
 class StatsView(HomeView):
     tab_class = "stats"
     template_name = "stats.html"
-    
     partial_templates = {
         Profile: "stats/profile.html",
         Contention: "stats/contention.html",
@@ -272,7 +269,7 @@ class StatsView(HomeView):
         except (TypeError, ValueError):
             days = None
 
-        if not days or not days in self.time_ranges:
+        if not days or days not in self.time_ranges:
             raise Http404()
 
         self.days = days
@@ -285,7 +282,7 @@ class StatsView(HomeView):
 
     def get_stats_bundle(self):
         stat_type = self.get_stats_type()
-        if not stat_type in self.method_mapping:
+        if stat_type not in self.method_mapping:
             raise Http404()
         method = getattr(self, self.method_mapping[stat_type])
         return [{
@@ -346,10 +343,10 @@ class UpdatedArgumentsView(HomeView):
     tab_class = "updated"
 
     def get_contentions(self, paginate=True):
-        contentions =  (Contention
-                        .objects
-                        .filter(is_published=True)
-                        .order_by('-date_modification'))
+        contentions = (Contention
+                       .objects
+                       .filter(is_published=True)
+                       .order_by('-date_modification'))
 
         if paginate:
             contentions = contentions[self.get_offset():self.get_limit()]
@@ -380,6 +377,7 @@ class AboutView(TemplateView):
         content = markdown(render_to_string("about.md"))
         return super(AboutView, self).get_context_data(
             content=content, **kwargs)
+
 
 class TosView(TemplateView):
     template_name = "tos.html"
@@ -485,9 +483,7 @@ class PremiseEditView(LoginRequiredMixin, UpdateView):
         return response
 
     def get_context_data(self, **kwargs):
-        return super(PremiseEditView, self).get_context_data(
-            #contention=self.get_contention(),
-            **kwargs)
+        return super(PremiseEditView, self).get_context_data(**kwargs)
 
 
 class PremiseCreationView(LoginRequiredMixin, CreateView):
@@ -529,6 +525,7 @@ class PremiseCreationView(LoginRequiredMixin, CreateView):
         parent_pk = self.kwargs.get("pk")
         if parent_pk:
             return get_object_or_404(Premise, pk=parent_pk)
+
 
 class PremiseSupportView(LoginRequiredMixin, View):
     def get_premise(self):

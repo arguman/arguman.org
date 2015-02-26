@@ -15,7 +15,8 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
-from newsfeed.constants import NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION
+from newsfeed.constants import (
+    NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION)
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 
 from premises.managers import ContentionManager, DeletePreventionManager
@@ -132,7 +133,7 @@ class Contention(DeletePreventionMixin, models.Model):
         children = self.published_children()
         return children.count() + reduce(operator.add,
                                          map(operator.methodcaller("width"),
-                                            children), 0)
+                                             children), 0)
 
     def get_actor(self):
         """
@@ -165,8 +166,9 @@ class Premise(DeletePreventionMixin, models.Model):
     parent = models.ForeignKey("self", related_name="children",
                                null=True, blank=True,
                                verbose_name="Öncülü",
-                               help_text="Önermenin öncülü. Eğer boş bırakılırsa"
-                                         "ana argümanın bir önermesi olur.")
+                               help_text="Önermenin öncülü. Eğer boş "
+                                         "bırakılırsa ana argümanın bir "
+                                         "önermesi olur.")
     premise_type = models.IntegerField(
         default=SUPPORT,
         choices=PREMISE_TYPES, verbose_name="Önerme Tipi",
@@ -257,6 +259,7 @@ class Premise(DeletePreventionMixin, models.Model):
 
     def recent_supporters(self):
         return self.supporters.all()[0:5]
+
 
 class Comment(models.Model):
     premise = models.ForeignKey(Premise)

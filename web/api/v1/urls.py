@@ -9,4 +9,5 @@ urlpatterns = patterns(
     url(r'^users/', include('api.v1.users.urls')),
     url(r'^arguments/', include('api.v1.arguments.urls')),
     url(r'^newsfeed/', include('api.v1.newsfeed.urls')),
+    url(r'^notifications/', include('api.v1.notifications.urls')),
 )

@@ -1,3 +1,5 @@
+from django.shortcuts import get_object_or_404
+
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.decorators import detail_route
@@ -10,6 +12,7 @@ from .serializers import (ContentionSerializer, PremisesSerializer,
 from premises.utils import int_or_default
 from premises.signals import supported_a_premise
 from api.v1.users.serializers import UserProfileSerializer
+from newsfeed.models import Entry
 
 
 class ContentionViewset(viewsets.ModelViewSet):
@@ -42,6 +45,30 @@ class ContentionViewset(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def _get_owner_object(self):
+        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+        filter_kwargs = {
+            self.lookup_field: self.kwargs[lookup_url_kwarg],
+            'user': self.request.user
+        }
+        obj = get_object_or_404(Contention.objects.all(), **filter_kwargs)
+        return obj
+
+    def update_argument(self, request, pk=None):
+        contention = self._get_owner_object()
+        serializer = self.serializer_class(data=request.DATA,
+                                           instance=contention)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete_argument(self, request, pk=None):
+        contention = self._get_owner_object()
+        Entry.objects.delete(contention.get_newsfeed_type(), contention.id)
+        contention.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     @detail_route()
     def create_premise(self, request, pk=None):
@@ -84,6 +111,31 @@ class PremiseViewset(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def _get_owner_object(self):
+        argument_id = int_or_default(self.kwargs.get('pk'), default=0)
+        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+        filter_kwargs = {
+            self.lookup_field: self.kwargs[lookup_url_kwarg],
+            'argument__id': argument_id,
+            'user': self.request.user
+        }
+        obj = get_object_or_404(Premise.objects.all(), **filter_kwargs)
+        return obj
+
+    def update_premise(self, request, pk=None, premise_id=None):
+        premise = self._get_owner_object()
+        serializer = self.serializer_class(data=request.DATA,
+                                           instance=premise)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete_premise(self, request, pk=None, premise_id=None):
+        premise = self._get_owner_object()
+        premise.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class PremiseSupportViewset(PremiseViewset):
 
@@ -119,13 +171,15 @@ contention_list = ContentionViewset.as_view(
     {'get': 'list', 'post': 'create_argument'}
 )
 contention_detail = ContentionViewset.as_view(
-    {'get': 'retrieve'}
+    {'get': 'retrieve', 'put': 'update_argument',
+     'delete': 'delete_argument'}
 )
 premises_list = ContentionViewset.as_view(
     {'get': 'premises', 'post': 'create_premise'}
 )
 premise_detail = PremiseViewset.as_view(
-    {'get': 'retrieve'}
+    {'get': 'retrieve', 'put': 'update_premise',
+     'delete': 'delete_premise'}
 )
 premise_report = PremiseViewset.as_view(
     {'post': 'report'}
