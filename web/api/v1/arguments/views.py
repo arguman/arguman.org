@@ -122,7 +122,7 @@ class PremiseViewset(viewsets.ModelViewSet):
         obj = get_object_or_404(Premise.objects.all(), **filter_kwargs)
         return obj
 
-    def update_premise(self, request, pk=None):
+    def update_premise(self, request, pk=None, premise_id=None):
         premise = self._get_owner_object()
         serializer = self.serializer_class(data=request.DATA,
                                            instance=premise)
@@ -131,7 +131,7 @@ class PremiseViewset(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete_premise(self, request, pk=None):
+    def delete_premise(self, request, pk=None, premise_id=None):
         premise = self._get_owner_object()
         premise.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
