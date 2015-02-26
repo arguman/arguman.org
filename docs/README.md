@@ -22,3 +22,6 @@ Api Dökümantasyonu
 4. [Haber Kaynağı](api/newsfeed)
   1. [Genel](api/newsfeed/public_newsfeed.md)
   2. [Giriş Yapmış Kullanıcıya Özel](api/newsfeed/private_newsfeed.md)
+4. [Bildirimler](api/notifications)
+    1. [Bildirim Listesi](api/notifications/list.md)
+    2. [Okundu olarak işaretlemek](api/notifications/mark_read.md)
