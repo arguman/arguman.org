@@ -43,7 +43,8 @@ curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
          "notification_type":"supported-a-premise",
          "is_read":true,
          "target_object_id":1,
-         "id":15
+         "id":15,
+         "text": "bahattincinic Test argümanındaki önermeni destekledi."
       },
       {
          "sender":null,
@@ -57,7 +58,8 @@ curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
          "notification_type":"reported-as-fallacy",
          "is_read":true,
          "target_object_id":7,
-         "id":14
+         "id":14,
+         "text": "Test argümanındaki önermeniz Bir Bilen Safsatası olarak bildirildi."
       }
    ]
 }
