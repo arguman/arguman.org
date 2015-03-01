@@ -25,3 +25,9 @@ Api Dökümantasyonu
 4. [Bildirimler](api/notifications)
     1. [Bildirim Listesi](api/notifications/list.md)
     2. [Okundu olarak işaretlemek](api/notifications/mark_read.md)
+
+
+Genel
+==============================
+1. [Proje Kurulumu](installation.md)
+2. [Vagrant ile calismak](vagrant_installation.md)
