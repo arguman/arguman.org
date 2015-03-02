@@ -5,6 +5,7 @@ Gereksinimler
 
 1. Python 2.7x
 2. MongoDB
+3. Redis
 
 ## Linux için PIP ve Virtual Environment kurulumu
 
@@ -45,6 +46,18 @@ Projeyi klonlamak ve gereksinimlerini kurmak
 MongoDB yi çalıştırmak (http://docs.mongodb.org/manual/installation/)
     
     mongod
+
+MacOSX icin Redisi Kurmak
+
+    brew install redis-server
+
+Linux icin Redisi Kurmak (Son versiyon icin https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis)
+
+    sudo apt-get install redis-server
+
+Redisi Calistirmak
+
+    redis-server
 
 Projeyi Çalıştırmak
     
