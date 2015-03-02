@@ -3,3 +3,5 @@ settings_local.py
 *.pyc
 .DS_Store
 *.gml
+.vagrant
+VagrantFile
