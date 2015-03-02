@@ -6,14 +6,14 @@ Gereksinimler
 1. Python 2.7x
 2. MongoDB
 
-## Linux icin PIP ve Virtual Environment kurulumu
+## Linux için PIP ve Virtual Environment kurulumu
 
     sudo apt-get install python-pip python-dev build-essential
     sudo apt-get install python-pip
     sudo pip install --upgrade pip
     sudo pip install --upgrade virtualenv
 
-## MacOSX icin PIP ve Virtual Environment kurulumu
+## MacOSX için PIP ve Virtual Environment kurulumu
 
 MacOSX için `Homrbrew` ve `XCode command line tools` un kurulu olmasi gerekiyor.
 
