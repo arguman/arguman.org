@@ -30,4 +30,4 @@ Api Dökümantasyonu
 Genel
 ==============================
 1. [Proje Kurulumu](installation.md)
-2. [Vagrant ile calismak](vagrant_installation.md)
+2. [Vagrant ile çalışmak](vagrant_installation.md)
