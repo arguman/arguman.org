@@ -14,9 +14,9 @@
             {% if not user.is_anonymous and can_follow %}
             <nav class="actions">
                 {% if is_followed %}
-                    <a href="{% url "auth_profile" profile.username %}" class="anchor unfollow" data-method="delete">Takibi bırak</a>
+                    <a href="{% url "api-profile-follow" profile.username %}" class="anchor unfollow" data-method="delete">Takibi bırak</a>
                 {% else %}
-                    <a href="{% url "auth_profile" profile.username %}" class="anchor follow" data-method="post">Takip et</a>
+                    <a href="{% url "api-profile-follow" profile.username %}" class="anchor follow" data-method="post">Takip et</a>
                 {% endif %}
             </nav>
             {% endif %}
