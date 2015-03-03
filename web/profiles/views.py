@@ -1,11 +1,6 @@
-import json
-
 from django.contrib.auth import logout, login, authenticate
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
 from django.views.generic import (
     FormView, CreateView, RedirectView, DetailView, UpdateView)
 from django.db.models import Q
@@ -13,7 +8,6 @@ from django.db.models import Q
 from profiles.mixins import LoginRequiredMixin
 from profiles.forms import RegistrationForm, ProfileUpdateForm
 from profiles.models import Profile
-from profiles.signals import follow_done, unfollow_done
 from premises.models import Contention
 
 
