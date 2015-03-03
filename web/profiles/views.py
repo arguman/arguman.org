@@ -4,17 +4,18 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.views.generic import FormView, CreateView, RedirectView, DetailView, UpdateView
+from django.views.generic import (
+    FormView, CreateView, RedirectView, DetailView, UpdateView)
 from django.db.models import Q
 
 from profiles.mixins import LoginRequiredMixin
 from profiles.forms import RegistrationForm, ProfileUpdateForm
 from profiles.models import Profile
 from profiles.signals import follow_done, unfollow_done
-from premises.models import Contention, Report
+from premises.models import Contention
+
 
 class RegistrationView(CreateView):
     form_class = RegistrationForm
@@ -78,63 +79,14 @@ class ProfileDetailView(DetailView):
         can_follow = self.request.user != user
 
         if self.request.user.is_authenticated():
-            is_followed = self.request.user.following.filter(pk=user.id).exists()
+            is_followed = self.request.user.following.filter(
+                pk=user.id).exists()
         else:
             is_followed = False
         return super(ProfileDetailView, self).get_context_data(
             can_follow=can_follow,
             is_followed=is_followed,
             contentions=contentions)
-
-    @method_decorator(login_required)
-    def delete(self, request, **kwargs):
-        """
-        - Removes `FollowedProfile` object for authenticated user.
-        - Fires unfollow_done signal
-        """
-        user = self.get_object()
-
-        if not request.user.following.filter(id=user.id).exists():
-            return HttpResponse(json.dumps({
-                "error": "Takibi birakmadan once takip etmen gerekiyor.",
-                "success": False
-            }))
-
-        request.user.following.remove(user)
-
-        unfollow_done.send(sender=self, follower=request.user, following=user)
-
-        return HttpResponse(json.dumps({
-            "success": True
-        }))
-
-    @method_decorator(login_required)
-    def post(self, request, **kwargs):
-        """
-        - Creates `FollowedProfile` object for authenticated user.
-        - Fires follow_done signal
-        """
-        user = self.get_object()
-
-        if user.id == self.request.user.id:
-            return HttpResponse(json.dumps({
-                "error": "Kedini takip edemezsin.",
-                "success": False
-            }))
-
-        if user.followers.filter(pk=request.user.pk).exists():
-            return HttpResponse(json.dumps({
-                "error": "Zaten bu kullaniciyi takip ediyorsun",
-                "success": False
-            }))
-
-        request.user.following.add(user)
-
-        follow_done.send(sender=self, follower=request.user, following=user)
-
-        return HttpResponse(json.dumps({
-            "success": True
-        }))
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
