@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}" />
     <link rel="image_src" type="image/jpeg" href="{% static "img/logo-large.png" %}" />
     <meta name="google-site-verification" content="g-YRAePbSzX5_eMCqQvkkYqecMlQNAIxhRXmeAKMmiQ" />
+    {% block extra-meta %}{% endblock %}
 </head>
 <body>
 {% block header %}

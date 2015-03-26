@@ -3,6 +3,10 @@
 
 {% block title %}{{ contention.title }}{% endblock %}
 
+{% block extra-meta %}
+    <meta property="og:description" content="{{ contention.owner }}"/>
+{% endblock %}
+
 {% block header %}
     <header class="sticky-header">
         <div id="logo"><a href="/"><img src="{% static "img/logo.png" %}" /></a></div>
