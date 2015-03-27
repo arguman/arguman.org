@@ -9,9 +9,9 @@
 
 {% block header %}
     <header class="sticky-header">
-        <div id="logo"><a href="/"><img src="{% static "img/logo.png" %}" /></a></div>
+        <div id="contention-logo"><a href="/"><img src="{% static "img/logo.png" %}" /></a></div>
 
-        <nav>
+        <nav class="contention-nav">
             <ul>
                 <li>
                     ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user|lower }}</a>
@@ -50,7 +50,7 @@
         </nav>
         {% endif %}
 
-         <nav>
+         <nav class="contention-nav">
             <ul id="view-switcher">
                 <li>Görünüm</li>
                 <li><a href="?" class="tree-view active">Ağaç</a> |
@@ -58,7 +58,7 @@
             </ul>
         </nav>
 
-        <nav class="share">
+        <nav class="share contention-nav">
             <ul id="view-switcher">
                 <li>Paylaş</li>
                 <li><a target="_blank" href="https://www.facebook.com/sharer.php?u={{ contention.get_full_url }}" class="tree-view active">Facebook</a> |

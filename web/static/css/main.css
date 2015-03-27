@@ -35,8 +35,12 @@ body {
     margin: 20px auto;
 }
 
+.home {
+    margin-top: 0;
+}
+
 .landing {
-    margin: 30px 0;
+    margin: 0 0 30px;
     background-color: #f1f1f1;
     padding: 30px 10px 30px 30px;
     font-size: 28px;
@@ -143,36 +147,37 @@ header {
     overflow: hidden;
 }
 
-header nav {
+.contention-nav {
     float: left;
 }
 
-header nav ul {
+.contention-nav ul {
     padding: 0;
     margin: 12px 0 0;
+    float: left;
 }
 
-header nav ul li {
+.contention-nav ul li {
     margin: 0;
     padding: 0 15px;
 }
 
-header nav #main-navigation li a {
+.contention-nav #main-navigation li a {
     color: #4e4e4e;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     text-decoration: none;
     font-size: 18px;
 }
 
-header nav ul li a:hover {
+.contention-nav ul li a:hover {
     color: #ff815c;
 }
 
-header #logo {
-    float: left;;
+header #contention-logo {
+    float: left;
 }
 
-header #logo a {
+header #contention-logo a {
     text-decoration: none;
 }
 
@@ -1011,7 +1016,7 @@ form .parent-premise strong {
     font-size: 20px;
     padding: 0 20px;
     color: #9b9b9b;
-    margin-bottom: -10px;
+    margin-bottom: 15px;
 }
 
 .notifications a {
@@ -1390,7 +1395,7 @@ div.load-more {
 #login-form .reset-password-link {
     color: #c1c1c1;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 /* Stats */
@@ -1602,6 +1607,66 @@ div.load-more {
   left: 0;
   position: absolute;
   top: 0;
+}
+
+/* Main Navigation */
+
+#site-navigation {
+    background: rgb(255, 248, 178);
+    overflow: hidden;
+    margin: 10px 0 0;
+    padding: 0 20px;
+}
+
+#site-navigation li {
+    float: left;
+    padding: 15px 3px;
+    margin: 0 10px;
+}
+
+#site-navigation li a {
+    color: black;
+    font-size: 1.2em;
+    text-decoration: none
+}
+
+#site-navigation li.pull-right {
+    float: right;
+}
+
+#site-navigation li.inline-search {
+    padding: 8px;
+    margin-right: -10px;
+}
+
+
+.inline-search form {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.inline-search #keyword {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    width: 160px;
+    outline: none;
+    /*border: none;*/
+    padding: 4px 5px 2px;
+}
+
+#social-providers {
+    margin: 0;
+    padding: 0;
+}
+
+#social-providers li {
+    list-style: none;
+}
+
+#social-providers li a {
+    text-decoration: none;
 }
 
 /* Media Queries */
