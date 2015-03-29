@@ -159,7 +159,8 @@ class HomeView(TemplateView):
     def get_contentions(self, paginate=True):
         contentions = (Contention
                        .objects
-                       .featured())
+                       .featured()
+                       .order_by("-date_modification"))
 
         if paginate:
             contentions = (contentions[self.get_offset(): self.get_limit()])

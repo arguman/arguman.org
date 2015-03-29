@@ -1,12 +1,12 @@
 from django.contrib.auth import logout, login, authenticate
-from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse
 from django.views.generic import (
     FormView, CreateView, RedirectView, DetailView, UpdateView)
 from django.db.models import Q
 
 from profiles.mixins import LoginRequiredMixin
-from profiles.forms import RegistrationForm, ProfileUpdateForm
+from profiles.forms import (RegistrationForm, AuthenticationForm,
+                            ProfileUpdateForm)
 from profiles.models import Profile
 from premises.models import Contention
 

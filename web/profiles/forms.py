@@ -3,9 +3,18 @@
 import re
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.forms import (UserCreationForm, 
+    AuthenticationForm as BaseAuthenticationForm)
+
 from profiles.models import Profile
+
+
+class AuthenticationForm(BaseAuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(AuthenticationForm, self).__init__(*args, **kwargs)
+
 
 
 class RegistrationForm(UserCreationForm):
@@ -23,6 +32,10 @@ class RegistrationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ("username", "email")
         model = Profile
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(RegistrationForm, self).__init__(*args, **kwargs)
 
     def clean_username(self):
         # Since User.username is unique, this check is redundant,

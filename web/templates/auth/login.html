@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- {% include "profiles/social_providers.html" %} -->
+<!-- <a class="reset-password-link" href="{% url "password_reset" %}">Şifremi Unuttum</a> <br> -->
+
     <section class="container">
-        <form id="login-form" action="{% url "auth_login" %}?next={{ next }}" method="post">
-            {% include "profiles/social_providers.html" %}
+        <form id="auth-form" action="{% url "auth_login" %}?next={{ next }}" method="post">
+            <h3>Giriş yap (<a href="{% url "socialauth_begin" "twitter" %}">ya da twitter ile bağlan</a>)</h3>
             {% csrf_token %}
             {{ form.as_p }}
             <div class="form-footer">
-                <input type="submit" class="submit" value="Giriş">
-                <br>
-                <a class="reset-password-link" href="{% url "password_reset" %}">Şifremi Unuttum</a> <br>
-                
+                <input type="submit" value="Giriş">
+                <ul class="form-actions">
+                    <li>
+                        <a href="{% url "password_reset" %}">Şifremi unuttum</a>
+                    </li>
+                </ul>
             </div>
         </form>
     </section>

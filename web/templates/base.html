@@ -29,20 +29,22 @@
     <nav>
         <ul id="site-navigation">
             <li><a href="{% url "about" %}">nedir?</a></li>
-            <li><a href="{% url "about" %}">blog</a></li>
+            <li><a href="{% url "blog" %}">blog</a></li>
             {% if user.is_anonymous %}
             <li><a href="{% url "auth_registration" %}">kayıt ol</a></li>
             <li><a href="{% url "auth_login" %}">giriş yap</a></li>
             {% else %}
             <li><a href="{% url "new_argument" %}"><strong>argüman gönder</strong></a></li>
-            <li><a href="{% url "auth_profile" user.username %}">profilim</a></li>
-            <li><a href="{% url "auth_logout" %}">çıkış yap</a></li>
+            <li><a class="username" href="{% url "auth_profile" user.username %}">{{ user.username|truncatechars:14 }}</a> (<a href="{% url "auth_logout" %}">çıkış yap</a>)</li>
             {% endif %}
             <!-- <li class="pull-right">takip et: <a href="{% url "about" %}">@argumananalizi</a></li> -->
             <li class="inline-search pull-right">
-                <form>
-                    <input type="search" id="keyword" placeholder="kelimeler albayım"> 
+                <form action="{% url "contentions_search" %}">
+                    <input type="search" name="keywords" id="keyword" placeholder="kelimeler albayım"> 
                 </form>
+            </li>
+            <li class="social-links">
+                Takip et: <a href="https://twitter.com/argumananalizi" target="_blank">@argumananalizi</a>
             </li>
         </ul>
     </nav>
