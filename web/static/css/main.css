@@ -1739,11 +1739,9 @@ div.load-more {
 
 #auth-form .form-actions li a {
     text-decoration: none;
-    color: #474747;
     height: 1em;
     display: inline-block;
-    border-bottom: 5px solid #F7F7F7;
-    padding: 0 1px;
+    border-bottom: 3px solid #F7F7F7;
     font-size: 16px;
 }
 
