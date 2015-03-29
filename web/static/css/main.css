@@ -529,6 +529,10 @@ li.base-premises {
     margin-left: 30px;
 }
 
+.user-detail .user-stats {
+    padding: 20px 30px;
+}
+
 .container h2 {
     font-size: 30px;
     padding: 10px 0;
@@ -1026,7 +1030,7 @@ form .parent-premise strong {
     font-size: 20px;
     padding: 0 20px;
     color: #9b9b9b;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .notifications a {
@@ -1761,7 +1765,7 @@ div.load-more {
 }
 
 #auth-form h3 {
-    margin-left: 180px;
+    margin-left: 178px;
 }
 
 #auth-form h3 a {

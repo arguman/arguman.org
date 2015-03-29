@@ -23,7 +23,30 @@
         </aside>
 
         <div class="user-detail">
-                  <section class="user-contentions">
+
+            <div class="user-stats">
+                <div class="stats-bar">
+                    <span>
+                        {{ object.followers.count }} <br/>
+                        TAKİPÇİ
+                    </span>
+                    <span>
+                        {{ object.contention_set.count }} <br>
+                        ARGÜMAN
+                    </span>
+                    <span>
+                        {{ object.premise_set.count }} <br>
+                        ÖNERME
+                    </span>
+                    <span>
+                        {{ object.supported_premise_count }} <br>
+                        DESTEK
+                    </span>
+                </div>
+            </div>
+
+
+            <section class="user-contentions">
                 <h2>Katkıda bulunduğu argümanlar</h2>
                 <ul>
                     {% for contention in contentions %}

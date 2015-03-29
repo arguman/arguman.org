@@ -34,7 +34,7 @@
             <li><a href="{% url "auth_registration" %}">kayıt ol</a></li>
             <li><a href="{% url "auth_login" %}">giriş yap</a></li>
             {% else %}
-            <li><a href="{% url "new_argument" %}"><strong>argüman gönder</strong></a></li>
+            <li><a href="{% url "new_argument" %}">argüman gönder</a></li>
             <li><a class="username" href="{% url "auth_profile" user.username %}">{{ user.username|truncatechars:14 }}</a> (<a href="{% url "auth_logout" %}">çıkış yap</a>)</li>
             {% endif %}
             <!-- <li class="pull-right">takip et: <a href="{% url "about" %}">@argumananalizi</a></li> -->
