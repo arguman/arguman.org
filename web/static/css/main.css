@@ -1667,13 +1667,14 @@ div.load-more {
 
 #site-navigation li {
     float: left;
-    padding: 15px 3px;
+    padding: 15px 3px 13px;
     margin: 0 10px;
 }
 
 #site-navigation li a {
-    color: black;
+    color: #2B2B2B;
     font-size: 1.2em;
+    font-weight: bold;
     text-decoration: none;
 }
 
@@ -1691,6 +1692,10 @@ div.load-more {
     margin-left: 535px;
     margin-top: -60px;
     color: #C4C4C4;
+}
+
+#site-navigation .social-links a {
+    color: #595959;
 }
 
 .inline-search form {
