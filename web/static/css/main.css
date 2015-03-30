@@ -1512,6 +1512,7 @@ div.load-more {
 
 .user-detail .stats-bar {
     margin: 30px 25px;
+    border-bottom: 1px solid #d1d1d1;
 }
 
 .user-detail h3 {
