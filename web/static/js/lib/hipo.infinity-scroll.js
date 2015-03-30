@@ -21,7 +21,7 @@ hipo.InfinityScroll = Class.extend({
     active_page : 1,
 
     // constants
-    FOOTER_POSITION_THRESHOLD : 0,
+    FOOTER_POSITION_THRESHOLD : 100,
     MOBILE_FOOTER_POSITION_THRESHOLD : 1000,
 
     init : function (options) {
@@ -91,6 +91,7 @@ hipo.InfinityScroll = Class.extend({
 
             if  ($(window).scrollTop() + $(window).height() >
                 this.get_doc_height() - this.get_footer_threshold() ) {
+
                 callback();
             }
 
