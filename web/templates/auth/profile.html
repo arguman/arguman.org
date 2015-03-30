@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load gravatar %}
+{% load humanize %}
+
 
 {% block content %}
     <div class="container user-profile">
         <aside>
             <h3>{{ profile.username }}</h3>
             <a class="gravatar profile-image" href="{% url "auth_profile" profile.username %}">
-                {% gravatar profile 160 %}
+                {% gravatar profile 120 %}
             </a>
             {% ifequal profile user %}
             <a class="profile-update-button" href="{% url "auth_profile_update" %}">(güncelle)</a>
@@ -23,67 +25,44 @@
         </aside>
 
         <div class="user-detail">
-
-            <div class="user-stats">
-                <div class="stats-bar">
-                    <span>
-                        {{ object.followers.count }} <br/>
-                        TAKİPÇİ
-                    </span>
-                    <span>
-                        {{ object.contention_set.count }} <br>
-                        ARGÜMAN
-                    </span>
-                    <span>
-                        {{ object.premise_set.count }} <br>
-                        ÖNERME
-                    </span>
-                    <span>
-                        {{ object.supported_premise_count }} <br>
-                        DESTEK
-                    </span>
-                </div>
+            <div class="stats-bar">
+                <span>
+                    {{ object.followers.count }} <br/>
+                    TAKİPÇİ
+                </span>
+                <span>
+                    {{ object.contention_set.count }} <br>
+                    ARGÜMAN
+                </span>
+                <span>
+                    {{ object.premise_set.count }} <br>
+                    ÖNERME
+                </span>
+                <span>
+                    {{ object.supported_premise_count }} <br>
+                    DESTEK
+                </span>
             </div>
 
+         <div class="newsfeed-container">
+            {% for entry in news_entries %}
+              <div class="news-item {{ entry.entry_class }}">
+                <div class="news-item-content--no-arrow">
+                    {{ entry.render }}
+                    <time datetime="{{ entry.date_created }}">{{ entry.date_created|naturaltime }}</time>
+                </div>
+             </div>
+            {% empty %}
+                <p class="empty-newsfeed">Haber kaynağı boş.</p>
+            {% endfor %}
+        {% if has_next_page %}
+            <div class="load-more">
+                <a class="next" href="{{ next_page_url }}">Daha fazla yükle</a>
+            </div>
+        {% endif %}
+        </div>
 
-            <section class="user-contentions">
-                <h2>Katkıda bulunduğu argümanlar</h2>
-                <ul>
-                    {% for contention in contentions %}
-                        <li>
-                            <a href="{{ contention.get_absolute_url }}">{{ contention.title }}</a>
-                        </li>
-                    {% empty %}
-                        <li>hiç katkıda bulunduğu bir argüman yok.</li>
-                    {% endfor %}
-                </ul>
-            </section>
 
-            <h2>Takip ettikleri ({{ profile.following.count }})</h2>
-            <ul class="following">
-                {% for followee in profile.following.all %}
-                    <li>
-                        <a href="{% url "auth_profile" followee.username %}">
-                        {% gravatar followee 40 %}
-                        </a>
-                    </li>
-                {% empty %}
-                    <li class="empty">Kimseyi takip etmiyor.</li>
-                {% endfor %}
-            </ul>
-
-            <h2>Takipçileri ({{ profile.followers.count }})</h2>
-            <ul class="following">
-                {% for follower in profile.followers.all %}
-                    <li>
-                        <a href="{% url "auth_profile" follower.username %}">
-                            {% gravatar follower 40 %}
-                        </a>
-                    </li>
-                {% empty %}
-                    <li class="empty">{{ profile }} hiç takipçiye sahip değil.</li>
-                {% endfor %}
-            </ul>
 
         </div>
     </div>
@@ -91,6 +70,7 @@
 
 {% block extra-scripts %}
     {{ block.super }}
+    {% include "infinity-pagination.html" %}
     <script type="text/javascript">
         $(function () {
             $("nav.actions a").each(function () {
@@ -109,5 +89,4 @@
             });
         });
     </script>
-
 {% endblock %}

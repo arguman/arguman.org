@@ -131,6 +131,28 @@ class EntryManager(object):
                     .limit(limit))
         return map(Entry, newsfeed)
 
+    def get_newsfeed_of(self, user, offset, limit):
+        """
+        Fetches news items of specific user
+        """
+        parameters = {
+            "sender.email": user.email,
+            "news_type": {
+                "$in": [NEWS_TYPE_CONTENTION,
+                        NEWS_TYPE_PREMISE,
+                        NEWS_TYPE_FOLLOWING]
+            }
+        }
+
+        newsfeed = (Entry
+                    .objects
+                    .collection
+                    .find(parameters)
+                    .sort([("date_created", -1)])
+                    .skip(offset)
+                    .limit(limit))
+        return map(Entry, newsfeed)
+
 
 class Entry(dict):
     """

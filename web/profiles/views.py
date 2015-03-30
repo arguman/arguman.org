@@ -9,6 +9,8 @@ from profiles.forms import (RegistrationForm, AuthenticationForm,
                             ProfileUpdateForm)
 from profiles.models import Profile
 from premises.models import Contention
+from premises.mixins import PaginationMixin
+from newsfeed.models import Entry
 
 
 class RegistrationView(CreateView):
@@ -52,11 +54,12 @@ class LogoutView(LoginRequiredMixin, RedirectView):
         return reverse("home")
 
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(DetailView, PaginationMixin):
     slug_field = 'username__iexact'
     slug_url_kwarg = 'username'
     context_object_name = "profile"
     model = Profile
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         """
@@ -80,7 +83,23 @@ class ProfileDetailView(DetailView):
         return super(ProfileDetailView, self).get_context_data(
             can_follow=can_follow,
             is_followed=is_followed,
-            contentions=contentions)
+            contentions=contentions,
+            news_entries=self.get_news_entries(),
+            has_next_page=self.has_next_page(),
+            next_page_url=self.get_next_page_url())
+
+    def get_news_entries(self):
+        return Entry.objects.get_newsfeed_of(
+            offset=self.get_offset(),
+            limit=self.paginate_by,
+            user=self.get_object())
+
+    def has_next_page(self):
+        # tricky a little bit.
+        # if the page loaded full, probably there are more news
+        # entries. if not, returns a single empty page, it's not a problem.
+        # it's more effortless instead of get all collection for now.
+        return (len(self.get_news_entries()) == self.paginate_by)
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

@@ -26,6 +26,7 @@ from premises.signals import (added_premise_for_premise,
                               reported_as_fallacy,
                               supported_a_premise)
 from premises.templatetags.premise_tags import check_content_deletion
+from premises.mixins import PaginationMixin
 from newsfeed.models import Entry
 from profiles.mixins import LoginRequiredMixin
 from profiles.models import Profile
@@ -103,7 +104,7 @@ class ContentionJsonView(DetailView):
         return result['max_sibling'] <= 1
 
 
-class HomeView(TemplateView):
+class HomeView(TemplateView, PaginationMixin):
     template_name = "index.html"
     tab_class = "featured"
 
@@ -127,22 +128,6 @@ class HomeView(TemplateView):
 
     def get_announcements(self):
         return Post.objects.filter(is_announcement=True)
-
-    def get_offset(self):
-        return int_or_zero(self.request.GET.get("offset"))
-
-    def get_limit(self):
-        return self.get_offset() + self.paginate_by
-
-    def has_next_page(self):
-        total = self.get_contentions(paginate=False).count()
-        return total > (self.get_offset() + self.paginate_by)
-
-    def get_next_page_url(self):
-        offset = self.get_offset() + self.paginate_by
-        return '?offset=%(offset)s' % {
-            "offset": offset
-        }
 
     def get_unread_notifications(self):
         return (self.request.user

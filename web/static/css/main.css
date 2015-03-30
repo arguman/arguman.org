@@ -511,11 +511,11 @@ li.base-premises {
 .user-profile nav a {
     text-decoration: none;
     display: inline-block;
-    padding: 4px 20px;
+    padding: 4px 10px;
     background-color: #f4ebb0;
     border-radius: 5px;
     color: #181818;
-    font-size: 21px;
+    font-size: 20px;
 }
 
 .user-profile nav a:hover {
@@ -524,7 +524,7 @@ li.base-premises {
 }
 
 .user-profile .user-detail {
-    width: 500px;
+    width: 560px;
     float: left;
     margin-left: 30px;
 }
@@ -1183,6 +1183,16 @@ form .parent-premise strong {
     border-radius: 10px;
 }
 
+.news-item .news-item-content--no-arrow {
+    margin-top: 7px;
+    float: left;
+    width: 90%;
+    margin-left: 0;
+    padding: 25px 25px;
+    background: #f6f6f6;
+    border-radius: 10px;
+}
+
 .news-item time {
     display: block;
     font-size: 19px;
@@ -1222,7 +1232,7 @@ form .parent-premise strong {
     font-weight: normal;
 }
 
-.news-item.following_entry .news-item-content a {
+.news-item.following_entry  a {
     color: #464646;
     font-size: 22px;
     text-decoration: none;
@@ -1497,6 +1507,17 @@ div.load-more {
     float: left;
     border-radius: 50%;
     margin-top: 7px;
+}
+
+
+.user-detail .stats-bar {
+    margin: 30px 25px;
+}
+
+.user-detail .stats-bar span {
+    font-weight: bold;
+    font-size: 18px;
+    width: 110px;
 }
 
 .time-filter {
