@@ -42,5 +42,6 @@ Eğer siz de bir şeyler yapmak isterseniz yukarıdaki github adresini inceleyeb
 - [Can Göktaş](https://twitter.com/cangokt) (arayüz geliştirme)
 - [Kağan Yaldızkaya](https://dribbble.com/kagan) (yeni tasarım üzerinde çalışmakta)
 - [Mehmet İnce](https://twitter.com/mdisec) (güvenlik testi)
+- [Samet Aydemir](https://twitter.com/samet_aydemir) ([chrome plugin](https://chrome.google.com/webstore/detail/arguman/infgfejecdecnalkcjfemcibiponjban/related?hl=tr))
 
 İletişim için argumananalizi@gmail.com adresine yazabilirsiniz.

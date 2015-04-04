@@ -493,7 +493,7 @@ class PremiseCreationView(LoginRequiredMixin, CreateView):
         form.instance.argument = contention
         form.instance.parent = self.get_parent()
         form.instance.is_approved = True
-        form.instance.ip_address = get_ip_adress(self.request)
+        form.instance.ip_address = get_ip_address(self.request)
         form.save()
         contention.update_sibling_counts()
 
