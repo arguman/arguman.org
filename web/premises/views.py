@@ -32,6 +32,11 @@ from profiles.mixins import LoginRequiredMixin
 from profiles.models import Profile
 
 
+def get_ip_address(request):
+    return (request.META.get('HTTP_X_FORWARDED_FOR') or
+            request.META.get('REMOTE_ADDR'))
+
+
 class ContentionDetailView(DetailView):
     template_name = "premises/contention_detail.html"
     model = Contention
@@ -380,7 +385,7 @@ class ArgumentCreationView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.ip_address = self.request.META['REMOTE_ADDR']
+        form.instance.ip_address = get_ip_address(self.request)
         response = super(ArgumentCreationView, self).form_valid(form)
         form.instance.update_sibling_counts()
         return response
@@ -488,7 +493,7 @@ class PremiseCreationView(LoginRequiredMixin, CreateView):
         form.instance.argument = contention
         form.instance.parent = self.get_parent()
         form.instance.is_approved = True
-        form.instance.ip_address = self.request.META['REMOTE_ADDR']
+        form.instance.ip_address = get_ip_adress(self.request)
         form.save()
         contention.update_sibling_counts()
 
