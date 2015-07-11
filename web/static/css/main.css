@@ -445,6 +445,7 @@ li.base-premises {
         /*position: absolute;*/
         border-radius: 0 0 5px 5px;
         border-top: 1px solid #bcbcbc;
+        text-align: left;
     }
 
     .premise-sources strong {
@@ -463,10 +464,22 @@ li.base-premises {
         color: #a9a9a9;
     }
 
+    .premise-user p {
+      display: inline-block;
+    }
+
+    .premise-user > p > a {
+      display: inline;
+    }
+
+    .premise-user p:first-of-type{
+      padding-right: 0px;
+    }
+
     .premise-sources a {
         color: #b5b5b5;
-        display: block;
         overflow: hidden;
+        display:block;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -1769,7 +1782,7 @@ div.load-more {
 }
 
 #auth-form .form-actions li {
-    list-style: none;    
+    list-style: none;
     margin-bottom: 5px;
     font-size: 16px;
 }
