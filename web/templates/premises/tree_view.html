@@ -1,3 +1,4 @@
+{% load humanize %}
 <ul class="premise-list">
     {% for premise in premises %}
         <li class="child-premise premise-item">
@@ -15,9 +16,13 @@
                     <strong>kaynaklar:</strong>
                     <p>{{ premise.sources|urlize }}</p>
                     {% endif %}
-                    <strong>gönderen:</strong>
-                    <p><a href="{% url "auth_profile" premise.user.username %}">
-                        {{ premise.user }}</a></p>
+                    <div class="premise-user">
+                      <strong>gönderen:</strong>
+                      <p><a href="{% url "auth_profile" premise.user.username %}">
+                          {{ premise.user }}</a></p>
+                      <p><time datetime="{{ premise.date_creation }}">({{ premise.date_creation|naturaltime }})</time></p>
+                    </div>
+
 
                     {% if premise.reports.exists %}
                         <div class="reported_as_fallacy">
