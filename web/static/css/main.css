@@ -1818,6 +1818,31 @@ div.load-more {
     text-decoration: none;
 }
 
+.login-popup {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 200px;
+    background-color: #E6E6E6;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    z-index: 999;
+}
+
+.login-popup a {
+    color: gray;
+    text-decoration: none;
+}
+
+.login-popup button {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: gray;
+    margin-top: -2px;
+}
+
 /* Media Queries */
 @media (max-width: 800px){
   header nav ul li {

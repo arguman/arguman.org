@@ -124,6 +124,15 @@
         <div class="navigator no-user-select"></div>
       </div>
     </div>
+
+    {% if user.is_anonymous %}
+    <div class="login-popup">
+        <button class="login-popup-close">×</button>
+        Önerme eklemek için
+        <a href="{% url "auth_registration" %}?next={{ contention.get_absolute_url }}">kaydolun</a> ya da 
+        <a href="{% url "auth_login" %}?next={{ contention.get_absolute_url }}">giriş</a> yapın.
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% block extra-scripts %}

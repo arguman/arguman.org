@@ -341,5 +341,11 @@
           });
         }
     });
+    
+    $(function () {
+        $(".login-popup-close").on('click', function () {
+            $(this).parents('.login-popup').hide();
+        });
+    });
 
 })(window.arguman || (window.arguman = {}));
