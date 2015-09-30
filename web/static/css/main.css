@@ -468,6 +468,9 @@ li.base-premises {
         color: #a9a9a9;
     }
 
+    .premise-user {
+        font-size: 0.9em;
+    }
     .premise-user p {
       display: inline-block;
     }
@@ -478,6 +481,10 @@ li.base-premises {
 
     .premise-user p:first-of-type{
       padding-right: 0px;
+    }
+
+    .premise-user .time-ago {
+        padding-left: 0;
     }
 
     .premise-sources a {
