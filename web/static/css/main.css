@@ -145,6 +145,7 @@ body {
 
 header {
     overflow: hidden;
+    min-width: 960px;
 }
 
 .contention-nav {
@@ -1843,23 +1844,3 @@ div.load-more {
     margin-top: -2px;
 }
 
-/* Media Queries */
-@media (max-width: 800px){
-  header nav ul li {
-    float: left;
-    margin-top: 23px;
-    }
-}
-
-@media (max-width: 1140px){
-  .contention-main-actions {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #e8e8e8;
-  }
-
-  .share {
-      float: right;
-  }
-}
