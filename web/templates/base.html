@@ -12,7 +12,7 @@
     <meta name="google-site-verification" content="g-YRAePbSzX5_eMCqQvkkYqecMlQNAIxhRXmeAKMmiQ" />
     {% block extra-meta %}{% endblock %}
 </head>
-<body>
+<body{% block body-attrs %}{% endblock %}>
 {% block header %}
 <header class="container">
     {% if announcements.exists %}
