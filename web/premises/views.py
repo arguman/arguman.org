@@ -17,7 +17,6 @@ from django.views.generic.edit import UpdateView
 from django.db.models import Count
 
 from blog.models import Post
-from premises.utils import int_or_zero
 from premises.models import Contention, Premise
 from premises.forms import (ArgumentCreationForm, PremiseCreationForm,
                             PremiseEditForm, ReportForm)
