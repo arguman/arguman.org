@@ -16,7 +16,7 @@
         <nav class="contention-nav">
             <ul>
                 <li>
-                    ekleyen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user|lower }}</a>
+                    ekleyen: <a href="{{ contention.user.get_absolute_url }}">{{ contention.user|lower }}</a>
                 </li>
                 <li class="original-discourse">
                     orijinal söylem:
@@ -131,7 +131,7 @@
     <div class="login-popup">
         <button class="login-popup-close">×</button>
         Önerme eklemek için
-        <a href="{% url "auth_registration" %}?next={{ contention.get_absolute_url }}">kaydolun</a> ya da 
+        <a href="{% url "auth_registration" %}?next={{ contention.get_absolute_url }}">kaydolun</a> ya da
         <a href="{% url "auth_login" %}?next={{ contention.get_absolute_url }}">giriş</a> yapın.
     </div>
     {% endif %}

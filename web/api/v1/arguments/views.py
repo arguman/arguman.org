@@ -189,5 +189,5 @@ premise_support = PremiseSupportViewset.as_view(
 )
 premise_supporters = PremiseSupportViewset.as_view(
     {'get': 'supporters'},
-     serializer_class=UserProfileSerializer
+    serializer_class=UserProfileSerializer
 )
