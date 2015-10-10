@@ -7,7 +7,7 @@
     <div class="container user-profile">
         <aside>
             <h3>{{ profile.username }}</h3>
-            <a class="gravatar profile-image" href="{% url "auth_profile" profile.username %}">
+            <a class="gravatar profile-image" href="{{ profile.get_absolute_url }}">
                 {% gravatar profile 120 %}
             </a>
             {% ifequal profile user %}

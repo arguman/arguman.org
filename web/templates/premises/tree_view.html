@@ -18,7 +18,7 @@
                     {% endif %}
                     <div class="premise-user">
                       <strong>gönderen:</strong>
-                      <p><a href="{% url "auth_profile" premise.user.username %}">
+                      <p><a href="{{ premise.user.get_absolute_url }}">
                           {{ premise.user }}</a></p>
                       <p class="time-ago"><time datetime="{{ premise.date_creation }}">({{ premise.date_creation|naturalday }})</time></p>
                     </div>
@@ -42,7 +42,7 @@
                         {{ premise.supporters.count }} destekleyen var:
                         <div class="supporter-list">
                         {% for supporter in premise.recent_supporters %}{% if not forloop.first %}, {% endif %}
-                        <a href="{% url "auth_profile" supporter.username %}">{{ supporter.username }}</a>{% endfor %}
+                        <a href="{{ supporter.get_absolute_url }}">{{ supporter.username }}</a>{% endfor %}
                         {% if premise.supporters.count > 5 %}
                         ve diğerleri.
                         {% endif %}
