@@ -25,6 +25,7 @@
     {% endif %}
     <div id="logo">
         <a href="{% if user.is_anonymous %}/{% else %}{% url "newsfeed" %}{% endif %}">
+            argüman
             <img src="{% static "img/logo.png" %}" alt=""/></a>
     </div>
     <nav>

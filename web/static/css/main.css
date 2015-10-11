@@ -1677,9 +1677,33 @@ div.load-more {
 }
 
 /* Main Navigation */
+#logo a {
+    display: inline-block;
+    background: #FFF8B2;
+    width: 280px;
+    height: 85px;
+    font-size: 55px;
+    padding-top: 8px;
+    text-align: center;
+    text-decoration: none;
+    color: #343434;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+}
 
 #logo img {
-    height: 90px;
+    display: none
+}
+
+#logo.contention-logo {
+    float: left;
+}
+
+#logo.contention-logo a {
+    width: 250px;
+    height: 75px;
+    font-size: 48px;
+    padding-top: 8px;
 }
 
 #site-navigation {
