@@ -79,23 +79,23 @@ class ContentionJsonView(DetailView):
 
     def get_premises(self, contention, user, parent=None):
         children = [{
-            "pk": premise.pk,
-            "name": premise.text,
-            "parent": parent.text if parent else None,
-            "reportable_by_authenticated_user": self.user_can_report(
-                premise, user),
-            "report_count": premise.reports.count(),
-            "user": {
-                "id": premise.user.id,
-                "username": premise.user.username,
-                "absolute_url": reverse("auth_profile",
-                                        args=[premise.user.username])
-            },
-            "sources": premise.sources,
-            "premise_type": premise.premise_class(),
-            "children": (self.get_premises(contention, user, parent=premise)
-                         if premise.published_children().exists() else [])
-        } for premise in contention.published_premises(parent)]
+                        "pk": premise.pk,
+                        "name": premise.text,
+                        "parent": parent.text if parent else None,
+                        "reportable_by_authenticated_user": self.user_can_report(
+                            premise, user),
+                        "report_count": premise.reports.count(),
+                        "user": {
+                            "id": premise.user.id,
+                            "username": premise.user.username,
+                            "absolute_url": reverse("auth_profile",
+                                                    args=[premise.user.username])
+                        },
+                        "sources": premise.sources,
+                        "premise_type": premise.premise_class(),
+                        "children": (self.get_premises(contention, user, parent=premise)
+                                     if premise.published_children().exists() else [])
+                    } for premise in contention.published_premises(parent)]
         return children
 
     def user_can_report(self, premise, user):
@@ -137,20 +137,21 @@ class HomeView(TemplateView, PaginationMixin):
 
     def get_unread_notifications(self):
         return (self.request.user
-                    .notifications
-                    .filter(is_read=False)[:5])
+                .notifications
+                .filter(is_read=False)[:5])
 
     def mark_as_read(self, notifications):
         pks = notifications.values_list("id", flat=True)
         (self.request.user
-             .notifications
-             .filter(id__in=pks)
-             .update(is_read=True))
+         .notifications
+         .filter(id__in=pks)
+         .update(is_read=True))
 
     def get_contentions(self, paginate=True):
         contentions = (Contention
                        .objects
-                       .featured()
+                       .language()
+                       .filter(is_featured=True)
                        .order_by("-date_modification"))
 
         if paginate:
@@ -210,8 +211,12 @@ class NewsView(HomeView):
     tab_class = "news"
 
     def get_contentions(self, paginate=True):
-        contentions = Contention.objects.filter(
-            is_published=True)
+        contentions = (
+            Contention
+                .objects
+                .language()
+                .filter(is_published=True)
+        )
 
         if paginate:
             contentions = contentions[self.get_offset():self.get_limit()]
@@ -277,10 +282,12 @@ class StatsView(HomeView):
         if stat_type not in self.method_mapping:
             raise Http404()
         method = getattr(self, self.method_mapping[stat_type])
-        return [{
-            "template": self.partial_templates[type(item)],
-            "object": item
-        } for item in method()]
+        return [
+            {
+                "template": self.partial_templates[type(item)],
+                "object": item
+            } for item in method()
+        ]
 
     def get_active_users(self):
         return Profile.objects.annotate(
@@ -308,8 +315,9 @@ class StatsView(HomeView):
 
     def get_supported_premises(self):
         return Premise.objects.annotate(
-            supporter_count=Sum("supporters"),
+            supporter_count=Sum("supporters")
         ).filter(
+            argument__language=get_language(),
             supporter_count__gt=0,
             **self.build_time_filters(date_field="date_creation")
         ).order_by("-supporter_count")[:50]
@@ -326,6 +334,7 @@ class StatsView(HomeView):
         return Contention.objects.annotate(
             premise_count=Sum("premises"),
         ).filter(
+            language=get_language(),
             premise_count__gt=0,
             **self.build_time_filters(date_field="date_creation")
         ).order_by("-premise_count")[:10]
@@ -414,7 +423,6 @@ class ArgumentUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class ArgumentPublishView(LoginRequiredMixin, DetailView):
-
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
 
@@ -426,12 +434,11 @@ class ArgumentPublishView(LoginRequiredMixin, DetailView):
             messages.info(request, u"Argument is published now.")
         else:
             messages.info(request, u"You have to add at least one " +
-                                   u"premise to publish argument.")
+                          u"premise to publish argument.")
         return redirect(contention)
 
 
 class ArgumentUnpublishView(LoginRequiredMixin, DetailView):
-
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
 
@@ -444,7 +451,6 @@ class ArgumentUnpublishView(LoginRequiredMixin, DetailView):
 
 
 class ArgumentDeleteView(LoginRequiredMixin, DetailView):
-
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
 

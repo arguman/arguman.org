@@ -6,6 +6,7 @@
 
 {% block extra-meta %}
     <meta property="og:description" content="{{ contention.owner }}"/>
+    <meta name="canonical" content="{{ contention.get_full_url }}"/>
 {% endblock %}
 
 {% block body-attrs %} id="contention-detail"{% endblock %}

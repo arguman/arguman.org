@@ -59,6 +59,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'django.middleware.locale.LocaleMiddleware'
+
+    'i18n.middleware.SubdomainLanguageMiddleware'
 )
 
 LOCALE_PATHS = (
@@ -90,7 +92,21 @@ CACHES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'tr'
+REDIRECTED_PATHS = (
+    '/',
+    '/newsfeed',
+    '/news',
+    '/stats',
+    '/about',
+    '/blog'
+)
+
+DEFAULT_LANGUAGE = 'en'
+BASE_DOMAIN = 'arguman.org'
+AVAILABLE_LANGUAGES = (
+    'tr',
+    'en'
+)
 
 TIME_ZONE = 'UTC'
 

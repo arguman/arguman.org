@@ -90,6 +90,7 @@ class Contention(DeletePreventionMixin, models.Model):
     date_modification = models.DateTimeField(auto_now_add=True,
                                              auto_now=True)
     ip_address = models.IPAddressField(null=True, blank=True)
+    language = models.CharField(max_length=5, null=True)
 
     objects = ContentionManager()
 
@@ -104,8 +105,9 @@ class Contention(DeletePreventionMixin, models.Model):
         return 'contention_detail', [self.slug]
 
     def get_full_url(self):
-        return "http://%(site_url)s%(path)s" % {
-            "site_url": settings.SITE_URL,
+        return "http://%(language)s.%(domain)s%(path)s" % {
+            "language": self.language,
+            "domain": settings.BASE_DOMAIN,
             "path": self.get_absolute_url()
         }
 
