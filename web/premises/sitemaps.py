@@ -8,7 +8,7 @@ class ArgumentSitemap(Sitemap):
     priority = 0.9
 
     def items(self):
-        return Contention.objects.filter(is_published=True)
+        return Contention.objects.language().filter(is_published=True)
 
     def location(self, obj):
         return obj.get_absolute_url()
