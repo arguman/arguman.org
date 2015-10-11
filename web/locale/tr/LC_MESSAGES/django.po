@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-11 18:43+0000\n"
+"POT-Creation-Date: 2015-10-11 19:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: trMIME-Version: 1.0\n"
@@ -351,6 +351,10 @@ msgstr "Kullanım Koşulları"
 #: templates/base.html:74
 msgid "Feedback"
 msgstr "Öneri ve şikayet"
+
+#: templates/base.html:75
+msgid "Donate"
+msgstr "Bağış yapın"
 
 #: templates/home.html:8
 #, python-format

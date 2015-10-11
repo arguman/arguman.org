@@ -48,4 +48,8 @@ Also many thanks for intellectual support during development of arguman.org to B
 ## Events
 - [Galatasaray University Debating Society](http://arguman.org/blog/galatasaray-universitesi-munazara-egitimi-gunlerindeydik/)
 
+## Donations
+If you want to support os for server costs: <br>
+<http://paypal.me/arguman>
+
 If you have a general question, a suggestion or some feedback, you can email us: [argumananalizi@gmail.com](mailto:argumananalizi@gmail.com) 
