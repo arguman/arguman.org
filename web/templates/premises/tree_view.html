@@ -46,7 +46,7 @@
                         {% endblocktrans %}
                         <div class="supporter-list">
                         {% for supporter in premise.recent_supporters %}{% if not forloop.first %}, {% endif %}
-                        <a href="{% url "auth_profile" supporter.username %}">{{ supporter.username }}</a>{% endfor %}
+                        <a href="{{ supporter.get_absolute_url }}">{{ supporter.username }}</a>{% endfor %}
                         {% if premise.supporters.count > 5 %}
                         {% trans "and others." %}
                         {% endif %}

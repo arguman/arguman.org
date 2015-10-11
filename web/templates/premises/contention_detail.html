@@ -131,6 +131,7 @@
     {% if user.is_anonymous %}
     <div class="login-popup">
         <button class="login-popup-close">×</button>
+<<<<<<< HEAD
         {% url "auth_registration" as register_url %}
         {% url "auth_login" as login_url %}
         {% blocktrans trimmed with login_url=login_url register_url=register_url %}
@@ -138,6 +139,11 @@
             <a href="{{ register_url }}">register</a>
             to add a premise for this argument.
         {% endblocktrans %}
+=======
+        Önerme eklemek için
+        <a href="{% url "auth_registration" %}?next={{ contention.get_absolute_url }}">kaydolun</a> ya da
+        <a href="{% url "auth_login" %}?next={{ contention.get_absolute_url }}">giriş</a> yapın.
+>>>>>>> 5a09b89dcc7d9c482e75f276f14beef1b4889c4f
     </div>
     {% endif %}
 {% endblock %}

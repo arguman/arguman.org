@@ -2,7 +2,7 @@
 {% load gravatar %}
 <div class="user-stats">
 	{% gravatar object.email 90 %}
-	<h2><a href="{% url "auth_profile" object.username %}">{{ object.username }}</a></h2>
+	<h2><a href="{{ object.get_absolute_url }}">{{ object.username }}</a></h2>
 	<div class="stats-bar">
 		<span>
 			{{ object.followers.count }} <br/>

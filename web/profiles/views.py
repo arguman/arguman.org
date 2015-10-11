@@ -109,4 +109,4 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse("auth_profile", args=[self.request.user.username])
+        return self.request.user.get_absolute_url()

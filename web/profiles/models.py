@@ -7,9 +7,10 @@ from django.db import models
 from django.db.models import Count
 from django.dispatch import receiver
 from django.template.loader import render_to_string
-from premises.models import Contention, Report, Premise
+from premises.models import Report, Premise
 from premises.signals import (reported_as_fallacy, added_premise_for_premise,
-                              added_premise_for_contention, supported_a_premise)
+                              added_premise_for_contention,
+                              supported_a_premise)
 from profiles.signals import follow_done
 
 
@@ -26,6 +27,10 @@ class Profile(AbstractUser):
     def supported_premise_count(self):
         return self.premise_set.aggregate(Count('supporters'))[
             'supporters__count']
+
+    @models.permalink
+    def get_absolute_url(self):
+        return "auth_profile", [self.username]
 
 
 NOTIFICATION_ADDED_PREMISE_FOR_CONTENTION = 0

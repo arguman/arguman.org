@@ -20,7 +20,6 @@
                     </div>
                     <div class="info">
                         <a class="main-contention" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a>
-
                         <div class="user">{% trans "last sender:" %} <a
                                 href="{% url "auth_profile" contention.last_user.username %}">{{ contention.last_user }}</a>
                             <time datetime="{{ contention.date_modification }}">({{ contention.date_modification|naturaltime }})</time>

@@ -1,17 +1,14 @@
 from django.contrib.sitemaps import Sitemap
 
-from blog.models import Post
+from profiles.models import Profile
 
 
-class BlogSitemap(Sitemap):
+class ProfileSitemap(Sitemap):
     changefreq = "never"
     priority = 0.9
 
     def items(self):
-        return Post.published_objects.all()
-
-    def lastmod(self, obj):
-        return obj.date_modified
+        return Profile.objects.all()
 
     def location(self, obj):
         return obj.get_absolute_url()
