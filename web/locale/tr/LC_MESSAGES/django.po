@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-11 23:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: trMIME-Version: 1.0\n"
@@ -2393,6 +2392,10 @@ msgstr "Kullanım Koşulları"
 msgid "Feedback"
 msgstr "Öneri ve şikayet"
 
+#: templates/base.html:75
+msgid "Donate"
+msgstr "Bağış yapın"
+
 #: templates/home.html:8
 #, python-format
 msgid ""
@@ -2415,7 +2418,7 @@ msgstr "ancak"
 #: templates/index.html:23
 msgid "last sender:"
 msgstr "son gönderen:"
-gı
+
 #: templates/index.html:31
 msgid "No results found."
 msgstr "Sonuç bulunamadı."
