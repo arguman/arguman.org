@@ -1,1 +1,2 @@
-<a class="followed-profile" href="{% url "auth_profile" notification.sender.username %}">{{ notification.sender }}</a> sizi takip ediyor.
+{% load i18n %}
+<a class="followed-profile" href="{% url "auth_profile" notification.sender.username %}">{{ notification.sender }}</a> {% trans "is following you." %}

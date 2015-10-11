@@ -15,10 +15,11 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
+from django.utils.translation import ugettext_lazy as _
+
 from newsfeed.constants import (
     NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION)
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
-
 from premises.managers import ContentionManager, DeletePreventionManager
 from premises.mixins import DeletePreventionMixin
 
@@ -27,9 +28,34 @@ SUPPORT = 1
 SITUATION = 2
 
 PREMISE_TYPES = (
-    (OBJECTION, u"ama"),
-    (SUPPORT, u"çünkü"),
-    (SITUATION, u"ancak"),
+    (OBJECTION, "but"),
+    (SUPPORT, "because"),
+    (SITUATION, "however"),
+)
+
+FALLACY_TYPES = (
+    ("BeggingTheQuestion,", _("Begging The Question")),
+    ("IrrelevantConclusion", _("Irrelevant Conclusion")),
+    ("FallacyOfIrrelevantPurpose", _("Fallacy Of Irrelevant Purpose")),
+    ("FallacyOfRedHerring", _("Fallacy Of Red Herring")),
+    ("ArgumentAgainstTheMan", _("Argument Against TheMan")),
+    ("PoisoningTheWell", _("Poisoning The Well")),
+    ("FallacyOfTheBeard", _("Fallacy Of The Beard")),
+    ("FallacyOfSlipperySlope", _("Fallacy Of Slippery Slope")),
+    ("FallacyOfFalseCause", _("Fallacy Of False Cause")),
+    ("FallacyOfPreviousThis", _("Fallacy Of Previous This")),
+    ("JointEffect", _("Joint Effect")),
+    ("WrongDirection", _("Wrong Direction")),
+    ("FalseAnalogy", _("False Analogy")),
+    ("SlothfulInduction", _("Slothful Induction")),
+    ("AppealToBelief", _("Appeal To Belief")),
+    ("PragmaticFallacy", _("Pragmatic Fallacy")),
+    ("FallacyOfIsToOught", _("FallacyOf Is To Ought")),
+    ("ArgumentFromForce", _("Argument From Force")),
+    ("ArgumentToPity", _("Argument To Pity")),
+    ("PrejudicialLanguage", _("Prejudicial Language")),
+    ("FallacyOfSpecialPleading", _("Fallacy Of Special Pleading")),
+    ("AppealToAuthority", _("Appeal To Authority"))
 )
 
 
@@ -44,19 +70,19 @@ class Contention(DeletePreventionMixin, models.Model):
     channel = models.ForeignKey(Channel, related_name='contentions',
                                 null=True, blank=True)
     title = models.CharField(
-        max_length=255, verbose_name="Argüman",
+        max_length=255, verbose_name="Argument",
         help_text=render_to_string("premises/examples/contention.html"))
     slug = models.SlugField(max_length=255, blank=True)
     description = models.TextField(
-        null=True, blank=True, verbose_name="Ek bilgiler",)
+        null=True, blank=True, verbose_name="Description", )
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     owner = models.CharField(
         max_length=255, null=True, blank=True,
-        verbose_name="Orijinal söylem",
+        verbose_name="Original Discourse",
         help_text=render_to_string("premises/examples/owner.html"))
     sources = models.TextField(
         null=True, blank=True,
-        verbose_name="Kaynaklar",
+        verbose_name="Sources",
         help_text=render_to_string("premises/examples/sources.html"))
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
@@ -165,21 +191,20 @@ class Premise(DeletePreventionMixin, models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
                                null=True, blank=True,
-                               verbose_name="Öncülü",
-                               help_text="Önermenin öncülü. Eğer boş "
-                                         "bırakılırsa ana argümanın bir "
-                                         "önermesi olur.")
+                               verbose_name="Parent",
+                               help_text="The parent of premise. If you don't choose " +
+                                         "anything, it will be a main premise.")
     premise_type = models.IntegerField(
         default=SUPPORT,
-        choices=PREMISE_TYPES, verbose_name="Önerme Tipi",
+        choices=PREMISE_TYPES, verbose_name="Premise Type",
         help_text=render_to_string("premises/examples/premise_type.html"))
     text = models.TextField(
         null=True, blank=True,
-        verbose_name="Önermenin İçeriği",
+        verbose_name="Premise Content",
         help_text=render_to_string("premises/examples/premise.html"),
         validators=[validators.MaxLengthValidator(MAX_PREMISE_CONTENT_LENGTH)])
     sources = models.TextField(
-        null=True, blank=True, verbose_name="Kaynaklar",
+        null=True, blank=True, verbose_name="Sources",
         help_text=render_to_string("premises/examples/premise_source.html"))
     is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
     collapsed = models.BooleanField(default=False)
@@ -237,9 +262,9 @@ class Premise(DeletePreventionMixin, models.Model):
 
     def fallacies(self):
         fallacies = set(self.reports.values_list("fallacy_type", flat=True))
-        mapping = dict(get_fallacy_types())
-        fallacy_list = [mapping.get(fallacy) for fallacy in fallacies]
-        return filter(None, fallacy_list)
+        mapping = dict(FALLACY_TYPES)
+        return [(mapping.get(fallacy) or fallacy)
+                for fallacy in fallacies]
 
     def get_actor(self):
         # Encapsulated for newsfeed app.
@@ -272,17 +297,6 @@ class Comment(models.Model):
         return smart_unicode(self.text)
 
 
-def get_fallacy_types():
-    if hasattr(get_fallacy_types, "cache"):
-        return get_fallacy_types.cache
-
-    get_fallacy_types.cache = json.load(
-        open(os.path.join(os.path.dirname(__file__),
-                          "fallacies.json")))
-
-    return get_fallacy_types.cache
-
-
 class Report(models.Model):
     reporter = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  related_name='reports')
@@ -295,7 +309,7 @@ class Report(models.Model):
                                    blank=True,
                                    null=True)
     fallacy_type = models.CharField(
-        "Safsata Tipi", choices=get_fallacy_types(), null=True, blank=False,
+        "Fallacy Type", choices=FALLACY_TYPES, null=True, blank=False,
         max_length=255, default="Wrong Direction",
         help_text=render_to_string("premises/examples/fallacy.html"))
 

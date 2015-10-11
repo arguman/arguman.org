@@ -1,13 +1,14 @@
+{% load i18n %}
 {% for contention in contentions %}
     <li>
         <div class="stats">
-            <span class="because">{{ contention.because.count }} çünkü</span>
-            <span class="but">{{ contention.but.count }} ama</span>
-            <span class="however">{{ contention.however.count }} ancak</span>
+            <span class="because">{{ contention.because.count }} {% trans "because" %}</span>
+            <span class="but">{{ contention.but.count }} {% trans "but" %}</span>
+            <span class="however">{{ contention.however.count }} {% trans "however" %}</span>
         </div>
         <div class="info">
             <a class="main-contention" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a>
-            <div class="user">gönderen: <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user }}</a></div>
+            <div class="user">{% trans "sender:" %} <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user }}</a></div>
         </div>
     </li>
 {% endfor %}

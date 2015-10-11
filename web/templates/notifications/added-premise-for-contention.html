@@ -1,10 +1,13 @@
+{% load i18n %}
 {% with contention=target_object.argument %}
 {% if target_object.user and contention %}
 <a class="user" href="{% url "auth_profile" target_object.user.username %}">
     {{ target_object.user.username }}</a>
-başlattığınız argüman <a href="{{ contention.get_absolute_url }}" class="contention-link">{{ contention.title|truncatechars:50 }}</a>
-için bir
-<span class="premise-type {{ target_object.premise_class }}">{{ target_object.get_premise_type_display }}</span>
-önermesi gönderdi.
+
+{% blocktrans with class=target_object.premise_class label=target_object.get_premise_type_display %}
+    added a <span class="premise-type {{ class }}">{{ label }}</span> premise
+{% endblocktrans %}
+<br>
+    <a href="{{ contention.get_absolute_url }}" class="contention-link">{{ contention.title }}</a>
 {% endif %}
 {% endwith %}

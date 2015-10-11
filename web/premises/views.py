@@ -14,6 +14,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
+from django.utils.translation import get_language
 from django.db.models import Count
 
 from blog.models import Post
@@ -364,8 +365,12 @@ class ControversialArgumentsView(HomeView):
 class AboutView(TemplateView):
     template_name = "about.html"
 
+    def get_text_file(self):
+        language = get_language()
+        return render_to_string("about-%s.md" % language)
+
     def get_context_data(self, **kwargs):
-        content = markdown(render_to_string("about.md"))
+        content = markdown(self.get_text_file())
         return super(AboutView, self).get_context_data(
             content=content, **kwargs)
 
@@ -418,10 +423,10 @@ class ArgumentPublishView(LoginRequiredMixin, DetailView):
         if contention.premises.exists():
             contention.is_published = True
             contention.save()
-            messages.info(request, u"Argüman yayına alındı.")
+            messages.info(request, u"Argument is published now.")
         else:
-            messages.info(request, u"Argümanı yayına almadan önce en az 1 "
-                                   u"önerme ekleyin.")
+            messages.info(request, u"You have to add at least one " +
+                                   u"premise to publish argument.")
         return redirect(contention)
 
 
@@ -449,10 +454,10 @@ class ArgumentDeleteView(LoginRequiredMixin, DetailView):
             # remove notification
             Entry.objects.delete(contention.get_newsfeed_type(), contention.id)
             contention.delete()
-            messages.info(request, u"Argümanınız silindi.")
+            messages.info(request, u"Argument has been removed.")
             return redirect("home")
         else:
-            messages.info(request, u"Argümanınız silinecek durumda değil.")
+            messages.info(request, u"Argument cannot be deleted.")
             return redirect(contention)
 
     delete = post

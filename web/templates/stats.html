@@ -1,24 +1,25 @@
 {% extends "index.html" %}
+{% load i18n %}
 
 {% block tab_content %}
 
 <div class="stats-content">
-    <h2>İstatistikler</h2>
+    <h2>{% trans "Statistics" %}</h2>
     <div class="stats-sidebar">
         <ul>
-            <li{% if stats_type == "active_users" %} class="active"{% endif %}><a href="?what=active_users">en katılımcı üyeler</a></li>
-            <li{% if stats_type == "supported_users" %} class="active"{% endif %}><a href="?what=supported_users">en desteklenen üyeler</a></li>
+            <li{% if stats_type == "active_users" %} class="active"{% endif %}><a href="?what=active_users">{% trans "most active users" %}</a></li>
+            <li{% if stats_type == "supported_users" %} class="active"{% endif %}><a href="?what=supported_users">{% trans "most supported users" %}</a></li>
             <!--<li{% if stats_type == "disgraced_users" %} class="active"{% endif %}><a href="?what=disgraced_users">en yüz karası üyeler</a></li>-->
-            <li{% if stats_type == "crowded_contentions" %} class="active"{% endif %}><a href="?what=crowded_contentions">en kalabalık argümanlar</a></li>
-            <li{% if stats_type == "supported_premises" %} class="active"{% endif %}><a href="?what=supported_premises">en çok desteklenen önermeler</a></li>
-            <li{% if stats_type == "fallacy_premises" %} class="active"{% endif %}><a href="?what=fallacy_premises">en safsata önermeler</a></li>
+            <li{% if stats_type == "crowded_contentions" %} class="active"{% endif %}><a href="?what=crowded_contentions">{% trans "most crowded arguments" %}</a></li>
+            <li{% if stats_type == "supported_premises" %} class="active"{% endif %}><a href="?what=supported_premises">{% trans "most supported premises" %}</a></li>
+            <li{% if stats_type == "fallacy_premises" %} class="active"{% endif %}><a href="?what=fallacy_premises">{% trans "most fallacy premises" %}</a></li>
         </ul>
     </div>
     <div class="stats-list">
         <ul class="time-filter">
-            <li{% if days == 7 %} class="active"{% endif %}><a href="?what={{ stats_type }}&days=7">bu hafta</a></li>
-            <li{% if days == 30 %} class="active"{% endif %}><a href="?what={{ stats_type }}&days=30">bu ay</a></li>
-            <li{% if not days %} class="active"{% endif %}><a href="?what={{ stats_type }}&days=all">tüm zamanlar</a></li>
+            <li{% if days == 7 %} class="active"{% endif %}><a href="?what={{ stats_type }}&days=7">{% trans "this week" %}</a></li>
+            <li{% if days == 30 %} class="active"{% endif %}><a href="?what={{ stats_type }}&days=30">{% trans "this month" %}</a></li>
+            <li{% if not days %} class="active"{% endif %}><a href="?what={{ stats_type }}&days=all">{% trans "all time" %}</a></li>
         </ul>
         {% for item in stats %}
             <div class="stat-item">

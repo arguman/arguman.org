@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load gravatar %}
 <div class="user-stats">
 	{% gravatar object.email 90 %}
@@ -5,19 +6,19 @@
 	<div class="stats-bar">
 		<span>
 			{{ object.followers.count }} <br/>
-			TAKİPÇİ
+			{% trans "FOLLOWER" %}
 		</span>
 		<span>
 			{{ object.contention_set.count }} <br>
-			ARGÜMAN
+			{% trans "ARGUMENT" %}
 		</span>
 		<span>
 			{{ object.premise_set.count }} <br>
-			ÖNERME
+			{% trans "PREMISE" %}
 		</span>
 		<span>
 			{{ object.supported_premise_count }} <br>
-			DESTEK
+			{% trans "SUPPORT" %}
 		</span>
 	</div>
 </div>

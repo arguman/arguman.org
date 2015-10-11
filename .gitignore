@@ -5,3 +5,4 @@ settings_local.py
 *.gml
 .vagrant
 VagrantFile
+.idea

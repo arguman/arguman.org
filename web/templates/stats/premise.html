@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load gravatar %}
 <div class="premise-stats">
 	<h2><a href="{% url "contention_detail" object.argument.slug %}">{{ object.argument.title }}</a></h2>
@@ -7,12 +8,12 @@
     </div>
     {% if object.supporters.exists %}
 	<div class="supporter-count">
-	{{ object.supporters.count }} destekleyen var.
+	{{ object.supporters.count }} {% trans "supporter." %}
 	</div>
 	{% endif %}
 	{% if object.reports.exists %}
 		<div class="reported_as_fallacy">
-		{{ object.reports.count }} safsata bildirimi yapıldı.
+		{{ object.reports.count }} {% trans "fallacy report." %}
 
 		{% if object.fallacies %}
 			{% for fallacy in object.fallacies %}

@@ -1,7 +1,8 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Argüman Analizi Platformu{% endblock %}</title>
+    <title>{% block title %}{% trans "Argument Analysis Platform" %}{% endblock %}</title>
     <meta charset="utf-8">
     {% load static %}
     <link rel="stylesheet" href="{% static "css/h5bp.css" %}" />
@@ -18,7 +19,7 @@
     {% if announcements.exists %}
     <ul class="announcements">
         {% for announcement in announcements %}
-            <li><strong>Duyuru: </strong> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></li>
+            <li><strong>{% trans "Announcement:" %} </strong> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -28,23 +29,23 @@
     </div>
     <nav>
         <ul id="site-navigation">
-            <li><a href="{% url "about" %}">nedir?</a></li>
-            <li><a href="{% url "blog" %}">blog</a></li>
+            <li><a href="{% url "about" %}">{% trans "about" %}</a></li>
+            <li><a href="{% url "blog" %}">{% trans "blog" %}</a></li>
             {% if user.is_anonymous %}
-            <li><a href="{% url "auth_registration" %}">kayıt ol</a></li>
-            <li><a href="{% url "auth_login" %}">giriş yap</a></li>
+            <li><a href="{% url "auth_registration" %}">{% trans "register" %}</a></li>
+            <li><a href="{% url "auth_login" %}">{% trans "login" %}</a></li>
             {% else %}
-            <li><a href="{% url "new_argument" %}">argüman gönder</a></li>
-            <li><a class="username" href="{% url "auth_profile" user.username %}">{{ user.username|truncatechars:14 }}</a> (<a href="{% url "auth_logout" %}">çıkış yap</a>)</li>
+            <li><a class="new-argument-link" href="{% url "new_argument" %}">{% trans "new argument" %}</a></li>
+            <li><a class="username" href="{% url "auth_profile" user.username %}">{{ user.username|truncatechars:14 }}</a>
+                (<a href="{% url "auth_logout" %}">{% trans "logout" %}</a>)</li>
             {% endif %}
-            <!-- <li class="pull-right">takip et: <a href="{% url "about" %}">@argumananalizi</a></li> -->
             <li class="inline-search pull-right">
                 <form action="{% url "contentions_search" %}">
-                    <input type="search" name="keywords" id="keyword" placeholder="bu bir arama kutusu"> 
+                    <input type="search" name="keywords" id="keyword" placeholder="search keywords"> 
                 </form>
             </li>
             <li class="social-links">
-                Takip et: <a href="https://twitter.com/argumananalizi" target="_blank">@argumananalizi</a>
+                {% trans "Follow:" %} <a href="https://twitter.com/argumananalizi" target="_blank">@argumananalizi</a>
             </li>
         </ul>
     </nav>
@@ -55,10 +56,16 @@
 {% block footer %}
 <footer>
     <div class="container">
-        <p>Arguman.org henüz geliştirilme aşamasındadır. Ancak bu platformu kullanamayacağınız anlamına gelmiyor.</p>
-    <p><a href="/tos">Kullanım Koşulları</a> |
-       <a href="https://github.com/fatiherikli/arguman.org/issues">Öneri ve şikayet</a> |
-       <a href="mailto:argumananalizi@gmail.com">argumananalizi@gmail.com</a>
+        <p>
+            {% blocktrans %}
+                arguman.org is an open-source project. you can follow the
+                <a href="http://github.com/arguman">organization</a> on github.
+            {% endblocktrans %}
+        </p>
+        <p>
+            <a href="/tos">{% trans "Terms of Service" %}</a> |
+            <a href="https://github.com/fatiherikli/arguman.org/issues">{% trans "Feedback" %}</a> |
+            <a href="mailto:argumananalizi@gmail.com">argumananalizi@gmail.com</a>
     </p>
     </div>
 </footer>

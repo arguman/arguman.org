@@ -1701,6 +1701,10 @@ div.load-more {
     text-decoration: none;
 }
 
+#site-navigation .new-argument-link {
+    border-bottom: 3px solid #313131;
+}
+
 #site-navigation li.pull-right {
     float: right;
 }
@@ -1834,7 +1838,7 @@ div.load-more {
     bottom: 10px;
     right: 10px;
     width: 200px;
-    background-color: #E6E6E6;
+    background-color: #F7F6F6;
     padding: 10px 15px;
     font-size: 0.9em;
     z-index: 999;

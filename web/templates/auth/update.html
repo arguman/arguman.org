@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
     <section class="container">
         <form action="{% url "auth_profile_update" %}" method="post">
-            <h2>Bilgilerim</h2>
+            <h2>{% trans "Update Profile" %}</h2>
             {% csrf_token %}
             {{ form.as_p }}
             <p class="helptext">
-                Avatar yüklemek için <a target="_blank" href="//gravatar.com">gravatar.com</a>
-                adresini kullanabilirsiniz.
+                {% blocktrans %}
+                You can update your profile picture on <a href="http://gravatar.com">gravatar.com</a>.
+                {% endblocktrans %}
             </p>
-            <input type="submit" value="Güncelle" class="submit">
+            <input type="submit" value="{% trans "Update" %}" class="submit">
         </form>
     </section>
 {% endblock %}

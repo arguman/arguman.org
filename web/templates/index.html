@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load humanize %}
 
 {% block content %}
@@ -13,14 +14,14 @@
             {% for contention in contentions %}
                 <li>
                     <div class="stats">
-                        <span class="because">{{ contention.because.count }} çünkü</span>
-                        <span class="but">{{ contention.but.count }} ama</span>
-                        <span class="however">{{ contention.however.count }} ancak</span>
+                        <span class="because">{{ contention.because.count }} {% trans "çünkü" %}</span>
+                        <span class="but">{{ contention.but.count }} {% trans "ama" %}</span>
+                        <span class="however">{{ contention.however.count }} {% trans "ancak" %}</span>
                     </div>
                     <div class="info">
                         <a class="main-contention" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a>
 
-                        <div class="user">son gönderen: <a
+                        <div class="user">{% trans "last sender:" %} <a
                                 href="{% url "auth_profile" contention.last_user.username %}">{{ contention.last_user }}</a>
                             <time datetime="{{ contention.date_modification }}">({{ contention.date_modification|naturaltime }})</time>
                         </div>
@@ -28,12 +29,12 @@
                 </li>
             {% empty %}
                 {% if keywords %}
-                    <li>Sonuç bulunamadı.</li>
+                    <li>{% trans "No results found." %}</li>
                 {% endif %}
             {% endfor %}
             {% if has_next_page %}
             <li class="load-more">
-                <a class="next" href="{{ next_page_url }}">Daha fazla yükle</a>
+                <a class="next" href="{{ next_page_url }}">{% trans "Load more" %}</a>
             </li>
             {% endif %}
         </ul>

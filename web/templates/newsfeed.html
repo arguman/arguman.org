@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load humanize %}
 {% load gravatar %}
 
@@ -8,13 +9,13 @@
         {% include "home.html" %}
         {% include "tabs.html" %}
         {% if user.is_anonymous %}
-        <h3 class="newsfeed-title">neler oluyor burada:</h3>
+        <h3 class="newsfeed-title">{% trans "What is going on here:" %}</h3>
         {% else %}
             <div class="newsfeed-actions">
             {% if newsfeed_is_public %}
-                <a href="{% url "newsfeed" %}" class="switch-newsfeed">Sadece takip ettiklerini görüntüle</a>
+                <a href="{% url "newsfeed" %}" class="switch-newsfeed">{% trans "Show only followed users activity." %}</a>
             {% else %}
-                <a href="{% url "public_newsfeed" %}" class="switch-newsfeed">Herkesin haberlerini görüntüle</a>
+                <a href="{% url "public_newsfeed" %}" class="switch-newsfeed">{% trans "Show all users activity." %}</a>
             {% endif %}
             </div>
         {% endif %}
@@ -31,11 +32,11 @@
                 </div>
              </div>
             {% empty %}
-                <p class="empty-newsfeed">Haber kaynağınız boş. Birilerini takip edebilirsiniz.</p>
+                <p class="empty-newsfeed">{% trans "Newsfeed seems empty." %}</p>
             {% endfor %}
         {% if has_next_page %}
             <div class="load-more">
-                <a class="next" href="{{ next_page_url }}">Daha fazla yükle</a>
+                <a class="next" href="{{ next_page_url }}">{% trans "Load more" %}</a>
             </div>
         {% endif %}
         </div>
