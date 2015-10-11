@@ -1,0 +1,740 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Arguman\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-11 18:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
+"Language: trMIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: blog/admin.py:18
+msgid "Publish selected posts"
+msgstr "Yayına al"
+
+#: blog/admin.py:22
+msgid "Mark as draft selected posts"
+msgstr "Taslak olarak işaretle"
+
+#: blog/models.py:21
+msgid "Name"
+msgstr "İsim"
+
+#: blog/models.py:22
+msgid "Slug"
+msgstr "URL"
+
+#: blog/models.py:23
+msgid "Content"
+msgstr "İçerik"
+
+#: blog/models.py:26 premises/models.py:211
+msgid "Published"
+msgstr "Yayınlı"
+
+#: premises/models.py:37
+msgid "Begging The Question"
+msgstr "Kısır Döngü Safsatası"
+
+#: premises/models.py:38
+msgid "Irrelevant Conclusion"
+msgstr "Alakasız Sonuç Safsatası"
+
+#: premises/models.py:39
+msgid "Fallacy Of Irrelevant Purpose"
+msgstr "Alakasız Amaç Safsatası"
+
+#: premises/models.py:40
+msgid "Fallacy Of Red Herring"
+msgstr "Konuyu Saptırma Safsatası"
+
+#: premises/models.py:41
+msgid "Argument Against TheMan"
+msgstr "Adam Karalama Safsatası"
+
+#: premises/models.py:42
+msgid "Poisoning The Well"
+msgstr "Dolduruşa Getirme Safsatası"
+
+#: premises/models.py:43
+msgid "Fallacy Of The Beard"
+msgstr "Devede Kulak Safsatası"
+
+#: premises/models.py:44
+msgid "Fallacy Of Slippery Slope"
+msgstr "Felaket Tellallığı Safsatası"
+
+#: premises/models.py:45
+msgid "Fallacy Of False Cause"
+msgstr "Yanlış Sebep Safsatası"
+
+#: premises/models.py:46
+msgid "Fallacy Of Previous This"
+msgstr "Öncesinde Safsatası"
+
+#: premises/models.py:47
+msgid "Joint Effect"
+msgstr "Müşterek Etki"
+
+#: premises/models.py:48
+msgid "Wrong Direction"
+msgstr "Yanlış Yön Safsatası"
+
+#: premises/models.py:49
+msgid "False Analogy"
+msgstr "Yanlış Benzetme Safsatası"
+
+#: premises/models.py:50
+msgid "Slothful Induction"
+msgstr "Yok Sayma Safsatası"
+
+#: premises/models.py:51
+msgid "Appeal To Belief"
+msgstr "İnanca Başvurma Safsatası"
+
+#: premises/models.py:52
+msgid "Pragmatic Fallacy"
+msgstr "Faydacı Safsata"
+
+#: premises/models.py:53
+msgid "Fallacy Of Is To Ought"
+msgstr "Dayatma Safsatası"
+
+#: premises/models.py:54
+msgid "Argument From Force"
+msgstr "Tehdit Safsatası"
+
+#: premises/models.py:55
+msgid "Argument To Pity"
+msgstr "Duygu Sömürüsü"
+
+#: premises/models.py:56
+msgid "Prejudicial Language"
+msgstr "Önyargılı Dil Safsatası"
+
+#: premises/models.py:57
+msgid "Fallacy Of Special Pleading"
+msgstr "Mazeret Safsatası"
+
+#: premises/models.py:58
+msgid "Appeal To Authority"
+msgstr "Bir Bilen Safsatası"
+
+#: premises/models.py:73
+msgid "Argument"
+msgstr "Argüman"
+
+#: premises/models.py:77
+msgid "Description"
+msgstr ""
+
+#: premises/models.py:81
+msgid "Original Discourse"
+msgstr "Orijinal Söylem"
+
+#: premises/models.py:85 premises/models.py:209
+msgid "Sources"
+msgstr "Kaynaklar"
+
+#: premises/models.py:196
+msgid "Parent"
+msgstr "Önermenin öncülü"
+
+#: premises/models.py:197
+msgid ""
+"The parent of premise. If you don't choose anything, it will be a main "
+"premise."
+msgstr ""
+"Önermenin öncülü. Eğer boş bırakılırsa ana argümanın bir önermesi olur."
+
+#: premises/models.py:201
+msgid "Premise Type"
+msgstr "Önerme Tipi"
+
+#: premises/models.py:205
+msgid "Premise Content"
+msgstr "İçerik"
+
+#: premises/models.py:314
+msgid "Fallacy Type"
+msgstr "Safsata Tipi"
+
+#: profiles/forms.py:56
+msgid "The two password fields didn't match."
+msgstr "Şifreler birbiriyle uyuşmuyor."
+
+#: profiles/forms.py:63 templates/auth/password_reset_confirm.html:12
+msgid "New password"
+msgstr "Yeni şifre"
+
+#: profiles/forms.py:67
+msgid "New password confirmation"
+msgstr "Yeni şifre onayı"
+
+#: templates/auth/login.html:7 templates/auth/login.html.py:11
+#: templates/auth/password_reset_complete.html:9
+msgid "Login"
+msgstr "Giriş yap"
+
+#: templates/auth/login.html:7 templates/auth/register.html:7
+msgid "or login with twitter"
+msgstr "ya da twitter ile bağlan"
+
+#: templates/auth/login.html:14
+msgid "Forgot your password?"
+msgstr "Şifremi unuttum"
+
+#: templates/auth/password_reset_complete.html:8
+msgid "The password changed successfully."
+msgstr "Şifre başarıyla değiştirildi."
+
+#: templates/auth/password_reset_confirm.html:7
+msgid "Enter your password"
+msgstr "Şifrenizi girin"
+
+#: templates/auth/password_reset_confirm.html:17
+msgid "New password (again)"
+msgstr "Yeni şifre (tekrar)"
+
+#: templates/auth/password_reset_confirm.html:21
+msgid "Change my password"
+msgstr "Şifremi değiştir"
+
+#: templates/auth/password_reset_confirm.html:25
+msgid "Invalid password reset url."
+msgstr "Yanlış şifre sıfırlama URL'i."
+
+#: templates/auth/password_reset_done.html:8
+msgid "We have sent an email to reset your password. Please check your inbox."
+msgstr ""
+"Şifrenizi sıfırlamanız için bir email gönderdik. Lütfen kontrol ediniz."
+
+#: templates/auth/password_reset_form.html:7
+msgid "Reset Password"
+msgstr "Şifremi Unuttum"
+
+#: templates/auth/password_reset_form.html:10
+#: templates/premises/new_premise.html:15
+msgid "Submit"
+msgstr "Gönder"
+
+#: templates/auth/profile.html:15
+msgid "update"
+msgstr "güncelle"
+
+#: templates/auth/profile.html:20
+msgid "Unfollow"
+msgstr "Takibi bırak"
+
+#: templates/auth/profile.html:22
+msgid "Follow"
+msgstr "Takip et"
+
+#: templates/auth/profile.html:32 templates/stats/profile.html:9
+msgid "FOLLOWER"
+msgstr "TAKİPÇİ"
+
+#: templates/auth/profile.html:36 templates/stats/profile.html:13
+msgid "ARGUMENT"
+msgstr "ARGÜMAN"
+
+#: templates/auth/profile.html:40 templates/stats/profile.html:17
+msgid "PREMISE"
+msgstr "ÖNERME"
+
+#: templates/auth/profile.html:44 templates/stats/profile.html:21
+msgid "SUPPORT"
+msgstr "DESTEK"
+
+#: templates/auth/profile.html:59
+msgid "The feed seems to empty."
+msgstr "Haber kaynağı boş gözüküyor."
+
+#: templates/auth/profile.html:63 templates/index.html:36
+#: templates/newsfeed.html:39
+msgid "Load more"
+msgstr "Daha fazla yükle"
+
+#: templates/auth/register.html:7 templates/auth/register.html.py:17
+msgid "Register"
+msgstr "Kayıt Ol"
+
+#: templates/auth/register.html:12 templates/auth/update.html:10
+msgid ""
+"You can update your profile picture on <a href=\"http://gravatar.com"
+"\">gravatar.com</a>."
+msgstr ""
+"Avatarınızı <a href=\"http://gravatar.com\">gravatar.com</a> üzerinden "
+"güncelleyebilirsiniz."
+
+#: templates/auth/update.html:6
+msgid "Update Profile"
+msgstr "Profil Güncelle"
+
+#: templates/auth/update.html:14 templates/premises/edit_contention.html:11
+#: templates/premises/edit_premise.html:10
+msgid "Update"
+msgstr "Güncelle"
+
+#: templates/base.html:5
+msgid "Argument Analysis Platform"
+msgstr "Argüman Analizi Platformu"
+
+#: templates/base.html:22
+msgid "Announcement:"
+msgstr "Duyuru:"
+
+#: templates/base.html:33
+msgid "about"
+msgstr "nedir?"
+
+#: templates/base.html:34
+msgid "blog"
+msgstr "blog"
+
+#: templates/base.html:36
+msgid "register"
+msgstr "kayıt ol"
+
+#: templates/base.html:37
+msgid "login"
+msgstr "giriş"
+
+#: templates/base.html:39
+msgid "new argument"
+msgstr "yeni argüman"
+
+#: templates/base.html:41
+msgid "logout"
+msgstr "çıkış"
+
+#: templates/base.html:45
+msgid "search keywords"
+msgstr "bu bir arama kutusu"
+
+#: templates/base.html:50
+msgid "Languages:"
+msgstr ""
+
+#: templates/base.html:52
+msgid "English"
+msgstr "İngilizce"
+
+#: templates/base.html:54
+msgid "Turkish"
+msgstr "Türkçe"
+
+#: templates/base.html:55
+msgid "Follow on twitter:"
+msgstr "Twitter'da takip et:"
+
+#: templates/base.html:67
+msgid ""
+"arguman.org is an open-source project. you can follow the <a href=\"http://"
+"github.com/arguman\">organization</a> on github."
+msgstr ""
+"arguman.org açık kaynak bir projedir. <a href=\"http://github.com/arguman"
+"\">github</a> üzerinde takip edebilirsiniz"
+
+#: templates/base.html:73
+msgid "Terms of Service"
+msgstr "Kullanım Koşulları"
+
+#: templates/base.html:74
+msgid "Feedback"
+msgstr "Öneri ve şikayet"
+
+#: templates/home.html:8
+#, python-format
+msgid ""
+"arguman.org is an <a href=\"%(about_url)s\">argument analysis</a> platform."
+msgstr ""
+"arguman.org bir <a href=\"%(about_url)s\">argüman analizi</a> platformudur."
+
+#: templates/index.html:17 templates/premises/contention.html:5
+msgid "because"
+msgstr "çünkü"
+
+#: templates/index.html:18 templates/premises/contention.html:6
+msgid "but"
+msgstr "ama"
+
+#: templates/index.html:19 templates/premises/contention.html:7
+msgid "however"
+msgstr "ancak"
+
+#: templates/index.html:23
+msgid "last sender:"
+msgstr "son gönderen:"
+
+#: templates/index.html:31
+msgid "No results found."
+msgstr "Sonuç bulunamadı."
+
+#: templates/newsfeed.html:12
+msgid "What is going on here:"
+msgstr "Neler oluyor burada:"
+
+#: templates/newsfeed.html:16
+msgid "Show only followed users activity."
+msgstr "Sadece takip takip ettiklerim"
+
+#: templates/newsfeed.html:18
+msgid "Show all users activity."
+msgstr "Herkesin haberlerini görüntüle"
+
+#: templates/newsfeed.html:35
+msgid "Newsfeed seems empty."
+msgstr "Haber kaynağı boş gözüküyor."
+
+#: templates/newsfeed/contention.html:2
+msgid "created an argument:"
+msgstr "bir argüman oluşturdu:"
+
+#: templates/newsfeed/fallacy.html:4
+#, python-format
+msgid "reported <strong>%(fallacy)s</strong> fallacy for a premise:"
+msgstr "bir önerme için <strong>%(fallacy)s</strong> bildirimi yaptı:"
+
+#: templates/newsfeed/following.html:1
+#, python-format
+msgid ""
+"following <a href=\"%(profile_url)s\" class=\"contention-link\">"
+"%(username)s</a>"
+msgstr ""
+"<a href=\"%(profile_url)s\" class=\"contention-link\">%(username)s</a> "
+"kişisini takip ediyor"
+
+#: templates/notifications.html:8
+msgid "Notifications"
+msgstr "Bildirimler"
+
+#: templates/notifications/added-premise-for-contention.html:7
+#, python-format
+msgid "added a <span class=\"premise-type %(class)s\">%(label)s</span> premise"
+msgstr ""
+"bir <span class=\"premise-type %(class)s\">%(label)s</span> önermesi ekledi"
+
+#: templates/notifications/added-premise-for-premise.html:8
+#, python-format
+msgid ""
+"added a <span class=\"premise-type %(class)s\">%(label)s</span> premise for "
+"a premise"
+msgstr ""
+"senin önermen için başka bir <span class=\"premise-type %(class)s\">"
+"%(label)s</span> önermesi ekledi"
+
+#: templates/notifications/followed.html:2
+msgid "is following you."
+msgstr "sizi takip ediyor."
+
+#: templates/notifications/reported-as-fallacy.html:4
+#, python-format
+msgid "Your premise reported as <strong>%(label)s</strong>"
+msgstr "Önermen <strong>%(label)s</strong> olarak bildirildi."
+
+#: templates/notifications/supported-a-premise.html:6
+msgid "supported your premise"
+msgstr "önermeni destekledi"
+
+#: templates/partials/notifications.html:14
+#: templates/partials/notifications.html:21
+msgid "See all"
+msgstr "Hepsini gör"
+
+#: templates/partials/notifications.html:19
+msgid "You have no new notifications."
+msgstr "Hiç yeni bildiriminiz yok."
+
+#: templates/premises/actions.html:3
+#: templates/premises/contention_detail.html:104
+#: templates/premises/tree_view.html:71
+msgid "add premise"
+msgstr "önerme ekle"
+
+#: templates/premises/actions.html:7 templates/premises/tree_view.html:64
+msgid "remove"
+msgstr "kaldır"
+
+#: templates/premises/contention.html:11
+#: templates/premises/contention_detail.html:21
+#: templates/premises/tree_view.html:21
+msgid "sender:"
+msgstr "gönderen:"
+
+#: templates/premises/contention_detail.html:24
+msgid "original discourse:"
+msgstr "orijinal söylem:"
+
+#: templates/premises/contention_detail.html:28
+msgid "Unspecified"
+msgstr "Belirtilmemiş"
+
+#: templates/premises/contention_detail.html:38
+msgid "Edit"
+msgstr "Düzenle"
+
+#: templates/premises/contention_detail.html:43
+msgid "Unpublish"
+msgstr "Yayından Kaldır"
+
+#: templates/premises/contention_detail.html:48
+msgid "Publish"
+msgstr "Yayınla"
+
+#: templates/premises/contention_detail.html:58
+msgid "View"
+msgstr "Görünüm"
+
+#: templates/premises/contention_detail.html:59
+msgid "Tree"
+msgstr "Ağaç"
+
+#: templates/premises/contention_detail.html:60
+msgid "List"
+msgstr "Liste"
+
+#: templates/premises/contention_detail.html:66
+msgid "Share"
+msgstr "Paylaş"
+
+#: templates/premises/contention_detail.html:86
+msgid "You can use arrow keys to navigate in the map."
+msgstr "harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz."
+
+#: templates/premises/contention_detail.html:137
+#, python-format
+msgid ""
+"<a href=\"%(login_url)s\">Login</a> or <a href=\"%(register_url)s"
+"\">register</a> to add a premise for this argument."
+msgstr ""
+"Bir önerme eklemek için <a href=\"%(login_url)s\">giriş</a> yapın ya da <a "
+"href=\"%(register_url)s\">kayıt</a> olun."
+
+#: templates/premises/edit_contention.html:8
+msgid "Edit Argument"
+msgstr "Argümanı Düzenle"
+
+#: templates/premises/edit_contention.html:16
+msgid "Remove the argument"
+msgstr "Argümanı sil"
+
+#: templates/premises/edit_premise.html:7
+msgid "Edit Premise"
+msgstr "Önermeyi Düzenle"
+
+#: templates/premises/examples/contention.html:2
+msgid ""
+"The main contention. It will be arguable with own premises. The Premises can "
+"prove or rebuttal this contention.<br> Examples: <ul> <li>Real art is for "
+"society, not for profit</li> <li>The meaning of life is 42</li> <li>Ethics "
+"man did what had to be done</li> </ul>"
+msgstr ""
+"Önermeleriyle birlikte tartışılabilecek, desteklenebilecek, ispatlanabilecek "
+"ya da çürütülebilecek bir argüman. <br> Örnekler:<ul><li>Sanat toplum "
+"içindir.</li><li>Bisiklet bir ulaşım aracıdır.</li><li>Bisikletçiler "
+"trafikte bulunduğu tüm şeridi kaplamalıdır.</li><li>Python'ın ilerlemesinde "
+"GIL büyük bir engeldir.</li></ul>"
+
+#: templates/premises/examples/fallacy.html:2
+msgid ""
+"You have to choose a fallacy type. For more information, you can look at the "
+"<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia entry</"
+"a> for fallacies."
+msgstr ""
+"Safsata tipi belirtilmesi gereklidir.Bunlar hakkında daha fazla bilgi için <a href='http://safsatakilavuzu.com'>safsatakilavuzu.com</a> "
+"adresini ziyaret edebilirsiniz."
+
+#: templates/premises/examples/owner.html:2
+msgid ""
+"The owner of argument. It can be instutation, person, book, or a paper. "
+"Examples: <ul> <li>On the Origin of Species</li> <li>Friedrich Nietzsche</"
+"li> <li>Piet Mondiran</li> <li>The Guardian</li> </ul>"
+msgstr ""
+"Argümanın sahibi. Bir kurum, kitap ya da kişi olabilir.<ul><li>T.C. "
+"Anayasası</li><li>Türk Dil Kurumu</li><li>Friedrich Nietzsche</li><li>Piet "
+"Mondiran</li><li>Aziz Nesin</li></ul>"
+
+#: templates/premises/examples/premise.html:2
+msgid ""
+"Example: We define happiness as a state of well-being, starting with being "
+"alive instead of dead."
+msgstr ""
+"Örnek: Bisiklet sürücüsü karayolunda en sağ şeridi kullanır ve diğer "
+"taşıtlar ile aynı sorumlulukla hareket eder."
+
+#: templates/premises/examples/premise_source.html:2
+msgid "Example: Charles Darwin's The Origin of Species"
+msgstr "Örnek: T.C. Karayolları Trafik Kanunu 2918/46. Maddesi"
+
+#: templates/premises/examples/premise_type.html:3
+msgid ""
+"The type of premise. It can be: <ul> <li> but: An objection against the "
+"contention. </li> <li> because: A reason for proof the contention. </li> "
+"<li> however: An additional situation for the premise. </li> </ul>"
+msgstr ""
+"Önermenin tipi belirtilmesi gerekir. Değerler şunlardır:<ul>\t<li>ama: "
+"itiraz ve çürütme için kullanılır</li>\t<li>çünkü: destek/kanıt için "
+"kullanılır</li>\t<li>ancak: bir önermeye ek bilgi ya da durum belirtilmesi "
+"için kullanılır.</li></ul>"
+
+#: templates/premises/examples/sources.html:2
+msgid ""
+"The source of argument. It can be a URL, a book, or a newspaper. It is "
+"important for reliability of main contention."
+msgstr ""
+"Angümanın kaynağı. Bir URL, kitap adı ya da dergi adı olabilir. Bu alan önemlidir, kaynaksız ve tartışmalı bir argüman/önerme yayından "
+"kaldırılır."
+
+#: templates/premises/new_contention.html:9
+msgid "Save and continue to edit"
+msgstr "Kaydet ve düzenlemeye devam et"
+
+#: templates/premises/new_premise.html:9
+msgid "The parent premise:"
+msgstr "Önermenin öncülü:"
+
+#: templates/premises/new_premise.html:27
+msgid "Characters remaining:"
+msgstr "Kalan karakter sayısı:"
+
+#: templates/premises/report.html:7
+msgid "The premise:"
+msgstr "Önerme:"
+
+#: templates/premises/report.html:13
+msgid "Report Fallacy"
+msgstr "Safsata Bildirimi"
+
+#: templates/premises/tree_view.html:17
+msgid "sources:"
+msgstr "kaynaklar"
+
+#: templates/premises/tree_view.html:30
+#, python-format
+msgid "%(count)s fallacy reported."
+msgstr "%(count)s safsata bildirimi"
+
+#: templates/premises/tree_view.html:44
+#, python-format
+msgid "%(count)s supporter."
+msgstr "%(count)s destekleyen var."
+
+#: templates/premises/tree_view.html:51
+msgid "and others."
+msgstr "ve diğerleri"
+
+#: templates/premises/tree_view.html:61
+msgid "edit"
+msgstr "düzenle"
+
+#: templates/premises/tree_view.html:65
+msgid "Are you sure to remove this premise?"
+msgstr "Bu önermeyi silmek istediğinize emin misini?"
+
+#: templates/premises/tree_view.html:76
+msgid "undo"
+msgstr "geri al"
+
+#: templates/premises/tree_view.html:81
+msgid "support"
+msgstr "destekle"
+
+#: templates/premises/tree_view.html:88
+msgid "report fallacy"
+msgstr "safsata bildir"
+
+#: templates/profiles/social_providers.html:3
+msgid "Login with Twitter"
+msgstr "Twitter ile Giriş Yap"
+
+#: templates/search.html:6
+msgid "Keywords:"
+msgstr "Kelime:"
+
+#: templates/stats.html:7 templates/tabs.html:10
+msgid "Statistics"
+msgstr "İstatistikler"
+
+#: templates/stats.html:10
+msgid "most active users"
+msgstr "en katılımcı üyeler"
+
+#: templates/stats.html:11
+msgid "most supported users"
+msgstr "en desteklenen üyeler"
+
+#: templates/stats.html:13
+msgid "most crowded arguments"
+msgstr "en kalabalık önermeler"
+
+#: templates/stats.html:14
+msgid "most supported premises"
+msgstr "en çok desteklenen önermeler"
+
+#: templates/stats.html:15
+msgid "most fallacy premises"
+msgstr "en safsata önermeler"
+
+#: templates/stats.html:20
+msgid "this week"
+msgstr "bu hafta"
+
+#: templates/stats.html:21
+msgid "this month"
+msgstr "bu ay"
+
+#: templates/stats.html:22
+msgid "all time"
+msgstr "tüm zamanlar"
+
+#: templates/stats/contention.html:8
+msgid "PARTICIPANT"
+msgstr "KATILIMCI"
+
+#: templates/stats/contention.html:12
+msgid "BECAUSE"
+msgstr "ÇÜNKÜ"
+
+#: templates/stats/contention.html:16
+msgid "BUT"
+msgstr "AMA"
+
+#: templates/stats/contention.html:20
+msgid "HOWEVER"
+msgstr "ANCAK"
+
+#: templates/stats/premise.html:11
+msgid "supporter."
+msgstr "destekleyen"
+
+#: templates/stats/premise.html:16
+msgid "fallacy report."
+msgstr "safsata bildirimi"
+
+#: templates/tabs.html:4
+msgid "Newsfeed"
+msgstr "Haber Kaynağı"
+
+#: templates/tabs.html:6
+msgid "Featured"
+msgstr "Seçilmişler"
+
+#: templates/tabs.html:8
+msgid "Recently Updated"
+msgstr "Yeniler"
+
+#: templates/tabs.html:12
+msgid "Search"
+msgstr "Arama"
+
+#~ msgid "Follow:"
+#~ msgstr "Takip et:"

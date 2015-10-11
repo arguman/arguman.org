@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
     <section class="container">
         <form id="auth-form" action="{% url "auth_registration" %}" method="post">
-            <h3>Kayıt ol (<a href="{% url "socialauth_begin" "twitter" %}">ya da twitter ile bağlan</a>)</h3>
+            <h3>{% trans "Register" %}(<a href="{% url "socialauth_begin" "twitter" %}">{% trans "or login with twitter" %}</a>)</h3>
             {% csrf_token %}
             {{ form.as_p }}
             <ul class="form-actions">
-            <li>Bu siteyi kullanarak <a href="/tos">kullanım koşulları</a>nı kabul etmiş olursunuz.</li>
-            <li>Avatar yüklemek için <a target="_blank" href="//gravatar.com">gravatar.com</a>
-                adresini kullanabilirsiniz.</li>
+            <li>
+                {% blocktrans trimmed %}
+                You can update your profile picture on <a href="http://gravatar.com">gravatar.com</a>.
+                {% endblocktrans %}
+            </li>
             </ul>
-            <input type="submit" value="Kayıt ol">
+            <input type="submit" value="{% trans "Register" %}">
         </form>
     </section>
 {% endblock %}

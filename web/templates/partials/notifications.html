@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load i18n %}
 {% if user.notifications.exists %}
 <div class="notifications">
 {% if notifications %}
@@ -10,14 +11,14 @@
             </li>
         {% endfor %}
         {% if show_see_more_button %}
-            <li class="see-more"><a href="{% url "notifications" %}" class="notifications-link">Tümünü gör</a></li>
+            <li class="see-more"><a href="{% url "notifications" %}" class="notifications-link">{% trans "See all" %}</a></li>
         {% endif %}
     </ul>
 {% else %}
     <div class="empty">
-        Hiç yeni bildiriminiz yok.
+        {% trans "You have no new notifications." %}
         {% if show_see_more_button %}
-            <a href="{% url "notifications" %}" class="notifications-link">Eskilerini görüntüle</a>
+            <a href="{% url "notifications" %}" class="notifications-link">{% trans "See all" %}</a>
         {% endif %}
     </div>
 {% endif %}

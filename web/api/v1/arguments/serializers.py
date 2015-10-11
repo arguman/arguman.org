@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from rest_framework import serializers
 
 from premises.models import (
-    Contention, Premise, Report, get_fallacy_types, PREMISE_TYPES)
+    Contention, Premise, Report, FALLACY_TYPES, PREMISE_TYPES)
 from premises.signals import reported_as_fallacy
 from api.v1.users.serializers import UserProfileSerializer
 
@@ -71,7 +71,7 @@ class PremiseReportSerializer(serializers.ModelSerializer):
     premise = PremisesSerializer(read_only=True)
     contention = ContentionSerializer(read_only=True)
     fallacy_type = serializers.ChoiceField(
-        required=True, choices=get_fallacy_types())
+        required=True, choices=FALLACY_TYPES)
 
     class Meta:
         model = Report

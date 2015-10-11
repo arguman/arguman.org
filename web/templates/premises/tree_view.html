@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load humanize %}
 <ul class="premise-list">
     {% for premise in premises %}
@@ -13,12 +14,12 @@
 
                 <div class="premise-sources">
                     {% if premise.sources %}
-                    <strong>kaynaklar:</strong>
+                    <strong>{% trans "sources:" %}</strong>
                     <p>{{ premise.sources|urlize }}</p>
                     {% endif %}
                     <div class="premise-user">
-                      <strong>gönderen:</strong>
-                      <p><a href="{{ premise.user.get_absolute_url }}">
+                      <strong>{% trans "sender:" %}</strong>
+                      <p><a href="{% url "auth_profile" premise.user.username %}">
                           {{ premise.user }}</a></p>
                       <p class="time-ago"><time datetime="{{ premise.date_creation }}">({{ premise.date_creation|naturalday }})</time></p>
                     </div>
@@ -26,8 +27,9 @@
 
                     {% if premise.reports.exists %}
                         <div class="reported_as_fallacy">
-                        {{ premise.reports.count }} safsata bildirimi yapıldı.
-
+                        {% blocktrans trimmed with count=premise.reports.count %}
+                             {{ count }} fallacy reported.
+                        {% endblocktrans %}
                         {% if premise.fallacies %}
                             {% for fallacy in premise.fallacies %}
                             <div class="fallacy">{{ fallacy }}</div>
@@ -39,12 +41,14 @@
 
                     {% if premise.supporters.exists %}
                         <div class="supporters">
-                        {{ premise.supporters.count }} destekleyen var:
+                        {% blocktrans trimmed with count=premise.supporters.count %}
+                            {{ count }} supporter.
+                        {% endblocktrans %}
                         <div class="supporter-list">
                         {% for supporter in premise.recent_supporters %}{% if not forloop.first %}, {% endif %}
                         <a href="{{ supporter.get_absolute_url }}">{{ supporter.username }}</a>{% endfor %}
                         {% if premise.supporters.count > 5 %}
-                        ve diğerleri.
+                        {% trans "and others." %}
                         {% endif %}
                         </div>
                         </div>
@@ -54,34 +58,34 @@
                 {% if user.is_authenticated %}
                     <div class="premise-actions">
                 {% if user == premise.user %}
-                        <a href="{% url "edit_premise" contention.slug premise.pk %}">düzenle</a>
+                        <a href="{% url "edit_premise" contention.slug premise.pk %}">{% trans "edit" %}</a>
                         <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="sil"
-                                   onclick="return confirm('Önermeyi silmek istediğinize emin misiniz?');"
+                            <input type="submit" value="{% trans "remove" %}"
+                                   onclick="return confirm('{% trans "Are you sure to remove this premise?" %}');"
                                    class="delete_premise"/>
                         </form>
                 {% endif %}
 
                 {% if user.is_authenticated %}
-                    <a href="{% url "insert_premise" contention.slug premise.pk %}">önerme gönder</a>
+                    <a href="{% url "insert_premise" contention.slug premise.pk %}">{% trans "add premise" %}</a>
                     {% if premise.user != user %}
                         {% if user in premise.supporters.all %}
                         <form class="support" action="{% url "unsupport_premise" contention.slug premise.pk %}" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="geri al"/>
+                            <input type="submit" value="{% trans "undo" %}"/>
                         </form>
                         {% else %}
                         <form class="support" action="{% url "support_premise" contention.slug premise.pk %}" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="destekle"/>
+                            <input type="submit" value="{% trans "support" %}"/>
                         </form>
                         {% endif %}
                     {% endif %}
                 {% endif %}
                 </div>
                     <div class="report">
-                        <a href="{% url 'report_premise' contention.slug premise.pk %}">safsata bildir</a>
+                        <a href="{% url 'report_premise' contention.slug premise.pk %}">{% trans "report fallacy" %}</a>
                     </div>
                 {% endif %}
 

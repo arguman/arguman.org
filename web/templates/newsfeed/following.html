@@ -1,2 +1,3 @@
-<a href="{{ related_object.get_absolute_url }}" class="contention-link">{{ related_object.username }}</a>
-kişisini takip ediyor.
+{% blocktrans trimmed with profile_url=profile_url username=related_object.username %}
+    following <a href="{{ profile_url }}" class="contention-link">{{ username }}</a>
+{% endblocktrans %}

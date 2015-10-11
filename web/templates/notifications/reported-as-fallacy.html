@@ -1,7 +1,10 @@
+{% load i18n %}
 {% with contention=target_object.premise.argument %}
 {% if contention %}
-    <a href="{{ contention.get_absolute_url }}" class="contention-link">{{ contention.title|truncatechars:50 }}</a>
-    argümanındaki önermeniz
-    <strong>{{ target_object.get_fallacy_type_display }}</strong> olarak bildirildi.
+    {% blocktrans trimmed with label=target_object.get_fallacy_type_display %}
+    Your premise reported as <strong>{{ label }}</strong> 
+    {% endblocktrans %}
+    <br>
+    <a href="{{ contention.get_absolute_url }}" class="contention-link">{{ contention.title }}</a>
 {% endif %}
 {% endwith %}

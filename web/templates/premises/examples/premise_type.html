@@ -1,12 +1,16 @@
-Önermenin tipi belirtilmesi gerekir. Değerler şunlardır:
+{% load i18n %}
+
+{% blocktrans trimmed %}
+The type of premise. It can be:
 <ul>
     <li>
-        ama: itiraz ve çürütme için kullanılır
+        but: An objection against the contention.
     </li>
     <li>
-        çünkü: destek/kanıt için kullanılır
+        because: A reason for proof the contention.
     </li>
     <li>
-        ancak: bir önermeye ek bilgi ya da durum belirtilmesi için kullanılır.
+        however: An additional situation for the premise.
     </li>
 </ul>
+{% endblocktrans %}

@@ -1,7 +1,8 @@
+{% load i18n %}
 <form action="{% url "insert_premise" contention.slug premise.pk %}" method="get">
-    <input type="submit" value="önerme ekle"/>
+    <input type="submit" value="{% trans "add premise" %}"/>
 </form>
 <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
     {% csrf_token %}
-    <input type="submit" value="kaldır" class="delete_premise"/>
+    <input type="submit" value="{% trans "remove" %}" class="delete_premise"/>
 </form>

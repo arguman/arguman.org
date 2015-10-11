@@ -59,7 +59,12 @@ class ReportForm(forms.ModelForm):
             contention=self.initial['contention'],
             fallacy_type=self.cleaned_data['fallacy_type']
         ).exists()
+        
         if is_report_exist:
-            raise ValidationError(u'Bu safsata bildirimini zaten yaptınız.')
+            raise ValidationError(
+                u'You have already reported %s fallacy for this premise.' % (
+                    self.cleaned_data['fallacy_type']
+                )
+            )
 
         super(ReportForm, self).clean()

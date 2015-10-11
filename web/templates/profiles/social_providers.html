@@ -1,5 +1,6 @@
+{% load i18n %}
 <ul id="social-providers">
-    <li><a href="{% url "socialauth_begin" "twitter" %}">Twitter ile bağlan</a></li>
+    <li><a href="{% url "socialauth_begin" "twitter" %}">{% trans "Login with Twitter" %}</a></li>
 {#    <li><a href="{% url "socialauth_begin" "twitter" %}">Facebook ile bağlan</a></li>#}
 {#    <li><a href="{% url "socialauth_begin" "twitter" %}">Google ile bağlan</a></li>#}
 {#    <li><a href="{% url "socialauth_begin" "twitter" %}">Github ile bağlan</a></li>#}

@@ -14,6 +14,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
+from django.utils.translation import get_language
 from django.db.models import Count
 
 from blog.models import Post
@@ -86,7 +87,8 @@ class ContentionJsonView(DetailView):
             "user": {
                 "id": premise.user.id,
                 "username": premise.user.username,
-                "absolute_url": premise.user.get_absolute_url()
+                "absolute_url": reverse("auth_profile",
+                                        args=[premise.user.username])
             },
             "sources": premise.sources,
             "premise_type": premise.premise_class(),
@@ -134,20 +136,21 @@ class HomeView(TemplateView, PaginationMixin):
 
     def get_unread_notifications(self):
         return (self.request.user
-                    .notifications
-                    .filter(is_read=False)[:5])
+                .notifications
+                .filter(is_read=False)[:5])
 
     def mark_as_read(self, notifications):
         pks = notifications.values_list("id", flat=True)
         (self.request.user
-             .notifications
-             .filter(id__in=pks)
-             .update(is_read=True))
+         .notifications
+         .filter(id__in=pks)
+         .update(is_read=True))
 
     def get_contentions(self, paginate=True):
         contentions = (Contention
                        .objects
-                       .featured()
+                       .language()
+                       .filter(is_featured=True)
                        .order_by("-date_modification"))
 
         if paginate:
@@ -170,10 +173,10 @@ class NotificationsView(LoginRequiredMixin, HomeView):
 
 class SearchView(HomeView):
     tab_class = 'search'
-    template_name = 'search.html'
+    template_name = 'search/search.html'
     partial_templates = {
-        'contentions': 'search/profile.html',
-        'users': 'search/contention.html',
+        'contentions': 'search/contention.html',
+        'users': 'search/profile.html',
         'premises' : 'search/premise.html'
     }
 
@@ -184,24 +187,26 @@ class SearchView(HomeView):
 
     def dispatch(self, request, *args, **kwargs):
         self.type = request.GET.get('type', 'contentions')
+        if not self.method_mapping.get(self.type):
+            raise Http404()
         return super(SearchView, self).dispatch(request, *args, **kwargs)
 
     def get_keywords(self):
         return self.request.GET.get('keywords') or ""
 
     def has_next_page(self):
-        total = getattr(self, self.method_mapping[self.type]).count()
+        method = getattr(self, self.method_mapping[self.type])
+        total = method().count()
         return total > (self.get_offset() + self.paginate_by)
 
     def get_search_bundle(self):
-        if not self.method_mapping.get(self.type):
-            raise Http404()
+        method = getattr(self, self.method_mapping[self.type])
         return [{'template': self.partial_templates[self.type],
-                'object': item} for item in getattr(self, self.method_mapping[self.type])]
+                'object': item} for item in method()]
 
     def get_context_data(self, **kwargs):
         return super(SearchView, self).get_context_data(
-            objects=self.get_search_bundle(),
+            results=self.get_search_bundle(),
             **kwargs)
 
 
@@ -243,7 +248,8 @@ class SearchView(HomeView):
         else:
             result = (Contention
                       .objects
-                      .filter(title__icontains=keywords))
+                      .filter(title__icontains=keywords,
+                              language=get_language()))
 
             if paginate:
                 result = result[self.get_offset():self.get_limit()]
@@ -255,8 +261,12 @@ class NewsView(HomeView):
     tab_class = "news"
 
     def get_contentions(self, paginate=True):
-        contentions = Contention.objects.filter(
-            is_published=True)
+        contentions = (
+            Contention
+                .objects
+                .language()
+                .filter(is_published=True)
+        )
 
         if paginate:
             contentions = contentions[self.get_offset():self.get_limit()]
@@ -322,10 +332,12 @@ class StatsView(HomeView):
         if stat_type not in self.method_mapping:
             raise Http404()
         method = getattr(self, self.method_mapping[stat_type])
-        return [{
-            "template": self.partial_templates[type(item)],
-            "object": item
-        } for item in method()]
+        return [
+            {
+                "template": self.partial_templates[type(item)],
+                "object": item
+            } for item in method()
+        ]
 
     def get_active_users(self):
         return Profile.objects.annotate(
@@ -353,8 +365,9 @@ class StatsView(HomeView):
 
     def get_supported_premises(self):
         return Premise.objects.annotate(
-            supporter_count=Sum("supporters"),
+            supporter_count=Sum("supporters")
         ).filter(
+            argument__language=get_language(),
             supporter_count__gt=0,
             **self.build_time_filters(date_field="date_creation")
         ).order_by("-supporter_count")[:50]
@@ -371,6 +384,7 @@ class StatsView(HomeView):
         return Contention.objects.annotate(
             premise_count=Sum("premises"),
         ).filter(
+            language=get_language(),
             premise_count__gt=0,
             **self.build_time_filters(date_field="date_creation")
         ).order_by("-premise_count")[:10]
@@ -410,8 +424,12 @@ class ControversialArgumentsView(HomeView):
 class AboutView(TemplateView):
     template_name = "about.html"
 
+    def get_text_file(self):
+        language = get_language()
+        return render_to_string("about-%s.md" % language)
+
     def get_context_data(self, **kwargs):
-        content = markdown(render_to_string("about.md"))
+        content = markdown(self.get_text_file())
         return super(AboutView, self).get_context_data(
             content=content, **kwargs)
 
@@ -432,6 +450,8 @@ class ArgumentCreationView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.ip_address = get_ip_address(self.request)
+        form.instance.language = get_language()
+        form.instance.is_published = True
         response = super(ArgumentCreationView, self).form_valid(form)
         form.instance.update_sibling_counts()
         return response
@@ -455,24 +475,18 @@ class ArgumentUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class ArgumentPublishView(LoginRequiredMixin, DetailView):
-
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
 
     def post(self, request, slug):
         contention = self.get_object()
-        if contention.premises.exists():
-            contention.is_published = True
-            contention.save()
-            messages.info(request, u"Argüman yayına alındı.")
-        else:
-            messages.info(request, u"Argümanı yayına almadan önce en az 1 "
-                                   u"önerme ekleyin.")
+        contention.is_published = True
+        contention.save()
+        messages.info(request, u"Argument is published now.")
         return redirect(contention)
 
 
 class ArgumentUnpublishView(LoginRequiredMixin, DetailView):
-
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
 
@@ -485,7 +499,6 @@ class ArgumentUnpublishView(LoginRequiredMixin, DetailView):
 
 
 class ArgumentDeleteView(LoginRequiredMixin, DetailView):
-
     def get_queryset(self):
         return Contention.objects.filter(user=self.request.user)
 
@@ -495,10 +508,10 @@ class ArgumentDeleteView(LoginRequiredMixin, DetailView):
             # remove notification
             Entry.objects.delete(contention.get_newsfeed_type(), contention.id)
             contention.delete()
-            messages.info(request, u"Argümanınız silindi.")
+            messages.info(request, u"Argument has been removed.")
             return redirect("home")
         else:
-            messages.info(request, u"Argümanınız silinecek durumda değil.")
+            messages.info(request, u"Argument cannot be deleted.")
             return redirect(contention)
 
     delete = post

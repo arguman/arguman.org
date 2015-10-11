@@ -1,12 +1,12 @@
 from django.template.defaulttags import register
-from premises.models import get_fallacy_types
+from premises.models import FALLACY_TYPES
 from django.conf import settings
 from django.utils import timezone
 
 
 @register.filter
 def humanize_fallacy_type(value):
-    return dict(get_fallacy_types()).get(value)
+    return dict(FALLACY_TYPES).get(value)
 
 
 @register.filter
