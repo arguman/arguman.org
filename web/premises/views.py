@@ -212,8 +212,9 @@ class SearchView(HomeView):
 
     def get_next_page_url(self):
         offset = self.get_offset() + self.paginate_by
-        return '?offset=%(offset)s&keywords=%(keywords)s' % {
+        return '?offset=%(offset)s&keywords=%(keywords)s&type=%(type)s' % {
             "offset": offset,
+            "type": self.type,
             "keywords": self.get_keywords()
         }
 
