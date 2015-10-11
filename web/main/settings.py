@@ -98,7 +98,8 @@ REDIRECTED_PATHS = (
     '/news',
     '/stats',
     '/about',
-    '/blog'
+    '/blog',
+    '/new-argument'
 )
 
 DEFAULT_LANGUAGE = 'en'

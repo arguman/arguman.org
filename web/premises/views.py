@@ -400,6 +400,8 @@ class ArgumentCreationView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.ip_address = get_ip_address(self.request)
+        form.instance.language = get_language()
+        form.instance.is_published = True
         response = super(ArgumentCreationView, self).form_valid(form)
         form.instance.update_sibling_counts()
         return response
@@ -428,13 +430,9 @@ class ArgumentPublishView(LoginRequiredMixin, DetailView):
 
     def post(self, request, slug):
         contention = self.get_object()
-        if contention.premises.exists():
-            contention.is_published = True
-            contention.save()
-            messages.info(request, u"Argument is published now.")
-        else:
-            messages.info(request, u"You have to add at least one " +
-                          u"premise to publish argument.")
+        contention.is_published = True
+        contention.save()
+        messages.info(request, u"Argument is published now.")
         return redirect(contention)
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-11 15:55+0000\n"
+"POT-Creation-Date: 2015-10-11 17:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: trMIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "URL"
 msgid "Content"
 msgstr "İçerik"
 
-#: blog/models.py:26 premises/models.py:209
+#: blog/models.py:26 premises/models.py:211
 msgid "Published"
 msgstr "Yayınlı"
 
@@ -140,30 +140,30 @@ msgstr ""
 msgid "Original Discourse"
 msgstr "Orijinal Söylem"
 
-#: premises/models.py:85 premises/models.py:207
+#: premises/models.py:85 premises/models.py:209
 msgid "Sources"
 msgstr "Kaynaklar"
 
-#: premises/models.py:194
+#: premises/models.py:196
 msgid "Parent"
 msgstr "Önermenin öncülü"
 
-#: premises/models.py:195
+#: premises/models.py:197
 msgid ""
 "The parent of premise. If you don't choose anything, it will be a main "
 "premise."
 msgstr ""
 "Önermenin öncülü. Eğer boş bırakılırsa ana argümanın bir önermesi olur."
 
-#: premises/models.py:199
+#: premises/models.py:201
 msgid "Premise Type"
 msgstr "Önerme Tipi"
 
-#: premises/models.py:203
+#: premises/models.py:205
 msgid "Premise Content"
 msgstr "İçerik"
 
-#: premises/models.py:312
+#: premises/models.py:314
 msgid "Fallacy Type"
 msgstr "Safsata Tipi"
 
@@ -294,7 +294,7 @@ msgstr "Duyuru:"
 
 #: templates/base.html:32
 msgid "about"
-msgstr "hakkında"
+msgstr "nedir?"
 
 #: templates/base.html:33
 msgid "blog"
@@ -316,6 +316,10 @@ msgstr "yeni argüman"
 msgid "logout"
 msgstr "çıkış"
 
+#: templates/base.html:44
+msgid "search keywords"
+msgstr "bu bir arama kutusu"
+
 #: templates/base.html:48
 msgid "Follow:"
 msgstr "Takip et:"
@@ -335,6 +339,13 @@ msgstr "Kullanım Koşulları"
 #: templates/base.html:67
 msgid "Feedback"
 msgstr "Öneri ve şikayet"
+
+#: templates/home.html:8
+#, python-format
+msgid ""
+"arguman.org is an <a href=\"%(about_url)s\">argument analysis</a> platform."
+msgstr ""
+"arguman.org bir <a href=\"%(about_url)s\">argüman analizi</a> platformudur."
 
 #: templates/index.html:17 templates/premises/contention.html:5
 msgid "because"
@@ -432,7 +443,7 @@ msgid "You have no new notifications."
 msgstr "Hiç yeni bildiriminiz yok."
 
 #: templates/premises/actions.html:3
-#: templates/premises/contention_detail.html:103
+#: templates/premises/contention_detail.html:104
 #: templates/premises/tree_view.html:71
 msgid "add premise"
 msgstr "önerme ekle"
@@ -442,52 +453,52 @@ msgid "remove"
 msgstr "kaldır"
 
 #: templates/premises/contention.html:11
-#: templates/premises/contention_detail.html:20
+#: templates/premises/contention_detail.html:21
 #: templates/premises/tree_view.html:21
 msgid "sender:"
-msgstr ""
+msgstr "gönderen:"
 
-#: templates/premises/contention_detail.html:23
+#: templates/premises/contention_detail.html:24
 msgid "original discourse:"
 msgstr "orijinal söylem:"
 
-#: templates/premises/contention_detail.html:27
+#: templates/premises/contention_detail.html:28
 msgid "Unspecified"
 msgstr "Belirtilmemiş"
 
-#: templates/premises/contention_detail.html:37
+#: templates/premises/contention_detail.html:38
 msgid "Edit"
 msgstr "Düzenle"
 
-#: templates/premises/contention_detail.html:42
+#: templates/premises/contention_detail.html:43
 msgid "Unpublish"
 msgstr "Yayından Kaldır"
 
-#: templates/premises/contention_detail.html:47
+#: templates/premises/contention_detail.html:48
 msgid "Publish"
 msgstr "Yayınla"
 
-#: templates/premises/contention_detail.html:57
+#: templates/premises/contention_detail.html:58
 msgid "View"
 msgstr "Görünüm"
 
-#: templates/premises/contention_detail.html:58
+#: templates/premises/contention_detail.html:59
 msgid "Tree"
 msgstr "Ağaç"
 
-#: templates/premises/contention_detail.html:59
+#: templates/premises/contention_detail.html:60
 msgid "List"
 msgstr "Liste"
 
-#: templates/premises/contention_detail.html:65
+#: templates/premises/contention_detail.html:66
 msgid "Share"
 msgstr "Paylaş"
 
-#: templates/premises/contention_detail.html:85
+#: templates/premises/contention_detail.html:86
 msgid "You can use arrow keys to navigate in the map."
 msgstr "harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz."
 
-#: templates/premises/contention_detail.html:135
+#: templates/premises/contention_detail.html:136
 #, python-format
 msgid ""
 "<a href=\"%(login_url)s\">Login</a> or <a href=\"%(register_url)s"
