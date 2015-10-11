@@ -46,5 +46,5 @@ arguman.org is an open source project which developed by community, If you want 
 
 ## Additionally Thanks To
 
-Burak Arıkan
-Kadir Akkara Yardımcı
+- Burak Arıkan
+- Kadir Akkara Yardımcı
