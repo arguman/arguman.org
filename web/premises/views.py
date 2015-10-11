@@ -223,6 +223,7 @@ class SearchView(HomeView):
             result = Premise.objects.none()
         else:
             result = (Premise.objects.filter(
+                argument__language=get_language(),
                 text__contains=keywords))
             if paginate:
                 result = result[self.get_offset():self.get_limit()]
