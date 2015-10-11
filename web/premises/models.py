@@ -50,7 +50,7 @@ FALLACY_TYPES = (
     ("SlothfulInduction", _("Slothful Induction")),
     ("AppealToBelief", _("Appeal To Belief")),
     ("PragmaticFallacy", _("Pragmatic Fallacy")),
-    ("FallacyOfIsToOught", _("FallacyOf Is To Ought")),
+    ("FallacyOfIsToOught", _("Fallacy Of Is To Ought")),
     ("ArgumentFromForce", _("Argument From Force")),
     ("ArgumentToPity", _("Argument To Pity")),
     ("PrejudicialLanguage", _("Prejudicial Language")),
@@ -70,19 +70,19 @@ class Contention(DeletePreventionMixin, models.Model):
     channel = models.ForeignKey(Channel, related_name='contentions',
                                 null=True, blank=True)
     title = models.CharField(
-        max_length=255, verbose_name="Argument",
+        max_length=255, verbose_name=_("Argument"),
         help_text=render_to_string("premises/examples/contention.html"))
     slug = models.SlugField(max_length=255, blank=True)
     description = models.TextField(
-        null=True, blank=True, verbose_name="Description", )
+        null=True, blank=True, verbose_name=_("Description"), )
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     owner = models.CharField(
         max_length=255, null=True, blank=True,
-        verbose_name="Original Discourse",
+        verbose_name=_("Original Discourse"),
         help_text=render_to_string("premises/examples/owner.html"))
     sources = models.TextField(
         null=True, blank=True,
-        verbose_name="Sources",
+        verbose_name=_("Sources"),
         help_text=render_to_string("premises/examples/sources.html"))
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
@@ -191,22 +191,22 @@ class Premise(DeletePreventionMixin, models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     parent = models.ForeignKey("self", related_name="children",
                                null=True, blank=True,
-                               verbose_name="Parent",
-                               help_text="The parent of premise. If you don't choose " +
-                                         "anything, it will be a main premise.")
+                               verbose_name=_("Parent"),
+                               help_text=_("The parent of premise. If you don't choose " +
+                                           "anything, it will be a main premise."))
     premise_type = models.IntegerField(
         default=SUPPORT,
-        choices=PREMISE_TYPES, verbose_name="Premise Type",
+        choices=PREMISE_TYPES, verbose_name=_("Premise Type"),
         help_text=render_to_string("premises/examples/premise_type.html"))
     text = models.TextField(
         null=True, blank=True,
-        verbose_name="Premise Content",
+        verbose_name=_("Premise Content"),
         help_text=render_to_string("premises/examples/premise.html"),
         validators=[validators.MaxLengthValidator(MAX_PREMISE_CONTENT_LENGTH)])
     sources = models.TextField(
-        null=True, blank=True, verbose_name="Sources",
+        null=True, blank=True, verbose_name=_("Sources"),
         help_text=render_to_string("premises/examples/premise_source.html"))
-    is_approved = models.BooleanField(default=True, verbose_name="Yayınla")
+    is_approved = models.BooleanField(default=True, verbose_name=_("Published"))
     collapsed = models.BooleanField(default=False)
     supporters = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name="supporting")
@@ -309,7 +309,7 @@ class Report(models.Model):
                                    blank=True,
                                    null=True)
     fallacy_type = models.CharField(
-        "Fallacy Type", choices=FALLACY_TYPES, null=True, blank=False,
+        _("Fallacy Type"), choices=FALLACY_TYPES, null=True, blank=False,
         max_length=255, default="Wrong Direction",
         help_text=render_to_string("premises/examples/fallacy.html"))
 

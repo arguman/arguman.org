@@ -7,7 +7,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <p class="helptext">
-                {% blocktrans %}
+                {% blocktrans trimmed %}
                 You can update your profile picture on <a href="http://gravatar.com">gravatar.com</a>.
                 {% endblocktrans %}
             </p>

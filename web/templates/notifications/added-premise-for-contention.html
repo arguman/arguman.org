@@ -4,7 +4,7 @@
 <a class="user" href="{% url "auth_profile" target_object.user.username %}">
     {{ target_object.user.username }}</a>
 
-{% blocktrans with class=target_object.premise_class label=target_object.get_premise_type_display %}
+{% blocktrans trimmed with class=target_object.premise_class label=target_object.get_premise_type_display %}
     added a <span class="premise-type {{ class }}">{{ label }}</span> premise
 {% endblocktrans %}
 <br>

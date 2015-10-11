@@ -27,7 +27,7 @@
 
                     {% if premise.reports.exists %}
                         <div class="reported_as_fallacy">
-                        {% blocktrans with count=premise.reports.count %}
+                        {% blocktrans trimmed with count=premise.reports.count %}
                              {{ count }} fallacy reported.
                         {% endblocktrans %}
                         {% if premise.fallacies %}
@@ -41,7 +41,7 @@
 
                     {% if premise.supporters.exists %}
                         <div class="supporters">
-                        {% blocktrans with count=premise.supporters.count %}
+                        {% blocktrans trimmed with count=premise.supporters.count %}
                             {{ count }} supporter.
                         {% endblocktrans %}
                         <div class="supporter-list">

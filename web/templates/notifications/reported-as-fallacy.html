@@ -1,7 +1,7 @@
 {% load i18n %}
 {% with contention=target_object.premise.argument %}
 {% if contention %}
-    {% blocktrans with label=target_object.get_fallacy_type_display %}
+    {% blocktrans trimmed with label=target_object.get_fallacy_type_display %}
     Your premise reported as <strong>{{ label }}</strong> 
     {% endblocktrans %}
     <br>

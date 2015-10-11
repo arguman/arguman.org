@@ -58,6 +58,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.middleware.locale.LocaleMiddleware'
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
 )
 
 ROOT_URLCONF = 'main.urls'
@@ -85,7 +90,7 @@ CACHES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'EN'
+LANGUAGE_CODE = 'tr'
 
 TIME_ZONE = 'UTC'
 

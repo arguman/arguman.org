@@ -14,9 +14,9 @@
             {% for contention in contentions %}
                 <li>
                     <div class="stats">
-                        <span class="because">{{ contention.because.count }} {% trans "çünkü" %}</span>
-                        <span class="but">{{ contention.but.count }} {% trans "ama" %}</span>
-                        <span class="however">{{ contention.however.count }} {% trans "ancak" %}</span>
+                        <span class="because">{{ contention.because.count }} {% trans "because" %}</span>
+                        <span class="but">{{ contention.but.count }} {% trans "but" %}</span>
+                        <span class="however">{{ contention.however.count }} {% trans "however" %}</span>
                     </div>
                     <div class="info">
                         <a class="main-contention" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a>

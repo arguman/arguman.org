@@ -132,7 +132,7 @@
         <button class="login-popup-close">×</button>
         {% url "auth_registration" as register_url %}
         {% url "auth_login" as login_url %}
-        {% blocktrans with login_url=login_url register_url=register_url %}
+        {% blocktrans trimmed with login_url=login_url register_url=register_url %}
             <a href="{{ login_url }}">Login</a> or
             <a href="{{ register_url }}">register</a>
             to add a premise for this argument.
