@@ -1,3 +1,4 @@
+{% load i18n %}
 {% blocktrans trimmed with profile_url=profile_url username=related_object.username %}
     following <a href="{{ profile_url }}" class="contention-link">{{ username }}</a>
 {% endblocktrans %}
