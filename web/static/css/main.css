@@ -87,9 +87,9 @@ body {
     font-weight: normal;
     text-decoration: none;
     color: #3f3f3f;
-    line-height: 43px;
+    line-height: 42px;
     display: inline-block;
-    font-size: 45px;
+    font-size: 40px;
     padding-bottom: 4px;
     border-bottom: 3px solid #e3e3e5;
 }
@@ -363,7 +363,7 @@ li.base-premises {
     /*margin-left: 400px;*/
     margin-top: 60px;
     width: 800px;
-    font-size: 60px;
+    font-size: 50px;
     text-align: center;
     margin-bottom: -70px;
     /*width: 100%;*/
@@ -391,7 +391,7 @@ li.base-premises {
 #app .premise .premise-content {
     margin: auto;
     padding: 10px 15px;
-    font-size: 17px;
+    font-size: 15px;
     border-radius: 5px;
     z-index: 1;
     color: #353535;
@@ -450,6 +450,7 @@ li.base-premises {
         border-radius: 0 0 5px 5px;
         border-top: 1px solid #bcbcbc;
         text-align: left;
+        font-size: 14px;
     }
 
     .premise-sources strong {
@@ -468,9 +469,6 @@ li.base-premises {
         color: #a9a9a9;
     }
 
-    .premise-user {
-        font-size: 0.9em;
-    }
     .premise-user p {
       display: inline-block;
     }
@@ -689,7 +687,7 @@ ul [for='id_premise_type_2'] { color: #ffcc64; }
 }
 
 footer {
-    font-size: 22px;
+    font-size: 18px;
     margin: 50px auto auto;
     background: #ebebeb;
     color: #3d3d3d;
@@ -814,7 +812,7 @@ form .parent-premise strong {
 }
 
 .reported_as_fallacy .fallacy {
-    font-size: 17px;
+    font-size: 15px;
     color: #676568;
 }
 
@@ -1681,9 +1679,9 @@ div.load-more {
     display: inline-block;
     background: #FFF8B2;
     width: 280px;
-    height: 85px;
+    height: 83px;
     font-size: 55px;
-    padding-top: 8px;
+    padding-top: 10px;
     text-align: center;
     text-decoration: none;
     color: #343434;

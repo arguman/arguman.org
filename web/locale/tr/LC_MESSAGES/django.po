@@ -604,7 +604,7 @@ msgstr "Safsata Bildirimi"
 
 #: templates/premises/tree_view.html:17
 msgid "sources:"
-msgstr "kaynallar"
+msgstr "kaynaklar"
 
 #: templates/premises/tree_view.html:30
 #, python-format
