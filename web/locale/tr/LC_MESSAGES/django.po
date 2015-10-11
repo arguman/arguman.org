@@ -362,7 +362,7 @@ msgstr "Neler oluyor burada:"
 
 #: templates/newsfeed.html:16
 msgid "Show only followed users activity."
-msgstr "Sadece takip ettiğim kişilerin haberlerini görüntüle"
+msgstr "Sadece takip takip ettiklerim"
 
 #: templates/newsfeed.html:18
 msgid "Show all users activity."
