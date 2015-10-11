@@ -1738,13 +1738,20 @@ div.load-more {
 
 #site-navigation .social-links {
     position: absolute;
-    margin-left: 535px;
-    margin-top: -60px;
+    margin-left: 480px;
+    margin-top: -85px;
     color: #C4C4C4;
+    text-align: right;
 }
 
 #site-navigation .social-links a {
-    color: #595959;
+    color: #999999;
+    font-size: 17px;
+    margin-left: 8px
+}
+
+#site-navigation .social-links a.active {
+    border-bottom: 2px solid #7F7F7F;
 }
 
 .inline-search form {

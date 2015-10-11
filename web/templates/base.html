@@ -46,7 +46,13 @@
                 </form>
             </li>
             <li class="social-links">
-                {% trans "Follow:" %} <a href="https://twitter.com/argumananalizi" target="_blank">@argumananalizi</a>
+                {% get_current_language as language %}
+                {% trans "Languages:" %} 
+                <a {% if language == "en" %}class="active" {% endif %}
+                    href="http://en.arguman.org">{% trans "English" %}</a>
+                <a {% if language == "tr" %}class="active" {% endif %}
+                    href="http://tr.arguman.org">{% trans "Turkish" %}</a> <br>
+                {% trans "Follow on twitter:" %} <a href="https://twitter.com/argumananalizi" target="_blank">@argumananalizi</a>
             </li>
         </ul>
     </nav>

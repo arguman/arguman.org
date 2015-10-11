@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-11 17:36+0000\n"
+"POT-Creation-Date: 2015-10-11 18:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: trMIME-Version: 1.0\n"
@@ -258,7 +258,7 @@ msgstr "DESTEK"
 msgid "The feed seems to empty."
 msgstr "Haber kaynağı boş gözüküyor."
 
-#: templates/auth/profile.html:63 templates/index.html:37
+#: templates/auth/profile.html:63 templates/index.html:36
 #: templates/newsfeed.html:39
 msgid "Load more"
 msgstr "Daha fazla yükle"
@@ -292,39 +292,51 @@ msgstr "Argüman Analizi Platformu"
 msgid "Announcement:"
 msgstr "Duyuru:"
 
-#: templates/base.html:32
+#: templates/base.html:33
 msgid "about"
 msgstr "nedir?"
 
-#: templates/base.html:33
+#: templates/base.html:34
 msgid "blog"
 msgstr "blog"
 
-#: templates/base.html:35
+#: templates/base.html:36
 msgid "register"
 msgstr "kayıt ol"
 
-#: templates/base.html:36
+#: templates/base.html:37
 msgid "login"
 msgstr "giriş"
 
-#: templates/base.html:38
+#: templates/base.html:39
 msgid "new argument"
 msgstr "yeni argüman"
 
-#: templates/base.html:40
+#: templates/base.html:41
 msgid "logout"
 msgstr "çıkış"
 
-#: templates/base.html:44
+#: templates/base.html:45
 msgid "search keywords"
 msgstr "bu bir arama kutusu"
 
-#: templates/base.html:48
-msgid "Follow:"
-msgstr "Takip et:"
+#: templates/base.html:50
+msgid "Languages:"
+msgstr ""
 
-#: templates/base.html:60
+#: templates/base.html:52
+msgid "English"
+msgstr "İngilizce"
+
+#: templates/base.html:54
+msgid "Turkish"
+msgstr "Türkçe"
+
+#: templates/base.html:55
+msgid "Follow on twitter:"
+msgstr "Twitter'da takip et:"
+
+#: templates/base.html:67
 msgid ""
 "arguman.org is an open-source project. you can follow the <a href=\"http://"
 "github.com/arguman\">organization</a> on github."
@@ -332,11 +344,11 @@ msgstr ""
 "arguman.org açık kaynak bir projedir. <a href=\"http://github.com/arguman"
 "\">github</a> üzerinde takip edebilirsiniz"
 
-#: templates/base.html:66
+#: templates/base.html:73
 msgid "Terms of Service"
 msgstr "Kullanım Koşulları"
 
-#: templates/base.html:67
+#: templates/base.html:74
 msgid "Feedback"
 msgstr "Öneri ve şikayet"
 
@@ -359,11 +371,11 @@ msgstr "ama"
 msgid "however"
 msgstr "ancak"
 
-#: templates/index.html:24
+#: templates/index.html:23
 msgid "last sender:"
 msgstr "son gönderen:"
 
-#: templates/index.html:32
+#: templates/index.html:31
 msgid "No results found."
 msgstr "Sonuç bulunamadı."
 
@@ -498,7 +510,7 @@ msgstr "Paylaş"
 msgid "You can use arrow keys to navigate in the map."
 msgstr "harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz."
 
-#: templates/premises/contention_detail.html:136
+#: templates/premises/contention_detail.html:137
 #, python-format
 msgid ""
 "<a href=\"%(login_url)s\">Login</a> or <a href=\"%(register_url)s"
@@ -723,3 +735,6 @@ msgstr "Yeniler"
 #: templates/tabs.html:12
 msgid "Search"
 msgstr "Arama"
+
+#~ msgid "Follow:"
+#~ msgstr "Takip et:"
