@@ -171,15 +171,39 @@ class NotificationsView(LoginRequiredMixin, HomeView):
 class SearchView(HomeView):
     tab_class = 'search'
     template_name = 'search.html'
+    partial_templates = {
+        'contentions': 'search/profile.html',
+        'users': 'search/contention.html',
+        'premises' : 'search/premise.html'
+    }
 
-    def get_context_data(self, **kwargs):
-        return super(SearchView, self).get_context_data(
-            keywords=self.get_keywords(),
-            **kwargs
-        )
+    method_mapping = {'contentions': "get_contentions",
+                      'users': "get_users",
+                      'premises': "get_premises"}
+
+
+    def dispatch(self, request, *args, **kwargs):
+        self.type = request.GET.get('type', 'contentions')
+        return super(SearchView, self).dispatch(request, *args, **kwargs)
 
     def get_keywords(self):
         return self.request.GET.get('keywords') or ""
+
+    def has_next_page(self):
+        total = getattr(self, self.method_mapping[self.type]).count()
+        return total > (self.get_offset() + self.paginate_by)
+
+    def get_search_bundle(self):
+        if not self.method_mapping.get(self.type):
+            raise Http404()
+        return [{'template': self.partial_templates[self.type],
+                'object': item} for item in getattr(self, self.method_mapping[self.type])]
+
+    def get_context_data(self, **kwargs):
+        return super(SearchView, self).get_context_data(
+            objects=self.get_search_bundle(),
+            **kwargs)
+
 
     def get_next_page_url(self):
         offset = self.get_offset() + self.paginate_by
@@ -187,6 +211,30 @@ class SearchView(HomeView):
             "offset": offset,
             "keywords": self.get_keywords()
         }
+
+    def get_premises(self, paginate=True):
+        keywords = self.request.GET.get('keywords')
+        if not keywords or len(keywords) < 3:
+            result = Premise.objects.none()
+        else:
+            result = (Premise.objects.filter(
+                text__contains=keywords))
+            if paginate:
+                result = result[self.get_offset():self.get_limit()]
+        return result
+
+
+    def get_users(self, paginate=True):
+        keywords = self.request.GET.get('keywords')
+        if not keywords or len(keywords) < 2:
+            result = Profile.objects.none()
+        else:
+            result = (Profile.objects.filter(
+                username__icontains=keywords))
+            if paginate:
+                result = result[self.get_offset():self.get_limit()]
+        return result
+
 
     def get_contentions(self, paginate=True):
         keywords = self.request.GET.get('keywords')

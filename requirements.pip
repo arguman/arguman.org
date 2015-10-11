@@ -2,7 +2,7 @@ Django==1.7
 Unidecode==0.04.16
 django-social-auth==0.7.28
 httplib2==0.9
-oauth2==1.5
+oauth2
 python-openid==2.2.5
 wsgiref==0.1.2
 django-gravatar2==1.1.4

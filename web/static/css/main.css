@@ -1557,6 +1557,16 @@ div.load-more {
     padding: 0;
     overflow: hidden;
 }
+.search-filter {
+    margin: 0 0 70px;
+    padding: 0;
+    overflow: hidden;
+}
+.search-filter li {
+    margin: 0 0 20px;
+    padding: 0;
+    overflow: hidden;
+}
 
 .time-filter li {
     float: left;
@@ -1565,6 +1575,14 @@ div.load-more {
 }
 
 .time-filter li a {
+    text-decoration: none;
+    color: gray;
+    border-bottom: 4px solid #e1e1e1;
+    display: inline-block;
+    padding: 0 3px;
+    font-size: 22px;
+}
+.search-filter li a {
     text-decoration: none;
     color: gray;
     border-bottom: 4px solid #e1e1e1;

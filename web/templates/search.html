@@ -1,10 +1,30 @@
 {% extends "index.html" %}
+{% load i18n %}
 
 {% block tab_content %}
-<form action="{% url "contentions_search" %}" class="search-form">
-    <label for="id_q">Kelime: </label>
-    <input type="text" class="searchfield" value="{{ keywords }}" name="keywords" id="id_q"/>
-</form>
-{{ block.super }}
+
+<div class="stats-content">
+    <h2>Search</h2>
+    <div class="stats-list">
+
+        <ul class="time-filter">
+            <li{% if request.GET.type == 'contentions' or not request.GET.type %} class="active"{% endif %}><a href="?keywords={{ request.keywords }}&type=contentions">{% trans "contentions" %}</a></li>
+            <li{% if request.GET.type == 'users' %} class="active"{% endif %}><a href="?keywords={{ request.keywords }}&type=users">{% trans "users" %}</a></li>
+        </ul>
+    {% if request.GET.type == 'users' %}
+        {% for item in users %}
+            <div class="stat-item">
+                {% with object=item.object %}
+                    {% include item.template %}
+                {% endwith %}
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+</div>
+
 {% endblock %}
 
+{% block extra-scripts %}
+
+{% endblock %}
