@@ -9,10 +9,14 @@ class ReportAdmin(admin.ModelAdmin):
 
 
 class ContentionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'channel')
+    list_display = ('title', 'channel', 'is_featured', 
+    				'is_published', 'premise_count')
     list_editable = ('channel', )
+    search_fields = ('title', )
     list_per_page = 10
 
+    def premise_count(self, obj):
+    	return obj.premises.count()
 
 class PremiseAdmin(admin.ModelAdmin):
     list_display = ('text', 'argument', 'is_deleted')
