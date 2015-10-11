@@ -1489,6 +1489,19 @@ div.load-more {
 .stat-item {
     margin-bottom: 20px;
 }
+.search-content {
+    overflow: hidden;
+}
+
+.search-list {
+    width: 710px;
+    float: left;
+    margin-left: 20px;
+}
+
+.search-item {
+    margin-bottom: 20px;
+}
 
 .user-stats h2 {
     margin: 0;
@@ -1507,10 +1520,10 @@ div.load-more {
 }
 
 .stats-bar span {
-    width: 90px;
+    width: 92px;
     float: left;
     display: block;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
     margin: 2px 3px;
     padding: 2px 3px;
@@ -1555,6 +1568,16 @@ div.load-more {
     padding: 0;
     overflow: hidden;
 }
+.search-filter {
+    margin: 0 0 70px;
+    padding: 0;
+    overflow: hidden;
+}
+.search-filter li {
+    margin: 0 0 20px;
+    padding: 0;
+    overflow: hidden;
+}
 
 .time-filter li {
     float: left;
@@ -1563,6 +1586,14 @@ div.load-more {
 }
 
 .time-filter li a {
+    text-decoration: none;
+    color: gray;
+    border-bottom: 4px solid #e1e1e1;
+    display: inline-block;
+    padding: 0 3px;
+    font-size: 22px;
+}
+.search-filter li a {
     text-decoration: none;
     color: gray;
     border-bottom: 4px solid #e1e1e1;
