@@ -28,9 +28,9 @@ SUPPORT = 1
 SITUATION = 2
 
 PREMISE_TYPES = (
-    (OBJECTION, "but"),
-    (SUPPORT, "because"),
-    (SITUATION, "however"),
+    (OBJECTION, _("but")),
+    (SUPPORT, _("because")),
+    (SITUATION, _("however")),
 )
 
 FALLACY_TYPES = (
