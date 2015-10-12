@@ -59,7 +59,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'i18n.middleware.SubdomainLanguageMiddleware'
+    'i18n.middleware.SubdomainLanguageMiddleware',
+    'i18n.middleware.MultipleProxyMiddleware'
 )
 
 LOCALE_PATHS = (
