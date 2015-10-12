@@ -138,9 +138,6 @@
             <a href="{{ register_url }}">register</a>
             to add a premise for this argument.
         {% endblocktrans %}
-        Önerme eklemek için
-        <a href="{% url "auth_registration" %}?next={{ contention.get_absolute_url }}">kaydolun</a> ya da
-        <a href="{% url "auth_login" %}?next={{ contention.get_absolute_url }}">giriş</a> yapın.
     </div>
     {% endif %}
 {% endblock %}
