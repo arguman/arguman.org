@@ -6,6 +6,7 @@ Critical thinking is the intellectually disciplined process of actively and skil
 
 <img style="width: 40%; margin-left: 4%;" align="right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Whatley.png/800px-Whatley.png">
 
+
 El Mapeado de Argumentos o *Argument Mapping* consiste en crear diagramas de "cajas y flechas" para representar razonamientos, argumentos especialmente complejos o debates.
 Con los mapas argumentales mejoramos nuestra habilidad de articular, comprender y comunicar el razonamiento, promoviendo así el pensamiento crítico.
 
