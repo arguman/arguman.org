@@ -8,7 +8,7 @@ from django.contrib.auth.forms import (UserCreationForm,
     AuthenticationForm as BaseAuthenticationForm)
 
 from profiles.models import Profile
-
+from django.utils.translation import ugettext_lazy as _
 
 class AuthenticationForm(BaseAuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -19,13 +19,11 @@ class AuthenticationForm(BaseAuthenticationForm):
 
 class RegistrationForm(UserCreationForm):
     username = forms.RegexField(
-        label="Kullanıcı adınız",
+        label=_("Username"),
         max_length=30, regex=re.compile(r'^[\w\s-]+$', re.LOCALE),
-        help_text="30 karakterden az, ascii, - ve boşluk kullanabileceginiz "
-                  "kullanıcı adı",
+        help_text=_('Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.'),
         error_messages={
-            'invalid': "ascii, - boşluk karakterleri dışında "
-                       "karakter girmeyiniz."
+            'invalid': _("Invalid characters")
         }
     )
 
