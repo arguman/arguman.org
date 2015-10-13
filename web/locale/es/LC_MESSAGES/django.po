@@ -267,7 +267,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                arguman.org es un proyecto de código libre. Puedes seguir la\n"
+"                arguman.org es un proyecto de software libre. Puedes seguir la\n"
 "                organización <a href=\"http://github.com/arguman/arguman.org"
 "\">organization</a> en github.\n"
 "            "
@@ -302,84 +302,84 @@ msgstr ""
 
 #: templates/index.html:31
 msgid "No results found."
-msgstr ""
+msgstr "No se han encontrado resultados."
 
 #: templates/index.html:36 templates/newsfeed.html:39
 #: templates/auth/profile.html:63
 msgid "Load more"
-msgstr ""
+msgstr "Cargar más"
 
 #: templates/newsfeed.html:12
 msgid "What is going on here:"
-msgstr ""
+msgstr "Lo que está pasandoÑ"
 
 #: templates/newsfeed.html:16
 msgid "Show only followed users activity."
-msgstr ""
+msgstr "Mostrar sólo actividad de los usuarios a los que sigo"
 
 #: templates/newsfeed.html:18
 msgid "Show all users activity."
-msgstr ""
+msgstr "Mostrar la actividad de todos los usuarios "
 
 #: templates/newsfeed.html:35
 msgid "Newsfeed seems empty."
-msgstr ""
+msgstr "Sin novedad."
 
 #: templates/notifications.html:8
 msgid "Notifications"
-msgstr ""
+msgstr "Notificaciones"
 
 #: templates/stats.html:7 templates/tabs.html:10
 msgid "Statistics"
-msgstr ""
+msgstr "Estadísticas"
 
 #: templates/stats.html:10
 msgid "most active users"
-msgstr ""
+msgstr "usuarios más activos"
 
 #: templates/stats.html:11
 msgid "most supported users"
-msgstr ""
+msgstr "usuarios más apoyados"
 
 #: templates/stats.html:13
 msgid "most crowded arguments"
-msgstr ""
+msgstr "argumentos más concurridos"
 
 #: templates/stats.html:14
 msgid "most supported premises"
-msgstr ""
+msgstr "premisas más apoyadas"
 
 #: templates/stats.html:15
 msgid "most fallacy premises"
-msgstr ""
+msgstr "falacias más usadas"
 
 #: templates/stats.html:20
 msgid "this week"
-msgstr ""
+msgstr "última semana"
 
 #: templates/stats.html:21
 msgid "this month"
-msgstr ""
+msgstr "último mes"
 
 #: templates/stats.html:22
 msgid "all time"
-msgstr ""
+msgstr "siempre"
 
 #: templates/tabs.html:4
 msgid "Newsfeed"
-msgstr ""
+msgstr "Noticias"
 
 #: templates/tabs.html:6
 msgid "Featured"
-msgstr ""
+msgstr "Destacado"
 
 #: templates/tabs.html:8
 msgid "Recently Updated"
-msgstr ""
+msgstr "Mensajes Recientes"
 
 #: templates/tabs.html:12
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: templates/auth/login.html:7 templates/auth/login.html.py:11
 #: templates/auth/password_reset_complete.html:9
