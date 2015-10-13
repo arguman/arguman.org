@@ -44,17 +44,17 @@ msgstr ""
 #: premises/models.py:31 templates/index.html:18
 #: templates/premises/contention.html:6
 msgid "but"
-msgstr ""
+msgstr "pero"
 
 #: premises/models.py:32 templates/index.html:17
 #: templates/premises/contention.html:5
 msgid "because"
-msgstr ""
+msgstr "porque"
 
 #: premises/models.py:33 templates/index.html:19
 #: templates/premises/contention.html:7
 msgid "however"
-msgstr ""
+msgstr "en cualquier caso"
 
 #: premises/models.py:37
 msgid "Begging The Question"
@@ -146,15 +146,15 @@ msgstr ""
 
 #: premises/models.py:73
 msgid "Argument"
-msgstr ""
+msgstr "Argumento"
 
 #: premises/models.py:77
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: premises/models.py:81
 msgid "Original Discourse"
-msgstr ""
+msgstr "Discurso Original"
 
 #: premises/models.py:85 premises/models.py:209
 msgid "Sources"
