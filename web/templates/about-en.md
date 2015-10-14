@@ -43,13 +43,13 @@ Also many thanks for intellectual support during development of arguman.org to B
 - [Verigazeteciligi](http://www.verigazeteciligi.com/arguman-org-arguman-analiz-ve-haritalama-platformu/)
 - [VenturesZone](http://ventureszone.com/girisimler/turk-girisimler/arguman-org-arguman-analiz-ve-haritalama-platformu/)
 - [Bigumigu](http://bigumigu.com/haber/bir-argumaniniz-mi-var-gecerliligini-tartisalim)
-- [Adaptasyon](http://adaptasyon.tumblr.com/post/105016798063/adaptasyon-4-d%C3%B6nem-2-b%C3%B6l%C3%BCm-argumanorg) (radyo kaydı)
+- [Adaptasyon](http://adaptasyon.tumblr.com/post/105016798063/adaptasyon-4-d%C3%B6nem-2-b%C3%B6l%C3%BCm-argumanorg) (podcast)
 
 ## Events
 - [Galatasaray University Debating Society](http://arguman.org/blog/galatasaray-universitesi-munazara-egitimi-gunlerindeydik/)
 
 ## Donations
-If you want to support os for server costs: <br>
+If you want to support us for server costs: <br>
 <http://paypal.me/arguman>
 
 If you have a general question, a suggestion or some feedback, you can email us: [argumananalizi@gmail.com](mailto:argumananalizi@gmail.com) 
