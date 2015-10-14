@@ -27,12 +27,8 @@ class SubdomainLanguageMiddleware(object):
 
         return HttpResponseRedirect(
             ''.join([
-                'http://',
-                language,
-                '.',
-                settings.BASE_DOMAIN,
-                request.path,
-                querystring
+                'http://', language, '.', settings.BASE_DOMAIN,
+                request.path, querystring
             ])
         )
 
@@ -40,7 +36,9 @@ class SubdomainLanguageMiddleware(object):
         host = request.get_host().split('.')
         language = host[0]
 
-        if language not in self.LANGUAGES:
+        if settings.PREVENT_LANGUAGE_REDIRECTION:
+            language = settings.DEFAULT_LANGUAGE
+        elif language not in self.LANGUAGES:
             return self.redirect_homepage(request)
 
         translation.activate(language)
