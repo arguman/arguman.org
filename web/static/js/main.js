@@ -69,9 +69,15 @@
             }
         },
         setInitial: function () {
-            if (this.needsScroll()) {
-                this.select(this.$el.find(".child-premise").first(), false);
-            }
+            //if (this.needsScroll()) {
+	        var hash = window.location.hash;
+		if (hash) {
+		    var selection = $("#premise-" + hashhash.replace("#", ""));
+		} else {
+		    var selection = this.$el.find(".child-premise").first();
+		}
+                this.select(selection, hash && this.needsScroll());
+            //}
         },
         bindEvents: function () {
             $(document).keydown(function(e) {

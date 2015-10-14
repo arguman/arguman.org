@@ -2,7 +2,7 @@
 {% load humanize %}
 <ul class="premise-list">
     {% for premise in premises %}
-        <li class="child-premise premise-item">
+        <li class="child-premise premise-item" id="premise-{{ premise.id }}">
             <div class="premise">
                 <div class="premise-type {{ premise.premise_class }}">
                     {{ premise.get_premise_type_display }}
@@ -21,7 +21,7 @@
                       <strong>{% trans "sender:" %}</strong>
                       <p><a href="{% url "auth_profile" premise.user.username %}">
                           {{ premise.user }}</a></p>
-                      <p class="time-ago"><time datetime="{{ premise.date_creation }}">({{ premise.date_creation|naturalday }})</time></p>
+                      <p class="time-ago"><a href="#{{ premise.id }}"><time datetime="{{ premise.date_creation }}">({{ premise.date_creation|naturaltime }})</time></a></p>
                     </div>
 
 
