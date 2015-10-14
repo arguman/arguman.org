@@ -11,7 +11,7 @@ class ReportAdmin(admin.ModelAdmin):
 class ContentionAdmin(admin.ModelAdmin):
     list_display = ('title', 'channel', 'is_featured', 
     				'is_published', 'premise_count')
-    list_editable = ('channel', )
+    list_editable = ('channel', 'is_featured', )
     search_fields = ('title', )
     list_per_page = 10
 
