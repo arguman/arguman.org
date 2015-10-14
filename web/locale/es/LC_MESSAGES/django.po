@@ -19,27 +19,27 @@ msgstr ""
 
 #: blog/admin.py:18
 msgid "Publish selected posts"
-msgstr ""
+msgstr "Publicar artículos seleccionados"
 
 #: blog/admin.py:22
 msgid "Mark as draft selected posts"
-msgstr ""
+msgstr "Marcar como borradores los artículos seleccionados"
 
 #: blog/models.py:21
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: blog/models.py:22
 msgid "Slug"
-msgstr ""
+msgstr "Slug"
 
 #: blog/models.py:23
 msgid "Content"
-msgstr ""
+msgstr "Contenido"
 
 #: blog/models.py:26 premises/models.py:211
 msgid "Published"
-msgstr ""
+msgstr "Publicado"
 
 #: premises/models.py:31 templates/index.html:18
 #: templates/premises/contention.html:6
@@ -58,47 +58,47 @@ msgstr "en cualquier caso"
 
 #: premises/models.py:37
 msgid "Begging The Question"
-msgstr ""
+msgstr "Petición de principio"
 
 #: premises/models.py:38
 msgid "Irrelevant Conclusion"
-msgstr ""
+msgstr "Conclusión irrelevante"
 
 #: premises/models.py:39
 msgid "Fallacy Of Irrelevant Purpose"
-msgstr ""
+msgstr "Falacia del Propósito irrelevante"
 
 #: premises/models.py:40
 msgid "Fallacy Of Red Herring"
-msgstr ""
+msgstr "Falacia del Red Herring"
 
 #: premises/models.py:41
 msgid "Argument Against TheMan"
-msgstr ""
+msgstr "Contra el hombre"
 
 #: premises/models.py:42
 msgid "Poisoning The Well"
-msgstr ""
+msgstr "Envenenamiento del pozo"
 
 #: premises/models.py:43
 msgid "Fallacy Of The Beard"
-msgstr ""
+msgstr "Falcia del Continuo"
 
 #: premises/models.py:44
 msgid "Fallacy Of Slippery Slope"
-msgstr ""
+msgstr "Falacia de la Pendiente resbaladiza"
 
 #: premises/models.py:45
 msgid "Fallacy Of False Cause"
-msgstr ""
+msgstr "Falacia de la Causa falsa"
 
 #: premises/models.py:46
 msgid "Fallacy Of Previous This"
-msgstr ""
+msgstr "Falacia del Historiador"
 
 #: premises/models.py:47
 msgid "Joint Effect"
-msgstr ""
+msgstr "Falacia de la Conjunción"
 
 #: premises/models.py:48
 msgid "Wrong Direction"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: premises/models.py:49
 msgid "False Analogy"
-msgstr ""
+msgstr "Falsa Analogía"
 
 #: premises/models.py:50
 msgid "Slothful Induction"
@@ -142,7 +142,7 @@ msgstr ""
 
 #: premises/models.py:58
 msgid "Appeal To Authority"
-msgstr ""
+msgstr "Argumento de autoridad"
 
 #: premises/models.py:73
 msgid "Argument"
