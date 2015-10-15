@@ -2,7 +2,7 @@
 {% load humanize %}
 <ul class="premise-list">
     {% for premise in premises %}
-        <li class="child-premise premise-item">
+        <li id="premise-{{ premise.id }}" class="child-premise premise-item">
             {% include "premises/premise.html" %}
             {% if premise.children.exists %}
                 {% with template_name="premises/tree.html" premises=premise.published_children %}

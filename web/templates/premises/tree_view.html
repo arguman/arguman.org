@@ -1,100 +1,82 @@
+{% extends "premises/base_contention.html" %}
 {% load i18n %}
-{% load humanize %}
-<ul class="premise-list">
-    {% for premise in premises %}
-        <li class="child-premise premise-item" id="premise-{{ premise.id }}">
-            <div class="premise">
-                <div class="premise-type {{ premise.premise_class }}">
-                    {{ premise.get_premise_type_display }}
-                </div>
-
-                <div class="premise-content {{ premise.premise_class }}">
-                    {{ premise.formatted_text|safe }}
-                </div>
-
-                <div class="premise-sources">
-                    {% if premise.sources %}
-                    <strong>{% trans "sources:" %}</strong>
-                    <p>{{ premise.sources|urlize }}</p>
-                    {% endif %}
-                    <div class="premise-user">
-                      <strong>{% trans "sender:" %}</strong>
-                      <p><a href="{% url "auth_profile" premise.user.username %}">
-                          {{ premise.user }}</a></p>
-                      <p class="time-ago"><a href="#{{ premise.id }}"><time datetime="{{ premise.date_creation }}">({{ premise.date_creation|naturaltime }})</time></a></p>
-                    </div>
+{% load static %}
 
 
-                    {% if premise.reports.exists %}
-                        <div class="reported_as_fallacy">
-                        {% blocktrans trimmed with count=premise.reports.count %}
-                             {{ count }} fallacy reported.
-                        {% endblocktrans %}
-                        {% if premise.fallacies %}
-                            {% for fallacy in premise.fallacies %}
-                            <div class="fallacy">{{ fallacy }}</div>
-                            {% endfor %}
-                        {% endif %}
+{% block content %}
+    {% if view == "tree-view" %}
+    <div id="keyboard-manager-info">
+    <span class="keys">
+        <span class="left">←</span>
+        <span class="up-down">↑<br />↓</span>
+        <span class="right">→</span>
+    </span>
+    <p>{% trans "You can use arrow keys to navigate in the map." %}</p>
+    </div>
+    {% endif %}
 
-                        </div>
-                    {% endif %}
-
-                    {% if premise.supporters.exists %}
-                        <div class="supporters">
-                        {% blocktrans trimmed with count=premise.supporters.count %}
-                            {{ count }} supporter.
-                        {% endblocktrans %}
-                        <div class="supporter-list">
-                        {% for supporter in premise.recent_supporters %}{% if not forloop.first %}, {% endif %}
-                        <a href="{{ supporter.get_absolute_url }}">{{ supporter.username }}</a>{% endfor %}
-                        {% if premise.supporters.count > 5 %}
-                        {% trans "and others." %}
-                        {% endif %}
-                        </div>
-                        </div>
-                    {% endif %}
-                </div>
-
+    <div id="app" class="tree-view {% if not contention.published_premises.exists %} empty{% endif %}">
+        <div class="main-contention">
+            <div class="main-premise-content">
+            {{ contention }}
+            <div class="main-contention-actions">
                 {% if user.is_authenticated %}
-                    <div class="premise-actions">
-                {% if user == premise.user %}
-                        <a href="{% url "edit_premise" contention.slug premise.pk %}">{% trans "edit" %}</a>
-                        <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
-                            {% csrf_token %}
-                            <input type="submit" value="{% trans "remove" %}"
-                                   onclick="return confirm('{% trans "Are you sure to remove this premise?" %}');"
-                                   class="delete_premise"/>
-                        </form>
+                <a class="new-main-premise" href="{% url "new_premise" contention.slug %}">{% trans "add premise" %}</a>
                 {% endif %}
-
-                {% if user.is_authenticated %}
-                    <a href="{% url "insert_premise" contention.slug premise.pk %}">{% trans "add premise" %}</a>
-                    {% if premise.user != user %}
-                        {% if user in premise.supporters.all %}
-                        <form class="support" action="{% url "unsupport_premise" contention.slug premise.pk %}" method="post">
-                            {% csrf_token %}
-                            <input type="submit" value="{% trans "undo" %}"/>
-                        </form>
-                        {% else %}
-                        <form class="support" action="{% url "support_premise" contention.slug premise.pk %}" method="post">
-                            {% csrf_token %}
-                            <input type="submit" value="{% trans "support" %}"/>
-                        </form>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-                </div>
-                    <div class="report">
-                        <a href="{% url 'report_premise' contention.slug premise.pk %}">{% trans "report fallacy" %}</a>
-                    </div>
-                {% endif %}
-
             </div>
-            {% if premise.children.exists %}
-                {% with template_name="premises/tree_view.html" premises=premise.published_children %}
-                    {% include template_name %}
-                {% endwith %}
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+            </div>
+        </div>
+
+        <div class="tree loading{% if not contention.published_premises.exists %} empty{% endif %}" data-width="{{ contention.width }}">
+            <ul class="premise-list">
+                <li class="premise-item">
+                    <div class="root"></div>
+                    {% with template_name="premises/tree.html" %}
+                        {% with premises=contention.published_premises.all %}
+                            {% include template_name %}
+                        {% endwith %}
+                    {% endwith %}
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="minimap" class="no-user-select">
+      <div class="map">
+        <div class="navigator no-user-select"></div>
+      </div>
+    </div>
+
+    {% if user.is_anonymous %}
+    {% include "auth/login_popup.html" %}
+    {% endif %}
+{% endblock %}
+
+{% block extra-scripts %}
+<script type="text/javascript" src="{% static "js/lib/html2canvas.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/lib/jquery.pep.js" %}"></script>
+<script type="text/javascript">
+    arguman.editMode = {{ edit_mode|yesno:"true,false" }};
+    arguman.authenticatedUser = {
+        "id": {{ user.id|default:"null" }}
+    };
+
+    var tree = new arguman.CollapsibleTree({
+        "el": ".tree",
+        "mainContention": ".main-contention"
+    });
+
+    tree.render();
+
+    new arguman.KeyboardManager({
+        "el": ".tree",
+        "info": "#keyboard-manager-info"
+    });
+
+    new arguman.DraggablePage();
+</script>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}

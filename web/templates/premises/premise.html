@@ -21,7 +21,9 @@
                 {{ premise.user }}</a></p>
 
             <p class="time-ago">
-                <time datetime="{{ premise.date_creation }}">({{ premise.date_creation|naturalday }})</time>
+                <a href="#{{ premise.id }}">
+                    <time datetime="{{ premise.date_creation }}">({{ premise.date_creation|naturaltime }})</time>
+                </a>
             </p>
         </div>
 

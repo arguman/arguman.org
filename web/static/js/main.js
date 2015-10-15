@@ -69,15 +69,14 @@
             }
         },
         setInitial: function () {
-            //if (this.needsScroll()) {
-	        var hash = window.location.hash;
-		if (hash) {
-		    var selection = $("#premise-" + hashhash.replace("#", ""));
-		} else {
-		    var selection = this.$el.find(".child-premise").first();
-		}
-                this.select(selection, hash && this.needsScroll());
-            //}
+	        var selection,
+                hash = window.location.hash;
+            if (hash) {
+                selection = $("#premise-" + hash.replace("#", ""));
+            } else {
+                selection = this.$el.find(".child-premise").first();
+            }
+            this.select(selection, hash && this.needsScroll());
         },
         bindEvents: function () {
             $(document).keydown(function(e) {
