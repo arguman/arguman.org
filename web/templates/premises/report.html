@@ -3,7 +3,7 @@
 
 {% block content %}
     <section class="container">
-        <form action="?" method="post">
+        <form action="?view={{ view }}" method="post">
             <label>{% trans "The premise:" %}</label>
             <div class="fallacy-premise">
                 <p>{{ premise.text }}</p>

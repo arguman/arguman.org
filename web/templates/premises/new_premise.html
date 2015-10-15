@@ -3,7 +3,7 @@
 
 {% block content %}
     <section class="container new-premise">
-        <form action="?" method="post">
+        <form action="?view={{ view }}" method="post">
             {% if parent %}
                 <div class="parent-premise">
                     <strong>{% trans "The parent premise:" %}</strong>

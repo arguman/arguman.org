@@ -225,7 +225,7 @@ class Premise(DeletePreventionMixin, models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'contention_detail', [self.argument.slug]
+        return 'premise_detail', [self.argument.slug, self.pk]
 
     def update_sibling_counts(self):
         count = self.get_siblings().count()
@@ -284,8 +284,18 @@ class Premise(DeletePreventionMixin, models.Model):
             "contention": self.argument.get_newsfeed_bundle()
         }
 
+    def get_parent(self):
+        return self.parent or self.argument
+
     def recent_supporters(self):
         return self.supporters.all()[0:5]
+
+    def children_by_premise_type(self, premise_type=None):
+        return self.published_children().filter(premise_type=premise_type)
+
+    because = curry(children_by_premise_type, premise_type=SUPPORT)
+    but = curry(children_by_premise_type, premise_type=OBJECTION)
+    however = curry(children_by_premise_type, premise_type=SITUATION)
 
 
 class Comment(models.Model):

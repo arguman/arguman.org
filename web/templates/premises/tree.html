@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load humanize %}
+<ul class="premise-list">
+    {% for premise in premises %}
+        <li class="child-premise premise-item">
+            {% include "premises/premise.html" %}
+            {% if premise.children.exists %}
+                {% with template_name="premises/tree.html" premises=premise.published_children %}
+                    {% include template_name %}
+                {% endwith %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

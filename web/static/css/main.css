@@ -494,8 +494,6 @@ li.base-premises {
     }
 
     .tree-view .premise-sources a { width: 240px; }
-    .list-view .premise-sources a { width: 440px; }
-
 
 .tree-view .main-premise-content {
     padding-top: 60px;
@@ -509,6 +507,317 @@ li.base-premises {
 #app .main-premise-content p {
     margin: 0;
     padding: 0;
+}
+
+/*
+* List View
+*/
+#app.list-view {
+    margin-top: 110px;
+    margin-left: 90px;
+}
+
+#app.list-view .contention-header {
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    font-weight: normal;
+    padding: 10px;
+    max-width: 700px;
+    line-height: 1.2em;
+}
+
+#app.list-view .new-main-premise {
+    color: gray;
+    position: absolute;
+    margin-left: 150px;
+    text-decoration: none;
+    margin-top: 4px;
+}
+
+#app.list-view .thread {
+    border-left: 1px solid #E1E1E1;
+    margin-left: 100px;
+    margin-top: 30px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+#app.list-view .thread:after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #E1E1E1;
+    margin-left: -5px;
+    border-radius: 50%;
+    margin-top: 10px;
+    position: absolute;
+}
+
+#app.list-view .thread:before {
+    content: "";
+    margin-top: -80px;
+    margin-left: -15px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    text-align: center;
+    background: gray;
+    border-radius: 50%;
+}
+
+#app.list-view .thread-item {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 80px;
+}
+
+#app.list-view .thread-item.parent-premise {
+    margin-bottom: 100px;
+}
+
+#app.list-view .parent-premise-info {
+    width: 10px;
+    height: 30px;
+    background: white;
+    position: absolute;
+    margin-left: -55px;
+    margin-top: 45px;
+}
+
+#app.list-view .parent-premise-info:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #E1E1E1;
+    position: absolute;
+    border-radius: 50%;
+    margin-top: 30px;
+}
+
+#app.list-view .parent-premise-info:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #E1E1E1;
+    position: absolute;
+    border-radius: 50%;
+    margin-top: -10px;
+}
+
+
+#app.list-view .thread-item .go-to-main-premise {
+    position: absolute;
+    margin-top: -85px;
+    text-decoration: none;
+    color: gray;
+}
+
+#app.list-view .thread-item:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 50px;
+    height: 1px;
+    background: #E1E1E1;
+    margin-left: -50px;
+    margin-top: 20px;
+}
+
+#app.list-view .thread-item .premise {
+    width: 320px;
+}
+
+#app.list-view .thread-item .premise .premise-content a {
+    text-decoration: none;
+    color: #333333;
+}
+
+#app.list-view .thread-item .premise .premise-type {
+    text-align: left;
+    padding-left: 15px;
+    font-size: 17px;
+    margin-top: -26px;
+}
+
+#app.list-view .thread-item .thread-actions {
+    margin-top: 4px;
+    margin-left: 3px;
+}
+
+#app.list-view .thread-item .thread-actions a.thread-action,
+#app.list-view .thread-item .thread-actions input {
+    font-size: 13px;
+    color: #CCCCCC;
+    text-decoration: underline;
+}
+
+#app.list-view .thread-item .thread-actions input {
+    border: none;
+    background: transparent;
+}
+
+#app.list-view .thread-item .thread-actions form {
+    display: inline-block;
+    line-height: 0;
+    margin: -1px 0;
+    padding: 0;
+}
+
+#app.list-view .thread-item .thread-action,
+#app.list-view .thread-item form.thread-action {
+    float: left;
+    padding-left: 5px;
+}
+
+#app.list-view .thread-item .report a {
+    font-size: 13px;
+    margin-left: 15px;
+}
+
+#app.list-view .thread-fallacies {
+    padding: 10px 15px;
+    font-size: 15px;
+    color: #9C9B9B;
+    background-color: #F4F4F4;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+#app.list-view .thread-fallacies .fallacy {
+    color: #d07d7d;
+}
+
+#app.list-view .thread-item .thread-user {
+    position: absolute;
+    margin-left: -200px;
+    width: 150px;
+    margin-top: -8px;
+}
+
+#app.list-view .thread-item .thread-user:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 1px;
+    background-color: #E1E1E1;
+    width: 30px;
+    margin-top: 28px;
+    margin-left: 120px;
+}
+
+#app.list-view .thread-item .thread-user .username {
+    text-decoration: none;
+    color: gray;
+    display: block;
+    text-align: right;
+    padding-right: 5px;
+    margin-right: 25px;
+}
+
+#app.list-view .thread-item .thread-user .avatar {
+    text-decoration: none;
+    display: block;
+    text-align: right;
+    margin-right: 30px;
+    margin-top: 5px;
+}
+
+#app.list-view .thread-item .time-ago {
+    display: block;
+    color: #E6E6E6;
+    font-size: 12px;
+    text-align: right;
+    margin-right: 30px;
+    margin-top: 2px;
+}
+
+#app.list-view .thread-item .thread-user .avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+#app.list-view .thread-item .thread-info:before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: #E1E1E1;
+    margin-left: -40px;
+}
+
+#app.list-view .thread-item .thread-info {
+    width: 150px;
+    position: absolute;
+    margin-left: 350px;
+    margin-top: 20px;
+    border-left: 1px solid #E1E1E1;
+    padding-left: 10px;
+    border-bottom: 1px solid #E1E1E1;
+    padding-bottom: 5px;
+}
+
+#app.list-view .thread-item .thread-info:empty {
+    display: none;
+}
+
+#app.list-view .thread-item .thread-info:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background: #E1E1E1;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 150px;
+    margin-top: -5px;
+}
+
+#app.list-view .thread-item .thread-branches {
+    width: 100px;
+    padding-bottom: 5px;
+}
+
+#app.list-view .thread-item .thread-branches a {
+    display: block;
+    text-decoration: none;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+#app.list-view .thread-item .thread-branches a.but { color: #d07d7d; }
+#app.list-view .thread-item .thread-branches a.because { color: #85ad63; }
+#app.list-view .thread-item .thread-branches a.however { color: #ffbe86; }
+
+#app.list-view .thread-item .thread-branches a.but span { background-color: #ffd8d5; color: #d07d7d; }
+#app.list-view .thread-item .thread-branches a.because span { background-color: #c8ffb3; color: #85ad63; }
+#app.list-view .thread-item .thread-branches a.however span { background-color: #fff1a4; color: #ffbe86; }
+
+#app.list-view .thread-item .thread-branches span {
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 5px;
+    color: #333333;
+}
+
+#app.list-view .thread-item .thread-supporters {
+    margin: 5px;
+    color: gray;
+    font-size: 14px;
+}
+
+#app.list-view .thread-item .thread-supporters img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 2px;
 }
 
 .user-profile {
@@ -788,11 +1097,6 @@ form .parent-premise strong {
     z-index: 999;
 }
 
-.list-view .report {
-    margin-left: 480px;
-    margin-top: 10px;
-}
-
 .report a {
     color: #aeaeae;
     font-size: 17px;
@@ -937,18 +1241,6 @@ form .parent-premise strong {
     border-radius: 50%;
 }
 
-.collapse-button {
-    display: inline-block;
-    position: absolute;
-    border-radius: 50%;
-    color: white;
-    width: 20px;
-    height: 20px;
-    margin-top: -70px;
-    z-index: 9;
-    text-decoration: none;
-}
-
 #app.empty .root {
     display: none;
 }
@@ -962,65 +1254,8 @@ form .parent-premise strong {
     margin: auto;
 }
 
-#app.empty .new-main-premise {
+#app.empty.tree-view .new-main-premise {
     margin-left: -54px;
-}
-
-.collapsed {
-    /*display: none;*/
-}
-
-.uncollapse-button {
-    width: 100%;
-    display: block;
-    margin-top: 50px;
-}
-
-
-#app.list-view {
-    position: static;
-}
-
-.list-view li {
-    list-style: none;
-    padding-left: 20px;
-}
-
-.list-view .child-premise {
-    border-left: 3px solid #eaeaea;
-}
-
-/*.list-view ul:first-child {*/
-    /*border: none;*/
-/*}*/
-
-.list-view .premise {
-    width: 600px;
-    margin-bottom: 100px;
-    margin-left: 30px;
-}
-
-.list-view .main-contention {
-    width: 100%;
-    margin-bottom: 0;
-}
-
-.list-view .main-contention {
-    font-size: 60px;
-    padding-bottom: 70px;
-    margin-top: 130px;
-}
-
-.list-view .main-premise-content {
-    margin: 0 50px -30px;
-    padding-bottom: 20px;
-    width: 900px;
-    line-height: 1em;
-}
-
-
-.list-view .premise-actions {
-    padding-left: 10px;
 }
 
 .contention-main-actions {

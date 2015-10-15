@@ -1,0 +1,41 @@
+{% extends "premises/base_contention.html" %}
+{% load i18n %}
+{% load static %}
+
+
+{% block content %}
+    <div id="app" class="list-view">
+        <div class="main-contention">
+            <h3 class="contention-header">
+                {{ contention }}
+            </h3>
+            {% if user.is_authenticated and not parent_premise %}
+            <a class="new-main-premise" href="{% url "new_premise" contention.slug %}?view=list">{% trans "Add premise" %}</a>
+            {% endif %}
+        </div>
+        <div class="thread">
+            {% if parent_premise %}
+            <div class="thread-item parent-premise">
+                <a class="go-to-main-premise"
+                   href="{{ parent_premise.get_parent.get_absolute_url }}?view=list">&lsaquo; {% trans "Go to parent premise" %}</a>
+                {% include "premises/thread.html" with premise=parent_premise %}
+                {% if premises.exists %}
+                    <div class="parent-premise-info"></div>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% for premise in premises.all %}
+            <div class="thread-item">
+                {% include "premises/thread.html" %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if user.is_anonymous %}
+    {% include "auth/login_popup.html" %}
+    {% endif %}
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

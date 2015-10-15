@@ -26,7 +26,7 @@ from premises.signals import (added_premise_for_premise,
                               reported_as_fallacy,
                               supported_a_premise)
 from premises.templatetags.premise_tags import check_content_deletion
-from premises.mixins import PaginationMixin
+from premises.mixins import PaginationMixin, NextURLMixin
 from newsfeed.models import Entry
 from profiles.mixins import LoginRequiredMixin
 from profiles.models import Profile
@@ -38,19 +38,31 @@ def get_ip_address(request):
 
 
 class ContentionDetailView(DetailView):
-    template_name = "premises/contention_detail.html"
     model = Contention
+
+    def get_template_names(self):
+        view = self.request.GET.get("view")
+        name = ("list_view" if view == "list" else "tree_view")
+        return ["premises/%s.html" % name]
+
+    def get_parent(self):
+        premise_id = self.kwargs.get("premise_id")
+        if premise_id:
+            return get_object_or_404(Premise, id=premise_id)
+
+    def get_premises(self):
+        contention = self.get_parent() or self.get_object()
+        return contention.published_children()
 
     def get_context_data(self, **kwargs):
         contention = self.get_object()
-        GET = self.request.GET
-        view = ("list-view" if GET.get("view") == "list" else "tree-view")
         edit_mode = (
             self.request.user.is_superuser or
             self.request.user.is_staff or
             contention.user == self.request.user)
         return super(ContentionDetailView, self).get_context_data(
-            view=view,
+            premises=self.get_premises(),
+            parent_premise=self.get_parent(),
             path=contention.get_absolute_url(),
             edit_mode=edit_mode,
             **kwargs)
@@ -538,13 +550,14 @@ class PremiseEditView(LoginRequiredMixin, UpdateView):
         return super(PremiseEditView, self).get_context_data(**kwargs)
 
 
-class PremiseCreationView(LoginRequiredMixin, CreateView):
+class PremiseCreationView(NextURLMixin, LoginRequiredMixin, CreateView):
     template_name = "premises/new_premise.html"
     form_class = PremiseCreationForm
 
     def get_context_data(self, **kwargs):
         return super(PremiseCreationView, self).get_context_data(
             contention=self.get_contention(),
+            view=self.get_view_name(),
             parent=self.get_parent(),
             **kwargs)
 
@@ -568,7 +581,10 @@ class PremiseCreationView(LoginRequiredMixin, CreateView):
         contention.date_modification = timezone.now()
         contention.save()
 
-        return redirect(contention)
+        return redirect(
+            form.instance.get_parent().get_absolute_url() +
+            self.get_next_parameter()
+        )
 
     def get_contention(self):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
@@ -579,7 +595,7 @@ class PremiseCreationView(LoginRequiredMixin, CreateView):
             return get_object_or_404(Premise, pk=parent_pk)
 
 
-class PremiseSupportView(LoginRequiredMixin, View):
+class PremiseSupportView(NextURLMixin, LoginRequiredMixin, View):
     def get_premise(self):
         premises = Premise.objects.exclude(user=self.request.user)
         return get_object_or_404(premises, pk=self.kwargs['pk'])
@@ -589,7 +605,10 @@ class PremiseSupportView(LoginRequiredMixin, View):
         premise.supporters.add(self.request.user)
         supported_a_premise.send(sender=self, premise=premise,
                                  user=self.request.user)
-        return redirect(self.get_contention())
+        return redirect(
+            premise.get_parent().get_absolute_url() +
+            self.get_next_parameter()
+        )
 
     def get_contention(self):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
@@ -599,7 +618,10 @@ class PremiseUnsupportView(PremiseSupportView):
     def delete(self, request, *args, **kwargs):
         premise = self.get_premise()
         premise.supporters.remove(self.request.user)
-        return redirect(self.get_contention())
+        return redirect(
+            premise.get_parent().get_absolute_url() +
+            self.get_next_parameter()
+        )
 
     post = delete
 
@@ -629,13 +651,14 @@ class PremiseDeleteView(LoginRequiredMixin, View):
         return get_object_or_404(Contention, slug=self.kwargs['slug'])
 
 
-class ReportView(LoginRequiredMixin, CreateView):
+class ReportView(NextURLMixin, LoginRequiredMixin, CreateView):
     form_class = ReportForm
     template_name = "premises/report.html"
 
     def get_context_data(self, **kwargs):
         return super(ReportView, self).get_context_data(
             premise=self.get_premise(),
+            view=self.get_view_name(),
             **kwargs)
 
     def get_contention(self):
@@ -659,4 +682,7 @@ class ReportView(LoginRequiredMixin, CreateView):
         form.instance.reporter = self.request.user
         form.save()
         reported_as_fallacy.send(sender=self, report=form.instance)
-        return redirect(contention)
+        return redirect(
+            premise.get_parent().get_absolute_url() +
+            self.get_next_parameter()
+        )

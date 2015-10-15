@@ -1,0 +1,127 @@
+{% load i18n %}
+{% load humanize %}
+{% load gravatar %}
+
+<div class="premise">
+    <div class="thread-user">
+        
+        <a class="avatar" href="{% url "auth_profile" premise.user.username %}">
+            {% gravatar profile 80 %}
+        </a>
+        <a class="username" href="{% url "auth_profile" premise.user.username %}">
+            {{ premise.user.username }}
+        </a>
+
+        <p class="time-ago">
+            <time datetime="{{ premise.date_creation }}">
+                {{ premise.date_creation|naturaltime }}
+            </time>
+        </p>
+    </div>
+
+    <div class="premise-type {{ premise.premise_class }}">
+        {{ premise.get_premise_type_display }}
+    </div>
+
+    <div class="thread-info">{% spaceless %}
+        {% if parent_premise.id != premise.id and premise.published_children.exists %}
+            <div class="thread-branches">
+                {% if premise.but.exists %}
+                    <a href="{{ premise.get_absolute_url }}?view=list" class="but">
+                        <span>{{ premise.but.count }}</span> {% trans "but" %}
+                    </a>
+                {% endif %}
+                {% if premise.because.exists %}
+                    <a href="{{ premise.get_absolute_url }}?view=list" class="because">
+                        <span>{{ premise.because.count }}</span> {% trans "because" %}
+                    </a>
+                {% endif %}
+                {% if premise.however.exists %}
+                    <a href="{{ premise.get_absolute_url }}?view=list" class="however">
+                        <span>{{ premise.however.count }}</span> {% trans "however" %}
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+        {% if premise.supporters.exists %}
+            <div class="thread-supporters">
+                {% blocktrans trimmed with count=premise.supporters.count %}
+                    {{ count }} supporter.
+                {% endblocktrans %}
+                <div class="supporter-list">
+                    {% for supporter in premise.recent_supporters %}
+                        <a href="{{ supporter.get_absolute_url }}">{% gravatar profile 40 %}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% endspaceless %}</div>
+
+    <div class="premise-content {{ premise.premise_class }}">
+        <a href="{{ premise.get_absolute_url }}?view=list">
+            {{ premise.formatted_text|safe }}
+        </a>
+    </div>
+    {% if premise.sources %}
+    <div class="premise-sources">
+        <strong>{% trans "sources:" %}</strong>
+        <p>{{ premise.sources|urlize }}</p>
+    </div>
+    {% endif %}
+
+     {% if premise.reports.exists %}
+    <div class="thread-fallacies">
+        {% blocktrans trimmed with count=premise.reports.count %}
+            {{ count }} fallacy reported.
+        {% endblocktrans %}
+        {% if premise.fallacies %}
+            {% for fallacy in premise.fallacies %}
+                <div class="fallacy">{{ fallacy }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <div class="thread-actions">
+        {% if user == premise.user %}
+        <a class="thread-action" 
+           href="{% url "edit_premise" contention.slug premise.pk %}?view=list">
+            {% trans "edit" %}
+        </a>
+        
+        <form class="thread-action" action="{% url "delete_premise" contention.slug premise.pk %}?view=list" method="post">
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                value="{% trans "remove" %}"
+                onclick="return confirm('{% trans "Are you sure to remove this premise?" %}');"
+                class="delete_premise"/>
+        </form>
+        {% endif %}
+        
+        <a class="thread-action" 
+            href="{% url "insert_premise" contention.slug premise.pk %}?view=list">
+            {% trans "add premise" %}
+        </a>
+        
+        {% if premise.user != user %}
+            {% if user in premise.supporters.all %}
+                <form class="thread-action" action="{% url "unsupport_premise" contention.slug premise.pk %}?view=list"
+                      method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="{% trans "undo" %}"/>
+                </form>
+            {% else %}
+                <form class="thread-action" action="{% url "support_premise" contention.slug premise.pk %}?view=list"
+                      method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="{% trans "support" %}"/>
+                </form>
+            {% endif %}
+        {% endif %}
+
+        <a class="thread-action" href="{% url 'report_premise' contention.slug premise.pk %}?view=list">{% trans "report fallacy" %}</a>
+    </div>
+    {% endif %}
+</div>
