@@ -473,7 +473,8 @@ li.base-premises {
       display: inline-block;
     }
 
-    .premise-user > p > a {
+    .premise-user > p > a:first-child {
+      //text-decoration: none;
       display: inline;
     }
 
@@ -1273,6 +1274,7 @@ form .parent-premise strong {
 }
 
 .original-discourse {
+    overflow: hidden;
     max-width: 350px;
     height: 1.3em;
 }
