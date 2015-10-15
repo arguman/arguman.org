@@ -10,7 +10,7 @@
                 {{ contention }}
             </h3>
             {% if user.is_authenticated and not parent_premise %}
-            <a class="new-main-premise" href="{% url "new_premise" contention.slug %}?view=list">{% trans "Add premise" %}</a>
+            <a class="new-main-premise" href="{% url "new_premise" contention.slug %}?view=list">{% trans "add premise" %}</a>
             {% endif %}
         </div>
         <div class="thread">
