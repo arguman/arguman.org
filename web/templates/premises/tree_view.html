@@ -4,7 +4,6 @@
 
 
 {% block content %}
-    {% if view == "tree-view" %}
     <div id="keyboard-manager-info">
     <span class="keys">
         <span class="left">←</span>
@@ -13,8 +12,6 @@
     </span>
     <p>{% trans "You can use arrow keys to navigate in the map." %}</p>
     </div>
-    {% endif %}
-
     <div id="app" class="tree-view {% if not contention.published_premises.exists %} empty{% endif %}">
         <div class="main-contention">
             <div class="main-premise-content">
@@ -46,6 +43,12 @@
       <div class="map">
         <div class="navigator no-user-select"></div>
       </div>
+    </div>
+
+    <div id="list-view-indicator" class="tooltip">
+        {% blocktrans trimmed %}
+        The argument is too complex. You can switch to list view.
+        {% endblocktrans %}
     </div>
 
     {% if user.is_anonymous %}

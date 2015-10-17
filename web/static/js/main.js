@@ -60,10 +60,11 @@
                     maxHeight > window.innerHeight)
         },
         scrollTo: function (el) {
+            var mainPremiseSelector = ".root + .premise-list > li";
             if (this.needsScroll()) {
                 var center = el.offset().left +  (el.width()/2);
                 $('html, body').animate({
-                    scrollTop: el.is('.main-premise') ? 0 : el.offset().top - 200,
+                    scrollTop: el.is(mainPremiseSelector) ? 10 : el.offset().top - 200,
                     scrollLeft: center - (window.innerWidth / 2)
                 }, 150);
             }
@@ -126,6 +127,78 @@
             this.$el = $(this.el);
         },
 
+        setMainContentionPosition: function () {
+            var root = this.$el.find(".root"),
+                mainContention = $(this.mainContention),
+                mainPremiseContent = mainContention.find(".main-premise-content"),
+                firstPremise = $(".premise").first(),
+                scrollLeft = $(document).scrollLeft();
+
+            var rootPosition = scrollLeft + window.innerWidth / 2 - root.width() / 2;
+
+            mainContention.css({
+                "margin-left": (
+                    scrollLeft + 
+                    window.innerWidth / 2 - 
+                    mainPremiseContent.width() / 2)
+            });
+                
+            root.css({
+                left: rootPosition
+            })
+
+            if (firstPremise.position().left > rootPosition) {
+
+                var rootConnector = $(".root-connector");
+
+                if (!rootConnector.length) {
+                    rootConnector = $("<div />", {
+                        class: "root-connector"
+                    });
+                    root.before(rootConnector);
+                }
+
+                rootConnector.css({
+                    position: "absolute",
+                    display: "inline-block",
+                    height: 4,
+                    width: (firstPremise.position().left 
+                                + firstPremise.width() / 2
+                                - rootPosition
+                                + 10),
+                    background: "#E1E1E1",
+                    left: rootPosition,
+                    top: root.height() + 30
+                });
+
+
+                firstPremise.css({
+                    marginTop: 60
+                });
+            }
+
+            if (this.width < window.innerWidth) {
+                this.$el.css({
+                    "margin-left": (window.innerWidth / 2) - (this.width / 2)
+                });
+                mainContention.css({
+                    "margin-left": (window.innerWidth / 2) - (mainContention.width() / 2)
+                });
+                root.css({
+                    left: "auto"
+                })
+            }
+
+            var mainPremises = $(".root + .premise-list > li");
+            if (mainPremises.length === 1) {
+                root.addClass("single");
+                firstPremise.css({
+                    marginTop: 20
+                });
+            }
+
+        },
+
         setTreeWidth: function () {
             /*
             * Set full width to container, and reduce the width with
@@ -138,6 +211,7 @@
 
             var root = this.$el.find(".root"),
                 mainContention = $(this.mainContention);
+
             var treeWidth = parseInt(this.$el.data("width")) * (this.premiseWidth * 2);
             this.width = treeWidth;
             this.$el.width(treeWidth);
@@ -154,24 +228,12 @@
 
                 this.width = (maxPosition + this.premiseWidth + 50);
                 this.$el.width(this.width);
-                mainContention.css({
-                    "margin-left": (root.position().left) - (mainContention.width() / 2)
-                });
             }
-
-            if (this.width < window.innerWidth) {
-                this.$el.css({
-                    "margin-left": (window.innerWidth / 2) - (this.width / 2)
-                });
-                mainContention.css({
-                    "margin-left": (window.innerWidth / 2) - (mainContention.width() / 2)
-                });
-            }
-
         },
 
         render: function () {
             this.setTreeWidth();
+            this.setMainContentionPosition();
             this.$el.css("visibility", "visible");
         }
     });
@@ -234,7 +296,6 @@
                     self.clicked && self.setScrollPosition(e);
                 },
                 'mousedown': function (e) {
-                  console.log(self);
                     self.disableUserSelect();
                     self.clicked = e;
                     self.click.x = e.pageX;

@@ -1190,6 +1190,7 @@ form .parent-premise strong {
 	border-top: 4px solid #e1e1e1;
 	width: 50%; height: 60px;
 }
+
 .tree-view .tree li.premise-item::after{
 	right: auto; left: 50%;
 	border-left: 4px solid #e1e1e1;
@@ -1223,6 +1224,9 @@ form .parent-premise strong {
 	width: 0; height: 60px;
 }
 
+.tree-view .tree .root + ul.premise-list::before {
+    border: none;
+}
 
 .tree-view .tree li .premise {
 	text-decoration: none;
@@ -1233,13 +1237,38 @@ form .parent-premise strong {
 .tree-view .root {
     display: inline-block;
     width: 30px;
-    z-index: 2;
+    z-index: -1;
     position: absolute;
     height: 30px;
     margin-left: -13px;
     text-align: center;
     background: gray;
     border-radius: 50%;
+}
+
+.tree-view .root::after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 4px;
+    height: 30px;
+    background: #E1E1E1;
+    margin-left: -2px;
+    margin-top: 30px;
+}
+
+.tree-view .root.single::after {
+    height: 60px;
+}
+
+.tree-view .root-connector:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 80px;
+    width: 4px;
+    background: #E1E1E1;
+    right: 0;
 }
 
 #app.empty .root {
@@ -2155,3 +2184,40 @@ div.load-more {
     margin-top: -2px;
 }
 
+#list-view-indicator {
+    position: absolute;
+    padding: 10px;
+    right: 155px;
+    z-index: 9999999;
+    top: 82px;
+    width: 200px;
+    display: none;
+}
+
+.tooltip {
+    position: relative;
+    background: #B3B3B3;
+}
+.tooltip:after, .tooltip:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.tooltip:after {
+    border-color: rgba(47, 64, 74, 0);
+    border-bottom-color: #B3B3B3;
+    border-width: 6px;
+    margin-left: -10px;
+}
+.tooltip:before {
+    border-color: rgba(65, 75, 82, 0);
+    border-bottom-color: #B3B3B3;
+    border-width: 10px;
+    margin-left: -16px;
+}
