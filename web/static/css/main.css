@@ -755,7 +755,7 @@ li.base-premises {
     width: 150px;
     position: absolute;
     margin-left: 350px;
-    margin-top: 20px;
+    margin-top: 25px;
     border-left: 1px solid #E1E1E1;
     padding-left: 10px;
     border-bottom: 1px solid #E1E1E1;
@@ -775,7 +775,7 @@ li.base-premises {
     height: 10px;
     border-radius: 50%;
     margin-left: 150px;
-    margin-top: -5px;
+    margin-top: 0px;
 }
 
 #app.list-view .thread-item .thread-branches {
@@ -819,6 +819,7 @@ li.base-premises {
     height: 20px;
     border-radius: 50%;
     margin-right: 2px;
+    margin-left: 2px;
 }
 
 .user-profile {

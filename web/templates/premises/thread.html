@@ -6,7 +6,7 @@
     <div class="thread-user">
         
         <a class="avatar" href="{% url "auth_profile" premise.user.username %}">
-            {% gravatar profile 80 %}
+            {% gravatar profile.user 80 %}
         </a>
         <a class="username" href="{% url "auth_profile" premise.user.username %}">
             {{ premise.user.username }}
@@ -50,7 +50,7 @@
                 {% endblocktrans %}
                 <div class="supporter-list">
                     {% for supporter in premise.recent_supporters %}
-                        <a href="{{ supporter.get_absolute_url }}">{% gravatar profile 40 %}</a>
+                        <a href="{{ supporter.get_absolute_url }}">{% gravatar supporter 40 %}</a>
                     {% endfor %}
                 </div>
             </div>
