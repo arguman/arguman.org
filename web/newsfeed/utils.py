@@ -30,7 +30,6 @@ def send_complex_mail(subject, template_txt, template_html, _from, to, context):
     response = requests.post(settings.POSTMARK_API_URL,
                   data=json.dumps(data),
                   headers=headers)
-    print response.text
 
 def get_connection():
     global _connection
