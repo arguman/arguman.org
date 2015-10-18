@@ -92,6 +92,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
+PREVENT_LANGUAGE_REDIRECTION = False
 REDIRECTED_PATHS = (
     '/',
     '/newsfeed',
