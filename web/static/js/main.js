@@ -138,11 +138,11 @@
 
             mainContention.css({
                 "margin-left": (
-                    scrollLeft +
-                    window.innerWidth / 2 -
+                    scrollLeft + 
+                    window.innerWidth / 2 - 
                     mainPremiseContent.width() / 2)
             });
-
+                
             root.css({
                 left: rootPosition
             })
@@ -162,7 +162,7 @@
                     position: "absolute",
                     display: "inline-block",
                     height: 4,
-                    width: (firstPremise.position().left
+                    width: (firstPremise.position().left 
                                 + firstPremise.width() / 2
                                 - rootPosition
                                 + 10),
@@ -407,35 +407,10 @@
           });
         }
     });
-
+    
     $(function () {
         $(".login-popup-close").on('click', function () {
             $(this).parents('.login-popup').hide();
-        });
-
-        $("form.support").submit(function(event) {
-          event.preventDefault();
-          var $this = $(this);
-          var csrfToken = $this.find('[name=csrfmiddlewaretoken]').val();
-          var contentionPk = $this.attr('data-contention-pk');
-          var premisePk = $this.attr('data-premise-pk');
-          var action = $this.attr('data-action');
-          $.ajax('/api/v1/arguments/' + contentionPk + '/premises/' + premisePk + '/support/',
-            {
-              type: action,
-              headers: {
-                'X-CSRFToken': csrfToken
-              },
-              success: function () {
-                if(action === 'POST') {
-                  $this.attr('data-action', 'DELETE');
-                  $this.find('input[type=submit]').val('undo');
-                } else {
-                  $this.attr('data-action', 'POST');
-                  $this.find('input[type=submit]').val('support');
-                }
-              }
-            });
         });
     });
 
