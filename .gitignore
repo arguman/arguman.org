@@ -4,6 +4,5 @@ settings_local.py
 .DS_Store
 *.gml
 .vagrant
-VagrantFile
 env/
 .idea/
