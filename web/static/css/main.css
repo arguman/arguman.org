@@ -115,6 +115,11 @@ body {
     border-bottom: none;
 }
 
+.argument-list .user {
+    overflow: hidden;
+    max-height: 1.4em;
+}
+
 .argument-list .user time {
     font-weight: normal;
     color: #8f8f8f;
@@ -318,6 +323,8 @@ li.base-premises {
     background: #f4f4f4;
     z-index: 9999;
     top: 0;
+    height: 82px;
+    overflow: hidden;
     /*border-bottom: 1px solid #c5c5c5;*/
 }
 
@@ -350,6 +357,7 @@ li.base-premises {
 #app {
     margin-bottom: 40px;
     position: absolute;
+    padding-left: 20px;
 }
 
 #app canvas {
@@ -794,18 +802,21 @@ li.base-premises {
 #app.list-view .thread-item .thread-branches a.because { color: #85ad63; }
 #app.list-view .thread-item .thread-branches a.however { color: #ffbe86; }
 
+
 #app.list-view .thread-item .thread-branches a.but span { background-color: #ffd8d5; color: #d07d7d; }
 #app.list-view .thread-item .thread-branches a.because span { background-color: #c8ffb3; color: #85ad63; }
 #app.list-view .thread-item .thread-branches a.however span { background-color: #fff1a4; color: #ffbe86; }
+
 
 #app.list-view .thread-item .thread-branches span {
     display: inline-block;
     text-align: center;
     width: 20px;
-    height: 20px;
+    height: 19px;
     border-radius: 50%;
     margin-left: 5px;
     color: #333333;
+    padding-top: 1px;
 }
 
 #app.list-view .thread-item .thread-supporters {
@@ -1262,15 +1273,15 @@ form .parent-premise strong {
     height: 60px;
 }
 
-.tree-view .root-connector:before {
+/*.tree-view .root-connector:before {
     content: "";
     display: inline-block;
     position: absolute;
     height: 80px;
-    width: 4px;
+    width: 3px;
     background: #E1E1E1;
     right: 0;
-}
+}*/
 
 #app.empty .root {
     display: none;
