@@ -1,10 +1,5 @@
-    <div>
-        <p>
-        <span style="color:darkred">new premise:</span>
-        <a href="{{ BASE_URL }}{{ premise.get_absolute_url }}">{{ premise.text }}</a>
-        </p>
-        <p>
-        <span style="color:darkred">argument:</span>
-        <a href="{{ BASE_URL }}{{ premise.argument.get_absolute_url }}">{{ premise.argument.title }}</a>
-        </p>
-    </div>
+{{ premise.user }} added a new {{ premise.get_premise_type_display }}
+
+{{ premise.argument.get_full_url }}#{{ premise.pk }}
+
+You can turn off email notifications in your profile settings.

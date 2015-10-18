@@ -1,11 +1,18 @@
-    <div>
-        <p>
-        <span style="color:darkred">new premise:</span>
-        <a href="{{ BASE_URL }}{{ premise.argument.get_absolute_url }}#{{ premise.id }}">{{ premise.text }}</a>
-        </p>
-        <p>
-        <span style="color:darkred">argument:</span>
-        <a href="{{ BASE_URL }}{{ premise.argument.get_absolute_url }}">{{ premise.argument.title }}</a>
-        </p>
-    </div>
+<div style="padding: 10px; border-radius: 5px;">
+{{ premise.user }} added a new <b>{{ premise.get_premise_type_display }}</b>:
+</div>
 
+<div style="padding: 10px; background: #FFF8B2; border-radius: 5px;">
+    <a style="color: black; text-decoration: none;" href="{{ premise.argument.get_full_url }}#{{ premise.pk }}">{{ premise.text }}</a>
+</div>
+
+<div style="padding: 10px; border-radius: 5px;">
+<b>related argument</b>: <br>
+<a style="color: black;" href="{{ premise.argument.get_full_url }}">{{ premise.argument }}</a>
+</div>
+
+<div style="padding: 10px; color: gray;">
+    You can turn off email notifications in your profile settings. <br>
+    ---------------------------------<br>
+    {{ premise.date_creation }}
+</div>

@@ -209,7 +209,8 @@ def create_premise_entry(premise, **kwargs):
         - Report
     That models have `get_news_type` method.
     """
-    user_emails = [user.email for user in premise.parent_users if user.email and user.notification_email]
+    user_emails = [user.email for user in premise.parent_users
+                   if user.email and user.notification_email]
     send_complex_mail('New premise for %s'% premise.argument.title,
                       'email/premise_notification.txt',
                       'email/premise_notification.html',
