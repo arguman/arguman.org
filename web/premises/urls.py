@@ -11,6 +11,7 @@ from premises.views import (ContentionDetailView, HomeView,
                             StatsView)
 
 
+
 urlpatterns = patterns('',
    url(r'^$', HomeView.as_view(), name='home'),
    url(r'^notifications$', NotificationsView.as_view(), name='notifications'),

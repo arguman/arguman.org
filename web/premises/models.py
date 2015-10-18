@@ -223,9 +223,21 @@ class Premise(DeletePreventionMixin, models.Model):
     def __unicode__(self):
         return smart_unicode(self.text)
 
+
     @models.permalink
     def get_absolute_url(self):
         return 'premise_detail', [self.argument.slug, self.pk]
+
+    @property
+    def parent_users(self):
+        current = self
+        parent_users_ = []
+        while current.parent:
+            if current.parent.user != self.user:
+                parent_users_.append(current.parent.user)
+            current = current.parent
+        return list(set(parent_users_))
+
 
     def update_sibling_counts(self):
         count = self.get_siblings().count()
@@ -271,6 +283,7 @@ class Premise(DeletePreventionMixin, models.Model):
     def get_actor(self):
         # Encapsulated for newsfeed app.
         return self.user
+
 
     def get_newsfeed_type(self):
         return NEWS_TYPE_PREMISE

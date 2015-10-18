@@ -1,0 +1,11 @@
+    <div>
+        <p>
+        <span style="color:darkred">new premise:</span>
+        <a href="{{ BASE_URL }}{{ premise.argument.get_absolute_url }}#{{ premise.id }}">{{ premise.text }}</a>
+        </p>
+        <p>
+        <span style="color:darkred">argument:</span>
+        <a href="{{ BASE_URL }}{{ premise.argument.get_absolute_url }}">{{ premise.argument.title }}</a>
+        </p>
+    </div>
+
