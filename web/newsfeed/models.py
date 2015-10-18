@@ -1,11 +1,11 @@
 from datetime import datetime
-from django.core.mail import send_mail
 from django.db.models.signals import post_delete, post_save
 
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 
-from newsfeed.utils import get_collection, send_complex_mail
+from newsfeed.utils import get_collection
+from main.utils import send_complex_mail
 from premises.models import Contention, Premise, Report
 from premises.signals import (
     reported_as_fallacy, added_premise_for_premise,
@@ -215,8 +215,8 @@ def create_premise_entry(premise, **kwargs):
                       'email/premise_notification.txt',
                       'email/premise_notification.html',
                       'info@arguman.org',
-                      user_emails,
-                      {'premise': premise})
+                      bcc=user_emails,
+                      context={'premise': premise})
 
     Entry.objects.create(
         object_id=premise.id,
