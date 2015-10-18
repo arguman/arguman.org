@@ -3,3 +3,5 @@
 {{ premise.argument.get_full_url }}#{{ premise.pk }}
 
 You can turn off email notifications in your profile settings.
+http://arguman.org/auth/profile
+
