@@ -686,5 +686,6 @@ class ReportView(NextURLMixin, LoginRequiredMixin, CreateView):
         reported_as_fallacy.send(sender=self, report=form.instance)
         return redirect(
             premise.get_parent().get_absolute_url() +
-            self.get_next_parameter()
+            self.get_next_parameter() +
+            "#%s" % premise.pk
         )
