@@ -103,9 +103,11 @@ class Contention(DeletePreventionMixin, models.Model):
 
     def serialize(self):
         premises = Premise.objects.filter(
-            argument__id=self.id).prefetch_related('supporters', 'children')
+            argument__id=self.id,
+            is_approved=True).prefetch_related('supporters', 'children')
         premises_users = Premise.objects.filter(
-            argument__id=self.id).select_related('user')
+            argument__id=self.id,
+            is_approved=True).select_related('user')
 
         supporter_lookup = {}
         children_lookup = {}
@@ -114,7 +116,7 @@ class Contention(DeletePreventionMixin, models.Model):
             supporter_lookup[premise.id] = [supporter.serialize()
                                           for supporter in
                                           premise.supporters.all()]
-            children_lookup[premise.id] = [child for child in premise.children.all()]
+            children_lookup[premise.id] = [child for child in premise.children.filter(is_approved=True)]
 
         for premise in premises_users:
             user_lookup[premise.id] = premise.user.serialize()
@@ -128,7 +130,7 @@ class Contention(DeletePreventionMixin, models.Model):
                 'premises': [premise.serialize(supporter_lookup,
                                                children_lookup,
                                                user_lookup)
-                             for premise in self.premises.all()],
+                             for premise in self.premises.filter(is_approved=True)],
                 'date_creation': self.date_creation}
 
 
