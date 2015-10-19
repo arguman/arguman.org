@@ -195,6 +195,9 @@
                 firstPremise.css({
                     marginTop: 20
                 });
+		if (rootConnector) rootConnector.css({
+		    top: 90
+		});
             }
 
         },

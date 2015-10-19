@@ -7,7 +7,7 @@
     <li class="news{% ifequal tab_class "news" %} active{% endifequal %}">
         <a href="{% url "contentions_latest" %}">{% trans "Recently Updated" %}</a></li>
     <li class="stats{% ifequal tab_class "stats" %} active{% endifequal %}">
-        <a href="{% url "contentions_stats" %}?what=active_users&days=7">{% trans "Statistics" %}</a></li>
+        <a href="{% url "contentions_stats" %}?what=crowded_contentions&days=7">{% trans "Statistics" %}</a></li>
     <li class="search{% ifequal tab_class "search" %} active{% endifequal %}">
         <a href="{% url "contentions_search" %}">{% trans "Search" %}</a>
     </li>
