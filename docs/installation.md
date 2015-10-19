@@ -1,65 +1,78 @@
-Proje Kurulumu
+Project Setup
 ==================
 
-Gereksinimler
+Requirements
 
 1. Python 2.7x
 2. MongoDB
 3. Redis
 
-## Linux için PIP ve Virtual Environment kurulumu
+## Environment Setup for Linux
 
     sudo apt-get install python-pip python-dev build-essential
     sudo apt-get install python-pip
     sudo pip install --upgrade pip
     sudo pip install --upgrade virtualenv
 
-## MacOSX için PIP ve Virtual Environment kurulumu
+Install Mongodb:
+    sudo apt-get install mongodb
 
-MacOSX için `Homrbrew` ve `XCode command line tools` un kurulu olmasi gerekiyor.
+Install Redis:
 
-HomeBrew kurulu değilse şu sekilde kurabilirsiniz.
+    sudo apt-get install redis-server
 
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-XCode command line tools kurulu değilse şu şekilde kurabilirsiniz.
-
-    xcode-select --install
-    
-Kurulumun geri kalanı için
-
-    sudo easy_install pip
-    sudo apt-get install python-pip
-    sudo pip install --upgrade pip
-    sudo pip install --upgrade virtualenv
-
-Virtual Environment Oluşturmak
+Create a virtual environment
 
     virtualenv argumanorg
     source argumanorg/bin/active
 
-Projeyi klonlamak ve gereksinimlerini kurmak
+Clone project and install requirements
 
     git clone git@github.com:arguman/arguman.org.git
     pip install -r arguman/requirements.pip
 
-MongoDB yi çalıştırmak (http://docs.mongodb.org/manual/installation/)
-    
-    mongod
 
-MacOSX icin Redisi Kurmak
+## Environment Setup for Mac OSX 
+
+Note for El Capitan users: El Capitan introduces a new security feature called System Integrity Protection. You may need to disable this. See: https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/El_Capitan_and_Homebrew.md 
+
+You need `Homebrew` and `Xcode Command Line Tools`
+
+Install homebrew:
+
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Install Xcode Command Line Tools
+
+    xcode-select --install
+
+Install and start mongodb
+    
+    brew install mongodb 
+
+Install Redis
 
     brew install redis-server
 
-Linux icin Redisi Kurmak (Son versiyon icin https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis)
+Install PIP and VirtualEnv
 
-    sudo apt-get install redis-server
+    sudo easy_install pip
+    sudo pip install --upgrade pip
+    sudo pip install --upgrade virtualenv
 
-Redisi Calistirmak
+Create a virtual environment
 
-    redis-server
+    virtualenv argumanorg
+    source argumanorg/bin/active
 
-Projeyi Çalıştırmak
+Clone project and install requirements
+
+    git clone git@github.com:arguman/arguman.org.git
+    pip install -r arguman/requirements.pip
+
+
+## Run Project
+
     
     python manage.py migrate
     python manage.pr runserver
