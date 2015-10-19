@@ -607,7 +607,8 @@ class PremiseSupportView(NextURLMixin, LoginRequiredMixin, View):
                                  user=self.request.user)
         return redirect(
             premise.get_parent().get_absolute_url() +
-            self.get_next_parameter()
+            self.get_next_parameter() +
+            "#%s" % premise.pk
         )
 
     def get_contention(self):
@@ -620,7 +621,8 @@ class PremiseUnsupportView(PremiseSupportView):
         premise.supporters.remove(self.request.user)
         return redirect(
             premise.get_parent().get_absolute_url() +
-            self.get_next_parameter()
+            self.get_next_parameter() + 
+            "#%s" % premise.pk
         )
 
     post = delete
