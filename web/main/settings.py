@@ -180,7 +180,7 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 DEFAULT_FROM_EMAIL = 'info@arguman.org'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'main.postmark_backend.EmailBackend'
 
 
 REST_FRAMEWORK = {
