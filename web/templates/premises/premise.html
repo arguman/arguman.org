@@ -75,13 +75,13 @@
                 {% if premise.user != user %}
                     {% if user in premise.supporters.all %}
                         <form class="support" action="{% url "unsupport_premise" contention.slug premise.pk %}"
-                              method="post">
+                              method="post" data-contention-pk="{{ contention.pk }}" data-premise-pk="{{ premise.pk }}" data-action="DELETE" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
                             {% csrf_token %}
                             <input type="submit" value="{% trans "undo" %}"/>
                         </form>
                     {% else %}
                         <form class="support" action="{% url "support_premise" contention.slug premise.pk %}"
-                              method="post">
+                              method="post" data-contention-pk="{{ contention.pk }}" data-premise-pk="{{ premise.pk }}" data-action="POST" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
                             {% csrf_token %}
                             <input type="submit" value="{% trans "support" %}"/>
                         </form>
