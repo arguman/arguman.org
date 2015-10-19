@@ -48,7 +48,9 @@ INSTALLED_APPS = (
     'premises',
     'newsfeed',
     'blog',
-    'api'
+    'api',
+
+    'debug_toolbar'
 
 )
 

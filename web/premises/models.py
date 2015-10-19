@@ -158,10 +158,7 @@ class Contention(DeletePreventionMixin, models.Model):
         return user
 
     def width(self):
-        children = self.published_children()
-        return children.count() + reduce(operator.add,
-                                         map(operator.methodcaller("width"),
-                                             children), 0)
+        return self.published_children(ignore_parent=True).count()
 
     def get_actor(self):
         """
@@ -267,12 +264,7 @@ class Premise(DeletePreventionMixin, models.Model):
         return markdown(escape(self.text), safe_mode=True)
 
     def width(self):
-        total = self.published_children().count()
-
-        for child in self.published_children():
-            total += child.width()
-
-        return total
+        return self.published_children().count()
 
     def fallacies(self):
         fallacies = set(self.reports.values_list("fallacy_type", flat=True))
@@ -283,7 +275,6 @@ class Premise(DeletePreventionMixin, models.Model):
     def get_actor(self):
         # Encapsulated for newsfeed app.
         return self.user
-
 
     def get_newsfeed_type(self):
         return NEWS_TYPE_PREMISE
@@ -301,7 +292,7 @@ class Premise(DeletePreventionMixin, models.Model):
         return self.parent or self.argument
 
     def recent_supporters(self):
-        return self.supporters.all()[0:5]
+        return self.supporters.values("id", "username")[0:5]
 
     def children_by_premise_type(self, premise_type=None):
         return self.published_children().filter(premise_type=premise_type)
