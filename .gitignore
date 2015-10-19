@@ -1,4 +1,5 @@
 db.sqlite3
+*.rdb
 settings_local.py
 *.pyc
 .DS_Store

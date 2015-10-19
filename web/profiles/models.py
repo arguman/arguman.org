@@ -20,6 +20,10 @@ class Profile(AbstractUser):
     following = models.ManyToManyField("self", symmetrical=False)
     notification_email = models.BooleanField(_('email notification'), default=True)
 
+    def serialize(self):
+        return {'username': self.username,
+                'email': self.email}
+
     @property
     def followers(self):
         # todo: find a way to make reverse relationships
