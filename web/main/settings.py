@@ -49,9 +49,6 @@ INSTALLED_APPS = (
     'newsfeed',
     'blog',
     'api',
-
-    'debug_toolbar'
-
 )
 
 MIDDLEWARE_CLASSES = (

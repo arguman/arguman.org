@@ -2198,11 +2198,12 @@ div.load-more {
 
 #list-view-indicator {
     position: absolute;
-    padding: 10px;
-    right: 155px;
+    padding: 10px 15px;
+    right: 144px;
     z-index: 9999999;
     top: 82px;
     width: 200px;
+    font-size: 16px;
     display: none;
 }
 
@@ -2227,9 +2228,19 @@ div.load-more {
     border-width: 6px;
     margin-left: -10px;
 }
+
 .tooltip:before {
     border-color: rgba(65, 75, 82, 0);
     border-bottom-color: #B3B3B3;
     border-width: 10px;
     margin-left: -16px;
+}
+
+.tooltip .close {
+    display: inline-block;
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    background: #B3B3B3;
+    border: none;
 }

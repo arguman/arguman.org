@@ -170,11 +170,6 @@
                     left: rootPosition,
                     top: root.height() + 30
                 });
-
-
-               // firstPremise.css({
-                 //   marginTop: 60
-                //});
             }
 
             if (this.width < window.innerWidth) {
@@ -195,9 +190,11 @@
                 firstPremise.css({
                     marginTop: 20
                 });
-		if (rootConnector) rootConnector.css({
-		    top: 90
-		});
+		        if (rootConnector)  {
+                    rootConnector.css({
+                        top: 90
+                    });
+                }
             }
 
         },
@@ -238,6 +235,9 @@
             this.setTreeWidth();
             this.setMainContentionPosition();
             this.$el.css("visibility", "visible");
+            if ($(".premise").length > 50) {
+                $("#list-view-indicator").show();
+            } 
         }
     });
 
@@ -415,6 +415,13 @@
         $(".login-popup-close").on('click', function () {
             $(this).parents('.login-popup').hide();
         });
+
+        var hideToolTips = function () {
+            $('.tooltip').hide();
+        };
+        
+        $(".tooltip .close").on('click', hideToolTips);
+        $(window).on('scroll', hideToolTips);
     });
 
 })(window.arguman || (window.arguman = {}));

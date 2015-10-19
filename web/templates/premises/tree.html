@@ -4,9 +4,11 @@
     {% for premise in premises %}
         <li id="premise-{{ premise.id }}" class="child-premise premise-item">
             {% include "premises/premise.html" %}
+            {% if premise.published_children.exists %}
             {% with template_name="premises/tree.html" premises=premise.published_children %}
                 {% include template_name %}
             {% endwith %}
+            {% endif %}
         </li>
     {% endfor %}
 </ul>
