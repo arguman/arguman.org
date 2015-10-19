@@ -6,7 +6,7 @@
 
 Users assert contentions to be discussed, supported, prooved or disprooved and argue with premises using because, but, or however conjuctions.
 
-![](http://i.imgur.com/yEjemt1.png)
+![image](https://cloud.githubusercontent.com/assets/182906/10586355/674acef0-76a4-11e5-9902-3dd7184cb0b3.png)
 
 ## Benefits
 
