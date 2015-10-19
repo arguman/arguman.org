@@ -1,66 +1,69 @@
-Proje Kurulumu
+Installiation
 ==================
 
-Gereksinimler
+Requirements
 
 1. Python 2.7x
 2. MongoDB
 3. Redis
 
-## Linux için PIP ve Virtual Environment kurulumu
+## For Linux, PIP an Virtual Environment Setup
 
     sudo apt-get install python-pip python-dev build-essential
     sudo apt-get install python-pip
     sudo pip install --upgrade pip
     sudo pip install --upgrade virtualenv
 
-## MacOSX için PIP ve Virtual Environment kurulumu
+## For MacOSX, PIP and Virtual Environment Setup
 
-MacOSX için `Homrbrew` ve `XCode command line tools` un kurulu olmasi gerekiyor.
+For MacOSX users, `Homrbrew` and `XCode command line tools` are needed.
 
-HomeBrew kurulu değilse şu sekilde kurabilirsiniz.
+HomeBrew setup:
 
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-XCode command line tools kurulu değilse şu şekilde kurabilirsiniz.
+XCode command line tools setup:
 
     xcode-select --install
     
-Kurulumun geri kalanı için
+And Then:
 
     sudo easy_install pip
     sudo apt-get install python-pip
     sudo pip install --upgrade pip
     sudo pip install --upgrade virtualenv
 
-Virtual Environment Oluşturmak
+For Virtual Environment:
 
     virtualenv argumanorg
     source argumanorg/bin/active
 
-Projeyi klonlamak ve gereksinimlerini kurmak
+And you need to clone project and install requirements
 
     git clone git@github.com:arguman/arguman.org.git
     pip install -r arguman/requirements.pip
 
-MongoDB yi çalıştırmak (http://docs.mongodb.org/manual/installation/)
+Start MongoDB (http://docs.mongodb.org/manual/installation/)
     
     mongod
 
-MacOSX icin Redisi Kurmak
+For MacOSX, setup Redis
 
     brew install redis-server
 
-Linux icin Redisi Kurmak (Son versiyon icin https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis)
+For Linux setup Redis (For latest version of Redis https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis)
 
     sudo apt-get install redis-server
 
-Redisi Calistirmak
+Start Redis:
 
     redis-server
 
-Projeyi Çalıştırmak
+Start the application of arguman:
     
     python manage.py migrate
     python manage.pr runserver
 
+
+The End
+:tada:
