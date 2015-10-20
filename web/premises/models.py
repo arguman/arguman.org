@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import operator
+from django.contrib.auth.models import User
 import os
 
 from uuid import uuid4
@@ -99,6 +100,39 @@ class Contention(DeletePreventionMixin, models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.title)
+
+    def serialize(self):
+        premises = Premise.objects.filter(
+            argument__id=self.id,
+            is_approved=True).prefetch_related('supporters', 'children')
+        premises_users = Premise.objects.filter(
+            argument__id=self.id,
+            is_approved=True).select_related('user')
+
+        supporter_lookup = {}
+        children_lookup = {}
+        user_lookup = {}
+        for premise in premises:
+            supporter_lookup[premise.id] = [supporter.serialize()
+                                          for supporter in
+                                          premise.supporters.all()]
+            children_lookup[premise.id] = [child for child in premise.children.filter(is_approved=True)]
+
+        for premise in premises_users:
+            user_lookup[premise.id] = premise.user.serialize()
+
+        return {'id': self.id,
+                'user': self.user.serialize(),
+                'title': self.title,
+                'description': self.description,
+                'owner': self.owner,
+                'sources': self.sources,
+                'premises': [premise.serialize(supporter_lookup,
+                                               children_lookup,
+                                               user_lookup)
+                             for premise in self.premises.filter(is_approved=True)],
+                'date_creation': self.date_creation}
+
 
     @models.permalink
     def get_absolute_url(self):
@@ -219,6 +253,23 @@ class Premise(DeletePreventionMixin, models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.text)
+
+    def serialize(self, supporter_lookup, children_lookup, user_lookup):
+        return {'id': self.id,
+                'children': [child.serialize(supporter_lookup,
+                                             children_lookup,
+                                             user_lookup)
+                             for child in children_lookup.get(self.id)],
+                'supporters': supporter_lookup.get(self.id),
+                'user': user_lookup.get(self.id),
+                'premise_type': self.premise_type,
+                'text': self.text,
+                'sources': self.sources,
+                'is_approved': self.is_approved,
+                'collapsed': self.collapsed,
+                'max_sibling_count': self.max_sibling_count,
+                'sibling_count': self.sibling_count,
+                'child_count': self.child_count}
 
 
     @models.permalink
