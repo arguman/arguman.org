@@ -48,3 +48,6 @@ arguman.org is an open source project which developed by community, If you want 
 
 - Burak Arıkan
 - Kadir Akkara Yardımcı
+
+### Subreddit
+<https://www.reddit.com/r/arguman>
