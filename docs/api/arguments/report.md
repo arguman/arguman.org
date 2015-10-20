@@ -1,21 +1,21 @@
-Önermeye Safsata bildirimi yapmak
+Reporting Fallacies
 =======================
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/arguments/`<id>`/premises/`<id>`/report/|
 | Method          | POST               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
 #####Payload - Raw
 
-| Paramether    | Type     | Zorunlu Alan |
+| Paramether    | Type     | Required |
 | ------------- | ---------| ------------ |
-| fallacy_type  | String   | Evet         |
+| fallacy_type  | String   | Yes          |
 
 
-**Saftasat tipleri için:**
+**Fallacy Types:**
 
 https://github.com/arguman/arguman.org/blob/master/web/premises/fallacies.json
 

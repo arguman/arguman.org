@@ -1,4 +1,4 @@
-Önermeyi Desteklemek
+Supporting a premise
 =======================
 
 | Key             | Value              |
@@ -6,7 +6,7 @@
 | URL             | /api/v1/arguments/`<id>`/premises/`<id>`/support/|
 | Method          | POST               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
 #####Request
@@ -22,7 +22,7 @@ curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
   `<Response body is empty>`
 
 
-Önermeyi Desteklemekten Vazgeçmek
+Unsupporting a premise
 =======================
 
 | Key             | Value              |
@@ -30,7 +30,7 @@ curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
 | URL             | /api/v1/arguments/`<id>`/premises/`<id>`/support/|
 | Method          | DELETE               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
 #####Request
@@ -46,7 +46,7 @@ curl -X DELETE  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f23990
   `<Response body is empty>`
 
 
-Önermeyi Deskeleyenlerin Listesini Almak
+Getting the supporters of a premise
 ========================================
 
 | Key             | Value              |

@@ -1,17 +1,17 @@
-Kullanıcıya Özel Haber Kaynağını Almak
+Getting the private newsfeed
 ========================================
 
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/newsfeed/private/|
-| Method          | GET               |
+| Method          | GET                |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
-#####Ek Bilgi
-1. Sayfa değiştirmek için `?page=<page_number>` şeklinde sayfa değiştirebilirsiniz
-2. Varsayılan limitleme sayfa başına 20 adet. bunu değiştirmek için `?limit=<limit_number>` şeklinde istek yapabilirsiniz.
+#####Additional Information
+1. You can use `?page=<page_number>` to change pages.
+2. Default result limit is 20 per page. You can specify a custom limit by `?limit=<limit_number>`
 
 #####Request
 

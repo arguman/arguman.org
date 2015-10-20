@@ -1,21 +1,21 @@
-Argüman Eklemek
+Creating a new Argument
 =======================
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/arguments/ |
 | Method          | POST               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
 #####Payload - Raw
 
-| Paramether    | Type     |  Zorunlu Alan |
+| Paramether    | Type     |  Required     |
 | ------------- | ---------| --------------|
-| title         | String   |  Evet         |
-| sources       | String   |  Hayır        |
-| owner         | String   |  Hayır        |
-| is_published  | Boolean  |  Evet         |
+| title         | String   |  Yes          |
+| sources       | String   |  No           |
+| owner         | String   |  No           |
+| is_published  | Boolean  |  Yes          |
 
 
 #####Request

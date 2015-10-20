@@ -1,14 +1,14 @@
-Argüman Silmek
+Deleting an Argument
 =======================
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/arguments/`<id>`/ |
-| Method          | DELETE               |
+| Method          | DELETE             |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
-#####Ek Bilgi
-Argümanı sadece ekleyen kişi silebilir.
+#####Additional Info
+Only the owner can delete their arguments.
 
 #####Request
 
