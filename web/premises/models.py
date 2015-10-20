@@ -109,7 +109,7 @@ class Contention(DeletePreventionMixin, models.Model):
                     .prefetch_related('supporters', 'reports')
                     .annotate(
                         report_count=Count('reports'),
-                        supporter_count=Count('supporters')
+                        supporter_count=Count('supporters', distinct=True)
                     ))
         
         return {
