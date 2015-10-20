@@ -25,7 +25,7 @@ Arguman.org’s aim is arguments to be mapped successfully by many users.
 
 arguman.org is an open source project which developed by community, If you want to contribute technically or intellectually please don’t hesitate.
 
-### Contributors
+## Contributors
 
 - Fatih Erikli
 - Tuna Vargı
@@ -49,5 +49,5 @@ arguman.org is an open source project which developed by community, If you want 
 - Burak Arıkan
 - Kadir Akkara Yardımcı
 
-### Subreddit
+## Subreddit
 <https://www.reddit.com/r/arguman>
