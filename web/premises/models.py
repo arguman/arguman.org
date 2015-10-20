@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
 import operator
-from django.contrib.auth.models import User
 import os
 
 from uuid import uuid4
@@ -13,10 +12,12 @@ from django.core import validators
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.db import models
+from django.db.models import Count
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 
 from newsfeed.constants import (
     NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION)
@@ -102,37 +103,32 @@ class Contention(DeletePreventionMixin, models.Model):
         return smart_unicode(self.title)
 
     def serialize(self):
-        premises = Premise.objects.filter(
-            argument__id=self.id,
-            is_approved=True).prefetch_related('supporters', 'children')
-        premises_users = Premise.objects.filter(
-            argument__id=self.id,
-            is_approved=True).select_related('user')
-
-        supporter_lookup = {}
-        children_lookup = {}
-        user_lookup = {}
-        for premise in premises:
-            supporter_lookup[premise.id] = [supporter.serialize()
-                                          for supporter in
-                                          premise.supporters.all()]
-            children_lookup[premise.id] = [child for child in premise.children.filter(is_approved=True)]
-
-        for premise in premises_users:
-            user_lookup[premise.id] = premise.user.serialize()
-
-        return {'id': self.id,
-                'user': self.user.serialize(),
-                'title': self.title,
-                'description': self.description,
-                'owner': self.owner,
-                'sources': self.sources,
-                'premises': [premise.serialize(supporter_lookup,
-                                               children_lookup,
-                                               user_lookup)
-                             for premise in self.premises.filter(is_approved=True)],
-                'date_creation': self.date_creation}
-
+        premises = (self.premises
+                    .filter(is_approved=True)
+                    .select_related('user')
+                    .prefetch_related('supporters', 'reports')
+                    .annotate(
+                        report_count=Count('reports'),
+                        supporter_count=Count('supporters')
+                    ))
+        
+        return {
+            'id': self.id,
+            'user': self.user.serialize(),
+            'title': self.title,
+            'description': self.description,
+            'owner': self.owner,
+            'sources': self.sources,
+            'is_published': self.is_published,
+            'slug': self.slug,
+            'absolute_url': self.get_absolute_url(),
+            'language': self.language,
+            'full_url': self.get_full_url(),
+            'premises': [premise.serialize(premises) 
+                         for premise in premises
+                         if premise.parent_id is None],
+            'date_creation': self.date_creation
+        }
 
     @models.permalink
     def get_absolute_url(self):
@@ -254,23 +250,35 @@ class Premise(DeletePreventionMixin, models.Model):
     def __unicode__(self):
         return smart_unicode(self.text)
 
-    def serialize(self, supporter_lookup, children_lookup, user_lookup):
-        return {'id': self.id,
-                'children': [child.serialize(supporter_lookup,
-                                             children_lookup,
-                                             user_lookup)
-                             for child in children_lookup.get(self.id)],
-                'supporters': supporter_lookup.get(self.id),
-                'user': user_lookup.get(self.id),
-                'premise_type': self.premise_type,
-                'text': self.text,
-                'sources': self.sources,
-                'is_approved': self.is_approved,
-                'collapsed': self.collapsed,
-                'max_sibling_count': self.max_sibling_count,
-                'sibling_count': self.sibling_count,
-                'child_count': self.child_count}
-
+    def serialize(self, premise_lookup):
+        return {
+            'id': self.id,
+            'children': [
+                premise.serialize(premise_lookup)
+                for premise in premise_lookup
+                if premise.parent_id == self.id
+            ],
+            'recent_supporters': [
+                supporter.serialize()
+                for supporter in self.supporters.all()[:5]
+            ],
+            'supporter_count': self.supporter_count,
+            'user': self.user.serialize(),
+            'premise_type': self.premise_type,
+            'premise_type_label': self.get_premise_type_display(),
+            'premise_class': self.premise_class(),
+            'text': self.text,
+            'formatted_text': self.formatted_text,
+            'sources': self.sources,
+            'is_approved': self.is_approved,
+            'collapsed': self.collapsed,
+            'max_sibling_count': self.max_sibling_count,
+            'sibling_count': self.sibling_count,
+            'child_count': self.child_count,
+            'date_creation': self.date_creation,
+            'fallacies': self.fallacies,
+            'fallacy_count': self.report_count
+        }
 
     @models.permalink
     def get_absolute_url(self):
@@ -318,7 +326,8 @@ class Premise(DeletePreventionMixin, models.Model):
         return self.published_children().count()
 
     def fallacies(self):
-        fallacies = set(self.reports.values_list("fallacy_type", flat=True))
+        fallacies = set(report.fallacy_type 
+                        for report in self.reports.all())
         mapping = dict(FALLACY_TYPES)
         return [(mapping.get(fallacy) or fallacy)
                 for fallacy in fallacies]

@@ -38,7 +38,10 @@ def get_ip_address(request):
 
 
 class ContentionDetailView(DetailView):
-    model = Contention
+    queryset = (Contention.objects
+                .select_related('user')
+                .prefetch_related('premises'))
+    context_object_name = 'contention'
 
     def get_template_names(self):
         view = self.request.GET.get("view")
@@ -65,6 +68,7 @@ class ContentionDetailView(DetailView):
             parent_premise=self.get_parent(),
             path=contention.get_absolute_url(),
             edit_mode=edit_mode,
+            serialized=contention.serialize(),
             **kwargs)
 
 

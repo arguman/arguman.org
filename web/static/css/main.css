@@ -477,23 +477,6 @@ li.base-premises {
         color: #a9a9a9;
     }
 
-    .premise-user p {
-      display: inline-block;
-    }
-
-    .premise-user > p > a:first-child {
-      //text-decoration: none;
-      display: inline;
-    }
-
-    .premise-user p:first-of-type{
-      padding-right: 0px;
-    }
-
-    .premise-user .time-ago {
-        padding-left: 0;
-    }
-
     .premise-sources a {
         color: #b5b5b5;
         overflow: hidden;
@@ -502,7 +485,21 @@ li.base-premises {
         text-overflow: ellipsis;
     }
 
-    .tree-view .premise-sources a { width: 240px; }
+    .premise-user {
+        overflow: hidden;
+    }
+
+    .premise-user a {
+        width: auto;
+    }
+
+    .premise-user p {
+      float: left;
+      margin: 0;
+      padding: 0 0 7px 10px;
+    }
+    
+    .tree-view .premise-sources .links a { width: 240px; }
 
 .tree-view .main-premise-content {
     padding-top: 60px;
@@ -1129,7 +1126,6 @@ form .parent-premise strong {
 }
 
 .reported_as_fallacy .fallacy {
-    font-size: 15px;
     color: #676568;
 }
 

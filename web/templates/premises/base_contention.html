@@ -2,11 +2,11 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}{{ contention.title }}{% endblock %}
+{% block title %}{{ serialized.title }}{% endblock %}
 
 {% block extra-meta %}
-    <meta property="og:description" content="{{ contention.owner }}"/>
-    <meta name="canonical" content="{{ contention.get_full_url }}"/>
+    <meta property="og:description" content="{{ serialized.owner }}"/>
+    <meta name="canonical" content="{{ serialized.full_url }}"/>
 {% endblock %}
 
 {% block body-attrs %} id="contention-detail"{% endblock %}
@@ -18,12 +18,12 @@
         <nav class="contention-nav">
             <ul>
                 <li>
-                    {% trans "sender:" %} <a href="{% url "auth_profile" contention.user.username %}">{{ contention.user|lower }}</a>
+                    {% trans "sender:" %} <a href="{% url "auth_profile" serialized.user.username %}">{{ serialized.user.username|lower }}</a>
                 </li>
                 <li class="original-discourse">
                     {% trans "original discourse:" %}
-                    {% if contention.sources or contention.owner %}
-                        {{ contention.owner }}
+                    {% if serialized.sources or serialized.owner %}
+                        {{ serialized.owner }}
                     {% else %}
                         {% trans "Unspecified" %}
                     {% endif %}
@@ -35,15 +35,15 @@
         {% if edit_mode %}
         <nav class="contention-admin-menu">
             <ul>
-                <li><a href="{% url "contention_edit" contention.slug %}">{% trans "Edit" %}</a></li>
+                <li><a href="{% url "contention_edit" serialized.slug %}">{% trans "Edit" %}</a></li>
                 <li>
-                    {% if contention.is_published %}
-                    <form action="{% url "contention_unpublish" contention.slug %}" method="post">
+                    {% if serialized.is_published %}
+                    <form action="{% url "contention_unpublish" serialized.slug %}" method="post">
                         {% csrf_token %}
                         <input type="submit" value="{% trans "Unpublish" %}"/>
                     </form>
                     {% else %}
-                    <form action="{% url "contention_publish" contention.slug %}" method="post">
+                    <form action="{% url "contention_publish" serialized.slug %}" method="post">
                         {% csrf_token %}
                         <input type="submit" value="{% trans "Publish" %}"/>
                     </form>
@@ -64,8 +64,8 @@
         <nav class="share contention-nav">
             <ul id="view-switcher">
                 <li>{% trans "Share" %}</li>
-                <li><a target="_blank" href="https://www.facebook.com/sharer.php?u={{ contention.get_full_url }}" class="tree-view active">Facebook</a> |
-                    <a target="_blank" href="http://twitter.com/home?status={{ contention.title }} {{ contention.get_full_url }}" class="list-view">Twitter</a></li>
+                <li><a target="_blank" href="https://www.facebook.com/sharer.php?u={{ serialized.full_url }}" class="tree-view active">Facebook</a> |
+                    <a target="_blank" href="http://twitter.com/home?status={{ serialized.title }} {{ serialized.full_url }}" class="list-view">Twitter</a></li>
             </ul>
         </nav>
 

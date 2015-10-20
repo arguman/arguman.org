@@ -212,7 +212,7 @@
             var root = this.$el.find(".root"),
                 mainContention = $(this.mainContention);
 
-            var treeWidth = parseInt(this.$el.data("width")) * (this.premiseWidth * 2);
+            var treeWidth = parseInt(this.$el.data("width")) * (this.premiseWidth * 4);
             this.width = treeWidth;
             this.$el.width(treeWidth);
 
@@ -235,7 +235,7 @@
             this.setTreeWidth();
             this.setMainContentionPosition();
             this.$el.css("visibility", "visible");
-            if ($(".premise").length > 50) {
+            if ($(".premise").length > 150) {
                 $("#list-view-indicator").show();
             }
         }

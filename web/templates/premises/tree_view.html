@@ -24,12 +24,12 @@
             </div>
         </div>
 
-        <div class="tree loading{% if not contention.published_premises.exists %} empty{% endif %}" data-width="{{ contention.width }}">
+        <div class="tree loading{% if not serialized.premises %} empty{% endif %}" data-width="{{ contention.width }}">
             <ul class="premise-list">
                 <li class="premise-item">
                     <div class="root"></div>
                     {% with template_name="premises/tree.html" %}
-                        {% with premises=contention.published_premises.all %}
+                        {% with premises=serialized.premises %}
                             {% include template_name %}
                         {% endwith %}
                     {% endwith %}

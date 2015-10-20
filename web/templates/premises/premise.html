@@ -2,7 +2,7 @@
 {% load humanize %}
 <div class="premise">
     <div class="premise-type {{ premise.premise_class }}">
-        {{ premise.get_premise_type_display }}
+        {{ premise.premise_type_label }}
     </div>
 
     <div class="premise-content {{ premise.premise_class }}">
@@ -12,13 +12,13 @@
     <div class="premise-sources">
         {% if premise.sources %}
             <strong>{% trans "sources:" %}</strong>
-            <p>{{ premise.sources|urlize }}</p>
+            <p class="links">{{ premise.sources|urlize }}</p>
         {% endif %}
         <div class="premise-user">
             <strong>{% trans "sender:" %}</strong>
 
             <p><a href="{% url "auth_profile" premise.user.username %}">
-                {{ premise.user }}</a></p>
+                {{ premise.user.username|lower }}</a></p>
 
             <p class="time-ago">
                 <a href="#{{ premise.id }}">
@@ -28,9 +28,9 @@
         </div>
 
 
-        {% if premise.reports.exists %}
+        {% if premise.fallacies %}
             <div class="reported_as_fallacy">
-                {% blocktrans trimmed with count=premise.reports.count %}
+                {% blocktrans trimmed with count=premise.fallacy_count %}
                     {{ count }} fallacy reported.
                 {% endblocktrans %}
                 {% if premise.fallacies %}
@@ -38,19 +38,18 @@
                         <div class="fallacy">{{ fallacy }}</div>
                     {% endfor %}
                 {% endif %}
-
             </div>
         {% endif %}
 
-        {% if premise.supporters.exists %}
+        {% if premise.recent_supporters %}
             <div class="supporters">
-                {% blocktrans trimmed with count=premise.supporters.count %}
+                {% blocktrans trimmed with count=premise.supporter_count %}
                     {{ count }} supporter.
                 {% endblocktrans %}
                 <div class="supporter-list">
                     {% for supporter in premise.recent_supporters %}{% if not forloop.first %}, {% endif %}
-                        <a href="{{ supporter.get_absolute_url }}">{{ supporter.username }}</a>{% endfor %}
-                    {% if premise.supporters.count > 5 %}
+                        <a href="{{ supporter.get_absolute_url }}">{{ supporter.username|lower }}</a>{% endfor %}
+                    {% if premise.supporter_count > 5 %}
                         {% trans "and others." %}
                     {% endif %}
                 </div>
@@ -61,8 +60,8 @@
     {% if user.is_authenticated %}
         <div class="premise-actions">
             {% if user == premise.user %}
-                <a href="{% url "edit_premise" contention.slug premise.pk %}">{% trans "edit" %}</a>
-                <form action="{% url "delete_premise" contention.slug premise.pk %}" method="post">
+                <a href="{% url "edit_premise" serialized.slug premise.id %}">{% trans "edit" %}</a>
+                <form action="{% url "delete_premise" serialized.slug premise.id %}" method="post">
                     {% csrf_token %}
                     <input type="submit" value="{% trans "remove" %}"
                            onclick="return confirm('{% trans "Are you sure to remove this premise?" %}');"
@@ -71,17 +70,17 @@
             {% endif %}
 
             {% if user.is_authenticated %}
-                <a href="{% url "insert_premise" contention.slug premise.pk %}">{% trans "add premise" %}</a>
+                <a href="{% url "insert_premise" serialized.slug premise.id %}">{% trans "add premise" %}</a>
                 {% if premise.user != user %}
                     {% if user in premise.supporters.all %}
-                        <form class="support" action="{% url "unsupport_premise" contention.slug premise.pk %}"
-                              method="post" data-contention-pk="{{ contention.pk }}" data-premise-pk="{{ premise.pk }}" data-action="DELETE" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
+                        <form class="support" action="{% url "unsupport_premise" serialized.slug premise.id %}"
+                              method="post" data-contention-pk="{{ serialized.id }}" data-premise-pk="{{ premise.id }}" data-action="DELETE" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
                             {% csrf_token %}
                             <input type="submit" value="{% trans "undo" %}"/>
                         </form>
                     {% else %}
-                        <form class="support" action="{% url "support_premise" contention.slug premise.pk %}"
-                              method="post" data-contention-pk="{{ contention.pk }}" data-premise-pk="{{ premise.pk }}" data-action="POST" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
+                        <form class="support" action="{% url "support_premise" serialized.slug premise.id %}"
+                              method="post" data-contention-pk="{{ serialized.id }}" data-premise-pk="{{ premise.id }}" data-action="POST" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
                             {% csrf_token %}
                             <input type="submit" value="{% trans "support" %}"/>
                         </form>
@@ -90,7 +89,7 @@
             {% endif %}
         </div>
         <div class="report">
-            <a href="{% url 'report_premise' contention.slug premise.pk %}">{% trans "report fallacy" %}</a>
+            <a href="{% url 'report_premise' serialized.slug premise.id %}">{% trans "report fallacy" %}</a>
         </div>
     {% endif %}
 
