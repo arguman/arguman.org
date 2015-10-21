@@ -1,3 +1,4 @@
+from newsfeed import NEWS_TYPE_FALLACY
 from . import Premise, Contention
 from . import FALLACY_TYPES
 

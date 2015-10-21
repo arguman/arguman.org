@@ -1,3 +1,4 @@
+from newsfeed import NEWS_TYPE_PREMISE
 from ..mixins import DeletePreventionMixin
 from ..managers import DeletePreventionManager
 from . import Contention

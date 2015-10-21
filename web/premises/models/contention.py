@@ -1,7 +1,10 @@
 from premises.mixins import DeletePreventionMixin
 from premises.managers import ContentionManager
+from newsfeed import NEWS_TYPE_CONTENTION
 from . import Channel, OBJECTION, SUPPORT, SITUATION
 
+from uuid import uuid4
+from unidecode import unidecode
 from django.conf import settings
 from django.db import models
 from django.db.models import Count
