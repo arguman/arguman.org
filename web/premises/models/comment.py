@@ -1,8 +1,8 @@
-from . import Premise
-
 from django.db import models
 from django.conf import settings
 from django.utils.encoding import smart_unicode
+
+from . import Premise
 
 
 class Comment(models.Model):

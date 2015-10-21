@@ -1,10 +1,3 @@
-from newsfeed import NEWS_TYPE_PREMISE
-from ..mixins import DeletePreventionMixin
-from ..managers import DeletePreventionManager
-from . import Contention
-from . import OBJECTION, SUPPORT, SITUATION
-from . import MAX_PREMISE_CONTENT_LENGTH, PREMISE_TYPES, FALLACY_TYPES
-
 from markdown2 import markdown
 from django.db import models
 from django.conf import settings
@@ -13,6 +6,13 @@ from django.utils.html import escape
 from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
+
+from newsfeed import NEWS_TYPE_PREMISE
+from ..mixins import DeletePreventionMixin
+from ..managers import DeletePreventionManager
+from . import Contention
+from . import OBJECTION, SUPPORT, SITUATION
+from . import MAX_PREMISE_CONTENT_LENGTH, PREMISE_TYPES, FALLACY_TYPES
 
 
 class Premise(DeletePreventionMixin, models.Model):

@@ -1,8 +1,3 @@
-from premises.mixins import DeletePreventionMixin
-from premises.managers import ContentionManager
-from newsfeed import NEWS_TYPE_CONTENTION
-from . import Channel, OBJECTION, SUPPORT, SITUATION
-
 from uuid import uuid4
 from unidecode import unidecode
 from django.conf import settings
@@ -13,6 +8,11 @@ from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
+
+from ..mixins import DeletePreventionMixin
+from ..managers import ContentionManager
+from newsfeed import NEWS_TYPE_CONTENTION
+from . import Channel, OBJECTION, SUPPORT, SITUATION
 
 
 class Contention(DeletePreventionMixin, models.Model):

@@ -1,6 +1,6 @@
-from . import DeletePreventionManager
-
 from django.utils.translation import get_language
+
+from . import DeletePreventionManager
 
 
 class ContentionManager(DeletePreventionManager):

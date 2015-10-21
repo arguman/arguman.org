@@ -1,12 +1,12 @@
-from newsfeed import NEWS_TYPE_FALLACY
-from . import Premise, Contention
-from . import FALLACY_TYPES
-
 from django.db import models
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.encoding import smart_unicode
 from django.utils.translation import ugettext_lazy as _
+
+from newsfeed import NEWS_TYPE_FALLACY
+from . import Premise, Contention
+from . import FALLACY_TYPES
 
 
 class Report(models.Model):
