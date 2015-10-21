@@ -1,9 +1,6 @@
+from datetime import datetime
 from django.db import models
 from django.db.models import query
-from datetime import datetime
-from django.utils.translation import get_language
-
-from premises.constants import FEATURED_CONTENT_COUNT
 
 
 class DeletePreventionQueryset(query.QuerySet):
@@ -27,10 +24,3 @@ class DeletePreventionManager(models.Manager):
 
     def all_with_deleted(self):
         return DeletePreventionQueryset(self.model, using=self._db)
-
-
-class ContentionManager(DeletePreventionManager):
-    def language(self, language_code=None):
-        if language_code is None:
-            language_code = get_language()
-        return self.filter(language=language_code)
