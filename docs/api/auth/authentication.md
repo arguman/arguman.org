@@ -9,10 +9,10 @@ Authentication
 
 #####Payload - Raw
 
-| Paramether    | Type     | Zorunlu Alan |
+| Paramether    | Type     | Required |
 | ------------- | ---------| ------------ |
-| Username      | String   | Evet         |
-| Password      | String   | Evet         |
+| Username      | String   | Yes          |
+| Password      | String   | Yes          |
 
 
 #####Request
@@ -31,9 +31,9 @@ curl -X POST  -H "Content-Type: application/json"
 }
 ```
 
-Token Kullanimi
+Using Tokens
 =========================
-Authentication sonucunda donen Token bilgisini Header e koymaniz gerekiyor.
+You need to put the received token to headers like this:
 
 #####Request
 

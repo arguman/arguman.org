@@ -1,25 +1,25 @@
-Kullanıcı Bilgilerini Güncelleme & Şifre Değiştirme
+Updating User Profile
 ===========================
 | Key             | Value                                                 |
 | ----------------|-------------------------------------------------------|
 | URL             | /api/v1/user/                                         |
 | Method          | PUT                                                   |
 | Content-Type    | application/json                                      |
-| Authentication  | Evet                                                  |
+| Authentication  | Yes                                                   |
 
 
 #####Payload - Raw
 
-| Paramether    | Type     |  Zorunlu Alan |
+| Paramether    | Type     |  Required |
 | ------------- | ---------| --------------|
-| username      | String   |  Evet         |
-| email         | String   |  Hayır        |
-| new_password1 | String   |  Hayır        |
-| new_password2 | String   |  Hayır        |
+| username      | String   |  Yes          |
+| email         | String   |  No           |
+| new_password1 | String   |  No           |
+| new_password2 | String   |  No           |
 
-#####Ek Bilgi
-1. new_password1 ve new_password2 alanlari gonderildigi taktirde sifre degistirme islemi yapilir.
-2. new_password1 ve new_password2 bilgilerinin ayni olmasi gerekmekte.
+#####Additional Info
+1. new_password1 and new_password2 fields should both be provided to change the password.
+2. new_password1 and new_password2 fields should have the same value.
 
 
 #####Request
@@ -40,8 +40,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{"username": "bahattincinic"
 }
 ```
 
-
-#####Şifre Değiştirme
+#####Change Password
 
 ```bash
 curl -X PUT -H "Content-Type: application/json"

@@ -1,31 +1,30 @@
-Önerme Düzenlemek
+Editing a Premise
 =======================
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/arguments/`<id>`/premises/`<id>`/ |
 | Method          | PUT               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
 #####Payload - Raw
 
-| Paramether    | Type     |  Zorunlu Alan |
+| Paramether    | Type     |  Required |
 | ------------- | ---------| --------------|
-| premise_type  | Integer  |  Evet         |
-| text          | String   |  Evet         |
-| parent        | String   |  Hayır        |
-| sources       | String   |  Hayır        |
+| premise_type  | Integer  |  Yes          |
+| text          | String   |  Yes          |
+| parent        | String   |  No           |
+| sources       | String   |  No           |
 
 
-#####Ek Bilgi
-1. **premise_type:** 3 değer alabilir. Bunlar 0, 1 ve 2. (0 ama, 1 çünkü, 2 ancak)
-2. **text:** Önerme içeriğidir. Maksimum 300 karakter uzunluğunda olabilir.
-3. **parent:** Önermenin neye yazıldığıdır. eğer değer gönderilmez ise Argümana yazılmıştır. Gönderilmiş ise id si verilen önermeye yazılmıştır.
-4. Önermeyi sadece ekleyen kişi düzenleyebilir
+#####Additional Info
+1. **premise_type:** 0 for but, 1 for because, 2 for however.
+2. **text**: Content of the premise. Maximum 300 characters.
+3. **parent:** ID of the parent premise. If empty, then it's a top level premise. 
+4. Only the owner can delete a premise.
 
-
-#####Argümana önerme göndermek
+#####Editing a premise
 
 #####Request
 

@@ -1,14 +1,14 @@
-Önerme Silmek
+Deleting a premise
 =======================
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/arguments/`<id>`/premises/`<id>`/ |
 | Method          | DELETE               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
-#####Ek Bilgi
-Önermeyi sadece ekleyen kişi silebilir.
+#####Additional Info
+Only the owner can delete a premise.
 
 #####Request
 

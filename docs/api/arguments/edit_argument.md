@@ -1,24 +1,24 @@
-Argüman Düzenlemek
+Editing an Argument
 =======================
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/arguments/`<id>`/ |
 | Method          | PUT               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
 #####Payload - Raw
 
-| Paramether    | Type     |  Zorunlu Alan |
+| Paramether    | Type     |  Required |
 | ------------- | ---------| --------------|
-| title         | String   |  Evet         |
-| sources       | String   |  Hayır        |
-| owner         | String   |  Hayır        |
-| is_published  | Boolean  |  Evet         |
+| title         | String   |  Yes          |
+| sources       | String   |  No           |
+| owner         | String   |  No           |
+| is_published  | Boolean  |  Yes          |
 
-#####Ek Bilgi
-Argümanı sadece ekleyen kişi düzenleyebilir.
+#####Additional Info
+Only the owner can delete an argument.
 
 #####Request
 
