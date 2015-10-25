@@ -1,4 +1,4 @@
-Installiation
+Installation
 ==================
 
 Requirements
@@ -25,7 +25,7 @@ HomeBrew setup:
 XCode command line tools setup:
 
     xcode-select --install
-    
+
 And Then:
 
     sudo easy_install pip
@@ -41,10 +41,11 @@ For Virtual Environment:
 And you need to clone project and install requirements
 
     git clone git@github.com:arguman/arguman.org.git
-    pip install -r arguman/requirements.pip
+    cd arguman.org
+    pip install -r requirements.txt
 
 Start MongoDB (http://docs.mongodb.org/manual/installation/)
-    
+
     mongod
 
 For MacOSX, setup Redis
@@ -60,7 +61,8 @@ Start Redis:
     redis-server
 
 Start the application of arguman:
-    
+
+    cd web
     python manage.py migrate
     python manage.pr runserver
 
