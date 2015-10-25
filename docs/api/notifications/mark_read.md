@@ -1,4 +1,4 @@
-Tüm bildirimleri Okundu olarak işaretlemek
+Marking all notifications as read
 ========================================
 
 | Key             | Value              |
@@ -6,7 +6,7 @@ Tüm bildirimleri Okundu olarak işaretlemek
 | URL             | /api/v1/notifications/|
 | Method          | PATCH                |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 #####Request
 
@@ -17,7 +17,7 @@ curl -X PATCH -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
 ```
 
 
-Sadece birini okundu olarak işaretlemek
+Marking a notification as read
 ========================================
 
 | Key             | Value              |
@@ -25,7 +25,7 @@ Sadece birini okundu olarak işaretlemek
 | URL             | /api/v1/notifications/`<id>`/|
 | Method          | PATCH                |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 #####Request
 

@@ -1,4 +1,4 @@
-Kullanıcının Kendi Eklediği Argümanlar
+ Arguments owned a user
 ==================================
 | Key             | Value                                                 |
 | ----------------|-------------------------------------------------------|
@@ -28,9 +28,9 @@ curl -X GET -H "Content-Type: application/json"
 ```
 
 
-Kullanıcının Katkıda Bulunduğu Argümanlar
+All arguments a user contributed
 ==================================
-Burada kendi ekledikleri dışında önerme gönderdiği argümanlar listesini içermektedir.
+
 
 | Key             | Value                                                 |
 | ----------------|-------------------------------------------------------|

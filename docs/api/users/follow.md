@@ -1,4 +1,4 @@
-Kullanıcının Takipçilerinin Listesi
+Followers of a user
 ===========================
 | Key             | Value                                                 |
 | ----------------|-------------------------------------------------------|
@@ -37,7 +37,7 @@ curl -X GET -H "Content-Type: application/json"
 }
 ```
 
-Kullanicinin Takip Ettiği Kişilerin Listesi
+Followed users
 ===========================
 | Key             | Value                                                 |
 | ----------------|-------------------------------------------------------|
@@ -70,7 +70,7 @@ curl -X GET -H "Content-Type: application/json"
 }
 ```
 
-Kullanıcıyı Takip Etmek
+Following a user
 ==============================================
 | Key             | Value                                                 |
 | ----------------|-------------------------------------------------------|
@@ -78,7 +78,7 @@ Kullanıcıyı Takip Etmek
 | Method          | POST                                                  |
 | Status Codes    | 201                                                   |
 | Content-Type    | application/json                                      |
-| Authentication  | Evet                                                  |
+| Authentication  | Yes                                                   |
 
 #####Request
 
@@ -92,7 +92,7 @@ curl -X POST -H "Authorization: Token d2b443e34d64124dd6d20044c39f6a6c82fd0ee2"
   `<Response body is empty>`
 
 
-Kullanıcıyı Takipten Çıkartmak
+Unfollowing a user
 ==============================================
 | Key             | Value                                                 |
 | ----------------|-------------------------------------------------------|
@@ -100,7 +100,7 @@ Kullanıcıyı Takipten Çıkartmak
 | Method          | DELETE                                                |
 | Status Codes    | 204                                                   |
 | Content-Type    | application/json                                      |
-| Authentication  | Evet                                                  |
+| Authentication  | Yes                                                   |
 
 #####Request
 

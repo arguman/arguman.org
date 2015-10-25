@@ -10,11 +10,11 @@ User Registration
 
 #####Payload - raw
 
-| Paramether    | Type     | Zorunlu Alan
+| Paramether    | Type     | Required
 | ------------- | ---------|-----------------------|
-| Username      | String   | Evet                  |
-| Password      | String   | Evet                  |
-| E-Mail        | String   | Hayir                 |
+| Username      | String   | Yes                   |
+| Password      | String   | Yes                   |
+| E-Mail        | String   | No                    |
 
 #####Request
 
