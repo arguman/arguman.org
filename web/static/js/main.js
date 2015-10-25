@@ -146,10 +146,6 @@
             } else {
                 $(this.info).hide();
             }
-
-            $(document).on('scroll', function () {
-                $(this.info).hide();
-            }.bind(this));
         },
 
         render: function () {
@@ -495,12 +491,25 @@
             })
         },
 
+        showApp: function () {
+            $("#app").css({
+                visibility: "visible"
+            });
+            $("#loading").hide();
+        },
+
         render: function () {
             var tree = this.getRoot();
             this.renderContentionHeader();
             this.collapseTree(tree);
             this.renderTree(tree);
-        }
+            this.onRender();
+            this.showApp();
+        },
+
+        init: function (options) {
+            $.extend(this, options);
+        },
         
     });
 

@@ -803,9 +803,20 @@ li.base-premises {
 /*
 * Tree View
 */
+#loading {
+    position: fixed;
+    font-size: 30px;
+    top: 300px;
+    width: 400px;
+    text-align: center;
+    color: gray;
+    left: 50%;
+    margin-left: -200px;
+}
 
 #app.tree-view {
     margin-top: 30px;
+    visibility: hidden;
 }
 
 #app.tree-view .tree-contention {

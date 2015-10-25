@@ -12,6 +12,7 @@
         </span>
         <p>{% trans "You can use arrow keys to navigate in the map." %}</p>
     </div>
+    <div id="loading">{% trans "Loading tree..." %}</div>
     <div id="app" class="tree-view">
         <div class="tree-contention">
             <h3>{{ contention }}</h3>
@@ -56,7 +57,13 @@
         "id": {{ user.id|default:"null" }}
     };
 
-    var treeView = new arguman.Tree();
+    var treeView = new arguman.Tree({
+        onRender: function () {
+            $(document).on('scroll', function () {
+                $("#keyboard-manager-info").hide();
+            }.bind(this));
+        }
+    });
 
     treeView.render();
 
