@@ -11,8 +11,6 @@
         init: function (options) {
             $.extend(this, options);
             this.$el = $(this.el);
-            this.bindEvents();
-            this.setInitial();
         },
         up: function () {
             this.select(
@@ -22,27 +20,36 @@
         },
         down: function () {
             this.select(
-                this.currentElement.find("ul").find(".child-premise").first(),
+                this.currentElement
+                    .find(".tree-branch")
+                    .first(),
                 true
             )
         },
         left: function () {
             this.select(
-                this.currentElement.prev(),
+                this.currentElement
+                    .prevAll(".tree-branch")
+                    .first(),
                 true
             );
         },
         right: function () {
             this.select(
-                this.currentElement.next(),
+                this.currentElement
+                    .nextAll(".tree-branch")
+                    .first(),
                 true
             );
         },
         select: function (leaf, scroll) {
-            if (leaf.is(".child-premise")) {
-                this.$el.find(".premise").removeClass("focused");
+            if (leaf.is(".tree-branch")) {
+                if (leaf.is(".collapsed")) {
+                    this.expandNode(leaf);
+                }
+                this.$el.find(".tree-node").removeClass("focused");
+                leaf.find(".tree-node").first().addClass("focused");
                 this.currentElement = leaf;
-                leaf.find(".premise").first().addClass("focused");
                 if (scroll) {
                     this.scrollTo(leaf);
                 }
@@ -53,30 +60,52 @@
                 this.$el.find(".premise")
                     .toArray()
                     .map(function (el) {
-                    return $(el).offset().top + $(el).height();
+                        return $(el).offset().top + $(el).height();
             }));
 
             return (this.$el.width() > window.innerWidth ||
                     maxHeight > window.innerHeight)
         },
         scrollTo: function (el) {
-            var mainPremiseSelector = ".root + .premise-list > li";
+            var mainPremise = (".tree-container > .tree > " +
+                               ".tree-branch > .tree-node");
+            var node = el.find("> .tree-node");
             if (this.needsScroll()) {
-                var center = el.offset().left +  (el.width()/2);
+                var center = node.offset().left +  (node.width()/2);
                 $('html, body').animate({
-                    scrollTop: el.is(mainPremiseSelector) ? 0 : el.offset().top - 200,
+                    scrollTop: node.is(mainPremise)? 0: node.offset().top - 200,
                     scrollLeft: center - (window.innerWidth / 2)
                 }, 150);
             }
         },
-        setInitial: function () {
-	        var selection,
-                hash = window.location.hash;
-            if (hash) {
-                selection = $("#premise-" + hash.replace("#", ""));
-            } else {
-                selection = this.$el.find(".child-premise").first();
+        expandNode: function (node) {
+            var branch = node.closest(".tree-branch.collapsed");
+            if (branch.length) {
+                this.treeView.expandBranch(branch);
             }
+        },
+        getHashOrPath: function () {
+            var hash = window.location.hash,
+                path = window.location.pathname;
+
+            var parts = path.split("/");
+
+            if (parts.length > 2) {
+                return parts[parts.length - 1];
+            } else {
+                return hash.replace("#", "");
+            }
+        },
+        setInitial: function () {
+	        var hash = this.getHashOrPath();
+            
+            if (hash) {
+                var selection = $("#premise-" + hash);
+                this.expandNode(selection);
+            } else {
+                var selection = this.$el.find(".tree-branch").first();    
+            }
+            
             this.select(selection, hash && this.needsScroll());
         },
         bindEvents: function () {
@@ -98,175 +127,34 @@
                     this.down();
                     break;
 
-                    default: return; // exit this handler for other keys
+                    default: return;
                 }
-                e.preventDefault(); // prevent the default action (scroll / move caret)
+                e.preventDefault();
             }.bind(this));
 
             if (this.needsScroll()) {
-                this.$el.find(".premise-content").on('click', function (event) {
-                    this.select($(event.target).parents(".child-premise").eq(0))
-                }.bind(this));
+                this.$el
+                    .find(".tree-node")
+                    .on('click', function (event) {
+                        this.select(
+                            $(event.target)
+                            .parents(".tree-branch")
+                            .first()
+                        )
+                    }.bind(this));
                 $(this.info).show();
-               // $(window).on("scroll", function () {
-                 //   $(this.info).fadeOut(100);
-               // }.bind(this));
             } else {
                 $(this.info).hide();
             }
 
-        }
-    });
-
-    arguman.CollapsibleTree = Class.extend({
-
-        premiseWidth: 260,
-
-        init: function (options) {
-            $.extend(this, options);
-            this.$el = $(this.el);
-        },
-
-        setMainContentionPosition: function () {
-            var root = this.$el.find(".root"),
-                mainContention = $(this.mainContention),
-                mainPremiseContent = mainContention.find(".main-premise-content"),
-                firstPremise = $(".premise").first(),
-                scrollLeft = $(document).scrollLeft();
-
-            var rootPosition = scrollLeft + window.innerWidth / 2 - root.width() / 2;
-
-            mainContention.css({
-                "margin-left": (
-                    scrollLeft +
-                    window.innerWidth / 2 -
-                    mainPremiseContent.width() / 2)
-            });
-
-            root.css({
-                left: rootPosition
-            })
-
-            if (firstPremise.position().left + firstPremise.width() > rootPosition) {
-
-                var rootConnector = $(".root-connector");
-
-                if (!rootConnector.length) {
-                    rootConnector = $("<div />", {
-                        class: "root-connector"
-                    });
-                    root.before(rootConnector);
-                }
-
-                rootConnector.css({
-                    position: "absolute",
-                    display: "inline-block",
-                    height: 4,
-                    width: (firstPremise.position().left
-                                + firstPremise.width() / 2
-                                - rootPosition
-                                + 10),
-                    background: "#E1E1E1",
-                    left: rootPosition,
-                    top: root.height() + 30
-                });
-            }
-
-            if (this.width < window.innerWidth) {
-                this.$el.css({
-                    "margin-left": (window.innerWidth / 2) - (this.width / 2)
-                });
-                mainContention.css({
-                    "margin-left": (window.innerWidth / 2) - (mainContention.width() / 2)
-                });
-                root.css({
-                    left: "auto"
-                })
-            }
-
-            var mainPremises = $(".root + .premise-list > li");
-            if (mainPremises.length === 1) {
-                root.addClass("single");
-                firstPremise.css({
-                    marginTop: 20
-                });
-		        if (rootConnector)  {
-                    rootConnector.css({
-                        top: 90
-                    });
-                }
-            }
-
-        },
-
-        setTreeWidth: function () {
-            /*
-            * Set full width to container, and reduce the width with
-            * positions of last premise.
-            * */
-
-            if (this.$el.hasClass("empty")) {
-                return;
-            }
-
-            var root = this.$el.find(".root"),
-                mainContention = $(this.mainContention);
-
-            var treeWidth = parseInt(this.$el.data("width")) * (this.premiseWidth * 4);
-            this.width = treeWidth;
-            this.$el.width(treeWidth);
-
-            var mainPremises = root.next().children();
-
-            if (mainPremises.length) {
-                var premises = root.parent().find("li");
-
-                var maxPosition = Math.max.apply(this,
-                    premises.toArray().map(function (premise) {
-                        return $(premise).offset().left
-                    }));
-
-                this.width = (maxPosition + this.premiseWidth + 50);
-                this.$el.width(this.width);
-            }
+            $(document).on('scroll', function () {
+                $(this.info).hide();
+            }.bind(this));
         },
 
         render: function () {
-            this.setTreeWidth();
-            this.setMainContentionPosition();
-            this.$el.css("visibility", "visible");
-            if ($(".premise").length > 150) {
-                $("#list-view-indicator").show();
-            }
-        }
-    });
-
-    arguman.Zoom = Class.extend({
-        canvas: '#app',
-        currentSize: function () {
-            return parseFloat($(this.canvas).css('zoom')) || 1
-        },
-        zoomOut: function () {
-            var current = this.currentSize();
-            $(this.canvas).css('zoom', current - 0.1);
-            $('#zoomIn').show();
-            $(this.canvas).css('padding-top', function (index, curValue) {
-                return parseInt(curValue, 10) + 40 + 'px';
-            });
-        },
-        zoomIn: function () {
-            var current = this.currentSize();
-            $('#app').css('zoom', current + 0.1);
-            if (parseFloat($(this.canvas).css('zoom')) >= 1) {
-                $('#zoomIn').hide();
-            }
-            $(this.canvas).css('padding-top', function (index, curValue) {
-                return parseInt(curValue, 10) - 40 + 'px';
-            });
-        },
-        init: function () {
-            $('#zoomIn').on('click', $.proxy(this, 'zoomIn'));
-            $('#zoomOut').on('click', $.proxy(this, 'zoomOut'));
+            this.bindEvents();
+            this.setInitial();
         }
     });
 
@@ -314,101 +202,306 @@
                 }
             });
         },
-        init: function (options) {
+        render: function (options) {
             $.extend(this, options);
             this.bindEvents();
         }
     });
 
-    arguman.Minimap = Class.extend({
-        el: '#minimap',
-        map: '#minimap .map',
-        captureEl: '#app',
-        width: 250,
-        ratio: {
-          x: null,
-          y: null
+    arguman.Tree = Class.extend({
+
+        treeWidth: 0,
+
+        branchWidth: function (i, branch) {
+            var width = 1;
+            $(branch).find("> .tree").each(function (i, el) {
+                var tree = $(el);
+                var max = tree
+                            .find("> .tree-branch")
+                            .not(".collapsed")
+                            .map(this.branchWidth.bind(this))
+                            .toArray()
+                            .reduce(arguman.utils.adder, 0);
+                
+                if (max > width) {
+                    width = max;
+                }
+
+            }.bind(this));
+            return width;
         },
-        navigator: '#minimap .navigator',
-        setScrollPosition: function (x, y) {
-          $(window)
-              .scrollLeft(x)
-              .scrollTop(y);
-        },
-        init: function (options) {
-          $.extend(this, options);
 
-          var self = this;
+        renderSubTree: function (branch, top, left, level) {
+            var subTree = branch.find("> .tree"),
+                isSingleBranch = subTree.find("> .tree-branch").length === 1;
+            
+            if (subTree.length) {
+                if (isSingleBranch) {
+                    var extraHeight = 50;
+                } else {
+                    var extraHeight = 100;
+                }
 
-          this.$el = $(this.el);
-          this.$map = $(this.map);
-          this.$captureEl = $(this.captureEl);
-          this.$navigator = $(this.navigator);
-
-          this.capture();
-          this.setDraggable();
-
-          $(window).on('resize', function () {
-              self.setDimensions();
-          });
-        },
-        capture: function () {
-          var self = this;
-
-          html2canvas(this.$captureEl, {
-            onrendered: function (canvas) {
-              imageData = canvas.toDataURL();
-              self.$map.css('backgroundImage', 'url(' + imageData + ')');
-              self.setDimensions();
+                this.renderTree(
+                    subTree, 
+                    top + extraHeight,
+                    left,
+                    level
+                );
             }
-          });
         },
-        setDimensions: function () {
-          height = Math.ceil(this.width * this.$captureEl.height() / this.$captureEl.width());
 
-          this.$el.css({
-            'height': height,
-            'width': this.width
-          });
-
-          this.$navigator.css({
-            height: $(window).height() * this.$map.height() / this.$captureEl.height(),
-            width: $(window).width() * this.$map.width() / this.$captureEl.width()
-          });
-
-          this.ratio.x = this.$captureEl.width() / this.$map.width();
-          this.ratio.y = this.$captureEl.height() / this.$map.height();
-        },
-        setDraggable: function () {
-          var self = this;
-
-          this.$navigator.pep({
-            useCSSTranslation: true,
-            constrainTo: 'parent',
-            cssEaseDuration: 100,
-            grid: [1, 1],
-            velocityMultiplier: 1,
-            allowDragEventPropagation: true,
-            drag: function(e, obj) {
-                var scrollX = self.$navigator.position().left * 100 / (self.$map.width() - self.$navigator.width());
-                var scrollY = self.$navigator.position().top * 100 / (self.$map.height() - self.$navigator.height());
-
-                scrollX *= self.$captureEl.width() / 100;
-                scrollY *= self.$captureEl.height() / 100;
-
-                self.setScrollPosition(scrollX, scrollY);
+        renderBranchConnector: function (branch, top, left) {
+            var branchConnector = branch.find("> .branch-connector");
+            if (branchConnector.length) {
+                branchConnector.css({
+                    left: left,
+                    top: top
+                });
             }
-          });
         },
-        keepBound: function () {
-          leftLimit = parseFloat(this.$navigator.css('left'));
-          topLimit = parseFloat(this.$navigator.css('top'));
 
-          this.$navigator.css({
-            left: leftLimit <= 0 ? 1 : (leftLimit >= (this.$map.width() - this.$navigator.width()) ? (this.$map.width() - this.$navigator.width()) - 1 : leftLimit),
-            top: topLimit <= 0 ? 1 : (topLimit >= (this.$map.height() - this.$navigator.height()) ? (this.$map.height() - this.$navigator.height()) - 1 : topLimit)
-          });
+        renderChildConnector: function (branch, top, left) {
+            var childConnector = branch.find("> .child-connector");
+            if (childConnector.length) {
+                childConnector.css({
+                    left: left,
+                    top: top
+                });
+            }
+        },
+
+        renderTreeConnector: function (tree, width, top, left, branchSize, level) {
+            var connector = tree.find("> .tree-connector"),
+                hasCollapsed = tree.find("> .collapsed").length > 0,
+                hasCollapsible = tree.find("> .collapsible").length > 0,
+                visible = branchSize > 1; 
+
+            if (connector.length) {
+                connector.css({
+                    width: width,
+                    marginLeft: 125,
+                    left: left,
+                    top: top,
+                    display: visible ? "block": "none"
+                });
+            }
+
+            if (hasCollapsed) {
+                var collapsiblePreview = connector.hide().next();
+                collapsiblePreview.css({
+                    display: "block",
+                    top: top - 30,
+                    left: left
+                })
+                .off('click')
+                .one('click', function () {
+                    this.resetTreeWidth();
+                    this.expandTree(tree);
+                }.bind(this))
+            }
+
+            if (hasCollapsible && !hasCollapsed) {
+                var collapseButton = connector.nextAll(".collapse-button");
+                    
+                collapseButton.css({
+                    display: "block",
+                    top: top - 30,
+                    left: left + width
+                })
+                .off('click')
+                .one('click', function () {
+                    this.resetTreeWidth();
+                    this.collapseTree(tree.parents(".tree").first());
+                    this.renderTree(this.getRoot());
+                }.bind(this)); 
+                
+            }
+
+        },
+        
+        renderBranch: function (el, treeTop, treeLeft, level) {
+            var branch = $(el);
+            var node = branch.find("> .tree-node");
+            var left = branch
+                        .prevAll()
+                        .map(this.branchWidth.bind(this))
+                        .toArray()
+                        .reduce(arguman.utils.adder, 0)
+                         * (node.width() + 20);
+
+            node.css({
+                left: left + treeLeft,
+                top: treeTop
+            });
+
+            if (!branch.is(".collapsed")) {
+                branch.show();
+            }
+
+            this.renderSubTree(
+                branch,
+                treeTop + node.height(), 
+                left + treeLeft,
+                level + 1
+            )
+
+            this.renderBranchConnector(
+                branch,
+                treeTop,
+                left + treeLeft
+            )
+            
+            this.renderChildConnector(
+                branch,
+                treeTop + node.height(),
+                left + treeLeft
+            );
+
+            return left;
+        },
+
+        renderTree: function (tree, treeTop, treeLeft, level) {
+            var branches = tree.find("> .tree-branch");
+            
+            treeTop = treeTop || 40;
+            treeLeft = treeLeft || 0;
+            level = level || 0;
+
+            var maxWidth = 0,
+                branchSize = branches.length;
+            
+            branches.each(function (index, el) {
+                var width = this.renderBranch(
+                    el,
+                    treeTop,
+                    treeLeft,
+                    level
+                );
+                if (width > maxWidth) {
+                    maxWidth = width;
+                }
+            }.bind(this));
+
+            this.renderTreeConnector(
+                tree,
+                maxWidth,
+                treeTop,
+                treeLeft,
+                branchSize,
+                level
+            );
+            
+            if (maxWidth > this.treeWidth) {
+                this.treeWidth = maxWidth;
+            }
+
+            if (level === 0) {
+                this.setMaxHeight(treeTop);
+                this.setCenter(maxWidth);
+                if (branches.length === 1) {
+                    this.viewSingleBranch();
+                }
+            }
+        },
+
+        resetTreeWidth: function () {
+            this.treeWidth = null;
+        },
+
+        viewSingleBranch: function () {
+            this.getRoot().css({
+                marginTop: -50
+            });
+        },
+
+        setCenter: function (maxWidth) {
+            if (maxWidth + 300 < window.innerWidth) {
+                var width = maxWidth + 254;
+                var left = (window.innerWidth / 2 - width / 2);
+            } else {
+                var left = 30;
+            }
+            $(".tree-container").css({
+                marginLeft: left
+            });
+        },
+
+        setMaxHeight: function (top) {
+            var app = $("#app"),
+                height = Math.max(app.height(), top);
+            app.height(height);
+        },
+
+        expandTree: function (tree, renderTree) {
+            renderTree = renderTree || true;
+
+            tree.find("> .collapsed").removeClass("collapsed");
+            tree.find('> .collapsible-preview').hide();
+
+            if (renderTree) {
+                this.renderTree(this.getRoot())
+            };
+        },
+
+        expandBranch: function (branch) {
+            branch.parents('.tree').each(function (i, el) {
+                this.expandTree($(el));
+            }.bind(this));
+
+            this.renderTree(this.getRoot());
+        },
+
+        collapseTree: function (tree) {
+            var subTrees = tree.find(".tree");
+            subTrees.each(function (i, el) {
+                var subTree = $(el);
+                
+                if (parseInt(subTree.data("level")) < 2) {
+                    return;
+                }
+                
+                subTree
+                    .find("> .tree-branch")
+                    .first()
+                    .nextAll(".tree-branch")
+                    .addClass("collapsible")
+                    .addClass("collapsed");
+
+                subTree
+                    .find(".collapse-button")
+                    .add(".collapsed")
+                    .hide();
+
+            }.bind(this));
+        },
+
+        getRoot: function () {
+            return $(".tree-container > .tree");
+        },
+
+        renderContentionHeader: function () {
+            var viewport = window.innerWidth,
+                rootPoint = $(".root"),
+                actions = $(".tree-contention-actions");
+
+            var center = viewport / 2 - rootPoint.width() / 2;
+
+            rootPoint.css({
+                marginLeft: center
+            });
+            actions.css({
+                marginLeft: center + 40
+            })
+        },
+
+        render: function () {
+            var tree = this.getRoot();
+            this.renderContentionHeader();
+            this.collapseTree(tree);
+            this.renderTree(tree);
         }
+        
     });
 
     $(function () {
@@ -422,6 +515,12 @@
 
         $(".tooltip .close").on('click', hideToolTips);
         $(window).on('scroll', hideToolTips);
+        $(window).on('scroll', function () {
+            $(".contention-detail-header").css({
+                marginLeft: $('body').scrollLeft(),
+                width: window.innerWidth
+            });
+        }).trigger('scroll');
 
         $("form.support").submit(function(event) {
           event.preventDefault();

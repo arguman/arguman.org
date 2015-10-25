@@ -68,7 +68,7 @@ class ContentionDetailView(DetailView):
             parent_premise=self.get_parent(),
             path=contention.get_absolute_url(),
             edit_mode=edit_mode,
-            serialized=contention.serialize(),
+            serialized=contention.serialize(self.request.user),
             **kwargs)
 
 
@@ -688,6 +688,24 @@ class ReportView(NextURLMixin, LoginRequiredMixin, CreateView):
         form.instance.reporter = self.request.user
         form.save()
         reported_as_fallacy.send(sender=self, report=form.instance)
+        return redirect(
+            premise.get_parent().get_absolute_url() +
+            self.get_next_parameter() +
+            "#%s" % premise.pk
+        )
+
+
+class RemoveReportView(NextURLMixin, LoginRequiredMixin, View):
+    def get_premise(self):
+        premises = Premise.objects.exclude(user=self.request.user)
+        return get_object_or_404(premises, pk=self.kwargs['pk'])
+
+    def post(self, request, *args, **kwargs):
+        premise = self.get_premise()
+        premise.reports.filter(
+            reporter=request.user,
+            fallacy_type=request.GET.get('type')
+        ).delete()
         return redirect(
             premise.get_parent().get_absolute_url() +
             self.get_next_parameter() +

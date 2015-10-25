@@ -102,7 +102,7 @@ class Contention(DeletePreventionMixin, models.Model):
     def __unicode__(self):
         return smart_unicode(self.title)
 
-    def serialize(self):
+    def serialize(self, authenticted_user=None):
         premises = (self.premises
                     .filter(is_approved=True)
                     .select_related('user')
@@ -124,7 +124,7 @@ class Contention(DeletePreventionMixin, models.Model):
             'absolute_url': self.get_absolute_url(),
             'language': self.language,
             'full_url': self.get_full_url(),
-            'premises': [premise.serialize(premises) 
+            'premises': [premise.serialize(premises, authenticted_user) 
                          for premise in premises
                          if premise.parent_id is None],
             'date_creation': self.date_creation
@@ -250,7 +250,12 @@ class Premise(DeletePreventionMixin, models.Model):
     def __unicode__(self):
         return smart_unicode(self.text)
 
-    def serialize(self, premise_lookup):
+    def serialize(self, premise_lookup, authenticated_user=None):
+        supported = False
+        if authenticated_user is not None:
+            supported = self.supporters.filter(
+                id=authenticated_user.id
+            ).exists()
         return {
             'id': self.id,
             'children': [
@@ -262,6 +267,7 @@ class Premise(DeletePreventionMixin, models.Model):
                 supporter.serialize()
                 for supporter in self.supporters.all()[:5]
             ],
+            'supported_by_authenticated_user': supported,
             'supporter_count': self.supporter_count,
             'user': self.user.serialize(),
             'premise_type': self.premise_type,
@@ -276,7 +282,7 @@ class Premise(DeletePreventionMixin, models.Model):
             'sibling_count': self.sibling_count,
             'child_count': self.child_count,
             'date_creation': self.date_creation,
-            'fallacies': self.fallacies,
+            'fallacies': self.fallacies(authenticated_user),
             'fallacy_count': self.report_count
         }
 
@@ -325,12 +331,22 @@ class Premise(DeletePreventionMixin, models.Model):
     def width(self):
         return self.published_children().count()
 
-    def fallacies(self):
-        fallacies = set(report.fallacy_type 
-                        for report in self.reports.all())
+    def fallacies(self, authenticed_user=None):
+        reports = self.reports.values('fallacy_type', 'reporter_id')
+        fallacies = set(report['fallacy_type'] for report in reports)
         mapping = dict(FALLACY_TYPES)
-        return [(mapping.get(fallacy) or fallacy)
-                for fallacy in fallacies]
+        
+        user_reports = set()
+        if authenticed_user is not None:
+            for report in reports:
+                if report['reporter_id'] == authenticed_user.id:
+                    user_reports.add(report['fallacy_type'])
+
+        return [{
+            'type': fallacy,
+            'label': mapping.get(fallacy),
+            'reported_by_authenticated_user': fallacy in user_reports
+        } for fallacy in fallacies if fallacy]
 
     def get_actor(self):
         # Encapsulated for newsfeed app.
