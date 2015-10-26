@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 import json
 import operator
+from django.utils import timezone
 import os
+from datetime import datetime, timedelta
+from math import log
+
 
 from uuid import uuid4
 from django.utils.html import escape
@@ -25,9 +29,12 @@ from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 from premises.managers import ContentionManager, DeletePreventionManager
 from premises.mixins import DeletePreventionMixin
 
+
 OBJECTION = 0
 SUPPORT = 1
 SITUATION = 2
+
+epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
 
 PREMISE_TYPES = (
     (OBJECTION, _("but")),
@@ -89,11 +96,11 @@ class Contention(DeletePreventionMixin, models.Model):
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
-    date_modification = models.DateTimeField(auto_now_add=True,
-                                             auto_now=True)
+    date_modification = models.DateTimeField(auto_now_add=True)
     ip_address = models.CharField(max_length=255, null=True, blank=True)
     language = models.CharField(max_length=5, null=True)
 
+    score = models.FloatField(blank=True, null=True)
     objects = ContentionManager()
 
     class Meta:
@@ -134,6 +141,21 @@ class Contention(DeletePreventionMixin, models.Model):
     def get_absolute_url(self):
         return 'contention_detail', [self.slug]
 
+    def epoch_seconds(self, date):
+        """Returns the number of seconds from the epoch to date."""
+        td = date - epoch
+        return td.days * 86400 + td.seconds + (float(td.microseconds) / 1000000)
+
+    def calculate_score(self):
+        """The hot formula. Should match the equivalent function in postgres."""
+        s = self.premises.exclude(user__id=self.user.id).count()
+        if s < 1:
+            return 0
+        order = log(max(abs(s), 1), 10)
+        sign = 1 if s > 0 else -1 if s < 0 else 0
+        seconds = self.epoch_seconds(self.date_creation) - 1134028003
+        return round(sign * order + seconds / 45000, 7)
+
     def get_full_url(self):
         return "http://%(language)s.%(domain)s%(path)s" % {
             "language": self.language,
@@ -152,6 +174,9 @@ class Contention(DeletePreventionMixin, models.Model):
                 self.slug = "%s-%s" % (slug, uuid4().hex)
             else:
                 self.slug = slug
+
+        if not kwargs.pop('skip_date_update', False):
+            self.date_modification = datetime.datetime.now()
         return super(Contention, self).save(*args, **kwargs)
 
     def published_premises(self, parent=None, ignore_parent=False):

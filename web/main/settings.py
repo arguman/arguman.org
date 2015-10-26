@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
 
+    'django_extensions',
     'social_auth',
     'django_gravatar',
     'rest_framework',
