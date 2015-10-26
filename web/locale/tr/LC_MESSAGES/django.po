@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-25 20:47+0000\n"
+"POT-Creation-Date: 2015-10-26 18:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: trMIME-Version: 1.0\n"
@@ -178,7 +178,7 @@ msgstr "Önerme Tipi"
 msgid "Premise Content"
 msgstr "İçerik"
 
-#: premises/models.py:398
+#: premises/models.py:404
 msgid "Fallacy Type"
 msgstr "Safsata Tipi"
 
@@ -514,7 +514,7 @@ msgstr "Hiç yeni bildiriminiz yok."
 
 #: templates/premises/actions.html:3 templates/premises/list_view.html:13
 #: templates/premises/premise.html:72 templates/premises/thread.html:105
-#: templates/premises/tree_view.html:23
+#: templates/premises/tree_view.html:24
 msgid "add premise"
 msgstr "önerme ekle"
 
@@ -552,15 +552,15 @@ msgstr "Yayınla"
 msgid "View"
 msgstr "Görünüm"
 
-#: templates/premises/base_contention.html:59
+#: templates/premises/base_contention.html:61
 msgid "Tree"
 msgstr "Ağaç"
 
-#: templates/premises/base_contention.html:60
+#: templates/premises/base_contention.html:64
 msgid "List"
 msgstr "Liste"
 
-#: templates/premises/base_contention.html:66
+#: templates/premises/base_contention.html:72
 msgid "Share"
 msgstr "Paylaş"
 
@@ -714,7 +714,19 @@ msgstr "dal daha"
 msgid "You can use arrow keys to navigate in the map."
 msgstr "harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz."
 
+#: templates/premises/tree_view.html:15
+msgid "Loading tree..."
+msgstr ""
+
+#: templates/premises/tree_view.html:38
+msgid "The argument has no premises yet."
+msgstr "Argümanın henüz bir önermesi yok."
+
 #: templates/premises/tree_view.html:40
+msgid "Add a premise"
+msgstr "Önerme ekle"
+
+#: templates/premises/tree_view.html:48
 msgid "The argument is too complex. You can switch to list view."
 msgstr "Argüman çok kalabalık. Liste görünümüne geçebilirsiniz."
 

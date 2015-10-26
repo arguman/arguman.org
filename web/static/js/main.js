@@ -398,6 +398,9 @@
                 if (branches.length === 1) {
                     this.viewSingleBranch();
                 }
+                if (branches.length === 0) {
+                    this.viewEmptyTree();
+                }
             }
         },
 
@@ -409,6 +412,12 @@
             this.getRoot().css({
                 marginTop: -50
             });
+        },
+
+        viewEmptyTree: function () {
+            $(".tree-contention-actions").hide()
+            $(".root-connector").addClass("empty");
+            $(".empty-state").show();
         },
 
         setCenter: function (maxWidth) {

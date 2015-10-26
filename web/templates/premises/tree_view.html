@@ -33,7 +33,14 @@
                 {% include "premises/tree.html" %}
             {% endwith %}
         </div>
-
+        {% if not serialized.premises %}
+            <div id="empty-state">
+                {% trans "The argument has no premises yet." %}<br />
+                {% if user.is_authenticated %}
+                <a href="{% url "new_premise" contention.slug %}">{% trans "Add a premise" %}</a>
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
 
     <div id="list-view-indicator" class="tooltip">

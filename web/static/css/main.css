@@ -814,6 +814,27 @@ li.base-premises {
     margin-left: -200px;
 }
 
+#empty-state {
+    font-size: 20px;
+    width: 280px;
+    margin: auto;
+    text-align: center;
+    color: #A1A1A1;
+    font-weight: normal;
+    background: #F3F3F3;
+    padding: 20px 15px;
+    border-radius: 20px;
+}
+
+#empty-state a {
+    margin-top: 15px;
+    color: gray;
+    display: inline-block;
+    border-bottom: 2px solid gray;
+    text-decoration: none;
+    height: 1.3em;
+}
+
 #app.tree-view {
     margin-top: 30px;
     visibility: hidden;
@@ -852,6 +873,10 @@ li.base-premises {
     border-radius: 50%;
     margin-bottom: 60px;
     margin-left: 360px;
+}
+
+#app.tree-view .empty-state {
+   
 }
 
 #app.tree-view .tree-container {
@@ -897,6 +922,10 @@ li.base-premises {
     height: 70px;
     margin-left: 13px;
     margin-top: 1px;
+}
+
+#app.tree-view .root-connector.empty {
+    height: 100px;
 }
 
 #app.tree-view .tree-connector {
