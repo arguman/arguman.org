@@ -1,14 +1,21 @@
 {% load i18n %}
 {% load humanize %}
-<ul class="premise-list">
+<ul class="tree" data-level="{{ level }}">
     {% for premise in premises %}
-        <li id="premise-{{ premise.id }}" class="child-premise premise-item">
+        <li id="premise-{{ premise.id }}" class="tree-branch">
+            <div class="connector branch-connector{% if premises|length < 2 %} branch-single{% endif %}"></div>
             {% include "premises/premise.html" %}
             {% if premise.children %}
-            {% with template_name="premises/tree.html" premises=premise.children %}
+            {% with template_name="premises/tree.html" premises=premise.children level=level|add:1 %}
                 {% include template_name %}
             {% endwith %}
+            <div class="connector child-connector"></div>
             {% endif %}
         </li>
     {% endfor %}
+    {% if premises %}
+        <li class="connector tree-connector"></li>
+        <li class="collapsible-preview">{{ premises|length|add:-1 }} {% trans "branch" %}</li>
+        <li class="collapse-button">‒</li>
+    {% endif %}
 </ul>

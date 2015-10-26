@@ -12,7 +12,7 @@
 {% block body-attrs %} id="contention-detail"{% endblock %}
 
 {% block header %}
-    <header class="sticky-header">
+    <header class="contention-detail-header">
         <div id="logo" class="contention-logo"><a href="/">argüman<img src="{% static "img/logo.png" %}" /></a></div>
 
         <nav class="contention-nav">
@@ -53,19 +53,31 @@
         </nav>
         {% endif %}
 
-         <nav class="contention-nav">
+         <nav class="view contention-nav">
             <ul id="view-switcher">
                 <li>{% trans "View" %}</li>
-                <li><a id="tree-view-button" href="?" class="tree-view active">{% trans "Tree" %}</a> |
-                    <a id="list-view-button" href="?view=list" class="list-view">{% trans "List" %}</a></li>
+                <li>
+                    <a id="tree-view-button" href="?" class="tree-view active">
+                        <img width="18" height="18" alt="{% trans "Tree" %}" src="{% static "img/tree.svg" %}" />
+                    </a>
+                    <a id="list-view-button" href="?view=list" class="list-view">
+                        <img width="20" height="20" alt="{% trans "List" %}" src="{% static "img/thread.svg" %}" />
+                    </a>
+                </li>
             </ul>
         </nav>
 
         <nav class="share contention-nav">
-            <ul id="view-switcher">
+            <ul>
                 <li>{% trans "Share" %}</li>
-                <li><a target="_blank" href="https://www.facebook.com/sharer.php?u={{ serialized.full_url }}" class="tree-view active">Facebook</a> |
-                    <a target="_blank" href="http://twitter.com/home?status={{ serialized.title }} {{ serialized.full_url }}" class="list-view">Twitter</a></li>
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ serialized.full_url }}" class="tree-view active">
+                        <img width="20" height="20" src="{% static "img/facebook.svg" %}" />
+                    </a>
+                    <a target="_blank" href="http://twitter.com/home?status={{ serialized.title }} {{ serialized.full_url }}" class="list-view">
+                        <img width="20" height="20" src="{% static "img/twitter.svg" %}" />
+                    </a>
+                </li>
             </ul>
         </nav>
 

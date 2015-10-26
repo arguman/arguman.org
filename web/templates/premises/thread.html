@@ -76,7 +76,7 @@
         {% endblocktrans %}
         {% if premise.fallacies %}
             {% for fallacy in premise.fallacies %}
-                <div class="fallacy">{{ fallacy }}</div>
+                <div class="fallacy">{{ fallacy.label }}</div>
             {% endfor %}
         {% endif %}
     </div>

@@ -1,31 +1,30 @@
-Önerme Eklemek
+Adding a Premise
 =======================
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/arguments/`<id>`/premises/ |
 | Method          | POST               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
 #####Payload - Raw
 
-| Paramether    | Type     |  Zorunlu Alan |
+| Paramether    | Type     |  Required     |
 | ------------- | ---------| --------------|
-| premise_type  | Integer  |  Evet         |
-| text          | String   |  Evet         |
-| parent        | String   |  Hayır        |
-| sources       | String   |  Hayır        |
+| premise_type  | Integer  |  Yes          |
+| text          | String   |  Yes          |
+| parent        | String   |  No           |
+| sources       | String   |  No           |
 
 
-#####Ek Bilgi
-1. **premise_type:** 3 değer alabilir. Bunlar 0, 1 ve 2. (0 ama, 1 çünkü, 2 ancak)
-2. **text:** Önerme içeriğidir. Maksimum 300 karakter uzunluğunda olabilir.
-3. **parent:** Önermenin neye yazıldığıdır. eğer değer gönderilmez ise Argümana yazılmıştır. Gönderilmiş ise id si verilen önermeye yazılmıştır.
+#####Additional Information1
+1. **premise_type:** can be 1,2 or 3. (0 for but, 1 for because, 2 for however)
+2. **text:** Premise itself. Maximum 300 characters.
+3. **parent:** ID of the parent premise. If empty, then it's a top level premise. 
 
 
-
-#####Argümana önerme göndermek
+#####Adding a premise to an argument
 
 #####Request
 
@@ -60,7 +59,7 @@ curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
 ```
 
 
-#####Önermeye Önerme göndermek
+#####Adding a premise to another premise
 
 #####Request
 

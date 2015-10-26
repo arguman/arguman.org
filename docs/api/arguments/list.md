@@ -1,4 +1,4 @@
-Argüman Listesini Almak
+Getting the Argument List
 ========================================
 
 | Key             | Value              |
@@ -182,7 +182,7 @@ curl -X GET  -H "Content-Type: application/json"
 ```
 
 
-Argüman Listesinin Detayını Almak
+Getting the details of the Argument list
 ========================================
 
 | Key             | Value              |
@@ -200,7 +200,7 @@ curl -X GET  -H "Content-Type: application/json"
 ```
 
 
-Argümanın Önermelerini Almak
+Getting the premises of an argument
 ========================================
 
 | Key             | Value              |
@@ -218,7 +218,7 @@ curl -X GET  -H "Content-Type: application/json"
 ```
 
 
-Argümanları En son eklenmişlere göre sıralamak
+Listing arguments by their creation date
 ========================================
 
 | Key             | Value              |
@@ -237,7 +237,7 @@ curl -X GET  -H "Content-Type: application/json"
 
 
 
-Argümanların arasında seçilmişleri almak
+Listing Featured Arguments
 ========================================
 
 | Key             | Value              |
@@ -255,7 +255,7 @@ curl -X GET  -H "Content-Type: application/json"
 ```
 
 
-Argümanların arasında arama yapmak
+Searching Arguments
 ========================================
 
 | Key             | Value              |

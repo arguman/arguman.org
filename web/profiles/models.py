@@ -22,7 +22,8 @@ class Profile(AbstractUser):
 
     def serialize(self):
         return {'username': self.username,
-                'email': self.email}
+                'email': self.email,
+                'id': self.id}
 
     @property
     def followers(self):

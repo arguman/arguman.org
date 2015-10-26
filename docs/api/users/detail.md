@@ -1,4 +1,4 @@
-Kullanici Detayi
+User details
 =======================
 
 | Key             | Value                      |
@@ -27,7 +27,7 @@ curl -X GET -H "Content-Type: application/json"
 ```
 
 
-Giriş Yapmış Kullanıcının Detayı
+Logged in User's details
 ===============================
 
 | Key             | Value                      |

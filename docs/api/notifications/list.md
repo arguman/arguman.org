@@ -1,12 +1,12 @@
-Bildirim Listesi
+Listing notifications
 ========================================
 
 | Key             | Value              |
 | ----------------|--------------------|
 | URL             | /api/v1/notifications/|
-| Method          | GET               |
+| Method          | GET                |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 
 #####Request
@@ -65,7 +65,7 @@ curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
 }
 ```
 
-Bildirim Detayı
+Notification detail
 ========================================
 
 | Key             | Value              |
@@ -73,7 +73,7 @@ Bildirim Detayı
 | URL             | /api/v1/notifications/`<id>`/|
 | Method          | GET               |
 | Content-Type    | application/json   |
-| Authentication  | Evet               |
+| Authentication  | Yes                |
 
 ```bash
 curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
@@ -81,7 +81,7 @@ curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
               http://arguman.org/api/v1/notifications/15/
 ```
 
-Sadece Okunmuşları Almak
+Getting already read notifications
 ========================================
 
 ```bash
@@ -91,7 +91,7 @@ curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
 ```
 
 
-Sadece Okunmamışları Almak
+Getting not yet read notifications
 ========================================
 
 ```bash
@@ -100,7 +100,7 @@ curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
               http://arguman.org/api/v1/notifications/15/?is_read=False
 ```
 
-Bildirimleri okunma sırasına göre sıralamak
+Ordering the notifications by their creation date
 ========================================
 
 ```bash

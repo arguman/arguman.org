@@ -1,6 +1,5 @@
 {% load i18n %}
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}{% trans "Argument Analysis Platform" %}{% endblock %}</title>
@@ -8,9 +7,9 @@
     {% load static %}
     <link rel="stylesheet" href="{% static "css/h5bp.css" %}" />
     <link rel="stylesheet" href="{% static "css/normalize.css" %}" />
-    <link rel="stylesheet" href="{% static "css/main.css" %}?v=2.8" />
+    <link rel="stylesheet" href="{% static "css/main.css" %}?v=3.1" />
     <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}" />
-    <link rel="image_src" type="image/jpeg" href="http://arguman.org{% static "img/logo-large.png" %}" />
+    <link rel="image_src" type="image/png" href="http://arguman.org{% static "img/logo-large.png" %}" />
     <meta property="og:image" content="http://arguman.org{% static "img/logo-large.png" %}"/>
     <meta name="google-site-verification" content="g-YRAePbSzX5_eMCqQvkkYqecMlQNAIxhRXmeAKMmiQ" />
     {% block extra-meta %}{% endblock %}
@@ -85,7 +84,7 @@
 <script type="text/javascript" src="{% static "js/lib/class.js" %}"></script>
 <script type="text/javascript" src="{% static "js/lib/underscore-template.js" %}"></script>
 <script type="text/javascript" src="{% static "js/lib/hipo.infinity-scroll.js" %}"></script>
-<script type="text/javascript" src="{% static "js/main.js?v=0.2" %}"></script>
+<script type="text/javascript" src="{% static "js/main.js?v=0.3" %}"></script>
 {% block extra-scripts %}{% endblock %}
 <script>
 
@@ -95,12 +94,6 @@
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-55983865-1', 'auto');
     ga('send', 'pageview');
-$(function(){
-    $('.search').on('click', function(){$('#keyword').trigger('focus')})
-
-
-
-})
 </script>
 
 </body>
