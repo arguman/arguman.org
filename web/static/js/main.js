@@ -393,14 +393,14 @@
             }
 
             if (level === 0) {
-                this.setMaxHeight(treeTop);
                 this.setCenter(maxWidth);
                 if (branches.length === 1) {
                     this.viewSingleBranch();
-                }
-                if (branches.length === 0) {
+                } else if (branches.length === 0) {
                     this.viewEmptyTree();
-                }
+                } 
+                
+                this.setAppHeight();
             }
         },
 
@@ -432,10 +432,27 @@
             });
         },
 
-        setMaxHeight: function (top) {
-            var app = $("#app"),
-                height = Math.max(app.height(), top);
-            app.height(height);
+        setAppHeight: function () {
+            var premises = $(".tree-node"),
+                deepestPosition = 0,
+                deepestPremise = null;
+            premises.each(function () {
+                var premise = $(this),
+                    position = premise.position().top;
+                if (position > deepestPosition) {
+                    deepestPosition = position;
+                    deepestPremise = premise
+                }
+            });
+
+            if (deepestPremise) {
+                $("#app").height(
+                    deepestPosition + 
+                    deepestPremise.height() +
+                    $(".tree-contention").height() +
+                    150
+                );
+            } 
         },
 
         expandTree: function (tree, renderTree) {
