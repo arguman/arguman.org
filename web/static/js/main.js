@@ -557,6 +557,10 @@
             });
         }).trigger('scroll');
 
+        $('.search').on('click', function(){
+            $('#keyword').trigger('focus');
+        });
+
         $("form.support").submit(function(event) {
           event.preventDefault();
           var $this = $(this);
