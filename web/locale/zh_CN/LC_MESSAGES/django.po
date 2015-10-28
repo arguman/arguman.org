@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 23:58+0000\n"
+"POT-Creation-Date: 2015-10-28 23:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: tvvocold <tvvocold@gmail.com>\n"
 "Language: zh-CN\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: blog/admin.py:18
 msgid "Publish selected posts"
-msgstr "发布所选贴文"
+msgstr "发布所选"
 
 #: blog/admin.py:22
 msgid "Mark as draft selected posts"
@@ -146,7 +146,7 @@ msgstr "诉诸权威"
 
 #: premises/models.py:73
 msgid "Argument"
-msgstr "争议"
+msgstr "论点"
 
 #: premises/models.py:77
 msgid "Description"
@@ -172,11 +172,11 @@ msgstr "论述的前提。如果你不选，这将成为主要的论述。"
 
 #: premises/models.py:201
 msgid "Premise Type"
-msgstr "前提类型"
+msgstr "论述类型"
 
 #: premises/models.py:205
 msgid "Premise Content"
-msgstr "前提内容"
+msgstr "论述内容"
 
 #: premises/models.py:314
 msgid "Fallacy Type"
@@ -208,7 +208,7 @@ msgstr "确认密码"
 
 #: templates/base.html:6
 msgid "Argument Analysis Platform"
-msgstr "命题分析平台"
+msgstr "论点分析平台"
 
 #: templates/base.html:23
 msgid "Announcement:"
@@ -232,7 +232,7 @@ msgstr "登录"
 
 #: templates/base.html:40
 msgid "new argument"
-msgstr "新的命题"
+msgstr "新的论点"
 
 #: templates/base.html:42
 msgid "logout"
@@ -268,7 +268,7 @@ msgid ""
 msgstr ""
 "\n"
 "                arguman.org 是一个开源平台。你可以在 GitHub 上关注 \n"
-"                organización <a href=\"http://github.com/arguman/arguman.org"
+"                 <a href=\"http://github.com/arguman/arguman.org"
 "\">我们的组织</a>.\n"
 "            "
 
@@ -293,7 +293,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    arguman.org 是一个 <a href=\"%(about_url)s\">命题分析</a>"
+"    arguman.org 是一个 <a href=\"%(about_url)s\">论点分析</a>"
 "平台。\n"
 "    "
 
@@ -340,19 +340,19 @@ msgstr "最活跃的用户"
 
 #: templates/stats.html:11
 msgid "most supported users"
-msgstr "被支持最多的用户"
+msgstr "支持度最高的用戶"
 
 #: templates/stats.html:13
 msgid "most crowded arguments"
-msgstr "争议最多的论证"
+msgstr "争议最多的论点"
 
 #: templates/stats.html:14
 msgid "most supported premises"
-msgstr "被支持最多的前提"
+msgstr "支持度最高的论证"
 
 #: templates/stats.html:15
 msgid "most fallacy premises"
-msgstr "最荒谬的前提"
+msgstr "最荒谬的论述"
 
 #: templates/stats.html:20
 msgid "this week"
@@ -456,7 +456,7 @@ msgstr "关注者"
 #: templates/auth/profile.html:36 templates/search/profile.html:13
 #: templates/stats/profile.html:13
 msgid "ARGUMENT"
-msgstr "命题"
+msgstr "论点"
 
 #: templates/auth/profile.html:40 templates/search/profile.html:17
 #: templates/stats/profile.html:17
@@ -499,7 +499,7 @@ msgstr "更新"
 
 #: templates/newsfeed/contention.html:2
 msgid "created an argument:"
-msgstr "创建一个命题："
+msgstr "创建一个论点："
 
 #: templates/newsfeed/fallacy.html:4
 #, python-format
@@ -528,7 +528,7 @@ msgid ""
 "    added a <span class=\"premise-type %(class)s\">%(label)s</span> premise\n"
 msgstr ""
 "\n"
-"    添加一个 <span class=\"premise-type %(class)s\">%(label)s</span> 前提\n"
+"    添加一个 <span class=\"premise-type %(class)s\">%(label)s</span> 论述\n"
 
 #: templates/notifications/added-premise-for-premise.html:8
 #, python-format
@@ -538,8 +538,8 @@ msgid ""
 "for a premise\n"
 msgstr ""
 "\n"
-"    添加一个 <span class=\"premise-type %(class)s\">%(label)s</span> 前提 "
-"为该论述\n"
+"    为该论述添加一个 <span class=\"premise-type %(class)s\">%(label)s</span>论述  "
+"\n"
 
 #: templates/notifications/followed.html:2
 msgid "is following you."
@@ -558,7 +558,7 @@ msgstr ""
 
 #: templates/notifications/supported-a-premise.html:6
 msgid "supported your premise"
-msgstr "支持你的前提"
+msgstr "支持你的论述"
 
 #: templates/partials/notifications.html:14
 #: templates/partials/notifications.html:21
@@ -573,7 +573,7 @@ msgstr "你有新的消息。"
 #: templates/premises/contention_detail.html:104
 #: templates/premises/tree_view.html:71
 msgid "add premise"
-msgstr "添加预述"
+msgstr "添加论述"
 
 #: templates/premises/actions.html:7 templates/premises/tree_view.html:64
 msgid "remove"
@@ -637,16 +637,16 @@ msgstr ""
 "\n"
 "            <a href=\"%(login_url)s\">登录</a> 或\n"
 "            <a href=\"%(register_url)s\">注册</a>\n"
-"            去为这个命题添加论述。\n"
+"            为该论点添加论述。\n"
 "        "
 
 #: templates/premises/edit_contention.html:8
 msgid "Edit Argument"
-msgstr "编辑命题"
+msgstr "编辑论点"
 
 #: templates/premises/edit_contention.html:16
 msgid "Remove the argument"
-msgstr "移除命题"
+msgstr "移除论点"
 
 #: templates/premises/edit_premise.html:7
 msgid "Edit Premise"
@@ -661,7 +661,7 @@ msgid "The parent premise:"
 msgstr "父级论述："
 
 #: templates/premises/new_premise.html:27
-msgid "剩余字符:"
+msgid "剩余字符："
 msgstr ""
 
 #: templates/premises/report.html:7
@@ -735,8 +735,8 @@ msgid ""
 "</ul>\n"
 msgstr ""
 "\n"
-"其主要争论。该论述将是值得商榷的。\n"
-"该论述可以证明或反驳这一论点。<br>\n"
+"其主要论点。其论述将是值得商榷的。\n"
+"论述可以证明或反驳这一论点。<br>\n"
 "例如：\n"
 "<ul>\n"
 "    <li>真正的艺术是为了社会，而不是以盈利为目的</li>\n"
@@ -753,8 +753,8 @@ msgid ""
 "a> for fallacies.\n"
 msgstr ""
 "\n"
-"你需要选择一个前提类型。.\n"
-"针对谬误的更多信息，你可以查看\n"
+"你需要选择一个谬误类型。.\n"
+"关于谬误的更多信息，你可以查看\n"
 "<a href=\"https://zh.wikipedia.org/wiki/%E8%AC%AC%E8%AA%A4%E5%88%97%E8%A1%A8\">维基百科条目</"
 "a> 。\n"
 
@@ -772,7 +772,7 @@ msgid ""
 "</ul>\n"
 msgstr ""
 "\n"
-"争论的拥有者。它可以是一个机构，一个人，一本书，或者一篇文章。\n"
+"论点的拥有者。它可以是一个机构，一个人，一本书，或者一篇文章。\n"
 "\n"
 "例如：\n"
 "<ul>\n"
@@ -818,16 +818,16 @@ msgid ""
 msgstr ""
 msgid ""
 "\n"
-"引述的类型。它可以是：\n"
+"论述的类型。它可以是：\n"
 "<ul>\n"
 "    <li>\n"
-"        但是：对论证的反对。\n"
+"        但是：对争论的反对。\n"
 "    </li>\n"
 "    <li>\n"
-"        因为：对论证的支持。\n"
+"        因为：对争论的支持。\n"
 "    </li>\n"
 "    <li>\n"
-"        然而：前提的另外一个条件。\n"
+"        然而：论述的另外一个条件。\n"
 "    </li>\n"
 "</ul>\n"
 
@@ -838,7 +838,7 @@ msgid ""
 "It is important for reliability of main contention.\n"
 msgstr ""
 "\n"
-"论证来源。它可以是一个网址，一本书，或一张报纸。\n"
+"论点来源。它可以是一个网址，一本书，或一张报纸。\n"
 "它对主要论证的可靠性很重要。\n"
 
 #: templates/profiles/social_providers.html:3
