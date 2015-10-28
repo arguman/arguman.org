@@ -348,7 +348,7 @@ msgstr "争议最多的论点"
 
 #: templates/stats.html:14
 msgid "most supported premises"
-msgstr "支持度最高的论证"
+msgstr "支持度最高的论述"
 
 #: templates/stats.html:15
 msgid "most fallacy premises"
