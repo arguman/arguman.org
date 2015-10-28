@@ -242,7 +242,7 @@ class Contention(DeletePreventionMixin, models.Model):
 
 class Premise(DeletePreventionMixin, models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_premises')
     parent = models.ForeignKey("self", related_name="children",
                                null=True, blank=True,
                                verbose_name=_("Parent"),
@@ -325,7 +325,6 @@ class Premise(DeletePreventionMixin, models.Model):
             current = current.parent
         return list(set(parent_users_))
 
-
     def update_sibling_counts(self):
         count = self.get_siblings().count()
         self.get_siblings().update(sibling_count=count)
@@ -336,6 +335,15 @@ class Premise(DeletePreventionMixin, models.Model):
 
     def published_children(self):
         return self.children.filter(is_approved=True)
+
+    def sub_tree_ids(self, current=None, children_ids=None):
+        # RETURNS ALL THE CHILD PREMISE IDS
+        current = self if current is None else current
+        children_ids = children_ids if children_ids != None else []
+        for child in current.children.all():
+            children_ids.append(child.id)
+            self.sub_tree_ids(current=child, children_ids=children_ids)
+        return children_ids
 
     def premise_class(self):
         return {
