@@ -102,7 +102,7 @@ msgstr "複合結果"
 
 #: premises/models.py:48
 msgid "Wrong Direction"
-msgstr "倒因為果"
+msgstr "倒果為因"
 
 #: premises/models.py:49
 msgid "False Analogy"
