@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+<div class="container">
+    <div class="noun-tree">
+        <h3>{{ noun }}</h3>
+        <ul class="relations">
+            {% for hypernym in noun.hypernyms.all %}
+            <li class="is-a relation">
+                <span>{% trans "is a" %}</span>
+                <a href="{{ hypernym.get_absolute_url }}">{{ hypernym }}</a>
+                {% if hypernym.hyponyms.exists %}
+                <ul class="hyponyms">
+                    {% for hyponym in hypernym.hyponyms.all %}
+                    <li><a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+            {% for hyponym in noun.hyponyms.all %}
+            <li class="parent-of relation">
+                <span>{% trans "has a" %}</span>
+                <a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a>
+                {% if hyponym.hyponyms.exists %}
+                <ul class="hyponyms">
+                    {% for hyponym in hyponym.hyponyms.all %}
+                    <li><a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+            {% for antonym in noun.antonyms.all %}
+            <li class="opposite-with relation">
+                <span>{% trans "opposite with" %}</span>
+                <a href="{{ antonym.get_absolute_url }}">{{ antonym }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <ul class="contentions relations">
+            <li class="header">{% trans "mentioned in" %}</li>
+            {% for contention in noun.contentions.all %}
+            <li class="argument relation">
+                <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.highlighted_title|safe }}</a>
+                <ul class="argument-stats">
+                    <li>
+                    <a href="{{ contention.user.get_absolute_url }}">@{{ contention.user }}</a>
+                    {% blocktrans trimmed with participants=contention.contributors|length|add:-1 %}
+                        and {{ participants }} participant.
+                    {% endblocktrans %}
+                    </li>
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+</div>
+{% endblock %}

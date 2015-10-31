@@ -472,6 +472,7 @@ class ArgumentCreationView(LoginRequiredMixin, CreateView):
         form.instance.is_published = True
         response = super(ArgumentCreationView, self).form_valid(form)
         form.instance.update_sibling_counts()
+        form.instance.save_nouns()
         return response
 
 
@@ -489,6 +490,8 @@ class ArgumentUpdateView(LoginRequiredMixin, UpdateView):
         form.instance.user = self.request.user
         response = super(ArgumentUpdateView, self).form_valid(form)
         form.instance.update_sibling_counts()
+        form.instance.nouns.clear()
+        form.instance.save_nouns()
         return response
 
 

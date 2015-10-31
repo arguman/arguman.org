@@ -836,7 +836,7 @@ li.base-premises {
 }
 
 #app.tree-view {
-    margin-top: 30px;
+    margin-top: 18px;
     visibility: hidden;
 }
 
@@ -851,8 +851,17 @@ li.base-premises {
     margin: 0;
     padding: 0 0 5px;
     font-weight: normal;
-    font-size: 50px;
+    font-size: 40px;
     line-height: 0.9em;
+    color: #161616;
+}
+
+#app.tree-view .tree-contention h3 a {
+    color: #161616;
+    text-decoration: none;
+    border-bottom: 3px solid #dadada;
+    line-height: 0.7em;
+    display: inline-block;
 }
 
 #app.tree-view .tree-contention-actions {
@@ -2333,4 +2342,202 @@ div.load-more {
 
 .view ul li img {
     margin-left: 5px;
+}
+
+.nouns .contentions {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.nouns .contentions h2 {
+    margin: 0;
+}
+
+.nouns .contentions ul {
+    padding: 0;
+    margin: 10px 0;
+}
+
+.nouns .contentions li {
+    padding: 0;
+    margin: 0;
+}
+
+.nouns .contentions li h3 {
+    margin: 5px 0;
+}
+
+.nouns .contentions li h3 a {
+    border-bottom: none;
+    line-height: 1.1em;
+    color: #5b5b5b;
+}
+
+.noun-tree {
+    margin-left: 15px;
+}
+
+.noun-tree h3 {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #dedede;
+    display: inline-block;
+    color: #1d1d1d;
+    min-width: 120px;
+    text-align: center;
+}
+
+.noun-tree .relations {
+    margin: 0;
+    margin-top: -7px;
+    margin-left: 70px;
+    padding: 0;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    border-left: 1px solid #dedede;
+}
+
+.noun-tree .relations:last-child:after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background: #dedede;
+    border-radius: 50%;
+    margin-left: -8px;
+    margin-top: 5px;
+}
+
+.noun-tree .relations li.relation {
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+}
+
+.noun-tree .relations li.relation > span {
+    position: absolute;
+    width: 60px;
+    margin-left: -80px;
+    text-align: right; 
+    color: #bfbfbf;
+    line-height: 0.9em;
+    margin-top: 5px;
+}
+
+.noun-tree .relations li.relation > a {
+    padding: 0;
+    font-size: 1.2em;
+    margin-top: -1px;
+    display: inline-block;
+    text-decoration: none;
+    color: #5f5f5f;
+    border-bottom: 1px solid #81ffdd;
+    margin-left: 15px;
+}
+
+.noun-tree .relations li.relation.opposite-with > a {
+    border-bottom: 1px solid #ffb7b1;
+}
+
+.noun-tree .relations li.relation.parent-of > a {
+    border-bottom: 1px solid #6bd3ff;
+}
+
+.noun-tree .relations li.relation > a:before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    position: absolute;
+    background: #dedede;
+    border-radius: 50%;
+    margin-left: -20px;
+    margin-top: 9px;
+}
+
+.noun-tree .relations .hyponyms {
+    margin: 0 35px;
+    padding: 0;
+}
+
+.noun-tree .relations .is-a .hyponyms {
+    border-left: 1px solid #81ffdd;
+}
+
+.noun-tree .relations .is-a .hyponyms a {
+    border-bottom: 1px solid #81ffdd;
+}
+
+.noun-tree .relations .parent-of .hyponyms {
+    border-left: 1px solid #6bd3ff;
+}
+
+.noun-tree .relations .parent-of .hyponyms a {
+    border-bottom: 1px solid #6bd3ff;
+}
+
+.noun-tree .relations .hyponyms li {
+    list-style: none;
+    padding: 4px 0 0;
+}
+
+.noun-tree .relations .hyponyms li a {
+    text-decoration: none;
+    margin-left: 5px;
+    color: black;
+}
+
+.noun-tree .relations .header {
+    list-style: none;
+    padding: 20px 15px 5px;
+    font-size: 1.1em;
+    color: #b3b3b3;
+    border-bottom: 1px solid #dedede;
+    width: 130px;
+    margin-bottom: 10px;
+}
+
+.noun-tree .relations .relation.argument {
+    margin-bottom: 10px;
+}
+
+.noun-tree .relations .relation.argument > a:before {
+    margin-left: -35px;
+    margin-top: 6px;
+}
+
+.noun-tree .relations .relation.argument > a {
+    border-bottom: 0px;
+    color: #333333;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    font-weight: normal;
+    background: #fafafa;
+    padding: 12px 15px;
+    border-radius: 5px;
+    max-width: 400px;
+}
+
+.noun-tree .relations .relation.argument > a span {
+    border-bottom: 3px solid #FFF57C;
+    line-height: 0.9em;
+    display: inline-block;
+}
+
+.noun-tree .argument-stats {
+    margin: 4px 30px 0;
+    padding: 0 0;
+    overflow: hidden;
+    font-size: 1em;
+}
+
+.noun-tree .argument-stats li {
+    float: left;
+    margin-right: 20px;
+    list-style: none;
+    color: #d0d0d0;
+}
+
+.noun-tree .argument-stats li a {
+    color: #b7b7b7;
+    text-decoration: none;
 }

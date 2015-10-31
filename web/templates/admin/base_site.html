@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Arguman | Admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">Arguman</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block footer %}
+{{ block.super }}
+<script>
+	(function ($) {
+		$('.has_original')
+			.removeClass('has_original')
+			.find('p')
+			.remove();
+	})(django.jQuery);
+</script>
+{% endblock %}

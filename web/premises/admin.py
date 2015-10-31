@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Count
 
-from premises.models import Contention, Premise, Comment, Report, Channel
+from premises.models import Contention, Premise, Report, Channel
 
 
 class ReportAdmin(admin.ModelAdmin):
@@ -28,5 +28,4 @@ class PremiseAdmin(admin.ModelAdmin):
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Contention, ContentionAdmin)
 admin.site.register(Premise, PremiseAdmin)
-admin.site.register(Comment)
 admin.site.register(Channel)
