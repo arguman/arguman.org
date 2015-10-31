@@ -104,7 +104,7 @@ REDIRECTED_PATHS = (
     '/new-argument'
 )
 
-DEFAULT_LANGUAGE = 'zh_Hans'
+DEFAULT_LANGUAGE = 'en'
 
 BASE_DOMAIN = 'arguman.org'
 
@@ -115,7 +115,7 @@ AVAILABLE_LANGUAGES = (
 )
 
 LANGUAGE_CODE_MAPPING = {
-    'ch': 'zh_Hans'
+    'ch': 'zh-Hans'
 }
 
 TIME_ZONE = 'UTC'
