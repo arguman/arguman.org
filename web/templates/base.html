@@ -48,11 +48,13 @@
             </li>
             <li class="social-links">
                 {% get_current_language as language %}
-                {% trans "Languages:" %} 
+                {% trans "Languages:" %}
                 <a {% if language == "en" %}class="active" {% endif %}
                     href="http://en.arguman.org">{% trans "English" %}</a>
                 <a {% if language == "tr" %}class="active" {% endif %}
-                    href="http://tr.arguman.org">{% trans "Turkish" %}</a> <br>
+                    href="http://tr.arguman.org">{% trans "Turkish" %}</a>
+                <a {% if language == "zh-hans" %}class="active" {% endif %}
+                    href="http://ch.arguman.org">{% trans "Chinese" %}</a><br>
                 {% trans "Follow on twitter:" %} <a href="https://twitter.com/argumananalizi" target="_blank">@argumananalizi</a> <br />
 		Subreddit: <a href="https://www.reddit.com/r/arguman" target="_blank">/r/arguman</a>
             </li>

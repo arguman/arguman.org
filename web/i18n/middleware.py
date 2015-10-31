@@ -32,6 +32,10 @@ class SubdomainLanguageMiddleware(object):
             ])
         )
 
+    def get_language_code(self, code):
+        mapping = settings.LANGUAGE_CODE_MAPPING
+        return mapping.get(code, code)
+
     def process_request(self, request):
         host = request.get_host().split('.')
         language = host[0]
@@ -41,8 +45,10 @@ class SubdomainLanguageMiddleware(object):
         elif language not in self.LANGUAGES:
             return self.redirect_homepage(request)
 
-        translation.activate(language)
-        request.LANGUAGE_CODE = language
+        language_code = self.get_language_code(language)
+
+        translation.activate(language_code)
+        request.LANGUAGE_CODE = language_code
 
 
 class MultipleProxyMiddleware(object):

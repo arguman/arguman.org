@@ -10,252 +10,271 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-31 22:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
-"Language: trMIME-Version: 1.0\n"
+"Last-Translator: tvvocold <tvvocold@gmail.com>\n"
+"Language: zh-CN\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: blog/admin.py:18
 msgid "Publish selected posts"
-msgstr "Yayına al"
+msgstr "发布所选"
 
 #: blog/admin.py:22
 msgid "Mark as draft selected posts"
-msgstr "Taslak olarak işaretle"
+msgstr "标记为草稿"
 
 #: blog/models.py:21
 msgid "Name"
-msgstr "İsim"
+msgstr "姓名"
 
 #: blog/models.py:22
 msgid "Slug"
-msgstr "URL"
+msgstr "Slug"
 
 #: blog/models.py:23
 msgid "Content"
-msgstr "İçerik"
+msgstr "内容"
 
 #: blog/models.py:26 premises/models.py:312
 msgid "Published"
-msgstr "Yayınlı"
+msgstr "已发布"
 
 #: premises/models.py:33 templates/index.html:18
 #: templates/premises/contention.html:6 templates/premises/thread.html:31
 msgid "but"
-msgstr "ama"
+msgstr "但是"
 
 #: premises/models.py:34 templates/index.html:17
 #: templates/premises/contention.html:5 templates/premises/thread.html:36
 msgid "because"
-msgstr "çünkü"
+msgstr "因为"
 
 #: premises/models.py:35 templates/index.html:19
 #: templates/premises/contention.html:7 templates/premises/thread.html:41
 msgid "however"
-msgstr "ancak"
+msgstr "然而"
 
 #: premises/models.py:39
 msgid "Begging The Question"
-msgstr "Kısır Döngü Safsatası"
+msgstr "乞求论点"
 
 #: premises/models.py:40
 msgid "Irrelevant Conclusion"
-msgstr "Alakasız Sonuç Safsatası"
+msgstr "不相关的结论"
 
 #: premises/models.py:41
 msgid "Fallacy Of Irrelevant Purpose"
-msgstr "Alakasız Amaç Safsatası"
+msgstr "不相关的谬误"
 
 #: premises/models.py:42
 msgid "Fallacy Of Red Herring"
-msgstr "Konuyu Saptırma Safsatası"
+msgstr "烟雾弹"
 
 #: premises/models.py:43
 msgid "Argument Against TheMan"
-msgstr "Adam Karalama Safsatası"
+msgstr "诉诸人身"
 
 #: premises/models.py:44
 msgid "Poisoning The Well"
-msgstr "Dolduruşa Getirme Safsatası"
+msgstr "扣帽子"
 
 #: premises/models.py:45
 msgid "Fallacy Of The Beard"
-msgstr "Devede Kulak Safsatası"
+msgstr "连续体谬误"
 
 #: premises/models.py:46
 msgid "Fallacy Of Slippery Slope"
-msgstr "Felaket Tellallığı Safsatası"
+msgstr "滑坡谬误"
 
 #: premises/models.py:47
 msgid "Fallacy Of False Cause"
-msgstr "Yanlış Sebep Safsatası"
+msgstr "虚假原因谬误"
 
 #: premises/models.py:48
 msgid "Fallacy Of Previous This"
-msgstr "Öncesinde Safsatası"
+msgstr "先前的谬误"
 
 #: premises/models.py:49
 msgid "Joint Effect"
-msgstr "Müşterek Etki"
+msgstr "联合效应"
 
 #: premises/models.py:50
 msgid "Wrong Direction"
-msgstr "Yanlış Yön Safsatası"
+msgstr "因果倒置"
 
 #: premises/models.py:51
 msgid "False Analogy"
-msgstr "Yanlış Benzetme Safsatası"
+msgstr "错误类比"
 
 #: premises/models.py:52
 msgid "Slothful Induction"
-msgstr "Yok Sayma Safsatası"
+msgstr "懒于归纳"
 
 #: premises/models.py:53
 msgid "Appeal To Belief"
-msgstr "İnanca Başvurma Safsatası"
+msgstr "诉诸信念"
 
 #: premises/models.py:54
 msgid "Pragmatic Fallacy"
-msgstr "Faydacı Safsata"
+msgstr "语用谬误"
 
 #: premises/models.py:55
 msgid "Fallacy Of Is To Ought"
-msgstr "Dayatma Safsatası"
+msgstr "是与应该谬误"
 
 #: premises/models.py:56
 msgid "Argument From Force"
-msgstr "Tehdit Safsatası"
+msgstr "暴力说服"
 
 #: premises/models.py:57
 msgid "Argument To Pity"
-msgstr "Duygu Sömürüsü"
+msgstr "诉诸怜悯"
 
 #: premises/models.py:58
 msgid "Prejudicial Language"
-msgstr "Önyargılı Dil Safsatası"
+msgstr "偏见的语言"
 
 #: premises/models.py:59
 msgid "Fallacy Of Special Pleading"
-msgstr "Mazeret Safsatası"
+msgstr "诡辩的谬误"
 
 #: premises/models.py:60
 msgid "Appeal To Authority"
-msgstr "Bir Bilen Safsatası"
+msgstr "诉诸权威"
 
 #: premises/models.py:75
 msgid "Argument"
-msgstr "Argüman"
+msgstr "论点"
 
 #: premises/models.py:79
 msgid "Description"
-msgstr "Açıklama"
+msgstr "描述"
 
 #: premises/models.py:83
 msgid "Original Discourse"
-msgstr "Orijinal Söylem"
+msgstr "原表述"
 
 #: premises/models.py:87 premises/models.py:310
 msgid "Sources"
-msgstr "Kaynaklar"
+msgstr "来源"
 
 #: premises/models.py:297
 msgid "Parent"
-msgstr "Önermenin öncülü"
+msgstr "父"
 
 #: premises/models.py:298
 msgid ""
 "The parent of premise. If you don't choose anything, it will be a main "
 "premise."
-msgstr ""
-"Önermenin öncülü. Eğer boş bırakılırsa ana argümanın bir önermesi olur."
+msgstr "论述的前提。如果你不选，这将成为主要的论述。"
 
 #: premises/models.py:302
 msgid "Premise Type"
-msgstr "Önerme Tipi"
+msgstr "论述类型"
 
 #: premises/models.py:306
 msgid "Premise Content"
-msgstr "İçerik"
+msgstr "论述内容"
 
 #: premises/models.py:466
 msgid "Fallacy Type"
-msgstr "Safsata Tipi"
+msgstr "谬误类型"
 
 #: profiles/forms.py:22
 msgid "Username"
-msgstr "Kullanıcı Adı"
+msgstr "用户名"
 
 #: profiles/forms.py:24
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Bu alan gereklidir."
+msgstr "支持 30 位以内字符。字母，数字和 @/./+/-/_"
 
 #: profiles/forms.py:26
 msgid "Invalid characters"
-msgstr "Geçersiz karakterler."
+msgstr "字符无效"
 
 #: profiles/forms.py:54
 msgid "The two password fields didn't match."
-msgstr "Şifreler birbiriyle uyuşmuyor."
+msgstr "两次输入的密码不一致。"
 
 #: profiles/forms.py:61 templates/auth/password_reset_confirm.html:12
 msgid "New password"
-msgstr "Yeni şifre"
+msgstr "新密码"
 
 #: profiles/forms.py:65
 msgid "New password confirmation"
-msgstr "Yeni şifre onayı"
+msgstr "确认密码"
 
 #: profiles/models.py:21
+#, fuzzy
+#| msgid "Notifications"
 msgid "email notification"
-msgstr "E-posta Bildirimleri"
+msgstr "提醒"
 
 #: templates/auth/login.html:7 templates/auth/login.html.py:11
 #: templates/auth/password_reset_complete.html:9
 msgid "Login"
-msgstr "Giriş yap"
+msgstr "登录"
 
 #: templates/auth/login.html:7 templates/auth/register.html:7
 msgid "or login with twitter"
-msgstr "ya da twitter ile bağlan"
+msgstr "或使用 twitter 登录"
 
 #: templates/auth/login.html:14
 msgid "Forgot your password?"
-msgstr "Şifremi unuttum"
+msgstr "忘记密码了?"
 
 #: templates/auth/login_popup.html:6
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "            <a href=\"%(login_url)s\">Login</a> or\n"
+#| "            <a href=\"%(register_url)s\">register</a>\n"
+#| "            to add a premise for this argument.\n"
+#| "        "
 msgid ""
 "<a href=\"%(login_url)s\">Login</a> or <a href=\"%(register_url)s"
 "\">register</a> to add a premise for this argument."
 msgstr ""
-"Bir önerme eklemek için <a href=\"%(login_url)s\">giriş</a> yapın ya da <a "
-"href=\"%(register_url)s\">kayıt</a> olun."
+"\n"
+"            <a href=\"%(login_url)s\">登录</a> 或\n"
+"            <a href=\"%(register_url)s\">注册</a>\n"
+"            为该论点添加论述。\n"
+"        "
 
 #: templates/auth/password_reset_complete.html:8
 msgid "The password changed successfully."
-msgstr "Şifre başarıyla değiştirildi."
+msgstr "密码修改成功。"
 
 #: templates/auth/password_reset_confirm.html:7
 msgid "Enter your password"
-msgstr "Şifrenizi girin"
+msgstr "输入密码"
 
 #: templates/auth/password_reset_confirm.html:17
 msgid "New password (again)"
-msgstr "Yeni şifre (tekrar)"
+msgstr "新的密码（重复一次）"
 
 #: templates/auth/password_reset_confirm.html:21
 msgid "Change my password"
-msgstr "Şifremi değiştir"
+msgstr "更改我的密码"
 
 #: templates/auth/password_reset_confirm.html:25
 msgid "Invalid password reset url."
-msgstr "Yanlış şifre sıfırlama URL'i."
+msgstr "无效的密码重置链接。"
 
 #: templates/auth/password_reset_done.html:8
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "        We have sent an email to reset your password. Please check your "
+#| "inbox.\n"
+#| "    "
 msgid "We have sent an email to reset your password. Please check your inbox."
 msgstr ""
-"Şifrenizi sıfırlamanız için bir email gönderdik. Lütfen kontrol ediniz."
+"\n"
+"       我们已发送密码重置邮件。请查收您的 邮箱.\n"
+"    "
 
 #: templates/auth/password_reset_email.html:2
 msgid ""
@@ -273,239 +292,273 @@ msgstr ""
 
 #: templates/auth/password_reset_form.html:7
 msgid "Reset Password"
-msgstr "Şifremi Unuttum"
+msgstr "重置密码"
 
 #: templates/auth/password_reset_form.html:10
 #: templates/premises/new_premise.html:15
 msgid "Submit"
-msgstr "Gönder"
+msgstr "提交"
 
 #: templates/auth/profile.html:15
 msgid "update"
-msgstr "güncelle"
+msgstr "更新"
 
 #: templates/auth/profile.html:20
 msgid "Unfollow"
-msgstr "Takibi bırak"
+msgstr "取消关注"
 
 #: templates/auth/profile.html:22
 msgid "Follow"
-msgstr "Takip et"
+msgstr "关注"
 
 #: templates/auth/profile.html:32 templates/search/profile.html:9
 #: templates/stats/profile.html:9
 msgid "FOLLOWER"
-msgstr "TAKİPÇİ"
+msgstr "关注者"
 
 #: templates/auth/profile.html:36 templates/search/profile.html:13
 #: templates/stats/profile.html:13
 msgid "ARGUMENT"
-msgstr "ARGÜMAN"
+msgstr "论点"
 
 #: templates/auth/profile.html:40 templates/search/profile.html:17
 #: templates/stats/profile.html:17
 msgid "PREMISE"
-msgstr "ÖNERME"
+msgstr "论述"
 
 #: templates/auth/profile.html:44 templates/search/profile.html:21
 #: templates/stats/profile.html:21
 msgid "SUPPORT"
-msgstr "DESTEK"
+msgstr "支持"
 
 #: templates/auth/profile.html:48 templates/tabs.html:4
 msgid "Newsfeed"
-msgstr "Haber Kaynağı"
+msgstr "信息流"
 
 #: templates/auth/profile.html:59
 msgid "The feed seems to empty."
-msgstr "Haber kaynağı boş gözüküyor."
+msgstr "信息流看起来是空的。"
 
 #: templates/auth/profile.html:63 templates/index.html:36
 #: templates/newsfeed.html:39
 msgid "Load more"
-msgstr "Daha fazla yükle"
+msgstr "加载更多"
 
 #: templates/auth/register.html:7 templates/auth/register.html.py:17
 msgid "Register"
-msgstr "Kayıt Ol"
+msgstr "注册"
 
 #: templates/auth/register.html:12 templates/auth/update.html:10
 msgid ""
 "You can update your profile picture on <a href=\"http://gravatar.com"
 "\">gravatar.com</a>."
 msgstr ""
-"Avatarınızı <a href=\"http://gravatar.com\">gravatar.com</a> üzerinden "
-"güncelleyebilirsiniz."
+"                你可以在 <a href=\"http://gravatar.com\">gravatar.com</a> 更"
+"新头像。\n"
+"                "
 
 #: templates/auth/update.html:6
 msgid "Update Profile"
-msgstr "Profil Güncelle"
+msgstr "更新设置"
 
 #: templates/auth/update.html:14 templates/premises/edit_contention.html:11
 #: templates/premises/edit_premise.html:10
 msgid "Update"
-msgstr "Güncelle"
+msgstr "更新"
 
 #: templates/base.html:5
 msgid "Argument Analysis Platform"
-msgstr "Argüman Analizi Platformu"
+msgstr "论点分析平台"
 
 #: templates/base.html:23
 msgid "Announcement:"
-msgstr "Duyuru:"
+msgstr "公告:"
 
 #: templates/base.html:34
 msgid "about"
-msgstr "nedir?"
+msgstr "关于"
 
 #: templates/base.html:35
 msgid "blog"
-msgstr "blog"
+msgstr "博客"
 
 #: templates/base.html:37
 msgid "register"
-msgstr "kayıt ol"
+msgstr "注册"
 
 #: templates/base.html:38
 msgid "login"
-msgstr "giriş"
+msgstr "登录"
 
 #: templates/base.html:40
 msgid "new argument"
-msgstr "yeni argüman"
+msgstr "新的论点"
 
 #: templates/base.html:42
 msgid "logout"
-msgstr "çıkış"
+msgstr "登出"
 
 #: templates/base.html:46
 msgid "search keywords"
-msgstr "bu bir arama kutusu"
+msgstr "搜索关键词"
 
 #: templates/base.html:51
 msgid "Languages:"
-msgstr "Diller:"
+msgstr "语言:"
 
 #: templates/base.html:53
 msgid "English"
-msgstr "İngilizce"
+msgstr "英语"
 
 #: templates/base.html:55
 msgid "Turkish"
-msgstr "Türkçe"
+msgstr "土耳其语"
 
 #: templates/base.html:57
 msgid "Chinese"
-msgstr "Çince"
+msgstr "中国"
 
 #: templates/base.html:58
 msgid "Follow on twitter:"
-msgstr "Twitter'da takip et:"
+msgstr "在推特关注我们："
 
 #: templates/base.html:71
 #, fuzzy
 #| msgid ""
-#| "arguman.org is an open-source project. you can follow the <a href="
-#| "\"http://github.com/arguman\">organization</a> on github."
+#| "\n"
+#| "                arguman.org is an open-source project. you can follow "
+#| "the\n"
+#| "                <a href=\"http://github.com/arguman/arguman.org"
+#| "\">organization</a> on github.\n"
+#| "            "
 msgid ""
 "arguman.org is an open-source project. you can follow the <a href=\"http://"
 "github.com/arguman/arguman.org\">organization</a> on github."
 msgstr ""
-"arguman.org açık kaynak bir projedir. <a href=\"http://github.com/arguman"
-"\">github</a> üzerinde takip edebilirsiniz"
+"\n"
+"                arguman.org 是一个开源平台。你可以在 GitHub 上关注 \n"
+"                 <a href=\"http://github.com/arguman/arguman.org\">我们的组织"
+"</a>.\n"
+"            "
 
 #: templates/base.html:77
 msgid "Terms of Service"
-msgstr "Kullanım Koşulları"
+msgstr "使用条款"
 
 #: templates/base.html:78
 msgid "Feedback"
-msgstr "Öneri ve şikayet"
+msgstr "反馈"
 
 #: templates/base.html:79
 msgid "Donate"
-msgstr "Bağış yapın"
+msgstr "捐助"
 
 #: templates/home.html:8
 #, python-format
 msgid ""
 "arguman.org is an <a href=\"%(about_url)s\">argument analysis</a> platform."
-msgstr ""
-"arguman.org bir <a href=\"%(about_url)s\">argüman analizi</a> platformudur."
+msgstr "是一个 <a href=\"%(about_url)s\">论点分析</a>平台。"
 
 #: templates/index.html:23
 msgid "last sender:"
-msgstr "son gönderen:"
+msgstr "最近的发布者："
 
 #: templates/index.html:31
 msgid "No results found."
-msgstr "Sonuç bulunamadı."
+msgstr "未找到结果。"
 
 #: templates/newsfeed.html:12
 msgid "What is going on here:"
-msgstr "Neler oluyor burada:"
+msgstr "发生了什么："
 
 #: templates/newsfeed.html:16
 msgid "Show only followed users activity."
-msgstr "Sadece takip takip ettiklerim"
+msgstr "仅显示我关注的用户动态。"
 
 #: templates/newsfeed.html:18
 msgid "Show all users activity."
-msgstr "Herkesin haberlerini görüntüle"
+msgstr "显示所有用户动态。"
 
 #: templates/newsfeed.html:35
 msgid "Newsfeed seems empty."
-msgstr "Haber kaynağı boş gözüküyor."
+msgstr "动态为空。"
 
 #: templates/newsfeed/contention.html:2
 msgid "created an argument:"
-msgstr "bir argüman oluşturdu:"
+msgstr "创建一个论点："
 
 #: templates/newsfeed/fallacy.html:4
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "reported <strong>%(fallacy)s</strong> fallacy for a premise:\n"
 msgid "reported <strong>%(fallacy)s</strong> fallacy for a premise:"
-msgstr "bir önerme için <strong>%(fallacy)s</strong> bildirimi yaptı:"
+msgstr ""
+"\n"
+"报告此论述 <strong>%(fallacy)s</strong> 为谬误:\n"
 
 #: templates/newsfeed/following.html:2
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    following <a href=\"%(profile_url)s\" class=\"contention-link\">"
+#| "%(username)s</a>\n"
 msgid ""
 "following <a href=\"%(profile_url)s\" class=\"contention-link\">"
 "%(username)s</a>"
 msgstr ""
-"<a href=\"%(profile_url)s\" class=\"contention-link\">%(username)s</a> "
-"kişisini takip ediyor"
+"\n"
+"    正在关注 <a href=\"%(profile_url)s\" class=\"contention-link\">"
+"%(username)s</a>\n"
 
 #: templates/notifications.html:8
 msgid "Notifications"
-msgstr "Bildirimler"
+msgstr "提醒"
 
 #: templates/notifications/added-premise-for-contention.html:7
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    added a <span class=\"premise-type %(class)s\">%(label)s</span> "
+#| "premise\n"
 msgid "added a <span class=\"premise-type %(class)s\">%(label)s</span> premise"
 msgstr ""
-"bir <span class=\"premise-type %(class)s\">%(label)s</span> önermesi ekledi"
+"\n"
+"    添加一个 <span class=\"premise-type %(class)s\">%(label)s</span> 论述\n"
 
 #: templates/notifications/added-premise-for-premise.html:8
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    added a <span class=\"premise-type %(class)s\">%(label)s</span> "
+#| "premise for a premise\n"
 msgid ""
 "added a <span class=\"premise-type %(class)s\">%(label)s</span> premise for "
 "a premise"
 msgstr ""
-"senin önermen için başka bir <span class=\"premise-type %(class)s\">"
-"%(label)s</span> önermesi ekledi"
+"\n"
+"    为该论述添加一个 <span class=\"premise-type %(class)s\">%(label)s</span>"
+"论述  \n"
 
 #: templates/notifications/followed.html:2
 msgid "is following you."
-msgstr "sizi takip ediyor."
+msgstr "在关注你。"
 
 #: templates/notifications/reported-as-fallacy.html:4
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Your premise reported as <strong>%(label)s</strong> \n"
+#| "    "
 msgid "Your premise reported as <strong>%(label)s</strong>"
-msgstr "Önermen <strong>%(label)s</strong> olarak bildirildi."
+msgstr ""
+"\n"
+"    你的论述被报告为 <strong>%(label)s</strong> \n"
+"    "
 
 #: templates/notifications/supported-a-premise.html:6
 msgid "supported your premise"
-msgstr "önermeni destekledi"
+msgstr "支持你的论述"
 
 #: templates/nouns/detail.html:12
 msgid "is a"
@@ -531,399 +584,407 @@ msgstr ""
 #: templates/partials/notifications.html:14
 #: templates/partials/notifications.html:21
 msgid "See all"
-msgstr "Hepsini gör"
+msgstr "查看所有"
 
 #: templates/partials/notifications.html:19
 msgid "You have no new notifications."
-msgstr "Hiç yeni bildiriminiz yok."
+msgstr "你有新的消息。"
 
 #: templates/premises/actions.html:3 templates/premises/list_view.html:13
 #: templates/premises/premise.html:72 templates/premises/thread.html:105
 #: templates/premises/tree_view.html:24
 msgid "add premise"
-msgstr "önerme ekle"
+msgstr "添加论述"
 
 #: templates/premises/actions.html:7 templates/premises/premise.html:78
 #: templates/premises/thread.html:97
 msgid "remove"
-msgstr "kaldır"
+msgstr "删除"
 
 #: templates/premises/base_contention.html:21
 #: templates/premises/contention.html:11 templates/premises/premise.html:18
 msgid "sender:"
-msgstr "gönderen:"
+msgstr "发送者"
 
 #: templates/premises/base_contention.html:24
 msgid "original discourse:"
-msgstr "orijinal söylem:"
+msgstr "原话"
 
 #: templates/premises/base_contention.html:28
 msgid "Unspecified"
-msgstr "Belirtilmemiş"
+msgstr "不明确的"
 
 #: templates/premises/base_contention.html:38
 msgid "Edit"
-msgstr "Düzenle"
+msgstr "编辑"
 
 #: templates/premises/base_contention.html:43
 msgid "Unpublish"
-msgstr "Yayından Kaldır"
+msgstr "取消发布"
 
 #: templates/premises/base_contention.html:48
 msgid "Publish"
-msgstr "Yayınla"
+msgstr "发布"
 
 #: templates/premises/base_contention.html:58
 msgid "View"
-msgstr "Görünüm"
+msgstr "查看"
 
 #: templates/premises/base_contention.html:61
 msgid "Tree"
-msgstr "Ağaç"
+msgstr "树型"
 
 #: templates/premises/base_contention.html:64
 msgid "List"
-msgstr "Liste"
+msgstr "列表"
 
 #: templates/premises/base_contention.html:72
 msgid "Share"
-msgstr "Paylaş"
+msgstr "分享"
 
 #: templates/premises/edit_contention.html:8
 msgid "Edit Argument"
-msgstr "Argümanı Düzenle"
+msgstr "编辑论点"
 
 #: templates/premises/edit_contention.html:16
 msgid "Remove the argument"
-msgstr "Argümanı sil"
+msgstr "移除论点"
 
 #: templates/premises/edit_premise.html:7
 msgid "Edit Premise"
-msgstr "Önermeyi Düzenle"
+msgstr "编辑论述"
 
 #: templates/premises/examples/contention.html:2
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "The main contention. It will be arguable with own premises.\n"
+#| "The Premises can prove or rebuttal this contention.<br>\n"
+#| "Examples:\n"
+#| "<ul>\n"
+#| "    <li>Real art is for society, not for profit</li>\n"
+#| "    <li>The meaning of life is 42</li>\n"
+#| "    <li>Ethics man did what had to be done</li>\n"
+#| "</ul>\n"
 msgid ""
 "The main contention. It will be arguable with own premises. The Premises can "
 "prove or rebuttal this contention.<br> Examples: <ul> <li>Real art is for "
 "society, not for profit</li> <li>The meaning of life is 42</li> <li>Ethics "
 "man did what had to be done</li> </ul>"
 msgstr ""
-"Önermeleriyle birlikte tartışılabilecek, desteklenebilecek, ispatlanabilecek "
-"ya da çürütülebilecek bir argüman. <br> Örnekler:<ul><li>Sanat toplum "
-"içindir.</li><li>Bisiklet bir ulaşım aracıdır.</li><li>Bisikletçiler "
-"trafikte bulunduğu tüm şeridi kaplamalıdır.</li><li>Python'ın ilerlemesinde "
-"GIL büyük bir engeldir.</li></ul>"
+"\n"
+"其主要论点。其论述将是值得商榷的。\n"
+"论述可以证明或反驳这一论点。<br>\n"
+"例如：\n"
+"<ul>\n"
+"    <li>真正的艺术是为了社会，而不是以盈利为目的</li>\n"
+"    <li>生命的意义就是 42</li>\n"
+"    <li>道德的人做了必须做的事</li>\n"
+"</ul>\n"
 
 #: templates/premises/examples/fallacy.html:2
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "You have to choose a fallacy type.\n"
+#| "For more information, you can look at the\n"
+#| "<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia "
+#| "entry</a> for fallacies.\n"
 msgid ""
 "You have to choose a fallacy type. For more information, you can look at the "
 "<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia entry</"
 "a> for fallacies."
 msgstr ""
-"Safsata tipi belirtilmesi gereklidir.Bunlar hakkında daha fazla bilgi için <a href='http://safsatakilavuzu.com'>safsatakilavuzu.com</a> "
-"adresini ziyaret edebilirsiniz."
+"\n"
+"你需要选择一个谬误类型。.\n"
+"关于谬误的更多信息，你可以查看\n"
+"<a href=\"https://zh.wikipedia.org/wiki/%E8%AC%AC%E8%AA"
+"%A4%E5%88%97%E8%A1%A8\">维基百科条目</a> 。\n"
 
 #: templates/premises/examples/owner.html:2
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "The owner of argument. It can be instutation, person, book, or a paper.\n"
+#| "\n"
+#| "Examples:\n"
+#| "<ul>\n"
+#| "    <li>On the Origin of Species</li>\n"
+#| "    <li>Friedrich Nietzsche</li>\n"
+#| "    <li>Piet Mondiran</li>\n"
+#| "    <li>The Guardian</li>\n"
+#| "</ul>\n"
 msgid ""
 "The owner of argument. It can be instutation, person, book, or a paper. "
 "Examples: <ul> <li>On the Origin of Species</li> <li>Friedrich Nietzsche</"
 "li> <li>Piet Mondiran</li> <li>The Guardian</li> </ul>"
 msgstr ""
-"Argümanın sahibi. Bir kurum, kitap ya da kişi olabilir.<ul><li>T.C. "
-"Anayasası</li><li>Türk Dil Kurumu</li><li>Friedrich Nietzsche</li><li>Piet "
-"Mondiran</li><li>Aziz Nesin</li></ul>"
+"\n"
+"论点的拥有者。它可以是一个机构，一个人，一本书，或者一篇文章。\n"
+"\n"
+"例如：\n"
+"<ul>\n"
+"    <li>物种起源</li>\n"
+"    <li>尼采</li>\n"
+"    <li>蒙德里安</li>\n"
+"    <li>卫报</li>\n"
+"</ul>\n"
 
 #: templates/premises/examples/premise.html:2
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "Example: We define happiness as a state of well-being, starting with "
+#| "being alive instead of dead.\n"
 msgid ""
 "Example: We define happiness as a state of well-being, starting with being "
 "alive instead of dead."
 msgstr ""
-"Örnek: Bisiklet sürücüsü karayolunda en sağ şeridi kullanır ve diğer "
-"taşıtlar ile aynı sorumlulukla hareket eder."
+"\n"
+"例如：我们定义幸福是一种好的状态，前提是 活着而不是死亡。\n"
 
 #: templates/premises/examples/premise_source.html:2
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "Example: Charles Darwin's The Origin of Species\n"
 msgid "Example: Charles Darwin's The Origin of Species"
-msgstr "Örnek: T.C. Karayolları Trafik Kanunu 2918/46. Maddesi"
+msgstr ""
+"\n"
+"例如：查尔斯·达尔文的物种起源\n"
 
 #: templates/premises/examples/premise_type.html:3
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "The type of premise. It can be:\n"
+#| "<ul>\n"
+#| "    <li>\n"
+#| "        but: An objection against the contention.\n"
+#| "    </li>\n"
+#| "    <li>\n"
+#| "        because: A reason for proof the contention.\n"
+#| "    </li>\n"
+#| "    <li>\n"
+#| "        however: An additional situation for the premise.\n"
+#| "    </li>\n"
+#| "</ul>\n"
 msgid ""
 "The type of premise. It can be: <ul> <li> but: An objection against the "
 "contention. </li> <li> because: A reason for proof the contention. </li> "
 "<li> however: An additional situation for the premise. </li> </ul>"
 msgstr ""
-"Önermenin tipi belirtilmesi gerekir. Değerler şunlardır:<ul>\t<li>ama: "
-"itiraz ve çürütme için kullanılır</li>\t<li>çünkü: destek/kanıt için "
-"kullanılır</li>\t<li>ancak: bir önermeye ek bilgi ya da durum belirtilmesi "
-"için kullanılır.</li></ul>"
+"\n"
+"论述的类型。它可以是：\n"
+"<ul>\n"
+"    <li>\n"
+"        但是：对争论的反对。\n"
+"    </li>\n"
+"    <li>\n"
+"        因为：对争论的支持。\n"
+"    </li>\n"
+"    <li>\n"
+"        然而：论述的另外一个条件。\n"
+"    </li>\n"
+"</ul>\n"
 
 #: templates/premises/examples/sources.html:2
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "The source of argument. It can be a URL, a book, or a newspaper.\n"
+#| "It is important for reliability of main contention.\n"
 msgid ""
 "The source of argument. It can be a URL, a book, or a newspaper. It is "
 "important for reliability of main contention."
 msgstr ""
-"Angümanın kaynağı. Bir URL, kitap adı ya da dergi adı olabilir. Bu alan önemlidir, kaynaksız ve tartışmalı bir argüman/önerme yayından "
-"kaldırılır."
+"\n"
+"论点来源。它可以是一个网址，一本书，或一张报纸。\n"
+"它对主要论证的可靠性很重要。\n"
 
 #: templates/premises/list_view.html:20
 #, fuzzy
 #| msgid "The parent premise:"
 msgid "Go to parent premise"
-msgstr "Önermenin öncülü:"
+msgstr "父级论述："
 
 #: templates/premises/new_contention.html:9
 msgid "Save and continue to edit"
-msgstr "Kaydet ve düzenlemeye devam et"
+msgstr "保存并继续编辑"
 
 #: templates/premises/new_premise.html:9
 msgid "The parent premise:"
-msgstr "Önermenin öncülü:"
+msgstr "父级论述："
 
 #: templates/premises/new_premise.html:27
 msgid "Characters remaining:"
-msgstr "Kalan karakter sayısı:"
+msgstr ""
 
 #: templates/premises/premise.html:14 templates/premises/thread.html:67
 msgid "sources:"
-msgstr "kaynaklar"
+msgstr "信息源："
 
 #: templates/premises/premise.html:33 templates/premises/thread.html:74
 #, python-format
 msgid "%(count)s fallacy reported."
-msgstr "%(count)s safsata bildirimi"
+msgstr "%(count)s个谬误报告。"
 
 #: templates/premises/premise.html:45 templates/premises/premise.html.py:87
 #: templates/premises/premise.html:89 templates/premises/premise.html.py:93
 #: templates/premises/thread.html:113
 msgid "undo"
-msgstr "geri al"
+msgstr "取消操作"
 
 #: templates/premises/premise.html:56 templates/premises/thread.html:48
 #, python-format
 msgid "%(count)s supporter."
-msgstr "%(count)s destekleyen var."
+msgstr "%(count)s个支持者。"
 
 #: templates/premises/premise.html:63
 msgid "and others."
-msgstr "ve diğerleri"
+msgstr "和其他人。"
 
 #: templates/premises/premise.html:75 templates/premises/thread.html:90
 msgid "edit"
-msgstr "düzenle"
+msgstr "编辑"
 
 #: templates/premises/premise.html:79 templates/premises/thread.html:98
 msgid "Are you sure to remove this premise?"
-msgstr "Bu önermeyi silmek istediğinize emin misini?"
+msgstr "你确定要移除该论述？"
 
 #: templates/premises/premise.html:87 templates/premises/premise.html.py:93
 #: templates/premises/premise.html:95 templates/premises/thread.html:119
 msgid "support"
-msgstr "destekle"
+msgstr "支持"
 
 #: templates/premises/premise.html:101 templates/premises/thread.html:124
 msgid "report fallacy"
-msgstr "safsata bildir"
+msgstr "报告谬误"
 
 #: templates/premises/report.html:7
 msgid "The premise:"
-msgstr "Önerme:"
+msgstr "论述："
 
 #: templates/premises/report.html:13
 msgid "Report Fallacy"
-msgstr "Safsata Bildirimi"
+msgstr "报告谬误"
 
 #: templates/premises/tree.html:18
 msgid "branch"
-msgstr "dal daha"
+msgstr ""
 
 #: templates/premises/tree_view.html:13
 msgid "You can use arrow keys to navigate in the map."
-msgstr "harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz."
+msgstr "你可以使用方向键浏览地图。"
 
 #: templates/premises/tree_view.html:15
 msgid "Loading tree..."
 msgstr ""
 
 #: templates/premises/tree_view.html:38
+#, fuzzy
+#| msgid "The parent premise:"
 msgid "The argument has no premises yet."
-msgstr "Argümanın henüz bir önermesi yok."
+msgstr "父级论述："
 
 #: templates/premises/tree_view.html:40
+#, fuzzy
+#| msgid "add premise"
 msgid "Add a premise"
-msgstr "Önerme ekle"
+msgstr "添加论述"
 
 #: templates/premises/tree_view.html:48
 msgid "The argument is too complex. You can switch to list view."
-msgstr "Argüman çok kalabalık. Liste görünümüne geçebilirsiniz."
+msgstr ""
 
 #: templates/profiles/social_providers.html:3
 msgid "Login with Twitter"
-msgstr "Twitter ile Giriş Yap"
+msgstr "通过 Twitter 登录"
 
 #: templates/search/contention.html:8 templates/stats/contention.html:8
 msgid "PARTICIPANT"
-msgstr "KATILIMCI"
+msgstr "参与者"
 
 #: templates/search/contention.html:12 templates/stats/contention.html:12
 msgid "BECAUSE"
-msgstr "ÇÜNKÜ"
+msgstr "因为"
 
 #: templates/search/contention.html:16 templates/stats/contention.html:16
 msgid "BUT"
-msgstr "AMA"
+msgstr "但是"
 
 #: templates/search/contention.html:20 templates/stats/contention.html:20
 msgid "HOWEVER"
-msgstr "ANCAK"
+msgstr "然而"
 
 #: templates/search/premise.html:11 templates/stats/premise.html:11
 msgid "supporter."
-msgstr "destekleyen"
+msgstr "支持者。"
 
 #: templates/search/premise.html:16 templates/stats/premise.html:16
 msgid "fallacy report."
-msgstr "safsata bildirimi"
+msgstr "谬误报告。"
 
 #: templates/search/search.html:7
 msgid "Keywords:"
-msgstr "Kelime:"
+msgstr "关键字;"
 
 #: templates/search/search.html:14
 msgid "contentions"
-msgstr "argümanlar"
+msgstr "争论"
 
 #: templates/search/search.html:17
 msgid "users"
-msgstr "kullanıcılar"
+msgstr "用户"
 
 #: templates/search/search.html:20
 msgid "premises"
-msgstr "önermeler"
+msgstr "论述"
 
 #: templates/stats.html:7 templates/tabs.html:10
 msgid "Statistics"
-msgstr "İstatistikler"
+msgstr "统计"
 
 #: templates/stats.html:10
 msgid "most active users"
-msgstr "en katılımcı üyeler"
+msgstr "最活跃的用户"
 
 #: templates/stats.html:11
 msgid "most supported users"
-msgstr "en desteklenen üyeler"
+msgstr "支持度最高的用戶"
 
 #: templates/stats.html:13
 msgid "most crowded arguments"
-msgstr "en kalabalık önermeler"
+msgstr "争议最多的论点"
 
 #: templates/stats.html:14
 msgid "most supported premises"
-msgstr "en çok desteklenen önermeler"
+msgstr "支持度最高的论述"
 
 #: templates/stats.html:15
 msgid "most fallacy premises"
-msgstr "en safsata önermeler"
+msgstr "最荒谬的论述"
 
 #: templates/stats.html:20
 msgid "this week"
-msgstr "bu hafta"
+msgstr "本周"
 
 #: templates/stats.html:21
 msgid "this month"
-msgstr "bu ay"
+msgstr "本月"
 
 #: templates/stats.html:22
 msgid "all time"
-msgstr "tüm zamanlar"
+msgstr "所有的时间"
 
 #: templates/tabs.html:6
 msgid "Featured"
-msgstr "Seçilmişler"
+msgstr "精选"
 
 #: templates/tabs.html:8
 msgid "Recently Updated"
-msgstr "Yeniler"
+msgstr "最新提交"
 
 #: templates/tabs.html:12
 msgid "Search"
-msgstr "Arama"
-
-#, fuzzy
-#~| msgid "Statistics"
-#~ msgid "Static Files"
-#~ msgstr "İstatistikler"
-
-#, fuzzy
-#~| msgid "The feed seems to empty."
-#~ msgid "The submitted file is empty."
-#~ msgstr "Haber kaynağı boş gözüküyor."
-
-#, fuzzy
-#~| msgid "Featured"
-#~ msgid "Saturday"
-#~ msgstr "Seçilmişler"
-
-#, fuzzy
-#~| msgid "Search"
-#~ msgid "March"
-#~ msgstr "Arama"
-
-#, fuzzy
-#~| msgid "Search"
-#~ msgctxt "abbrev. month"
-#~ msgid "March"
-#~ msgstr "Arama"
-
-#, fuzzy
-#~| msgid "Search"
-#~ msgctxt "alt. month"
-#~ msgid "March"
-#~ msgstr "Arama"
-
-#, fuzzy
-#~| msgid "this month"
-#~ msgid "%d month"
-#~ msgid_plural "%d months"
-#~ msgstr[0] "bu ay"
-#~ msgstr[1] "bu ay"
-
-#, fuzzy
-#~| msgid "this week"
-#~ msgid "%d week"
-#~ msgid_plural "%d weeks"
-#~ msgstr[0] "bu hafta"
-#~ msgstr[1] "bu hafta"
-
-#, fuzzy
-#~| msgid "this month"
-#~ msgid "%d minute"
-#~ msgid_plural "%d minutes"
-#~ msgstr[0] "bu ay"
-#~ msgstr[1] "bu ay"
-
-#, fuzzy
-#~| msgid "Unspecified"
-#~ msgid "No year specified"
-#~ msgstr "Belirtilmemiş"
-
-#, fuzzy
-#~| msgid "Unspecified"
-#~ msgid "No month specified"
-#~ msgstr "Belirtilmemiş"
-
-#, fuzzy
-#~| msgid "Unspecified"
-#~ msgid "No day specified"
-#~ msgstr "Belirtilmemiş"
-
-#, fuzzy
-#~| msgid "Unspecified"
-#~ msgid "No week specified"
-#~ msgstr "Belirtilmemiş"
-
-#, fuzzy
-#~| msgid "Notifications"
-#~ msgid "notification_email"
-#~ msgstr "Bildirimler"
-
-#~ msgid "Follow:"
-#~ msgstr "Takip et:"
+msgstr "搜索"

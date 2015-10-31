@@ -4,7 +4,7 @@
 
 ## 推理图
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Whatley.png/800px-Whatley.png)
+<img style="width: 40%; margin-left: 4%;" align="right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Whatley.png/800px-Whatley.png">
 
 
 推理图是把推理过程，尤其是复杂的论争和辩论，用“方框和箭头”的形式绘制出来。推理图提高了我们阐述，理解和交流论证的能力，从而促进批判性思维能力。

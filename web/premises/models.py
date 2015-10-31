@@ -416,10 +416,10 @@ class Premise(DeletePreventionMixin, models.Model):
                     user_reports.add(report['fallacy_type'])
 
         return [{
-                    'type': fallacy,
-                    'label': mapping.get(fallacy),
-                    'reported_by_authenticated_user': fallacy in user_reports
-                } for fallacy in fallacies if fallacy]
+            'type': fallacy,
+            'label': mapping.get(fallacy),
+            'reported_by_authenticated_user': fallacy in user_reports
+        } for fallacy in fallacies if fallacy]
 
     def get_actor(self):
         # Encapsulated for newsfeed app.

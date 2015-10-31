@@ -93,6 +93,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 PREVENT_LANGUAGE_REDIRECTION = False
+
 REDIRECTED_PATHS = (
     '/',
     '/newsfeed',
@@ -103,12 +104,19 @@ REDIRECTED_PATHS = (
     '/new-argument'
 )
 
-DEFAULT_LANGUAGE = 'en'
+DEFAULT_LANGUAGE = 'zh_Hans'
+
 BASE_DOMAIN = 'arguman.org'
+
 AVAILABLE_LANGUAGES = (
     'tr',
-    'en'
+    'en',
+    'ch'
 )
+
+LANGUAGE_CODE_MAPPING = {
+    'ch': 'zh_Hans'
+}
 
 TIME_ZONE = 'UTC'
 
