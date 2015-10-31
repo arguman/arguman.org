@@ -15,7 +15,7 @@ class SynonymInline(admin.TabularInline):
 class ContentionInline(admin.TabularInline):
     model = Contention.nouns.through
     extra = 0
-    raw_id_fields = ('contention', )
+    raw_id_fields = ('contention',)
 
 
 class HypernymsInline(admin.SimpleListFilter):
@@ -34,7 +34,7 @@ class HypernymsInline(admin.SimpleListFilter):
         return [
             (hyponym.id, hyponym.text)
             for hyponym in hyponyms
-        ]
+            ]
 
     def queryset(self, request, qs):
         if not self.value():
@@ -45,7 +45,7 @@ class HypernymsInline(admin.SimpleListFilter):
 
 class NounAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'is_active', 'hypernyms_as_text')
-    filter_horizontal = ('hypernyms', )
+    filter_horizontal = ('hypernyms',)
     list_filter = (HypernymsInline, 'is_active')
     inlines = [SynonymInline, ContentionInline]
     actions = ['update_contentions', 'reset_contentions',
@@ -57,16 +57,16 @@ class NounAdmin(admin.ModelAdmin):
         return qs.prefetch_related('hypernyms', 'synonyms')
 
     def update_contentions(self, request, qs):
-    	q = Q()
+        q = Q()
 
-    	for noun in qs:
-    		q |= Q(title__icontains=noun.text)
-    		for synonym in noun.synonyms.all():
-    			q |= Q(title__icontains=synonym.text)
+        for noun in qs:
+            q |= Q(title__icontains=noun.text)
+            for synonym in noun.synonyms.all():
+                q |= Q(title__icontains=synonym.text)
 
-    	contentions = Contention.objects.filter(q)
-    	for contention in contentions:
-    		contention.save_nouns()
+        contentions = Contention.objects.filter(q)
+        for contention in contentions:
+            contention.save_nouns()
 
     def reset_contentions(self, request, qs):
         contentions = Contention.objects.filter(nouns=qs)
@@ -74,16 +74,16 @@ class NounAdmin(admin.ModelAdmin):
             contention.nouns.clear()
 
     def update_with_wordnet(self, request, qs):
-    	for noun in qs:
+        for noun in qs:
             noun.update_with_wordnet()
 
     def hypernyms_as_text(self, noun):
         return ', '.join([
-            '<a href="%(id)s">%(text)s</a>' % {
-                'id': hypernym.id, 
-                'text': hypernym.text
-            } for hypernym in noun.hypernyms.all()
-        ])
+                             '<a href="%(id)s">%(text)s</a>' % {
+                                 'id': hypernym.id,
+                                 'text': hypernym.text
+                             } for hypernym in noun.hypernyms.all()
+                             ])
 
     hypernyms_as_text.allow_tags = True
 

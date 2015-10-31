@@ -92,7 +92,9 @@ class Contention(DeletePreventionMixin, models.Model):
     date_modification = models.DateTimeField(auto_now_add=True,
                                              auto_now=True)
     ip_address = models.CharField(max_length=255, null=True, blank=True)
-    language = models.CharField(max_length=5, null=True)
+    language = models.CharField(max_length=5, null=True,
+                                choices=[(language, language) for language in
+                                        settings.AVAILABLE_LANGUAGES])
     nouns = models.ManyToManyField('nouns.Noun', related_name="contentions",
                                    blank=True, null=True)
 
@@ -416,10 +418,10 @@ class Premise(DeletePreventionMixin, models.Model):
                     user_reports.add(report['fallacy_type'])
 
         return [{
-            'type': fallacy,
-            'label': mapping.get(fallacy),
-            'reported_by_authenticated_user': fallacy in user_reports
-        } for fallacy in fallacies if fallacy]
+                    'type': fallacy,
+                    'label': mapping.get(fallacy),
+                    'reported_by_authenticated_user': fallacy in user_reports
+                } for fallacy in fallacies if fallacy]
 
     def get_actor(self):
         # Encapsulated for newsfeed app.
