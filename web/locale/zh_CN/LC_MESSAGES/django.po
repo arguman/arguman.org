@@ -1,0 +1,886 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Arguman\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-28 23:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: tvvocold <tvvocold@gmail.com>\n"
+"Language: zh-CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/admin.py:18
+msgid "Publish selected posts"
+msgstr "发布所选"
+
+#: blog/admin.py:22
+msgid "Mark as draft selected posts"
+msgstr "标记为草稿"
+
+#: blog/models.py:21
+msgid "Name"
+msgstr "姓名"
+
+#: blog/models.py:22
+msgid "Slug"
+msgstr "Slug"
+
+#: blog/models.py:23
+msgid "Content"
+msgstr "内容"
+
+#: blog/models.py:26 premises/models.py:211
+msgid "Published"
+msgstr "已发布"
+
+#: premises/models.py:31 templates/index.html:18
+#: templates/premises/contention.html:6
+msgid "but"
+msgstr "但是"
+
+#: premises/models.py:32 templates/index.html:17
+#: templates/premises/contention.html:5
+msgid "because"
+msgstr "因为"
+
+#: premises/models.py:33 templates/index.html:19
+#: templates/premises/contention.html:7
+msgid "however"
+msgstr "然而"
+
+#: premises/models.py:37
+msgid "Begging The Question"
+msgstr "乞求论点"
+
+#: premises/models.py:38
+msgid "Irrelevant Conclusion"
+msgstr "不相关的结论"
+
+#: premises/models.py:39
+msgid "Fallacy Of Irrelevant Purpose"
+msgstr "不相关的谬误"
+
+#: premises/models.py:40
+msgid "Fallacy Of Red Herring"
+msgstr "烟雾弹"
+
+#: premises/models.py:41
+msgid "Argument Against The Man"
+msgstr "诉诸人身"
+
+#: premises/models.py:42
+msgid "Poisoning The Well"
+msgstr "扣帽子"
+
+#: premises/models.py:43
+msgid "Fallacy Of The Beard"
+msgstr "连续体谬误"
+
+#: premises/models.py:44
+msgid "Fallacy Of Slippery Slope"
+msgstr "滑坡谬误"
+
+#: premises/models.py:45
+msgid "Fallacy Of False Cause"
+msgstr "虚假原因谬误"
+
+#: premises/models.py:46
+msgid "Fallacy Of Previous This"
+msgstr "先前的谬误"
+
+#: premises/models.py:47
+msgid "Joint Effect"
+msgstr "联合效应"
+
+#: premises/models.py:48
+msgid "Wrong Direction"
+msgstr "因果倒置"
+
+#: premises/models.py:49
+msgid "False Analogy"
+msgstr "错误类比"
+
+#: premises/models.py:50
+msgid "Slothful Induction"
+msgstr "懒于归纳"
+
+#: premises/models.py:51
+msgid "Appeal To Belief"
+msgstr "诉诸信念"
+
+#: premises/models.py:52
+msgid "Pragmatic Fallacy"
+msgstr "语用谬误"
+
+#: premises/models.py:53
+msgid "Fallacy Of Is To Ought"
+msgstr "是与应该谬误"
+
+#: premises/models.py:54
+msgid "Argument From Force"
+msgstr "暴力说服"
+
+#: premises/models.py:55
+msgid "Argument To Pity"
+msgstr "诉诸怜悯"
+
+#: premises/models.py:56
+msgid "Prejudicial Language"
+msgstr "偏见的语言"
+
+#: premises/models.py:57
+msgid "Fallacy Of Special Pleading"
+msgstr "诡辩的谬误"
+
+#: premises/models.py:58
+msgid "Appeal To Authority"
+msgstr "诉诸权威"
+
+#: premises/models.py:73
+msgid "Argument"
+msgstr "论点"
+
+#: premises/models.py:77
+msgid "Description"
+msgstr "描述"
+
+#: premises/models.py:81
+msgid "Original Discourse"
+msgstr "原表述"
+
+#: premises/models.py:85 premises/models.py:209
+msgid "Sources"
+msgstr "来源"
+
+#: premises/models.py:196
+msgid "Parent"
+msgstr "父"
+
+#: premises/models.py:197
+msgid ""
+"The parent of premise. If you don't choose anything, it will be a main "
+"premise."
+msgstr "论述的前提。如果你不选，这将成为主要的论述。"
+
+#: premises/models.py:201
+msgid "Premise Type"
+msgstr "论述类型"
+
+#: premises/models.py:205
+msgid "Premise Content"
+msgstr "论述内容"
+
+#: premises/models.py:314
+msgid "Fallacy Type"
+msgstr "谬误类型"
+
+#: profiles/forms.py:22
+msgid "Username"
+msgstr "用户名"
+
+#: profiles/forms.py:24
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "支持 30 位以内字符。字母，数字和 @/./+/-/_"
+
+#: profiles/forms.py:26
+msgid "Invalid characters"
+msgstr "字符无效"
+
+#: profiles/forms.py:54
+msgid "The two password fields didn't match."
+msgstr "两次输入的密码不一致。"
+
+#: profiles/forms.py:61 templates/auth/password_reset_confirm.html:12
+msgid "New password"
+msgstr "新密码"
+
+#: profiles/forms.py:65
+msgid "New password confirmation"
+msgstr "确认密码"
+
+#: templates/base.html:6
+msgid "Argument Analysis Platform"
+msgstr "论点分析平台"
+
+#: templates/base.html:23
+msgid "Announcement:"
+msgstr "公告:"
+
+#: templates/base.html:34
+msgid "about"
+msgstr "关于"
+
+#: templates/base.html:35
+msgid "blog"
+msgstr "博客"
+
+#: templates/base.html:37
+msgid "register"
+msgstr "注册"
+
+#: templates/base.html:38
+msgid "login"
+msgstr "登录"
+
+#: templates/base.html:40
+msgid "new argument"
+msgstr "新的论点"
+
+#: templates/base.html:42
+msgid "logout"
+msgstr "登出"
+
+#: templates/base.html:46
+msgid "search keywords"
+msgstr "搜索关键词"
+
+#: templates/base.html:51
+msgid "Languages:"
+msgstr "语言:"
+
+#: templates/base.html:53
+msgid "English"
+msgstr "英语"
+
+#: templates/base.html:55
+msgid "Turkish"
+msgstr "土耳其语"
+
+#: templates/base.html:56
+msgid "Follow on twitter:"
+msgstr "在推特关注我们："
+
+#: templates/base.html:68
+msgid ""
+"\n"
+"                arguman.org is an open-source project. you can follow the\n"
+"                <a href=\"http://github.com/arguman/arguman.org"
+"\">organization</a> on github.\n"
+"            "
+msgstr ""
+"\n"
+"                arguman.org 是一个开源平台。你可以在 GitHub 上关注 \n"
+"                 <a href=\"http://github.com/arguman/arguman.org"
+"\">我们的组织</a>.\n"
+"            "
+
+#: templates/base.html:74
+msgid "Terms of Service"
+msgstr "使用条款"
+
+#: templates/base.html:75
+msgid "Feedback"
+msgstr "反馈"
+
+#: templates/base.html:76
+msgid "Donate"
+msgstr "捐助"
+
+#: templates/home.html:8
+#, python-format
+msgid ""
+"\n"
+"    arguman.org is an <a href=\"%(about_url)s\">argument analysis</a> "
+"platform.\n"
+"    "
+msgstr ""
+"\n"
+"    arguman.org 是一个 <a href=\"%(about_url)s\">论点分析</a>"
+"平台。\n"
+"    "
+
+#: templates/index.html:23
+msgid "last sender:"
+msgstr "最近的发布者："
+
+#: templates/index.html:31
+msgid "No results found."
+msgstr "未找到结果。"
+
+#: templates/index.html:36 templates/newsfeed.html:39
+#: templates/auth/profile.html:63
+msgid "Load more"
+msgstr "加载更多"
+
+#: templates/newsfeed.html:12
+msgid "What is going on here:"
+msgstr "发生了什么："
+
+#: templates/newsfeed.html:16
+msgid "Show only followed users activity."
+msgstr "仅显示我关注的用户动态。"
+
+#: templates/newsfeed.html:18
+msgid "Show all users activity."
+msgstr "显示所有用户动态。"
+
+#: templates/newsfeed.html:35
+msgid "Newsfeed seems empty."
+msgstr "动态为空。"
+
+#: templates/notifications.html:8
+msgid "Notifications"
+msgstr "提醒"
+
+#: templates/stats.html:7 templates/tabs.html:10
+msgid "Statistics"
+msgstr "统计"
+
+#: templates/stats.html:10
+msgid "most active users"
+msgstr "最活跃的用户"
+
+#: templates/stats.html:11
+msgid "most supported users"
+msgstr "支持度最高的用戶"
+
+#: templates/stats.html:13
+msgid "most crowded arguments"
+msgstr "争议最多的论点"
+
+#: templates/stats.html:14
+msgid "most supported premises"
+msgstr "支持度最高的论述"
+
+#: templates/stats.html:15
+msgid "most fallacy premises"
+msgstr "最荒谬的论述"
+
+#: templates/stats.html:20
+msgid "this week"
+msgstr "本周"
+
+#: templates/stats.html:21
+msgid "this month"
+msgstr "本月"
+
+#: templates/stats.html:22
+msgid "all time"
+msgstr "所有的时间"
+
+#: templates/tabs.html:4
+msgid "Newsfeed"
+msgstr "信息流"
+
+#: templates/tabs.html:6
+msgid "Featured"
+msgstr "精选"
+
+#: templates/tabs.html:8
+msgid "Recently Updated"
+msgstr "最新提交"
+
+#: templates/tabs.html:12
+msgid "Search"
+msgstr "搜索"
+
+#: templates/auth/login.html:7 templates/auth/login.html.py:11
+#: templates/auth/password_reset_complete.html:9
+msgid "Login"
+msgstr "登录"
+
+#: templates/auth/login.html:7 templates/auth/register.html:7
+msgid "or login with twitter"
+msgstr "或使用 twitter 登录"
+
+#: templates/auth/login.html:14
+msgid "Forgot your password?"
+msgstr "忘记密码了?"
+
+#: templates/auth/password_reset_complete.html:8
+msgid "The password changed successfully."
+msgstr "密码修改成功。"
+
+#: templates/auth/password_reset_confirm.html:7
+msgid "Enter your password"
+msgstr "输入密码"
+
+#: templates/auth/password_reset_confirm.html:17
+msgid "New password (again)"
+msgstr "新的密码（重复一次）"
+
+#: templates/auth/password_reset_confirm.html:21
+msgid "Change my password"
+msgstr "更改我的密码"
+
+#: templates/auth/password_reset_confirm.html:25
+msgid "Invalid password reset url."
+msgstr "无效的密码重置链接。"
+
+#: templates/auth/password_reset_done.html:8
+msgid ""
+"\n"
+"        We have sent an email to reset your password. Please check your "
+"inbox.\n"
+"    "
+msgstr ""
+"\n"
+"       我们已发送密码重置邮件。请查收您的 "
+"邮箱".\n"
+"    "
+
+#: templates/auth/password_reset_form.html:7
+msgid "Reset Password"
+msgstr "重置密码"
+
+#: templates/auth/password_reset_form.html:10
+#: templates/premises/new_premise.html:15
+msgid "Submit"
+msgstr "提交"
+
+#: templates/auth/profile.html:15
+msgid "update"
+msgstr "更新"
+
+#: templates/auth/profile.html:20
+msgid "Unfollow"
+msgstr "取消关注"
+
+#: templates/auth/profile.html:22
+msgid "Follow"
+msgstr "关注"
+
+#: templates/auth/profile.html:32 templates/search/profile.html:9
+#: templates/stats/profile.html:9
+msgid "FOLLOWER"
+msgstr "关注者"
+
+#: templates/auth/profile.html:36 templates/search/profile.html:13
+#: templates/stats/profile.html:13
+msgid "ARGUMENT"
+msgstr "论点"
+
+#: templates/auth/profile.html:40 templates/search/profile.html:17
+#: templates/stats/profile.html:17
+msgid "PREMISE"
+msgstr "论述"
+
+#: templates/auth/profile.html:44 templates/search/profile.html:21
+#: templates/stats/profile.html:21
+msgid "SUPPORT"
+msgstr "支持"
+
+#: templates/auth/profile.html:59
+msgid "The feed seems to empty."
+msgstr "信息流看起来是空的。"
+
+#: templates/auth/register.html:7 templates/auth/register.html.py:17
+msgid "Register"
+msgstr "注册"
+
+#: templates/auth/register.html:12 templates/auth/update.html:10
+msgid ""
+"\n"
+"                You can update your profile picture on <a href=\"http://"
+"gravatar.com\">gravatar.com</a>.\n"
+"                "
+msgstr ""
+"\n"
+"                你可以在 <a href=\"http://"
+"gravatar.com\">gravatar.com</a> 更新头像。\n"
+"                "
+
+#: templates/auth/update.html:6
+msgid "Update Profile"
+msgstr "更新设置"
+
+#: templates/auth/update.html:14 templates/premises/edit_contention.html:11
+#: templates/premises/edit_premise.html:10
+msgid "Update"
+msgstr "更新"
+
+#: templates/newsfeed/contention.html:2
+msgid "created an argument:"
+msgstr "创建一个论点："
+
+#: templates/newsfeed/fallacy.html:4
+#, python-format
+msgid ""
+"\n"
+"reported <strong>%(fallacy)s</strong> fallacy for a premise:\n"
+msgstr ""
+"\n"
+"报告此论述 <strong>%(fallacy)s</strong> 为谬误:\n"
+
+#: templates/newsfeed/following.html:2
+#, python-format
+msgid ""
+"\n"
+"    following <a href=\"%(profile_url)s\" class=\"contention-link\">"
+"%(username)s</a>\n"
+msgstr ""
+"\n"
+"    正在关注 <a href=\"%(profile_url)s\" class=\"contention-link\">"
+"%(username)s</a>\n"
+
+#: templates/notifications/added-premise-for-contention.html:7
+#, python-format
+msgid ""
+"\n"
+"    added a <span class=\"premise-type %(class)s\">%(label)s</span> premise\n"
+msgstr ""
+"\n"
+"    添加一个 <span class=\"premise-type %(class)s\">%(label)s</span> 论述\n"
+
+#: templates/notifications/added-premise-for-premise.html:8
+#, python-format
+msgid ""
+"\n"
+"    added a <span class=\"premise-type %(class)s\">%(label)s</span> premise "
+"for a premise\n"
+msgstr ""
+"\n"
+"    为该论述添加一个 <span class=\"premise-type %(class)s\">%(label)s</span>论述  "
+"\n"
+
+#: templates/notifications/followed.html:2
+msgid "is following you."
+msgstr "在关注你。"
+
+#: templates/notifications/reported-as-fallacy.html:4
+#, python-format
+msgid ""
+"\n"
+"    Your premise reported as <strong>%(label)s</strong> \n"
+"    "
+msgstr ""
+"\n"
+"    你的论述被报告为 <strong>%(label)s</strong> \n"
+"    "
+
+#: templates/notifications/supported-a-premise.html:6
+msgid "supported your premise"
+msgstr "支持你的论述"
+
+#: templates/partials/notifications.html:14
+#: templates/partials/notifications.html:21
+msgid "See all"
+msgstr "查看所有"
+
+#: templates/partials/notifications.html:19
+msgid "You have no new notifications."
+msgstr "你有新的消息。"
+
+#: templates/premises/actions.html:3
+#: templates/premises/contention_detail.html:104
+#: templates/premises/tree_view.html:71
+msgid "add premise"
+msgstr "添加论述"
+
+#: templates/premises/actions.html:7 templates/premises/tree_view.html:64
+msgid "remove"
+msgstr "删除"
+
+#: templates/premises/contention.html:11
+#: templates/premises/contention_detail.html:21
+#: templates/premises/tree_view.html:21
+msgid "sender:"
+msgstr "发送者"
+
+#: templates/premises/contention_detail.html:24
+msgid "original discourse:"
+msgstr "原话"
+
+#: templates/premises/contention_detail.html:28
+msgid "Unspecified"
+msgstr "不明确的"
+
+#: templates/premises/contention_detail.html:38
+msgid "Edit"
+msgstr "编辑"
+
+#: templates/premises/contention_detail.html:43
+msgid "Unpublish"
+msgstr "取消发布"
+
+#: templates/premises/contention_detail.html:48
+msgid "Publish"
+msgstr "发布"
+
+#: templates/premises/contention_detail.html:58
+msgid "View"
+msgstr "查看"
+
+#: templates/premises/contention_detail.html:59
+msgid "Tree"
+msgstr "树型"
+
+#: templates/premises/contention_detail.html:60
+msgid "List"
+msgstr "列表"
+
+#: templates/premises/contention_detail.html:66
+msgid "Share"
+msgstr "分享"
+
+#: templates/premises/contention_detail.html:86
+msgid "You can use arrow keys to navigate in the map."
+msgstr "你可以使用方向键浏览地图。"
+
+#: templates/premises/contention_detail.html:136
+#, python-format
+msgid ""
+"\n"
+"            <a href=\"%(login_url)s\">Login</a> or\n"
+"            <a href=\"%(register_url)s\">register</a>\n"
+"            to add a premise for this argument.\n"
+"        "
+msgstr ""
+"\n"
+"            <a href=\"%(login_url)s\">登录</a> 或\n"
+"            <a href=\"%(register_url)s\">注册</a>\n"
+"            为该论点添加论述。\n"
+"        "
+
+#: templates/premises/edit_contention.html:8
+msgid "Edit Argument"
+msgstr "编辑论点"
+
+#: templates/premises/edit_contention.html:16
+msgid "Remove the argument"
+msgstr "移除论点"
+
+#: templates/premises/edit_premise.html:7
+msgid "Edit Premise"
+msgstr "编辑论述"
+
+#: templates/premises/new_contention.html:9
+msgid "Save and continue to edit"
+msgstr "保存并继续编辑"
+
+#: templates/premises/new_premise.html:9
+msgid "The parent premise:"
+msgstr "父级论述："
+
+#: templates/premises/new_premise.html:27
+msgid "剩余字符："
+msgstr ""
+
+#: templates/premises/report.html:7
+msgid "The premise:"
+msgstr "论述："
+
+#: templates/premises/report.html:13
+msgid "Report Fallacy"
+msgstr "报告谬误"
+
+#: templates/premises/tree_view.html:17
+msgid "sources:"
+msgstr "信息源："
+
+#: templates/premises/tree_view.html:30
+#, python-format
+msgid ""
+"\n"
+"                             %(count)s fallacy reported.\n"
+"                        "
+msgstr ""
+"\n"
+"                             %(count)个谬误报告。\n"
+"                        "
+
+#: templates/premises/tree_view.html:44
+#, python-format
+msgid ""
+"\n"
+"                            %(count)s supporter.\n"
+"                        "
+msgstr ""
+"\n"
+"                            %(count)个支持者。\n"
+"                        "
+
+#: templates/premises/tree_view.html:51
+msgid "and others."
+msgstr "和其他人。"
+
+#: templates/premises/tree_view.html:61
+msgid "edit"
+msgstr "编辑"
+
+#: templates/premises/tree_view.html:65
+msgid "Are you sure to remove this premise?"
+msgstr "你确定要移除该论述？"
+
+#: templates/premises/tree_view.html:76
+msgid "undo"
+msgstr "取消操作"
+
+#: templates/premises/tree_view.html:81
+msgid "support"
+msgstr "支持"
+
+#: templates/premises/tree_view.html:88
+msgid "report fallacy"
+msgstr "报告谬误"
+
+#: templates/premises/examples/contention.html:2
+msgid ""
+"\n"
+"The main contention. It will be arguable with own premises.\n"
+"The Premises can prove or rebuttal this contention.<br>\n"
+"Examples:\n"
+"<ul>\n"
+"    <li>Real art is for society, not for profit</li>\n"
+"    <li>The meaning of life is 42</li>\n"
+"    <li>Ethics man did what had to be done</li>\n"
+"</ul>\n"
+msgstr ""
+"\n"
+"其主要论点。其论述将是值得商榷的。\n"
+"论述可以证明或反驳这一论点。<br>\n"
+"例如：\n"
+"<ul>\n"
+"    <li>真正的艺术是为了社会，而不是以盈利为目的</li>\n"
+"    <li>生命的意义就是 42</li>\n"
+"    <li>道德的人做了必须做的事</li>\n"
+"</ul>\n"
+
+#: templates/premises/examples/fallacy.html:2
+msgid ""
+"\n"
+"You have to choose a fallacy type.\n"
+"For more information, you can look at the\n"
+"<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia entry</"
+"a> for fallacies.\n"
+msgstr ""
+"\n"
+"你需要选择一个谬误类型。.\n"
+"关于谬误的更多信息，你可以查看\n"
+"<a href=\"https://zh.wikipedia.org/wiki/%E8%AC%AC%E8%AA%A4%E5%88%97%E8%A1%A8\">维基百科条目</"
+"a> 。\n"
+
+#: templates/premises/examples/owner.html:2
+msgid ""
+"\n"
+"The owner of argument. It can be instutation, person, book, or a paper.\n"
+"\n"
+"Examples:\n"
+"<ul>\n"
+"    <li>On the Origin of Species</li>\n"
+"    <li>Friedrich Nietzsche</li>\n"
+"    <li>Piet Mondiran</li>\n"
+"    <li>The Guardian</li>\n"
+"</ul>\n"
+msgstr ""
+"\n"
+"论点的拥有者。它可以是一个机构，一个人，一本书，或者一篇文章。\n"
+"\n"
+"例如：\n"
+"<ul>\n"
+"    <li>物种起源</li>\n"
+"    <li>尼采</li>\n"
+"    <li>蒙德里安</li>\n"
+"    <li>卫报</li>\n"
+"</ul>\n"
+
+#: templates/premises/examples/premise.html:2
+msgid ""
+"\n"
+"Example: We define happiness as a state of well-being, starting with being "
+"alive instead of dead.\n"
+msgstr ""
+"\n"
+"例如：我们定义幸福是一种好的状态，前提是 "
+"活着而不是死亡。\n"
+
+#: templates/premises/examples/premise_source.html:2
+msgid ""
+"\n"
+"Example: Charles Darwin's The Origin of Species\n"
+msgstr ""
+"\n"
+"例如：查尔斯·达尔文的物种起源\n"
+
+#: templates/premises/examples/premise_type.html:3
+msgid ""
+"\n"
+"The type of premise. It can be:\n"
+"<ul>\n"
+"    <li>\n"
+"        but: An objection against the contention.\n"
+"    </li>\n"
+"    <li>\n"
+"        because: A reason for proof the contention.\n"
+"    </li>\n"
+"    <li>\n"
+"        however: An additional situation for the premise.\n"
+"    </li>\n"
+"</ul>\n"
+msgstr ""
+msgid ""
+"\n"
+"论述的类型。它可以是：\n"
+"<ul>\n"
+"    <li>\n"
+"        但是：对争论的反对。\n"
+"    </li>\n"
+"    <li>\n"
+"        因为：对争论的支持。\n"
+"    </li>\n"
+"    <li>\n"
+"        然而：论述的另外一个条件。\n"
+"    </li>\n"
+"</ul>\n"
+
+#: templates/premises/examples/sources.html:2
+msgid ""
+"\n"
+"The source of argument. It can be a URL, a book, or a newspaper.\n"
+"It is important for reliability of main contention.\n"
+msgstr ""
+"\n"
+"论点来源。它可以是一个网址，一本书，或一张报纸。\n"
+"它对主要论证的可靠性很重要。\n"
+
+#: templates/profiles/social_providers.html:3
+msgid "Login with Twitter"
+msgstr "通过 Twitter 登录"
+
+#: templates/search/contention.html:8 templates/stats/contention.html:8
+msgid "PARTICIPANT"
+msgstr "参与者"
+
+#: templates/search/contention.html:12 templates/stats/contention.html:12
+msgid "BECAUSE"
+msgstr "因为"
+
+#: templates/search/contention.html:16 templates/stats/contention.html:16
+msgid "BUT"
+msgstr "但是"
+
+#: templates/search/contention.html:20 templates/stats/contention.html:20
+msgid "HOWEVER"
+msgstr "然而"
+
+#: templates/search/premise.html:11 templates/stats/premise.html:11
+msgid "supporter."
+msgstr "支持者。"
+
+#: templates/search/premise.html:16 templates/stats/premise.html:16
+msgid "fallacy report."
+msgstr "谬误报告。"
+
+#: templates/search/search.html:7
+msgid "Keywords:"
+msgstr "关键字;"
+
+#: templates/search/search.html:14
+msgid "contentions"
+msgstr "争论"
+
+#: templates/search/search.html:17
+msgid "users"
+msgstr "用户"
+
+#: templates/search/search.html:20
+msgid "premises"
+msgstr "论述"
