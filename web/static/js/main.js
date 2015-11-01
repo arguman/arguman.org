@@ -479,7 +479,7 @@
             subTrees.each(function (i, el) {
                 var subTree = $(el);
                 
-                if (parseInt(subTree.data("level")) < 2) {
+                if (parseInt(subTree.data("level")) < 3) {
                     return;
                 }
                 
