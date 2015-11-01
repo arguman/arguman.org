@@ -3,7 +3,9 @@ from django.db.models.signals import post_delete, post_save
 
 from django.dispatch import receiver
 from django.template.loader import render_to_string
+from django.utils.translation import get_language
 
+from i18n.utils import normalize_language_code
 from newsfeed.utils import get_collection
 from main.utils import send_complex_mail
 from premises.models import Contention, Premise, Report
@@ -112,15 +114,21 @@ class EntryManager(object):
                     .limit(limit))
         return map(Entry, newsfeed)
 
+    def get_language(self):
+        return normalize_language_code(get_language())
+
     def get_public_newsfeed(self, offset, limit):
         """
         Fetches news items from the newsfeed database
         """
+        language = self.get_language()
+
         parameters = {
             "news_type": {
                 "$in": [NEWS_TYPE_CONTENTION,
                         NEWS_TYPE_PREMISE]
-            }
+            },
+            "related_object.language": language
         }
 
         newsfeed = (Entry

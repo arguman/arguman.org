@@ -209,6 +209,7 @@ class Contention(DeletePreventionMixin, models.Model):
     def get_newsfeed_bundle(self):
         return {
             "id": self.id,
+            "language": self.language,
             "title": self.title,
             "owner": self.owner,
             "uri": self.get_absolute_url()
@@ -434,6 +435,7 @@ class Premise(DeletePreventionMixin, models.Model):
     def get_newsfeed_bundle(self):
         return {
             "id": self.id,
+            "language": self.argument.language,
             "premise_type": self.premise_type,
             "premise_class": self.premise_class(),
             "text": self.text,
