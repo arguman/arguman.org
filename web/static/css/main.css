@@ -2344,68 +2344,54 @@ div.load-more {
     margin-left: 5px;
 }
 
-.nouns .contentions {
-    margin: 20px 0;
-    padding: 0;
-}
-
-.nouns .contentions h2 {
-    margin: 0;
-}
-
-.nouns .contentions ul {
-    padding: 0;
-    margin: 10px 0;
-}
-
-.nouns .contentions li {
-    padding: 0;
-    margin: 0;
-}
-
-.nouns .contentions li h3 {
-    margin: 5px 0;
-}
-
-.nouns .contentions li h3 a {
-    border-bottom: none;
-    line-height: 1.1em;
-    color: #5b5b5b;
-}
-
 .noun-tree {
     margin-left: 15px;
+    overflow: hidden;
 }
 
 .noun-tree h3 {
     margin: 0;
     padding: 0;
     border-bottom: 1px solid #dedede;
-    display: inline-block;
+    display: block;
     color: #1d1d1d;
     min-width: 120px;
-    text-align: center;
+    text-align: left;
+    padding: 10px 20px;
 }
 
 .noun-tree .relations {
     margin: 0;
-    margin-top: -7px;
+    margin-top: 0px;
     margin-left: 80px;
     padding: 0;
     padding-top: 15px;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
     border-left: 1px solid #dedede;
+    float: left;
+    width: 240px;
 }
 
-.noun-tree .relations:last-child:after {
+.noun-tree .relations.contentions {
+    float: right;
+    width: 400px;
+    margin-left: 0;
+    padding-bottom: 20px;
+}
+
+.noun-tree .relations:after {
     content: "";
-    width: 15px;
-    height: 15px;
+    width: 9px;
+    height: 9px;
     position: absolute;
     background: #dedede;
     border-radius: 50%;
-    margin-left: -8px;
-    margin-top: 5px;
+    margin-left: -5px;
+    margin-top: 45px;
+}
+
+.noun-tree .relations.contentions:after {
+    display: none;
 }
 
 .noun-tree .relations li.relation {
@@ -2443,6 +2429,11 @@ div.load-more {
     border-bottom: 1px solid #6bd3ff;
 }
 
+.noun-tree .relations li.create {
+    color: red;
+    padding-bottom: 0;
+}
+
 .noun-tree .relations li.relation > a:before {
     content: "";
     width: 9px;
@@ -2452,6 +2443,16 @@ div.load-more {
     border-radius: 50%;
     margin-left: -20px;
     margin-top: 9px;
+}
+
+.noun-tree .relations li.create > a:before {
+    margin-top: 13px;
+}
+
+.noun-tree .relations li.create > a {
+    padding-top: 5px;
+    position: absolute;
+    font-size: 1.1em;
 }
 
 .noun-tree .relations .hyponyms {
@@ -2488,10 +2489,9 @@ div.load-more {
 
 .noun-tree .relations .header {
     list-style: none;
-    padding: 20px 15px 5px;
+    padding: 0 15px 5px;
     font-size: 1.1em;
     color: #b3b3b3;
-    border-bottom: 1px solid #dedede;
     width: 130px;
     margin-bottom: 10px;
 }

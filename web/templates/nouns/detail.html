@@ -14,7 +14,9 @@
                 {% if hypernym.hyponyms.exists %}
                 <ul class="hyponyms">
                     {% for hyponym in hypernym.hyponyms.all %}
+                    {% if hyponym != noun %}
                     <li><a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a></li>
+                    {% endif %}
                     {% endfor %}
                 </ul>
                 {% endif %}
@@ -27,7 +29,9 @@
                 {% if hyponym.hyponyms.exists %}
                 <ul class="hyponyms">
                     {% for hyponym in hyponym.hyponyms.all %}
+                    {% if hyponym != noun %}
                     <li><a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a></li>
+                    {% endif %}
                     {% endfor %}
                 </ul>
                 {% endif %}
@@ -40,24 +44,25 @@
             </li>
             {% endfor %}
         </ul>
-        {% if noun.contentions.exists %}
+        
         <ul class="contentions relations">
-            <li class="header">{% trans "mentioned in" %}</li>
             {% for contention in noun.contentions.all %}
             <li class="argument relation">
                 <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.highlighted_title|safe }}</a>
                 <ul class="argument-stats">
                     <li>
                     <a href="{{ contention.user.get_absolute_url }}">@{{ contention.user }}</a>
+                    {% if contention.contributors|length > 1 %}
                     {% blocktrans trimmed with participants=contention.contributors|length|add:-1 %}
                         and {{ participants }} participant.
                     {% endblocktrans %}
+                    {% endif %}
                     </li>
                 </ul>
             </li>
             {% endfor %}
+            <li class="create relation"><a href="{% url "new_argument" %}">{% trans "create an argument" %}</a></li>
         </ul>
-        {% endif %}
     </div>
 </div>
 </div>

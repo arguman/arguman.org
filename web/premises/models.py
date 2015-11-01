@@ -236,7 +236,7 @@ class Contention(DeletePreventionMixin, models.Model):
             if is_subsequence(noun.text.split(), tokens):
                 yield noun
                 continue
-            for synonym in noun.synonyms.all():
+            for synonym in noun.synonyms.filter(is_active=True):
                 if is_subsequence(synonym.text.split(), tokens):
                     yield noun
                     continue
