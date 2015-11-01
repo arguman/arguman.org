@@ -29,4 +29,10 @@ def from_lemma(text):
 
 def tokenize(text):
     blob = TextBlob(text.lower())
-    return blob.tokenize().singularize()
+    return blob.tokenize()
+
+def is_subsequence(sequence, parent):
+    for i in xrange(1 + len(parent) - len(sequence)):
+        if sequence == parent[i:i+len(sequence)]:
+            return True
+    return False

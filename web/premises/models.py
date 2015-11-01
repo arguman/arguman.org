@@ -23,7 +23,8 @@ from premises.managers import ContentionManager, DeletePreventionManager
 from premises.mixins import DeletePreventionMixin
 from premises.utils import replace_with_link
 from nouns.models import Noun
-from nouns.utils import tokenize
+from nouns.utils import tokenize, is_subsequence
+
 
 OBJECTION = 0
 SUPPORT = 1
@@ -224,7 +225,7 @@ class Contention(DeletePreventionMixin, models.Model):
         )
 
     def extract_nouns(self):
-        tokens = ' '.join(tokenize(self.title))
+        tokens = tokenize(self.title)
 
         nouns = (Noun
                  .objects
@@ -232,11 +233,11 @@ class Contention(DeletePreventionMixin, models.Model):
                  .filter(is_active=True))
 
         for noun in nouns:
-            if noun.text in tokens:
+            if is_subsequence(noun.text.split(), tokens):
                 yield noun
                 continue
             for synonym in noun.synonyms.all():
-                if synonym.text in tokens:
+                if is_subsequence(synonym.text.split(), tokens):
                     yield noun
                     continue
 

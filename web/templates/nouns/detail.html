@@ -9,7 +9,7 @@
         <ul class="relations">
             {% for hypernym in noun.hypernyms.all %}
             <li class="is-a relation">
-                <span>{% trans "is a" %}</span>
+                <span>{% trans "instance of" %}</span>
                 <a href="{{ hypernym.get_absolute_url }}">{{ hypernym }}</a>
                 {% if hypernym.hyponyms.exists %}
                 <ul class="hyponyms">
@@ -22,7 +22,7 @@
             {% endfor %}
             {% for hyponym in noun.hyponyms.all %}
             <li class="parent-of relation">
-                <span>{% trans "has a" %}</span>
+                <span>{% trans "parent of" %}</span>
                 <a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a>
                 {% if hyponym.hyponyms.exists %}
                 <ul class="hyponyms">
@@ -40,6 +40,7 @@
             </li>
             {% endfor %}
         </ul>
+        {% if noun.contentions.exists %}
         <ul class="contentions relations">
             <li class="header">{% trans "mentioned in" %}</li>
             {% for contention in noun.contentions.all %}
@@ -56,6 +57,7 @@
             </li>
             {% endfor %}
         </ul>
+        {% endif %}
     </div>
 </div>
 </div>
