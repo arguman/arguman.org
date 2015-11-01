@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 22:45+0000\n"
+"POT-Creation-Date: 2015-11-01 00:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: tvvocold <tvvocold@gmail.com>\n"
 "Language: zh-CN\n"
@@ -37,7 +37,7 @@ msgstr "Slug"
 msgid "Content"
 msgstr "内容"
 
-#: blog/models.py:26 premises/models.py:312
+#: blog/models.py:26 premises/models.py:315
 msgid "Published"
 msgstr "已发布"
 
@@ -156,29 +156,29 @@ msgstr "描述"
 msgid "Original Discourse"
 msgstr "原表述"
 
-#: premises/models.py:87 premises/models.py:310
+#: premises/models.py:87 premises/models.py:313
 msgid "Sources"
 msgstr "来源"
 
-#: premises/models.py:297
+#: premises/models.py:300
 msgid "Parent"
 msgstr "父"
 
-#: premises/models.py:298
+#: premises/models.py:301
 msgid ""
 "The parent of premise. If you don't choose anything, it will be a main "
 "premise."
 msgstr "论述的前提。如果你不选，这将成为主要的论述。"
 
-#: premises/models.py:302
+#: premises/models.py:305
 msgid "Premise Type"
 msgstr "论述类型"
 
-#: premises/models.py:306
+#: premises/models.py:309
 msgid "Premise Content"
 msgstr "论述内容"
 
-#: premises/models.py:466
+#: premises/models.py:470
 msgid "Fallacy Type"
 msgstr "谬误类型"
 
@@ -207,8 +207,6 @@ msgid "New password confirmation"
 msgstr "确认密码"
 
 #: profiles/models.py:21
-#, fuzzy
-#| msgid "Notifications"
 msgid "email notification"
 msgstr "提醒"
 
@@ -226,22 +224,14 @@ msgid "Forgot your password?"
 msgstr "忘记密码了?"
 
 #: templates/auth/login_popup.html:6
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "            <a href=\"%(login_url)s\">Login</a> or\n"
-#| "            <a href=\"%(register_url)s\">register</a>\n"
-#| "            to add a premise for this argument.\n"
-#| "        "
+#, python-format
 msgid ""
 "<a href=\"%(login_url)s\">Login</a> or <a href=\"%(register_url)s"
 "\">register</a> to add a premise for this argument."
 msgstr ""
-"\n"
 "            <a href=\"%(login_url)s\">登录</a> 或\n"
 "            <a href=\"%(register_url)s\">注册</a>\n"
-"            为该论点添加论述。\n"
-"        "
+"            为该论点添加论述。"
 
 #: templates/auth/password_reset_complete.html:8
 msgid "The password changed successfully."
@@ -264,15 +254,8 @@ msgid "Invalid password reset url."
 msgstr "无效的密码重置链接。"
 
 #: templates/auth/password_reset_done.html:8
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "        We have sent an email to reset your password. Please check your "
-#| "inbox.\n"
-#| "    "
 msgid "We have sent an email to reset your password. Please check your inbox."
 msgstr ""
-"\n"
 "       我们已发送密码重置邮件。请查收您的 邮箱.\n"
 "    "
 
@@ -423,23 +406,13 @@ msgid "Follow on twitter:"
 msgstr "在推特关注我们："
 
 #: templates/base.html:71
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                arguman.org is an open-source project. you can follow "
-#| "the\n"
-#| "                <a href=\"http://github.com/arguman/arguman.org"
-#| "\">organization</a> on github.\n"
-#| "            "
 msgid ""
 "arguman.org is an open-source project. you can follow the <a href=\"http://"
 "github.com/arguman/arguman.org\">organization</a> on github."
 msgstr ""
-"\n"
 "                arguman.org 是一个开源平台。你可以在 GitHub 上关注 \n"
 "                 <a href=\"http://github.com/arguman/arguman.org\">我们的组织"
-"</a>.\n"
-"            "
+"</a>."
 
 #: templates/base.html:77
 msgid "Terms of Service"
@@ -488,73 +461,46 @@ msgid "created an argument:"
 msgstr "创建一个论点："
 
 #: templates/newsfeed/fallacy.html:4
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "reported <strong>%(fallacy)s</strong> fallacy for a premise:\n"
+#, python-format
 msgid "reported <strong>%(fallacy)s</strong> fallacy for a premise:"
-msgstr ""
-"\n"
-"报告此论述 <strong>%(fallacy)s</strong> 为谬误:\n"
+msgstr "报告此论述 <strong>%(fallacy)s</strong> 为谬误:"
 
 #: templates/newsfeed/following.html:2
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    following <a href=\"%(profile_url)s\" class=\"contention-link\">"
-#| "%(username)s</a>\n"
+#, python-format
 msgid ""
 "following <a href=\"%(profile_url)s\" class=\"contention-link\">"
 "%(username)s</a>"
 msgstr ""
-"\n"
 "    正在关注 <a href=\"%(profile_url)s\" class=\"contention-link\">"
-"%(username)s</a>\n"
+"%(username)s</a>"
 
 #: templates/notifications.html:8
 msgid "Notifications"
 msgstr "提醒"
 
 #: templates/notifications/added-premise-for-contention.html:7
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    added a <span class=\"premise-type %(class)s\">%(label)s</span> "
-#| "premise\n"
+#, python-format
 msgid "added a <span class=\"premise-type %(class)s\">%(label)s</span> premise"
 msgstr ""
-"\n"
-"    添加一个 <span class=\"premise-type %(class)s\">%(label)s</span> 论述\n"
+"    添加一个 <span class=\"premise-type %(class)s\">%(label)s</span> 论述"
 
 #: templates/notifications/added-premise-for-premise.html:8
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    added a <span class=\"premise-type %(class)s\">%(label)s</span> "
-#| "premise for a premise\n"
+#, python-format
 msgid ""
 "added a <span class=\"premise-type %(class)s\">%(label)s</span> premise for "
 "a premise"
 msgstr ""
-"\n"
 "    为该论述添加一个 <span class=\"premise-type %(class)s\">%(label)s</span>"
-"论述  \n"
+"论述  "
 
 #: templates/notifications/followed.html:2
 msgid "is following you."
 msgstr "在关注你。"
 
 #: templates/notifications/reported-as-fallacy.html:4
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Your premise reported as <strong>%(label)s</strong> \n"
-#| "    "
+#, python-format
 msgid "Your premise reported as <strong>%(label)s</strong>"
-msgstr ""
-"\n"
-"    你的论述被报告为 <strong>%(label)s</strong> \n"
-"    "
+msgstr "    你的论述被报告为 <strong>%(label)s</strong> "
 
 #: templates/notifications/supported-a-premise.html:6
 msgid "supported your premise"
@@ -591,12 +537,12 @@ msgid "You have no new notifications."
 msgstr "你有新的消息。"
 
 #: templates/premises/actions.html:3 templates/premises/list_view.html:13
-#: templates/premises/premise.html:72 templates/premises/thread.html:105
+#: templates/premises/premise.html:71 templates/premises/thread.html:105
 #: templates/premises/tree_view.html:24
 msgid "add premise"
 msgstr "添加论述"
 
-#: templates/premises/actions.html:7 templates/premises/premise.html:78
+#: templates/premises/actions.html:7 templates/premises/premise.html:77
 #: templates/premises/thread.html:97
 msgid "remove"
 msgstr "删除"
@@ -655,24 +601,12 @@ msgid "Edit Premise"
 msgstr "编辑论述"
 
 #: templates/premises/examples/contention.html:2
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "The main contention. It will be arguable with own premises.\n"
-#| "The Premises can prove or rebuttal this contention.<br>\n"
-#| "Examples:\n"
-#| "<ul>\n"
-#| "    <li>Real art is for society, not for profit</li>\n"
-#| "    <li>The meaning of life is 42</li>\n"
-#| "    <li>Ethics man did what had to be done</li>\n"
-#| "</ul>\n"
 msgid ""
 "The main contention. It will be arguable with own premises. The Premises can "
 "prove or rebuttal this contention.<br> Examples: <ul> <li>Real art is for "
 "society, not for profit</li> <li>The meaning of life is 42</li> <li>Ethics "
 "man did what had to be done</li> </ul>"
 msgstr ""
-"\n"
 "其主要论点。其论述将是值得商榷的。\n"
 "论述可以证明或反驳这一论点。<br>\n"
 "例如：\n"
@@ -680,46 +614,24 @@ msgstr ""
 "    <li>真正的艺术是为了社会，而不是以盈利为目的</li>\n"
 "    <li>生命的意义就是 42</li>\n"
 "    <li>道德的人做了必须做的事</li>\n"
-"</ul>\n"
+"</ul>"
 
 #: templates/premises/examples/fallacy.html:2
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "You have to choose a fallacy type.\n"
-#| "For more information, you can look at the\n"
-#| "<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia "
-#| "entry</a> for fallacies.\n"
 msgid ""
 "You have to choose a fallacy type. For more information, you can look at the "
 "<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia entry</"
 "a> for fallacies."
 msgstr ""
-"\n"
 "你需要选择一个谬误类型。.\n"
 "关于谬误的更多信息，你可以查看\n"
-"<a href=\"https://zh.wikipedia.org/wiki/%E8%AC%AC%E8%AA"
-"%A4%E5%88%97%E8%A1%A8\">维基百科条目</a> 。\n"
+"<a href=\"https://zh.wikipedia.org/wiki/謬誤列表\">维基百科条目</a> 。"
 
 #: templates/premises/examples/owner.html:2
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "The owner of argument. It can be instutation, person, book, or a paper.\n"
-#| "\n"
-#| "Examples:\n"
-#| "<ul>\n"
-#| "    <li>On the Origin of Species</li>\n"
-#| "    <li>Friedrich Nietzsche</li>\n"
-#| "    <li>Piet Mondiran</li>\n"
-#| "    <li>The Guardian</li>\n"
-#| "</ul>\n"
 msgid ""
 "The owner of argument. It can be instutation, person, book, or a paper. "
 "Examples: <ul> <li>On the Origin of Species</li> <li>Friedrich Nietzsche</"
 "li> <li>Piet Mondiran</li> <li>The Guardian</li> </ul>"
 msgstr ""
-"\n"
 "论点的拥有者。它可以是一个机构，一个人，一本书，或者一篇文章。\n"
 "\n"
 "例如：\n"
@@ -728,53 +640,24 @@ msgstr ""
 "    <li>尼采</li>\n"
 "    <li>蒙德里安</li>\n"
 "    <li>卫报</li>\n"
-"</ul>\n"
+"</ul>"
 
 #: templates/premises/examples/premise.html:2
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "Example: We define happiness as a state of well-being, starting with "
-#| "being alive instead of dead.\n"
 msgid ""
 "Example: We define happiness as a state of well-being, starting with being "
 "alive instead of dead."
-msgstr ""
-"\n"
-"例如：我们定义幸福是一种好的状态，前提是 活着而不是死亡。\n"
+msgstr "例如：我们定义幸福是一种好的状态，前提是 活着而不是死亡。"
 
 #: templates/premises/examples/premise_source.html:2
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "Example: Charles Darwin's The Origin of Species\n"
 msgid "Example: Charles Darwin's The Origin of Species"
-msgstr ""
-"\n"
-"例如：查尔斯·达尔文的物种起源\n"
+msgstr "例如：查尔斯·达尔文的物种起源"
 
 #: templates/premises/examples/premise_type.html:3
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "The type of premise. It can be:\n"
-#| "<ul>\n"
-#| "    <li>\n"
-#| "        but: An objection against the contention.\n"
-#| "    </li>\n"
-#| "    <li>\n"
-#| "        because: A reason for proof the contention.\n"
-#| "    </li>\n"
-#| "    <li>\n"
-#| "        however: An additional situation for the premise.\n"
-#| "    </li>\n"
-#| "</ul>\n"
 msgid ""
 "The type of premise. It can be: <ul> <li> but: An objection against the "
 "contention. </li> <li> because: A reason for proof the contention. </li> "
 "<li> however: An additional situation for the premise. </li> </ul>"
 msgstr ""
-"\n"
 "论述的类型。它可以是：\n"
 "<ul>\n"
 "    <li>\n"
@@ -786,25 +669,17 @@ msgstr ""
 "    <li>\n"
 "        然而：论述的另外一个条件。\n"
 "    </li>\n"
-"</ul>\n"
+"</ul>"
 
 #: templates/premises/examples/sources.html:2
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "The source of argument. It can be a URL, a book, or a newspaper.\n"
-#| "It is important for reliability of main contention.\n"
 msgid ""
 "The source of argument. It can be a URL, a book, or a newspaper. It is "
 "important for reliability of main contention."
 msgstr ""
-"\n"
 "论点来源。它可以是一个网址，一本书，或一张报纸。\n"
-"它对主要论证的可靠性很重要。\n"
+"它对主要论证的可靠性很重要。"
 
 #: templates/premises/list_view.html:20
-#, fuzzy
-#| msgid "The parent premise:"
 msgid "Go to parent premise"
 msgstr "父级论述："
 
@@ -824,40 +699,40 @@ msgstr ""
 msgid "sources:"
 msgstr "信息源："
 
-#: templates/premises/premise.html:33 templates/premises/thread.html:74
+#: templates/premises/premise.html:32 templates/premises/thread.html:74
 #, python-format
 msgid "%(count)s fallacy reported."
 msgstr "%(count)s个谬误报告。"
 
-#: templates/premises/premise.html:45 templates/premises/premise.html.py:87
-#: templates/premises/premise.html:89 templates/premises/premise.html.py:93
+#: templates/premises/premise.html:44 templates/premises/premise.html.py:86
+#: templates/premises/premise.html:88 templates/premises/premise.html.py:92
 #: templates/premises/thread.html:113
 msgid "undo"
 msgstr "取消操作"
 
-#: templates/premises/premise.html:56 templates/premises/thread.html:48
+#: templates/premises/premise.html:55 templates/premises/thread.html:48
 #, python-format
 msgid "%(count)s supporter."
 msgstr "%(count)s个支持者。"
 
-#: templates/premises/premise.html:63
+#: templates/premises/premise.html:62
 msgid "and others."
 msgstr "和其他人。"
 
-#: templates/premises/premise.html:75 templates/premises/thread.html:90
+#: templates/premises/premise.html:74 templates/premises/thread.html:90
 msgid "edit"
 msgstr "编辑"
 
-#: templates/premises/premise.html:79 templates/premises/thread.html:98
+#: templates/premises/premise.html:78 templates/premises/thread.html:98
 msgid "Are you sure to remove this premise?"
 msgstr "你确定要移除该论述？"
 
-#: templates/premises/premise.html:87 templates/premises/premise.html.py:93
-#: templates/premises/premise.html:95 templates/premises/thread.html:119
+#: templates/premises/premise.html:86 templates/premises/premise.html.py:92
+#: templates/premises/premise.html:94 templates/premises/thread.html:119
 msgid "support"
 msgstr "支持"
 
-#: templates/premises/premise.html:101 templates/premises/thread.html:124
+#: templates/premises/premise.html:100 templates/premises/thread.html:124
 msgid "report fallacy"
 msgstr "报告谬误"
 
@@ -882,14 +757,10 @@ msgid "Loading tree..."
 msgstr ""
 
 #: templates/premises/tree_view.html:38
-#, fuzzy
-#| msgid "The parent premise:"
 msgid "The argument has no premises yet."
 msgstr "父级论述："
 
 #: templates/premises/tree_view.html:40
-#, fuzzy
-#| msgid "add premise"
 msgid "Add a premise"
 msgstr "添加论述"
 

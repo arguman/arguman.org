@@ -12,7 +12,7 @@ from django.db.models import Count, Q
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, get_language
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 

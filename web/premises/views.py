@@ -30,6 +30,7 @@ from premises.mixins import PaginationMixin, NextURLMixin
 from newsfeed.models import Entry
 from profiles.mixins import LoginRequiredMixin
 from profiles.models import Profile
+from i18n.utils import normalize_language_code
 
 
 def get_ip_address(request):
@@ -240,7 +241,7 @@ class SearchView(HomeView):
             result = Premise.objects.none()
         else:
             result = (Premise.objects.filter(
-                argument__language=get_language(),
+                argument__language=normalize_language_code(get_language()),
                 text__contains=keywords))
             if paginate:
                 result = result[self.get_offset():self.get_limit()]
@@ -267,7 +268,7 @@ class SearchView(HomeView):
             result = (Contention
                       .objects
                       .filter(title__icontains=keywords,
-                              language=get_language()))
+                              language=normalize_language_code(get_language())))
 
             if paginate:
                 result = result[self.get_offset():self.get_limit()]
@@ -402,7 +403,7 @@ class StatsView(HomeView):
         return Contention.objects.annotate(
             premise_count=Sum("premises"),
         ).filter(
-            language=get_language(),
+            language=normalize_language_code(get_language()),
             premise_count__gt=0,
             **self.build_time_filters(date_field="date_creation")
         ).order_by("-premise_count")[:10]
@@ -465,10 +466,23 @@ class ArgumentCreationView(LoginRequiredMixin, CreateView):
     template_name = "premises/new_contention.html"
     form_class = ArgumentCreationForm
 
+    help_texts = {
+        'title': 'premises/examples/contention.html',
+        'owner': 'premises/examples/owner.html',
+        'sources': 'premises/examples/sources.html'
+    }
+
+    def get_form_class(self):
+        form_class = self.form_class
+        for key, value in self.help_texts.items():
+            help_text = render_to_string(value)
+            form_class.base_fields[key].help_text = help_text
+        return form_class
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.ip_address = get_ip_address(self.request)
-        form.instance.language = get_language()
+        form.instance.language = normalize_language_code(get_language())
         form.instance.is_published = True
         response = super(ArgumentCreationView, self).form_valid(form)
         form.instance.update_sibling_counts()
@@ -542,6 +556,19 @@ class PremiseEditView(LoginRequiredMixin, UpdateView):
     template_name = "premises/edit_premise.html"
     form_class = PremiseEditForm
 
+    help_texts = {
+        'premise_type': 'premises/examples/premise_type.html',
+        'text': 'premises/examples/premise.html',
+        'sources': 'premises/examples/premise_source.html'
+    }
+
+    def get_form_class(self):
+        form_class = self.form_class
+        for key, value in self.help_texts.items():
+            help_text = render_to_string(value)
+            form_class.base_fields[key].help_text = help_text
+        return form_class
+
     def get_queryset(self):
         premises = Premise.objects.all()
         if self.request.user.is_superuser:
@@ -560,6 +587,19 @@ class PremiseEditView(LoginRequiredMixin, UpdateView):
 class PremiseCreationView(NextURLMixin, LoginRequiredMixin, CreateView):
     template_name = "premises/new_premise.html"
     form_class = PremiseCreationForm
+
+    help_texts = {
+        'premise_type': 'premises/examples/premise_type.html',
+        'text': 'premises/examples/premise.html',
+        'sources': 'premises/examples/premise_source.html'
+    }
+
+    def get_form_class(self):
+        form_class = self.form_class
+        for key, value in self.help_texts.items():
+            help_text = render_to_string(value)
+            form_class.base_fields[key].help_text = help_text
+        return form_class
 
     def get_context_data(self, **kwargs):
         return super(PremiseCreationView, self).get_context_data(
@@ -663,6 +703,12 @@ class PremiseDeleteView(LoginRequiredMixin, View):
 class ReportView(NextURLMixin, LoginRequiredMixin, CreateView):
     form_class = ReportForm
     template_name = "premises/report.html"
+
+    def get_form_class(self):
+        form = self.form_class
+        help_text = render_to_string('premises/examples/fallacy.html')
+        form.base_fields['fallacy_type'].help_text = help_text
+        return form
 
     def get_context_data(self, **kwargs):
         return super(ReportView, self).get_context_data(

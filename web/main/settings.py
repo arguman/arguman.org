@@ -118,6 +118,10 @@ LANGUAGE_CODE_MAPPING = {
     'ch': 'zh-Hans'
 }
 
+LANGUAGE_CODE_MAPPING_REVERSED = {
+    v.lower(): k for k, v in LANGUAGE_CODE_MAPPING.iteritems()
+}
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
