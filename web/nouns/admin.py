@@ -1,14 +1,15 @@
 from django.contrib import admin
 from django.db.models import Count, Q
 from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.http import HttpResponseRedirect
 from django import forms
 
-from nouns.models import Noun, Synonym
+from nouns.models import Noun, Keyword, Relation
 from premises.models import Contention
 
 
-class SynonymInline(admin.TabularInline):
-    model = Synonym
+class KeywordInline(admin.TabularInline):
+    model = Keyword
     extra = 0
 
 
@@ -18,51 +19,61 @@ class ContentionInline(admin.TabularInline):
     raw_id_fields = ('contention',)
 
 
-class HypernymsInline(admin.SimpleListFilter):
-    parameter_name = 'hypernym'
-    root_hypernym = 'abstraction'
-    title = 'hypernym'
-
-    def lookups(self, request, model_admin):
-        if self.value():
-            hyponyms = Noun.objects.filter(
-                hypernyms__id=self.value())
-        else:
-            hyponyms = Noun.objects.filter(
-                hypernyms__text=self.root_hypernym)
-
-        return [
-            (hyponym.id, hyponym.text)
-            for hyponym in hyponyms
-            ]
-
-    def queryset(self, request, qs):
-        if not self.value():
-            return qs
-
-        return qs.filter(hypernyms__id=self.value())
+class RelationInline(admin.TabularInline):
+    model = Relation
+    extra = 0
+    raw_id_fields = ('target',)
+    fk_name = 'source'
 
 
-class NounAdmin(admin.ModelAdmin):
+class ActionInChangeFormMixin(object):
+    def response_action(self, request, queryset):
+        """
+        Prefer http referer for redirect
+        """
+        _super = super(ActionInChangeFormMixin, self)
+        response = _super.response_action(request, queryset)
+        if isinstance(response, HttpResponseRedirect):
+            response['Location'] = request.META.get(
+                                'HTTP_REFERER', response.url)
+        return response  
+
+    def change_view(self, request, object_id, extra_context=None):
+        actions = self.get_actions(request)
+        if actions:
+            action_form = self.action_form(auto_id=None)
+            choices = self.get_action_choices(request)
+            action_form.fields['action'].choices = choices
+        else: 
+            action_form = None
+        extra_context=extra_context or {}
+        extra_context['action_form'] = action_form
+        return super(ActionInChangeFormMixin, self).change_view(
+                      request, object_id, extra_context=extra_context)
+
+
+class NounAdmin(ActionInChangeFormMixin, admin.ModelAdmin):
     list_display = ('__unicode__', 'is_active', 'hypernyms_as_text')
-    filter_horizontal = ('hypernyms',)
-    list_filter = (HypernymsInline, 'is_active')
-    inlines = [SynonymInline, ContentionInline]
+    list_filter = ('is_active', )
+    inlines = [KeywordInline, ContentionInline, RelationInline]
     actions = ['update_contentions', 'reset_contentions',
                'update_with_wordnet', 'make_active', 'make_passive']
-    search_fields = ['text', 'synonyms__text']
+    search_fields = ['text', 'keywords__text']
+    actions_on_top = True
+    actions_on_bottom = True
+    save_on_top = True
 
     def get_queryset(self, request):
         qs = super(NounAdmin, self).get_queryset(request)
-        return qs.prefetch_related('hypernyms', 'synonyms')
+        return qs.prefetch_related('out_relations', 'keywords')
 
     def update_contentions(self, request, qs):
         q = Q()
 
         for noun in qs:
             q |= Q(title__icontains=noun.text)
-            for synonym in noun.synonyms.all():
-                q |= Q(title__icontains=synonym.text)
+            for keyword in noun.keywords.all():
+                q |= Q(title__icontains=keyword.text)
 
         contentions = Contention.objects.filter(q)
         for contention in contentions:
@@ -79,11 +90,10 @@ class NounAdmin(admin.ModelAdmin):
 
     def hypernyms_as_text(self, noun):
         return ', '.join([
-                             '<a href="%(id)s">%(text)s</a>' % {
-                                 'id': hypernym.id,
-                                 'text': hypernym.text
-                             } for hypernym in noun.hypernyms.all()
-                             ])
+             '<a href="%(id)s">%(text)s</a>' % {
+             'id': hypernym.target.id,
+             'text': hypernym.target.text
+         } for hypernym in noun.hypernyms()])
 
     hypernyms_as_text.allow_tags = True
 

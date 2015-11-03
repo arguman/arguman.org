@@ -7,44 +7,29 @@
     <div class="noun-tree">
         <h3>{{ noun }}</h3>
         <ul class="relations">
-            {% for hypernym in noun.hypernyms.all %}
-            <li class="is-a relation">
-                <span>{% trans "instance of" %}</span>
-                <a href="{{ hypernym.get_absolute_url }}">{{ hypernym }}</a>
-                {% if hypernym.hyponyms.exists %}
+            {% for relation in noun.out_relations.all %}
+            <li class="{{ relation.relation_type }} relation">
+                <span>{{ relation.get_relation_type_display }}</span>
+                <a href="{{ relation.target.get_absolute_url }}">{{ relation.target }}</a>
+                {% if relation.target.hyponyms.exists %}
                 <ul class="hyponyms">
-                    {% for hyponym in hypernym.hyponyms.all %}
-                    {% if hyponym != noun %}
-                    <li><a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a></li>
+                    {% for hyponym in relation.target.hyponyms.all %}
+                    {% if hyponym.source != noun %}
+                    <li><a href="{{ hyponym.source.get_absolute_url }}">{{ hyponym.source }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
                 {% endif %}
             </li>
             {% endfor %}
-            {% for hyponym in noun.hyponyms.all %}
-            <li class="parent-of relation">
-                <span>{% trans "parent of" %}</span>
-                <a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a>
-                {% if hyponym.hyponyms.exists %}
-                <ul class="hyponyms">
-                    {% for hyponym in hyponym.hyponyms.all %}
-                    {% if hyponym != noun %}
-                    <li><a href="{{ hyponym.get_absolute_url }}">{{ hyponym }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-                {% endif %}
+            {% for relation in noun.in_relations.all %}
+            <li class="{{ relation.reverse_type }} relation">
+                <span>{{ relation.get_reverse_type_display }}</span>
+                <a href="{{ relation.source.get_absolute_url }}">{{ relation.source }}</a>
             </li>
             {% endfor %}
-            {% for antonym in noun.antonyms.all %}
-            <li class="opposite-with relation">
-                <span>{% trans "opposite with" %}</span>
-                <a href="{{ antonym.get_absolute_url }}">{{ antonym }}</a>
-            </li>
-            {% endfor %}
+            <li class="create relation"><a href="{% url "new_relation" noun.slug %}">{% trans "add new relation" %}</a></li>
         </ul>
-        
         <ul class="contentions relations">
             {% for contention in noun.contentions.all %}
             <li class="argument relation">
@@ -64,6 +49,5 @@
             <li class="create relation"><a href="{% url "new_argument" %}">{% trans "create an argument" %}</a></li>
         </ul>
     </div>
-</div>
 </div>
 {% endblock %}

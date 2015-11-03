@@ -2,7 +2,10 @@ from unidecode import unidecode
 
 from django.db import models
 from django.utils.encoding import smart_unicode
+from django.conf import settings
 from django.template.defaultfilters import slugify
+from django.utils.functional import curry
+from django.utils.translation import ugettext_lazy as _
 
 from nouns.utils import get_synsets, get_lemmas, from_lemma
 
@@ -10,11 +13,7 @@ from nouns.utils import get_synsets, get_lemmas, from_lemma
 class Noun(models.Model):
     text = models.CharField(max_length=255, db_index=True, unique=True)
     slug = models.SlugField(max_length=255, blank=True)
-    hypernyms = models.ManyToManyField('self', blank=True, null=True,
-                                       related_name='hyponyms', 
-                                       symmetrical=False)
-    antonyms = models.ManyToManyField('self', blank=True, null=True,
-                                       related_name='antonyms')
+
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
@@ -29,14 +28,14 @@ class Noun(models.Model):
     def from_synset(cls, synset):
         lemmas = synset.lemma_names()
         text = lemmas[0]
-        synonyms = lemmas[1:]
+        keywords = lemmas[1:]
         noun, created = cls.objects.get_or_create(
             text=from_lemma(text),
             defaults={
                 'is_active': False
             })
-        for synonym in synonyms:
-            noun.add_synonym(from_lemma(synonym))
+        for keyword in keywords:
+            noun.add_keyword(from_lemma(keyword))
         return noun
 
     def update_with_wordnet(self, update_antonyms=True):
@@ -51,12 +50,22 @@ class Noun(models.Model):
             parent = self
             for hypernym in reversed(parents):
                 noun = Noun.from_synset(hypernym)
-                parent.hypernyms.add(noun)
+                parent.add_hypernym(noun)
                 parent = noun
+
+            for holonym in synset.part_holonyms():
+                noun = Noun.from_synset(holonym)
+                noun.update_with_wordnet()
+                self.add_holonym(noun)
+
+            for holonym in synset.member_holonyms():
+                noun = Noun.from_synset(holonym)
+                noun.update_with_wordnet()
+                self.add_holonym(noun)
 
         for lemma in get_lemmas(self.text):
             if lemma != self.text:
-                self.add_synonym(lemma)
+                self.add_keyword(lemma)
 
         if not update_antonyms:
             return
@@ -65,20 +74,40 @@ class Noun(models.Model):
             for lemma in synset.lemmas():
                 for antonym in lemma.antonyms():
                     noun = Noun.from_synset(antonym.synset())
-                    self.antonyms.add(noun)
+                    self.add_antonym(noun)
                     noun.update_with_wordnet(update_antonyms=False)
 
-    def add_synonym(self, text):
-        synonym, created = self.synonyms.get_or_create(text=text)
-        return synonym
+    def add_keyword(self, text):
+        keyword, created = self.keywords.get_or_create(text=text)
+        return keyword
 
     @models.permalink
     def get_absolute_url(self):
         return 'nouns_detail', [self.slug]
 
+    def hypernyms(self):
+        return self.out_relations.filter(relation_type='hypernym')
 
-class Synonym(models.Model):
-    noun = models.ForeignKey(Noun, related_name="synonyms")
+    def hyponyms(self):
+        return self.in_relations.filter(relation_type='hypernym')
+
+    def add_relation(self, target, relation_type=None):
+        relation, created = (
+            self.out_relations.get_or_create(
+                target=target, relation_type=relation_type)
+        )
+        return relation
+
+    add_hypernym = curry(add_relation, relation_type="hypernym")
+    add_holonym = curry(add_relation, relation_type="holonym")
+    add_antonym = curry(add_relation, relation_type="antonym")
+
+
+class Keyword(models.Model):
+    """
+    Keywords for matching contentions.
+    """
+    noun = models.ForeignKey(Noun, related_name="keywords")
     text = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
 
@@ -86,10 +115,48 @@ class Synonym(models.Model):
         return smart_unicode(self.text)
 
 
-class Pattern(models.Model):
-    name = models.CharField(max_length=255)
-    text = models.TextField()
+class Relation(models.Model):
+    """
+    Holds the relationships of contentions.
+
+        - is a (hypernym)
+        - part of (holonym)
+        - opposite (antonym)
+        - same_as (synonym)
+
+    """
+    HYPERNYM = "hypernym"
+    HOLONYM = "holonym"
+    ANTONYM = "antonym"
+    HYPONYM = "hyponym"
+    MERONYM = "meronym"
+
+    TYPES = (
+        (HYPERNYM, _('is a')),
+        (HOLONYM, _('part of')),
+        (ANTONYM, _('opposite with')),
+    )
+
+    source = models.ForeignKey(Noun, related_name="out_relations")
+    target = models.ForeignKey(Noun, related_name="in_relations")
+    relation_type = models.CharField(max_length=25, choices=TYPES)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return smart_unicode(self.name)
+        return smart_unicode(self.relation_type)
 
+    def reverse_type(self):
+        return {
+            Relation.HYPERNYM: Relation.HYPONYM,
+            Relation.HOLONYM: Relation.MERONYM,
+            Relation.ANTONYM: Relation.ANTONYM
+        }.get(self.relation_type)
+
+    def get_reverse_type_display(self):
+        return {
+            Relation.HYPONYM: _("whole of"),
+            Relation.MERONYM: _("whole of"),
+            Relation.ANTONYM: _("opposite with")
+        }.get(self.reverse_type())

@@ -2351,7 +2351,6 @@ div.load-more {
 
 .noun-tree h3 {
     margin: 0;
-    padding: 0;
     border-bottom: 1px solid #dedede;
     display: block;
     color: #1d1d1d;
@@ -2361,43 +2360,28 @@ div.load-more {
 }
 
 .noun-tree .relations {
-    margin: 0;
-    margin-top: 0px;
-    margin-left: 80px;
-    padding: 0;
-    padding-top: 15px;
-    padding-bottom: 50px;
+    margin: 0 0 0 80px;
+    padding: 15px 0 20px;
     border-left: 1px solid #dedede;
     float: left;
     width: 240px;
+    color: #c8c8c8;
 }
 
 .noun-tree .relations.contentions {
     float: right;
     width: 400px;
     margin-left: 0;
-    padding-bottom: 20px;
-}
-
-.noun-tree .relations:after {
-    content: "";
-    width: 9px;
-    height: 9px;
-    position: absolute;
-    background: #dedede;
-    border-radius: 50%;
-    margin-left: -5px;
-    margin-top: 45px;
-}
-
-.noun-tree .relations.contentions:after {
-    display: none;
 }
 
 .noun-tree .relations li.relation {
     list-style: none;
     padding: 8px 0;
     margin: 0;
+}
+
+.noun-tree .relations li.relation.empty {
+    padding-left: 20px;
 }
 
 .noun-tree .relations li.relation > span {
@@ -2421,11 +2405,16 @@ div.load-more {
     margin-left: 15px;
 }
 
-.noun-tree .relations li.relation.opposite-with > a {
+.noun-tree .relations li.relation.antonym > a {
     border-bottom: 1px solid #ffb7b1;
 }
 
-.noun-tree .relations li.relation.parent-of > a {
+.noun-tree .relations li.relation.holonym > a {
+    border-bottom: 1px solid #ffd29b;
+}
+
+.noun-tree .relations li.relation.meronym > a,
+.noun-tree .relations li.relation.hyponym > a {
     border-bottom: 1px solid #6bd3ff;
 }
 
@@ -2460,19 +2449,27 @@ div.load-more {
     padding: 0;
 }
 
-.noun-tree .relations .is-a .hyponyms {
+.noun-tree .relations .hypernym .hyponyms {
     border-left: 1px solid #81ffdd;
 }
 
-.noun-tree .relations .is-a .hyponyms a {
+.noun-tree .relations .hypernym .hyponyms a {
     border-bottom: 1px solid #81ffdd;
 }
 
-.noun-tree .relations .parent-of .hyponyms {
+.noun-tree .relations .holonym .hyponyms {
+    border-left: 1px solid #ffd29b;
+}
+
+.noun-tree .relations .holonym .hyponyms a {
+    border-bottom: 1px solid #ffd29b;
+}
+
+.noun-tree .relations .hyponym .hyponyms {
     border-left: 1px solid #6bd3ff;
 }
 
-.noun-tree .relations .parent-of .hyponyms a {
+.noun-tree .relations .hyponym .hyponyms a {
     border-bottom: 1px solid #6bd3ff;
 }
 
@@ -2506,7 +2503,7 @@ div.load-more {
 }
 
 .noun-tree .relations .relation.argument > a {
-    border-bottom: 0px;
+    border-bottom: 0;
     color: #333333;
     font-size: 1.2em;
     line-height: 1.2em;
@@ -2540,4 +2537,108 @@ div.load-more {
 .noun-tree .argument-stats li a {
     color: #b7b7b7;
     text-decoration: none;
+}
+
+.new-relation-form {
+    overflow: hidden;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.new-relation-form h2 {
+    font-weight: normal;
+    margin: 0 25px 35px;
+    padding: 0;
+    color: #aeaeae;
+}
+
+.new-relation-form .relation-source {
+    float: left;
+    width: 240px;
+    text-align: center;
+    padding-top: 2px;
+}
+
+.new-relation-form .relation-source span {
+    font-size: 1.2em;
+    display: inline-block;
+    margin: 0 30px;
+    color: #656c6c;
+}
+
+.new-relation-form .relation-type {
+    float: left;
+    width: 200px;
+}
+
+.new-relation-form .relation-type ul {
+    margin: 0;
+    padding: 0;
+}
+
+.new-relation-form .relation-type ul li {
+    list-style: none;
+    padding-bottom: 5px;
+}
+
+.new-relation-form .relation-type ul li label {
+    font-size: 20px;
+    border-bottom: 2px solid #61ffec;
+    display: inline-block;
+    width: auto;
+}
+
+.new-relation-form .relation-target {
+    float: left;
+}
+
+.new-relation-form .relation-target label {
+    font-size: 18px;
+    color: #cbd7d0;
+}
+
+.new-relation-form .relation-type-examples {
+    clear: both;
+    padding: 20px;
+    background: #fff;
+}
+
+.new-relation-form .relation-type-examples h3 {
+    font-size: 24px;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.new-relation-form .relation-type-examples p {
+    margin: 5px 0 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #d6d6d6;
+    color: #adadad;
+    width: 90%;
+}
+
+.new-relation-form .relation-type-examples p:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.new-relation-form .relation-type-examples b {
+    font-weight: normal;
+    color: #7b7b7b;
+    display: block;
+}
+
+.new-relation-form .relation-type-examples i {
+    font-style: normal;
+    border-bottom: 2px solid #61ffec;
+    display: inline-block;
+    line-height: 1em;
+}
+
+.new-relation-form .form-footer {
+    clear: both;
+    font-size: 22px;
+    padding: 0 20px;
 }

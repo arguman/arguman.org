@@ -229,15 +229,15 @@ class Contention(DeletePreventionMixin, models.Model):
 
         nouns = (Noun
                  .objects
-                 .prefetch_related('synonyms')
+                 .prefetch_related('keywords')
                  .filter(is_active=True))
 
         for noun in nouns:
             if is_subsequence(noun.text.split(), tokens):
                 yield noun
                 continue
-            for synonym in noun.synonyms.filter(is_active=True):
-                if is_subsequence(synonym.text.split(), tokens):
+            for keyword in noun.keywords.filter(is_active=True):
+                if is_subsequence(keyword.text.split(), tokens):
                     yield noun
                     continue
 
@@ -252,25 +252,25 @@ class Contention(DeletePreventionMixin, models.Model):
         nouns = (self
                  .nouns
                  .extra(select=select)
-                 .prefetch_related('synonyms')
+                 .prefetch_related('keywords')
                  .order_by('-length'))
 
         for noun in nouns:
-            synonyms = (
-                noun.synonyms.values_list(
+            keywords = (
+                noun.keywords.values_list(
                     'text', flat=True
                 )
             )
-            sorted_synonyms = sorted(
-                synonyms,
+            sorted_keywords = sorted(
+                keywords,
                 key=len,
                 reverse=True
             )
 
-            for synonym in sorted_synonyms:
+            for keyword in sorted_keywords:
                 replaced = replace_with_link(
                     title,
-                    synonym,
+                    keyword,
                     noun.get_absolute_url(),
                     tag
                 )
