@@ -15,6 +15,7 @@ from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _, get_language
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
+from i18n.utils import normalize_language_code
 
 from newsfeed.constants import (
     NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION)
@@ -252,11 +253,13 @@ class Contention(DeletePreventionMixin, models.Model):
             self.nouns.add(noun)
 
     def formatted_title(self, tag='a'):
+        language = normalize_language_code(get_language())
         title = strip_tags(self.title)
         select = {'length': 'Length(nouns_noun.text)'}
         nouns = (self
                  .nouns
                  .extra(select=select)
+                 .filter(language=language)
                  .prefetch_related('keywords')
                  .order_by('-length'))
 

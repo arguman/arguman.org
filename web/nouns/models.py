@@ -66,12 +66,10 @@ class Noun(models.Model):
 
             for holonym in synset.part_holonyms():
                 noun = Noun.from_synset(holonym)
-                noun.update_with_wordnet()
                 self.add_holonym(noun)
 
             for holonym in synset.member_holonyms():
                 noun = Noun.from_synset(holonym)
-                noun.update_with_wordnet()
                 self.add_holonym(noun)
 
         for lemma in get_lemmas(self.text):

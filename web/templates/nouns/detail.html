@@ -27,10 +27,12 @@
             </li>
             {% endfor %}
             {% for relation in noun.in_relations.all %}
+            {% if relation.relation_type != "antonym" %}
             <li class="{{ relation.reverse_type }} relation">
                 <span>{{ relation.get_reverse_type_display }}</span>
                 <a href="{{ relation.source.get_absolute_url }}">{{ relation.source }}</a>
             </li>
+            {% endif %}
             {% endfor %}
             <li class="create relation"><a href="{% url "new_relation" noun.slug %}">{% trans "add new relation" %}</a></li>
         </ul>
