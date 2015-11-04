@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 00:03+0000\n"
+"POT-Creation-Date: 2015-11-04 22:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: tvvocold <tvvocold@gmail.com>\n"
 "Language: zh-CN\n"
@@ -37,9 +37,25 @@ msgstr "Slug"
 msgid "Content"
 msgstr "内容"
 
-#: blog/models.py:26 premises/models.py:315
+#: blog/models.py:26 premises/models.py:345
 msgid "Published"
 msgstr "已发布"
+
+#: nouns/models.py:156
+msgid "is a"
+msgstr ""
+
+#: nouns/models.py:157
+msgid "part of"
+msgstr ""
+
+#: nouns/models.py:158 nouns/models.py:182
+msgid "opposite with"
+msgstr ""
+
+#: nouns/models.py:180 nouns/models.py:181
+msgid "whole of"
+msgstr ""
 
 #: premises/models.py:33 templates/index.html:18
 #: templates/premises/contention.html:6 templates/premises/thread.html:31
@@ -156,29 +172,29 @@ msgstr "描述"
 msgid "Original Discourse"
 msgstr "原表述"
 
-#: premises/models.py:87 premises/models.py:313
+#: premises/models.py:87 premises/models.py:343
 msgid "Sources"
 msgstr "来源"
 
-#: premises/models.py:300
+#: premises/models.py:330
 msgid "Parent"
 msgstr "父"
 
-#: premises/models.py:301
+#: premises/models.py:331
 msgid ""
 "The parent of premise. If you don't choose anything, it will be a main "
 "premise."
 msgstr "论述的前提。如果你不选，这将成为主要的论述。"
 
-#: premises/models.py:305
+#: premises/models.py:335
 msgid "Premise Type"
 msgstr "论述类型"
 
-#: premises/models.py:309
+#: premises/models.py:339
 msgid "Premise Content"
 msgstr "论述内容"
 
-#: premises/models.py:470
+#: premises/models.py:501
 msgid "Fallacy Type"
 msgstr "谬误类型"
 
@@ -278,7 +294,7 @@ msgid "Reset Password"
 msgstr "重置密码"
 
 #: templates/auth/password_reset_form.html:10
-#: templates/premises/new_premise.html:15
+#: templates/nouns/new_relation.html:37 templates/premises/new_premise.html:15
 msgid "Submit"
 msgstr "提交"
 
@@ -506,25 +522,53 @@ msgstr "    你的论述被报告为 <strong>%(label)s</strong> "
 msgid "supported your premise"
 msgstr "支持你的论述"
 
-#: templates/nouns/detail.html:12
-msgid "is a"
+#: templates/nouns/detail.html:35
+msgid "add new relation"
 msgstr ""
 
-#: templates/nouns/detail.html:25
-msgid "has a"
-msgstr ""
-
-#: templates/nouns/detail.html:38
-msgid "opposite with"
-msgstr ""
-
-#: templates/nouns/detail.html:44
-msgid "mentioned in"
-msgstr ""
-
-#: templates/nouns/detail.html:51
+#: templates/nouns/detail.html:45
 #, python-format
-msgid "and %(participants)s participant."
+msgid "and 1 participant."
+msgid_plural "and %(participants)s participants."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/nouns/detail.html:55
+#, fuzzy
+#| msgid "created an argument:"
+msgid "create an argument"
+msgstr "创建一个论点："
+
+#: templates/nouns/new_relation.html:10
+msgid "New Relation"
+msgstr ""
+
+#: templates/nouns/new_relation.html:19
+msgid "Target noun (Singular)"
+msgstr ""
+
+#: templates/nouns/new_relation.html:22
+msgid "Relation types"
+msgstr ""
+
+#: templates/nouns/new_relation.html:23
+msgid ""
+"<p><b>Is a (hypernym and hyponym)</b> A type-of relationship between two "
+"types. For example <i>Organic Process</i> is the hypernym of <i>Evolution</"
+"i>.</p>"
+msgstr ""
+
+#: templates/nouns/new_relation.html:27
+msgid ""
+"<p><b>Part of (holonymy and meronymy)</b> A part/whole relationship between "
+"two types. For example <i>Natural Selection</i> is the part of <i>Evolution</"
+"i></p>"
+msgstr ""
+
+#: templates/nouns/new_relation.html:31
+msgid ""
+"<p><b>Opposite with (antonym)</b> The opposite meaning of the type. For "
+"example, <i>Evolution</i> and <i>Devolution</i></p>"
 msgstr ""
 
 #: templates/partials/notifications.html:14
@@ -537,12 +581,12 @@ msgid "You have no new notifications."
 msgstr "你有新的消息。"
 
 #: templates/premises/actions.html:3 templates/premises/list_view.html:13
-#: templates/premises/premise.html:71 templates/premises/thread.html:105
+#: templates/premises/premise.html:75 templates/premises/thread.html:105
 #: templates/premises/tree_view.html:24
 msgid "add premise"
 msgstr "添加论述"
 
-#: templates/premises/actions.html:7 templates/premises/premise.html:77
+#: templates/premises/actions.html:7 templates/premises/premise.html:81
 #: templates/premises/thread.html:97
 msgid "remove"
 msgstr "删除"
@@ -700,39 +744,41 @@ msgid "sources:"
 msgstr "信息源："
 
 #: templates/premises/premise.html:32 templates/premises/thread.html:74
-#, python-format
 msgid "%(count)s fallacy reported."
-msgstr "%(count)s个谬误报告。"
+msgid_plural "%(count)s fallacies reported."
+msgstr[0] "%(count)s个谬误报告。"
+msgstr[1] "%(count)s个谬误报告。"
 
-#: templates/premises/premise.html:44 templates/premises/premise.html.py:86
-#: templates/premises/premise.html:88 templates/premises/premise.html.py:92
+#: templates/premises/premise.html:46 templates/premises/premise.html.py:90
+#: templates/premises/premise.html:92 templates/premises/premise.html.py:96
 #: templates/premises/thread.html:113
 msgid "undo"
 msgstr "取消操作"
 
-#: templates/premises/premise.html:55 templates/premises/thread.html:48
-#, python-format
+#: templates/premises/premise.html:57 templates/premises/thread.html:48
 msgid "%(count)s supporter."
-msgstr "%(count)s个支持者。"
+msgid_plural "%(count)s supporters."
+msgstr[0] "%(count)s个支持者。"
+msgstr[1] "%(count)s个支持者。"
 
-#: templates/premises/premise.html:62
+#: templates/premises/premise.html:66
 msgid "and others."
 msgstr "和其他人。"
 
-#: templates/premises/premise.html:74 templates/premises/thread.html:90
+#: templates/premises/premise.html:78 templates/premises/thread.html:90
 msgid "edit"
 msgstr "编辑"
 
-#: templates/premises/premise.html:78 templates/premises/thread.html:98
+#: templates/premises/premise.html:82 templates/premises/thread.html:98
 msgid "Are you sure to remove this premise?"
 msgstr "你确定要移除该论述？"
 
-#: templates/premises/premise.html:86 templates/premises/premise.html.py:92
-#: templates/premises/premise.html:94 templates/premises/thread.html:119
+#: templates/premises/premise.html:90 templates/premises/premise.html.py:96
+#: templates/premises/premise.html:98 templates/premises/thread.html:119
 msgid "support"
 msgstr "支持"
 
-#: templates/premises/premise.html:100 templates/premises/thread.html:124
+#: templates/premises/premise.html:104 templates/premises/thread.html:124
 msgid "report fallacy"
 msgstr "报告谬误"
 
@@ -767,6 +813,12 @@ msgstr "添加论述"
 #: templates/premises/tree_view.html:48
 msgid "The argument is too complex. You can switch to list view."
 msgstr ""
+
+#: templates/premises/tree_view.html:58
+#, fuzzy
+#| msgid "created an argument:"
+msgid "Related Arguments"
+msgstr "创建一个论点："
 
 #: templates/profiles/social_providers.html:3
 msgid "Login with Twitter"

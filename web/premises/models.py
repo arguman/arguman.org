@@ -25,7 +25,6 @@ from premises.utils import replace_with_link
 from nouns.models import Noun
 from nouns.utils import tokenize, is_subsequence
 
-
 OBJECTION = 0
 SUPPORT = 1
 SITUATION = 2
@@ -95,9 +94,11 @@ class Contention(DeletePreventionMixin, models.Model):
     ip_address = models.CharField(max_length=255, null=True, blank=True)
     language = models.CharField(max_length=5, null=True,
                                 choices=[(language, language) for language in
-                                        settings.AVAILABLE_LANGUAGES])
-    nouns = models.ManyToManyField('nouns.Noun', related_name="contentions",
-                                   blank=True, null=True)
+                                         settings.AVAILABLE_LANGUAGES])
+    nouns = models.ManyToManyField('nouns.Noun', blank=True, null=True,
+                                   related_name="contentions")
+    related_nouns = models.ManyToManyField('nouns.Noun', blank=True, null=True,
+                                           related_name="contentions_related")
 
     objects = ContentionManager()
 
@@ -107,15 +108,17 @@ class Contention(DeletePreventionMixin, models.Model):
     def __unicode__(self):
         return smart_unicode(self.title)
 
-    def serialize(self, authenticted_user=None):
-        premises = (self.premises
-            .filter(is_approved=True)
-            .select_related('user')
-            .prefetch_related('supporters', 'reports')
-            .annotate(
-            report_count=Count('reports'),
-            supporter_count=Count('supporters', distinct=True)
-        ))
+    def serialize(self, authenticated_user=None):
+        premises = (
+            self.premises
+                .filter(is_approved=True)
+                .select_related('user')
+                .prefetch_related('supporters', 'reports')
+                .annotate(
+                    report_count=Count('reports'),
+                    supporter_count=Count('supporters', distinct=True)
+                )
+        )
 
         return {
             'id': self.id,
@@ -129,7 +132,7 @@ class Contention(DeletePreventionMixin, models.Model):
             'absolute_url': self.get_absolute_url(),
             'language': self.language,
             'full_url': self.get_full_url(),
-            'premises': [premise.serialize(premises, authenticted_user)
+            'premises': [premise.serialize(premises, authenticated_user)
                          for premise in premises
                          if premise.parent_id is None],
             'date_creation': self.date_creation
@@ -230,12 +233,14 @@ class Contention(DeletePreventionMixin, models.Model):
         nouns = (Noun
                  .objects
                  .prefetch_related('keywords')
-                 .filter(is_active=True))
+                 .filter(is_active=True,
+                         language=self.language))
 
         for noun in nouns:
             if is_subsequence(noun.text.split(), tokens):
                 yield noun
                 continue
+
             for keyword in noun.keywords.filter(is_active=True):
                 if is_subsequence(keyword.text.split(), tokens):
                     yield noun
@@ -257,7 +262,7 @@ class Contention(DeletePreventionMixin, models.Model):
 
         for noun in nouns:
             keywords = (
-                noun.keywords.values_list(
+                noun.active_keywords().values_list(
                     'text', flat=True
                 )
             )
@@ -292,6 +297,29 @@ class Contention(DeletePreventionMixin, models.Model):
         return title
 
     highlighted_title = curry(formatted_title, tag='span')
+
+    def related_contentions(self):
+        if self.related_nouns.exists():
+            nouns = self.related_nouns
+        else:
+            nouns = self.nouns
+
+        available_nouns = (
+            Noun.objects.filter(
+                id__in=nouns.values_list('pk', flat=True),
+            ).annotate(
+                contention_count=Count('contentions'),
+            ).filter(
+                contention_count__gt=2
+            ).prefetch_related(
+                'contentions'
+            )
+        )
+
+        return [{
+            'noun': noun,
+            'contentions': noun.contentions.exclude(pk=self.pk)[:5]
+        } for noun in available_nouns]
 
 
 class Premise(DeletePreventionMixin, models.Model):

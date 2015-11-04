@@ -163,8 +163,8 @@ CONTENT_DELETION = {
     'LAST_DELETION_DATE': timedelta(hours=1)
 }
 
-TWITTER_CONSUMER_KEY = None # defined in settings_local.py
-TWITTER_CONSUMER_SECRET = None # defined in settings_local.py
+TWITTER_CONSUMER_KEY = None  # defined in settings_local.py
+TWITTER_CONSUMER_SECRET = None  # defined in settings_local.py
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'

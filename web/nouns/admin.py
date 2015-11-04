@@ -1,9 +1,10 @@
 from django.contrib import admin
-from django.db.models import Count, Q
-from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django import forms
 
+from django.utils.translation import get_language
+
+from i18n.utils import normalize_language_code
 from nouns.models import Noun, Keyword, Relation
 from premises.models import Contention
 
@@ -22,7 +23,7 @@ class ContentionInline(admin.TabularInline):
 class RelationInline(admin.TabularInline):
     model = Relation
     extra = 0
-    raw_id_fields = ('target',)
+    raw_id_fields = ('target', 'user')
     fk_name = 'source'
 
 
@@ -62,6 +63,11 @@ class NounAdmin(ActionInChangeFormMixin, admin.ModelAdmin):
     actions_on_top = True
     actions_on_bottom = True
     save_on_top = True
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(NounAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['language'].initial = normalize_language_code(get_language())
+        return form
 
     def get_queryset(self, request):
         qs = super(NounAdmin, self).get_queryset(request)

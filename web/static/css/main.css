@@ -320,11 +320,11 @@ li.base-premises {
     width: 100%;
     margin: 0;
     background: #f4f4f4;
-    z-index: 9999;
+    z-index: 999999;
     top: 0;
     height: 82px;
     overflow: hidden;
-    /*border-bottom: 1px solid #c5c5c5;*/
+    position: fixed;
 }
 
 .contention-detail-header #contention-logo img {
@@ -489,7 +489,7 @@ li.base-premises {
 * List View
 */
 #app.list-view {
-    margin-top: 20px;
+    margin-top: 120px;
     margin-left: 90px;
 }
 
@@ -836,7 +836,7 @@ li.base-premises {
 }
 
 #app.tree-view {
-    margin-top: 18px;
+    margin-top: 100px;
     visibility: hidden;
 }
 
@@ -2380,6 +2380,20 @@ div.load-more {
     margin: 0;
 }
 
+.noun-tree .relations li.relation a.sender {
+    border-radius: 50%;
+    border: none;
+    margin-left: 5px;
+}
+
+.noun-tree .relations li.relation a.sender img {
+    border-radius: 50%;
+}
+
+.noun-tree .relations li.relation a.sender:before {
+    display: none;
+}
+
 .noun-tree .relations li.relation.empty {
     padding-left: 20px;
 }
@@ -2641,4 +2655,97 @@ div.load-more {
     clear: both;
     font-size: 22px;
     padding: 0 20px;
+}
+
+.recommendation-sidebar {
+    background-color: rgb(244, 244, 244);
+    width: 300px;
+    height: 65px;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    z-index: 99999;
+    border-top: 3px solid #8a8a8a;
+}
+
+.recommendation-sidebar.opened,
+.recommendation-sidebar:hover {
+    height: calc(100% - 150px);
+    top: 150px;
+}
+
+.recommendation-sidebar .opener img {
+    fill: gray;
+}
+
+.recommendation-sidebar .scroll-area {
+    top: 60px;
+    position: absolute;
+    overflow: scroll;
+    width: 295px;
+    -webkit-transition: all 700ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    transition: all 700ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    height: 100%;
+    opacity: 0.2;
+}
+
+.recommendation-sidebar:hover .scroll-area,
+.recommendation-sidebar.opened .scroll-area {
+    top: 60px;
+    opacity: 1;
+}
+
+.recommendation-sidebar h2 {
+    padding: 0 15px 3px;
+    margin: 10px 0 0;
+    font-weight: normal;
+    color: #888888;
+    text-align: left;
+    font-size: 17px;
+    width: 100px;
+    text-transform: uppercase;
+}
+
+.recommendation-sidebar h3 {
+    padding: 0 15px;
+    margin: 0;
+    font-weight: normal;
+    color: #878787;
+}
+
+.recommendation-sidebar h3 a {
+    text-decoration: none;
+    border-bottom: 2px solid #d6d6d6;
+    color: #747474;
+    line-height: 0.8em;
+    display: inline-block;
+}
+
+.recommendation-sidebar ul {
+    margin: 0 0 15px;
+    padding: 2px 5px;
+}
+
+.recommendation-sidebar ul li {
+    padding: 2px 0 2px 10px;
+    margin: 0 7px 2px 0;
+    list-style: none;
+    line-height: 1.4em;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 0.9em;
+}
+
+.recommendation-sidebar ul li:last-child {
+    border-bottom: none;
+}
+
+.recommendation-sidebar ul li a {
+    color: #505050;
+    text-decoration: none;
+}
+
+.recommendation-sidebar ul li a span {
+    border-bottom: 2px solid #fffea1;
+    line-height: 0.9em;
+    display: inline-block;
 }

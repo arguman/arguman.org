@@ -7,7 +7,7 @@
     <form action="{% url "new_relation" noun.slug %}"
           method="post" class="new-relation-form">
     {% csrf_token %}
-    <h2>New Relation</h2>
+    <h2>{% trans "New Relation" %}</h2>
     <div class="relation-source">
         <span>{{ noun }}</span>
     </div>
@@ -19,10 +19,19 @@
         <label>{% trans "Target noun (Singular)" %}</label>
     </div>
     <div class="relation-type-examples">
-        <h3>Relation types</h3>
-        <p><b>Is a (hypernym and hyponym)</b> A type-of relationship between two types. For example <i>Organic Process</i> is the hypernym of <i>Evolution</i>.</p>
-        <p><b>Part of (holonymy and meronymy)</b> A part/whole relationship between two types. For example <i>Natural Selection</i> is the part of <i>Evolution</i></p>
-        <p><b>Opposite with (antonym)</b> The opposite meaning of the type. For example, <i>Evolution</i> and <i>Devolution</i></p>
+        <h3>{% trans "Relation types" %}</h3>
+        {% blocktrans trimmed %}
+            <p><b>Is a (hypernym and hyponym)</b> A type-of relationship between two types. For example
+                <i>Organic Process</i> is the hypernym of <i>Evolution</i>.</p>
+        {% endblocktrans %}
+        {% blocktrans trimmed %}
+            <p><b>Part of (holonymy and meronymy)</b> A part/whole relationship between two types.
+                For example <i>Natural Selection</i> is the part of <i>Evolution</i></p>
+        {% endblocktrans %}
+        {% blocktrans trimmed %}
+        <p><b>Opposite with (antonym)</b> The opposite meaning of the type.
+            For example, <i>Evolution</i> and <i>Devolution</i></p>
+        {% endblocktrans %}
     </div>
     <div class="form-footer">
         <input type="submit" value="{% trans "Submit" %}" class="submit" />

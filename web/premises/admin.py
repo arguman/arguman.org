@@ -31,7 +31,7 @@ class ContentionAdmin(admin.ModelAdmin):
     search_fields = ('title', 'nouns__text')
     list_per_page = 100
     list_filter = ('language', 'is_featured',)
-    filter_horizontal = ('nouns',)
+    filter_horizontal = ('nouns', 'related_nouns')
     inlines = [PremiseInline]
 
     def premise_count(self, obj):

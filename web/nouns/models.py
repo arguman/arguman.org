@@ -1,3 +1,4 @@
+from uuid import uuid4
 from unidecode import unidecode
 
 from django.db import models
@@ -5,23 +6,32 @@ from django.utils.encoding import smart_unicode
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.utils.functional import curry
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, get_language
+from i18n.utils import normalize_language_code
 
 from nouns.utils import get_synsets, get_lemmas, from_lemma
 
 
 class Noun(models.Model):
-    text = models.CharField(max_length=255, db_index=True, unique=True)
+    text = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, blank=True)
-
+    language = models.CharField(max_length=25)
     is_active = models.BooleanField(default=True)
+
+    class Meta:
+        unique_together = (("text", "language"),)
 
     def __unicode__(self):
         return smart_unicode(self.text).title()
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(unidecode(self.text))
+            slug = slugify(unidecode(self.text))
+            duplications = Noun.objects.filter(slug=slug)
+            if duplications.exists():
+                self.slug = "%s-%s" % (slug, uuid4().hex)
+            else:
+                self.slug = slug
         return super(Noun, self).save(*args, **kwargs)
 
     @classmethod
@@ -32,7 +42,8 @@ class Noun(models.Model):
         noun, created = cls.objects.get_or_create(
             text=from_lemma(text),
             defaults={
-                'is_active': False
+                'is_active': False,
+                'language': normalize_language_code(get_language())
             })
         for keyword in keywords:
             noun.add_keyword(from_lemma(keyword))
@@ -80,6 +91,16 @@ class Noun(models.Model):
     def add_keyword(self, text):
         keyword, created = self.keywords.get_or_create(text=text)
         return keyword
+
+    def active_keywords(self):
+        return self.keywords.filter(is_active=True)
+
+    def active_contentions(self):
+        language = normalize_language_code(get_language())
+        return self.contentions.filter(
+            is_published=True,
+            language=language
+        )
 
     @models.permalink
     def get_absolute_url(self):

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load humanize %}
+{% load gravatar %}
 
 {% block content %}
 <div class="container">
@@ -11,6 +12,9 @@
             <li class="{{ relation.relation_type }} relation">
                 <span>{{ relation.get_relation_type_display }}</span>
                 <a href="{{ relation.target.get_absolute_url }}">{{ relation.target }}</a>
+                {% if relation.user %}
+                    <a class="sender" href="{{ relation.user.get_absolute_url }}">{% gravatar relation.user 20 %}</a>
+                {% endif %}
                 {% if relation.target.hyponyms.exists %}
                 <ul class="hyponyms">
                     {% for hyponym in relation.target.hyponyms.all %}
@@ -31,15 +35,17 @@
             <li class="create relation"><a href="{% url "new_relation" noun.slug %}">{% trans "add new relation" %}</a></li>
         </ul>
         <ul class="contentions relations">
-            {% for contention in noun.contentions.all %}
+            {% for contention in noun.active_contentions.all %}
             <li class="argument relation">
                 <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.highlighted_title|safe }}</a>
                 <ul class="argument-stats">
                     <li>
                     <a href="{{ contention.user.get_absolute_url }}">@{{ contention.user }}</a>
                     {% if contention.contributors|length > 1 %}
-                    {% blocktrans trimmed with participants=contention.contributors|length|add:-1 %}
-                        and {{ participants }} participant.
+                    {% blocktrans trimmed count contention.contributors|length|add:-1 as participants %}
+                        and 1 participant.
+                        {% plural %}
+                        and {{ participants }} participants.
                     {% endblocktrans %}
                     {% endif %}
                     </li>

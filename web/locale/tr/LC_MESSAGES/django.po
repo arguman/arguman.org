@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 00:14+0000\n"
+"POT-Creation-Date: 2015-11-04 21:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: tr\n"
@@ -37,9 +37,25 @@ msgstr "URL"
 msgid "Content"
 msgstr "İçerik"
 
-#: blog/models.py:26 premises/models.py:315
+#: blog/models.py:26 premises/models.py:345
 msgid "Published"
 msgstr "Yayınlı"
+
+#: nouns/models.py:149
+msgid "is a"
+msgstr "üst anlam"
+
+#: nouns/models.py:150
+msgid "part of"
+msgstr "parçası"
+
+#: nouns/models.py:151 nouns/models.py:175
+msgid "opposite with"
+msgstr "karşıtı"
+
+#: nouns/models.py:173 nouns/models.py:174
+msgid "whole of"
+msgstr "alt anlam"
 
 #: premises/models.py:33 templates/index.html:18
 #: templates/premises/contention.html:6 templates/premises/thread.html:31
@@ -156,30 +172,30 @@ msgstr "Açıklama"
 msgid "Original Discourse"
 msgstr "Orijinal Söylem"
 
-#: premises/models.py:87 premises/models.py:313
+#: premises/models.py:87 premises/models.py:343
 msgid "Sources"
 msgstr "Kaynaklar"
 
-#: premises/models.py:300
+#: premises/models.py:330
 msgid "Parent"
 msgstr "Önermenin öncülü"
 
-#: premises/models.py:301
+#: premises/models.py:331
 msgid ""
 "The parent of premise. If you don't choose anything, it will be a main "
 "premise."
 msgstr ""
 "Önermenin öncülü. Eğer boş bırakılırsa ana argümanın bir önermesi olur."
 
-#: premises/models.py:305
+#: premises/models.py:335
 msgid "Premise Type"
 msgstr "Önerme Tipi"
 
-#: premises/models.py:309
+#: premises/models.py:339
 msgid "Premise Content"
 msgstr "İçerik"
 
-#: premises/models.py:470
+#: premises/models.py:501
 msgid "Fallacy Type"
 msgstr "Safsata Tipi"
 
@@ -277,7 +293,7 @@ msgid "Reset Password"
 msgstr "Şifremi Unuttum"
 
 #: templates/auth/password_reset_form.html:10
-#: templates/premises/new_premise.html:15
+#: templates/nouns/new_relation.html:37 templates/premises/new_premise.html:15
 msgid "Submit"
 msgstr "Gönder"
 
@@ -404,10 +420,6 @@ msgid "Follow on twitter:"
 msgstr "Twitter'da takip et:"
 
 #: templates/base.html:71
-#, fuzzy
-#| msgid ""
-#| "arguman.org is an open-source project. you can follow the <a href="
-#| "\"http://github.com/arguman\">organization</a> on github."
 msgid ""
 "arguman.org is an open-source project. you can follow the <a href=\"http://"
 "github.com/arguman/arguman.org\">organization</a> on github."
@@ -508,26 +520,59 @@ msgstr "Önermen <strong>%(label)s</strong> olarak bildirildi."
 msgid "supported your premise"
 msgstr "önermeni destekledi"
 
-#: templates/nouns/detail.html:12
-msgid "is a"
-msgstr ""
+#: templates/nouns/detail.html:35
+msgid "add new relation"
+msgstr "yeni ilişki ekle"
 
-#: templates/nouns/detail.html:25
-msgid "has a"
-msgstr ""
-
-#: templates/nouns/detail.html:38
-msgid "opposite with"
-msgstr ""
-
-#: templates/nouns/detail.html:44
-msgid "mentioned in"
-msgstr ""
-
-#: templates/nouns/detail.html:51
+#: templates/nouns/detail.html:45
 #, python-format
-msgid "and %(participants)s participant."
+msgid "and 1 participant."
+msgid_plural "and %(participants)s participants."
+msgstr[0] "ve 1 katılımcı."
+msgstr[1] "ve %(participants)s katılımcı."
+
+#: templates/nouns/detail.html:55
+msgid "create an argument"
+msgstr "bir argüman oluştur"
+
+#: templates/nouns/new_relation.html:10
+msgid "New Relation"
+msgstr "Yeni İlişki"
+
+#: templates/nouns/new_relation.html:19
+msgid "Target noun (Singular)"
+msgstr "Hedef İsim"
+
+#: templates/nouns/new_relation.html:22
+msgid "Relation types"
+msgstr "İlişki tipleri"
+
+#: templates/nouns/new_relation.html:23
+msgid ""
+"<p><b>Is a (hypernym and hyponym)</b> A type-of relationship between two "
+"types. For example <i>Organic Process</i> is the hypernym of <i>Evolution</"
+"i>.</p>"
 msgstr ""
+"<p><b>Üst Anlam ve Alt Anlam</b> Üst anlam nesnenin bir üst kategorisini, "
+"alt anlam ise tam tersi temsil eder.Örnek, <i>Yumuşakcalar</i> <i>Salyangoz</"
+"i> kelimesinin üst anlamıdır.</p>"
+
+#: templates/nouns/new_relation.html:27
+msgid ""
+"<p><b>Part of (holonymy and meronymy)</b> A part/whole relationship between "
+"two types. For example <i>Natural Selection</i> is the part of <i>Evolution</"
+"i></p>"
+msgstr ""
+"<p><b>Üst Anlam ve Alt Anlam</b> Üst anlam nesnenin bir üst kategorisini, "
+"alt anlam ise tam tersi temsil eder.Örnek, <i>Yumuşakcalar</i> <i>Salyangoz</"
+"i> kelimesinin üst anlamıdır.</p>"
+
+#: templates/nouns/new_relation.html:31
+msgid ""
+"<p><b>Opposite with (antonym)</b> The opposite meaning of the type. For "
+"example, <i>Evolution</i> and <i>Devolution</i></p>"
+msgstr "<p><b>Karşıt Anlam</b> Nesnenin karşıt anlamını temsil eder. Örnek, "
+"<i>Genleşme</i> and <i>Büzüşme</i></p>"
 
 #: templates/partials/notifications.html:14
 #: templates/partials/notifications.html:21
@@ -539,12 +584,12 @@ msgid "You have no new notifications."
 msgstr "Hiç yeni bildiriminiz yok."
 
 #: templates/premises/actions.html:3 templates/premises/list_view.html:13
-#: templates/premises/premise.html:71 templates/premises/thread.html:105
+#: templates/premises/premise.html:75 templates/premises/thread.html:105
 #: templates/premises/tree_view.html:24
 msgid "add premise"
 msgstr "önerme ekle"
 
-#: templates/premises/actions.html:7 templates/premises/premise.html:77
+#: templates/premises/actions.html:7 templates/premises/premise.html:81
 #: templates/premises/thread.html:97
 msgid "remove"
 msgstr "kaldır"
@@ -662,14 +707,12 @@ msgid ""
 "The source of argument. It can be a URL, a book, or a newspaper. It is "
 "important for reliability of main contention."
 msgstr ""
-"Angümanın kaynağı. Bir URL, kitap adı ya da dergi adı olabilir. Bu alan önemlidir, kaynaksız ve tartışmalı bir argüman/önerme yayından "
+"Angümanın kaynağı. Bir URL, kitap adı ya da dergi adı olabilir.  Bu alan önemlidir, kaynaksız ve tartışmalı bir argüman/önerme yayından "
 "kaldırılır."
 
 #: templates/premises/list_view.html:20
-#, fuzzy
-#| msgid "The parent premise:"
 msgid "Go to parent premise"
-msgstr "Önermenin öncülü:"
+msgstr "Önermenin öncülüne git"
 
 #: templates/premises/new_contention.html:9
 msgid "Save and continue to edit"
@@ -690,37 +733,41 @@ msgstr "kaynaklar"
 #: templates/premises/premise.html:32 templates/premises/thread.html:74
 #, python-format
 msgid "%(count)s fallacy reported."
-msgstr "%(count)s safsata bildirimi"
+msgid_plural "%(count)s fallacies reported."
+msgstr[0] "%(count)s safsata bildirimi"
+msgstr[1] "%(count)s safsata bildirimi"
 
-#: templates/premises/premise.html:44 templates/premises/premise.html.py:86
-#: templates/premises/premise.html:88 templates/premises/premise.html.py:92
+#: templates/premises/premise.html:46 templates/premises/premise.html.py:90
+#: templates/premises/premise.html:92 templates/premises/premise.html.py:96
 #: templates/premises/thread.html:113
 msgid "undo"
 msgstr "geri al"
 
-#: templates/premises/premise.html:55 templates/premises/thread.html:48
+#: templates/premises/premise.html:57 templates/premises/thread.html:48
 #, python-format
 msgid "%(count)s supporter."
-msgstr "%(count)s destekleyen var."
+msgid_plural "%(count)s supporters."
+msgstr[0] "%(count)s destekleyen var."
+msgstr[1] "%(count)s destekleyen var."
 
-#: templates/premises/premise.html:62
+#: templates/premises/premise.html:66
 msgid "and others."
 msgstr "ve diğerleri"
 
-#: templates/premises/premise.html:74 templates/premises/thread.html:90
+#: templates/premises/premise.html:78 templates/premises/thread.html:90
 msgid "edit"
 msgstr "düzenle"
 
-#: templates/premises/premise.html:78 templates/premises/thread.html:98
+#: templates/premises/premise.html:82 templates/premises/thread.html:98
 msgid "Are you sure to remove this premise?"
 msgstr "Bu önermeyi silmek istediğinize emin misini?"
 
-#: templates/premises/premise.html:86 templates/premises/premise.html.py:92
-#: templates/premises/premise.html:94 templates/premises/thread.html:119
+#: templates/premises/premise.html:90 templates/premises/premise.html.py:96
+#: templates/premises/premise.html:98 templates/premises/thread.html:119
 msgid "support"
 msgstr "destekle"
 
-#: templates/premises/premise.html:100 templates/premises/thread.html:124
+#: templates/premises/premise.html:104 templates/premises/thread.html:124
 msgid "report fallacy"
 msgstr "safsata bildir"
 
@@ -742,7 +789,7 @@ msgstr "harita üzerinde gezinmek için yön tuşlarını kullanabilirsiniz."
 
 #: templates/premises/tree_view.html:15
 msgid "Loading tree..."
-msgstr ""
+msgstr "Yükleniyor..."
 
 #: templates/premises/tree_view.html:38
 msgid "The argument has no premises yet."
@@ -755,6 +802,10 @@ msgstr "Önerme ekle"
 #: templates/premises/tree_view.html:48
 msgid "The argument is too complex. You can switch to list view."
 msgstr "Argüman çok kalabalık. Liste görünümüne geçebilirsiniz."
+
+#: templates/premises/tree_view.html:58
+msgid "Related Arguments"
+msgstr "İLGİLİ ARGÜMANLAR"
 
 #: templates/profiles/social_providers.html:3
 msgid "Login with Twitter"

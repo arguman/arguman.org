@@ -97,15 +97,17 @@
             }
         },
         setInitial: function () {
-	        var hash = this.getHashOrPath();
+	        var hash = this.getHashOrPath(),
+                selection = this.$el.find(".tree-branch").first();
             
             if (hash) {
-                var selection = $("#premise-" + hash);
-                this.expandNode(selection);
-            } else {
-                var selection = this.$el.find(".tree-branch").first();    
+                var targetPremise = $("#premise-" + hash);
+                if (targetPremise.length) {
+                    selection = targetPremise;
+                    this.expandNode(selection);
+                }
             }
-            
+
             this.select(selection, hash && this.needsScroll());
         },
         bindEvents: function () {
@@ -340,13 +342,13 @@
                 treeTop + node.height(), 
                 left + treeLeft,
                 level + 1
-            )
+            );
 
             this.renderBranchConnector(
                 branch,
                 treeTop,
                 left + treeLeft
-            )
+            );
             
             this.renderChildConnector(
                 branch,
@@ -421,11 +423,12 @@
         },
 
         setCenter: function (maxWidth) {
+            var left;
             if (maxWidth + 300 < window.innerWidth) {
                 var width = maxWidth + 254;
-                var left = (window.innerWidth / 2 - width / 2);
+                left = (window.innerWidth / 2 - width / 2);
             } else {
-                var left = 30;
+                left = 30;
             }
             $(".tree-container").css({
                 marginLeft: left
@@ -463,7 +466,7 @@
 
             if (renderTree) {
                 this.renderTree(this.getRoot())
-            };
+            }
         },
 
         expandBranch: function (branch) {
@@ -479,7 +482,7 @@
             subTrees.each(function (i, el) {
                 var subTree = $(el);
                 
-                if (parseInt(subTree.data("level")) < 3) {
+                if (parseInt(subTree.data("level")) < 2) {
                     return;
                 }
                 
@@ -535,7 +538,7 @@
 
         init: function (options) {
             $.extend(this, options);
-        },
+        }
         
     });
 
@@ -548,18 +551,19 @@
             $('.tooltip').hide();
         };
 
-        $(".tooltip .close").on('click', hideToolTips);
+        $('.tooltip .close').on('click', hideToolTips);
         $(window).on('scroll', hideToolTips);
-        $(window).on('scroll', function () {
-            $(".contention-detail-header").css({
-                marginLeft: $('body').scrollLeft(),
-                width: window.innerWidth
-            });
-        }).trigger('scroll');
 
         $('.search').on('click', function(){
             $('#keyword').trigger('focus');
         });
+
+        if (window.location.hash.indexOf('related') > -1) {
+            $('.recommendation-sidebar')
+                .mouseout(function () {
+                    $(this).removeClass('opened');
+                }).addClass('opened');
+        }
 
         $("form.support").submit(function(event) {
           event.preventDefault();

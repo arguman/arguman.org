@@ -1,5 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect
+from django.utils.translation import get_language
 from django.views.generic import DetailView, CreateView
+
+from i18n.utils import normalize_language_code
 from nouns.models import Noun, Relation
 from nouns.forms import RelationCreationForm
 from profiles.mixins import LoginRequiredMixin
@@ -8,6 +11,13 @@ from profiles.mixins import LoginRequiredMixin
 class NounDetail(DetailView):
     model = Noun
     template_name = "nouns/detail.html"
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(
+            Noun,
+            slug=self.kwargs['slug'],
+            language=normalize_language_code(get_language())
+        )
 
 
 class RelationCreate(LoginRequiredMixin, CreateView):

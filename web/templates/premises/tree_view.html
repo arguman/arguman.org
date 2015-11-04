@@ -53,6 +53,21 @@
     {% if user.is_anonymous %}
     {% include "auth/login_popup.html" %}
     {% endif %}
+    {% if contention.related_contentions %}
+        <div class="recommendation-sidebar">
+            <h2>{% trans "Related Arguments" %}</h2>
+            <div class="scroll-area">
+                {% for relation in contention.related_contentions %}
+                    <h3><a href="{{ relation.noun.get_absolute_url }}">{{ relation.noun }}</a></h3>
+                    <ul>
+                        {% for contention in relation.contentions %}
+                            <li><a href="{{ contention.get_absolute_url }}#related">{{ contention.highlighted_title|safe }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block extra-scripts %}
