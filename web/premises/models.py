@@ -307,9 +307,16 @@ class Contention(DeletePreventionMixin, models.Model):
         else:
             nouns = self.nouns
 
+        noun_ids = nouns.values_list('pk', flat=True)
+
         available_nouns = (
             Noun.objects.filter(
-                id__in=nouns.values_list('pk', flat=True),
+                models.Q(language=normalize_language_code(get_language())),
+                (
+                    models.Q(id__in=noun_ids) |
+                    models.Q(out_relations__target__id__in=noun_ids) |
+                    models.Q(out_relations__source__id__in=noun_ids)
+                )
             ).annotate(
                 contention_count=Count('contentions'),
             ).filter(
@@ -321,7 +328,7 @@ class Contention(DeletePreventionMixin, models.Model):
 
         return [{
             'noun': noun,
-            'contentions': noun.contentions.exclude(pk=self.pk)[:5]
+            'contentions': noun.contentions.exclude(pk=self.pk)[:7]
         } for noun in available_nouns]
 
 
