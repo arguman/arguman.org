@@ -9,6 +9,12 @@
     <meta name="canonical" content="{{ serialized.full_url }}"/>
 {% endblock %}
 
+{% block description %}{% spaceless %}
+    {% with first=serialized.premises|first %}
+        {{ first.text }}
+    {% endwith %}
+{% endspaceless %}{% endblock  %}
+
 {% block body-attrs %} id="contention-detail"{% endblock %}
 
 {% block header %}

@@ -6,7 +6,7 @@ from premises.models import Contention
 
 class Command(BaseCommand):
     def handle(self, language='en', **kwargs):
-    	contentions = Contention.objects.filter(language=language)
+        contentions = Contention.objects.filter(language=language)
 
         Contention.nouns.through.objects.all().delete()
 

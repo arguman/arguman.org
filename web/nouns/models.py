@@ -7,6 +7,7 @@ from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _, get_language
+from anora.templatetags.anora import CONSONANT_SOUND, VOWEL_SOUND
 from i18n.utils import normalize_language_code
 
 from nouns.utils import get_synsets, get_lemmas, from_lemma
@@ -27,7 +28,8 @@ class Noun(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = slugify(unidecode(self.text))
-            duplications = Noun.objects.filter(slug=slug)
+            duplications = Noun.objects.filter(slug=slug,
+                                               language=self.language)
             if duplications.exists():
                 self.slug = "%s-%s" % (slug, uuid4().hex)
             else:
@@ -179,3 +181,12 @@ class Relation(models.Model):
             Relation.MERONYM: _("whole of"),
             Relation.ANTONYM: _("opposite with")
         }.get(self.reverse_type())
+
+    def relation_type_label(self):
+        if (self.relation_type == Relation.HYPERNYM
+                and self.target.language == 'en'):
+            text = unicode(self.target)
+            return ('is an' if not CONSONANT_SOUND.match(text)
+                               and VOWEL_SOUND.match(text)
+                    else 'is a')
+        return self.get_relation_type_display()

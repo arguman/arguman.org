@@ -24,7 +24,7 @@ from premises.managers import ContentionManager, DeletePreventionManager
 from premises.mixins import DeletePreventionMixin
 from premises.utils import replace_with_link
 from nouns.models import Noun
-from nouns.utils import tokenize, is_subsequence
+from nouns.utils import tokenize, is_subsequence, build_ngrams
 
 OBJECTION = 0
 SUPPORT = 1
@@ -117,8 +117,8 @@ class Contention(DeletePreventionMixin, models.Model):
                 .prefetch_related('supporters', 'reports')
                 .annotate(
                     report_count=Count('reports'),
-                    supporter_count=Count('supporters', distinct=True)
-                )
+                    supporter_count=Count('supporters', distinct=True))
+                .order_by('-supporter_count')
         )
 
         return {
@@ -229,23 +229,23 @@ class Contention(DeletePreventionMixin, models.Model):
         )
 
     def extract_nouns(self):
-        tokens = tokenize(self.title)
+        ngrams = set(build_ngrams(self.title,
+                                  language=self.language))
 
-        nouns = (Noun
-                 .objects
-                 .prefetch_related('keywords')
-                 .filter(is_active=True,
-                         language=self.language))
+        nouns = (
+            Noun
+            .objects
+            .prefetch_related('keywords')
+            .filter(
+                Q(is_active=True),
+                Q(language=self.language),
+                Q(text__in=ngrams) |
+                Q(keywords__text__in=ngrams,
+                  keywords__is_active=True)
+            )
+        )
 
-        for noun in nouns:
-            if is_subsequence(noun.text.split(), tokens):
-                yield noun
-                continue
-
-            for keyword in noun.keywords.filter(is_active=True):
-                if is_subsequence(keyword.text.split(), tokens):
-                    yield noun
-                    continue
+        return nouns
 
     def save_nouns(self):
         nouns = self.extract_nouns()
@@ -303,20 +303,21 @@ class Contention(DeletePreventionMixin, models.Model):
 
     def related_contentions(self):
         if self.related_nouns.exists():
-            nouns = self.related_nouns
+            source = self.related_nouns
         else:
-            nouns = self.nouns
+            source = self.nouns
 
-        noun_ids = nouns.values_list('pk', flat=True)
+        nouns = source.prefetch_related('out_relations')
+        noun_ids = set(nouns.values_list('pk', flat=True))
+
+        for noun in nouns.all():
+            relations = set(noun.out_relations.values_list('target', flat=True))
+            noun_ids = noun_ids.union(relations)
 
         available_nouns = (
             Noun.objects.filter(
-                models.Q(language=normalize_language_code(get_language())),
-                (
-                    models.Q(id__in=noun_ids) |
-                    models.Q(out_relations__target__id__in=noun_ids) |
-                    models.Q(out_relations__source__id__in=noun_ids)
-                )
+                language=normalize_language_code(get_language()),
+                id__in=noun_ids
             ).annotate(
                 contention_count=Count('contentions'),
             ).filter(

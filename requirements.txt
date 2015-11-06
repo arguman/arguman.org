@@ -17,3 +17,5 @@ redis==2.10.3
 requests==2.8.1
 nltk==3.1
 textblob==0.10.0
+anora==0.1.2
+snowballstemmer==1.2.0

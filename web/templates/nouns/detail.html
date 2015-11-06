@@ -10,7 +10,7 @@
         <ul class="relations">
             {% for relation in noun.out_relations.all %}
             <li class="{{ relation.relation_type }} relation">
-                <span>{{ relation.get_relation_type_display }}</span>
+                <span>{{ relation.relation_type_label }}</span>
                 <a href="{{ relation.target.get_absolute_url }}">{{ relation.target }}</a>
                 {% if relation.user %}
                     <a class="sender" href="{{ relation.user.get_absolute_url }}">{% gravatar relation.user 20 %}</a>
@@ -39,17 +39,10 @@
         <ul class="contentions relations">
             {% for contention in noun.active_contentions.all %}
             <li class="argument relation">
-                <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.highlighted_title|safe }}</a>
+                <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.title|safe }}</a>
                 <ul class="argument-stats">
                     <li>
-                    <a href="{{ contention.user.get_absolute_url }}">@{{ contention.user }}</a>
-                    {% if contention.contributors|length > 1 %}
-                    {% blocktrans trimmed count contention.contributors|length|add:-1 as participants %}
-                        and 1 participant.
-                        {% plural %}
-                        and {{ participants }} participants.
-                    {% endblocktrans %}
-                    {% endif %}
+                    <a href="{{ contention.user.get_absolute_url }}">@{{ contention.user }}</a> {{ contention.date_creation|naturaltime }}
                     </li>
                 </ul>
             </li>
