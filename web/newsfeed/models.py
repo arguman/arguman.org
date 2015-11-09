@@ -145,7 +145,7 @@ class EntryManager(object):
         Fetches news items of specific user
         """
         parameters = {
-            "sender.email": user.email,
+            "sender.username": user.username,
             "news_type": {
                 "$in": [NEWS_TYPE_CONTENTION,
                         NEWS_TYPE_PREMISE,

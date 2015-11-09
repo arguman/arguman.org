@@ -842,6 +842,7 @@ li.base-premises {
 
 #app.tree-view {
     margin-top: 100px;
+    padding-right: 10px;
     visibility: hidden;
 }
 
@@ -1323,6 +1324,8 @@ form .parent-premise strong {
 
 .reported_as_fallacy .fallacy {
     color: #676568;
+    display: inline-block;
+    width: 100%;
 }
 
 .reported_as_fallacy .fallacy form {
@@ -2758,4 +2761,22 @@ div.load-more {
 .recommendation-sidebar ul li a {
     color: #6f6f6f;
     text-decoration: none;
+}
+
+/*
+    Hidden premises
+*/
+.too-many-fallacy > .premise-content.but {
+    background: #FFF2F2;
+    color: rgba(156, 155, 155, 0.37) !important;
+}
+
+.too-many-fallacy > .premise-content.because {
+    background-color: #EEFFEA;
+    color: rgba(156, 155, 155, 0.37) !important;
+}
+
+.too-many-fallacy > .premise-content.however {
+    background-color: #FFFBE8;
+    color: rgba(156, 155, 155, 0.37) !important;
 }

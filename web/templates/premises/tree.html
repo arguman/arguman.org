@@ -6,9 +6,13 @@
             <div class="connector branch-connector{% if premises|length < 2 %} branch-single{% endif %}"></div>
             {% include "premises/premise.html" %}
             {% if premise.children %}
-            {% with template_name="premises/tree.html" premises=premise.children level=level|add:1 %}
-                {% include template_name %}
-            {% endwith %}
+            {% if level == 1 %}
+                <div data-load-partial="?partial={{ premise.id }}&level={{ level|add:1 }}"></div>
+            {% else %}
+                {% with template_name="premises/tree.html" premises=premise.children level=level|add:1 %}
+                    {% include template_name %}
+                {% endwith %}
+            {% endif %}
             <div class="connector child-connector"></div>
             {% endif %}
         </li>

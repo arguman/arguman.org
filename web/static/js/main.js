@@ -481,8 +481,10 @@
             var subTrees = tree.find(".tree");
             subTrees.each(function (i, el) {
                 var subTree = $(el);
+
+                var isFallacy = subTree.prev().hasClass('too-many-fallacy');
                 
-                if (parseInt(subTree.data("level")) < 2) {
+                if (parseInt(subTree.data("level")) < 3 && !isFallacy) {
                     return;
                 }
                 
@@ -527,13 +529,42 @@
             $("#loading").hide();
         },
 
+        loadPartials: function (callback) {
+
+            var promises = [],
+                partials = $('[data-load-partial]');
+
+            if (!partials.length) {
+                callback();
+            }
+
+            partials.each(function () {
+                var partialNode = $(this);
+                var url = partialNode.data('load-partial');
+                var promise = $.get(url);
+
+                promise.done(function (response) {
+                    partialNode.replaceWith(response)
+                });
+
+                promises.push(promise)
+            });
+
+            $.when.apply($, promises).then(function () {
+                callback()
+            })
+
+        },
+
         render: function () {
-            var tree = this.getRoot();
-            this.renderContentionHeader();
-            this.collapseTree(tree);
-            this.renderTree(tree);
-            this.onRender();
-            this.showApp();
+            this.loadPartials(function () {
+                var tree = this.getRoot();
+                this.renderContentionHeader();
+                this.collapseTree(tree);
+                this.renderTree(tree);
+                this.onRender();
+                this.showApp();
+            }.bind(this));
         },
 
         init: function (options) {

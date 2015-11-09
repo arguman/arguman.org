@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from operator import itemgetter
 from uuid import uuid4
 from markdown2 import markdown
 from unidecode import unidecode
@@ -109,17 +110,20 @@ class Contention(DeletePreventionMixin, models.Model):
     def __unicode__(self):
         return smart_unicode(self.title)
 
-    def serialize(self, authenticated_user=None):
-        premises = (
+    def get_premises(self):
+        return (
             self.premises
                 .filter(is_approved=True)
                 .select_related('user')
                 .prefetch_related('supporters', 'reports')
                 .annotate(
-                    report_count=Count('reports'),
+                    report_count=Count('reports', distinct=True),
                     supporter_count=Count('supporters', distinct=True))
-                .order_by('-supporter_count')
+                .order_by('date_creation')
         )
+
+    def serialize(self, authenticated_user=None):
+        premises = self.get_premises()
 
         return {
             'id': self.id,
@@ -133,9 +137,27 @@ class Contention(DeletePreventionMixin, models.Model):
             'absolute_url': self.get_absolute_url(),
             'language': self.language,
             'full_url': self.get_full_url(),
-            'premises': [premise.serialize(premises, authenticated_user)
-                         for premise in premises
-                         if premise.parent_id is None],
+            'premises': [
+                premise.serialize(premises, authenticated_user)
+                for premise in premises
+                if (premise.parent_id is None)
+            ],
+            'date_creation': self.date_creation
+        }
+
+    def partial_serialize(self, parent_id, authenticated_user=None):
+        premises = self.get_premises()
+
+        parent = list(premise.serialize(premises, authenticated_user) for premise in premises
+                      if premise.parent_id == parent_id)
+
+        return {
+            'id': self.id,
+            'slug': self.slug,
+            'absolute_url': self.get_absolute_url(),
+            'language': self.language,
+            'full_url': self.get_full_url(),
+            'premises': parent,
             'date_creation': self.date_creation
         }
 
@@ -321,16 +343,26 @@ class Contention(DeletePreventionMixin, models.Model):
             ).annotate(
                 contention_count=Count('contentions'),
             ).filter(
-                contention_count__gt=2
+                contentions__is_published=True
             ).prefetch_related(
                 'contentions'
             )
         )
 
-        return [{
+        serialized = [{
             'noun': noun,
-            'contentions': noun.contentions.exclude(pk=self.pk)[:7]
+            'contentions': (
+                noun
+                .contentions
+                .exclude(pk=self.pk)
+                .values('title', 'slug')
+                .order_by('?')  # find a proper way to randomize
+                                # suggestions
+                [:7]
+            )
         } for noun in available_nouns]
+
+        return filter(itemgetter('contentions'), serialized)
 
 
 class Premise(DeletePreventionMixin, models.Model):
@@ -368,23 +400,27 @@ class Premise(DeletePreventionMixin, models.Model):
     def __unicode__(self):
         return smart_unicode(self.text)
 
+    def is_collapsed(self):
+        return self.report_count > 3
+
     def serialize(self, premise_lookup, authenticated_user=None):
-        supported = False
+
         if authenticated_user is not None:
             supported = self.supporters.filter(
                 id=authenticated_user.id
             ).exists()
+        else:
+            supported = False
+
+        children = [
+            premise.serialize(premise_lookup, authenticated_user)
+            for premise in premise_lookup
+            if premise.parent_id == self.id
+        ]
+
         return {
             'id': self.id,
-            'children': [
-                premise.serialize(premise_lookup)
-                for premise in premise_lookup
-                if premise.parent_id == self.id
-                ],
-            'recent_supporters': [
-                supporter.serialize()
-                for supporter in self.supporters.all()[:5]
-                ],
+            'children': children,
             'supported_by_authenticated_user': supported,
             'supporter_count': self.supporter_count,
             'user': self.user.serialize(),
@@ -395,13 +431,12 @@ class Premise(DeletePreventionMixin, models.Model):
             'formatted_text': self.formatted_text,
             'sources': self.sources,
             'is_approved': self.is_approved,
-            'collapsed': self.collapsed,
+            'is_collapsed': self.is_collapsed(),
             'max_sibling_count': self.max_sibling_count,
-            'sibling_count': self.sibling_count,
             'child_count': self.child_count,
             'date_creation': self.date_creation,
             'fallacies': self.fallacies(authenticated_user),
-            'fallacy_count': self.report_count
+            'fallacy_count': self.report_count,
         }
 
     @models.permalink
@@ -508,6 +543,8 @@ class Report(models.Model):
                                    related_name='reports',
                                    blank=True,
                                    null=True)
+    reason = models.TextField(verbose_name=_("Reason"), null=True, blank=False,
+                              help_text=_('Please explain that why the premise is a fallacy.'))
     fallacy_type = models.CharField(
         _("Fallacy Type"), choices=FALLACY_TYPES, null=True, blank=False,
         max_length=255, default="Wrong Direction",

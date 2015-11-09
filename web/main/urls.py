@@ -14,6 +14,7 @@ sitemaps = {
     'user': ProfileSitemap(),
     'argument': ArgumentSitemap()
 }
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('',
     url(r'^', include('newsfeed.urls')),
@@ -33,3 +34,8 @@ urlpatterns = patterns('',
         cache_page(86400)(sitemaps_views.sitemap),
         {'sitemaps': sitemaps}, name='sitemaps'),
 )
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.STATIC_URL, view='django.contrib.staticfiles.views.serve')
