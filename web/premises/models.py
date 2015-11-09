@@ -183,7 +183,7 @@ class Contention(DeletePreventionMixin, models.Model):
                 self.slug = slug
         self.save_nouns()
         if not kwargs.pop('skip_date_update', False):
-            self.date_modification = datetime.datetime.now()
+            self.date_modification = datetime.now()
         return super(Contention, self).save(*args, **kwargs)
 
     def published_premises(self, parent=None, ignore_parent=False):
@@ -521,6 +521,16 @@ class Premise(DeletePreventionMixin, models.Model):
     def children_by_premise_type(self, premise_type=None):
         return self.published_children().filter(premise_type=premise_type)
 
+    def save_karma_tree(self):
+        for user in self.parent_users:
+            karma = user.calculate_karma()
+            user.karma = karma
+            user.save()
+
+    def save(self, *args, **kwargs):
+        self.save_karma_tree()
+        return super(Premise, self).save(*args, **kwargs)
+
     because = curry(children_by_premise_type, premise_type=SUPPORT)
     but = curry(children_by_premise_type, premise_type=OBJECTION)
     however = curry(children_by_premise_type, premise_type=SITUATION)
@@ -544,6 +554,16 @@ class Report(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.fallacy_type)
+
+
+    def save_karma(self):
+        karma = self.premise.user.calculate_karma()
+        self.premise.user.karma = karma
+        self.premise.user.save()
+
+    def save(self, *args, **kwargs):
+        self.save_karma()
+        return super(Report, self).save(*args, **kwargs)
 
     def get_actor(self):
         """
