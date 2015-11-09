@@ -8,7 +8,7 @@
     <div class="stats-sidebar">
         <ul>
             <li{% if stats_type == "active_users" %} class="active"{% endif %}><a href="?what=active_users">{% trans "most active users" %}</a></li>
-            <li{% if stats_type == "supported_users" %} class="active"{% endif %}><a href="?what=supported_users">{% trans "most supported users" %}</a></li>
+            <li{% if stats_type == "user_karma" %} class="active"{% endif %}><a href="?what=user_karma">{% trans "highest user karma" %}</a></li>
             <!--<li{% if stats_type == "disgraced_users" %} class="active"{% endif %}><a href="?what=disgraced_users">en yüz karası üyeler</a></li>-->
             <li{% if stats_type == "crowded_contentions" %} class="active"{% endif %}><a href="?what=crowded_contentions">{% trans "most crowded arguments" %}</a></li>
             <li{% if stats_type == "supported_premises" %} class="active"{% endif %}><a href="?what=supported_premises">{% trans "most supported premises" %}</a></li>
