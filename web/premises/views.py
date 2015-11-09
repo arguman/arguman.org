@@ -168,7 +168,7 @@ class HomeView(TemplateView, PaginationMixin):
                        .objects
                        .language()
                        .filter(is_featured=True)
-                       .order_by("-score"))
+                       .order_by("-date_modification"))
 
         if paginate:
             contentions = (contentions[self.get_offset(): self.get_limit()])
