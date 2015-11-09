@@ -1,0 +1,17 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_static admin_list admin_urls %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}" />
+{% endblock %}
+
+{% block object-tools %}
+    {{ block.super }}
+    <div id="changelist">
+    <form action="{% url opts|admin_urlname:'changelist' %}" method="POST">{% csrf_token %}
+        {% admin_actions %}
+        <input type="hidden" name="_selected_action" value="{{ object_id }}">
+    </form>
+    </div>
+{% endblock %}

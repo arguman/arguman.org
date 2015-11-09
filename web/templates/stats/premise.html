@@ -17,7 +17,7 @@
 
 		{% if object.fallacies %}
 			{% for fallacy in object.fallacies %}
-			<div class="fallacy">{{ fallacy }}</div>
+			<div class="fallacy">{{ fallacy.label }}</div>
 			{% endfor %}
 		{% endif %}
 

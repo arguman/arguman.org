@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'profiles',
     'premises',
+    'nouns',
     'newsfeed',
     'blog',
     'api',
@@ -92,6 +93,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 PREVENT_LANGUAGE_REDIRECTION = False
+
 REDIRECTED_PATHS = (
     '/',
     '/newsfeed',
@@ -103,11 +105,22 @@ REDIRECTED_PATHS = (
 )
 
 DEFAULT_LANGUAGE = 'en'
+
 BASE_DOMAIN = 'arguman.org'
+
 AVAILABLE_LANGUAGES = (
     'tr',
-    'en'
+    'en',
+    'ch'
 )
+
+LANGUAGE_CODE_MAPPING = {
+    'ch': 'zh-Hans'
+}
+
+LANGUAGE_CODE_MAPPING_REVERSED = {
+    v.lower(): k for k, v in LANGUAGE_CODE_MAPPING.iteritems()
+}
 
 TIME_ZONE = 'UTC'
 
@@ -150,8 +163,8 @@ CONTENT_DELETION = {
     'LAST_DELETION_DATE': timedelta(hours=1)
 }
 
-TWITTER_CONSUMER_KEY = None # defined in settings_local.py
-TWITTER_CONSUMER_SECRET = None # defined in settings_local.py
+TWITTER_CONSUMER_KEY = None  # defined in settings_local.py
+TWITTER_CONSUMER_SECRET = None  # defined in settings_local.py
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'

@@ -15,7 +15,7 @@
     <div id="loading">{% trans "Loading tree..." %}</div>
     <div id="app" class="tree-view">
         <div class="tree-contention">
-            <h3>{{ contention }}</h3>
+            <h3>{{ contention.formatted_title|safe }}</h3>
         </div>
         <div class="tree-contention-actions">
             {% if user.is_authenticated %}
@@ -52,6 +52,31 @@
 
     {% if user.is_anonymous %}
     {% include "auth/login_popup.html" %}
+    {% endif %}
+    {% if contention.related_contentions %}
+        <div class="recommendation-sidebar">
+            <h2>{% trans "Related Arguments" %}</h2>
+            <div class="scroll-area">
+                {% for relation in contention.related_contentions %}
+                    <h3>
+                        <a href="{{ relation.noun.get_absolute_url }}">
+                            {{ relation.noun }}
+                            <span>
+                            {% with hypernym=relation.noun.hypernyms.first %}
+                                {{ hypernym.relation_type_label }}
+                                {{ hypernym.target }}
+                            {% endwith %}
+                            </span>
+                        </a>
+                    </h3>
+                    <ul>
+                        {% for contention in relation.contentions %}
+                            <li><a href="{{ contention.get_absolute_url }}#related">{{ contention.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
 

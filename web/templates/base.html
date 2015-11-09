@@ -4,10 +4,11 @@
 <head>
     <title>{% block title %}{% trans "Argument Analysis Platform" %}{% endblock %}</title>
     <meta charset="utf-8">
+    <meta name="description" value="{% block description %}{% trans "Argument Analysis Platform" %}{% endblock %}" />
     {% load static %}
     <link rel="stylesheet" href="{% static "css/h5bp.css" %}" />
     <link rel="stylesheet" href="{% static "css/normalize.css" %}" />
-    <link rel="stylesheet" href="{% static "css/main.css" %}?v=3.1" />
+    <link rel="stylesheet" href="{% static "css/main.css" %}?v=3.6" />
     <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}" />
     <link rel="image_src" type="image/png" href="http://arguman.org{% static "img/logo-large.png" %}" />
     <meta property="og:image" content="http://arguman.org{% static "img/logo-large.png" %}"/>
@@ -48,13 +49,15 @@
             </li>
             <li class="social-links">
                 {% get_current_language as language %}
-                {% trans "Languages:" %} 
+                {% trans "Languages:" %}
                 <a {% if language == "en" %}class="active" {% endif %}
                     href="http://en.arguman.org">{% trans "English" %}</a>
                 <a {% if language == "tr" %}class="active" {% endif %}
-                    href="http://tr.arguman.org">{% trans "Turkish" %}</a> <br>
+                    href="http://tr.arguman.org">{% trans "Turkish" %}</a>
+                <a {% if language == "zh-hans" %}class="active" {% endif %}
+                    href="http://ch.arguman.org">{% trans "Chinese" %}</a><br>
                 {% trans "Follow on twitter:" %} <a href="https://twitter.com/argumananalizi" target="_blank">@argumananalizi</a> <br />
-		Subreddit: <a href="https://www.reddit.com/r/arguman" target="_blank">/r/arguman</a>
+		        Subreddit: <a href="https://www.reddit.com/r/arguman" target="_blank">/r/arguman</a>
             </li>
         </ul>
     </nav>

@@ -1,33 +1,32 @@
 # -*- coding: utf-8 -*-
-import json
-import operator
 from django.utils import timezone
-import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from math import log
-
-
 from uuid import uuid4
-from django.utils.html import escape
 from markdown2 import markdown
 from unidecode import unidecode
 
+from django.utils.html import escape
 from django.core import validators
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.db import models
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
-from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.html import strip_tags
+from i18n.utils import normalize_language_code
 
 from newsfeed.constants import (
     NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION)
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
 from premises.managers import ContentionManager, DeletePreventionManager
 from premises.mixins import DeletePreventionMixin
+from premises.utils import replace_with_link
+from nouns.models import Noun
+from nouns.utils import  build_ngrams
 
 
 OBJECTION = 0
@@ -98,7 +97,13 @@ class Contention(DeletePreventionMixin, models.Model):
     date_creation = models.DateTimeField(auto_now_add=True)
     date_modification = models.DateTimeField(auto_now_add=True)
     ip_address = models.CharField(max_length=255, null=True, blank=True)
-    language = models.CharField(max_length=5, null=True)
+    language = models.CharField(max_length=5, null=True,
+                                choices=[(language, language) for language in
+                                         settings.AVAILABLE_LANGUAGES])
+    nouns = models.ManyToManyField('nouns.Noun', blank=True, null=True,
+                                   related_name="contentions")
+    related_nouns = models.ManyToManyField('nouns.Noun', blank=True, null=True,
+                                           related_name="contentions_related")
 
     score = models.FloatField(blank=True, null=True)
     objects = ContentionManager()
@@ -109,16 +114,18 @@ class Contention(DeletePreventionMixin, models.Model):
     def __unicode__(self):
         return smart_unicode(self.title)
 
-    def serialize(self, authenticted_user=None):
-        premises = (self.premises
-                    .filter(is_approved=True)
-                    .select_related('user')
-                    .prefetch_related('supporters', 'reports')
-                    .annotate(
-                        report_count=Count('reports'),
-                        supporter_count=Count('supporters', distinct=True)
-                    ))
-        
+    def serialize(self, authenticated_user=None):
+        premises = (
+            self.premises
+                .filter(is_approved=True)
+                .select_related('user')
+                .prefetch_related('supporters', 'reports')
+                .annotate(
+                    report_count=Count('reports'),
+                    supporter_count=Count('supporters', distinct=True))
+                .order_by('-supporter_count')
+        )
+
         return {
             'id': self.id,
             'user': self.user.serialize(),
@@ -131,7 +138,7 @@ class Contention(DeletePreventionMixin, models.Model):
             'absolute_url': self.get_absolute_url(),
             'language': self.language,
             'full_url': self.get_full_url(),
-            'premises': [premise.serialize(premises, authenticted_user) 
+            'premises': [premise.serialize(premises, authenticated_user)
                          for premise in premises
                          if premise.parent_id is None],
             'date_creation': self.date_creation
@@ -174,7 +181,7 @@ class Contention(DeletePreventionMixin, models.Model):
                 self.slug = "%s-%s" % (slug, uuid4().hex)
             else:
                 self.slug = slug
-
+        self.save_nouns()
         if not kwargs.pop('skip_date_update', False):
             self.date_modification = datetime.datetime.now()
         return super(Contention, self).save(*args, **kwargs)
@@ -226,6 +233,8 @@ class Contention(DeletePreventionMixin, models.Model):
 
     def get_newsfeed_bundle(self):
         return {
+            "id": self.id,
+            "language": self.language,
             "title": self.title,
             "owner": self.owner,
             "uri": self.get_absolute_url()
@@ -238,6 +247,110 @@ class Contention(DeletePreventionMixin, models.Model):
         return Profile.objects.filter(
             id__in=self.premises.values_list("user_id", flat=True)
         )
+
+    def extract_nouns(self):
+        ngrams = set(build_ngrams(self.title,
+                                  language=self.language))
+
+        nouns = (
+            Noun
+            .objects
+            .prefetch_related('keywords')
+            .filter(
+                Q(is_active=True),
+                Q(language=self.language),
+                Q(text__in=ngrams) |
+                Q(keywords__text__in=ngrams,
+                  keywords__is_active=True)
+            )
+        )
+
+        return nouns
+
+    def save_nouns(self):
+        nouns = self.extract_nouns()
+        for noun in nouns:
+            self.nouns.add(noun)
+
+    def formatted_title(self, tag='a'):
+        language = normalize_language_code(get_language())
+        title = strip_tags(self.title)
+        select = {'length': 'Length(nouns_noun.text)'}
+        nouns = (self
+                 .nouns
+                 .extra(select=select)
+                 .filter(language=language)
+                 .prefetch_related('keywords')
+                 .order_by('-length'))
+
+        for noun in nouns:
+            keywords = (
+                noun.active_keywords().values_list(
+                    'text', flat=True
+                )
+            )
+            sorted_keywords = sorted(
+                keywords,
+                key=len,
+                reverse=True
+            )
+
+            for keyword in sorted_keywords:
+                replaced = replace_with_link(
+                    title,
+                    keyword,
+                    noun.get_absolute_url(),
+                    tag
+                )
+
+                if replaced is not None:
+                    title = replaced
+                    continue
+
+            replaced = replace_with_link(
+                title,
+                noun.text,
+                noun.get_absolute_url(),
+                tag
+            )
+
+            if replaced is not None:
+                title = replaced
+
+        return title
+
+    highlighted_title = curry(formatted_title, tag='span')
+
+    def related_contentions(self):
+        if self.related_nouns.exists():
+            source = self.related_nouns
+        else:
+            source = self.nouns
+
+        nouns = source.prefetch_related('out_relations')
+        noun_ids = set(nouns.values_list('pk', flat=True))
+
+        for noun in nouns.all():
+            relations = set(noun.out_relations.values_list('target', flat=True))
+            noun_ids = noun_ids.union(relations)
+
+        available_nouns = (
+            Noun.objects.filter(
+                language=normalize_language_code(get_language()),
+                id__in=noun_ids
+            ).annotate(
+                contention_count=Count('contentions'),
+            ).filter(
+                contention_count__gt=2
+            ).prefetch_related(
+                'contentions'
+            )
+        )
+
+        return [{
+            'noun': noun,
+            'contentions': noun.contentions.exclude(pk=self.pk)[:7]
+        } for noun in available_nouns]
 
 
 class Premise(DeletePreventionMixin, models.Model):
@@ -287,11 +400,11 @@ class Premise(DeletePreventionMixin, models.Model):
                 premise.serialize(premise_lookup)
                 for premise in premise_lookup
                 if premise.parent_id == self.id
-            ],
+                ],
             'recent_supporters': [
                 supporter.serialize()
                 for supporter in self.supporters.all()[:5]
-            ],
+                ],
             'supported_by_authenticated_user': supported,
             'supporter_count': self.supporter_count,
             'user': self.user.serialize(),
@@ -368,7 +481,7 @@ class Premise(DeletePreventionMixin, models.Model):
         reports = self.reports.values('fallacy_type', 'reporter_id')
         fallacies = set(report['fallacy_type'] for report in reports)
         mapping = dict(FALLACY_TYPES)
-        
+
         user_reports = set()
         if authenticed_user is not None:
             for report in reports:
@@ -376,10 +489,10 @@ class Premise(DeletePreventionMixin, models.Model):
                     user_reports.add(report['fallacy_type'])
 
         return [{
-            'type': fallacy,
-            'label': mapping.get(fallacy),
-            'reported_by_authenticated_user': fallacy in user_reports
-        } for fallacy in fallacies if fallacy]
+                    'type': fallacy,
+                    'label': mapping.get(fallacy),
+                    'reported_by_authenticated_user': fallacy in user_reports
+                } for fallacy in fallacies if fallacy]
 
     def get_actor(self):
         # Encapsulated for newsfeed app.
@@ -390,6 +503,8 @@ class Premise(DeletePreventionMixin, models.Model):
 
     def get_newsfeed_bundle(self):
         return {
+            "id": self.id,
+            "language": self.argument.language,
             "premise_type": self.premise_type,
             "premise_class": self.premise_class(),
             "text": self.text,
@@ -409,17 +524,6 @@ class Premise(DeletePreventionMixin, models.Model):
     because = curry(children_by_premise_type, premise_type=SUPPORT)
     but = curry(children_by_premise_type, premise_type=OBJECTION)
     however = curry(children_by_premise_type, premise_type=SITUATION)
-
-
-class Comment(models.Model):
-    premise = models.ForeignKey(Premise)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    text = models.TextField()
-    date_creation = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
-
-    def __unicode__(self):
-        return smart_unicode(self.text)
 
 
 class Report(models.Model):

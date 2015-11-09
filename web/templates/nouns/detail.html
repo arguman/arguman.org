@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
+{% load gravatar %}
+
+{% block content %}
+<div class="container">
+    <div class="noun-tree">
+        <h3>{{ noun }}</h3>
+        <ul class="relations">
+            {% for relation in noun.out_relations.all %}
+            <li class="{{ relation.relation_type }} relation">
+                <span>{{ relation.relation_type_label }}</span>
+                <a href="{{ relation.target.get_absolute_url }}">{{ relation.target }}</a>
+                {% if relation.user %}
+                    <a class="sender" href="{{ relation.user.get_absolute_url }}">{% gravatar relation.user 20 %}</a>
+                {% endif %}
+                {% if relation.target.hyponyms.exists %}
+                <ul class="hyponyms">
+                    {% for hyponym in relation.target.hyponyms.all %}
+                    {% if hyponym.source != noun %}
+                    <li><a href="{{ hyponym.source.get_absolute_url }}">{{ hyponym.source }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+            {% for relation in noun.in_relations.all %}
+            {% if relation.relation_type != "antonym" %}
+            <li class="{{ relation.reverse_type }} relation">
+                <span>{{ relation.get_reverse_type_display }}</span>
+                <a href="{{ relation.source.get_absolute_url }}">{{ relation.source }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            <li class="create relation"><a href="{% url "new_relation" noun.slug %}">{% trans "add new relation" %}</a></li>
+        </ul>
+        <ul class="contentions relations">
+            {% for contention in noun.active_contentions.all %}
+            <li class="argument relation">
+                <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.title|safe }}</a>
+                <ul class="argument-stats">
+                    <li>
+                    <a href="{{ contention.user.get_absolute_url }}">@{{ contention.user }}</a> {{ contention.date_creation|naturaltime }}
+                    </li>
+                </ul>
+            </li>
+            {% endfor %}
+            <li class="create relation"><a href="{% url "new_argument" %}">{% trans "create an argument" %}</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -27,11 +27,12 @@
             </p>
         </div>
 
-
         {% if premise.fallacies %}
             <div class="reported_as_fallacy">
-                {% blocktrans trimmed with count=premise.fallacy_count %}
+                {% blocktrans trimmed count premise.fallacy_count as count %}
                     {{ count }} fallacy reported.
+                    {% plural %}
+                    {{ count }} fallacies reported.
                 {% endblocktrans %}
                 {% if premise.fallacies %}
                     {% for fallacy in premise.fallacies %}
@@ -53,8 +54,10 @@
 
         {% if premise.recent_supporters %}
             <div class="supporters">
-                {% blocktrans trimmed with count=premise.supporter_count %}
+                {% blocktrans trimmed count premise.supporter_count as count %}
                     {{ count }} supporter.
+                {% plural %}
+                    {{ count }} supporters.
                 {% endblocktrans %}
                 <div class="supporter-list">
                     {% for supporter in premise.recent_supporters %}{% if not forloop.first %}, {% endif %}
