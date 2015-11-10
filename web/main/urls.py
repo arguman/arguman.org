@@ -5,16 +5,16 @@ from django.views.decorators.cache import cache_page
 
 from blog.sitemaps import BlogSitemap
 from profiles.sitemaps import ProfileSitemap
-from premises.sitemaps import ArgumentSitemap
+from premises.sitemaps import ArgumentSitemap, PremiseSitemap
 
 admin.autodiscover()
 
 sitemaps = {
     'blog': BlogSitemap(),
     'user': ProfileSitemap(),
-    'argument': ArgumentSitemap()
+    'argument': ArgumentSitemap(),
+    'premise': PremiseSitemap()
 }
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('',
     url(r'^', include('newsfeed.urls')),
@@ -34,8 +34,3 @@ urlpatterns = patterns('',
         cache_page(86400)(sitemaps_views.sitemap),
         {'sitemaps': sitemaps}, name='sitemaps'),
 )
-
-from django.conf import settings
-from django.conf.urls.static import static
-
-urlpatterns += static(settings.STATIC_URL, view='django.contrib.staticfiles.views.serve')

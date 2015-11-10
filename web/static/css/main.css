@@ -758,6 +758,13 @@ li.base-premises {
     margin-top: 0px;
 }
 
+#app.list-view .switch-to-tree-view {
+    color: gray;
+    line-height: 0.9;
+    margin-top: 4px;
+    display: inline-block;
+}
+
 #app.list-view .thread-item .thread-branches {
     width: 100px;
     padding-bottom: 5px;

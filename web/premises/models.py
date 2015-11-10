@@ -21,11 +21,11 @@ from i18n.utils import normalize_language_code
 from newsfeed.constants import (
     NEWS_TYPE_FALLACY, NEWS_TYPE_PREMISE, NEWS_TYPE_CONTENTION)
 from premises.constants import MAX_PREMISE_CONTENT_LENGTH
-from premises.managers import ContentionManager, DeletePreventionManager
+from premises.managers import LanguageManager, DeletePreventionManager
 from premises.mixins import DeletePreventionMixin
 from premises.utils import replace_with_link
 from nouns.models import Noun
-from nouns.utils import tokenize, is_subsequence, build_ngrams
+from nouns.utils import build_ngrams
 
 OBJECTION = 0
 SUPPORT = 1
@@ -102,7 +102,7 @@ class Contention(DeletePreventionMixin, models.Model):
     related_nouns = models.ManyToManyField('nouns.Noun', blank=True, null=True,
                                            related_name="contentions_related")
 
-    objects = ContentionManager()
+    objects = LanguageManager()
 
     class Meta:
         ordering = ["-date_creation"]
@@ -442,6 +442,9 @@ class Premise(DeletePreventionMixin, models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'premise_detail', [self.argument.slug, self.pk]
+
+    def get_list_url(self):
+        return '%s?view=list' % self.get_absolute_url()
 
     @property
     def parent_users(self):
