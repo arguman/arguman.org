@@ -2797,19 +2797,18 @@ div.load-more {
 */
 .noun-tooltip {
     width: 300px;
-    border: 3px solid #FFE85F;
-    background: rgb(255, 250, 221);
+    border: 3px solid #D3E5E3;
+    background: rgb(247, 255, 254);
     position: absolute;
     min-height: 50px;
-    border-radius: 10px;
-    margin-left: -6px;
-    margin-top: -1px;
+    margin-top: 0;
     color: #686363;
     padding-top: 12px;
+    z-index: 99999999;
 }
 
 .noun-tooltip ul {
-    margin: 2px 0 14px;
+    margin: 5px 0 14px;
     padding: 0 0;
 }
 
@@ -2835,9 +2834,15 @@ div.load-more {
 }
 
 .noun-tooltip .argument.relation {
-    line-height: 1em;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     padding-top: 2px;
+    padding-bottom: 4px;
+    line-height: 1.2em;
+    border-bottom: 1px solid #f7f7f7;
+}
+
+.noun-tooltip .argument.relation:last-child {
+    border-bottom: none;
 }
 
 .noun-tooltip .argument.relation a {

@@ -15,6 +15,9 @@
 </li>
 {% endif %}
 {% endfor %}
+{% if not noun.out_relations.exists and not noun.in_relations.exists %}
+<li class="create relation"><a href="{% url "new_relation" noun.slug %}">{% trans "add new relation" %}</a></li>
+{% endif %}
 </ul>
 
 {% if contentions.exists %}
