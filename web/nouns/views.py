@@ -14,7 +14,24 @@ class NounDetail(DetailView):
                 .select_related('contentions__user')
                 .order_by('-date_creation'))
     template_name = "nouns/detail.html"
+    partial_template_name = "nouns/partial.html"
     context_object_name = "noun"
+
+    def get_template_names(self):
+        if self.request.GET.get('partial'):
+            return [self.partial_template_name]
+        return [self.template_name]
+
+    def get_context_data(self, **kwargs):
+        contentions = (self.get_object().active_contentions())
+        source = self.request.GET.get('source')
+        if source:
+            contentions = contentions.exclude(
+                id=source
+            )
+        return super(NounDetail, self).get_context_data(
+            contentions=contentions,
+            **kwargs)
 
     def get_object(self, queryset=None):
         return get_object_or_404(

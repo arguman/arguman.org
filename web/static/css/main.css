@@ -862,9 +862,9 @@ li.base-premises {
 
 #app.tree-view .tree-contention h3 {
     margin: 0;
-    padding: 0 0 5px;
+    padding: 0 0 10px;
     font-weight: normal;
-    font-size: 40px;
+    font-size: 36px;
     line-height: 0.9em;
     color: #161616;
 }
@@ -872,9 +872,13 @@ li.base-premises {
 #app.tree-view .tree-contention h3 a {
     color: #161616;
     text-decoration: none;
-    border-bottom: 3px solid #dadada;
-    line-height: 0.7em;
+    border-bottom: 3px solid #d3e5e3;
+    line-height: 0.9em;
     display: inline-block;
+    text-shadow: 1px 1px 0 #fff, 
+                -1px 1px 0 #fff, 
+                -1px 0px 0 #fff, 
+                 1px 0px 0 #fff;
 }
 
 #app.tree-view .tree-contention-actions {
@@ -2786,4 +2790,57 @@ div.load-more {
 .too-many-fallacy > .premise-content.however {
     background-color: #FFFBE8;
     color: rgba(156, 155, 155, 0.37) !important;
+}
+
+/*
+    Noun Tooltip
+*/
+.noun-tooltip {
+    width: 300px;
+    border: 3px solid #FFE85F;
+    background: rgb(255, 250, 221);
+    position: absolute;
+    min-height: 50px;
+    border-radius: 10px;
+    margin-left: -6px;
+    margin-top: -1px;
+    color: #686363;
+    padding-top: 12px;
+}
+
+.noun-tooltip ul {
+    margin: 2px 0 14px;
+    padding: 0 0;
+}
+
+.noun-tooltip li {
+    margin: 0;
+    padding: 1px 15px;
+    list-style: none;
+}
+
+.noun-tooltip li a {
+    color: #5A5A5A;
+}
+
+.noun-tooltip h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: normal;
+    border-bottom: 2px solid #FFE85F;
+    display: inline-block;
+    line-height: 0.8em;
+    margin-left: 15px;
+}
+
+.noun-tooltip .argument.relation {
+    line-height: 1em;
+    margin-bottom: 8px;
+    padding-top: 2px;
+}
+
+.noun-tooltip .argument.relation a {
+    text-decoration: none;
+    line-height: 0.9em;
 }

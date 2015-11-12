@@ -573,6 +573,74 @@
         
     });
 
+    arguman.NounLoader = Class.extend({
+        el: ".tree-contention h3 a",
+
+        init: function (options) {
+            $.extend(this, options);
+            this.$el = $(this.el);
+            this.$tooltip = $("<div>", {
+                'class': 'noun-tooltip'
+            }).css({
+                'display': 'none'
+            });
+        },
+
+        placeTooltip: function ($target) {
+            var position = $target.position();
+            this.$tooltip.css({
+                'left': position.left,
+                'top': position.top + $target.height()
+            });
+            this.timeout = setTimeout(
+                this.loadContent.bind(this, $target),
+                300
+            );
+        },
+
+        loadContent: function ($target) {
+            this.$tooltip.html('Loading');
+            $.get($target.attr('href'), {
+                'partial': true,
+                'source': arguman.contention.id
+            }, function (response) {
+                if ($(response).find('.relation').length > 0) {
+                    this.$tooltip
+                        .html(response)
+                        .show();
+                }
+            }.bind(this));
+        },
+
+        render: function () {
+            $('body').append(this.$tooltip);
+
+            this.$el.on('mouseover', function (event) {
+                var $target = $(event.target);
+                this.placeTooltip($target);
+            }.bind(this));
+
+            var hideTooltip = true;
+
+            this.$el.on('mouseleave', function (event) {
+                if (!$(event.relatedTarget).is(this.$tooltip)) {
+                    this.hideTooltip();
+                }
+            }.bind(this));
+
+            this.$tooltip.on('mouseleave', function (event) {
+                if (!$(event.relatedTarget).is(this.el)) {
+                    this.hideTooltip();
+                }
+            }.bind(this));
+        },
+
+        hideTooltip: function () {
+            this.$tooltip.hide();
+            clearTimeout(this.timeout);
+        }
+    });
+
     $(function () {
         $(".login-popup-close").on('click', function () {
             $(this).parents('.login-popup').hide();

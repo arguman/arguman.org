@@ -39,7 +39,7 @@
         <ul class="contentions relations">
             {% for contention in noun.active_contentions.all %}
             <li class="argument relation">
-                <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.title|safe }}</a>
+                <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.title }}</a>
                 <ul class="argument-stats">
                     <li>
                     <a href="{{ contention.user.get_absolute_url }}">@{{ contention.user }}</a> {{ contention.date_creation|naturaltime }}

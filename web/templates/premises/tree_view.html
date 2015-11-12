@@ -83,6 +83,9 @@
 {% block extra-scripts %}
 <script type="text/javascript">
     arguman.editMode = {{ edit_mode|yesno:"true,false" }};
+    arguman.contention = {
+        "id": {{ serialized.id }}
+    };
     arguman.authenticatedUser = {
         "id": {{ user.id|default:"null" }}
     };
@@ -103,6 +106,7 @@
 
     treeView.render();
 
+    (new arguman.NounLoader()).render();
     (new arguman.DraggablePage()).render();
 </script>
 {% endblock %}

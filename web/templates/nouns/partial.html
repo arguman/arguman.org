@@ -1,0 +1,29 @@
+{% load i18n %}
+<h3>{{ noun }}</h3>
+<ul class="relations">
+{% for relation in noun.out_relations.all %}
+<li class="{{ relation.relation_type }} relation">
+    <span>{{ relation.relation_type_label }}</span>
+    <a href="{{ relation.target.get_absolute_url }}">{{ relation.target }}</a>
+</li>
+{% endfor %}
+{% for relation in noun.in_relations.all %}
+{% if relation.relation_type != "antonym" %}
+<li class="{{ relation.reverse_type }} relation">
+    <span>{{ relation.get_reverse_type_display }}</span>
+    <a href="{{ relation.source.get_absolute_url }}">{{ relation.source }}</a>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+
+{% if contentions.exists %}
+<h3>{% trans "Arguments" %}</h3>
+<ul class="contentions relations">
+    {% for contention in contentions|slice:":5" %}
+    <li class="argument relation">
+        <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
