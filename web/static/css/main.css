@@ -2802,7 +2802,7 @@ div.load-more {
     width: 0;
     height: 0;
     border: 8px solid transparent;
-    border-bottom-color: #bbebff;
+    border-bottom-color: #f4f4f4;
     border-bottom-width: 10px;
     margin-top: 0px;
     margin-left: 20px;
@@ -2818,23 +2818,25 @@ div.load-more {
 
 .noun-tooltip-content {
     padding-top: 12px;
-    border: 4px solid #bbebff;
-    background: #fff;
+    border: 0 solid #dcdedc;
+    background: #f4f4f4;
     margin-top: 16px;
     border-radius: 7px;
-    -webkit-box-shadow: 0 1px 2px #6e6e6e;
-    -moz-box-shadow: 0 1px 2px #6e6e6e;
-    box-shadow: 0 1px 2px #6e6e6e;
+    -webkit-box-shadow: 0 1px 1px #8b8b8b;
+    -moz-box-shadow: 0 1px 1px #8b8b8b;
+    box-shadow: 0 1px 1px #8b8b8b;
+    padding-bottom: 1px;
 }
 
 .noun-tooltip ul {
-    margin: 5px 0 14px;
+    margin: 8px 0 8px;
     padding: 0 0;
 }
 
 .noun-tooltip li {
     margin: 0;
-    padding: 1px 15px;
+    padding: 1px 5px;
+    margin: 0 10px;
     list-style: none;
 }
 
@@ -2858,7 +2860,7 @@ div.load-more {
     padding-top: 2px;
     padding-bottom: 4px;
     line-height: 1.2em;
-    border-bottom: 1px solid #f7f7f7;
+    border-bottom: 1px solid #e3e3e3;
 }
 
 .noun-tooltip .argument.relation:last-child {
