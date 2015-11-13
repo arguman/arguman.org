@@ -872,7 +872,7 @@ li.base-premises {
 #app.tree-view .tree-contention h3 a {
     color: #161616;
     text-decoration: none;
-    border-bottom: 3px solid #d3e5e3;
+    border-bottom: 3px solid #c6f3ff;
     line-height: 0.9em;
     display: inline-block;
     text-shadow: 1px 1px 0 #fff, 
@@ -2795,16 +2795,36 @@ div.load-more {
 /*
     Noun Tooltip
 */
+.noun-tooltip:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-bottom-color: #bbebff;
+    border-bottom-width: 10px;
+    margin-top: 0px;
+    margin-left: 20px;
+}
 .noun-tooltip {
     width: 300px;
-    border: 3px solid #D3E5E3;
-    background: rgb(247, 255, 254);
     position: absolute;
     min-height: 50px;
-    margin-top: 0;
+    margin-top: -3px;
     color: #686363;
+    z-index: 99999;
+}
+
+.noun-tooltip-content {
     padding-top: 12px;
-    z-index: 99999999;
+    border: 4px solid #bbebff;
+    background: #fff;
+    margin-top: 16px;
+    border-radius: 7px;
+    -webkit-box-shadow: 0 1px 2px #6e6e6e;
+    -moz-box-shadow: 0 1px 2px #6e6e6e;
+    box-shadow: 0 1px 2px #6e6e6e;
 }
 
 .noun-tooltip ul {

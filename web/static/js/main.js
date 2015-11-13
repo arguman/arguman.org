@@ -575,6 +575,7 @@
 
     arguman.NounLoader = Class.extend({
         el: ".tree-contention h3 a",
+        currentNoun: null,
 
         init: function (options) {
             $.extend(this, options);
@@ -583,7 +584,9 @@
                 'class': 'noun-tooltip'
             }).css({
                 'display': 'none'
-            });
+            }).append(
+                $("<div />").addClass('noun-tooltip-content')
+            );
         },
 
         placeTooltip: function ($target) {
@@ -599,15 +602,23 @@
         },
 
         loadContent: function ($target) {
-            this.$tooltip.html('Loading');
-            $.get($target.attr('href'), {
+            var url = $target.attr('href');
+            if (this.currentNoun != url) {
+                this.$tooltip
+                    .find('.noun-tooltip-content')
+                    .html('Loading');
+            }
+            $.get(url, {
                 'partial': true,
                 'source': arguman.contention.id
             }, function (response) {
+                this.currentNoun = url;
                 if ($(response).find('.relation').length > 0) {
+                    console.log(this.$tooltip.find('.noun-tooltip-content').length);
                     this.$tooltip
+                        .find('.noun-tooltip-content')
                         .html(response)
-                        .show();
+                        .end().show();
                 }
             }.bind(this));
         },
@@ -617,13 +628,18 @@
 
             this.$el.on('mouseover', function (event) {
                 var $target = $(event.target);
+                if (this.timeout) {
+                    clearTimeout(this.timeout);
+                }
                 this.placeTooltip($target);
             }.bind(this));
 
             var hideTooltip = true;
 
             this.$el.on('mouseleave', function (event) {
-                if (!$(event.relatedTarget).is(this.$tooltip)) {
+                var target = $(event.relatedTarget);
+                if (!target.is(this.$tooltip) &&
+                    !target.is('.noun-tooltip-content')) {
                     this.hideTooltip();
                 }
             }.bind(this));
