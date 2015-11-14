@@ -124,6 +124,11 @@ class Contention(DeletePreventionMixin, models.Model):
 
     def serialize(self, authenticated_user=None):
         premises = self.get_premises()
+        main_premises = [
+            premise.serialize(premises, authenticated_user)
+            for premise in premises
+            if (premise.parent_id is None)
+        ]
 
         return {
             'id': self.id,
@@ -137,12 +142,9 @@ class Contention(DeletePreventionMixin, models.Model):
             'absolute_url': self.get_absolute_url(),
             'language': self.language,
             'full_url': self.get_full_url(),
-            'premises': [
-                premise.serialize(premises, authenticated_user)
-                for premise in premises
-                if (premise.parent_id is None)
-            ],
-            'date_creation': self.date_creation
+            'premises': main_premises,
+            'date_creation': self.date_creation,
+            'overview': self.overview(main_premises)
         }
 
     def partial_serialize(self, parent_id, authenticated_user=None):
@@ -159,6 +161,31 @@ class Contention(DeletePreventionMixin, models.Model):
             'full_url': self.get_full_url(),
             'premises': parent,
             'date_creation': self.date_creation
+        }
+
+    def overview(self, premises):
+        supported = sum(premise['weight'] for premise in premises
+                        if premise['premise_type'] == SUPPORT
+                        if premise['weight'] > 0)
+
+        objected = sum(premise['weight'] for premise in premises
+                       if premise['premise_type'] == OBJECTION)
+
+        objected += sum(premise['weight'] * -1 for premise in premises
+                        if premise['premise_type'] == SUPPORT
+                        and premise['weight'] < 0)
+
+        total = supported + objected
+
+        if total > 0:
+            return {
+                'support': 100 * float(supported) / total,
+                'objection': 100 * float(objected) / total,
+            }
+
+        return {
+            'support': supported,
+            'objection': objected
         }
 
     @models.permalink
@@ -394,6 +421,7 @@ class Premise(DeletePreventionMixin, models.Model):
     max_sibling_count = models.IntegerField(default=1)  # denormalized field
     date_creation = models.DateTimeField(auto_now_add=True)
     ip_address = models.CharField(max_length=255, null=True, blank=True)
+    weight = models.IntegerField(default=0)
 
     objects = DeletePreventionManager()
 
@@ -437,6 +465,7 @@ class Premise(DeletePreventionMixin, models.Model):
             'date_creation': self.date_creation,
             'fallacies': self.fallacies(authenticated_user),
             'fallacy_count': self.report_count,
+            'weight': self.weight
         }
 
     @models.permalink
@@ -533,6 +562,23 @@ class Premise(DeletePreventionMixin, models.Model):
     because = curry(children_by_premise_type, premise_type=SUPPORT)
     but = curry(children_by_premise_type, premise_type=OBJECTION)
     however = curry(children_by_premise_type, premise_type=SITUATION)
+
+    def update_weight(self):
+        weight = 1 + self.supporters.count() - self.reports.count()
+
+        for child in self.published_children():
+            child_weight = child.update_weight()
+
+            if child.premise_type == OBJECTION:
+                weight -= child_weight
+
+            if child.premise_type == SUPPORT:
+                weight += child_weight
+
+        self.weight = weight
+        self.save()
+
+        return weight
 
 
 class Report(models.Model):
