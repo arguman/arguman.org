@@ -2,6 +2,7 @@
 
 import json
 from datetime import timedelta
+from django.conf import settings
 from markdown2 import markdown
 
 from django.contrib import messages
@@ -16,6 +17,7 @@ from django.views.generic import DetailView, TemplateView, CreateView, View
 from django.views.generic.edit import UpdateView
 from django.utils.translation import get_language
 from django.db.models import Count
+from django.shortcuts import render
 
 from blog.models import Post
 from premises.models import Contention, Premise
@@ -71,6 +73,31 @@ class ContentionDetailView(DetailView):
             edit_mode=edit_mode,
             serialized=contention.serialize(self.request.user),
             **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        host = request.META['HTTP_HOST']
+
+        if not host.startswith(settings.AVAILABLE_LANGUAGES):
+            return redirect(self.get_object().get_full_url())
+
+        partial = request.GET.get('partial')
+        level = request.GET.get('level')
+
+        if partial:
+            contention = self.get_object()
+
+            try:
+                serialized = contention.partial_serialize(int(partial), self.request.user)
+            except (StopIteration, ValueError):
+                raise Http404
+
+            return render(request, 'premises/tree.html', {
+                'premises': serialized['premises'],
+                'serialized': serialized,
+                'level': int(level)
+            })
+
+        return super(ContentionDetailView, self).get(request, *args, **kwargs)
 
 
 class ContentionJsonView(DetailView):
@@ -484,6 +511,7 @@ class ArgumentCreationView(LoginRequiredMixin, CreateView):
         response = super(ArgumentCreationView, self).form_valid(form)
         form.instance.update_sibling_counts()
         form.instance.save_nouns()
+        form.instance.save()
         return response
 
 
@@ -498,11 +526,11 @@ class ArgumentUpdateView(LoginRequiredMixin, UpdateView):
         return contentions.filter(user=self.request.user)
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
         response = super(ArgumentUpdateView, self).form_valid(form)
         form.instance.update_sibling_counts()
         form.instance.nouns.clear()
         form.instance.save_nouns()
+        form.instance.save()
         return response
 
 

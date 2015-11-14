@@ -71,7 +71,7 @@
                     </h3>
                     <ul>
                         {% for contention in relation.contentions %}
-                            <li><a href="{{ contention.get_absolute_url }}#related">{{ contention.title }}</a></li>
+                            <li><a href="{% url "contention_detail" contention.slug %}#related">{{ contention.title }}</a></li>
                         {% endfor %}
                     </ul>
                 {% endfor %}
@@ -81,10 +81,11 @@
 {% endblock %}
 
 {% block extra-scripts %}
-<script type="text/javascript" src="{% static "js/lib/html2canvas.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/lib/jquery.pep.js" %}"></script>
 <script type="text/javascript">
     arguman.editMode = {{ edit_mode|yesno:"true,false" }};
+    arguman.contention = {
+        "id": {{ serialized.id }}
+    };
     arguman.authenticatedUser = {
         "id": {{ user.id|default:"null" }}
     };
@@ -94,17 +95,18 @@
             $(document).on('scroll', function () {
                 $("#keyboard-manager-info").hide();
             }.bind(this));
+
+            (new arguman.KeyboardManager({
+                el: "#app",
+                info: "#keyboard-manager-info",
+                treeView: treeView
+            })).render();
         }
     });
 
     treeView.render();
 
-    (new arguman.KeyboardManager({
-        el: "#app",
-        info: "#keyboard-manager-info",
-        treeView: treeView
-    })).render();
-    
+    (new arguman.NounLoader()).render();
     (new arguman.DraggablePage()).render();
 </script>
 {% endblock %}

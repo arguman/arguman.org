@@ -122,6 +122,8 @@
         {% endif %}
 
         <a class="thread-action" href="{% url 'report_premise' contention.slug premise.pk %}?view=list">{% trans "report fallacy" %}</a>
+        <br>
+        <a href="{% url 'premise_detail' contention.slug premise.pk %}" class="thread-action switch-to-tree-view">{% trans "open in tree view" %}</a>
     </div>
     {% endif %}
 </div>

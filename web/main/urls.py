@@ -5,14 +5,15 @@ from django.views.decorators.cache import cache_page
 
 from blog.sitemaps import BlogSitemap
 from profiles.sitemaps import ProfileSitemap
-from premises.sitemaps import ArgumentSitemap
+from premises.sitemaps import ArgumentSitemap, PremiseSitemap
 
 admin.autodiscover()
 
 sitemaps = {
     'blog': BlogSitemap(),
     'user': ProfileSitemap(),
-    'argument': ArgumentSitemap()
+    'argument': ArgumentSitemap(),
+    'premise': PremiseSitemap()
 }
 
 urlpatterns = patterns('',

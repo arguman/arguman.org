@@ -55,7 +55,7 @@ class ProfileUpdateForm(forms.ModelForm):
     }
 
     class Meta(UserCreationForm.Meta):
-        fields = ("username", "email", "notification_email")
+        fields = ("email", "notification_email")
         model = Profile
 
     new_password1 = forms.CharField(label=_("New password"),

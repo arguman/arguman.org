@@ -481,8 +481,10 @@
             var subTrees = tree.find(".tree");
             subTrees.each(function (i, el) {
                 var subTree = $(el);
+
+                var isFallacy = subTree.prev().hasClass('too-many-fallacy');
                 
-                if (parseInt(subTree.data("level")) < 2) {
+                if (parseInt(subTree.data("level")) < 3 && !isFallacy) {
                     return;
                 }
                 
@@ -527,19 +529,132 @@
             $("#loading").hide();
         },
 
+        loadPartials: function (callback) {
+
+            var promises = [],
+                partials = $('[data-load-partial]');
+
+            if (!partials.length) {
+                callback();
+            }
+
+            partials.each(function () {
+                var partialNode = $(this);
+                var url = partialNode.data('load-partial');
+                var promise = $.get(url);
+
+                promise.done(function (response) {
+                    partialNode.replaceWith(response)
+                });
+
+                promises.push(promise)
+            });
+
+            $.when.apply($, promises).then(function () {
+                callback()
+            })
+
+        },
+
         render: function () {
-            var tree = this.getRoot();
-            this.renderContentionHeader();
-            this.collapseTree(tree);
-            this.renderTree(tree);
-            this.onRender();
-            this.showApp();
+            this.loadPartials(function () {
+                var tree = this.getRoot();
+                this.renderContentionHeader();
+                this.collapseTree(tree);
+                this.renderTree(tree);
+                this.onRender();
+                this.showApp();
+            }.bind(this));
         },
 
         init: function (options) {
             $.extend(this, options);
         }
         
+    });
+
+    arguman.NounLoader = Class.extend({
+        el: ".tree-contention h3 a",
+        currentNoun: null,
+
+        init: function (options) {
+            $.extend(this, options);
+            this.$el = $(this.el);
+            this.$tooltip = $("<div>", {
+                'class': 'noun-tooltip'
+            }).css({
+                'display': 'none'
+            }).append(
+                $("<div />").addClass('noun-tooltip-content')
+            );
+        },
+
+        placeTooltip: function ($target) {
+            var position = $target.position();
+            this.$tooltip.css({
+                'left': position.left,
+                'top': position.top + $target.height()
+            });
+            this.timeout = setTimeout(
+                this.loadContent.bind(this, $target),
+                300
+            );
+        },
+
+        loadContent: function ($target) {
+            var url = $target.attr('href');
+            if (this.currentNoun != url) {
+                this.$tooltip
+                    .find('.noun-tooltip-content')
+                    .html('Loading');
+            }
+            $.get(url, {
+                'partial': true,
+                'source': arguman.contention.id
+            }, function (response) {
+                this.currentNoun = url;
+                if ($(response).find('.relation').length > 0) {
+                    console.log(this.$tooltip.find('.noun-tooltip-content').length);
+                    this.$tooltip
+                        .find('.noun-tooltip-content')
+                        .html(response)
+                        .end().show();
+                }
+            }.bind(this));
+        },
+
+        render: function () {
+            $('body').append(this.$tooltip);
+
+            this.$el.on('mouseover', function (event) {
+                var $target = $(event.target);
+                if (this.timeout) {
+                    clearTimeout(this.timeout);
+                }
+                this.placeTooltip($target);
+            }.bind(this));
+
+            var hideTooltip = true;
+
+            this.$el.on('mouseleave', function (event) {
+                var target = $(event.relatedTarget);
+                if (!target.is(this.$tooltip) &&
+                    !target.is('.noun-tooltip-content')) {
+                    this.hideTooltip();
+                }
+            }.bind(this));
+
+            this.$tooltip.on('mouseleave', function (event) {
+                if (!$(event.relatedTarget).is(this.el)) {
+                    this.hideTooltip();
+                }
+            }.bind(this));
+        },
+
+        hideTooltip: function () {
+            this.$tooltip.hide();
+            clearTimeout(this.timeout);
+        }
     });
 
     $(function () {

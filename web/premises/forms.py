@@ -14,7 +14,6 @@ class ArgumentCreationForm(FormRenderer, forms.ModelForm):
 
 
 class PremiseCreationForm(FormRenderer, forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(PremiseCreationForm, self).__init__(*args, **kwargs)
         self.fields['text'].required = True
@@ -40,17 +39,17 @@ class PremiseEditForm(FormRenderer, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PremiseEditForm, self).__init__(*args, **kwargs)
-        queryset = (self.instance
-          .argument
-          .premises
-          .exclude(pk=self.instance.pk))  # avoid self-loop
+        queryset = (
+            self.instance.argument.premises
+                .exclude(pk=self.instance.pk)  # avoid self-loop
+        )
         self.fields['parent'].queryset = queryset
 
 
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ["fallacy_type"]
+        fields = ["fallacy_type", "reason"]
 
     def clean(self):
         is_report_exist = Report.objects.filter(
@@ -59,7 +58,7 @@ class ReportForm(forms.ModelForm):
             contention=self.initial['contention'],
             fallacy_type=self.cleaned_data['fallacy_type']
         ).exists()
-        
+
         if is_report_exist:
             raise ValidationError(
                 u'You have already reported %s fallacy for this premise.' % (

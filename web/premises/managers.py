@@ -29,7 +29,7 @@ class DeletePreventionManager(models.Manager):
         return DeletePreventionQueryset(self.model, using=self._db)
 
 
-class ContentionManager(DeletePreventionManager):
+class LanguageManager(DeletePreventionManager):
     def language(self, language_code=None):
         if language_code is None:
             language_code = get_language()

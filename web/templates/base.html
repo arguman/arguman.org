@@ -8,7 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static "css/h5bp.css" %}" />
     <link rel="stylesheet" href="{% static "css/normalize.css" %}" />
-    <link rel="stylesheet" href="{% static "css/main.css" %}?v=3.6" />
+    <link rel="stylesheet" href="{% static "css/main.css" %}?v=3.8" />
     <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}" />
     <link rel="image_src" type="image/png" href="http://arguman.org{% static "img/logo-large.png" %}" />
     <meta property="og:image" content="http://arguman.org{% static "img/logo-large.png" %}"/>
@@ -56,7 +56,7 @@
                     href="http://tr.arguman.org">{% trans "Turkish" %}</a>
                 <a {% if language == "zh-hans" %}class="active" {% endif %}
                     href="http://ch.arguman.org">{% trans "Chinese" %}</a><br>
-                {% trans "Follow on twitter:" %} <a href="https://twitter.com/argumananalizi" target="_blank">@argumananalizi</a> <br />
+                {% trans "Follow on twitter:" %} <a href="https://twitter.com/argumentmapping" target="_blank">@argumentmapping</a> <br />
 		        Subreddit: <a href="https://www.reddit.com/r/arguman" target="_blank">/r/arguman</a>
             </li>
         </ul>
@@ -87,7 +87,7 @@
 <script type="text/javascript" src="{% static "js/lib/class.js" %}"></script>
 <script type="text/javascript" src="{% static "js/lib/underscore-template.js" %}"></script>
 <script type="text/javascript" src="{% static "js/lib/hipo.infinity-scroll.js" %}"></script>
-<script type="text/javascript" src="{% static "js/main.js?v=0.3" %}"></script>
+<script type="text/javascript" src="{% static "js/main.js?v=0.7" %}"></script>
 {% block extra-scripts %}{% endblock %}
 <script>
 

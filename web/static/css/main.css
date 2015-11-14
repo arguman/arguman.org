@@ -758,6 +758,13 @@ li.base-premises {
     margin-top: 0px;
 }
 
+#app.list-view .switch-to-tree-view {
+    color: gray;
+    line-height: 0.9;
+    margin-top: 4px;
+    display: inline-block;
+}
+
 #app.list-view .thread-item .thread-branches {
     width: 100px;
     padding-bottom: 5px;
@@ -842,6 +849,7 @@ li.base-premises {
 
 #app.tree-view {
     margin-top: 100px;
+    padding-right: 10px;
     visibility: hidden;
 }
 
@@ -854,9 +862,9 @@ li.base-premises {
 
 #app.tree-view .tree-contention h3 {
     margin: 0;
-    padding: 0 0 5px;
+    padding: 0 0 10px;
     font-weight: normal;
-    font-size: 40px;
+    font-size: 36px;
     line-height: 0.9em;
     color: #161616;
 }
@@ -864,9 +872,13 @@ li.base-premises {
 #app.tree-view .tree-contention h3 a {
     color: #161616;
     text-decoration: none;
-    border-bottom: 3px solid #dadada;
-    line-height: 0.7em;
+    border-bottom: 3px solid #c6f3ff;
+    line-height: 0.9em;
     display: inline-block;
+    text-shadow: 1px 1px 0 #fff, 
+                -1px 1px 0 #fff, 
+                -1px 0px 0 #fff, 
+                 1px 0px 0 #fff;
 }
 
 #app.tree-view .tree-contention-actions {
@@ -1323,6 +1335,8 @@ form .parent-premise strong {
 
 .reported_as_fallacy .fallacy {
     color: #676568;
+    display: inline-block;
+    width: 100%;
 }
 
 .reported_as_fallacy .fallacy form {
@@ -2758,4 +2772,102 @@ div.load-more {
 .recommendation-sidebar ul li a {
     color: #6f6f6f;
     text-decoration: none;
+}
+
+/*
+    Hidden premises
+*/
+.too-many-fallacy > .premise-content.but {
+    background: #FFF2F2;
+    color: rgba(156, 155, 155, 0.37) !important;
+}
+
+.too-many-fallacy > .premise-content.because {
+    background-color: #EEFFEA;
+    color: rgba(156, 155, 155, 0.37) !important;
+}
+
+.too-many-fallacy > .premise-content.however {
+    background-color: #FFFBE8;
+    color: rgba(156, 155, 155, 0.37) !important;
+}
+
+/*
+    Noun Tooltip
+*/
+.noun-tooltip:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-bottom-color: #f4f4f4;
+    border-bottom-width: 10px;
+    margin-top: 0px;
+    margin-left: 20px;
+}
+.noun-tooltip {
+    width: 300px;
+    position: absolute;
+    min-height: 50px;
+    margin-top: -3px;
+    color: #686363;
+    z-index: 99999;
+}
+
+.noun-tooltip-content {
+    padding-top: 12px;
+    border: 0 solid #dcdedc;
+    background: #f4f4f4;
+    margin-top: 16px;
+    border-radius: 7px;
+    -webkit-box-shadow: 0 1px 1px #8b8b8b;
+    -moz-box-shadow: 0 1px 1px #8b8b8b;
+    box-shadow: 0 1px 1px #8b8b8b;
+    padding-bottom: 1px;
+}
+
+.noun-tooltip ul {
+    margin: 8px 0 8px;
+    padding: 0 0;
+}
+
+.noun-tooltip li {
+    margin: 0;
+    padding: 1px 5px;
+    margin: 0 10px;
+    list-style: none;
+}
+
+.noun-tooltip li a {
+    color: #5A5A5A;
+}
+
+.noun-tooltip h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: normal;
+    border-bottom: 2px solid #FFE85F;
+    display: inline-block;
+    line-height: 0.8em;
+    margin-left: 15px;
+}
+
+.noun-tooltip .argument.relation {
+    margin-bottom: 4px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    line-height: 1.2em;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.noun-tooltip .argument.relation:last-child {
+    border-bottom: none;
+}
+
+.noun-tooltip .argument.relation a {
+    text-decoration: none;
+    line-height: 0.9em;
 }
