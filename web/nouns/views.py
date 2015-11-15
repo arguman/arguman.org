@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import get_language
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, ListView
 from i18n.utils import normalize_language_code
-from nouns.models import Noun, Relation
+from nouns.models import Noun, Relation, Channel
 from nouns.forms import RelationCreationForm
+from premises.models import Contention
+from premises.views import HomeView
 from profiles.mixins import LoginRequiredMixin
 
 
@@ -65,3 +67,35 @@ class RelationCreate(LoginRequiredMixin, CreateView):
 
     def get_noun(self):
         return get_object_or_404(Noun, slug=self.kwargs.get('slug'))
+
+
+class ChannelDetail(HomeView):
+    template_name = "nouns/channel_detail.html"
+    paginate_by = 20
+    context_object_name = "contentions"
+
+    def get_channel(self):
+        language = normalize_language_code(get_language())
+        return get_object_or_404(Channel, slug=self.kwargs['slug'],
+                                 language=language)
+
+    def get_context_data(self, **kwargs):
+        channel = self.get_channel()
+        return super(ChannelDetail, self).get_context_data(
+            channel=channel, **kwargs)
+
+    def get_contentions(self, paginate=True):
+        channel = self.get_channel()
+        nouns = channel.nouns.all()
+        contentions = (Contention
+                       .objects
+                       .language()
+                       .filter(is_featured=True,
+                               nouns__in=nouns)
+                       .distinct()
+                       .order_by("-date_modification"))
+
+        if paginate:
+            contentions = (contentions[self.get_offset(): self.get_limit()])
+
+        return contentions

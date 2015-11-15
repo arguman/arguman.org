@@ -1,4 +1,12 @@
 {% load i18n %}
+{% if true %}
+    <ul class="tabs">
+        <li class="newsfeed{% ifequal tab_class "newsfeed" %} active{% endifequal %}">
+            <a href="{% url "newsfeed" %}">{% trans "Newsfeed" %}</a></li>
+        <li class="newsfeed{% ifequal tab_class "newsfeed" %} active{% endifequal %}">
+            <a href="/">{% trans "Frontpage" %}</a></li>
+    </ul>
+{% else %}
 <ul class="tabs">
     <li class="newsfeed{% ifequal tab_class "newsfeed" %} active{% endifequal %}">
         <a href="{% url "newsfeed" %}">{% trans "Newsfeed" %}</a></li>
@@ -12,3 +20,4 @@
         <a href="{% url "contentions_search" %}">{% trans "Search" %}</a>
     </li>
 </ul>
+{% endif %}

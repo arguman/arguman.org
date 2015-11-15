@@ -200,3 +200,25 @@ class Relation(models.Model):
                                and VOWEL_SOUND.match(text)
                     else 'is a')
         return self.get_relation_type_display()
+
+
+class Channel(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.CharField(max_length=255)
+    nouns = models.ManyToManyField('Noun', null=True, blank=True)
+    order = models.IntegerField()
+    language = models.CharField(max_length=255, blank=True, null=True)
+    is_featured = models.BooleanField(max_length=255, default=False)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            slug = slugify(unidecode(self.text))
+            self.slug = slug
+        return super(Channel, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return smart_unicode(self.title)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'channel_detail', [self.slug]

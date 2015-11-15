@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.utils.translation import get_language
 
 from i18n.utils import normalize_language_code
-from nouns.models import Noun, Keyword, Relation
+from nouns.models import Noun, Keyword, Relation, Channel
 from premises.models import Contention
 
 
@@ -110,4 +110,9 @@ class NounAdmin(ActionInChangeFormMixin, admin.ModelAdmin):
         return qs.update(is_active=False)
 
 
+class ChannelAdmin(admin.ModelAdmin):
+    filter_horizontal = ('nouns', )
+
+
 admin.site.register(Noun, NounAdmin)
+admin.site.register(Channel, ChannelAdmin)

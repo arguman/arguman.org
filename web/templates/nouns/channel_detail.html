@@ -1,17 +1,20 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 {% load humanize %}
+{% load gravatar %}
+
+{% block title %}{{ channel }}{% endblock %}
 
 {% block content %}
-    <div class="container home">
-        {% include "home.html" %}
-        {% include "tabs.html" %}
 
-        {% block tab_content %}
+<div class="container channel-index">
+    {% include "partials/channel_list.html" %}
+
+    <h3>{{ channel }}</h3>
+    <div class="channel-contentions">
         {% include "premises/contention_list.html" %}
-        {% endblock %}
     </div>
+</div>
 {% endblock %}
 
 {% block extra-scripts %}

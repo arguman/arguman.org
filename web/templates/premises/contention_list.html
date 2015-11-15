@@ -1,0 +1,29 @@
+{% load i18n %}
+{% load humanize %}
+<ul class="argument-list">
+    {% for contention in contentions %}
+        <li>
+            <div class="stats">
+                <span class="because">{{ contention.because.count }} {% trans "because" %}</span>
+                <span class="but">{{ contention.but.count }} {% trans "but" %}</span>
+                <span class="however">{{ contention.however.count }} {% trans "however" %}</span>
+            </div>
+            <div class="info">
+                <h3><a class="main-contention" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a></h3>
+                <div class="user">{% trans "last update:" %} <a
+                        href="{% url "auth_profile" contention.last_user.username %}">{{ contention.last_user|lower }}</a>
+                    <time datetime="{{ contention.date_modification }}">({{ contention.date_modification|naturaltime }})</time>
+                </div>
+            </div>
+        </li>
+    {% empty %}
+        {% if keywords %}
+            <li>{% trans "No results found." %}</li>
+        {% endif %}
+    {% endfor %}
+    {% if has_next_page %}
+    <li class="load-more">
+        <a class="next" href="{{ next_page_url }}">{% trans "Load more" %}</a>
+    </li>
+    {% endif %}
+</ul>

@@ -4,6 +4,7 @@ from django.contrib.sitemaps import views as sitemaps_views
 from django.views.decorators.cache import cache_page
 
 from blog.sitemaps import BlogSitemap
+from nouns.views import ChannelDetail
 from profiles.sitemaps import ProfileSitemap
 from premises.sitemaps import ArgumentSitemap, PremiseSitemap
 
@@ -22,6 +23,8 @@ urlpatterns = patterns('',
     url(r'^', include('profiles.urls')),
     url(r'^blog/', include('blog.urls')),
     url(r'^nouns/', include('nouns.urls')),
+    url(r'^channels/(?P<slug>[-\w]+)$',
+        ChannelDetail.as_view(), name="channel_detail"),
     url(r'^', include('social_auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include('api.urls')),

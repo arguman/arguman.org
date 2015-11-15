@@ -1,0 +1,19 @@
+{% load i18n %}
+<ul class="channel-list">
+   {% for item in channels %}
+       {% if item.is_featured %}
+        <li{% if item == channel %} class="active"{% endif %}><a href="{{ item.get_absolute_url }}">{{ item }}</a></li>
+       {% endif %}
+   {% endfor %}
+    <li class="show-all-channels"><a href="#">{% trans "all channels" %}</a></li>
+</ul>
+
+<div class="overlay all-channels">
+    <ul class="channel-list">
+       {% for item in channels %}
+           {% if not item.is_featured %}
+            <li><a href="{{ item.get_absolute_url }}">{{ item }}</a></li>
+           {% endif %}
+       {% endfor %}
+    </ul>
+</div>

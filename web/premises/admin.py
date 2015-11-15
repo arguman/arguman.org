@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models import Count
 from django.forms import Textarea
 
-from premises.models import Contention, Premise, Report, Channel
+from premises.models import Contention, Premise, Report
 
 
 class ReportAdmin(admin.ModelAdmin):
@@ -49,4 +49,4 @@ class PremiseAdmin(admin.ModelAdmin):
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Contention, ContentionAdmin)
 admin.site.register(Premise, PremiseAdmin)
-admin.site.register(Channel)
+

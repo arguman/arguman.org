@@ -2898,7 +2898,7 @@ div.load-more {
     position: absolute;
     width: 800px;
     left: 50%;
-    margin-left: -400px;
+    margin-left: -405px;
     top: 115px;
     right: 0;
     z-index: 99999;
@@ -2943,7 +2943,7 @@ div.load-more {
 */
 #tree-overview {
     width: 800px;
-    margin-left: -400px;
+    margin-left: -405px;
     left: 50%;
     position: absolute;
     top: 88px;
@@ -2951,6 +2951,8 @@ div.load-more {
     text-align: left;
     font-size: 1em;
     display: none;
+    height: 25px;
+    overflow: hidden;
 }
 
 #tree-overview .support,
@@ -2980,4 +2982,99 @@ div.load-more {
     color: gray;
     text-decoration: none;
     margin-top: 1px;
+}
+
+/*
+    Channel index
+*/
+
+.channel-index h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.channel-index .channel-contentions {
+    border-top: 3px solid #E3E3E5;
+}
+
+/* Channel List */
+.channel-list {
+    margin: -7px 0 15px;
+    padding: 0;
+    overflow: hidden;
+    background: #fcfde0;
+}
+
+.channel-list li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.channel-list li a {
+    text-decoration: none;
+    color: black;
+    background: #fcfde0;
+    padding: 10px 15px;
+    display: block;
+    font-size: 1.2em;
+    outline: none;
+}
+
+.channel-list li a.active,
+.channel-list li a:hover {
+    background-color: #FFF8B2;
+}
+
+.channel-list li.active a {
+    background: #FFF8B2;
+    /*border-bottom: 3px solid black;*/
+    /*padding-bottom: 7px;*/
+}
+
+.channel-list li:first-child a {
+    padding-left: 30px;
+}
+
+.channel-list .show-all-channels {
+    float: right;
+}
+
+.channel-list .show-all-channels a {
+    background: #FFF8B2;
+}
+
+.all-channels {
+    display: none;
+}
+
+.all-channels .channel-list {
+    width: 300px;
+    height: 400px;
+    position: absolute;
+}
+
+.all-channels .channel-list li {
+    float: none;
+}
+
+.all-channels .channel-list li a,
+.all-channels .channel-list li:first-child a {
+    padding: 10px 20px;
+    background: #FFF8B2;
+}
+
+.all-channels .channel-list li a:hover {
+    background: #FFF8B2;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.23);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999;
+    top: 0;
+    left: 0;
 }

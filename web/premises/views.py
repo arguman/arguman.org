@@ -32,6 +32,8 @@ from premises.mixins import PaginationMixin, NextURLMixin
 from newsfeed.models import Entry
 from profiles.mixins import LoginRequiredMixin
 from profiles.models import Profile
+from nouns.models import Channel
+
 from i18n.utils import normalize_language_code
 
 
@@ -172,6 +174,7 @@ class HomeView(TemplateView, PaginationMixin):
         else:
             notifications = None
         return super(HomeView, self).get_context_data(
+            channels=self.get_channels(),
             next_page_url=self.get_next_page_url(),
             tab_class=self.tab_class,
             notifications=notifications,
@@ -205,6 +208,11 @@ class HomeView(TemplateView, PaginationMixin):
             contentions = (contentions[self.get_offset(): self.get_limit()])
 
         return contentions
+
+    def get_channels(self):
+        return Channel.objects.filter(
+            language=normalize_language_code(get_language())
+        ).order_by('order')
 
 
 class NotificationsView(LoginRequiredMixin, HomeView):

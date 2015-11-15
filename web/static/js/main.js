@@ -696,18 +696,18 @@
         render: function () {
             var premises = this.sortPremises();
             var barWidth = Math.max(
-                $('.tree-contention h3 span').width() + 10,
+                $('.tree-contention h3 span').width() + 60,
                 620
             );
 
             $('#tree-overview')
                 .show()
                 .css({width: barWidth,
-                      marginLeft: -barWidth/2});
+                      marginLeft: -barWidth/2 - 5});
 
             this.$el.css({
                 width: barWidth,
-                marginLeft: -barWidth/2
+                marginLeft: -barWidth/2 - 5
             });
 
             var width = barWidth / this.$premises.length;
@@ -749,6 +749,22 @@
             $('#keyword').trigger('focus');
         });
 
+        $('.show-all-channels a').on('click', function (event) {
+            var position = $(this).position();
+            $(this).addClass('active');
+            $('.all-channels')
+                .show()
+                .height($(document).height());
+            $('.all-channels .channel-list').css({
+                left: position.left - 159,
+                top: position.top + 52
+            });
+            event.preventDefault();
+        });
+
+        $('.all-channels').on('click', function () {
+            $(this).hide();
+        });
 
         $('.recommendation-sidebar')
             .on('click', function () {
