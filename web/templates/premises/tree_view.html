@@ -16,7 +16,7 @@
     <div id="loading">{% trans "Loading tree..." %}</div>
     <div id="app" class="tree-view">
         <div class="tree-contention">
-            <h3>{{ contention.formatted_title|safe }}</h3>
+            <h3><span>{{ contention.formatted_title|safe }}</span></h3>
         </div>
         <div class="tree-contention-actions">
             {% if user.is_authenticated %}

@@ -12,7 +12,7 @@
 {% endif %}
 </ul>
 
-{% if contentions.exists %}
+{% if contentions.exists or indirect_contentions.exists %}
 <h3>{% trans "Arguments" %}</h3>
 <ul class="contentions relations">
     {% for contention in contentions|slice:":3" %}

@@ -695,7 +695,22 @@
 
         render: function () {
             var premises = this.sortPremises();
-            var width = this.$el.width() / this.$premises.length;
+            var barWidth = Math.max(
+                $('.tree-contention h3 span').width() + 10,
+                620
+            );
+
+            $('#tree-overview')
+                .show()
+                .css({width: barWidth,
+                      marginLeft: -barWidth/2});
+
+            this.$el.css({
+                width: barWidth,
+                marginLeft: -barWidth/2
+            });
+
+            var width = barWidth / this.$premises.length;
 
             $(premises).each(function (i, el) {
                 var premise = $(el);
@@ -715,8 +730,6 @@
                         }.bind(this))
                 );
             }.bind(this));
-
-            $('#tree-overview').show();
         }
     });
 
@@ -738,8 +751,11 @@
 
 
         $('.recommendation-sidebar')
-            .click(function () {
+            .on('click', function () {
                 $(this).addClass('opened');
+            })
+            .on('mouseleave', function () {
+                $(this).removeClass('opened');
             });
 
         $("form.support").submit(function(event) {
