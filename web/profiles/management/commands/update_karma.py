@@ -12,4 +12,4 @@ class Command(BaseCommand):
             karma = user.calculate_karma()
             user.karma = karma
             user.save()
-            print user.username, '==', user.karma
+            # print user.username, '==', user.karma
