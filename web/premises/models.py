@@ -595,7 +595,7 @@ class Premise(DeletePreventionMixin, models.Model):
             user.save()
 
     def save(self, *args, **kwargs):
-        self.save_karma_tree()
+        # self.save_karma_tree()
         return super(Premise, self).save(*args, **kwargs)
 
     because = curry(children_by_premise_type, premise_type=SUPPORT)
@@ -640,7 +640,6 @@ class Report(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.fallacy_type)
-
 
     def save_karma(self):
         karma = self.premise.user.calculate_karma()

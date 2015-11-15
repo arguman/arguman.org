@@ -27,6 +27,10 @@
 
         <div class="user-detail">
             <div class="stats-bar">
+                 <span>
+                    {{ object.karma }} <br>
+                    {% trans "KARMA" %}
+                </span>
                 <span>
                     {{ object.followers.count }} <br/>
                     {% trans "FOLLOWER" %}
@@ -38,10 +42,6 @@
                 <span>
                     {{ object.user_premises.count }} <br>
                     {% trans "PREMISE" %}
-                </span>
-                <span>
-                    {{ object.karma }} <br>
-                    {% trans "KARMA" %}
                 </span>
             </div>
 

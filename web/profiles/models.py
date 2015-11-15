@@ -52,7 +52,8 @@ class Profile(AbstractUser):
         main_premises = self.user_premises.all()
         all_sub_premises = []
         for premise in main_premises:
-            all_sub_premises += premise.sub_tree_ids()
+            all_sub_premises += premise.published_children().values_list('pk',
+                                                                         flat=True)
             karma -= 2 * (premise.reports.count())
         not_owned_sub_premises = Premise.objects.\
             filter(id__in=all_sub_premises).\

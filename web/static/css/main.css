@@ -2891,7 +2891,7 @@ div.load-more {
     position: absolute;
     width: 750px;
     left: 50%;
-    margin-left: -380px;
+    margin-left: -390px;
     top: 115px;
     right: 0;
     z-index: 99999;
@@ -2924,7 +2924,7 @@ div.load-more {
 */
 #tree-overview {
     width: 750px;
-    margin-left: -380px;
+    margin-left: -390px;
     left: 50%;
     position: absolute;
     top: 88px;
