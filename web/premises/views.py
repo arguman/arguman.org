@@ -643,7 +643,6 @@ class PremiseCreationView(NextURLMixin, LoginRequiredMixin, CreateView):
         form.instance.parent = self.get_parent()
         form.instance.is_approved = True
         form.instance.ip_address = get_ip_address(self.request)
-        form.instance.argument.update_premise_weights()
         form.save()
         contention.update_sibling_counts()
 
@@ -655,6 +654,7 @@ class PremiseCreationView(NextURLMixin, LoginRequiredMixin, CreateView):
                                               premise=form.instance)
 
         contention.date_modification = timezone.now()
+        contention.update_premise_weights()
         contention.save()
 
         return redirect(

@@ -135,15 +135,6 @@
             }.bind(this));
 
             if (this.needsScroll()) {
-                this.$el
-                    .find(".tree-node")
-                    .on('click', function (event) {
-                        this.select(
-                            $(event.target)
-                            .parents(".tree-branch")
-                            .first()
-                        )
-                    }.bind(this));
                 $(this.info).show();
             } else {
                 $(this.info).hide();
@@ -156,6 +147,15 @@
             setTimeout(function () {
                 $(this.info).fadeOut('slow');
             }.bind(this), 3000);
+            this.$el
+                .find(".tree-node")
+                .on('click', function (event) {
+                    this.select(
+                        $(event.target)
+                        .parents(".tree-branch")
+                        .first()
+                    )
+                }.bind(this));
         }
     });
 
@@ -486,8 +486,11 @@
                 var subTree = $(el);
 
                 var isFallacy = subTree.prev().hasClass('too-many-fallacy');
+                var score = parseInt(subTree.prev().data('weight'));
                 
-                if (parseInt(subTree.data("level")) < 3 && !isFallacy) {
+                if (parseInt(subTree.data("level")) < 3
+                        && !isFallacy
+                        && score > 0) {
                     return;
                 }
                 

@@ -419,6 +419,18 @@ li.base-premises {
         font-size: 24px;
     }
 
+    .premise .premise-type.premise-weight {
+        margin-top: -26px;
+        margin-left: 92px;
+        font-size: 0.9em;
+        color: #c8c8c8;
+        display: none;
+    }
+
+    .premise.focused .premise-type.premise-weight {
+        display: block;
+    }
+
     .premise-type.but {
         color: #d07d7d;
     }

@@ -1,9 +1,14 @@
 {% load i18n %}
 {% load humanize %}
 <div class="premise tree-node{% if premise.is_collapsed %} too-many-fallacy{% endif %}"
-    data-id="{{ premise.id }}" data-type="{{ premise.premise_class }}">
+    data-id="{{ premise.id }}" data-type="{{ premise.premise_class }}"
+    data-weight="{{ premise.weight }}">
     <div class="premise-type {{ premise.premise_class }}">
         {{ premise.premise_type_label }}
+    </div>
+
+    <div class="premise-type premise-weight {{ premise.premise_class }}">
+        score: {{ premise.weight }}
     </div>
 
     <div class="premise-content {{ premise.premise_class }}">

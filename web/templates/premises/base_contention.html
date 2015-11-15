@@ -11,7 +11,7 @@
 
 {% block description %}{% spaceless %}
     {% with first=serialized.premises|first %}
-        {{ first.text }}
+        {{ first.premise_type }} {{ first.text }}
     {% endwith %}
 {% endspaceless %}{% endblock  %}
 

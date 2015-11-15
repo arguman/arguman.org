@@ -119,7 +119,7 @@ class Contention(DeletePreventionMixin, models.Model):
                 .annotate(
                     report_count=Count('reports', distinct=True),
                     supporter_count=Count('supporters', distinct=True))
-                .order_by('date_creation')
+                .order_by('-weight')
         )
 
     def serialize(self, authenticated_user=None):
