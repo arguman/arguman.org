@@ -403,10 +403,10 @@
                     this.viewSingleBranch();
                 } else if (branches.length === 0) {
                     this.viewEmptyTree();
-                } 
-                
-                this.setAppHeight();
+                }
             }
+
+            this.setAppHeight();
         },
 
         resetTreeWidth: function () {
@@ -456,7 +456,7 @@
                     deepestPosition + 
                     deepestPremise.height() +
                     $(".tree-contention").height() +
-                    220
+                    300
                 );
             } 
         },
