@@ -1032,6 +1032,12 @@ li.base-premises {
         margin-top: -3px;
     }
 
+    #app.tree-view .branch-connector:after {
+        content: "";
+        display: inline-block;
+        width: 150px;
+    }
+
     #app.tree-view .branch-single:before {
         width: 0;
         height: 0;

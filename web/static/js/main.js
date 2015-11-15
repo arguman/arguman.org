@@ -456,7 +456,7 @@
                     deepestPosition + 
                     deepestPremise.height() +
                     $(".tree-contention").height() +
-                    300
+                    350
                 );
             } 
         },
