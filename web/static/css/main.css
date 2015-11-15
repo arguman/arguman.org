@@ -1429,7 +1429,7 @@ form .parent-premise strong {
 
 .original-discourse {
     overflow: hidden;
-    max-width: 350px;
+    max-width: 500px;
     height: 1.3em;
 }
 
@@ -2891,7 +2891,7 @@ div.load-more {
     position: absolute;
     width: 750px;
     left: 50%;
-    margin-left: -390px;
+    margin-left: -350px;
     top: 115px;
     right: 0;
     z-index: 99999;
@@ -2905,7 +2905,7 @@ div.load-more {
 }
 
 #timeline .entry:hover {
-    height: 8px;
+    height: 15px;
 }
 
 #timeline .entry.but {
@@ -2924,7 +2924,7 @@ div.load-more {
 */
 #tree-overview {
     width: 750px;
-    margin-left: -390px;
+    margin-left: -350px;
     left: 50%;
     position: absolute;
     top: 88px;
@@ -2949,7 +2949,7 @@ div.load-more {
 }
 
 #tree-overview .objection {
-    color: #ec8b80;
+    color: #ecaaa0;
 }
 
 #tree-overview .last-update {

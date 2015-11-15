@@ -620,7 +620,6 @@
             }, function (response) {
                 this.currentNoun = url;
                 if ($(response).find('.relation').length > 0) {
-                    console.log(this.$tooltip.find('.noun-tooltip-content').length);
                     this.$tooltip
                         .find('.noun-tooltip-content')
                         .html(response)

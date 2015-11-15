@@ -24,13 +24,14 @@ class NounDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         contentions = (self.get_object().active_contentions())
+        indirect_contentions = (self.get_object().indirect_contentions())
         source = self.request.GET.get('source')
         if source:
-            contentions = contentions.exclude(
-                id=source
-            )
+            contentions = contentions.exclude(id=source)
+            indirect_contentions = indirect_contentions.exclude(id=source)
         return super(NounDetail, self).get_context_data(
             contentions=contentions,
+            indirect_contentions=indirect_contentions,
             **kwargs)
 
     def get_object(self, queryset=None):

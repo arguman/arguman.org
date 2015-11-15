@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-15 01:44+0000\n"
+"POT-Creation-Date: 2015-11-15 13:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: tr\n"
@@ -195,15 +195,15 @@ msgstr "Önerme Tipi"
 msgid "Premise Content"
 msgstr "İçerik"
 
-#: premises/models.py:636
+#: premises/models.py:634
 msgid "Reason"
 msgstr "Sebep"
 
-#: premises/models.py:637
+#: premises/models.py:635
 msgid "Please explain that why the premise is a fallacy."
 msgstr "Önermenin neden safsata olduğunu açıklayınız."
 
-#: premises/models.py:639
+#: premises/models.py:637
 msgid "Fallacy Type"
 msgstr "Safsata Tipi"
 
@@ -370,9 +370,13 @@ msgstr "Profil Güncelle"
 msgid "Update"
 msgstr "Güncelle"
 
-#: templates/base.html:5 templates/base.html.py:7
+#: templates/base.html:5
 msgid "Argument Analysis Platform"
 msgstr "Argüman Analizi Platformu"
+
+#: templates/base.html:7
+msgid "Argument analysis and mapping platform"
+msgstr "Argüman analizi ve haritalama platformu"
 
 #: templates/base.html:24
 msgid "Announcement:"
@@ -608,35 +612,35 @@ msgstr "gönderen:"
 msgid "original discourse:"
 msgstr "orijinal söylem:"
 
-#: templates/premises/base_contention.html:34
+#: templates/premises/base_contention.html:36
 msgid "Unspecified"
 msgstr "Belirtilmemiş"
 
-#: templates/premises/base_contention.html:44
+#: templates/premises/base_contention.html:46
 msgid "Edit"
 msgstr "Düzenle"
 
-#: templates/premises/base_contention.html:49
+#: templates/premises/base_contention.html:51
 msgid "Unpublish"
 msgstr "Yayından Kaldır"
 
-#: templates/premises/base_contention.html:54
+#: templates/premises/base_contention.html:56
 msgid "Publish"
 msgstr "Yayınla"
 
-#: templates/premises/base_contention.html:64
+#: templates/premises/base_contention.html:66
 msgid "View"
 msgstr "Görünüm"
 
-#: templates/premises/base_contention.html:67
+#: templates/premises/base_contention.html:69
 msgid "Tree"
 msgstr "Ağaç"
 
-#: templates/premises/base_contention.html:70
+#: templates/premises/base_contention.html:72
 msgid "List"
 msgstr "Liste"
 
-#: templates/premises/base_contention.html:78
+#: templates/premises/base_contention.html:80
 msgid "Share"
 msgstr "Paylaş"
 

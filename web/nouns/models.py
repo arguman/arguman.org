@@ -100,7 +100,17 @@ class Noun(models.Model):
         return self.contentions.filter(
             is_published=True,
             language=language
-        )
+        ).order_by('?')
+
+    def indirect_contentions(self):
+        from premises.models import Contention  # to avoid circular import
+        language = normalize_language_code(get_language())
+        nouns = self.out_relations.values_list('target', flat=True)
+        return Contention.objects.filter(
+            language=language,
+            is_published=True,
+            nouns__in=nouns
+        ).order_by('?')
 
     @models.permalink
     def get_absolute_url(self):

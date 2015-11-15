@@ -7,15 +7,7 @@
     <a href="{{ relation.target.get_absolute_url }}">{{ relation.target }}</a>
 </li>
 {% endfor %}
-{% for relation in noun.in_relations.all %}
-{% if relation.relation_type != "antonym" %}
-<li class="{{ relation.reverse_type }} relation">
-    <span>{{ relation.get_reverse_type_display }}</span>
-    <a href="{{ relation.source.get_absolute_url }}">{{ relation.source }}</a>
-</li>
-{% endif %}
-{% endfor %}
-{% if not noun.out_relations.exists and not noun.in_relations.exists %}
+{% if not noun.out_relations.exists  %}
 <li class="create relation"><a href="{% url "new_relation" noun.slug %}">{% trans "add new relation" %}</a></li>
 {% endif %}
 </ul>
@@ -23,7 +15,12 @@
 {% if contentions.exists %}
 <h3>{% trans "Arguments" %}</h3>
 <ul class="contentions relations">
-    {% for contention in contentions|slice:":5" %}
+    {% for contention in contentions|slice:":3" %}
+    <li class="argument relation">
+        <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.title }}</a>
+    </li>
+    {% endfor %}
+    {% for contention in indirect_contentions|slice:":3" %}
     <li class="argument relation">
         <a class="contention-link" href="{% url "contention_detail" contention.slug %}">{{ contention.title }}</a>
     </li>

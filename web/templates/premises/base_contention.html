@@ -28,8 +28,10 @@
                 </li>
                 <li class="original-discourse">
                     {% trans "original discourse:" %}
-                    {% if serialized.sources or serialized.owner %}
+                    {% if serialized.owner %}
                         {{ serialized.owner }}
+                    {% elif serialized.sources %}
+                        {{ serialized.sources|urlizetrunc:30 }}
                     {% else %}
                         {% trans "Unspecified" %}
                     {% endif %}
