@@ -331,7 +331,7 @@ class StatsView(HomeView):
 
     method_mapping = {
         "active_users": "get_active_users",
-        "supported_users": "get_supported_users",
+        "user_karma": "get_user_karma",
         "disgraced_users": "get_disgraced_users",
         "supported_premises": "get_supported_premises",
         "fallacy_premises": "get_fallacy_premises",
@@ -387,26 +387,23 @@ class StatsView(HomeView):
 
     def get_active_users(self):
         return Profile.objects.annotate(
-            premise_count=Sum("premise"),
+            premise_count=Sum("user_premises"),
         ).filter(
             premise_count__gt=0,
-            **self.build_time_filters(date_field="premise__date_creation")
+            **self.build_time_filters(date_field="user_premises__date_creation")
         ).order_by("-premise_count")[:10]
 
-    def get_supported_users(self):
-        return Profile.objects.annotate(
-            supporter_count=Sum("premise__supporters"),
-        ).filter(
-            supporter_count__gt=0,
-            **self.build_time_filters(date_field="premise__date_creation")
-        ).order_by("-supporter_count")[:10]
+    def get_user_karma(self):
+        return Profile.objects.\
+                   filter(**self.build_time_filters(date_field="user_premises__date_creation")).\
+                   order_by("-karma", "id").distinct()[:10]
 
     def get_disgraced_users(self):
         return Profile.objects.annotate(
-            report_count=Sum("premise__reports"),
+            report_count=Sum("user_premises__reports"),
         ).filter(
             report_count__gt=0,
-            **self.build_time_filters(date_field="premise__date_creation")
+            **self.build_time_filters(date_field="user_premises__date_creation")
         ).order_by("-report_count")[:10]
 
     def get_supported_premises(self):

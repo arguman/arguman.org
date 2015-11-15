@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from django.utils import timezone
+from datetime import datetime
+from math import log
 from operator import itemgetter
 from uuid import uuid4
 from markdown2 import markdown
@@ -14,7 +17,6 @@ from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_unicode
 from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _, get_language
-from django.contrib.auth.models import User
 from django.utils.html import strip_tags
 from i18n.utils import normalize_language_code
 
@@ -30,6 +32,8 @@ from nouns.utils import build_ngrams
 OBJECTION = 0
 SUPPORT = 1
 SITUATION = 2
+
+epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
 
 PREMISE_TYPES = (
     (OBJECTION, _("but")),
@@ -91,8 +95,7 @@ class Contention(DeletePreventionMixin, models.Model):
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
-    date_modification = models.DateTimeField(auto_now_add=True,
-                                             auto_now=True)
+    date_modification = models.DateTimeField(auto_now_add=True)
     ip_address = models.CharField(max_length=255, null=True, blank=True)
     language = models.CharField(max_length=5, null=True,
                                 choices=[(language, language) for language in
@@ -102,6 +105,7 @@ class Contention(DeletePreventionMixin, models.Model):
     related_nouns = models.ManyToManyField('nouns.Noun', blank=True, null=True,
                                            related_name="contentions_related")
 
+    score = models.FloatField(blank=True, null=True)
     objects = LanguageManager()
 
     class Meta:
@@ -165,6 +169,21 @@ class Contention(DeletePreventionMixin, models.Model):
     def get_absolute_url(self):
         return 'contention_detail', [self.slug]
 
+    def epoch_seconds(self, date):
+        """Returns the number of seconds from the epoch to date."""
+        td = date - epoch
+        return td.days * 86400 + td.seconds + (float(td.microseconds) / 1000000)
+
+    def calculate_score(self):
+        """The hot formula. Should match the equivalent function in postgres."""
+        s = self.premises.exclude(user__id=self.user.id).count()
+        if s < 1:
+            return 0
+        order = log(max(abs(s), 1), 10)
+        sign = 1 if s > 0 else -1 if s < 0 else 0
+        seconds = self.epoch_seconds(self.date_creation) - 1134028003
+        return round(sign * order + seconds / 45000, 7)
+
     def get_full_url(self):
         return "http://%(language)s.%(domain)s%(path)s" % {
             "language": self.language,
@@ -183,10 +202,10 @@ class Contention(DeletePreventionMixin, models.Model):
                 self.slug = "%s-%s" % (slug, uuid4().hex)
             else:
                 self.slug = slug
-
-        instance = super(Contention, self).save(*args, **kwargs)
         self.save_nouns()
-        return instance
+        if not kwargs.pop('skip_date_update', False):
+            self.date_modification = datetime.now()
+        return super(Contention, self).save(*args, **kwargs)
 
     def published_premises(self, parent=None, ignore_parent=False):
         premises = self.premises.filter(is_approved=True)
@@ -367,7 +386,7 @@ class Contention(DeletePreventionMixin, models.Model):
 
 class Premise(DeletePreventionMixin, models.Model):
     argument = models.ForeignKey(Contention, related_name="premises")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_premises')
     parent = models.ForeignKey("self", related_name="children",
                                null=True, blank=True,
                                verbose_name=_("Parent"),
@@ -467,6 +486,15 @@ class Premise(DeletePreventionMixin, models.Model):
     def published_children(self):
         return self.children.filter(is_approved=True)
 
+    def sub_tree_ids(self, current=None, children_ids=None):
+        # RETURNS ALL THE CHILD PREMISE IDS
+        current = self if current is None else current
+        children_ids = children_ids if children_ids != None else []
+        for child in current.children.all():
+            children_ids.append(child.id)
+            self.sub_tree_ids(current=child, children_ids=children_ids)
+        return children_ids
+
     def premise_class(self):
         return {
             OBJECTION: "but",
@@ -530,6 +558,16 @@ class Premise(DeletePreventionMixin, models.Model):
     def children_by_premise_type(self, premise_type=None):
         return self.published_children().filter(premise_type=premise_type)
 
+    def save_karma_tree(self):
+        for user in self.parent_users:
+            karma = user.calculate_karma()
+            user.karma = karma
+            user.save()
+
+    def save(self, *args, **kwargs):
+        self.save_karma_tree()
+        return super(Premise, self).save(*args, **kwargs)
+
     because = curry(children_by_premise_type, premise_type=SUPPORT)
     but = curry(children_by_premise_type, premise_type=OBJECTION)
     however = curry(children_by_premise_type, premise_type=SITUATION)
@@ -555,6 +593,16 @@ class Report(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.fallacy_type)
+
+
+    def save_karma(self):
+        karma = self.premise.user.calculate_karma()
+        self.premise.user.karma = karma
+        self.premise.user.save()
+
+    def save(self, *args, **kwargs):
+        self.save_karma()
+        return super(Report, self).save(*args, **kwargs)
 
     def get_actor(self):
         """
