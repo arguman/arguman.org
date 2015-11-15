@@ -90,7 +90,7 @@ class ChannelDetail(HomeView):
         contentions = (Contention
                        .objects
                        .language()
-                       .filter(is_featured=True,
+                       .filter(is_published=True,
                                nouns__in=nouns)
                        .distinct()
                        .order_by("-date_modification"))

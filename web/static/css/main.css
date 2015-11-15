@@ -3053,6 +3053,8 @@ div.load-more {
     width: 300px;
     height: 400px;
     position: absolute;
+    overflow: scroll;
+    padding-bottom: 20px;
 }
 
 .all-channels .channel-list li {
@@ -3061,8 +3063,7 @@ div.load-more {
 
 .all-channels .channel-list li a,
 .all-channels .channel-list li:first-child a {
-    padding: 10px 20px;
-    background: #FFF8B2;
+    padding: 10px 15px;
 }
 
 .all-channels .channel-list li a:hover {
