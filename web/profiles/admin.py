@@ -10,8 +10,8 @@ from profiles.models import Profile, Notification
 class ProfileAdmin(UserAdmin):
 
     list_display = ('gravatar', 'username', 'email', 'first_name',
-                    'last_name', 'is_staff')
-    ordering = ("-id", )
+                    'last_name', 'is_staff', 'karma')
+    ordering = ("-id", "karma")
 
     def gravatar(self, obj):
         return gravatar_for_user(obj)

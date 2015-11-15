@@ -19,6 +19,7 @@ from django.core.mail import send_mail
 class Profile(AbstractUser):
     following = models.ManyToManyField("self", symmetrical=False)
     notification_email = models.BooleanField(_('email notification'), default=True)
+    karma = models.IntegerField(null=True, blank=True)
 
     def serialize(self):
         return {'username': self.username,
@@ -39,6 +40,25 @@ class Profile(AbstractUser):
     @models.permalink
     def get_absolute_url(self):
         return "auth_profile", [self.username]
+
+    def calculate_karma(self):
+        # CALCULATES THE KARMA POINT OF USER
+        # ACCORDING TO HOW MANY TIMES SUPPORTED * 2
+        # DECREASE BY FALLACY COUNT * 2
+        # HOW MANY CHILD PREMISES ARE ADDED TO USER'S PREMISES
+        karma = 0
+        support_sum = self.user_premises.aggregate(Count('supporters'))
+        karma += 2 * support_sum['supporters__count']
+        main_premises = self.user_premises.all()
+        all_sub_premises = []
+        for premise in main_premises:
+            all_sub_premises += premise.sub_tree_ids()
+            karma -= 2 * (premise.reports.count())
+        not_owned_sub_premises = Premise.objects.\
+            filter(id__in=all_sub_premises).\
+            exclude(user__id=self.id).count()
+        karma += not_owned_sub_premises
+        return karma
 
 
 NOTIFICATION_ADDED_PREMISE_FOR_CONTENTION = 0
