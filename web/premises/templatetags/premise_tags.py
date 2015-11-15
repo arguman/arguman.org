@@ -18,3 +18,8 @@ def check_content_deletion(contention):
     if contention.premises.count() <= content_deletion['MAX_PREMISE_COUNT'] and last_deletion_date > timezone.now():
         return True
     return False
+
+
+@register.filter
+def percentformat(value):
+    return min(40, max(5, value))

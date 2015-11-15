@@ -164,16 +164,13 @@ class Contention(DeletePreventionMixin, models.Model):
         }
 
     def overview(self, premises):
-        supported = sum(premise['weight'] for premise in premises
+        supported = sum(premise['weight'] + 1 for premise in premises
                         if premise['premise_type'] == SUPPORT
-                        if premise['weight'] > 0)
+                        if premise['weight'] >= 0)
 
-        objected = sum(premise['weight'] for premise in premises
-                       if premise['premise_type'] == OBJECTION)
-
-        objected += sum(premise['weight'] * -1 for premise in premises
-                        if premise['premise_type'] == SUPPORT
-                        and premise['weight'] < 0)
+        objected = sum(premise['weight'] + 1 for premise in premises
+                       if premise['premise_type'] == OBJECTION
+                       if premise['weight'] >= 0)
 
         total = supported + objected
 
@@ -390,6 +387,10 @@ class Contention(DeletePreventionMixin, models.Model):
         } for noun in available_nouns]
 
         return filter(itemgetter('contentions'), serialized)
+
+    def update_premise_weights(self):
+        for child in self.published_children():
+            child.update_weight()
 
 
 class Premise(DeletePreventionMixin, models.Model):

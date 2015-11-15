@@ -643,6 +643,7 @@ class PremiseCreationView(NextURLMixin, LoginRequiredMixin, CreateView):
         form.instance.parent = self.get_parent()
         form.instance.is_approved = True
         form.instance.ip_address = get_ip_address(self.request)
+        form.instance.argument.update_premise_weights()
         form.save()
         contention.update_sibling_counts()
 
@@ -680,6 +681,11 @@ class PremiseSupportView(NextURLMixin, LoginRequiredMixin, View):
         premise.supporters.add(self.request.user)
         supported_a_premise.send(sender=self, premise=premise,
                                  user=self.request.user)
+        premise.argument.update_premise_weights()
+
+        if request.is_ajax():
+            return HttpResponse(status=201)
+
         return redirect(
             premise.get_parent().get_absolute_url() +
             self.get_next_parameter() +
@@ -694,6 +700,11 @@ class PremiseUnsupportView(PremiseSupportView):
     def delete(self, request, *args, **kwargs):
         premise = self.get_premise()
         premise.supporters.remove(self.request.user)
+        premise.argument.update_premise_weights()
+
+        if request.is_ajax():
+            return HttpResponse(status=204)
+
         return redirect(
             premise.get_parent().get_absolute_url() +
             self.get_next_parameter() + 
@@ -720,6 +731,7 @@ class PremiseDeleteView(LoginRequiredMixin, View):
         if not contention.premises.exists():
             contention.is_published = False
             contention.save()
+        contention.update_premise_weights()
         return redirect(contention)
 
     post = delete

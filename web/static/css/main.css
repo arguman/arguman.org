@@ -848,16 +848,15 @@ li.base-premises {
 }
 
 #app.tree-view {
-    margin-top: 100px;
+    margin-top: 130px;
     padding-right: 10px;
     visibility: hidden;
 }
 
 #app.tree-view .tree-contention {
-    margin-bottom: 20px;
     text-align: center;
     width: 800px;
-    margin: auto;
+    margin: auto auto 5px;
 }
 
 #app.tree-view .tree-contention h3 {
@@ -1781,7 +1780,7 @@ div.load-more {
 #keyboard-manager-info {
     position: absolute;
     left: 40px;
-    top: 170px;
+    top: 220px;
     width: 290px;
     z-index: 999;
     color: gray;
@@ -2870,4 +2869,84 @@ div.load-more {
 .noun-tooltip .argument.relation a {
     text-decoration: none;
     line-height: 0.9em;
+}
+
+
+/*
+    Timeline
+*/
+#timeline {
+    position: absolute;
+    width: 750px;
+    left: 50%;
+    margin-left: -380px;
+    top: 115px;
+    right: 0;
+    z-index: 99999;
+}
+
+#timeline .entry {
+    height: 4px;
+    display: inline-block;
+    float: left;
+    outline: none;
+}
+
+#timeline .entry:hover {
+    height: 8px;
+}
+
+#timeline .entry.but {
+    background: #ffb0a4;
+}
+#timeline .entry.however {
+    background: #fff69e;
+}
+#timeline .entry.because {
+    background: #b1ecaf;
+}
+
+
+/*
+    Tree Overview
+*/
+#tree-overview {
+    width: 750px;
+    margin-left: -380px;
+    left: 50%;
+    position: absolute;
+    top: 88px;
+    color: #7b7b7b;
+    text-align: left;
+    font-size: 1em;
+    display: none;
+}
+
+#tree-overview .support,
+#tree-overview .objection,
+#tree-overview .neutral,
+#tree-overview .last-update {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 4px 0 2px;
+    float: left;
+}
+
+#tree-overview .support {
+    color: #88c184;
+}
+
+#tree-overview .objection {
+    color: #ec8b80;
+}
+
+#tree-overview .last-update {
+    float: right;
+    color: #a3a3a3;
+}
+
+#tree-overview .last-update a {
+    color: gray;
+    text-decoration: none;
+    margin-top: 1px;
 }

@@ -1,7 +1,8 @@
 {% extends "premises/base_contention.html" %}
 {% load i18n %}
 {% load static %}
-
+{% load premise_tags %}
+{% load humanize %}
 
 {% block content %}
     <div id="keyboard-manager-info">
@@ -50,6 +51,30 @@
         {% endblocktrans %}
     </div>
 
+    <div id="timeline"></div>
+    <div id="tree-overview">
+        {% if serialized.overview.support > serialized.overview.objection %}
+        <div class="support">
+            <div class="label">%{{ serialized.overview.support|floatformat }} {% trans "support rate" %}</div>
+        </div>
+        {% endif %}
+        {% if serialized.overview.objection > serialized.overview.support %}
+        <div class="objection">
+            <div class="label">%{{ serialized.overview.objection|floatformat }} {% trans "objection rate" %}</div>
+        </div>
+        {% endif %}
+        {% if serialized.overview.objection == serialized.overview.support %}
+        <div class="neutral">
+            <div class="label">{% trans "Neutral support and objection rate." %}</div>
+        </div>
+        {% endif %}
+        <div class="last-update">
+            {% trans "last update:" %} <a
+                href="{% url "auth_profile" contention.last_user.username %}">{{ contention.last_user|lower }}</a>
+            <time datetime="{{ contention.date_modification }}">({{ contention.date_modification|naturaltime }})</time>
+        </div>
+    </div>
+
     {% if user.is_anonymous %}
     {% include "auth/login_popup.html" %}
     {% endif %}
@@ -92,15 +117,20 @@
 
     var treeView = new arguman.Tree({
         onRender: function () {
-            $(document).on('scroll', function () {
-                $("#keyboard-manager-info").hide();
-            }.bind(this));
-
-            (new arguman.KeyboardManager({
+            var navigator = new arguman.Navigator({
                 el: "#app",
                 info: "#keyboard-manager-info",
                 treeView: treeView
-            })).render();
+            });
+
+            var timeline = new arguman.Timeline({
+                treeView: treeView,
+                navigator: navigator
+            });
+
+            navigator.render();
+            timeline.render();
+
         }
     });
 

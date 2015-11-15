@@ -1,8 +1,9 @@
 {% load i18n %}
 {% load humanize %}
-<div class="premise tree-node{% if premise.is_collapsed %} too-many-fallacy{% endif %}">
+<div class="premise tree-node{% if premise.is_collapsed %} too-many-fallacy{% endif %}"
+    data-id="{{ premise.id }}" data-type="{{ premise.premise_class }}">
     <div class="premise-type {{ premise.premise_class }}">
-        {{ premise.premise_type_label }} {{ premise.load_sibling }} {{ premise.sibling_count }}
+        {{ premise.premise_type_label }}
     </div>
 
     <div class="premise-content {{ premise.premise_class }}">
@@ -80,13 +81,13 @@
             {% if premise.user.id != user.id %}
                 {% if premise.supported_by_authenticated_user %}
                     <form class="support premise-action" action="{% url "unsupport_premise" serialized.slug premise.id %}"
-                          method="post" data-contention-pk="{{ serialized.id }}" data-premise-pk="{{ premise.id }}" data-action="DELETE" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
+                          method="post" data-action="DELETE" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
                         {% csrf_token %}
                         <input type="submit" value="{% trans "undo" %}"/>
                     </form>
                 {% else %}
                     <form class="support premise-action" action="{% url "support_premise" serialized.slug premise.id %}"
-                          method="post" data-contention-pk="{{ serialized.id }}" data-premise-pk="{{ premise.id }}" data-action="POST" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
+                          method="post" data-action="POST" data-label-support="{% trans "support" %}" data-label-undo="{% trans "undo" %}">
                         {% csrf_token %}
                         <input type="submit" value="{% trans "support" %}"/>
                     </form>

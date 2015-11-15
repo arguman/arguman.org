@@ -6,7 +6,7 @@
         }
     };
 
-    arguman.KeyboardManager = Class.extend({
+    arguman.Navigator = Class.extend({
         currentElement: null,
         init: function (options) {
             $.extend(this, options);
@@ -14,7 +14,7 @@
         },
         up: function () {
             this.select(
-                this.currentElement.parent().parent(),
+                this.currentElement.parent().closest(".tree-branch"),
                 true
             )
         },
@@ -44,7 +44,7 @@
         },
         select: function (leaf, scroll) {
             if (leaf.is(".tree-branch")) {
-                if (leaf.is(".collapsed")) {
+                if (leaf.closest(".collapsed").length) {
                     this.expandNode(leaf);
                 }
                 this.$el.find(".tree-node").removeClass("focused");
@@ -153,6 +153,9 @@
         render: function () {
             this.bindEvents();
             this.setInitial();
+            setTimeout(function () {
+                $(this.info).fadeOut('slow');
+            }.bind(this), 3000);
         }
     });
 
@@ -535,7 +538,7 @@
                 partials = $('[data-load-partial]');
 
             if (!partials.length) {
-                callback();
+                return callback();
             }
 
             partials.each(function () {
@@ -657,6 +660,64 @@
         }
     });
 
+    arguman.Timeline = Class.extend({
+        el: "#timeline",
+        premises: ".tree-node",
+
+        init: function (options) {
+            $.extend(this, options);
+
+            this.$el = $(this.el);
+            this.$premises = $(this.premises);
+        },
+
+        getPremiseId: function (node) {
+            return parseInt($(node).data('id'));
+        },
+
+        sortPremises: function () {
+            var premises = this.$premises;
+            premises.sort(function (a, b) {
+                return (this.getPremiseId(a) -
+                        this.getPremiseId(b));
+            }.bind(this));
+            return premises;
+        },
+
+        selectNode: function (target) {
+            this.navigator.select(
+                $(target).closest('.tree-branch'),
+                true
+            );
+        },
+
+        render: function () {
+            var premises = this.sortPremises();
+            var width = this.$el.width() / this.$premises.length;
+
+            $(premises).each(function (i, el) {
+                var premise = $(el);
+                this.$el.append(
+                    $("<a />")
+                        .addClass("entry")
+                        .addClass(premise.data('type'))
+                        .attr({
+                            'href': '#'
+                        })
+                        .css({
+                            width: width
+                        }).
+                        on('click', function (event) {
+                            this.selectNode(premise);
+                            event.preventDefault();
+                        }.bind(this))
+                );
+            }.bind(this));
+
+            $('#tree-overview').show();
+        }
+    });
+
     $(function () {
         $(".login-popup-close").on('click', function () {
             $(this).parents('.login-popup').hide();
@@ -689,7 +750,7 @@
           var action = $this.attr('data-action');
           var labelSupport = $this.attr('data-label-support');
           var labelUndo = $this.attr('data-label-undo');
-          $.ajax('/api/v1/arguments/' + contentionPk + '/premises/' + premisePk + '/support/',
+          $.ajax($this.attr('action'),
             {
               type: action,
               headers: {
