@@ -1,4 +1,5 @@
 {% load i18n %}
+{% if channels.exists %}
 <ul class="channel-list">
    {% for item in channels %}
        {% if item.is_featured %}
@@ -17,3 +18,4 @@
        {% endfor %}
     </ul>
 </div>
+{% endif %}
