@@ -2286,8 +2286,8 @@ div.load-more {
 
 .login-popup {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
+    bottom: 60px;
+    right: 20px;
     width: 200px;
     background-color: #F7F6F6;
     padding: 10px 15px;
@@ -2695,7 +2695,7 @@ div.load-more {
     bottom: 0;
     right: 20px;
     z-index: 99999;
-    border-top: 3px solid #8a8a8a;
+    box-shadow: 0 0 4px #7b787b;
 }
 
 .recommendation-sidebar.opened,
@@ -2726,14 +2726,15 @@ div.load-more {
 }
 
 .recommendation-sidebar h2 {
-    padding: 0 15px 3px;
-    margin: 10px 0 0;
+    padding: 0 0 3px;
+    margin: 10px 15px 0;
     font-weight: normal;
     color: #888888;
     text-align: left;
     font-size: 17px;
     width: 100px;
     text-transform: uppercase;
+    text-shadow: 1px 1px #fff;
 }
 
 .recommendation-sidebar h3 {
@@ -2889,9 +2890,9 @@ div.load-more {
 */
 #timeline {
     position: absolute;
-    width: 750px;
+    width: 800px;
     left: 50%;
-    margin-left: -350px;
+    margin-left: -400px;
     top: 115px;
     right: 0;
     z-index: 99999;
@@ -2904,8 +2905,20 @@ div.load-more {
     outline: none;
 }
 
+#timeline .entry:first-child {
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+}
+
+#timeline .entry:last-child {
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
 #timeline .entry:hover {
     height: 15px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
 #timeline .entry.but {
@@ -2923,8 +2936,8 @@ div.load-more {
     Tree Overview
 */
 #tree-overview {
-    width: 750px;
-    margin-left: -350px;
+    width: 800px;
+    margin-left: -400px;
     left: 50%;
     position: absolute;
     top: 88px;

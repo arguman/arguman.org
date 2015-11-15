@@ -5,10 +5,12 @@
 {% if notifications %}
     <ul>
         {% for notification in notifications %}
+            {% if notification.get_target_object %}
             <li>
                 <time>{{ notification.date_created|naturaltime }}</time>
                 {{ notification.render }}
             </li>
+            {% endif %}
         {% endfor %}
         {% if show_see_more_button %}
             <li class="see-more"><a href="{% url "notifications" %}" class="notifications-link">{% trans "See all" %}</a></li>

@@ -456,7 +456,7 @@
                     deepestPosition + 
                     deepestPremise.height() +
                     $(".tree-contention").height() +
-                    150
+                    220
                 );
             } 
         },
@@ -736,12 +736,11 @@
             $('#keyword').trigger('focus');
         });
 
-        if (window.location.hash.indexOf('related') > -1) {
-            $('.recommendation-sidebar')
-                .mouseout(function () {
-                    $(this).removeClass('opened');
-                }).addClass('opened');
-        }
+
+        $('.recommendation-sidebar')
+            .click(function () {
+                $(this).addClass('opened');
+            });
 
         $("form.support").submit(function(event) {
           event.preventDefault();

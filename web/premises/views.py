@@ -779,6 +779,7 @@ class ReportView(NextURLMixin, LoginRequiredMixin, CreateView):
         form.instance.reporter = self.request.user
         form.save()
         reported_as_fallacy.send(sender=self, report=form.instance)
+        contention.update_premise_weights()
         return redirect(
             premise.get_parent().get_absolute_url() +
             self.get_next_parameter() +
@@ -788,8 +789,7 @@ class ReportView(NextURLMixin, LoginRequiredMixin, CreateView):
 
 class RemoveReportView(NextURLMixin, LoginRequiredMixin, View):
     def get_premise(self):
-        premises = Premise.objects.exclude(user=self.request.user)
-        return get_object_or_404(premises, pk=self.kwargs['pk'])
+        return get_object_or_404(Premise, pk=self.kwargs['pk'])
 
     def post(self, request, *args, **kwargs):
         premise = self.get_premise()
