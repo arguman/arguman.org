@@ -1,21 +1,23 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Chinese (Simplified) Translation for arguman.org
+# Copyright (c) 2014 Fatih Erikli
+# This file is distributed under the same license as the arguman.org package.
+# tvvocold <ray@fdzh.org>, 2015.
+# Mingye Wang (Arthur2e5) <arthur200126@gmail.com>, 2015.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-15 13:34+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: tvvocold <tvvocold@gmail.com>\n"
-"Language: zh-CN\n"
+"PO-Revision-Date: 2015-11-15 21:16-0500\n"
+"Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Team: Chinese (Simplified) <i18n-zh@googlegroups.com>\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #: blog/admin.py:18
 msgid "Publish selected posts"
@@ -31,7 +33,7 @@ msgstr "姓名"
 
 #: blog/models.py:22
 msgid "Slug"
-msgstr "Slug"
+msgstr "缩略名"
 
 #: blog/models.py:23
 msgid "Content"
@@ -43,19 +45,19 @@ msgstr "已发布"
 
 #: nouns/models.py:156
 msgid "is a"
-msgstr ""
+msgstr "是"
 
 #: nouns/models.py:157
 msgid "part of"
-msgstr ""
+msgstr "一部分的"
 
 #: nouns/models.py:158 nouns/models.py:182
 msgid "opposite with"
-msgstr ""
+msgstr "与之相反"
 
 #: nouns/models.py:180 nouns/models.py:181
 msgid "whole of"
-msgstr ""
+msgstr "全部的"
 
 #: premises/models.py:39 templates/index.html:17
 #: templates/premises/contention.html:6 templates/premises/thread.html:31
@@ -196,11 +198,11 @@ msgstr "论述内容"
 
 #: premises/models.py:634
 msgid "Reason"
-msgstr ""
+msgstr "原因"
 
 #: premises/models.py:635
 msgid "Please explain that why the premise is a fallacy."
-msgstr ""
+msgstr "请解释为什么前提是个谬误。"
 
 #: premises/models.py:637
 msgid "Fallacy Type"
@@ -212,7 +214,7 @@ msgstr "用户名"
 
 #: profiles/forms.py:24
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "支持 30 位以内字符。字母，数字和 @/./+/-/_"
+msgstr "必须。只支持 30 位以内字符。字母，数字和 @/./+/-/_"
 
 #: profiles/forms.py:26
 msgid "Invalid characters"
@@ -232,7 +234,7 @@ msgstr "确认密码"
 
 #: profiles/models.py:21
 msgid "email notification"
-msgstr "提醒"
+msgstr "电邮通知"
 
 #: templates/auth/login.html:7 templates/auth/login.html.py:11
 #: templates/auth/password_reset_complete.html:9
@@ -280,22 +282,22 @@ msgstr "无效的密码重置链接。"
 #: templates/auth/password_reset_done.html:8
 msgid "We have sent an email to reset your password. Please check your inbox."
 msgstr ""
-"       我们已发送密码重置邮件。请查收您的 邮箱.\n"
+"       我们已发送密码重置邮件。请查收您的收件箱.\n"
 "    "
 
 #: templates/auth/password_reset_email.html:2
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at arguman.org"
-msgstr ""
+msgstr "您收到这封电子邮件，是因为您要求重置您的 arguman.org 账户密码"
 
 #: templates/auth/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "请到以下页面，并选择一个新的密码："
 
 #: templates/auth/password_reset_email.html:8
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "您的用户名，万一忘了的话："
 
 #: templates/auth/password_reset_form.html:7
 msgid "Reset Password"
@@ -320,12 +322,12 @@ msgstr "关注"
 
 #: templates/auth/profile.html:32 templates/stats/profile.html:21
 msgid "KARMA"
-msgstr ""
+msgstr "节操"
 
 #: templates/auth/profile.html:36 templates/search/profile.html:9
 #: templates/stats/profile.html:9
 msgid "FOLLOWER"
-msgstr "关注者"
+msgstr "粉丝"
 
 #: templates/auth/profile.html:40 templates/search/profile.html:13
 #: templates/stats/profile.html:13
@@ -378,11 +380,11 @@ msgstr "论点分析平台"
 
 #: templates/base.html:7
 msgid "Argument analysis and mapping platform"
-msgstr "是一个 论点分析平台。"
+msgstr "论点分析和绘图平台。"
 
 #: templates/base.html:24
 msgid "Announcement:"
-msgstr "公告:"
+msgstr "公告："
 
 #: templates/base.html:35
 msgid "about"
@@ -402,7 +404,7 @@ msgstr "登录"
 
 #: templates/base.html:41
 msgid "new argument"
-msgstr "新的论点"
+msgstr "新建论点"
 
 #: templates/base.html:43
 msgid "logout"
@@ -414,7 +416,7 @@ msgstr "搜索关键词"
 
 #: templates/base.html:52
 msgid "Languages:"
-msgstr "语言:"
+msgstr "语言："
 
 #: templates/base.html:54
 msgid "English"
@@ -426,7 +428,7 @@ msgstr "土耳其语"
 
 #: templates/base.html:58
 msgid "Chinese"
-msgstr "中国"
+msgstr "中文"
 
 #: templates/base.html:59
 msgid "Follow on twitter:"
@@ -461,7 +463,7 @@ msgstr "是一个 <a href=\"%(about_url)s\">论点分析</a>平台。"
 
 #: templates/index.html:22 templates/premises/tree_view.html:72
 msgid "last update:"
-msgstr "最后更新"
+msgstr "最后更新："
 
 #: templates/index.html:30
 msgid "No results found."
@@ -485,12 +487,12 @@ msgstr "动态为空。"
 
 #: templates/newsfeed/contention.html:2
 msgid "created an argument:"
-msgstr "创建一个论点："
+msgstr "创建了一个论点："
 
 #: templates/newsfeed/fallacy.html:4
 #, python-format
 msgid "reported <strong>%(fallacy)s</strong> fallacy for a premise:"
-msgstr "报告此论述 <strong>%(fallacy)s</strong> 为谬误:"
+msgstr "报告此论述 <strong>%(fallacy)s</strong> 为谬误："
 
 #: templates/newsfeed/following.html:2
 #, python-format
@@ -503,7 +505,7 @@ msgstr ""
 
 #: templates/notifications.html:8
 msgid "Notifications"
-msgstr "提醒"
+msgstr "通知"
 
 #: templates/notifications/added-premise-for-contention.html:7
 #, python-format
@@ -535,7 +537,7 @@ msgstr "支持你的论述"
 
 #: templates/nouns/detail.html:37 templates/nouns/partial.html:19
 msgid "add new relation"
-msgstr ""
+msgstr "新增关系"
 
 #: templates/nouns/detail.html:50
 msgid "create an argument"
@@ -543,15 +545,15 @@ msgstr "创建一个论点："
 
 #: templates/nouns/new_relation.html:10
 msgid "New Relation"
-msgstr ""
+msgstr "新建关系"
 
 #: templates/nouns/new_relation.html:19
 msgid "Target noun (Singular)"
-msgstr ""
+msgstr "目标名词 (单数)"
 
 #: templates/nouns/new_relation.html:22
 msgid "Relation types"
-msgstr ""
+msgstr "关系类型"
 
 #: templates/nouns/new_relation.html:23
 msgid ""
@@ -559,6 +561,8 @@ msgid ""
 "types. For example <i>Organic Process</i> is the hypernym of <i>Evolution</"
 "i>.</p>"
 msgstr ""
+"<p><b>是 (单词的上位词、下义词)</b>两种类型间的子类关系。例如<i>有机过程</i>"
+"是<i>进化</i>的单词的上位词。</p>"
 
 #: templates/nouns/new_relation.html:27
 msgid ""
@@ -566,12 +570,15 @@ msgid ""
 "two types. For example <i>Natural Selection</i> is the part of <i>Evolution</"
 "i></p>"
 msgstr ""
+"<p><b>一部分的 (整体和部分)</b>两个类型之间的部分/整体关系。例如，<i>自然选择"
+"</i>是<i>进化</i>的一部分</p>"
 
 #: templates/nouns/new_relation.html:31
 msgid ""
 "<p><b>Opposite with (antonym)</b> The opposite meaning of the type. For "
 "example, <i>Evolution</i> and <i>Devolution</i></p>"
 msgstr ""
+"<p><b>与之相反 (反义词)</b>类型相反的意思。例如，<i>进化</i>和<i>退化</i></p>"
 
 #: templates/nouns/partial.html:24
 msgid "Arguments"
@@ -584,7 +591,7 @@ msgstr "查看所有"
 
 #: templates/partials/notifications.html:19
 msgid "You have no new notifications."
-msgstr "你有新的消息。"
+msgstr "你没有新的通知。"
 
 #: templates/premises/actions.html:3 templates/premises/list_view.html:13
 #: templates/premises/premise.html:74 templates/premises/thread.html:105
@@ -600,11 +607,11 @@ msgstr "删除"
 #: templates/premises/base_contention.html:27
 #: templates/premises/contention.html:11 templates/premises/premise.html:24
 msgid "sender:"
-msgstr "发送者"
+msgstr "发送者："
 
 #: templates/premises/base_contention.html:30
 msgid "original discourse:"
-msgstr "原话"
+msgstr "原表述："
 
 #: templates/premises/base_contention.html:36
 msgid "Unspecified"
@@ -672,7 +679,7 @@ msgid ""
 "<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia entry</"
 "a> for fallacies."
 msgstr ""
-"你需要选择一个谬误类型。.\n"
+"你需要选择一个谬误类型。\n"
 "关于谬误的更多信息，你可以查看\n"
 "<a href=\"https://zh.wikipedia.org/wiki/謬誤列表\">维基百科条目</a> 。"
 
@@ -696,7 +703,7 @@ msgstr ""
 msgid ""
 "Example: We define happiness as a state of well-being, starting with being "
 "alive instead of dead."
-msgstr "例如：我们定义幸福是一种好的状态，前提是 活着而不是死亡。"
+msgstr "例如：我们定义幸福是一种好的状态，前提是活着而不是死亡。"
 
 #: templates/premises/examples/premise_source.html:2
 msgid "Example: Charles Darwin's The Origin of Species"
@@ -731,7 +738,7 @@ msgstr ""
 
 #: templates/premises/list_view.html:20
 msgid "Go to parent premise"
-msgstr "父级论述："
+msgstr "转到父级论述"
 
 #: templates/premises/new_contention.html:9
 msgid "Save and continue to edit"
@@ -743,11 +750,11 @@ msgstr "父级论述："
 
 #: templates/premises/new_premise.html:27
 msgid "Characters remaining:"
-msgstr ""
+msgstr "剩余字符数："
 
 #: templates/premises/premise.html:11
 msgid "score:"
-msgstr ""
+msgstr "分数："
 
 #: templates/premises/premise.html:20 templates/premises/thread.html:67
 msgid "sources:"
@@ -758,7 +765,6 @@ msgstr "信息源："
 msgid "%(count)s fallacy reported."
 msgid_plural "%(count)s fallacies reported."
 msgstr[0] "%(count)s个谬误报告。"
-msgstr[1] "%(count)s个谬误报告。"
 
 #: templates/premises/premise.html:52 templates/premises/premise.html.py:89
 #: templates/premises/premise.html:91 templates/premises/premise.html.py:95
@@ -771,7 +777,6 @@ msgstr "取消操作"
 msgid "%(count)s supporter."
 msgid_plural "%(count)s supporters."
 msgstr[0] "%(count)s个支持者。"
-msgstr[1] "%(count)s个支持者。"
 
 #: templates/premises/premise.html:77 templates/premises/thread.html:90
 msgid "edit"
@@ -800,7 +805,7 @@ msgstr "报告谬误"
 
 #: templates/premises/thread.html:126
 msgid "open in tree view"
-msgstr ""
+msgstr "在树视图中打开"
 
 #: templates/premises/tree.html:22
 msgid "branch"
@@ -824,7 +829,7 @@ msgstr "添加论述"
 
 #: templates/premises/tree_view.html:49
 msgid "The argument is too complex. You can switch to list view."
-msgstr ""
+msgstr "该论点太复杂。您可以切换到列表视图。"
 
 #: templates/premises/tree_view.html:58
 msgid "support rate"
@@ -836,7 +841,7 @@ msgstr "反对率"
 
 #: templates/premises/tree_view.html:68
 msgid "Neutral support and objection rate."
-msgstr ""
+msgstr "中性的反对和支持率。"
 
 #: templates/premises/tree_view.html:83
 msgid "Related Arguments"
@@ -876,7 +881,7 @@ msgstr "支持"
 
 #: templates/search/search.html:7
 msgid "Keywords:"
-msgstr "关键字;"
+msgstr "关键字："
 
 #: templates/search/search.html:14
 msgid "contentions"
@@ -900,7 +905,7 @@ msgstr "最活跃的用户"
 
 #: templates/stats.html:11
 msgid "highest user karma"
-msgstr "最高的用户因果报应"
+msgstr "最高的用户节操值"
 
 #: templates/stats.html:12
 msgid "most crowded arguments"
