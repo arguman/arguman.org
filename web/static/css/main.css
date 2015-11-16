@@ -3054,7 +3054,6 @@ div.load-more {
     height: 400px;
     position: absolute;
     overflow: scroll;
-    padding-bottom: 20px;
 }
 
 .all-channels .channel-list li {
