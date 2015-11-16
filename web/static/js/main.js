@@ -756,7 +756,7 @@
                 .show()
                 .height($(document).height());
             $('.all-channels .channel-list').css({
-                left: position.left - 159,
+                left: position.left - $(this).width() - 29,
                 top: position.top + 52
             });
             event.preventDefault();
