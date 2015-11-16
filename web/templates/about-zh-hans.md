@@ -33,7 +33,9 @@ Arguman.org 是一个组织的开源项目, 如果你想贡献技术或智慧请
 - [Mehmet İnce](https://twitter.com/mdisec) (渗透测试)
 - [Samet Aydemir](https://twitter.com/samet_aydemir) ([chrome 插件](https://chrome.google.com/webstore/detail/arguman/infgfejecdecnalkcjfemcibiponjban/related?hl=tr))
 - [Çağlar Bozkurt](http://caglarbozkurt.com) (安卓开发者)
-- [Ray](https://github.com/tvvocold) （中文本土化志愿者）
+- 中文（中国）本地化志愿译者：
+  - [Ray](https://github.com/tvvocold)
+  - [王铭烨](https://about.me/Arthur2e5)
 
 一并感谢在开发 arguman.org 过程中做出贡献的 Burak Arıkan 和 Kadir Akkara.
 
