@@ -2,13 +2,14 @@
 {% load i18n %}
 
 {% block tab_content %}
-
 <div class="stats-content">
     <h2>{% trans "Statistics" %}</h2>
     <div class="stats-sidebar">
         <ul>
+            {% if not community %}
             <li{% if stats_type == "active_users" %} class="active"{% endif %}><a href="?what=active_users">{% trans "most active users" %}</a></li>
             <li{% if stats_type == "user_karma" %} class="active"{% endif %}><a href="?what=user_karma">{% trans "highest user karma" %}</a></li>
+            {% endif %}
             <li{% if stats_type == "crowded_contentions" %} class="active"{% endif %}><a href="?what=crowded_contentions">{% trans "most crowded arguments" %}</a></li>
             <li{% if stats_type == "supported_premises" %} class="active"{% endif %}><a href="?what=supported_premises">{% trans "most supported premises" %}</a></li>
             <li{% if stats_type == "fallacy_premises" %} class="active"{% endif %}><a href="?what=fallacy_premises">{% trans "most fallacy premises" %}</a></li>

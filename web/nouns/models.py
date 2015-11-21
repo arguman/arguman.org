@@ -209,6 +209,7 @@ class Channel(models.Model):
     order = models.IntegerField()
     language = models.CharField(max_length=255, blank=True, null=True)
     is_featured = models.BooleanField(max_length=255, default=False)
+    community = models.ForeignKey('communities.Community', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

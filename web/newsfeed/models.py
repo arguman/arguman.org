@@ -138,6 +138,7 @@ class EntryManager(object):
                     .sort([("date_created", -1)])
                     .skip(offset)
                     .limit(limit))
+
         return map(Entry, newsfeed)
 
     def get_newsfeed_of(self, user, offset, limit):

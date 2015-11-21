@@ -20,6 +20,7 @@ from django.db.models import Count
 from django.shortcuts import render
 
 from blog.models import Post
+from communities.mixins import CommunityMixin
 from premises.models import Contention, Premise
 from premises.forms import (ArgumentCreationForm, PremiseCreationForm,
                             PremiseEditForm, ReportForm)
@@ -159,7 +160,7 @@ class ContentionJsonView(DetailView):
         return result['max_sibling'] <= 1
 
 
-class HomeView(TemplateView, PaginationMixin):
+class HomeView(CommunityMixin, TemplateView, PaginationMixin):
     template_name = "index.html"
     tab_class = "featured"
 
@@ -204,6 +205,8 @@ class HomeView(TemplateView, PaginationMixin):
                        .filter(is_featured=True)
                        .order_by("-date_modification"))
 
+        contentions = self.apply_community_filter(contentions)
+
         if paginate:
             contentions = (contentions[self.get_offset(): self.get_limit()])
 
@@ -211,6 +214,7 @@ class HomeView(TemplateView, PaginationMixin):
 
     def get_channels(self):
         return Channel.objects.filter(
+            community=self.request.community,
             language=normalize_language_code(get_language())
         ).order_by('order')
 
@@ -233,16 +237,16 @@ class SearchView(HomeView):
     partial_templates = {
         'contentions': 'search/contention.html',
         'users': 'search/profile.html',
-        'premises' : 'search/premise.html'
+        'premises': 'search/premise.html'
     }
 
     method_mapping = {'contentions': "get_contentions",
                       'users': "get_users",
                       'premises': "get_premises"}
 
-
     def dispatch(self, request, *args, **kwargs):
         self.type = request.GET.get('type', 'contentions')
+
         if not self.method_mapping.get(self.type):
             raise Http404()
         return super(SearchView, self).dispatch(request, *args, **kwargs)
@@ -265,7 +269,6 @@ class SearchView(HomeView):
             results=self.get_search_bundle(),
             **kwargs)
 
-
     def get_next_page_url(self):
         offset = self.get_offset() + self.paginate_by
         return '?offset=%(offset)s&keywords=%(keywords)s&type=%(type)s' % {
@@ -280,12 +283,12 @@ class SearchView(HomeView):
             result = Premise.objects.none()
         else:
             result = (Premise.objects.filter(
+                argument__community=self.request.community,
                 argument__language=normalize_language_code(get_language()),
                 text__contains=keywords))
             if paginate:
                 result = result[self.get_offset():self.get_limit()]
         return result
-
 
     def get_users(self, paginate=True):
         keywords = self.request.GET.get('keywords')
@@ -298,7 +301,6 @@ class SearchView(HomeView):
                 result = result[self.get_offset():self.get_limit()]
         return result
 
-
     def get_contentions(self, paginate=True):
         keywords = self.request.GET.get('keywords')
         if not keywords or len(keywords) < 2:
@@ -308,6 +310,8 @@ class SearchView(HomeView):
                       .objects
                       .filter(title__icontains=keywords,
                               language=normalize_language_code(get_language())))
+
+            result = self.apply_community_filter(result)
 
             if paginate:
                 result = result[self.get_offset():self.get_limit()]
@@ -326,6 +330,8 @@ class NewsView(HomeView):
                 .filter(is_published=True)
                 .order_by('-date_modification')
         )
+
+        contentions = self.apply_community_filter(contentions)
 
         if paginate:
             contentions = contentions[self.get_offset():self.get_limit()]
@@ -423,6 +429,7 @@ class StatsView(HomeView):
         return Premise.objects.annotate(
             supporter_count=Sum("supporters")
         ).filter(
+            argument__community=self.request.community,
             argument__language=get_language(),
             supporter_count__gt=0,
             **self.build_time_filters(date_field="date_creation")
@@ -432,6 +439,7 @@ class StatsView(HomeView):
         return Premise.objects.annotate(
             report_count=Sum("reports"),
         ).filter(
+            argument__community=self.request.community,
             report_count__gt=0,
             **self.build_time_filters(date_field="date_creation")
         ).order_by("-report_count")[:10]
@@ -440,6 +448,7 @@ class StatsView(HomeView):
         return Contention.objects.annotate(
             premise_count=Sum("premises"),
         ).filter(
+            community=self.request.community,
             language=normalize_language_code(get_language()),
             premise_count__gt=0,
             **self.build_time_filters(date_field="date_creation")
@@ -454,6 +463,8 @@ class UpdatedArgumentsView(HomeView):
                        .objects
                        .filter(is_published=True)
                        .order_by('-date_modification'))
+
+        contentions = self.apply_community_filter(contentions)
 
         if paginate:
             contentions = contentions[self.get_offset():self.get_limit()]
@@ -471,6 +482,9 @@ class ControversialArgumentsView(HomeView):
                        .annotate(num_children=Count('premises'))
                        .order_by('-num_children')
                        .filter(date_modification__gte=last_week))
+
+        contentions = self.apply_community_filter(contentions)
+
         if paginate:
             return contentions[self.get_offset():self.get_limit()]
 
@@ -482,6 +496,10 @@ class AboutView(TemplateView):
 
     def get_text_file(self):
         language = get_language()
+
+        if self.request.community:
+            return self.request.community.about
+
         return render_to_string("about-%s.md" % language)
 
     def get_context_data(self, **kwargs):
@@ -493,8 +511,14 @@ class AboutView(TemplateView):
 class TosView(TemplateView):
     template_name = "tos.html"
 
+    def get_text_file(self):
+        if self.request.community:
+            return self.request.community.about
+
+        return render_to_string("tos.md")
+
     def get_context_data(self, **kwargs):
-        content = markdown(render_to_string("tos.md"))
+        content = markdown(self.get_text_file())
         return super(TosView, self).get_context_data(
             content=content, **kwargs)
 

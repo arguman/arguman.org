@@ -44,6 +44,8 @@ INSTALLED_APPS = (
     'django_gravatar',
     'rest_framework',
     'rest_framework.authtoken',
+
+    'communities',
     'profiles',
     'premises',
     'nouns',
@@ -177,7 +179,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.core.context_processors.request",
-    "django.contrib.messages.context_processors.messages")
+    "django.contrib.messages.context_processors.messages",
+    "communities.context_processors.community"
+)
 
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'

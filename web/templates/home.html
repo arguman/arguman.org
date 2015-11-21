@@ -7,8 +7,12 @@
 {% endif %}
 
 <div class="landing">
+    {% if community %}
+        {{ community.description }}
+    {% else %}
     {% url "about" as about_url %}
-    {% blocktrans trimmed %}
-    arguman.org is an <a href="{{ about_url }}">argument analysis</a> platform.
-    {% endblocktrans %}
+        {% blocktrans trimmed %}
+        arguman.org is an <a href="{{ about_url }}">argument analysis</a> platform.
+        {% endblocktrans %}
+    {% endif %}
 </div>

@@ -97,6 +97,7 @@ class Contention(DeletePreventionMixin, models.Model):
                                            related_name="contentions_related")
 
     score = models.FloatField(blank=True, null=True)
+    community = models.ForeignKey('communities.Community', blank=True, null=True)
     objects = LanguageManager()
 
     class Meta:

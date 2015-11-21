@@ -3,6 +3,8 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.utils.translation import get_language_from_request
 
+from communities.models import Community
+
 
 class SubdomainLanguageMiddleware(object):
     """
@@ -36,14 +38,29 @@ class SubdomainLanguageMiddleware(object):
         mapping = settings.LANGUAGE_CODE_MAPPING
         return mapping.get(code, code)
 
+    def get_community(self, subdomain):
+        try:
+            community = Community.objects.get(name=subdomain)
+        except Community.DoesNotExist:
+            community = None
+
+        return community
+
     def process_request(self, request):
         host = request.get_host().split('.')
         language = host[0]
+        request.community = None
 
         if settings.PREVENT_LANGUAGE_REDIRECTION:
             language = settings.DEFAULT_LANGUAGE
+
         elif language not in self.LANGUAGES:
-            return self.redirect_homepage(request)
+            request.community = self.get_community(language)
+
+            if not request.community:
+                return self.redirect_homepage(request)
+
+            language = request.community.language
 
         language_code = self.get_language_code(language)
 
