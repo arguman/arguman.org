@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+  <section class="container form-section">
+      <form action="{% url "community_membership_confirm" %}" method="post">
+          {% csrf_token %}
+          <h3>
+              {% blocktrans trimmed with community_name=request.community.name %}
+                  You are joining {{ community_name }} community.
+              {% endblocktrans %}
+          </h3>
+          {% if community.terms_of_service %}
+          <div class="terms-of-service">
+              {{ community.terms_of_service|linebreaks }}
+          </div>
+          {% endif %}
+          <input class="btn confirm" type="submit" value="Confirm">
+          <p class="note">
+              {% blocktrans trimmed with community_name=request.community.name %}
+                  By confirming, you agree to the terms of service of {{ community_name }} community.
+              {% endblocktrans %}
+          </p>
+      </form>
+  </section>
+{% endblock %}

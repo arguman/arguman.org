@@ -545,6 +545,7 @@ class ArgumentCreationView(LoginRequiredMixin, CreateView):
         form.instance.ip_address = get_ip_address(self.request)
         form.instance.language = normalize_language_code(get_language())
         form.instance.is_published = True
+        form.instance.community = self.request.community
         response = super(ArgumentCreationView, self).form_valid(form)
         form.instance.update_sibling_counts()
         form.instance.save_nouns()

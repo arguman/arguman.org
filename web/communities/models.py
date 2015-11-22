@@ -27,9 +27,52 @@ class Community(models.Model):
     def __unicode__(self):
         return smart_unicode(self.name)
 
+    def is_restricted(self):
+        return self.community_type == 'restricted'
+
+    def is_private(self):
+        return self.community_type == 'private'
+
+    def is_public(self):
+        return self.community_type == 'public'
+
+    def get_membership(self, user):
+        try:
+            return self.memberships.get(user=user)
+        except Membership.DoesNotExist:
+            return
+
+    def is_member(self, user):
+        return bool(self.get_membership(user))
+
+    def add_member(self, user):
+        membership = self.get_membership(user)
+
+        if membership:
+            return membership
+
+        return self.memberships.create(
+            user=user,
+            is_active=True,
+            is_owner=False,
+            can_create_argument=not self.is_restricted,
+            can_create_premise=not self.is_restricted
+        )
+
+    def user_can_create_argument(self, user):
+        membership = self.get_membership(user)
+
+        if not membership:
+            return False
+
+        if self.is_restricted():
+            return membership.can_create_argument
+
+        return True
+
 
 class Membership(models.Model):
-    community = models.ForeignKey(Community)
+    community = models.ForeignKey(Community, related_name="memberships")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="memberships")
     is_active = models.BooleanField(default=True)
     is_owner = models.BooleanField(default=False)

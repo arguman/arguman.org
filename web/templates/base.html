@@ -38,7 +38,9 @@
             <li><a href="{% url "auth_registration" %}">{% trans "register" %}</a></li>
             <li><a href="{% url "auth_login" %}">{% trans "login" %}</a></li>
             {% else %}
-            <li><a class="new-argument-link" href="{% url "new_argument" %}">{% trans "new argument" %}</a></li>
+                {% if user_can_create_argument %}
+                <li><a class="new-argument-link" href="{% url "new_argument" %}">{% trans "new argument" %}</a></li>
+                {% endif %}
             <li><a class="username" href="{% url "auth_profile" user.username %}">{{ user.username|truncatechars:14 }}</a>
                 (<a href="{% url "auth_logout" %}">{% trans "logout" %}</a>)</li>
             {% endif %}

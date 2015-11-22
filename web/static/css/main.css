@@ -3078,3 +3078,40 @@ div.load-more {
     top: 0;
     left: 0;
 }
+
+.btn {
+    font-size: 0.7em;
+}
+
+p.note {
+    font-size: 0.5em;
+}
+
+.terms-of-service {
+    max-height: 250px;
+    overflow: scroll;
+    font-size: 0.7em;
+    padding: 5px;
+    background: #f6f6f6;
+    border-bottom: 1px solid #b2b2b2;
+    margin: 10px 0 0;
+}
+
+.terms-of-service p {
+    margin: 0;
+    padding: 10px;
+}
+
+section.form-section {
+    margin-top: -5px;
+}
+
+section.form-section form h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+}
+
+section.form-section .confirm {
+    margin: 20px 0 0;
+}

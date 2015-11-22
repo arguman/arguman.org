@@ -1,5 +1,6 @@
 from django.contrib.auth import logout, login, authenticate
 from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 from django.views.generic import (
     FormView, CreateView, RedirectView, DetailView, UpdateView)
 from django.db.models import Q
@@ -18,14 +19,17 @@ class RegistrationView(CreateView):
     template_name = "auth/register.html"
 
     def form_valid(self, form):
-        response = super(RegistrationView, self).form_valid(form)
+        form.save()
         user = authenticate(username=form.cleaned_data["username"],
                             password=form.cleaned_data["password1"])
-        login(self.request, user)
-        return response
 
-    def get_success_url(self):
-        return reverse("home")
+        login(self.request, user)
+
+        if self.request.community:
+            if not self.request.community.is_member(user):
+                return redirect(reverse('community_membership_confirm'))
+
+        return redirect(reverse('home'))
 
 
 class LoginView(FormView):
@@ -37,6 +41,10 @@ class LoginView(FormView):
         return super(LoginView, self).form_valid(form)
 
     def get_success_url(self):
+        if self.request.community:
+            if not self.request.community.get_membership(self.request.user):
+                return reverse('community_membership_confirm')
+
         return self.request.GET.get("next") or reverse("home")
 
     def get_context_data(self, **kwargs):
