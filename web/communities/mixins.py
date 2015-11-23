@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from communities.models import Community
 
 
@@ -18,3 +19,11 @@ class CommunityMixin(object):
             return queryset.filter(community=community)
 
         return queryset
+
+    def dispatch(self, request, *args, **kwargs):
+        community = request.community
+
+        if community.user_can_view(request.user):
+            return super(CommunityMixin, self).dispatch(request, *args, **kwargs)
+
+        return render('communities/requires_membership.html')

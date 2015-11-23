@@ -70,6 +70,12 @@ class Community(models.Model):
 
         return True
 
+    def user_can_view(self, user):
+        if self.is_private():
+            return self.is_member(user)
+
+        return True
+
 
 class Membership(models.Model):
     community = models.ForeignKey(Community, related_name="memberships")
