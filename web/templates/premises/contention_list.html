@@ -15,7 +15,6 @@
             <div class="info">
                 <h3><a class="main-contention {{ overview.status }}" href="{{ contention.get_absolute_url }}">{{ contention.title|widont }}</a></h3>
                 <div class="overview">
-{#                    <a href="{% url "auth_profile" contention.last_user.username %}">{{ contention.last_user|lower }}</a>#}
                     <div class="rate {{ overview.status }}">
                         {% if overview.status == 'objected' %}
                             %{{ overview.objection|floatformat }} {% trans "objection rate" %}

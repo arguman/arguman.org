@@ -101,19 +101,7 @@ p + br {
     display: inline-block;
     font-size: 40px;
     padding-bottom: 4px;
-    border-bottom: 3px solid #e3e3e5;
-}
-
-.argument-list li a.objected {
-    border-color: #fab1ae;
-}
-
-.argument-list li a.supported {
-    border-color: #b4dca9;
-}
-
-.argument-list li a.neutral {
-    border-color: #eee9e7;
+    border-bottom: 3px solid #eee9e7;
 }
 
 .argument-list li .main-contention:before {
@@ -138,7 +126,7 @@ p + br {
 }
 
 .argument-list li .main-contention.neutral:before {
-    background: #eee9e7;
+
 }
 
 .argument-list .overview {
@@ -150,6 +138,10 @@ p + br {
 
 .argument-list .overview {
     overflow: hidden;
+}
+
+.argument-list .overview .rate {
+    margin-left: 2px;
 }
 
 .argument-list .overview .user {
@@ -199,7 +191,7 @@ p + br {
     float: left;
     width: 600px;
     border-left: 2px solid #f2f2f4;
-    padding: 20px 20px 30px 20px;
+    padding: 20px 20px 10px 20px;
 }
 
 header {
