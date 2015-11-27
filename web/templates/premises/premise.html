@@ -107,9 +107,7 @@
         </div>
     {% endif %}
     <div class="share">
-        {% trans "share:" %}
-        <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ serialized.full_url }}/{{ premise.id }}" class="tree-view active"> <img width="10" height="10" src="{% static "img/facebook.svg" %}" /> </a>
-        <a target="_blank" href="http://twitter.com/home?status={{ serialized.title }} {{ serialized.full_url }}/{{ premise.id }}" class="list-view"> <img width="10" height="10" src="{% static "img/twitter.svg" %}" /> </a>
+        <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ serialized.full_url }}/{{ premise.id }}" class="tree-view active"> permalink</a>
     </div>
 
 </div>

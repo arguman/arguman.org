@@ -312,7 +312,7 @@ form textarea {
 
 .premise .share {
     position: absolute;
-    margin-top: 5px;
+    margin-top: 3px;
     margin-left: 10px;
     display: none;
     font-size: 12px;
@@ -321,6 +321,7 @@ form textarea {
 
 .premise .share a {
     opacity: 0.7;
+    color: #c8c8c8;
 }
 
 .story .because {
@@ -2270,7 +2271,7 @@ div.load-more {
 
 .login-popup {
     position: fixed;
-    bottom: 60px;
+    bottom: 20px;
     right: 20px;
     width: 200px;
     background-color: #F7F6F6;
