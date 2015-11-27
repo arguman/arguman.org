@@ -66,7 +66,11 @@ class RelationCreate(LoginRequiredMixin, CreateView):
             noun=noun, **kwargs)
 
     def get_noun(self):
-        return get_object_or_404(Noun, slug=self.kwargs.get('slug'))
+        return get_object_or_404(
+            Noun,
+            slug=self.kwargs.get('slug'),
+            language=normalize_language_code(get_language())
+        )
 
 
 class ChannelDetail(HomeView):

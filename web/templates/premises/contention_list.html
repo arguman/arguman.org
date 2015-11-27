@@ -1,21 +1,45 @@
 {% load i18n %}
 {% load humanize %}
+{% load gravatar  %}
+{% load typogrify_tags %}
+
 <ul class="argument-list">
     {% for contention in contentions %}
+        {% with overview=contention.overview but=contention.but.count however=contention.however.count because=contention.because.count %}
         <li>
             <div class="stats">
-                <span class="because">{{ contention.because.count }} {% trans "because" %}</span>
-                <span class="but">{{ contention.but.count }} {% trans "but" %}</span>
-                <span class="however">{{ contention.however.count }} {% trans "however" %}</span>
+                <span class="because">{{ because }} {% trans "because" %}</span>
+                <span class="but">{{ but }} {% trans "but" %}</span>
+                <span class="however">{{ however }} {% trans "however" %}</span>
             </div>
             <div class="info">
-                <h3><a class="main-contention" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a></h3>
-                <div class="user">{% trans "last update:" %} <a
-                        href="{% url "auth_profile" contention.last_user.username %}">{{ contention.last_user|lower }}</a>
-                    <time datetime="{{ contention.date_modification }}">({{ contention.date_modification|naturaltime }})</time>
+                <h3><a class="main-contention {{ overview.status }}" href="{{ contention.get_absolute_url }}">{{ contention.title|widont }}</a></h3>
+                <div class="overview">
+{#                    <a href="{% url "auth_profile" contention.last_user.username %}">{{ contention.last_user|lower }}</a>#}
+                    <div class="rate {{ overview.status }}">
+                        {% if overview.status == 'objected' %}
+                            %{{ overview.objection|floatformat }} {% trans "objection rate" %}
+                        {% endif %}
+                        {% if overview.status == 'supported' %}
+                            %{{ overview.support|floatformat }} {% trans "support rate" %}
+                        {% endif %}
+                        {% if overview.status == 'neutral' %}
+                            {% trans "Neutral support and objection rate." %}
+                        {% endif %}
+                    </div>
+                    <div class="user">
+                        {% with last_user=contention.last_user %}
+                            <a href="{% url "auth_profile" last_user.username %}">
+                                {% gravatar last_user 50 last_user.username %}
+                                <span>{{ last_user.username|lower }}</span>
+                            </a>
+                        {% endwith %}
+                        <time datetime="{{ contention.date_modification }}">({{ contention.date_modification|naturaltime }})</time>
+                    </div>
                 </div>
             </div>
         </li>
+        {% endwith %}
     {% empty %}
         {% if keywords %}
             <li>{% trans "No results found." %}</li>

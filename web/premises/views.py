@@ -68,12 +68,23 @@ class ContentionDetailView(DetailView):
             self.request.user.is_superuser or
             self.request.user.is_staff or
             contention.user == self.request.user)
+
+        parent = self.get_parent()
+        serialized = contention.serialize(self.request.user)
+        description = contention.title
+
+        if parent:
+            description = parent.text
+        elif serialized['premises']:
+            description = serialized['premises'][0]['text']
+
         return super(ContentionDetailView, self).get_context_data(
             premises=self.get_premises(),
-            parent_premise=self.get_parent(),
+            parent_premise=parent,
+            description=description,
             path=contention.get_absolute_url(),
             edit_mode=edit_mode,
-            serialized=contention.serialize(self.request.user),
+            serialized=serialized,
             **kwargs)
 
     def get(self, request, *args, **kwargs):
@@ -81,10 +92,10 @@ class ContentionDetailView(DetailView):
         host = request.META['HTTP_HOST']
 
         if not host.startswith(settings.AVAILABLE_LANGUAGES):
-            return redirect(self.object.get_full_url())
+            return redirect(self.object.get_full_url(), permanent=True)
 
         if not normalize_language_code(get_language()) == self.object.language:
-            return redirect(self.object.get_full_url())
+            return redirect(self.object.get_full_url(), permanent=True)
 
         partial = request.GET.get('partial')
         level = request.GET.get('level')
@@ -407,9 +418,10 @@ class StatsView(HomeView):
         ).order_by("-premise_count")[:10]
 
     def get_user_karma(self):
-        return Profile.objects.\
-                   filter(**self.build_time_filters(date_field="user_premises__date_creation")).\
-                   order_by("-karma", "id").distinct()[:10]
+        return Profile.objects.filter(
+            karma__gt=0,
+            **self.build_time_filters(date_field="user_premises__date_creation")
+        ).order_by("-karma", "id").distinct()[:10]
 
     def get_disgraced_users(self):
         return Profile.objects.annotate(
@@ -543,6 +555,7 @@ class ArgumentUpdateView(LoginRequiredMixin, UpdateView):
         form.instance.update_sibling_counts()
         form.instance.nouns.clear()
         form.instance.save_nouns()
+        form.instance.update_premise_weights()
         form.instance.save()
         return response
 
@@ -668,7 +681,7 @@ class PremiseCreationView(NextURLMixin, LoginRequiredMixin, CreateView):
         contention.save()
 
         return redirect(
-            form.instance.get_parent().get_absolute_url() +
+            form.instance.get_absolute_url() +
             self.get_next_parameter()
         )
 

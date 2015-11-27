@@ -20,10 +20,8 @@
         </div>
         <div class="tree-contention-actions">
             {% if user.is_authenticated %}
-            <a class="new-main-premise" 
-               href="{% url "new_premise" contention.slug %}">
-                    {% trans "add premise" %}
-            </a>
+            <a href="{% url "contention_edit" serialized.slug %}">{% trans "edit" %}</a>
+            <a href="{% url "new_premise" contention.slug %}">{% trans "add premise" %}</a>
             {% endif %}
         </div>
         <div class="root">
@@ -84,27 +82,24 @@
     {% endif %}
     {% if contention.related_contentions %}
         <div class="recommendation-sidebar">
-            <h2>{% trans "Related Arguments" %}</h2>
-            <div class="scroll-area">
-                {% for relation in contention.related_contentions %}
-                    <h3>
-                        <a href="{{ relation.noun.get_absolute_url }}">
-                            {{ relation.noun }}
-                            <span>
-                            {% with hypernym=relation.noun.hypernyms.first %}
-                                {{ hypernym.relation_type_label }}
-                                {{ hypernym.target }}
-                            {% endwith %}
-                            </span>
-                        </a>
-                    </h3>
-                    <ul>
-                        {% for contention in relation.contentions %}
-                            <li><a href="{% url "contention_detail" contention.slug %}#related">{{ contention.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                {% endfor %}
-            </div>
+            {% for relation in contention.related_contentions %}
+                <h3>
+                    <a href="{{ relation.noun.get_absolute_url }}">
+                        {{ relation.noun }}
+                        <span>
+                        {% with hypernym=relation.noun.hypernyms.first %}
+                            {{ hypernym.relation_type_label }}
+                            {{ hypernym.target }}
+                        {% endwith %}
+                        </span>
+                    </a>
+                </h3>
+                <ul>
+                    {% for contention in relation.contentions %}
+                        <li><a href="{% url "contention_detail" contention.slug %}#related">{{ contention.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
         </div>
     {% endif %}
 {% endblock %}

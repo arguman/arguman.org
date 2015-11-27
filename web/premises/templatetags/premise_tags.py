@@ -1,3 +1,4 @@
+from operator import itemgetter
 from django.template.defaulttags import register
 from premises.models import FALLACY_TYPES
 from django.conf import settings

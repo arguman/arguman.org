@@ -85,6 +85,7 @@ class Contention(DeletePreventionMixin, models.Model):
         help_text=render_to_string("premises/examples/sources.html"))
     is_featured = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
+    is_public = models.BooleanField(default=True)
     date_creation = models.DateTimeField(auto_now_add=True)
     date_modification = models.DateTimeField(auto_now_add=True)
     ip_address = models.CharField(max_length=255, null=True, blank=True)
@@ -158,7 +159,11 @@ class Contention(DeletePreventionMixin, models.Model):
             'date_creation': self.date_creation
         }
 
-    def overview(self, premises):
+    def overview(self, premises=None, show_percent=True):
+
+        if premises is None:
+            premises = self.published_children().values('weight', 'premise_type')
+
         supported = sum(premise['weight'] + 1 for premise in premises
                         if premise['premise_type'] == SUPPORT
                         if premise['weight'] >= 0)
@@ -169,15 +174,24 @@ class Contention(DeletePreventionMixin, models.Model):
 
         total = supported + objected
 
-        if total > 0:
+        if supported > objected:
+            status = 'supported'
+        elif supported < objected:
+            status = 'objected'
+        else:
+            status = 'neutral'
+
+        if total > 0 and show_percent:
             return {
                 'support': 100 * float(supported) / total,
                 'objection': 100 * float(objected) / total,
+                'status': status
             }
 
         return {
             'support': supported,
-            'objection': objected
+            'objection': objected,
+            'status': status
         }
 
     @models.permalink
@@ -217,9 +231,10 @@ class Contention(DeletePreventionMixin, models.Model):
                 self.slug = "%s-%s" % (slug, uuid4().hex)
             else:
                 self.slug = slug
-        self.save_nouns()
+
         if not kwargs.pop('skip_date_update', False):
             self.date_modification = datetime.now()
+
         return super(Contention, self).save(*args, **kwargs)
 
     def published_premises(self, parent=None, ignore_parent=False):
@@ -401,6 +416,24 @@ class Contention(DeletePreventionMixin, models.Model):
     def update_premise_weights(self):
         for child in self.published_children():
             child.update_weight()
+
+    def channel(self):
+        from nouns.models import Channel
+
+        if self.related_nouns.exists():
+            nouns = self.related_nouns.all()
+        else:
+            nouns = self.nouns.all()
+
+        if not nouns:
+            return
+
+        channel = Channel.objects.filter(
+            nouns__in=nouns,
+            language=normalize_language_code(get_language())
+        ).first()
+
+        return channel
 
 
 class Premise(DeletePreventionMixin, models.Model):
