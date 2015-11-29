@@ -696,6 +696,8 @@ class Report(models.Model):
 
     def get_newsfeed_bundle(self):
         return {
+            "language": self.contention.language,
+            "reason": self.reason,
             "fallacy_type": self.fallacy_type,
             "premise": self.premise.get_newsfeed_bundle(),
             "contention": self.contention.get_newsfeed_bundle()
