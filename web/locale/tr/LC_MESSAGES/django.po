@@ -945,7 +945,7 @@ msgstr "Seçilmişler"
 
 #: templates/tabs.html:8
 msgid "New"
-msgstr ""
+msgstr "Yeniler"
 
 #~ msgid "You have no new notifications."
 #~ msgstr "Hiç yeni bildiriminiz yok."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-15 13:34+0000\n"
+"POT-Creation-Date: 2015-11-29 05:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: tvvocold <tvvocold@gmail.com>\n"
 "Language: zh-CN\n"
@@ -37,172 +37,186 @@ msgstr "Slug"
 msgid "Content"
 msgstr "内容"
 
-#: blog/models.py:26 premises/models.py:435
+#: blog/models.py:26 premises/models.py:465
 msgid "Published"
 msgstr "已发布"
 
-#: nouns/models.py:156
+#: nouns/models.py:166
 msgid "is a"
 msgstr ""
 
-#: nouns/models.py:157
+#: nouns/models.py:167
 msgid "part of"
 msgstr ""
 
-#: nouns/models.py:158 nouns/models.py:182
+#: nouns/models.py:168 nouns/models.py:192
 msgid "opposite with"
 msgstr ""
 
-#: nouns/models.py:180 nouns/models.py:181
+#: nouns/models.py:190 nouns/models.py:191
 msgid "whole of"
 msgstr ""
 
-#: premises/models.py:39 templates/index.html:17
-#: templates/premises/contention.html:6 templates/premises/thread.html:31
+#: premises/forms.py:33
+msgid "You should write a premise or link an argument."
+msgstr ""
+
+#: premises/models.py:40 templates/premises/contention.html:6
+#: templates/premises/contention_list.html:12 templates/premises/thread.html:31
 msgid "but"
 msgstr "但是"
 
-#: premises/models.py:40 templates/index.html:16
-#: templates/premises/contention.html:5 templates/premises/thread.html:36
+#: premises/models.py:41 templates/premises/contention.html:5
+#: templates/premises/contention_list.html:11 templates/premises/thread.html:36
 msgid "because"
 msgstr "因为"
 
-#: premises/models.py:41 templates/index.html:18
-#: templates/premises/contention.html:7 templates/premises/thread.html:41
+#: premises/models.py:42 templates/premises/contention.html:7
+#: templates/premises/contention_list.html:13 templates/premises/thread.html:41
 msgid "however"
 msgstr "然而"
 
-#: premises/models.py:45
+#: premises/models.py:46
 msgid "Begging The Question"
 msgstr "乞求论点"
 
-#: premises/models.py:46
+#: premises/models.py:47
 msgid "Irrelevant Conclusion"
 msgstr "不相关的结论"
 
-#: premises/models.py:47
+#: premises/models.py:48
 msgid "Fallacy Of Irrelevant Purpose"
 msgstr "不相关的谬误"
 
-#: premises/models.py:48
+#: premises/models.py:49
 msgid "Fallacy Of Red Herring"
 msgstr "烟雾弹"
 
-#: premises/models.py:49
+#: premises/models.py:50
 msgid "Argument Against TheMan"
 msgstr "诉诸人身"
 
-#: premises/models.py:50
+#: premises/models.py:51
 msgid "Poisoning The Well"
 msgstr "扣帽子"
 
-#: premises/models.py:51
+#: premises/models.py:52
 msgid "Fallacy Of The Beard"
 msgstr "连续体谬误"
 
-#: premises/models.py:52
+#: premises/models.py:53
 msgid "Fallacy Of Slippery Slope"
 msgstr "滑坡谬误"
 
-#: premises/models.py:53
+#: premises/models.py:54
 msgid "Fallacy Of False Cause"
 msgstr "虚假原因谬误"
 
-#: premises/models.py:54
+#: premises/models.py:55
 msgid "Fallacy Of Previous This"
 msgstr "先前的谬误"
 
-#: premises/models.py:55
+#: premises/models.py:56
 msgid "Joint Effect"
 msgstr "联合效应"
 
-#: premises/models.py:56
+#: premises/models.py:57
 msgid "Wrong Direction"
 msgstr "因果倒置"
 
-#: premises/models.py:57
+#: premises/models.py:58
 msgid "False Analogy"
 msgstr "错误类比"
 
-#: premises/models.py:58
+#: premises/models.py:59
 msgid "Slothful Induction"
 msgstr "懒于归纳"
 
-#: premises/models.py:59
+#: premises/models.py:60
 msgid "Appeal To Belief"
 msgstr "诉诸信念"
 
-#: premises/models.py:60
+#: premises/models.py:61
 msgid "Pragmatic Fallacy"
 msgstr "语用谬误"
 
-#: premises/models.py:61
+#: premises/models.py:62
 msgid "Fallacy Of Is To Ought"
 msgstr "是与应该谬误"
 
-#: premises/models.py:62
+#: premises/models.py:63
 msgid "Argument From Force"
 msgstr "暴力说服"
 
-#: premises/models.py:63
+#: premises/models.py:64
 msgid "Argument To Pity"
 msgstr "诉诸怜悯"
 
-#: premises/models.py:64
+#: premises/models.py:65
 msgid "Prejudicial Language"
 msgstr "偏见的语言"
 
-#: premises/models.py:65
+#: premises/models.py:66
 msgid "Fallacy Of Special Pleading"
 msgstr "诡辩的谬误"
 
-#: premises/models.py:66
+#: premises/models.py:67
 msgid "Appeal To Authority"
 msgstr "诉诸权威"
 
-#: premises/models.py:81
+#: premises/models.py:73
 msgid "Argument"
 msgstr "论点"
 
-#: premises/models.py:85
+#: premises/models.py:77
 msgid "Description"
 msgstr "描述"
 
-#: premises/models.py:89
+#: premises/models.py:81
 msgid "Original Discourse"
 msgstr "原表述"
 
-#: premises/models.py:93 premises/models.py:433
+#: premises/models.py:85 premises/models.py:458
 msgid "Sources"
 msgstr "来源"
 
-#: premises/models.py:420
+#: premises/models.py:445
 msgid "Parent"
 msgstr "父"
 
-#: premises/models.py:421
+#: premises/models.py:446
 msgid ""
 "The parent of premise. If you don't choose anything, it will be a main "
 "premise."
 msgstr "论述的前提。如果你不选，这将成为主要的论述。"
 
-#: premises/models.py:425
+#: premises/models.py:450
 msgid "Premise Type"
 msgstr "论述类型"
 
-#: premises/models.py:429
+#: premises/models.py:454
 msgid "Premise Content"
 msgstr "论述内容"
 
-#: premises/models.py:634
+#: premises/models.py:462
+#, fuzzy
+#| msgid "Related Arguments"
+msgid "Related Argument"
+msgstr "相关参数"
+
+#: premises/models.py:463
+msgid "You can also associate your premise with an argument."
+msgstr ""
+
+#: premises/models.py:689
 msgid "Reason"
 msgstr ""
 
-#: premises/models.py:635
+#: premises/models.py:690
 msgid "Please explain that why the premise is a fallacy."
 msgstr ""
 
-#: premises/models.py:637
+#: premises/models.py:692
 msgid "Fallacy Type"
 msgstr "谬误类型"
 
@@ -345,8 +359,8 @@ msgstr "信息流"
 msgid "The feed seems to empty."
 msgstr "信息流看起来是空的。"
 
-#: templates/auth/profile.html:63 templates/index.html:35
-#: templates/newsfeed.html:39
+#: templates/auth/profile.html:63 templates/newsfeed.html:39
+#: templates/premises/contention_list.html:49
 msgid "Load more"
 msgstr "加载更多"
 
@@ -373,8 +387,8 @@ msgid "Update"
 msgstr "更新"
 
 #: templates/base.html:5
-msgid "Argument Analysis Platform"
-msgstr "论点分析平台"
+msgid "Argument Analysis Platform. Create and analyze argument maps online."
+msgstr ""
 
 #: templates/base.html:7
 msgid "Argument analysis and mapping platform"
@@ -453,19 +467,15 @@ msgstr "反馈"
 msgid "Donate"
 msgstr "捐助"
 
-#: templates/home.html:8
+#: templates/fallacies.html:4 templates/tabs.html:10
+msgid "Fallacies"
+msgstr "谬误"
+
+#: templates/home.html:11
 #, python-format
 msgid ""
 "arguman.org is an <a href=\"%(about_url)s\">argument analysis</a> platform."
 msgstr "是一个 <a href=\"%(about_url)s\">论点分析</a>平台。"
-
-#: templates/index.html:22 templates/premises/tree_view.html:72
-msgid "last update:"
-msgstr "最后更新"
-
-#: templates/index.html:30
-msgid "No results found."
-msgstr "未找到结果。"
 
 #: templates/newsfeed.html:12
 msgid "What is going on here:"
@@ -488,8 +498,9 @@ msgid "created an argument:"
 msgstr "创建一个论点："
 
 #: templates/newsfeed/fallacy.html:4
-#, python-format
-msgid "reported <strong>%(fallacy)s</strong> fallacy for a premise:"
+#, fuzzy, python-format
+#| msgid "reported <strong>%(fallacy)s</strong> fallacy for a premise:"
+msgid "reported <strong>%(fallacy)s</strong> for a premise."
 msgstr "报告此论述 <strong>%(fallacy)s</strong> 为谬误:"
 
 #: templates/newsfeed/following.html:2
@@ -500,6 +511,12 @@ msgid ""
 msgstr ""
 "    正在关注 <a href=\"%(profile_url)s\" class=\"contention-link\">"
 "%(username)s</a>"
+
+#: templates/newsfeed/premise.html:5
+#, fuzzy
+#| msgid "created an argument:"
+msgid "associated with another argument"
+msgstr "创建一个论点："
 
 #: templates/notifications.html:8
 msgid "Notifications"
@@ -533,11 +550,11 @@ msgstr "    你的论述被报告为 <strong>%(label)s</strong> "
 msgid "supported your premise"
 msgstr "支持你的论述"
 
-#: templates/nouns/detail.html:37 templates/nouns/partial.html:19
+#: templates/nouns/detail.html:39 templates/nouns/partial.html:11
 msgid "add new relation"
 msgstr ""
 
-#: templates/nouns/detail.html:50
+#: templates/nouns/detail.html:52
 msgid "create an argument"
 msgstr "创建一个论点："
 
@@ -573,70 +590,97 @@ msgid ""
 "example, <i>Evolution</i> and <i>Devolution</i></p>"
 msgstr ""
 
-#: templates/nouns/partial.html:24
+#: templates/nouns/partial.html:16
 msgid "Arguments"
 msgstr "论点"
 
-#: templates/partials/notifications.html:14
-#: templates/partials/notifications.html:21
+#: templates/partials/channel_list.html:9
+msgid "all channels"
+msgstr ""
+
+#: templates/partials/notifications.html:16
 msgid "See all"
 msgstr "查看所有"
 
-#: templates/partials/notifications.html:19
-msgid "You have no new notifications."
-msgstr "你有新的消息。"
-
 #: templates/premises/actions.html:3 templates/premises/list_view.html:13
-#: templates/premises/premise.html:74 templates/premises/thread.html:105
-#: templates/premises/tree_view.html:25
+#: templates/premises/premise.html:90 templates/premises/thread.html:105
+#: templates/premises/tree_view.html:24
 msgid "add premise"
 msgstr "添加论述"
 
-#: templates/premises/actions.html:7 templates/premises/premise.html:80
+#: templates/premises/actions.html:7 templates/premises/premise.html:96
 #: templates/premises/thread.html:97
 msgid "remove"
 msgstr "删除"
 
-#: templates/premises/base_contention.html:27
-#: templates/premises/contention.html:11 templates/premises/premise.html:24
-msgid "sender:"
+#: templates/premises/base_contention.html:6
+#, fuzzy
+#| msgid "Argument"
+msgid "Argument Map"
+msgstr "论点"
+
+#: templates/premises/base_contention.html:33
+#, fuzzy
+#| msgid "sender:"
+msgid "sender"
 msgstr "发送者"
 
-#: templates/premises/base_contention.html:30
-msgid "original discourse:"
-msgstr "原话"
+#: templates/premises/base_contention.html:41
+#, fuzzy
+#| msgid "sources:"
+msgid "source"
+msgstr "信息源："
 
-#: templates/premises/base_contention.html:36
+#: templates/premises/base_contention.html:47
 msgid "Unspecified"
 msgstr "不明确的"
 
-#: templates/premises/base_contention.html:46
-msgid "Edit"
-msgstr "编辑"
+#: templates/premises/base_contention.html:52
+#, fuzzy
+#| msgid "ARGUMENT"
+msgid "RELATED ARGUMENTS"
+msgstr "论点"
 
-#: templates/premises/base_contention.html:51
-msgid "Unpublish"
-msgstr "取消发布"
+#: templates/premises/base_contention.html:55
+#, fuzzy
+#| msgid "Share"
+msgid "share"
+msgstr "分享"
 
-#: templates/premises/base_contention.html:56
-msgid "Publish"
-msgstr "发布"
+#: templates/premises/base_contention.html:62
+msgid "view"
+msgstr ""
 
-#: templates/premises/base_contention.html:66
-msgid "View"
-msgstr "查看"
-
-#: templates/premises/base_contention.html:69
+#: templates/premises/base_contention.html:64
 msgid "Tree"
 msgstr "树型"
 
-#: templates/premises/base_contention.html:72
+#: templates/premises/base_contention.html:65
 msgid "List"
 msgstr "列表"
 
-#: templates/premises/base_contention.html:80
-msgid "Share"
-msgstr "分享"
+#: templates/premises/contention.html:11 templates/premises/premise.html:32
+msgid "sender:"
+msgstr "发送者"
+
+#: templates/premises/contention_list.html:20
+#: templates/premises/tree_view.html:61
+msgid "objection rate"
+msgstr "反对率"
+
+#: templates/premises/contention_list.html:23
+#: templates/premises/tree_view.html:56
+msgid "support rate"
+msgstr "支持率"
+
+#: templates/premises/contention_list.html:26
+#: templates/premises/tree_view.html:66
+msgid "Neutral support and objection rate."
+msgstr "中性的反对和支持率。"
+
+#: templates/premises/contention_list.html:44
+msgid "No results found."
+msgstr "未找到结果。"
 
 #: templates/premises/edit_contention.html:8
 msgid "Edit Argument"
@@ -741,52 +785,57 @@ msgstr "保存并继续编辑"
 msgid "The parent premise:"
 msgstr "父级论述："
 
-#: templates/premises/new_premise.html:27
-msgid "Characters remaining:"
+#: templates/premises/new_premise.html:29
+msgid "Characters remaining: "
 msgstr ""
 
-#: templates/premises/premise.html:11
+#: templates/premises/new_premise.html:49
+msgid "(change)"
+msgstr ""
+
+#: templates/premises/premise.html:12
 msgid "score:"
 msgstr ""
 
-#: templates/premises/premise.html:20 templates/premises/thread.html:67
+#: templates/premises/premise.html:28 templates/premises/thread.html:67
 msgid "sources:"
 msgstr "信息源："
 
-#: templates/premises/premise.html:38 templates/premises/thread.html:74
+#: templates/premises/premise.html:46 templates/premises/thread.html:74
 #, python-format
 msgid "%(count)s fallacy reported."
 msgid_plural "%(count)s fallacies reported."
 msgstr[0] "%(count)s个谬误报告。"
 msgstr[1] "%(count)s个谬误报告。"
 
-#: templates/premises/premise.html:52 templates/premises/premise.html.py:89
-#: templates/premises/premise.html:91 templates/premises/premise.html.py:95
+#: templates/premises/premise.html:60 templates/premises/premise.html.py:105
+#: templates/premises/premise.html:107 templates/premises/premise.html:111
 #: templates/premises/thread.html:113
 msgid "undo"
 msgstr "取消操作"
 
-#: templates/premises/premise.html:63 templates/premises/thread.html:48
+#: templates/premises/premise.html:79 templates/premises/thread.html:48
 #, python-format
 msgid "%(count)s supporter."
 msgid_plural "%(count)s supporters."
 msgstr[0] "%(count)s个支持者。"
 msgstr[1] "%(count)s个支持者。"
 
-#: templates/premises/premise.html:77 templates/premises/thread.html:90
+#: templates/premises/premise.html:93 templates/premises/thread.html:90
+#: templates/premises/tree_view.html:23
 msgid "edit"
 msgstr "编辑"
 
-#: templates/premises/premise.html:81 templates/premises/thread.html:98
+#: templates/premises/premise.html:97 templates/premises/thread.html:98
 msgid "Are you sure to remove this premise?"
 msgstr "你确定要移除该论述？"
 
-#: templates/premises/premise.html:89 templates/premises/premise.html.py:95
-#: templates/premises/premise.html:97 templates/premises/thread.html:119
+#: templates/premises/premise.html:105 templates/premises/premise.html:111
+#: templates/premises/premise.html:113 templates/premises/thread.html:119
 msgid "support"
 msgstr "支持"
 
-#: templates/premises/premise.html:103 templates/premises/thread.html:124
+#: templates/premises/premise.html:119 templates/premises/thread.html:124
 msgid "report fallacy"
 msgstr "报告谬误"
 
@@ -814,33 +863,21 @@ msgstr "你可以使用方向键浏览地图。"
 msgid "Loading tree..."
 msgstr "载入中..."
 
-#: templates/premises/tree_view.html:39
+#: templates/premises/tree_view.html:37
 msgid "The argument has no premises yet."
 msgstr "父级论述："
 
-#: templates/premises/tree_view.html:41
+#: templates/premises/tree_view.html:39
 msgid "Add a premise"
 msgstr "添加论述"
 
-#: templates/premises/tree_view.html:49
+#: templates/premises/tree_view.html:47
 msgid "The argument is too complex. You can switch to list view."
 msgstr ""
 
-#: templates/premises/tree_view.html:58
-msgid "support rate"
-msgstr "支持率"
-
-#: templates/premises/tree_view.html:63
-msgid "objection rate"
-msgstr "反对率"
-
-#: templates/premises/tree_view.html:68
-msgid "Neutral support and objection rate."
-msgstr "中性的反对和支持率。"
-
-#: templates/premises/tree_view.html:83
-msgid "Related Arguments"
-msgstr "相关参数"
+#: templates/premises/tree_view.html:72
+msgid "last update:"
+msgstr "最后更新"
 
 #: templates/profiles/social_providers.html:3
 msgid "Login with Twitter"
@@ -890,39 +927,39 @@ msgstr "用户"
 msgid "premises"
 msgstr "论述"
 
-#: templates/stats.html:7 templates/tabs.html:10
+#: templates/stats.html:6 templates/tabs.html:13
 msgid "Statistics"
 msgstr "统计"
 
-#: templates/stats.html:10
+#: templates/stats.html:9
 msgid "most active users"
 msgstr "最活跃的用户"
 
-#: templates/stats.html:11
+#: templates/stats.html:10
 msgid "highest user karma"
 msgstr "最高的用户因果报应"
 
-#: templates/stats.html:12
+#: templates/stats.html:11
 msgid "most crowded arguments"
 msgstr "争议最多的论点"
 
-#: templates/stats.html:13
+#: templates/stats.html:12
 msgid "most supported premises"
 msgstr "支持度最高的论述"
 
-#: templates/stats.html:14
+#: templates/stats.html:13
 msgid "most fallacy premises"
 msgstr "最荒谬的论述"
 
-#: templates/stats.html:19
+#: templates/stats.html:18
 msgid "this week"
 msgstr "本周"
 
-#: templates/stats.html:20
+#: templates/stats.html:19
 msgid "this month"
 msgstr "本月"
 
-#: templates/stats.html:21
+#: templates/stats.html:20
 msgid "all time"
 msgstr "所有的时间"
 
@@ -931,12 +968,35 @@ msgid "Featured"
 msgstr "精选"
 
 #: templates/tabs.html:8
-msgid "Recently Updated"
+msgid "New"
 msgstr "最新提交"
 
-#: templates/tabs.html:12
-msgid "Search"
-msgstr "搜索"
+#~ msgid "Argument Analysis Platform"
+#~ msgstr "论点分析平台"
+
+#~ msgid "You have no new notifications."
+#~ msgstr "你有新的消息。"
+
+#~ msgid "original discourse:"
+#~ msgstr "原话"
+
+#~ msgid "Edit"
+#~ msgstr "编辑"
+
+#~ msgid "Unpublish"
+#~ msgstr "取消发布"
+
+#~ msgid "Publish"
+#~ msgstr "发布"
+
+#~ msgid "View"
+#~ msgstr "查看"
+
+#~ msgid "Recently Updated"
+#~ msgstr "最新提交"
+
+#~ msgid "Search"
+#~ msgstr "搜索"
 
 #~ msgid "last sender:"
 #~ msgstr "最近的发布者："

@@ -3204,6 +3204,10 @@ div.load-more {
     margin-bottom: 20px;
 }
 
+.fallacy-report .premise-stats {
+    border: none;
+}
+
 .fallacy-report .premise-content {
     margin-top: 5px;
 }
@@ -3223,6 +3227,10 @@ div.load-more {
     font-weight: normal;
     margin: 0;
     padding: 0;
+    font-size: 1.5em;
+}
+
+.fallacy-list .load-more {
     font-size: 1.5em;
 }
 

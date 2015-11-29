@@ -241,11 +241,14 @@ class NotificationsView(LoginRequiredMixin, HomeView):
 class FallaciesView(HomeView, PaginationMixin):
     tab_class = "fallacies"
     template_name = "fallacies.html"
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
+        language = normalize_language_code(get_language())
         fallacies = (Report
                      .objects
-                     .filter(reason__isnull=False)
+                     .filter(reason__isnull=False,
+                             contention__language=language)
                      .order_by('-id')
                      [self.get_offset():self.get_limit()])
         return super(FallaciesView, self).get_context_data(
