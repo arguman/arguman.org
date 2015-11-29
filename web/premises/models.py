@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import defaultdict
 from django.utils import timezone
 from datetime import datetime
 from math import log
@@ -568,22 +569,32 @@ class Premise(DeletePreventionMixin, models.Model):
     def width(self):
         return self.published_children().count()
 
-    def fallacies(self, authenticed_user=None):
-        reports = self.reports.values('fallacy_type', 'reporter_id')
+    def fallacies(self, authenticated_user=None):
+        reports = self.reports.values('fallacy_type', 'reporter_id',
+                                      'reporter__username', 'reason')
         fallacies = set(report['fallacy_type'] for report in reports)
         mapping = dict(FALLACY_TYPES)
 
         user_reports = set()
-        if authenticed_user is not None:
-            for report in reports:
-                if report['reporter_id'] == authenticed_user.id:
-                    user_reports.add(report['fallacy_type'])
+        reasons = defaultdict(list)
+    
+        for report in reports:
+            if (authenticated_user is not None and 
+                    report['reporter_id'] == authenticated_user.id):
+                user_reports.add(report['fallacy_type'])
+
+            if report['reason'] is not None:
+                reasons[report['fallacy_type']].append({
+                    'reporter': report['reporter__username'],
+                    'reason': report['reason']
+                })
 
         return [{
-                    'type': fallacy,
-                    'label': mapping.get(fallacy),
-                    'reported_by_authenticated_user': fallacy in user_reports
-                } for fallacy in fallacies if fallacy]
+            'type': fallacy,
+            'label': mapping.get(fallacy),
+            'reasons': reasons.get(fallacy),
+            'reported_by_authenticated_user': fallacy in user_reports
+        } for fallacy in fallacies if fallacy]
 
     def get_actor(self):
         # Encapsulated for newsfeed app.

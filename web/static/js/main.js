@@ -344,7 +344,7 @@
 
             this.renderSubTree(
                 branch,
-                treeTop + node.height(), 
+                treeTop + node.height() + 5,
                 left + treeLeft,
                 level + 1
             );

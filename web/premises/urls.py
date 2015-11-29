@@ -8,7 +8,7 @@ from premises.views import (ContentionDetailView, HomeView,
                             UpdatedArgumentsView, ReportView, RemoveReportView,
                             ControversialArgumentsView, TosView, SearchView,
                             NotificationsView, PremiseSupportView, PremiseUnsupportView,
-                            StatsView)
+                            StatsView, FallaciesView)
 
 
 
@@ -25,6 +25,8 @@ urlpatterns = patterns('',
        name='contentions_controversial'),
    url(r'^stats$', StatsView.as_view(),
        name='contentions_stats'),
+    url(r'^fallacies$', FallaciesView.as_view(),
+       name='fallacies'),
    url(r'^about$',
        AboutView.as_view(),
        name='about'),

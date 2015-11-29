@@ -126,7 +126,8 @@ class EntryManager(object):
         parameters = {
             "news_type": {
                 "$in": [NEWS_TYPE_CONTENTION,
-                        NEWS_TYPE_PREMISE]
+                        NEWS_TYPE_PREMISE,
+                        NEWS_TYPE_FALLACY]
             },
             "related_object.language": language
         }

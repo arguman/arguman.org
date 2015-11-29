@@ -55,6 +55,14 @@
                                        value="({% trans "undo" %})" />
                             </form>
                             {% endif %}
+                            <div class="fallacy-reasons">
+                                {% for reason in fallacy.reasons %}
+                                    <p>
+                                        {{ reason.reason }}
+                                        <a href="{% url "auth_profile" reason.reporter %}">{{ reason.reporter|lower }}</a>
+                                    </p>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -107,7 +115,7 @@
         </div>
     {% endif %}
     <div class="share">
-        <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ serialized.full_url }}/{{ premise.id }}" class="tree-view active"> permalink</a>
+        <a target="_blank" href="{{ serialized.full_url }}/{{ premise.id }}" class="tree-view active"> permalink</a>
     </div>
 
 </div>

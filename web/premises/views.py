@@ -20,7 +20,7 @@ from django.db.models import Count
 from django.shortcuts import render
 
 from blog.models import Post
-from premises.models import Contention, Premise
+from premises.models import Contention, Premise, Report
 from premises.forms import (ArgumentCreationForm, PremiseCreationForm,
                             PremiseEditForm, ReportForm)
 from premises.signals import (added_premise_for_premise,
@@ -238,13 +238,28 @@ class NotificationsView(LoginRequiredMixin, HomeView):
             **kwargs)
 
 
+class FallaciesView(HomeView, PaginationMixin):
+    tab_class = "fallacies"
+    template_name = "fallacies.html"
+
+    def get_context_data(self, **kwargs):
+        fallacies = (Report
+                     .objects
+                     .filter(reason__isnull=False)
+                     .order_by('-id')
+                     [self.get_offset():self.get_limit()])
+        return super(FallaciesView, self).get_context_data(
+            fallacies=fallacies,
+            **kwargs)
+
+
 class SearchView(HomeView):
     tab_class = 'search'
     template_name = 'search/search.html'
     partial_templates = {
         'contentions': 'search/contention.html',
         'users': 'search/profile.html',
-        'premises' : 'search/premise.html'
+        'premises': 'search/premise.html'
     }
 
     method_mapping = {'contentions': "get_contentions",
