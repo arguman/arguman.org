@@ -13,7 +13,7 @@
                 <span class="however">{{ however }} {% trans "however" %}</span>
             </div>
             <div class="info">
-                <h3><a class="main-contention {{ overview.status }}" href="{{ contention.get_absolute_url }}">{{ contention.title|widont }}</a></h3>
+                <h3><a class="main-contention {{ overview.status }}" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a></h3>
                 <div class="overview">
                     <div class="rate {{ overview.status }}">
                         {% if overview.status == 'objected' %}

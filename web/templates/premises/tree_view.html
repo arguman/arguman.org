@@ -20,7 +20,9 @@
         </div>
         <div class="tree-contention-actions">
             {% if user.is_authenticated %}
-            <a href="{% url "contention_edit" serialized.slug %}">{% trans "edit" %}</a>
+            {% if edit_mode %}
+                <a href="{% url "contention_edit" serialized.slug %}">{% trans "edit" %}</a>
+            {% endif %}
             <a href="{% url "new_premise" contention.slug %}">{% trans "add premise" %}</a>
             {% endif %}
         </div>
