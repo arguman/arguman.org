@@ -17,12 +17,12 @@
         {% endif %}
     </ul>
 {% else %}
-    <div class="empty">
-        {% trans "You have no new notifications." %}
-        {% if show_see_more_button %}
-            <a href="{% url "notifications" %}" class="notifications-link">{% trans "See all" %}</a>
-        {% endif %}
-    </div>
+{#    <div class="empty">#}
+{#        {% trans "You have no new notifications." %}#}
+{#        {% if show_see_more_button %}#}
+{#            <a href="{% url "notifications" %}" class="notifications-link">{% trans "See all" %}</a>#}
+{#        {% endif %}#}
+{#    </div>#}
 {% endif %}
 </div>
 {% endif %}
