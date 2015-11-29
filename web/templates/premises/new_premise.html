@@ -20,11 +20,13 @@
 {% block extra-scripts %}
     <script type="text/javascript">
     $(function () {
+        var relatedArgumentLabel = "{{ premise.related_argument.title }}";
+
         var textarea = $("#id_text"),
             container = $("<div>", {
                 "class": "remained-char"
             }).appendTo(textarea.parent())
-              .html("{% trans "Characters remaining:" %}"),
+              .html("{% trans "Characters remaining: " %}"),
             remained = $("<span>").appendTo(container);
         var update = function (event) {
             var max = parseInt(textarea.attr("maxlength")),
@@ -33,6 +35,44 @@
         };
         textarea.keyup(update);
         update();
+
+        var relatedArgument = $('#id_related_argument');
+
+        var selectArgument = function (label) {
+            var selectedArgument = $("<div />", {
+                'class': 'selected-argument'
+            }).html(
+                label
+            ).append(
+                $("<a />")
+                 .html(
+                    '{% trans "(change)" %}'
+                 ).on('click', function (event) {
+                    event.preventDefault();
+                    relatedArgument.val("").show();
+                    selectedArgument.remove();
+                 }.bind(this))
+            );
+            relatedArgument.hide().after(selectedArgument);
+        };
+
+        relatedArgument.autocomplete({
+            source: function(search, callback) {
+                $.getJSON("{% url "contentions_search" %}", {
+                    keywords: search.term,
+                    json: true
+                }, callback);
+            },
+            select: function(event, ui) {
+                $(this).val(ui.item.id);
+                selectArgument(ui.item.label);
+                return false;
+            }
+        });
+
+        if (relatedArgument.val()) {
+            selectArgument(relatedArgumentLabel);
+        }
     });
     </script>
 {% endblock %}

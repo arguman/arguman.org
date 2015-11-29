@@ -460,6 +460,35 @@ li.base-premises {
     .premise-type.however {
         color: #ffbe86;
     }
+    
+    .premise .related-argument {
+        padding: 5px 0;
+        color: #9b9b9b;
+    }
+
+    .premise .related-argument a {
+        font-size: 1.6em;
+        line-height: 0.8em;
+        text-decoration: none;
+        letter-spacing: -1px;
+        font-family: AmericanTypewriter, serif;
+    }
+
+    .premise .but .related-argument a {
+        color: #d96174;
+    }
+
+    .premise .because .related-argument a {
+        color: #87c851;
+    }
+
+    .premise .however .related-argument a {
+        color: #e8b443;
+    }
+
+    .premise .related-argument a:hover {
+        color: #232323;
+    }
 
     .premise-sources {
         margin: -3px 0 0;
@@ -2705,7 +2734,6 @@ div.load-more {
     text-align: left;
     font-size: 17px;
     width: 100px;
-    text-transform: uppercase;
     text-shadow: 1px 1px #fff;
 }
 
@@ -3109,7 +3137,7 @@ div.load-more {
 
 .contention-detail-header .related-arguments {
     float: right;
-    width: 140px;
+    width: 160px;
     padding: 17px;
     cursor: pointer;
     background-color: #e7e7e7;
@@ -3136,7 +3164,7 @@ div.load-more {
 }
 
 .contention-detail-header .related-arguments h4 {
-    text-transform: uppercase;
+
 }
 
 .contention-detail-header .sender {
@@ -3196,4 +3224,59 @@ div.load-more {
     margin: 0;
     padding: 0;
     font-size: 1.5em;
+}
+
+/*
+    Autocomplete
+*/
+#id_related_argument {
+    outline: none;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus,
+.ui-menu .ui-menu-item a.ui-corner-all:active {
+    background: #fff992 !important;
+    color: #1d1d1d;
+    border-radius:0;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover,
+.ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #fff992;
+    border: none;
+    color:#1d1d1d;
+    border-radius:0;
+    font-weight: normal;
+}
+
+.ui-autocomplete {
+    background: #F3F3F3;
+    width: 522px;
+    margin-top: 16px;
+    margin-left: 0;
+    padding: 0;
+}
+
+.ui-autocomplete li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ui-autocomplete li a {
+    display: block;
+    padding: 7px 15px;
+    cursor: pointer;
+}
+
+.selected-argument {
+    color: #6ebf73;
+}
+
+.selected-argument a {
+    cursor: pointer;
+    margin-left: 5px;
 }

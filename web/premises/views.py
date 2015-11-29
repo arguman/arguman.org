@@ -266,7 +266,6 @@ class SearchView(HomeView):
                       'users': "get_users",
                       'premises': "get_premises"}
 
-
     def dispatch(self, request, *args, **kwargs):
         self.type = request.GET.get('type', 'contentions')
         if not self.method_mapping.get(self.type):
@@ -274,7 +273,11 @@ class SearchView(HomeView):
         return super(SearchView, self).dispatch(request, *args, **kwargs)
 
     def get_keywords(self):
-        return self.request.GET.get('keywords') or ""
+        return self.request.GET.get('keywords') or ''
+
+    def is_json(self):
+        return (self.request.is_ajax() or
+                self.request.GET.get('json'))
 
     def has_next_page(self):
         method = getattr(self, self.method_mapping[self.type])
@@ -290,7 +293,6 @@ class SearchView(HomeView):
         return super(SearchView, self).get_context_data(
             results=self.get_search_bundle(),
             **kwargs)
-
 
     def get_next_page_url(self):
         offset = self.get_offset() + self.paginate_by
@@ -312,7 +314,6 @@ class SearchView(HomeView):
                 result = result[self.get_offset():self.get_limit()]
         return result
 
-
     def get_users(self, paginate=True):
         keywords = self.request.GET.get('keywords')
         if not keywords or len(keywords) < 2:
@@ -323,7 +324,6 @@ class SearchView(HomeView):
             if paginate:
                 result = result[self.get_offset():self.get_limit()]
         return result
-
 
     def get_contentions(self, paginate=True):
         keywords = self.request.GET.get('keywords')
@@ -339,6 +339,24 @@ class SearchView(HomeView):
                 result = result[self.get_offset():self.get_limit()]
 
         return result
+
+    def render_to_response(self, context, **response_kwargs):
+        """
+        Returns a JSON response, transforming 'context' to make the payload.
+        """
+        if not self.is_json():
+            return super(SearchView, self).render_to_response(
+                context, **response_kwargs)
+
+        results = [{
+            "id": result['object'].id,
+            "label": unicode(result['object'])
+        } for result in context['results']]
+
+        return HttpResponse(
+            json.dumps(results),
+            dict(content_type='application/json', **response_kwargs)
+        )
 
 
 class NewsView(HomeView):

@@ -15,6 +15,7 @@ class PremiseInline(admin.TabularInline):
     extra = 0
     fields = ('user', 'premise_type',
               'text', 'sources', 'is_approved')
+    fk_name = "argument"
     raw_id_fields = ('user', )
     formfield_overrides = {
         models.TextField: {

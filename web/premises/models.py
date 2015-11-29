@@ -111,7 +111,7 @@ class Contention(DeletePreventionMixin, models.Model):
         return (
             self.premises
                 .filter(is_approved=True)
-                .select_related('user')
+                .select_related('user', 'related_argument')
                 .prefetch_related('supporters', 'reports')
                 .annotate(
                     report_count=Count('reports', distinct=True),
@@ -457,6 +457,11 @@ class Premise(DeletePreventionMixin, models.Model):
     sources = models.TextField(
         null=True, blank=True, verbose_name=_("Sources"),
         help_text=render_to_string("premises/examples/premise_source.html"))
+    related_argument = models.ForeignKey(Contention, related_name="related_premises",
+                                         blank=True, null=True,
+                                         verbose_name=_('Related Argument'),
+                                         help_text=_("You can also associate your premise "
+                                                     "with an argument."))
     is_approved = models.BooleanField(default=True, verbose_name=_("Published"))
     collapsed = models.BooleanField(default=False)
     supporters = models.ManyToManyField(settings.AUTH_USER_MODEL,
@@ -491,6 +496,14 @@ class Premise(DeletePreventionMixin, models.Model):
             if premise.parent_id == self.id
         ]
 
+        related_argument = None
+
+        if self.related_argument:
+            related_argument = {
+                'title': self.related_argument.title,
+                'absolute_url': self.related_argument.get_absolute_url()
+            }
+
         return {
             'id': self.id,
             'children': children,
@@ -510,7 +523,8 @@ class Premise(DeletePreventionMixin, models.Model):
             'date_creation': self.date_creation,
             'fallacies': self.fallacies(authenticated_user),
             'fallacy_count': self.report_count,
-            'weight': self.weight
+            'weight': self.weight,
+            'related_argument': related_argument
         }
 
     @models.permalink
@@ -604,6 +618,11 @@ class Premise(DeletePreventionMixin, models.Model):
         return NEWS_TYPE_PREMISE
 
     def get_newsfeed_bundle(self):
+        related_argument = None
+
+        if self.related_argument:
+            related_argument = self.related_argument.get_newsfeed_bundle()
+
         return {
             "id": self.id,
             "language": self.argument.language,
@@ -611,7 +630,8 @@ class Premise(DeletePreventionMixin, models.Model):
             "premise_class": self.premise_class(),
             "text": self.text,
             "sources": self.sources,
-            "contention": self.argument.get_newsfeed_bundle()
+            "contention": self.argument.get_newsfeed_bundle(),
+            'related_argument': related_argument
         }
 
     def get_parent(self):

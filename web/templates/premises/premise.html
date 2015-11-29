@@ -16,6 +16,11 @@
         {% with text=premise.formatted_text|safe %}
             {{text.strip|safe|linebreaksbr}}
         {% endwith %}
+        {% if premise.related_argument %}
+        <div class="related-argument">
+            <a href="{{ premise.related_argument.absolute_url }}">{{ premise.related_argument.title }}</a>
+        </div>
+        {% endif %}
     </div>
 
     <div class="premise-sources">
