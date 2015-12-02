@@ -214,7 +214,7 @@ class HomeView(TemplateView, PaginationMixin):
                        .objects
                        .language()
                        .filter(is_featured=True)
-                       .order_by("-date_modification"))
+                       .order_by("-date_creation"))
 
         if paginate:
             contentions = (contentions[self.get_offset(): self.get_limit()])
