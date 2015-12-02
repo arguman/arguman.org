@@ -292,6 +292,18 @@ class Contention(DeletePreventionMixin, models.Model):
             "uri": self.get_absolute_url()
         }
 
+    def get_overview_bundle(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "sender": self.user.serialize(show_email=False),
+            "date_creation": self.date_creation,
+            "date_modification": self.date_modification,
+            "premise_count": self.premises.count(),
+            "absolute_url": self.get_full_url(),
+            "support_rate": self.overview(show_percent=True)['support']
+        }
+
     def contributors(self):
         from profiles.models import Profile
         # avoid circular import

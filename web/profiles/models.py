@@ -16,15 +16,24 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.core.mail import send_mail
 
+
 class Profile(AbstractUser):
     following = models.ManyToManyField("self", symmetrical=False)
     notification_email = models.BooleanField(_('email notification'), default=True)
     karma = models.IntegerField(null=True, blank=True)
 
-    def serialize(self):
-        return {'username': self.username,
-                'email': self.email,
-                'id': self.id}
+    def serialize(self, show_email=True):
+        bundle = {
+            'username': self.username,
+            'id': self.id
+        }
+
+        if show_email:
+            bundle.update({
+                'email': self.email
+            })
+
+        return bundle
 
     @property
     def followers(self):

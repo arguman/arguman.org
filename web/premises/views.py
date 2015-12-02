@@ -3,6 +3,7 @@
 import json
 from datetime import timedelta
 from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
 from markdown2 import markdown
 
 from django.contrib import messages
@@ -139,23 +140,23 @@ class ContentionJsonView(DetailView):
 
     def get_premises(self, contention, user, parent=None):
         children = [{
-            "pk": premise.pk,
-            "name": premise.text,
-            "parent": parent.text if parent else None,
-            "reportable_by_authenticated_user": self.user_can_report(
-                premise, user),
-            "report_count": premise.reports.count(),
-            "user": {
-                "id": premise.user.id,
-                "username": premise.user.username,
-                "absolute_url": reverse("auth_profile",
-                                        args=[premise.user.username])
-            },
-            "sources": premise.sources,
-            "premise_type": premise.premise_class(),
-            "children": (self.get_premises(contention, user, parent=premise)
-                         if premise.published_children().exists() else [])
-        } for premise in contention.published_premises(parent)]
+                        "pk": premise.pk,
+                        "name": premise.text,
+                        "parent": parent.text if parent else None,
+                        "reportable_by_authenticated_user": self.user_can_report(
+                            premise, user),
+                        "report_count": premise.reports.count(),
+                        "user": {
+                            "id": premise.user.id,
+                            "username": premise.user.username,
+                            "absolute_url": reverse("auth_profile",
+                                                    args=[premise.user.username])
+                        },
+                        "sources": premise.sources,
+                        "premise_type": premise.premise_class(),
+                        "children": (self.get_premises(contention, user, parent=premise)
+                                     if premise.published_children().exists() else [])
+                    } for premise in contention.published_premises(parent)]
         return children
 
     def user_can_report(self, premise, user):
@@ -290,7 +291,7 @@ class SearchView(HomeView):
     def get_search_bundle(self):
         method = getattr(self, self.method_mapping[self.type])
         return [{'template': self.partial_templates[self.type],
-                'object': item} for item in method()]
+                 'object': item} for item in method()]
 
     def get_context_data(self, **kwargs):
         return super(SearchView, self).get_context_data(
@@ -352,9 +353,9 @@ class SearchView(HomeView):
                 context, **response_kwargs)
 
         results = [{
-            "id": result['object'].id,
-            "label": unicode(result['object'])
-        } for result in context['results']]
+                       "id": result['object'].id,
+                       "label": unicode(result['object'])
+                   } for result in context['results']]
 
         return HttpResponse(
             json.dumps(results),
@@ -378,6 +379,28 @@ class NewsView(HomeView):
             contentions = contentions[self.get_offset():self.get_limit()]
 
         return contentions
+
+
+class FeaturedJSONView(HomeView):
+    def render_to_response(self, context, **response_kwargs):
+        contentions = [contention.get_overview_bundle()
+                       for contention in self.get_contentions()]
+        return HttpResponse(
+            json.dumps({"contentions": contentions},
+                       cls=DjangoJSONEncoder),
+            content_type="application/json"
+        )
+
+
+class NewsJSONView(NewsView):
+    def render_to_response(self, context, **response_kwargs):
+        contentions = [contention.get_overview_bundle()
+                       for contention in self.get_contentions()]
+        return HttpResponse(
+            json.dumps({"contentions": contentions},
+                       cls=DjangoJSONEncoder),
+            content_type="application/json"
+        )
 
 
 class StatsView(HomeView):
@@ -443,7 +466,7 @@ class StatsView(HomeView):
                 "template": self.partial_templates[type(item)],
                 "object": item
             } for item in method()
-        ]
+            ]
 
     def get_active_users(self):
         return Profile.objects.annotate(
@@ -766,7 +789,7 @@ class PremiseUnsupportView(PremiseSupportView):
 
         return redirect(
             premise.get_parent().get_absolute_url() +
-            self.get_next_parameter() + 
+            self.get_next_parameter() +
             "#%s" % premise.pk
         )
 

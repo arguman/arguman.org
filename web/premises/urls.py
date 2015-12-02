@@ -8,13 +8,15 @@ from premises.views import (ContentionDetailView, HomeView,
                             UpdatedArgumentsView, ReportView, RemoveReportView,
                             ControversialArgumentsView, TosView, SearchView,
                             NotificationsView, PremiseSupportView, PremiseUnsupportView,
-                            StatsView, FallaciesView)
+                            StatsView, FallaciesView, FeaturedJSONView, NewsJSONView)
 
 
 
 urlpatterns = patterns('',
    url(r'^$', HomeView.as_view(), name='home'),
    url(r'^notifications$', NotificationsView.as_view(), name='notifications'),
+   url(r'^featured.json$', FeaturedJSONView.as_view(), name='contentions_featured_json'),
+   url(r'^news.json$', NewsJSONView.as_view(), name='contentions_latest_json'),
    url(r'^news$', NewsView.as_view(),
        name='contentions_latest'),
    url(r'^search', SearchView.as_view(),
