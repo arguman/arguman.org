@@ -497,7 +497,7 @@ li.base-premises {
 
     .premise .related-argument a {
         font-size: 1.6em;
-        line-height: 0.8em;
+        line-height: 20px;
         text-decoration: none;
         letter-spacing: -1px;
         font-family: AmericanTypewriter, serif;
@@ -3316,4 +3316,10 @@ div.load-more {
 .selected-argument a {
     cursor: pointer;
     margin-left: 5px;
+}
+
+.twitter-share-button {
+    position: absolute;
+    margin-left: 660px;
+    margin-top: -33px;
 }

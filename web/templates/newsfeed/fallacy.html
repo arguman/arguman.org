@@ -4,4 +4,4 @@
 {% blocktrans trimmed with fallacy=related_object.fallacy_type|humanize_fallacy_type %}
 reported <strong>{{ fallacy }}</strong> for a premise.
 {% endblocktrans %}
-<a class="contention-link" href="{{ related_object.contention.uri }}">{{ related_object.reason }}</a>
+<a class="contention-link" href="{{ related_object.contention.uri }}#{{ related_object.id }}">{{ related_object.reason }}</a>

@@ -2,8 +2,8 @@
 <a href="{{ related_object.contention.uri }}" class="contention-link">{{ related_object.contention.title }}</a>
 
 {% if related_object.related_argument %}
-{% trans "associated with another argument" %}
     <p>
+        {% trans "associated with another argument" %} <br />
         <a href="{{ related_object.contention.uri }}#{{ related_object.id }}" class="premise-link  {{ related_object.premise_class }}">{{ related_object.related_argument.title }}</a>
     </p>
 {% else %}

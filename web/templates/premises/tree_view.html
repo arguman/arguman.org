@@ -135,7 +135,9 @@
         }
     });
 
-    treeView.render();
+    $(window).load(function () {
+        treeView.render();
+    });
 
     (new arguman.NounLoader()).render();
     (new arguman.DraggablePage()).render();
