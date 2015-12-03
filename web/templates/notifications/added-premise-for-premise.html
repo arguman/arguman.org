@@ -3,13 +3,9 @@
 {% if target_object.user and contention %}
 <a class="user" href="{{ target_object.user.get_absolute_url }}">
 {{ target_object.user.username }}</a>
-<a href="{{ contention.get_absolute_url }}" class="contention-link">{{ contention.title|truncatechars:50 }}</a>
-
 {% blocktrans trimmed with class=target_object.premise_class label=target_object.get_premise_type_display %}
-    added a <span class="premise-type {{ class }}">{{ label }}</span> premise for a premise
+    added a <span class="premise-type {{ class }}">{{ label }}</span> premise for
 {% endblocktrans %}
-<br>
-<span class="premise-type {{ target_object.premise_class }}">{{ target_object.get_premise_type_display }}</span>
-önermesi gönderdi.
+    <a href="{{ contention.get_absolute_url }}/{{ target_object.id }}" class="contention-link">{{ contention.title|truncatechars:50 }}</a>
 {% endif %}
 {% endwith %}

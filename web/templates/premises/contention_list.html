@@ -26,6 +26,20 @@
                             {% trans "Neutral support and objection rate." %}
                         {% endif %}
                     </div>
+                    {% with contention.last_premise as last_premise %}
+                    {% if last_premise %}
+                    <div class="last-premises">
+                        <div class="last-premise">
+                            <a href="{{ last_premise.get_absolute_url }}">
+                                {{ last_premise.text }}
+                                {% if last_premise.related_argument %}
+                                <p>{{ last_premise.related_argument }}</p>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
                     <div class="user">
                         {% with last_user=contention.last_user %}
                             <a href="{% url "auth_profile" last_user.username %}">

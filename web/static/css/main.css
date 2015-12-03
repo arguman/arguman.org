@@ -194,6 +194,35 @@ p + br {
     padding: 20px 20px 10px 20px;
 }
 
+.argument-list .last-premise {
+    width: 400px;
+    float: left;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 10px 10px 10px 0;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.argument-list .last-premise a {
+    font-size: 1em;
+    line-height: 1.3em;
+    margin: 0;
+    padding: 0;
+    color: #979797;
+    border: none;
+}
+
+.argument-list .last-premise p {
+    margin: 0;
+    padding: 0;
+}
+
+.argument-list .last-premises {
+    overflow: hidden;
+}
+
 header {
     overflow: hidden;
 }

@@ -271,6 +271,9 @@ class Contention(DeletePreventionMixin, models.Model):
             user = premise.user
         return user
 
+    def last_premise(self):
+        return self.published_premises(ignore_parent=True).latest("pk")
+
     def width(self):
         return self.published_children(ignore_parent=True).count()
 

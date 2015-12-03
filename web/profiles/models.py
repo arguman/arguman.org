@@ -153,7 +153,7 @@ def create_premise_answer_notification(sender, premise, *args, **kwargs):
 
 
 @receiver(supported_a_premise)
-def create_premise_answer_notification(premise, user, *args, **kwargs):
+def create_premise_support_notification(premise, user, *args, **kwargs):
     Notification.objects.create(
         sender=user,
         recipient=premise.user,
