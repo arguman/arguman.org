@@ -8,7 +8,11 @@
         {% include "home.html" %}
         {% include "tabs.html" %}
         {% block tab_content %}
-        {% include "premises/contention_list.html" %}
+        {% if tab_class == "news" %}
+            {% include "premises/contention_list.html" with show_stats=True show_last_premise=True %}
+        {% else %}
+            {% include "premises/contention_list.html" with show_stats=True %}
+        {% endif %}
         {% endblock %}
     </div>
 {% endblock %}

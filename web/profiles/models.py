@@ -21,6 +21,7 @@ class Profile(AbstractUser):
     following = models.ManyToManyField("self", symmetrical=False)
     notification_email = models.BooleanField(_('email notification'), default=True)
     karma = models.IntegerField(null=True, blank=True)
+    twitter_username = models.CharField(max_length=255, blank=True, null=True)
 
     def serialize(self, show_email=True):
         bundle = {

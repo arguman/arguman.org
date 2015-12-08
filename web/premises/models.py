@@ -75,7 +75,7 @@ class Contention(DeletePreventionMixin, models.Model):
     slug = models.SlugField(max_length=255, blank=True)
     description = models.TextField(
         null=True, blank=True, verbose_name=_("Description"), )
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="arguments")
     owner = models.CharField(
         max_length=255, null=True, blank=True,
         verbose_name=_("Original Discourse"),

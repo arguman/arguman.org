@@ -11,8 +11,13 @@
     {% include "partials/channel_list.html" %}
 
     <h3>{{ channel }}</h3>
+    <ul class="channel-active-users">
+    {% for active_user in active_users %}
+        <li><a href="{{ active_user.get_absolute_url }}">{% gravatar profile 40 %} {{ active_user }}</a></li>
+    {% endfor %}
+    </ul>
     <div class="channel-contentions">
-        {% include "premises/contention_list.html" %}
+        {% include "premises/contention_list.html" with show_stats=True %}
     </div>
 </div>
 {% endblock %}

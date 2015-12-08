@@ -1126,7 +1126,7 @@ li.base-premises {
 
 
 #app.tree-view .child-connector {
-    margin-top: 0px;
+    margin-top: 0;
     height: 60px;
     margin-left: 125px;
     z-index: -2;
@@ -1136,34 +1136,84 @@ li.base-premises {
     overflow: hidden;
 }
 
-
 .user-profile aside {
     width: 200px;
     float: left;
     text-align: center;
 }
 
-.user-profile aside img {
-    border-radius: 50%;
+.user-profile aside .profile-image img {
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 190px;
+    height: 190px;
 }
 
 .user-profile nav {
     margin-top: 15px;
 }
 
-.user-profile nav a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 4px 10px;
-    background-color: #f4ebb0;
-    border-radius: 5px;
-    color: #181818;
-    font-size: 20px;
+.user-profile .users-block {
+    overflow: hidden;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
-.user-profile nav a:hover {
-    background-color: #464242;
-    color: white;
+.user-profile .user-info {
+    margin: 0 0 0 15px;
+    padding: 0;
+}
+
+.user-profile .user-info li {
+    text-align: left;
+    list-style-type: none;
+    padding: 1px;
+}
+
+.user-profile .user-info li,
+.user-profile .user-info li a {
+    color: #9c9c9c;
+    text-decoration: none;
+}
+
+.user-profile .user-info li.full-name {
+    font-size: 1.4em;
+    color: #6b6b6b;
+    margin-bottom: -7px;
+    margin-left: -1px;
+    line-height: 1em;
+}
+
+.user-profile .user-info li.username {
+}
+
+.user-profile .user-info li h5 {
+    color: #d6d6d6;
+    font-weight: normal;
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+.user-profile .users-block h4 {
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    color: #979797;
+    text-align: left;
+}
+
+.user-profile .users-block a {
+    text-decoration: none;
+    margin-top: 5px;
+    margin-right: 5px;
+    float: left;
+    display: inline-block;
+}
+
+.user-profile .users-block img {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
 }
 
 .user-profile .user-detail {
@@ -1200,19 +1250,6 @@ li.base-premises {
     color: #525252;
     font-size: 30px;
     text-decoration: none;
-}
-
-.following  {
-    margin: 0 0 0 20px;
-    padding: 0 0 20px 0;
-    overflow: hidden;
-}
-
-.following li {
-    list-style: none;
-    float: left;
-    margin-right: 2px;
-    margin-bottom: 2px;
 }
 
 .premise-actions {
@@ -1477,15 +1514,6 @@ form .parent-premise strong {
     width: 200px;
     font-size: 29px;
 }
-
-.profile-update-button {
-    font-size: 20px;
-    color: #232323;
-    text-decoration: none;
-    min-width: 200px;
-    display: inline-block;
-}
-
 
 .premise-list {
     margin: 0;
@@ -3320,6 +3348,204 @@ div.load-more {
 
 .twitter-share-button {
     position: absolute;
-    margin-left: 660px;
+    margin-left: 330px;
     margin-top: -33px;
+}
+
+.button {
+    background-color: #ffff95;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 2px 5px;
+    color: #191919;
+}
+
+.tab-headers {
+    margin: 0 0 10px;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 3px solid #f3f3f3;
+}
+
+.tab-headers li {
+    float: left;
+    list-style: none;
+    margin-bottom: -5px;
+    border: 3px solid #fff;
+}
+
+.tab-headers li.active {
+    border-radius: 5px;
+    background: #fff;
+    border: 3px solid #f3f3f3;
+}
+
+.tab-headers li.active a {
+
+}
+
+.tab-headers li a {
+    display: block;
+    padding: 7px 7px;
+    text-decoration: none;
+    color: #949494;
+}
+
+.tab-headers .actions-tab {
+    float: right;
+}
+
+.tab-headers .actions-tab a {
+    padding: 3px 5px;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+.graph .link {
+    stroke: #ccc;
+    stroke-width: 1px;
+}
+
+.graph circle {
+    cursor: move;
+    fill: #ccc;
+}
+
+.graph .noun {
+    fill: #eaeaea;
+}
+
+.graph .channel {
+    fill: #b3d98a;
+}
+
+.graph .node text {
+    pointer-events: none;
+    font: 20px sans-serif;
+    stroke: none;
+    fill: black;
+}
+
+.overview-blocks {
+    overflow: hidden;
+}
+
+.overview-block {
+    width: 42%;
+    margin-right: 10px;
+    float: left;
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.overview-block ul {
+    margin: 0;
+    padding: 0;
+}
+
+.overview-block li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.overview-block h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.1em;
+    line-height: 1.1em;
+}
+
+.overview-block .channels {
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.overview-block .channel {
+    overflow: hidden;
+    margin-bottom: 5px;
+    margin-right: 7px;
+    float: left;
+    height: 22px;
+}
+
+
+.overview-block .channel a {
+    display: inline-block;
+    padding: 0;
+    text-decoration: none;
+    color: #424242;
+    border-bottom: 2px solid #b3d98a;
+    line-height: 0.7em;
+    font-size: 1.2em;
+}
+
+.overview-block.discussed-users {
+
+}
+
+.overview-block.discussed-users .users {
+    margin: 3px 0;
+}
+
+.overview-block.discussed-users li {
+    overflow: hidden;
+    margin-bottom: 1px;
+}
+
+.overview-block.discussed-users .percent {
+    width: 70px;
+    float: left;
+}
+
+.overview-block.discussed-users .percent span {
+    background: black;
+    height: 1.3em;
+    display: inline-block;
+    float: left;
+}
+
+.overview-block.discussed-users .percent .but { background: #ffaeb6; }
+.overview-block.discussed-users .percent .because { background: #c3e5ad; }
+.overview-block.discussed-users .percent .however { background: #ffd284; }
+
+.overview-block.discussed-users .users a {
+    float: left;
+    margin-left: 5px;
+    color: #5b5b5b;
+    text-decoration: none;
+}
+
+.overview-block.most-loved {
+    background: transparent;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.overview-block.most-loved .premise-stats {
+    width: 500px;
+    margin: 10px 0;
+}
+
+.overview-block.most-loved .premise-stats:last-child {
+    border: none;
+}
+
+.overview-block.most-loved .premise-stats h2,
+.profile-premises .premise-stats h2{
+    margin: 15px 0 10px;
+}
+
+.overview-block.most-loved .premise-stats .supporter-count {
+    color: #c6c6c6;
+}
+
+.premise-stats a {
+    color: #383838;
+    text-decoration: none;
+}
+
+.profile-premises {
+    padding-top: 2px;
 }

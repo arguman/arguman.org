@@ -1,0 +1,48 @@
+{% extends "auth/profile.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load humanize %}
+
+{% block profile-content %}
+<div class="profile-premises paginated">
+{% for premise in premises %}
+    <div class="premise-stats">
+        <h2><a href="{{ premise.argument.get_absolute_url }}">{{ premise.argument.title }}</a></h2>
+        <div class="premise-content {{ premise.premise_class }}">
+            <a href="{{ premise.get_absolute_url }}">{{ premise.text }}</a>
+
+            {% if premise.related_argument %}
+            <div class="related-argument">
+                <a href="{{ premise.absolute_url }}">{{ premise.related_argument.title }}</a>
+            </div>
+            {% endif %}
+        </div>
+        {% if premise.supporters.exists %}
+        <div class="supporter-count">
+        {{ premise.supporters.count }} {% trans "supporter." %}
+        </div>
+        {% endif %}
+        {% if premise.reports.exists %}
+            <div class="reported_as_fallacy">
+            {{ premise.reports.count }} {% trans "fallacy report." %}
+
+            {% if premise.fallacies %}
+                {% for fallacy in premise.fallacies %}
+                <div class="fallacy">{{ fallacy.label }}</div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% empty %}
+    <div class="empty">
+    {% trans "No data." %}
+    </div>
+{% endfor %}
+{% if has_next_page %}
+<div class="load-more">
+    <a class="next" href="{{ next_page_url }}">{% trans "Load more" %}</a>
+</div>
+{% endif %}
+</div>
+{% endblock %}

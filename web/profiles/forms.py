@@ -55,7 +55,8 @@ class ProfileUpdateForm(forms.ModelForm):
     }
 
     class Meta(UserCreationForm.Meta):
-        fields = ("email", "notification_email")
+        fields = ("first_name", "last_name", "email", "twitter_username",
+                  "notification_email")
         model = Profile
 
     new_password1 = forms.CharField(label=_("New password"),

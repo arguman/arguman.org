@@ -7,65 +7,138 @@
 {% block content %}
     <div class="container user-profile">
         <aside>
-            <h3>{{ profile.username }}</h3>
             <a class="gravatar profile-image" href="{{ profile.get_absolute_url }}">
-                {% gravatar profile 120 %}
+                {% gravatar profile 380 %}
             </a>
-            {% ifequal profile user %}
-            <a class="profile-update-button" href="{% url "auth_profile_update" %}">({% trans "update" %})</a>
-            {% endifequal %}
-            {% if not user.is_anonymous and can_follow %}
-            <nav class="actions">
-                {% if is_followed %}
-                    <a href="{% url "api-profile-follow" profile.username %}" class="anchor unfollow" data-method="delete">{% trans "Unfollow" %}</a>
-                {% else %}
-                    <a href="{% url "api-profile-follow" profile.username %}" class="anchor follow" data-method="post">{% trans "Follow" %}</a>
+
+            <ul class="user-info">
+                {% if profile.first_name or profile.last_name %}
+                    <li class="full-name">{{ profile.get_full_name }}</li>
                 {% endif %}
+                <li class="username">{{ profile.username }}</li>
+                {% if profile.twitter_username %}
+                <li class="registration">
+                    <h5>{% trans "twitter" %}</h5>
+                    <a target="_blank" href="https://twitter.com/{{ profile.twitter_username }}">@{{ profile.twitter_username }}</a>
+                </li>
+                {% endif %}
+                <li class="registration">
+                    <h5>{% trans "date joined" %}</h5>
+                    {{ profile.date_joined|date }}
+                </li>
+            </ul>
+
+            <nav class="users-block following">
+                <h4>{% trans "Following" %} ({{ profile.following.count }})</h4>
+                {% for followee in profile.following.all|slice:":20" %}
+                    <a title="{{ followee.username }}" href="{{ followee.get_absolute_url }}">
+                        {% gravatar followee 380 %}
+                    </a>
+                {% endfor %}
             </nav>
-            {% endif %}
+
+            <nav class="users-block followers">
+                <h4>{% trans "Followers" %} ({{ profile.followers.count }})</h4>
+                {% for follower in profile.followers.all|slice:":20" %}
+                    <a title="{{ follower.username }}" href="{{ follower.get_absolute_url }}">
+                        {% gravatar follower 380 %}
+                    </a>
+                {% endfor %}
+            </nav>
+
         </aside>
 
         <div class="user-detail">
-            <div class="stats-bar">
-                 <span>
-                    {{ object.karma }} <br>
-                    {% trans "KARMA" %}
-                </span>
-                <span>
-                    {{ object.followers.count }} <br/>
-                    {% trans "FOLLOWER" %}
-                </span>
-                <span>
-                    {{ object.contention_set.count }} <br>
-                    {% trans "ARGUMENT" %}
-                </span>
-                <span>
-                    {{ object.user_premises.count }} <br>
-                    {% trans "PREMISE" %}
-                </span>
-            </div>
+        <ul class="tab-headers">
+            <li{% if tab_name == "overview" %} class="active"{% endif %}><a href="{% url "auth_profile" profile.username %}">{% trans "Overview" %}</a></li>
+            <li{% if tab_name == "arguments" %} class="active"{% endif %}><a href="{% url "auth_profile_arguments" profile.username %}">{% trans "Arguments" %}</a></li>
+            <li{% if tab_name == "premises" %} class="active"{% endif %}><a href="{% url "auth_profile_premises" profile.username %}">{% trans "Premises" %}</a></li>
+            <li{% if tab_name == "fallacies" %} class="active"{% endif %}><a href="{% url "auth_profile_fallacies" profile.username %}">{% trans "Fallacy Reports" %}</a></li>
+            <li class="actions-tab">
+                {% ifequal profile user %}
+                <a class="button" href="{% url "auth_profile_update" %}">{% trans "update profile" %}</a>
+                {% endifequal %}
+                {% if not user.is_anonymous and can_follow %}
+                {% if is_followed %}
+                    <a href="{% url "api-profile-follow" profile.username %}" class="button anchor unfollow" data-method="delete">{% trans "Unfollow" %}</a>
+                {% else %}
+                    <a href="{% url "api-profile-follow" profile.username %}" class="button anchor follow" data-method="post">{% trans "Follow" %}</a>
+                {% endif %}
+                {% endif %}
+            </li>
+        </ul>
 
-        <h3>{% trans "Newsfeed" %}:</h3>
-
-         <div class="newsfeed-container">
-            {% for entry in news_entries %}
-              <div class="news-item {{ entry.entry_class }}">
-                <div class="news-item-content--no-arrow">
-                    {{ entry.render }}
-                    <time datetime="{{ entry.date_created }}">{{ entry.date_created|naturaltime }}</time>
-                </div>
-             </div>
-            {% empty %}
-                <p class="empty-newsfeed">{% trans "The feed seems to empty." %}</p>
-            {% endfor %}
-        {% if has_next_page %}
-            <div class="load-more">
-                <a class="next" href="{{ next_page_url }}">{% trans "Load more" %}</a>
+        {% block profile-content %}
+            <div class="overview-blocks">
+            <div class="overview-block channels">
+                <h3>{% trans "Most active channels" %}</h3>
+                <ul class="channels">
+                {% for bundle in related_channels|slice:":10" %}
+                    <li class="channel">
+                        <a href="{{ bundle.channel.absolute_url }}">{{ bundle.channel.title }}</a>
+                    </li>
+                    {% empty %}
+                    <li class="empty">
+                    {% trans "No data." %}
+                    </li>
+                {% endfor %}
+                </ul>
             </div>
-        {% endif %}
+            <div class="overview-block discussed-users">
+                <h3>{% trans "Most discussed users" %}</h3>
+                <ul class="users">
+                    {% for discussed_user in discussed_users %}
+                        <li>
+                            <div class="percent">
+                                <span class="but" style="width: {{ discussed_user.but|stringformat:"f" }}%"></span>
+                                <span class="because" style="width: {{ discussed_user.because|stringformat:"f" }}%"></span>
+                                <span class="however" style="width: {{ discussed_user.however|stringformat:"f" }}%"></span>
+                            </div>
+                            <a href="{% url "auth_profile" discussed_user.user.username %}">{{ discussed_user.user.username|lower }}</a>
+                        </li>
+                        {% empty  %}
+                        <li>{% trans "No data." %}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="overview-block most-loved">
+                <h3>{% trans "Most supported premises" %}</h3>
+                {% for premise in supported_premises %}
+                    <div class="premise-stats">
+                        <h2><a href="{{ premise.argument.get_absolute_url }}">{{ premise.argument.title }}</a></h2>
+                        <div class="premise-content {{ premise.premise_class }}">
+                            <a href="{{ premise.get_absolute_url }}">{{ premise.text }}</a>
+                            {% if premise.related_argument %}
+                            <div class="related-argument">
+                                <a href="{{ premise.get_absolute_url }}">{{ premise.related_argument.title }}</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% if premise.supporters.exists %}
+                        <div class="supporter-count">
+                        {{ premise.supporters.count }} {% trans "supporter." %}
+                        </div>
+                        {% endif %}
+                        {% if premise.reports.exists %}
+                            <div class="reported_as_fallacy">
+                            {{ premise.reports.count }} {% trans "fallacy report." %}
+
+                            {% if premise.fallacies %}
+                                {% for fallacy in premise.fallacies %}
+                                <div class="fallacy">{{ fallacy.label }}</div>
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <div class="empty">
+                    {% trans "No data." %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-
-
+        {% endblock %}
 
         </div>
     </div>
@@ -76,7 +149,7 @@
     {% include "infinity-pagination.html" %}
     <script type="text/javascript">
         $(function () {
-            $("nav.actions a").each(function () {
+            $(".anchor").each(function () {
                 $(this).click(function () {
                     $.ajax({
                         url: $(this).attr("href"),
@@ -90,6 +163,14 @@
                     return false;
                 });
             });
+        });
+        $(window).on('load', function () {
+            var left = $(".channels"),
+                right = $(".discussed-users");
+
+            var max = Math.max(right.height(), left.height());
+            left.height(max);
+            right.height(max);
         });
     </script>
 {% endblock %}

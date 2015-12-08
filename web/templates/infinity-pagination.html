@@ -2,7 +2,12 @@
     new hipo.InfinityScroll({
         "pagination_selector": ".load-more",
         "next_link_selector": ".next",
-        "content_selector": ".argument-list, .newsfeed-container, .fallacy-list",
+        "content_selector": [
+            ".argument-list",
+            ".newsfeed-container",
+            ".fallacy-list",
+            ".paginated"
+        ].join(", "),
         "max_page": 5,
         "on_page_load": function () {
             $("footer").css({

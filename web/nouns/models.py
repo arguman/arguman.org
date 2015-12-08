@@ -116,6 +116,12 @@ class Noun(models.Model):
     def get_absolute_url(self):
         return 'nouns_detail', [self.slug]
 
+    def serialize(self):
+        return {
+            'title': self.text,
+            'absolute_url': self.get_absolute_url()
+        }
+
     def hypernyms(self):
         return self.out_relations.filter(relation_type='hypernym')
 
@@ -222,3 +228,9 @@ class Channel(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'channel_detail', [self.slug]
+
+    def serialize(self):
+        return {
+            'title': self.title,
+            'absolute_url': self.get_absolute_url()
+        }

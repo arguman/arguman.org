@@ -140,23 +140,23 @@ class ContentionJsonView(DetailView):
 
     def get_premises(self, contention, user, parent=None):
         children = [{
-                        "pk": premise.pk,
-                        "name": premise.text,
-                        "parent": parent.text if parent else None,
-                        "reportable_by_authenticated_user": self.user_can_report(
-                            premise, user),
-                        "report_count": premise.reports.count(),
-                        "user": {
-                            "id": premise.user.id,
-                            "username": premise.user.username,
-                            "absolute_url": reverse("auth_profile",
-                                                    args=[premise.user.username])
-                        },
-                        "sources": premise.sources,
-                        "premise_type": premise.premise_class(),
-                        "children": (self.get_premises(contention, user, parent=premise)
-                                     if premise.published_children().exists() else [])
-                    } for premise in contention.published_premises(parent)]
+            "pk": premise.pk,
+            "name": premise.text,
+            "parent": parent.text if parent else None,
+            "reportable_by_authenticated_user": self.user_can_report(
+                premise, user),
+            "report_count": premise.reports.count(),
+            "user": {
+                "id": premise.user.id,
+                "username": premise.user.username,
+                "absolute_url": reverse("auth_profile",
+                                        args=[premise.user.username])
+            },
+            "sources": premise.sources,
+            "premise_type": premise.premise_class(),
+            "children": (self.get_premises(contention, user, parent=premise)
+                         if premise.published_children().exists() else [])
+        } for premise in contention.published_premises(parent)]
         return children
 
     def user_can_report(self, premise, user):

@@ -7,11 +7,13 @@
     {% for contention in contentions %}
         {% with overview=contention.overview but=contention.but.count however=contention.however.count because=contention.because.count %}
         <li>
+            {% if show_stats %}
             <div class="stats">
                 <span class="because">{{ because }} {% trans "because" %}</span>
                 <span class="but">{{ but }} {% trans "but" %}</span>
                 <span class="however">{{ however }} {% trans "however" %}</span>
             </div>
+            {% endif %}
             <div class="info">
                 <h3><a class="main-contention {{ overview.status }}" href="{{ contention.get_absolute_url }}">{{ contention.title }}</a></h3>
                 <div class="overview">
@@ -26,6 +28,7 @@
                             {% trans "Neutral support and objection rate." %}
                         {% endif %}
                     </div>
+                    {% if show_last_premise %}
                     {% with contention.last_premise as last_premise %}
                     {% if last_premise %}
                     <div class="last-premises">
@@ -40,6 +43,7 @@
                     </div>
                     {% endif %}
                     {% endwith %}
+                    {% endif %}
                     <div class="user">
                         {% with last_user=contention.last_user %}
                             <a href="{% url "auth_profile" last_user.username %}">

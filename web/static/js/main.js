@@ -664,6 +664,106 @@
         }
     });
 
+    arguman.ForceGraph = Class.extend({
+        el: ".graph",
+        width: 550,
+        height: 400,
+        endpoint: null,
+
+        init: function (options) {
+            $.extend(this, options);
+
+            this.$el = $(this.el);
+        },
+
+        render: function () {
+            var width = this.width,
+                height = this.height;
+
+            var force = d3.layout.force()
+                .size([width, height])
+                .gravity(.05)
+                .charge(-240)
+                .linkDistance(50)
+                .on("tick", this.tick.bind(this));
+
+            var drag = force.drag()
+                .on("dragstart", this.dragStart);
+
+            var svg = d3.select(this.el).append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            var link = svg.selectAll(".link"),
+                node = svg.selectAll(".node");
+
+            this.svg = svg;
+
+            d3.json(this.endpoint, function(error, graph) {
+                if (error) throw error;
+
+                force
+                    .nodes(graph.nodes)
+                    .links(graph.links)
+                    .start();
+
+                link = link.data(graph.links)
+                    .enter().append("line")
+                    .attr("class", "link");
+
+                var node = svg.selectAll(".node")
+                    .data(graph.nodes)
+                    .enter().append("g")
+                    .attr("class", "node")
+                    .call(force.drag);
+
+                node.append("circle")
+                    .attr("class", function (d) {return d.type;})
+                    .attr("dx", -8)
+                    .attr("dy", -8)
+                    .attr("r", function (d) {
+                        return d.type === 'noun'? 7: 18;
+                    })
+                    .attr("width", 16)
+                    .attr("height", 16)
+                    .on("dblclick", this.doubleClick)
+                    .call(drag);
+
+                node.append("text")
+                    .attr("dx", 0)
+                    .attr("dy", ".35em")
+                    .style("font-size", function (d) {
+                        return d.type === 'noun'? '10px': '20px'
+                    })
+                    .text(function(d) { return d.label });
+
+            }.bind(this));
+        },
+
+        tick: function () {
+            //console.log('tick', this.link, this.node)
+            var link = this.svg.selectAll(".link"),
+                node = this.svg.selectAll(".node");
+
+            link.attr("x1", function(d) { return d.source.x; })
+                   .attr("y1", function(d) { return d.source.y; })
+                   .attr("x2", function(d) { return d.target.x; })
+                   .attr("y2", function(d) { return d.target.y; });
+
+            node.attr("transform", function(d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
+        },
+
+        doubleClick: function (d) {
+            //d3.select(this).classed("fixed", d.fixed = false);
+        },
+
+        dragStart: function (d) {
+           d3.select(this).classed("fixed", d.fixed = true);
+        }
+    });
+
     arguman.Timeline = Class.extend({
         el: "#timeline",
         premises: ".tree-node",

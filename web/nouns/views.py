@@ -1,3 +1,6 @@
+from datetime import timedelta, datetime
+from django.contrib.auth.models import User
+from django.db.models import Count, Q, Sum, F
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import get_language
 from django.views.generic import DetailView, CreateView, ListView
@@ -7,6 +10,7 @@ from nouns.forms import RelationCreationForm
 from premises.models import Contention
 from premises.views import HomeView
 from profiles.mixins import LoginRequiredMixin
+from profiles.models import Profile
 
 
 class NounDetail(DetailView):
@@ -86,6 +90,7 @@ class ChannelDetail(HomeView):
     def get_context_data(self, **kwargs):
         channel = self.get_channel()
         return super(ChannelDetail, self).get_context_data(
+            active_users=self.get_active_users(),
             channel=channel, **kwargs)
 
     def get_contentions(self, paginate=True):
@@ -103,3 +108,16 @@ class ChannelDetail(HomeView):
             contentions = (contentions[self.get_offset(): self.get_limit()])
 
         return contentions
+
+    def get_active_users(self):
+        channel = self.get_channel()
+        nouns = channel.nouns.all()
+        return Profile.objects.filter(
+            user_premises__argument__nouns__in=nouns,
+            user_premises__argument__is_published=True,
+            user_premises__date_creation__gte=datetime.today() - timedelta(days=90)
+        ).annotate(
+            score=Count('user_premises__argument', distinct=True)
+        ).order_by(
+            '-score'
+        )[:5]

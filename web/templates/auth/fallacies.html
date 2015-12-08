@@ -1,0 +1,32 @@
+{% extends "auth/profile.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load humanize %}
+
+{% block profile-content %}
+<div class="fallacy-list">
+    {% for fallacy in fallacies %}
+        <div class="fallacy-report">
+            <div class="premise-stats">
+            <h2><a href="{{ fallacy.contention.get_absolute_url }}">{{ fallacy.contention.title }}</a></h2>
+
+                <div class="premise-content {{ fallacy.premise.premise_class }}">
+                    {{ fallacy.premise.text }}
+                </div>
+                <div class="fallacy-reason">
+                    <h4>{{ fallacy.get_fallacy_type_display }}</h4>
+                    {{ fallacy.reason }}
+                    <div class="reporter">
+                    <a href="{% url "auth_profile" fallacy.reporter.username %}">{{ fallacy.reporter.username|lower }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% if has_next_page %}
+    <div class="load-more">
+        <a class="next" href="{{ next_page_url }}">{% trans "Load more" %}</a>
+    </div>
+{% endif %}
+</div>
+{% endblock %}
