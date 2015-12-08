@@ -12,8 +12,9 @@
 
     <h3>{{ channel }}</h3>
     <ul class="channel-active-users">
+    <li class="title"><span>{% trans "Regular users" %}</span></li>
     {% for active_user in active_users %}
-        <li><a href="{{ active_user.get_absolute_url }}">{% gravatar profile 40 %} {{ active_user }}</a></li>
+        <li><a href="{{ active_user.get_absolute_url }}">{% gravatar active_user 60 %}</a></li>
     {% endfor %}
     </ul>
     <div class="channel-contentions">

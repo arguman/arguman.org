@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-08 21:46+0000\n"
+"POT-Creation-Date: 2015-12-08 22:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: tr\n"
@@ -324,18 +324,18 @@ msgstr "Şifremi Unuttum"
 msgid "Submit"
 msgstr "Gönder"
 
-#: templates/auth/premises.html:22 templates/auth/profile.html:117
+#: templates/auth/premises.html:22 templates/auth/profile.html:121
 #: templates/search/premise.html:11 templates/stats/premise.html:11
 msgid "supporter."
 msgstr "destekleyen"
 
-#: templates/auth/premises.html:27 templates/auth/profile.html:122
+#: templates/auth/premises.html:27 templates/auth/profile.html:126
 #: templates/search/premise.html:16 templates/stats/premise.html:16
 msgid "fallacy report."
 msgstr "safsata bildirimi"
 
 #: templates/auth/premises.html:39 templates/auth/profile.html:82
-#: templates/auth/profile.html.py:134
+#: templates/auth/profile.html.py:101 templates/auth/profile.html:138
 msgid "No data."
 msgstr "Hiç veri yok."
 
@@ -391,7 +391,7 @@ msgstr "En aktif olduğu kanallar"
 msgid "Most discussed users"
 msgstr "En çok tartıştığı kullanıcılar"
 
-#: templates/auth/profile.html:103
+#: templates/auth/profile.html:107
 msgid "Most supported premises"
 msgstr "En çok desteklenen önermeleri"
 
@@ -556,6 +556,7 @@ msgstr ""
 "bir <span class=\"premise-type %(class)s\">%(label)s</span> önermesi ekledi"
 
 #: templates/notifications/added-premise-for-premise.html:6
+#, python-format
 msgid ""
 "added a <span class=\"premise-type %(class)s\">%(label)s</span> premise for"
 msgstr ""
@@ -573,6 +574,10 @@ msgstr "Önermen <strong>%(label)s</strong> olarak bildirildi."
 #: templates/notifications/supported-a-premise.html:6
 msgid "supported your premise"
 msgstr "önermeni destekledi"
+
+#: templates/nouns/channel_detail.html:15
+msgid "Regular users"
+msgstr "Müdavimler"
 
 #: templates/nouns/detail.html:39 templates/nouns/partial.html:11
 msgid "add new relation"
@@ -984,6 +989,11 @@ msgstr "Seçilmişler"
 #: templates/tabs.html:8
 msgid "New"
 msgstr "Yeniler"
+
+#, fuzzy
+#~| msgid "most active users"
+#~ msgid "Active users"
+#~ msgstr "en katılımcı üyeler"
 
 #~ msgid "update"
 #~ msgstr "güncelle"

@@ -3549,3 +3549,34 @@ div.load-more {
 .profile-premises {
     padding-top: 2px;
 }
+
+.channel-active-users {
+    float: right;
+    width: 300px;
+    margin: -40px 0 0;
+    padding: 0;
+    text-align: right;
+}
+
+.channel-active-users li {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #ababab;
+}
+
+.channel-active-users li.title {
+    margin-right: 5px;
+}
+
+.channel-active-users li.title span {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.channel-active-users li img {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}

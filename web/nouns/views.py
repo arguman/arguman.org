@@ -115,7 +115,7 @@ class ChannelDetail(HomeView):
         return Profile.objects.filter(
             user_premises__argument__nouns__in=nouns,
             user_premises__argument__is_published=True,
-            user_premises__date_creation__gte=datetime.today() - timedelta(days=90)
+            user_premises__date_creation__gte=datetime.today() - timedelta(days=30)
         ).annotate(
             score=Count('user_premises__argument', distinct=True)
         ).order_by(

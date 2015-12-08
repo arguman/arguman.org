@@ -86,6 +86,7 @@
             </div>
             <div class="overview-block discussed-users">
                 <h3>{% trans "Most discussed users" %}</h3>
+                {% if discussed_users %}
                 <ul class="users">
                     {% for discussed_user in discussed_users %}
                         <li>
@@ -94,12 +95,13 @@
                                 <span class="because" style="width: {{ discussed_user.because|stringformat:"f" }}%"></span>
                                 <span class="however" style="width: {{ discussed_user.however|stringformat:"f" }}%"></span>
                             </div>
-                            <a href="{% url "auth_profile" discussed_user.user.username %}">{{ discussed_user.user.username|lower }}</a>
+                            <a href="{% url "auth_profile" discussed_user.user.username %}">{{ discussed_user.user.username|lower|truncatechars:18 }}</a>
                         </li>
                         {% empty  %}
                         <li>{% trans "No data." %}</li>
                     {% endfor %}
                 </ul>
+                {% endif %}
             </div>
             <div class="overview-block most-loved">
                 <h3>{% trans "Most supported premises" %}</h3>
