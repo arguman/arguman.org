@@ -36,9 +36,12 @@
         </div>
         {% if not serialized.premises %}
             <div id="empty-state">
-                {% trans "The argument has no premises yet." %}<br />
+                {% trans "The argument have no premises." %}<br />
                 {% if user.is_authenticated %}
                 <a href="{% url "new_premise" contention.slug %}">{% trans "Add a premise" %}</a>
+                {% endif %}
+                {% if edit_mode %} |
+                    <a href="{% url "contention_edit" serialized.slug %}">{% trans "Edit argument" %}</a>
                 {% endif %}
             </div>
         {% endif %}

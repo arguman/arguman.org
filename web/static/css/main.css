@@ -916,13 +916,13 @@ li.base-premises {
 
 #empty-state {
     font-size: 20px;
-    width: 280px;
+    width: 340px;
     margin: auto;
     text-align: center;
     color: #A1A1A1;
     font-weight: normal;
     background: #F3F3F3;
-    padding: 20px 15px;
+    padding: 20px 25px;
     border-radius: 20px;
 }
 
@@ -933,6 +933,7 @@ li.base-premises {
     border-bottom: 2px solid gray;
     text-decoration: none;
     height: 1.3em;
+    font-size: 0.8em;
 }
 
 #app.tree-view {

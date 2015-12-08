@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arguman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-08 22:56+0000\n"
+"POT-Creation-Date: 2015-12-08 23:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fatih Erikli <fatiherikli@gmail.com>\n"
 "Language: tr\n"
@@ -687,17 +687,17 @@ msgid "sender:"
 msgstr "gönderen:"
 
 #: templates/premises/contention_list.html:22
-#: templates/premises/tree_view.html:63
+#: templates/premises/tree_view.html:66
 msgid "objection rate"
 msgstr "itiraz oranı"
 
 #: templates/premises/contention_list.html:25
-#: templates/premises/tree_view.html:58
+#: templates/premises/tree_view.html:61
 msgid "support rate"
 msgstr "desteklenme oranı"
 
 #: templates/premises/contention_list.html:28
-#: templates/premises/tree_view.html:68
+#: templates/premises/tree_view.html:71
 msgid "Neutral support and objection rate."
 msgstr "nötr desteklenme ve itiraz oranı."
 
@@ -871,18 +871,22 @@ msgid "Loading tree..."
 msgstr "Yükleniyor..."
 
 #: templates/premises/tree_view.html:39
-msgid "The argument has no premises yet."
-msgstr "Argümanın henüz bir önermesi yok."
+msgid "The argument have no premises."
+msgstr "Argüman henüz bir önermeye sahip değil."
 
 #: templates/premises/tree_view.html:41
 msgid "Add a premise"
 msgstr "Önerme ekle"
 
-#: templates/premises/tree_view.html:49
+#: templates/premises/tree_view.html:44
+msgid "Edit argument"
+msgstr "Argümanı Düzenle"
+
+#: templates/premises/tree_view.html:52
 msgid "The argument is too complex. You can switch to list view."
 msgstr "Argüman çok kalabalık. Liste görünümüne geçebilirsiniz."
 
-#: templates/premises/tree_view.html:74
+#: templates/premises/tree_view.html:77
 msgid "last update:"
 msgstr "son güncellenme:"
 
