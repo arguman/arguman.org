@@ -3536,10 +3536,20 @@ div.load-more {
 .overview-block.most-loved .premise-stats h2,
 .profile-premises .premise-stats h2{
     margin: 15px 0 10px;
+    font-size: 29px;
 }
 
 .overview-block.most-loved .premise-stats .supporter-count {
     color: #c6c6c6;
+}
+
+.user-detail .argument-list .info {
+    width: 500px;
+}
+
+.user-detail .argument-list h3 a {
+    font-size: 29px;
+    line-height: 32px;
 }
 
 .premise-stats a {
