@@ -3189,7 +3189,6 @@ div.load-more {
 .contention-detail-header .header-block.argument-actions {
     float: right;
     width: 180px;
-    border-left: 1px solid #e8e8e8;
 }
 
 .contention-detail-header .header-block.argument-actions ul {
@@ -3205,8 +3204,8 @@ div.load-more {
 .contention-detail-header .header-block.argument-actions li a {
     padding: 10px 100px 5px 15px;
     display: block;
-    background-color: #efefef;
-    color: #a3a3a3;
+    background-color: #eaeaea;
+    color: #8d8d8d;
     outline: none;
 }
 
@@ -3225,7 +3224,7 @@ div.load-more {
 }
 
 .contention-detail-header .header-block.argument-actions .random-argument {
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid #dddddd;
 }
 
 .contention-detail-header .header-block.argument-actions .random-argument img {
