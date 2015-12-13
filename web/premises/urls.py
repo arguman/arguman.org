@@ -8,8 +8,8 @@ from premises.views import (ContentionDetailView, HomeView,
                             UpdatedArgumentsView, ReportView, RemoveReportView,
                             ControversialArgumentsView, TosView, SearchView,
                             NotificationsView, PremiseSupportView, PremiseUnsupportView,
-                            StatsView, FallaciesView, FeaturedJSONView, NewsJSONView)
-
+                            StatsView, FallaciesView, FeaturedJSONView, NewsJSONView,
+                            RandomArgumentView)
 
 
 urlpatterns = patterns('',
@@ -19,8 +19,10 @@ urlpatterns = patterns('',
    url(r'^news.json$', NewsJSONView.as_view(), name='contentions_latest_json'),
    url(r'^news$', NewsView.as_view(),
        name='contentions_latest'),
-   url(r'^search', SearchView.as_view(),
+   url(r'^search$', SearchView.as_view(),
        name='contentions_search'),
+   url(r'^random$', RandomArgumentView.as_view(),
+       name='contentions_random'),
    url(r'^updated$', UpdatedArgumentsView.as_view(),
        name='contentions_updated'),
    url(r'^controversial', ControversialArgumentsView.as_view(),

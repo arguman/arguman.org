@@ -798,7 +798,7 @@
         render: function () {
             var premises = this.sortPremises();
             var barWidth = Math.max(
-                $('.tree-contention h3 span').width() + 60,
+                $('.tree-contention h3 span').width() + 62,
                 620
             );
 

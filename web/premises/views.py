@@ -14,7 +14,7 @@ from django.utils.timezone import now
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
-from django.views.generic import DetailView, TemplateView, CreateView, View
+from django.views.generic import DetailView, TemplateView, CreateView, View, RedirectView
 from django.views.generic.edit import UpdateView
 from django.utils.translation import get_language
 from django.db.models import Count
@@ -617,6 +617,21 @@ class ArgumentUpdateView(LoginRequiredMixin, UpdateView):
         form.instance.update_premise_weights()
         form.instance.save()
         return response
+
+
+class RandomArgumentView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        argument = Contention.objects.annotate(
+            premise_count=Count('premises')
+        ).filter(
+            premise_count__gt=2,
+            language=normalize_language_code(get_language())
+        ).order_by(
+            '?'
+        )[0]
+        return argument.get_absolute_url()
 
 
 class ArgumentPublishView(LoginRequiredMixin, DetailView):

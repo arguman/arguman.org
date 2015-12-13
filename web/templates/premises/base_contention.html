@@ -47,10 +47,30 @@
                 {% trans "Unspecified" %} 
             {% endif %}{% endspaceless %}</p>
         </div>
-        <div class="header-block related-arguments">
-            <img align="right" width="24" src="{% static "img/arrow-down.svg" %}" />
-            <h4><a href="#">{% trans "RELATED ARGUMENTS" %}</a></h4>
+        <div class="header-block argument-actions">
+            <ul>
+                <li class="random-argument">
+                    <a href="{% url "contentions_random" %}">
+                        {% trans "RANDOM" %}
+                        <img align="right" width="18" src="{% static "img/arrow-right.svg" %}" />
+                    </a>
+                </li>
+                <li class="related-arguments">
+                    <a href="{% url "contentions_random" %}">
+                        {% trans "RELATED ARGUMENTS" %}
+                        <img align="right" width="18" src="{% static "img/arrow-down.svg" %}" />
+                    </a>
+                </li>
+            </ul>
         </div>
+{#        <div class="header-block random-argument">#}
+{#            <h4><a href="{% url "contentions_random" %}">{% trans "RANDOM" %}#}
+{#                <img align="right" width="24" src="{% static "img/arrow-right.svg" %}" /></a></h4>#}
+{#        </div>#}
+{#        <div class="header-block related-arguments">#}
+{#            <img align="right" width="24" src="{% static "img/arrow-down.svg" %}" />#}
+{#            <h4><a href="#">{% trans "RELATED ARGUMENTS" %}</a></h4>#}
+{#        </div>#}
         <div class="header-block share">
             <h4>{% trans "share" %}</h4>
             <p>

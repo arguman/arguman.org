@@ -940,6 +940,7 @@ li.base-premises {
     margin-top: 130px;
     padding-right: 10px;
     visibility: hidden;
+    width: 100%;
 }
 
 #app.tree-view .tree-contention {
@@ -973,6 +974,7 @@ li.base-premises {
     position: absolute;
     margin-left: 400px;
     margin-top: 2px;
+    width: 200px;
 }
 
 #app.tree-view .tree-contention-actions a {
@@ -2769,7 +2771,7 @@ div.load-more {
 
 .recommendation-sidebar {
     background-color: rgb(244, 244, 244);
-    width: 300px;
+    width: 349px;
     height: calc(100% - 78px);
     position: fixed;
     top: 78px;
@@ -3138,6 +3140,7 @@ div.load-more {
     background: #f9f9f9;
     width: 100%;
     z-index: 9999999;
+    border-bottom: 1px solid #dfdfdf;
 }
 
 .contention-detail-header #logo a {
@@ -3183,22 +3186,63 @@ div.load-more {
     outline: none;
 }
 
-.contention-detail-header .related-arguments:hover {
-    background-color: #fffbc6;
-}
-
-.contention-detail-header .related-arguments img {
-    margin-right: 5px;
-    margin-top: 10px;
-    opacity: 0.7;
-}
-
-.contention-detail-header .related-arguments {
+.contention-detail-header .header-block.argument-actions {
     float: right;
-    width: 160px;
-    padding: 17px;
-    cursor: pointer;
-    background-color: #e7e7e7;
+    width: 180px;
+    border-left: 1px solid #e8e8e8;
+}
+
+.contention-detail-header .header-block.argument-actions ul {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+.contention-detail-header .header-block.argument-actions li {
+    list-style-type: none;
+}
+
+.contention-detail-header .header-block.argument-actions li a {
+    padding: 10px 100px 5px 15px;
+    display: block;
+    background-color: #efefef;
+    color: #a3a3a3;
+    outline: none;
+}
+
+.contention-detail-header .header-block.argument-actions li a:hover {
+    background-color: #fff9c6;
+    color: #686868;
+}
+
+.contention-detail-header .header-block.argument-actions li img {
+    opacity: 0.6;
+}
+
+.contention-detail-header .header-block.argument-actions li a img {
+    position: absolute;
+    right: 10px;
+}
+
+.contention-detail-header .header-block.argument-actions .random-argument {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.contention-detail-header .header-block.argument-actions .random-argument img {
+    top: 10px;
+}
+
+.contention-detail-header .header-block.argument-actions .related-arguments a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.contention-detail-header .header-block.argument-actions .related-arguments a {
+    line-height: 1em;
+}
+
+.contention-detail-header .header-block.argument-actions .related-arguments img {
+    top: 48px;
 }
 
 .contention-detail-header .view {
