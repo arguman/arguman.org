@@ -3,6 +3,7 @@
 {% load gravatar  %}
 {% load typogrify_tags %}
 
+<!--Generated on tracked version 1-->
 <ul class="argument-list">
     {% for contention in contentions %}
         {% with overview=contention.overview but=contention.but.count however=contention.however.count because=contention.because.count %}

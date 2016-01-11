@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load gravatar %}
+<!--Generated on tracked version 1-->
 <div class="premise-stats">
 	<h2><a href="{% url "contention_detail" object.argument.slug %}">{{ object.argument.title }}</a></h2>
     <span class="premise-type {{ object.premise_class }}">{{ object.get_premise_type_display }}</span>

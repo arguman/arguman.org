@@ -1,6 +1,7 @@
 {% load i18n %}
 {% with contention=target_object.argument %}
 {% if target_object.user and contention %}
+<!--Generated on tracked version 1-->
 <a class="user" href="{{ target_object.user.get_absolute_url }}">
     {{ target_object.user.username }}</a>
 
