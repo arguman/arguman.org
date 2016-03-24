@@ -8,7 +8,7 @@
     <div class="container user-profile">
         <aside>
             <a class="gravatar profile-image" href="{{ profile.get_absolute_url }}">
-                {% gravatar profile 380 %}
+                {% gravatar profile 190 %}
             </a>
 
             <ul class="user-info">
@@ -32,7 +32,7 @@
                 <h4>{% trans "Following" %} ({{ profile.following.count }})</h4>
                 {% for followee in profile.following.all|slice:":20" %}
                     <a title="{{ followee.username }}" href="{{ followee.get_absolute_url }}">
-                        {% gravatar followee 380 %}
+                        {% gravatar followee 30 %}
                     </a>
                 {% endfor %}
             </nav>
@@ -41,7 +41,7 @@
                 <h4>{% trans "Followers" %} ({{ profile.followers.count }})</h4>
                 {% for follower in profile.followers.all|slice:":20" %}
                     <a title="{{ follower.username }}" href="{{ follower.get_absolute_url }}">
-                        {% gravatar follower 380 %}
+                        {% gravatar follower 30 %}
                     </a>
                 {% endfor %}
             </nav>
