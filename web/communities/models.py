@@ -37,6 +37,9 @@ class Community(models.Model):
         return self.community_type == 'public'
 
     def get_membership(self, user):
+        if user.is_anonymous():
+            return
+
         try:
             return self.memberships.get(user=user)
         except Membership.DoesNotExist:

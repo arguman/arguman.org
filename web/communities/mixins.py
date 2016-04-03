@@ -23,7 +23,7 @@ class CommunityMixin(object):
     def dispatch(self, request, *args, **kwargs):
         community = request.community
 
-        if community.user_can_view(request.user):
-            return super(CommunityMixin, self).dispatch(request, *args, **kwargs)
+        if community and not community.user_can_view(request.user):
+            return render(self.request, 'communities/requires_membership.html')
 
-        return render('communities/requires_membership.html')
+        return super(CommunityMixin, self).dispatch(request, *args, **kwargs)
