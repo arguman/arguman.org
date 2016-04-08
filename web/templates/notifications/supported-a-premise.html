@@ -4,6 +4,6 @@
 <a class="user" href="{% url "auth_profile" notification.sender.username %}">
 {{ notification.sender.username }}</a> 
 {% trans "supported your premise" %} <br>
-<a href="{{ contention.get_absolute_url }}" class="contention-link">{{ contention.title }}</a>
+<a href="{{ contention.get_absolute_url }}/{{ target_object.id }}" class="contention-link">{{ contention.title }}</a>
 {% endif %}
 {% endwith %}
