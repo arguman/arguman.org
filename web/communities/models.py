@@ -73,6 +73,11 @@ class Community(models.Model):
             can_create_premise=self.is_public,
         )
 
+    def user_is_owner(self, user):
+        return user in self.owners
+
+
+
     def user_can_create_argument(self, user):
         membership = self.get_membership(user)
 
@@ -119,6 +124,7 @@ class Membership(models.Model):
     def change_access(self, type):
         status = getattr(self, type)
         setattr(self, type, not status)
+        print getattr(self, type)
         self.save()
 
 

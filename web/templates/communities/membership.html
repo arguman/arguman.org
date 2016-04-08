@@ -6,22 +6,22 @@
 	<div class="stats-bar">
 		<span>
 			{% trans "MEMBER" %}
-            <button  onclick="change_membership('is_active', {{ object.id }})">
+            <a href="#"  onclick="change_membership('is_active', {{ object.id }})">
             {{ object.is_active }}
-            </button>
+            </a>
 		</span>
 		<span>
 			{% trans "CREATE ARGUMENT" %}
-            <button  onclick="change_membership('can_create_argument', {{ object.id }})">
-			{{  object.can_create_premise }}
-            </button>
+            <a href="#" onclick="change_membership('can_create_argument', {{ object.id }})">
+			{{  object.can_create_argument }}
+            </a>
 
 		</span>
 		<span>
 			{% trans "CREATE PREMISE" %}
-            <button onclick="change_membership('can_create_premise', {{ object.id }})">
-			{{ object.can_create_argument }}
-            </button>
+            <a href="#" onclick="change_membership('can_create_premise', {{ object.id }})">
+			{{ object.can_create_premise }}
+            </a>
 		</span>
 	</div>
 
@@ -38,7 +38,7 @@ function change_membership(type, object_id){
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                     },
                 success: function(){
-                    window.reload()
+                    window.location.reload()
                 }
                 })
 }

@@ -22,7 +22,6 @@ class MembershipConfirmation(LoginRequiredMixin, TemplateView):
 
     def post(self, request):
         request.community.add_member(request.user)
-
         return redirect(reverse("home"))
 
 
