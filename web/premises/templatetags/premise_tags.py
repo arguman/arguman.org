@@ -1,3 +1,6 @@
+from django.template.defaultfilters import slugify
+from unidecode import unidecode
+
 from django.template.defaulttags import register
 from django_gravatar.helpers import GRAVATAR_DEFAULT_SIZE, get_gravatar_url
 from django.utils.html import escape
@@ -42,3 +45,33 @@ def gravatar(user_or_email, size=GRAVATAR_DEFAULT_SIZE, alt_text='', css_class='
     template = '<img class="{css_class}" src="{src}" width="{width}" height="{height}" alt="{alt}" />'
     return template.format(
         css_class=css_class, src=url, width=size, height=size, alt=alt_text)
+
+
+@register.filter
+def parse_markdown_tabs(text):
+    start, end = '<h1>', '</h1>'
+    tab_template = '<div class="tab-content" id="%(slug)s">%(content)s</div>'
+    title_template = '<a class="tab-title" href="#%(slug)s">%(name)s</a>'
+
+    if start not in text:
+        return text
+
+    titles = []
+    tabs = []
+
+    for tab in text.split(start)[1:]:
+        title, content = tab.split(end)
+
+        slug = slugify(unidecode(title))
+
+        titles.append(title_template % {
+            'name': title,
+            'slug': slug
+        })
+
+        tabs.append(tab_template % {
+            'content': content,
+            'slug': slug
+        })
+
+    return '\n'.join(titles + tabs)

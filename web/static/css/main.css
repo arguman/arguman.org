@@ -3634,3 +3634,42 @@ div.load-more {
     height: 30px;
     border-radius: 5px;
 }
+
+.about {
+    margin-top: 0;
+}
+
+.about .tab-title {
+    border: none;
+    font-size: 1.2em;
+    display: inline-block;
+    padding: 0;
+    margin-bottom: 20px;
+    margin-right: 15px;
+    outline: none;
+}
+
+.about h2 {
+    font-weight: normal;
+}
+
+.about .tab-title.current {
+    border-bottom: 3px solid #fff3aa;
+}
+
+.about .team {
+    overflow: hidden;
+}
+
+.about .team li {
+    width: 200px;
+    float: left;
+    list-style: none;
+    text-align: center;
+}
+
+.about .team img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}

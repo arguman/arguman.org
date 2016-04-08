@@ -1,7 +1,42 @@
 {% extends "base.html" %}
 
+{% load premise_tags %}
+
 {% block content %}
 <div class="container about content">
-    {{ content|safe }}
+    {{ content|parse_markdown_tabs|safe }}
 </div>
+{% endblock %}
+
+{% block extra-scripts %}
+    <script>
+        $(function () {
+            var tabContents = (
+                $('.tab-content')
+                    .hide()
+                    .first()
+                    .show()
+                    .end()
+            );
+
+            var tabTitles = $('.tab-title');
+
+            tabTitles.on('click', function (event) {
+                tabTitles.removeClass('current');
+
+                var slug = (
+                    $(event.target)
+                        .addClass('current')
+                        .attr('href')
+                );
+
+                (tabContents
+                    .hide()
+                    .filter(slug)
+                    .show());
+
+                event.preventDefault();
+            }).first().addClass('current');
+        });
+    </script>
 {% endblock %}
