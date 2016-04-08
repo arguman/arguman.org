@@ -21,6 +21,11 @@ body {
     /*-webkit-font-smoothing: antialiased;*/
 }
 
+br + ol {
+    margin-top: -10px;
+}
+
+li + br,
 br + br,
 p + br {
     display: none;
