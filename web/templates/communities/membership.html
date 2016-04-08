@@ -1,0 +1,46 @@
+{% load i18n %}
+{% load gravatar %}
+<div class="user-stats">
+	{% gravatar object.user.email 90 %}
+	<h2><a href="{{ object.user.get_absolute_url }}">{{ object.user.username }}</a></h2>
+	<div class="stats-bar">
+		<span>
+			{% trans "MEMBER" %}
+            <button  onclick="change_membership('is_active', {{ object.id }})">
+            {{ object.is_active }}
+            </button>
+		</span>
+		<span>
+			{% trans "CREATE ARGUMENT" %}
+            <button  onclick="change_membership('can_create_argument', {{ object.id }})">
+			{{  object.can_create_premise }}
+            </button>
+
+		</span>
+		<span>
+			{% trans "CREATE PREMISE" %}
+            <button onclick="change_membership('can_create_premise', {{ object.id }})">
+			{{ object.can_create_argument }}
+            </button>
+		</span>
+	</div>
+
+</div>
+{% block extra-scripts %}
+<script>
+function change_membership(type, object_id){
+        $.ajax({
+                url: "/communities/memberships",
+                type: "POST",
+                data: {
+                    type: type,
+                    membership_id: object_id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                success: function(){
+                    window.reload()
+                }
+                })
+}
+</script>
+{% endblock %}

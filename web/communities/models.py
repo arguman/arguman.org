@@ -17,9 +17,11 @@ class Community(models.Model):
     description = models.TextField(max_length=255)
     community_type = models.CharField(max_length=255,
                                       choices=COMMUNITY_TYPES)
+
     language = models.CharField(max_length=255)
     about = models.TextField(blank=True, null=True)
     terms_of_service = models.TextField(blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Communities"
@@ -27,23 +29,31 @@ class Community(models.Model):
     def __unicode__(self):
         return smart_unicode(self.name)
 
+    @property
     def is_restricted(self):
         return self.community_type == 'restricted'
 
+    @property
     def is_private(self):
         return self.community_type == 'private'
 
+    @property
     def is_public(self):
         return self.community_type == 'public'
 
     def get_membership(self, user):
         if user.is_anonymous():
             return
-
         try:
             return self.memberships.get(user=user)
         except Membership.DoesNotExist:
             return
+
+
+    @property
+    def owners(self):
+        return {i.user for i in Membership.objects.filter(is_owner=True)}
+
 
     def is_member(self, user):
         return bool(self.get_membership(user))
@@ -54,12 +64,13 @@ class Community(models.Model):
         if membership:
             return membership
 
+
         return self.memberships.create(
             user=user,
-            is_active=True,
+            is_active=self.is_public,
             is_owner=False,
-            can_create_argument=not self.is_restricted,
-            can_create_premise=not self.is_restricted
+            can_create_argument=self.is_public,
+            can_create_premise=self.is_public,
         )
 
     def user_can_create_argument(self, user):
@@ -68,13 +79,26 @@ class Community(models.Model):
         if not membership:
             return False
 
-        if self.is_restricted():
+        if self.is_restricted:
             return membership.can_create_argument
 
         return True
 
+
+    def user_can_create_premise(self, user):
+        membership = self.get_membership(user)
+
+        if not membership:
+            return False
+
+        if self.is_restricted:
+            return membership.can_create_premise
+
+        return True
+
+
     def user_can_view(self, user):
-        if self.is_private():
+        if self.is_private:
             return self.is_member(user)
 
         return True
@@ -83,10 +107,23 @@ class Community(models.Model):
 class Membership(models.Model):
     community = models.ForeignKey(Community, related_name="memberships")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="memberships")
-    is_active = models.BooleanField(default=True)
     is_owner = models.BooleanField(default=False)
+
+    is_active = models.BooleanField(default=True)
     can_create_argument = models.BooleanField(default=False)
     can_create_premise = models.BooleanField(default=False)
 
     def __unicode__(self):
         return smart_unicode(self.user.username)
+
+    def change_access(self, type):
+        status = getattr(self, type)
+        setattr(self, type, not status)
+        self.save()
+
+
+class Invitation(models.Model):
+    membership = models.ForeignKey(Membership)
+    is_active = models.BooleanField(default=True)
+    hash = models.CharField(max_length=255)
+    date_created = models.DateTimeField(auto_now_add=True)

@@ -774,6 +774,11 @@
                 $(this).removeClass('opened');
             });
 
+
+
+
+
+
         $("form.support").submit(function(event) {
           event.preventDefault();
           var $this = $(this);

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+
+          <h3>
+              {% blocktrans trimmed with community_name=request.community.name %}
+                  Members of {{ community_name }} community.
+              {% endblocktrans %}
+          </h3>
+
+  <div class="search-content">
+        {% for membership in memberships %}
+        <div class="member-item">
+            {% with object=membership %}
+                {% include "communities/membership.html" %}
+            {% endwith %}
+        </div>
+        {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

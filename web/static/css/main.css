@@ -1878,6 +1878,11 @@ div.load-more {
     line-height: 1em;
 }
 
+.member-item {
+    margin-bottom: 20px;
+}
+
+
 .stats-list {
     width: 510px;
     float: left;
