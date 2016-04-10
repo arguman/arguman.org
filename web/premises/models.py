@@ -444,6 +444,11 @@ class Premise(DeletePreventionMixin, models.Model):
     def is_collapsed(self):
         return self.report_count > 3
 
+    @property
+    def community(self):
+        return self.argument.community
+
+
     def serialize(self, premise_lookup, authenticated_user=None):
 
         if authenticated_user is not None:

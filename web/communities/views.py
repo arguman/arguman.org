@@ -33,7 +33,6 @@ class MembershipList(CommunityMixin, TemplateView):
             return super(MembershipList, self).dispatch(request, *args, **kwargs)
 
 
-
     def get_context_data(self, **kwargs):
         memberships = self.request.community.memberships.all()
         return super(MembershipList, self).get_context_data(

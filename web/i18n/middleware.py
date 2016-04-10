@@ -15,7 +15,15 @@ class SubdomainLanguageMiddleware(object):
     LANGUAGES = settings.AVAILABLE_LANGUAGES
 
     def redirect_homepage(self, request):
+
         if request.path not in settings.REDIRECTED_PATHS:
+            return
+
+
+        if not settings.USE_I18N:
+            return
+
+        if request.community:
             return
 
         language = get_language_from_request(request)
@@ -26,6 +34,7 @@ class SubdomainLanguageMiddleware(object):
         querystring = request.META.get('QUERY_STRING', '')
         if querystring:
             querystring = '?' + querystring
+
 
         return HttpResponseRedirect(
             ''.join([
