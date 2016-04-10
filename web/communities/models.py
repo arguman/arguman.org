@@ -72,8 +72,8 @@ class Community(models.Model):
             user=user,
             is_active=self.is_public,
             is_owner=False,
-            can_create_argument=self.is_public,
-            can_create_premise=self.is_public,
+            can_create_argument=not self.is_restricted,
+            can_create_premise=not self.is_restricted
         )
 
     def user_is_owner(self, user):
@@ -85,6 +85,9 @@ class Community(models.Model):
         membership = self.get_membership(user)
 
         if not membership:
+            return False
+
+        if not membership.is_active:
             return False
 
         if self.is_restricted:
