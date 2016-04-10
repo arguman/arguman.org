@@ -10,6 +10,7 @@
             {{ object.is_active }}
             </a>
 		</span>
+        {% if community.is_restricted %}
 		<span>
 			{% trans "CREATE ARGUMENT" %}
             <a href="#" onclick="change_membership('can_create_argument', {{ object.id }})">
@@ -23,6 +24,8 @@
 			{{ object.can_create_premise }}
             </a>
 		</span>
+        {% endif %}
+
 	</div>
 
 </div>

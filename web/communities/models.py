@@ -56,11 +56,14 @@ class Community(models.Model):
 
 
     def is_member(self, user):
-        return bool(self.get_membership(user))
+        membership = self.get_membership(user)
+        if membership:
+            return membership.is_active
+        return False
+
 
     def add_member(self, user):
         membership = self.get_membership(user)
-
         if membership:
             return membership
 
@@ -124,9 +127,7 @@ class Membership(models.Model):
     def change_access(self, type):
         status = getattr(self, type)
         setattr(self, type, not status)
-        print getattr(self, type)
         self.save()
-
 
 class Invitation(models.Model):
     membership = models.ForeignKey(Membership)

@@ -4,14 +4,11 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
-from premises.mixins import PaginationMixin
-from premises.views import HomeView
-
 from profiles.mixins import LoginRequiredMixin
 
 
 class MembershipConfirmation(LoginRequiredMixin, TemplateView):
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         if not request.community:
             return HttpResponse(status=400)
 

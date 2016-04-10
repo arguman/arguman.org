@@ -2,23 +2,24 @@
 {% load i18n %}
 
 {% block content %}
-<div class="container">
+    <div class="container">
+              <h3>
+                  {% blocktrans trimmed with community_name=request.community.name %}
+                      Members of {{ community_name }} community.
+                  {% endblocktrans %}
+              </h3>
 
-          <h3>
-              {% blocktrans trimmed with community_name=request.community.name %}
-                  Members of {{ community_name }} community.
-              {% endblocktrans %}
-          </h3>
-
-  <div class="search-content">
-        {% for membership in memberships %}
-        <div class="member-item">
-            {% with object=membership %}
-                {% include "communities/membership.html" %}
-            {% endwith %}
-        </div>
-        {% endfor %}
-  </div>
-</div>
+      <div class="search-content">
+            {% for membership in memberships %}
+            {% if not membership.is_owner %}
+            <div class="member-item">
+                {% with object=membership %}
+                    {% include "communities/membership.html" %}
+                {% endwith %}
+            </div>
+            {% endif %}
+            {% endfor %}
+      </div>
+    </div>
 
 {% endblock %}
