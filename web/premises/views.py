@@ -81,11 +81,14 @@ class ContentionDetailView(DetailView):
         self.object = self.get_object()
         host = request.META['HTTP_HOST']
 
-        if not host.startswith(settings.AVAILABLE_LANGUAGES):
-            return redirect(self.object.get_full_url())
+        if not request.community:
 
-        if not normalize_language_code(get_language()) == self.object.language:
-            return redirect(self.object.get_full_url())
+
+            if not host.startswith(settings.AVAILABLE_LANGUAGES):
+                return redirect(self.object.get_full_url())
+
+            if not normalize_language_code(get_language()) == self.object.language:
+                return redirect(self.object.get_full_url())
 
         partial = request.GET.get('partial')
         level = request.GET.get('level')

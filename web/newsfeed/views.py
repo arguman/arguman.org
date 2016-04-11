@@ -13,8 +13,13 @@ class NewsfeedView(HomeView):
             **kwargs)
 
     def get_news_entries(self):
+        community_id = None
+        if self.request.community:
+            community_id = self.request.community.id
+
         if self.request.user.is_authenticated():
             newsfeed = Entry.objects.get_private_newsfeed(
+                community_id=community_id,
                 offset=self.get_offset(), limit=self.paginate_by,
                 user=self.request.user)
         else:
@@ -32,7 +37,12 @@ class NewsfeedView(HomeView):
 
 class PublicNewsfeedView(NewsfeedView):
     def get_news_entries(self):
+        community_id = None
+        if self.request.community:
+            community_id = self.request.community.id
+
         return Entry.objects.get_public_newsfeed(
+            community_id=community_id,
             offset=self.get_offset(), limit=self.paginate_by)
 
     def get_context_data(self, **kwargs):

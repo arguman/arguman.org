@@ -41,6 +41,10 @@
                 {% if user_can_create_argument %}
                 <li><a class="new-argument-link" href="{% url "new_argument" %}">{% trans "new argument" %}</a></li>
                 {% endif %}
+                {% if user_is_owner and not community.is_public %}
+                <li><a  href="{% url "community_memberships" %}">{% trans "members" %}</a></li>
+                {% endif %}
+
             <li><a class="username" href="{% url "auth_profile" user.username %}">{{ user.username|truncatechars:14 }}</a>
                 (<a href="{% url "auth_logout" %}">{% trans "logout" %}</a>)</li>
             {% endif %}

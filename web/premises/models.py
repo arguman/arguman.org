@@ -98,6 +98,7 @@ class Contention(DeletePreventionMixin, models.Model):
 
     score = models.FloatField(blank=True, null=True)
     community = models.ForeignKey('communities.Community', blank=True, null=True)
+    is_public = models.BooleanField(default=True)
     objects = LanguageManager()
 
     class Meta:
@@ -442,6 +443,11 @@ class Premise(DeletePreventionMixin, models.Model):
 
     def is_collapsed(self):
         return self.report_count > 3
+
+    @property
+    def community(self):
+        return self.argument.community
+
 
     def serialize(self, premise_lookup, authenticated_user=None):
 

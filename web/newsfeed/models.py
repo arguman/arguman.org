@@ -36,6 +36,7 @@ class EntryManager(object):
         self.collection = get_collection("newsfeed")
 
     def create(self, object_id, news_type, sender, recipients=None,
+               community_id = None,
                related_object=None, date_creation=None):
         """
         Creates newsfeed item from provided parameters
@@ -47,6 +48,7 @@ class EntryManager(object):
 
         entry_bundle = {
             "object_id": object_id,
+            "community_id": community_id,
             "news_type": news_type,
             "date_created": date_creation or datetime.now(),
             "sender": {
@@ -89,7 +91,7 @@ class EntryManager(object):
             "news_type": object_type,
             "object_id": object_id})
 
-    def get_private_newsfeed(self, offset, limit, user):
+    def get_private_newsfeed(self, offset, limit, user, community_id=None):
         """
         Fetches news items from the newsfeed database
         """
@@ -104,7 +106,7 @@ class EntryManager(object):
                         NEWS_TYPE_FOLLOWING]
             }
         }
-
+        parameters['community_id'] = community_id
         newsfeed = (Entry
                     .objects
                     .collection
@@ -117,12 +119,11 @@ class EntryManager(object):
     def get_language(self):
         return normalize_language_code(get_language())
 
-    def get_public_newsfeed(self, offset, limit):
+    def get_public_newsfeed(self, offset, limit, community_id=None):
         """
         Fetches news items from the newsfeed database
         """
         language = self.get_language()
-
         parameters = {
             "news_type": {
                 "$in": [NEWS_TYPE_CONTENTION,
@@ -130,6 +131,8 @@ class EntryManager(object):
             },
             "related_object.language": language
         }
+        parameters['community_id'] = community_id
+
 
         newsfeed = (Entry
                     .objects
@@ -141,11 +144,12 @@ class EntryManager(object):
 
         return map(Entry, newsfeed)
 
-    def get_newsfeed_of(self, user, offset, limit):
+    def get_newsfeed_of(self, user, offset, limit, community_id=None):
         """
         Fetches news items of specific user
         """
         parameters = {
+
             "sender.username": user.username,
             "news_type": {
                 "$in": [NEWS_TYPE_CONTENTION,
@@ -153,6 +157,7 @@ class EntryManager(object):
                         NEWS_TYPE_FOLLOWING]
             }
         }
+        parameters['community_id'] = community_id
 
         newsfeed = (Entry
                     .objects
@@ -202,6 +207,7 @@ def create_contention_entry(instance, created, **kwargs):
     """
     if created:
         Entry.objects.create(
+            community_id=instance.community.id if instance.community else None,
             object_id=instance.id,
             news_type=instance.get_newsfeed_type(),
             sender=instance.get_actor(),
@@ -229,6 +235,7 @@ def create_premise_entry(premise, **kwargs):
 
     Entry.objects.create(
         object_id=premise.id,
+        community_id=premise.community.id if premise.community else None,
         news_type=premise.get_newsfeed_type(),
         sender=premise.get_actor(),
         related_object=premise.get_newsfeed_bundle()
@@ -242,6 +249,7 @@ def create_fallacy_entry(report, **kwargs):
     """
     Entry.objects.create(
         object_id=report.id,
+        community_id=report.premise.community.id if report.premise.community else None,
         news_type=report.get_newsfeed_type(),
         sender=report.get_actor(),
         related_object=report.get_newsfeed_bundle()
