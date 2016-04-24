@@ -24,6 +24,17 @@ Arguman.org’s aim is to map arguments successfully through the efforts of many
 
 arguman.org is an open source project which is developed by the community. If you want to contribute technically or intellectually please don’t hesitate.
 
+
+## Run arguman on your local
+
+- Fetch repository by `git clone git@github.com:arguman/arguman.org.git`
+- Make sure you have [docker](http://docker.io) and [docker-compose](https://docs.docker.com/compose/install/) installed and working
+- create `settings_local.py` from `settings_local.py.ex` under `main` folder
+- if you are using docker-machine or running docker on vagrant make sure you set proper addresses on `settings_local.py`
+- run `docker-compose up` under main project directory where `docker-compose.yml` is
+
+
+
 ## Contributors
 
 - Fatih Erikli
