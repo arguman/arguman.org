@@ -14,9 +14,7 @@ DATABASES = {
 }
 ALLOWED_HOSTS = ['*']
 DEBUG = True
-ADMINS = (('Tuna', 'tunavargi@gmail.com'),
-          ('Fatih', 'fatiherikli@gmail.com'))
 
 SERVER_EMAIL = 'info@arguman.org'
-BASE_DOMAIN = '<your docker machine ip>:8000'
-MONGODB_HOST = '<your docker machine ip>'
+BASE_DOMAIN = 'localhost:8000' #your docker machine ip if running on virtual server
+MONGODB_HOST = 'localhost' #your docker machine ip if running on virtual server
