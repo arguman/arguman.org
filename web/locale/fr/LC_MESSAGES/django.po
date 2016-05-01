@@ -23,7 +23,7 @@ msgstr "Publier les posts sélectionnés"
 
 #: blog/admin.py:22
 msgid "Mark as draft selected posts"
-msgstr "Marquer les post séléctionnés comme brouillons"
+msgstr "Marquer les post sélectionnés comme brouillons"
 
 #: blog/models.py:21
 msgid "Name"
@@ -76,7 +76,6 @@ msgstr "parce que"
 msgid "however"
 msgstr "cependant"
 
-Silvan Giraud (silvangiraud@gmail.com)
 #: premises/models.py:46
 msgid "Begging The Question"
 msgstr "Pétition de principe"
@@ -175,7 +174,7 @@ msgstr "Description"
 
 #: premises/models.py:81
 msgid "Original Discourse"
-msgstr "Orijinal Söylem"
+msgstr "Origine du débat"
 
 #: premises/models.py:85 premises/models.py:473
 msgid "Sources"
@@ -190,7 +189,8 @@ msgid ""
 "The parent of premise. If you don't choose anything, it will be a main "
 "premise."
 msgstr ""
-"Önermenin öncülü. Eğer boş bırakılırsa ana argümanın bir önermesi olur."
+"La prémisse parente. Si vous n'en choisissez pas, la prémisse sera "
+"créée à la racine."
 
 #: premises/models.py:465
 msgid "Premise Type"
@@ -214,7 +214,7 @@ msgstr "Raison"
 
 #: premises/models.py:705
 msgid "Please explain that why the premise is a fallacy."
-msgstr "Veuillez expliquer pourquoi votre prémisse est un sophisme."
+msgstr "Veuillez expliquer pourquoi cette prémisse est un sophisme."
 
 #: premises/models.py:707
 msgid "Fallacy Type"
@@ -252,7 +252,7 @@ msgstr "Notification par email"
 #: templates/fallacies.html:29 templates/newsfeed.html:39
 #: templates/premises/contention_list.html:67
 msgid "Load more"
-msgstr "Daha fazla yükle"
+msgstr "Montrer plus"
 
 #: templates/auth/login.html:7 templates/auth/login.html.py:11
 #: templates/auth/password_reset_complete.html:9
@@ -265,7 +265,7 @@ msgstr "ou connextion avec Twitter"
 
 #: templates/auth/login.html:14
 msgid "Forgot your password?"
-msgstr "Mot de passe oublié?"
+msgstr "Mot de passe oublié&nbsp;?"
 
 #: templates/auth/login_popup.html:6
 #, python-format
@@ -316,7 +316,7 @@ msgstr ""
 #: templates/auth/password_reset_email.html:8
 msgid "Your username, in case you've forgotten:"
 msgstr ""
-"Votre nom d'utilisateur est:"
+"Votre nom d'utilisateur est&nbsp;:"
 
 #: templates/auth/password_reset_form.html:7
 msgid "Reset Password"
@@ -348,7 +348,7 @@ msgstr ""
 
 #: templates/auth/profile.html:26
 msgid "date joined"
-msgstr "güncelle"
+msgstr "date d'inscription"
 
 #: templates/auth/profile.html:32
 msgid "Following"
@@ -388,7 +388,7 @@ msgstr "Suivre"
 
 #: templates/auth/profile.html:74
 msgid "Most active channels"
-msgstr "Canaux les plus actifs"
+msgstr "Sujets les plus actifs"
 
 #: templates/auth/profile.html:88
 msgid "Most discussed users"
@@ -396,7 +396,7 @@ msgstr "Utilisateurs les plus contestés"
 
 #: templates/auth/profile.html:107
 msgid "Most supported premises"
-msgstr "Prémisses les plus supportés"
+msgstr "Prémisses les plus plébiscitées"
 
 #: templates/auth/register.html:7 templates/auth/register.html.py:17
 msgid "Register"
@@ -424,7 +424,7 @@ msgstr "Plateforme de débat analytique | Créez et analysez des thèses en lign
 
 #: templates/base.html:7
 msgid "Argument analysis and mapping platform"
-msgstr "Argüman analizi ve haritalama platformu"
+msgstr "Plateforme cartographique de débat analytique"
 
 #: templates/base.html:24
 msgid "Announcement:"
@@ -460,7 +460,7 @@ msgstr "recherche"
 
 #: templates/base.html:52
 msgid "Languages:"
-msgstr "Langues:"
+msgstr "Langues&nbsp;:"
 
 #: templates/base.html:54
 msgid "English"
@@ -476,7 +476,7 @@ msgstr "Chinois"
 
 #: templates/base.html:59
 msgid "Follow on Twitter:"
-msgstr "Suivre sur Twitter:"
+msgstr "Suivre sur Twitter&nbsp;:"
 
 #: templates/base.html:72
 msgid ""
@@ -488,11 +488,11 @@ msgstr ""
 
 #: templates/base.html:78
 msgid "Terms of Service"
-msgstr "Termes d'utilisations"
+msgstr "Conditions d'utilisation"
 
 #: templates/base.html:79
 msgid "Feedback"
-msgstr "Öneri ve şikayet"
+msgstr "Retours"
 
 #: templates/base.html:80
 msgid "Donate"
@@ -527,7 +527,7 @@ msgstr "Le fil d'actualité est vide."
 
 #: templates/newsfeed/contention.html:2
 msgid "created an argument:"
-msgstr "a créé une thèse:"
+msgstr "a créé une thèse&nbsp;:"
 
 #: templates/newsfeed/fallacy.html:4
 #, python-format
@@ -544,7 +544,7 @@ msgstr ""
 
 #: templates/newsfeed/premise.html:6
 msgid "associated with another argument"
-msgstr "a été lié à une autre thèse:"
+msgstr "a été lié à une autre thèse&nbsp;:"
 
 #: templates/notifications.html:8
 msgid "Notifications"
@@ -603,29 +603,29 @@ msgstr "Type de lien"
 #: templates/nouns/new_relation.html:23
 msgid ""
 "<p><b>Is a (hypernym and hyponym)</b> A type-of relationship between two "
-"types. For example <i>Organic Process</i> is the hypernym of <i>Evolution</"
+"types. For example <i>Organic Process</i> is the hypernym of <i>Évolution</"
 "i>.</p>"
 msgstr ""
 "<p><b>Est un (hyperonyme ou hyponyme)</b> Une relation entre deux types. "
-"Par exemple, <i>Processus organique</i> est l'hypernonyme d'<i>Evolution</"
+"Par exemple, <i>Processus organique</i> est l'hypernonyme d'<i>Évolution</"
 "i>.</p>"
 
 #: templates/nouns/new_relation.html:27
 msgid ""
 "<p><b>Part of (holonymy and meronymy)</b> A part/whole relationship between "
-"two types. For example <i>Natural Selection</i> is the part of <i>Evolution</"
+"two types. For example <i>Natural Selection</i> is the part of <i>Évolution</"
 "i></p>"
 msgstr ""
 "<p><b>Partie de (holonymie et méronymie)</b> Relation entre partie et tout."
-" Par exemple, <i>Séléction naturelle</i> est une partie d'<i>Evolution</i>"
+" Par exemple, <i>Séléction naturelle</i> est une partie d'<i>Évolution</i>"
 
 #: templates/nouns/new_relation.html:31
 msgid ""
 "<p><b>Opposite with (antonym)</b> The opposite meaning of the type. For "
-"example, <i>Evolution</i> and <i>Devolution</i></p>"
+"example, <i>Évolution</i> and <i>DÉvolution</i></p>"
 msgstr ""
 "<p><b>Opposé avec (antonyme)</b> Le sens opposé. Par exemple, "
-"<i>Evolution</i> et <i>Invariabilité</i></p>"
+"<i>Évolution</i> et <i>Invariabilité</i></p>"
 
 #: templates/partials/channel_list.html:9
 msgid "all channels"
@@ -664,11 +664,11 @@ msgstr "Non spécifié"
 
 #: templates/premises/base_contention.html:54
 msgid "RANDOM"
-msgstr "ALEATOIRE"
+msgstr "ALÉATOIRE"
 
 #: templates/premises/base_contention.html:60
 msgid "RELATED ARGUMENTS"
-msgstr "THESES LIEES"
+msgstr "THÈSES LIÉES"
 
 #: templates/premises/base_contention.html:75
 msgid "share"
@@ -698,7 +698,7 @@ msgstr "pourcentage d'objections"
 #: templates/premises/contention_list.html:25
 #: templates/premises/tree_view.html:61
 msgid "support rate"
-msgstr "pourcentage de supports"
+msgstr "pourcentage de soutiens"
 
 #: templates/premises/contention_list.html:28
 #: templates/premises/tree_view.html:71
@@ -711,7 +711,7 @@ msgstr "Aucun résultat trouvé."
 
 #: templates/premises/edit_contention.html:8
 msgid "Edit Argument"
-msgstr "Editer la thèse"
+msgstr "Éditer la thèse"
 
 #: templates/premises/edit_contention.html:16
 msgid "Remove the argument"
@@ -719,7 +719,7 @@ msgstr "Supprimer la thèse"
 
 #: templates/premises/edit_premise.html:7
 msgid "Edit Premise"
-msgstr "Editer la prémisse"
+msgstr "Éditer la prémisse"
 
 #: templates/premises/examples/contention.html:2
 msgid ""
@@ -729,7 +729,7 @@ msgid ""
 "man did what had to be done</li> </ul>"
 msgstr ""
 "L'affirmation principale. Elle sera contestable par des prémisses. "
-"Les prémisses.<br> Exemples:<ul><li>L'art véritable est social, pas marchand."
+"Les prémisses.<br> Exemples&nbsp;:<ul><li>L'art véritable est social, pas marchand."
 "</li><li>42 est le sens de la vie.</li><li>Etre éthique c'est faire ce que "
 "l'on à faire.</li></ul>"
 
@@ -749,7 +749,7 @@ msgid ""
 "li> <li>Piet Mondiran</li> <li>The Guardian</li> </ul>"
 msgstr ""
 "La source de la thèse. Peut-être une personne, un livre, un journal ou une "
-"institution. Exemples: <ul><li>Pierre Bourdieu</li><li>Friedrich Nietzsche"
+"institution. Exemples&nbsp;: <ul><li>Pierre Bourdieu</li><li>Friedrich Nietzsche"
 "</li><li>Guido Van Rossum</li><li>Le Monde Diplomatique</li></ul>"
 
 #: templates/premises/examples/premise.html:2
@@ -757,7 +757,7 @@ msgid ""
 "Example: We define happiness as a state of well-being, starting with being "
 "alive instead of dead."
 msgstr ""
-"Exemple: Nous définissons le bonheur comme un état de bien être, en "
+"Exemple&nbsp;: Nous définissons le bonheur comme un état de bien être, en "
 "commençant par être vivant au lieu d'être mort."
 
 #: templates/premises/examples/premise_source.html:2
@@ -770,9 +770,9 @@ msgid ""
 "contention. </li> <li> because: A reason for proof the contention. </li> "
 "<li> however: An additional situation for the premise. </li> </ul>"
 msgstr ""
-"Le type de prémisse. Cela pourrait être:<ul>\t<li>mais: "
+"Le type de prémisse. Cela pourrait être&nbsp;:<ul>\t<li>mais&nbsp;: "
 "Une objection à la thèse.</li>\t<li>parce que: Une cause qui implique "
-"la thèse.</li>\t<li>cependant: Une précision apportée à la thèse."</li></ul>"
+"la thèse.</li>\t<li>cependant&nbsp;: Une précision apportée à la thèse."</li></ul>"
 
 #: templates/premises/examples/sources.html:2
 msgid ""
@@ -792,11 +792,11 @@ msgstr "Sauver et continuer l'édition"
 
 #: templates/premises/new_premise.html:9
 msgid "The parent premise:"
-msgstr "La prémisse parente:"
+msgstr "La prémisse parente&nbsp;:"
 
 #: templates/premises/new_premise.html:29
 msgid "Characters remaining: "
-msgstr "Caractères restants: "
+msgstr "Caractères restants&nbsp;: "
 
 #: templates/premises/new_premise.html:49
 msgid "(change)"
@@ -833,28 +833,28 @@ msgstr[1] "%(count)s supports."
 #: templates/premises/premise.html:93 templates/premises/thread.html:90
 #: templates/premises/tree_view.html:24
 msgid "edit"
-msgstr "édition"
+msgstr "modification"
 
 #: templates/premises/premise.html:97 templates/premises/thread.html:98
 msgid "Are you sure to remove this premise?"
-msgstr "Etes vous sur de vouloir supprimer cette prémisse?"
+msgstr "Êtes vous sur de vouloir supprimer cette prémisse&nbsp;?"
 
 #: templates/premises/premise.html:105 templates/premises/premise.html:111
 #: templates/premises/premise.html:113 templates/premises/thread.html:119
 msgid "support"
-msgstr "support"
+msgstr "soutenir"
 
 #: templates/premises/premise.html:119 templates/premises/thread.html:124
 msgid "report fallacy"
-msgstr "reporter un sophisme"
+msgstr "signaler un sophisme"
 
 #: templates/premises/report.html:7
 msgid "The premise:"
-msgstr "La prémisse:"
+msgstr "La prémisse&nbsp;:"
 
 #: templates/premises/report.html:13
 msgid "Report Fallacy"
-msgstr "Rapporter un sophisme"
+msgstr "Signaler un sophisme"
 
 #: templates/premises/thread.html:126
 msgid "open in tree view"
@@ -874,7 +874,7 @@ msgstr "Chargement..."
 
 #: templates/premises/tree_view.html:39
 msgid "The argument have no premises."
-msgstr "La thèse n'a pas de prémisse."
+msgstr "La thèse n'a pas été discutée."
 
 #: templates/premises/tree_view.html:41
 msgid "Add a premise"
@@ -886,11 +886,11 @@ msgstr "Editer l'argument"
 
 #: templates/premises/tree_view.html:52
 msgid "The argument is too complex. You can switch to list view."
-msgstr "Il y a trop de participations. Vous pouvez choisir la vue liste."
+msgstr "L'arbre analytique est trop complexe. Vous pouvez choisir la vue liste."
 
 #: templates/premises/tree_view.html:77
 msgid "last update:"
-msgstr "dernière modification:"
+msgstr "dernière modification&nbsp;:"
 
 #: templates/profiles/social_providers.html:3
 msgid "Login with Twitter"
@@ -914,15 +914,15 @@ msgstr "CEPENDANT"
 
 #: templates/search/profile.html:9 templates/stats/profile.html:9
 msgid "FOLLOWER"
-msgstr "ABONNE"
+msgstr "ABONNÉ"
 
 #: templates/search/profile.html:13 templates/stats/profile.html:13
 msgid "ARGUMENT"
-msgstr "THESE"
+msgstr "THÈSE"
 
 #: templates/search/profile.html:17 templates/stats/profile.html:17
 msgid "PREMISE"
-msgstr "PREMISSE"
+msgstr "PRÉMISSE"
 
 #: templates/search/profile.html:21
 msgid "SUPPORT"
@@ -962,15 +962,15 @@ msgstr "thèses les plus disputées"
 
 #: templates/stats.html:12
 msgid "most supported premises"
-msgstr "prémisses les plus supportés"
+msgstr "prémisses les plus supportées"
 
 #: templates/stats.html:13
 msgid "most fallacy premises"
-msgstr "prémisses avec le plus de sophismes rapportés"
+msgstr "prémisses les plus contestées"
 
 #: templates/stats.html:18
 msgid "this week"
-msgstr "cette semain"
+msgstr "cette semaine"
 
 #: templates/stats.html:19
 msgid "this month"
@@ -978,7 +978,7 @@ msgstr "ce mois"
 
 #: templates/stats.html:20
 msgid "all time"
-msgstr "tout les temps"
+msgstr "depuis le début"
 
 #: templates/stats/profile.html:21
 msgid "KARMA"
@@ -1018,7 +1018,7 @@ msgstr "Nouveau"
 #~ msgstr "Pas de nouvelle notification."
 
 #~ msgid "share:"
-#~ msgstr "partager:"
+#~ msgstr "partager&nbsp;:"
 
 #~ msgid "Recently Updated"
 #~ msgstr "Modifiés récemment"
@@ -1030,7 +1030,7 @@ msgstr "Nouveau"
 #~ msgstr "Plateforme d'analyse d'arguments"
 
 #~ msgid "original discourse:"
-#~ msgstr "affirmation originel:"
+#~ msgstr "affirmation originel&nbsp;:"
 
 #~ msgid "Edit"
 #~ msgstr "Editer"
@@ -1045,7 +1045,7 @@ msgstr "Nouveau"
 #~ msgstr "Voir"
 
 #~ msgid "last sender:"
-#~ msgstr "dernier émetteur:"
+#~ msgstr "dernier émetteur&nbsp;:"
 
 #~ msgid "and 1 participant."
 #~ msgid_plural "and %(participants)s participants."
@@ -1134,4 +1134,4 @@ msgstr "Nouveau"
 #~ msgstr "Non spécifié"
 
 #~ msgid "Follow:"
-#~ msgstr "Suivre:"
+#~ msgstr "Suivre&nbsp;:"
