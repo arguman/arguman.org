@@ -260,8 +260,8 @@ msgid "Login"
 msgstr "Connexion"
 
 #: templates/auth/login.html:7 templates/auth/register.html:7
-msgid "or login with twitter"
-msgstr "ou connextion avec twitter"
+msgid "or login with Twitter"
+msgstr "ou connextion avec Twitter"
 
 #: templates/auth/login.html:14
 msgid "Forgot your password?"
@@ -343,7 +343,7 @@ msgid "No data."
 msgstr "No data."
 
 #: templates/auth/profile.html:21
-msgid "twitter"
+msgid "Twitter"
 msgstr ""
 
 #: templates/auth/profile.html:26
@@ -475,8 +475,8 @@ msgid "Chinese"
 msgstr "Chinois"
 
 #: templates/base.html:59
-msgid "Follow on twitter:"
-msgstr "Suivre sur twitter:"
+msgid "Follow on Twitter:"
+msgstr "Suivre sur Twitter:"
 
 #: templates/base.html:72
 msgid ""
