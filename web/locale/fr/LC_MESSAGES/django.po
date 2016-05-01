@@ -59,7 +59,7 @@ msgstr "tout(e)"
 
 #: premises/forms.py:33
 msgid "You should write a premise or link an argument."
-msgstr "Vous devriez écrire un prémisse ou lier un argument."
+msgstr "Vous devriez écrire une prémisse ou lier un argument."
 
 #: premises/models.py:40 templates/premises/contention.html:6
 #: templates/premises/contention_list.html:13 templates/premises/thread.html:31
@@ -274,7 +274,7 @@ msgid ""
 "\">register</a> to add a premise for this argument."
 msgstr ""
 "<a href=\"%(login_url)s\">Connectez vous</a> ou <a "
-"href=\"%(register_url)s\">créez un compte</a> pour ajouter un prémisse ou un argument."
+"href=\"%(register_url)s\">créez un compte</a> pour ajouter une prémisse ou un argument."
 
 #: templates/auth/password_reset_complete.html:8
 msgid "The password changed successfully."
