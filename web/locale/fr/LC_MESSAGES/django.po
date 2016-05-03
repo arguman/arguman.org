@@ -772,7 +772,7 @@ msgid ""
 msgstr ""
 "Le type de prémisse. Cela pourrait être&nbsp;:<ul>\t<li>mais&nbsp;: "
 "Une objection à la thèse.</li>\t<li>parce que: Une cause qui implique "
-"la thèse.</li>\t<li>cependant&nbsp;: Une précision apportée à la thèse."</li></ul>"
+"la thèse.</li>\t<li>cependant&nbsp;: Une précision apportée à la thèse.</li></ul>"
 
 #: templates/premises/examples/sources.html:2
 msgid ""
