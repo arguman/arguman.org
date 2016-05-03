@@ -102,7 +102,7 @@ msgstr "Empoisonner le puits"
 
 #: premises/models.py:52
 msgid "Fallacy Of The Beard"
-msgstr ""
+msgstr "Sophisme de continuité"
 
 #: premises/models.py:53
 msgid "Fallacy Of Slippery Slope"
