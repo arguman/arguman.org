@@ -252,7 +252,7 @@ msgstr "Notification par email"
 #: templates/fallacies.html:29 templates/newsfeed.html:39
 #: templates/premises/contention_list.html:67
 msgid "Load more"
-msgstr "Montrer plus"
+msgstr "Voir plus"
 
 #: templates/auth/login.html:7 templates/auth/login.html.py:11
 #: templates/auth/password_reset_complete.html:9
