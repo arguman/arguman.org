@@ -507,7 +507,7 @@ msgstr "Sophismes"
 msgid ""
 "arguman.org is an <a href=\"%(about_url)s\">argument analysis</a> platform."
 msgstr ""
-"arguman.org est une plateform d'<a href=\"%(about_url)s\">analyse de thèses</a>."
+"argüman est une plateforme <a href=\"%(about_url)s\">d'argumentation</a>. "
 
 #: templates/newsfeed.html:12
 msgid "What is going on here:"

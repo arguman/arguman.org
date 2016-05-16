@@ -112,7 +112,8 @@ BASE_DOMAIN = 'arguman.org'
 AVAILABLE_LANGUAGES = (
     'tr',
     'en',
-    'ch'
+    'ch',
+    'fr'
 )
 
 LANGUAGE_CODE_MAPPING = {
