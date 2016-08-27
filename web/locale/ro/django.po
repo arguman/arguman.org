@@ -1,0 +1,1135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Arguman\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-27 10:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Marius Cornea  <marius@remote-lab.net>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: blog/admin.py:18
+msgid "Publish selected posts"
+msgstr "Publică postările selectate"
+
+#: blog/admin.py:22
+msgid "Mark as draft selected posts"
+msgstr "Marchează ca și ciornă postările selectate"
+
+#: blog/models.py:21
+msgid "Name"
+msgstr "Nume"
+
+#: blog/models.py:22
+msgid "Slug"
+msgstr "URL"
+
+#: blog/models.py:23
+msgid "Content"
+msgstr "Conţinut"
+
+#: blog/models.py:26 premises/models.py:480
+msgid "Published"
+msgstr "Publicat"
+
+#: nouns/models.py:172
+msgid "is a"
+msgstr "este un/o"
+
+#: nouns/models.py:173
+msgid "part of"
+msgstr "parte din"
+
+#: nouns/models.py:174 nouns/models.py:198
+msgid "opposite with"
+msgstr "opus cu"
+
+#: nouns/models.py:196 nouns/models.py:197
+msgid "whole of"
+msgstr "întregi de"
+
+#: premises/forms.py:33
+msgid "You should write a premise or link an argument."
+msgstr "Ar trebui să scrii o premisă sau să prezinţi un argument."
+
+#: premises/models.py:40 templates/premises/contention.html:6
+#: templates/premises/contention_list.html:13 templates/premises/thread.html:31
+msgid "but"
+msgstr "dar"
+
+#: premises/models.py:41 templates/premises/contention.html:5
+#: templates/premises/contention_list.html:12 templates/premises/thread.html:36
+msgid "because"
+msgstr "pentru că"
+
+#: premises/models.py:42 templates/premises/contention.html:7
+#: templates/premises/contention_list.html:14 templates/premises/thread.html:41
+msgid "however"
+msgstr "insă"
+
+#: premises/models.py:46
+msgid "Begging The Question"
+msgstr "Argument circular"
+
+#: premises/models.py:47
+msgid "Irrelevant Conclusion"
+msgstr "Concluzie irelevantă"
+
+#: premises/models.py:48
+msgid "Fallacy Of Irrelevant Purpose"
+msgstr ""
+
+#: premises/models.py:49
+msgid "Fallacy Of Red Herring"
+msgstr "Abatere de la subiect"
+
+#: premises/models.py:50
+msgid "Argument Against TheMan"
+msgstr "Atac la persoană"
+
+#: premises/models.py:51
+msgid "Poisoning The Well"
+msgstr "Otrăvirea fântânii"
+
+#: premises/models.py:52
+msgid "Fallacy Of The Beard"
+msgstr "Sophisme de continuité"
+
+#: premises/models.py:53
+msgid "Fallacy Of Slippery Slope"
+msgstr "Panta alunecoasă"
+
+#: premises/models.py:54
+msgid "Fallacy Of False Cause"
+msgstr "Cauză falsă"
+
+#: premises/models.py:55
+msgid "Fallacy Of Previous This"
+msgstr "Apel la tradiţie"
+
+#: premises/models.py:56
+msgid "Joint Effect"
+msgstr ""
+
+#: premises/models.py:57
+msgid "Wrong Direction"
+msgstr "Fausse piste"
+
+#: premises/models.py:58
+msgid "False Analogy"
+msgstr "Falsa analogie"
+
+#: premises/models.py:59
+msgid "Slothful Induction"
+msgstr "Respinge inducția"
+
+#: premises/models.py:60
+msgid "Appeal To Belief"
+msgstr "Apel la majoritate"
+
+#: premises/models.py:61
+msgid "Pragmatic Fallacy"
+msgstr "Eroare pragmatică"
+
+#: premises/models.py:62
+msgid "Fallacy Of Is To Ought"
+msgstr "Eroare Este / Trebuie; Ghilotina lui Hume"
+
+#: premises/models.py:63
+msgid "Argument From Force"
+msgstr "Apelare la forță"
+
+#: premises/models.py:64
+msgid "Argument To Pity"
+msgstr "Apel la milă"
+
+#: premises/models.py:65
+msgid "Prejudicial Language"
+msgstr "Limbaj Prejudiciabil"
+
+#: premises/models.py:66
+msgid "Fallacy Of Special Pleading"
+msgstr "Pledoarie specială"
+
+#: premises/models.py:67
+msgid "Appeal To Authority"
+msgstr "Apel la autoritate"
+
+#: premises/models.py:73
+msgid "Argument"
+msgstr "Argument"
+
+#: premises/models.py:77
+msgid "Description"
+msgstr "Descriere"
+
+#: premises/models.py:81
+msgid "Original Discourse"
+msgstr "Discurs Initial"
+
+#: premises/models.py:85 premises/models.py:473
+msgid "Sources"
+msgstr "Surse"
+
+#: premises/models.py:460
+msgid "Parent"
+msgstr "Părinte"
+
+#: premises/models.py:461
+msgid ""
+"The parent of premise. If you don't choose anything, it will be a main "
+"premise."
+msgstr ""
+"Părintele premisei. Daca nu alegi nimic va fi o premisă principala. "
+
+#: premises/models.py:465
+msgid "Premise Type"
+msgstr "Tipul premisei"
+
+#: premises/models.py:469
+msgid "Premise Content"
+msgstr "Conţinutul premisei"
+
+#: premises/models.py:477
+msgid "Related Argument"
+msgstr "Argument conex"
+
+#: premises/models.py:478
+msgid "You can also associate your premise with an argument."
+msgstr "Poţi asocia premisa cu un argument."
+
+#: premises/models.py:704
+msgid "Reason"
+msgstr "Raționament"
+
+#: premises/models.py:705
+msgid "Please explain that why the premise is a fallacy."
+msgstr "Te rog să explici de ce premisa este eronată."
+
+#: premises/models.py:707
+msgid "Fallacy Type"
+msgstr "Tipul erorii logice"
+
+#: profiles/forms.py:22
+msgid "Username"
+msgstr "Utilizator"
+
+#: profiles/forms.py:24
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "Obligatoriu. Până în 30 de caractere. Doar litere, cifre și @/./+/-/_ "
+
+#: profiles/forms.py:26
+msgid "Invalid characters"
+msgstr "Caractere invalide"
+
+#: profiles/forms.py:54
+msgid "The two password fields didn't match."
+msgstr "Cele două câmpuri pentru parolă nu corespund."
+
+#: profiles/forms.py:62 templates/auth/password_reset_confirm.html:12
+msgid "New password"
+msgstr "Parola nouă"
+
+#: profiles/forms.py:66
+msgid "New password confirmation"
+msgstr "Confirmarea noii parole"
+
+#: profiles/models.py:22
+msgid "email notification"
+msgstr "Notificare prin email"
+
+#: templates/auth/fallacies.html:28 templates/auth/premises.html:44
+#: templates/fallacies.html:29 templates/newsfeed.html:39
+#: templates/premises/contention_list.html:67
+msgid "Load more"
+msgstr "Încărca mai mult"
+
+#: templates/auth/login.html:7 templates/auth/login.html.py:11
+#: templates/auth/password_reset_complete.html:9
+msgid "Login"
+msgstr "Conectare"
+
+#: templates/auth/login.html:7 templates/auth/register.html:7
+msgid "or login with Twitter"
+msgstr "sau conectare cu Twitter"
+
+#: templates/auth/login.html:14
+msgid "Forgot your password?"
+msgstr "Ai uitat parola?"
+
+#: templates/auth/login_popup.html:6
+#, python-format
+msgid ""
+"<a href=\"%(login_url)s\">Login</a> or <a href=\"%(register_url)s"
+"\">register</a> to add a premise for this argument."
+msgstr ""
+"<a href=\"%(login_url)s\">Conectează-te</a> sau <a "
+"href=\"%(register_url)s\">înregistrează-te</a> pentru a adăuga o premisă pentru acest argument."
+
+#: templates/auth/password_reset_complete.html:8
+msgid "The password changed successfully."
+msgstr "Parola a fost modificată cu succes."
+
+#: templates/auth/password_reset_confirm.html:7
+msgid "Enter your password"
+msgstr "Introdu parola"
+
+#: templates/auth/password_reset_confirm.html:17
+msgid "New password (again)"
+msgstr "Parola nouă (din nou)"
+
+#: templates/auth/password_reset_confirm.html:21
+msgid "Change my password"
+msgstr "Schimbă parola"
+
+#: templates/auth/password_reset_confirm.html:25
+msgid "Invalid password reset url."
+msgstr "Adresa pentru resetarea parolei este invalidă."
+
+#: templates/auth/password_reset_done.html:8
+msgid "We have sent an email to reset your password. Please check your inbox."
+msgstr ""
+"Ți-am trimis un email pentru resetarea parolei. Te rog să verifici adresa de email."
+
+#: templates/auth/password_reset_email.html:2
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at arguman.org"
+msgstr ""
+"Ai primit acest email pentru că ai cerut resetarea parolei pentru contul de la arguman.org."
+
+#: templates/auth/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+"Te rog vizitează următoarea pagină și alege o nouă parolă:"
+
+#: templates/auth/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+"Numele de utilizator, in cazul in care il uiţi:"
+
+#: templates/auth/password_reset_form.html:7
+msgid "Reset Password"
+msgstr "Resetare Parolă"
+
+#: templates/auth/password_reset_form.html:10
+#: templates/nouns/new_relation.html:37 templates/premises/new_premise.html:15
+msgid "Submit"
+msgstr "Trimite"
+
+#: templates/auth/premises.html:22 templates/auth/profile.html:121
+#: templates/search/premise.html:11 templates/stats/premise.html:11
+msgid "supporter."
+msgstr "susţinător."
+
+#: templates/auth/premises.html:27 templates/auth/profile.html:126
+#: templates/search/premise.html:16 templates/stats/premise.html:16
+msgid "fallacy report."
+msgstr "raport cu erori."
+
+#: templates/auth/premises.html:39 templates/auth/profile.html:82
+#: templates/auth/profile.html.py:101 templates/auth/profile.html:138
+msgid "No data."
+msgstr "Fara date."
+
+#: templates/auth/profile.html:21
+msgid "Twitter"
+msgstr "Twitter"
+
+#: templates/auth/profile.html:26
+msgid "date joined"
+msgstr "data de înscriere"
+
+#: templates/auth/profile.html:32
+msgid "Following"
+msgstr "Urmăriri"
+
+#: templates/auth/profile.html:41
+msgid "Followers"
+msgstr "Urmăritori"
+
+#: templates/auth/profile.html:53
+msgid "Overview"
+msgstr "Vedere de ansamblu"
+
+#: templates/auth/profile.html:54 templates/nouns/partial.html:16
+msgid "Arguments"
+msgstr "Argumente"
+
+#: templates/auth/profile.html:55
+msgid "Premises"
+msgstr "Premise"
+
+#: templates/auth/profile.html:56
+msgid "Fallacy Reports"
+msgstr "Rapoarte Erori"
+
+#: templates/auth/profile.html:59
+msgid "update profile"
+msgstr "Actualizeaza profil"
+
+#: templates/auth/profile.html:63
+msgid "Unfollow"
+msgstr "Dezabonare"
+
+#: templates/auth/profile.html:65
+msgid "Follow"
+msgstr "Urmărește"
+
+#: templates/auth/profile.html:74
+msgid "Most active channels"
+msgstr "Cele mai active canale"
+
+#: templates/auth/profile.html:88
+msgid "Most discussed users"
+msgstr "Cei mai discutati utilizatori"
+
+#: templates/auth/profile.html:107
+msgid "Most supported premises"
+msgstr "Cele mai sustinute premise"
+
+#: templates/auth/register.html:7 templates/auth/register.html.py:17
+msgid "Register"
+msgstr "Inregistrare"
+
+#: templates/auth/register.html:12 templates/auth/update.html:10
+msgid ""
+"You can update your profile picture on <a href=\"http://gravatar.com"
+"\">gravatar.com</a>."
+msgstr ""
+"Îți poți actualiza poza de profil la  <a href=\"http://gravatar.com\">gravatar.com</a>."
+
+#: templates/auth/update.html:6
+msgid "Update Profile"
+msgstr "Actualizează Profil"
+
+#: templates/auth/update.html:14 templates/premises/edit_contention.html:11
+#: templates/premises/edit_premise.html:10
+msgid "Update"
+msgstr "Actualizează"
+
+#: templates/base.html:5
+msgid "Argument Analysis Platform. Create and analyze argument maps online."
+msgstr "Platformă pentru analiza argumentelor. Creează și analizează diagrame argumentative on-line."
+
+#: templates/base.html:7
+msgid "Argument analysis and mapping platform"
+msgstr "Platformă pentru analiza argumentelor"
+
+#: templates/base.html:24
+msgid "Announcement:"
+msgstr "Anunt:"
+
+#: templates/base.html:35
+msgid "about"
+msgstr "despre"
+
+#: templates/base.html:36
+msgid "blog"
+msgstr "blog"
+
+#: templates/base.html:38
+msgid "register"
+msgstr "inregistrare"
+
+#: templates/base.html:39
+msgid "login"
+msgstr "conectare"
+
+#: templates/base.html:41
+msgid "new argument"
+msgstr "argument nou"
+
+#: templates/base.html:43
+msgid "logout"
+msgstr "deconectare"
+
+#: templates/base.html:47
+msgid "search keywords"
+msgstr "cuvinte cheie"
+
+#: templates/base.html:52
+msgid "Languages:"
+msgstr "Limbi:"
+
+#: templates/base.html:54
+msgid "English"
+msgstr "Engleza"
+
+#: templates/base.html:56
+msgid "Turkish"
+msgstr "Turcă"
+
+#: templates/base.html:58
+msgid "Chinese"
+msgstr "Chineză"
+
+#: templates/base.html:59
+msgid "Follow on Twitter:"
+msgstr "Urmărește pe Twitter:"
+
+#: templates/base.html:72
+msgid ""
+"arguman.org is an open-source project. you can follow the <a href=\"http://"
+"github.com/arguman/arguman.org\">organization</a> on github."
+msgstr ""
+"arguman.org este un proiect open-source pe care il poti urmari la"
+"<a href=\"http://github.com/arguman/arguman.org\"> pe github </a>."
+
+#: templates/base.html:78
+msgid "Terms of Service"
+msgstr "Termeni și condiții"
+
+#: templates/base.html:79
+msgid "Feedback"
+msgstr "Feedback"
+
+#: templates/base.html:80
+msgid "Donate"
+msgstr "Donează"
+
+#: templates/fallacies.html:4 templates/tabs.html:10
+msgid "Fallacies"
+msgstr "Erori"
+
+#: templates/home.html:11
+#, python-format
+msgid ""
+"arguman.org is an <a href=\"%(about_url)s\">argument analysis</a> platform."
+msgstr ""
+"argüman este o <a href=\"%(about_url)s\">platformă</a> de analiză a argumentelor."
+
+#: templates/newsfeed.html:12
+msgid "What is going on here:"
+msgstr "Ce se mai întâmplă:"
+
+#: templates/newsfeed.html:16
+msgid "Show only followed users activity."
+msgstr "Arată doar activitatea utilizatorilor urmăriți."
+
+#: templates/newsfeed.html:18
+msgid "Show all users activity."
+msgstr "Arată activitatea tuturor utilizatorilor."
+
+#: templates/newsfeed.html:35
+msgid "Newsfeed seems empty."
+msgstr "Nu avem nicio noutate."
+
+#: templates/newsfeed/contention.html:2
+msgid "created an argument:"
+msgstr "a creat un argument:"
+
+#: templates/newsfeed/fallacy.html:4
+#, python-format
+msgid "reported <strong>%(fallacy)s</strong> for a premise."
+msgstr "a raportat <strong>%(fallacy)s</strong> pentru o premisă."
+
+#: templates/newsfeed/following.html:3
+#, python-format
+msgid ""
+"following <a href=\"%(profile_url)s\" class=\"contention-link\">"
+"%(username)s</a>"
+msgstr ""
+"urmăreşte <a href=\"%(profile_url)s\" class=\"contention-link\">%(username)s</a>"
+
+#: templates/newsfeed/premise.html:6
+msgid "associated with another argument"
+msgstr "este asociată cu un alt argument:"
+
+#: templates/notifications.html:8
+msgid "Notifications"
+msgstr "Notificări"
+
+#: templates/notifications/added-premise-for-contention.html:7
+#, python-format
+msgid "added a <span class=\"premise-type %(class)s\">%(label)s</span> premise"
+msgstr ""
+"a adaugat o <span class=\"premise-type %(class)s\">%(label)s</span> premisă"
+
+#: templates/notifications/added-premise-for-premise.html:6
+#, python-format
+msgid ""
+"added a <span class=\"premise-type %(class)s\">%(label)s</span> premise for"
+msgstr ""
+"a adaugat o <span class=\"premise-type %(class)s\">%(label)s</span> premisă pentru"
+
+#: templates/notifications/followed.html:2
+msgid "is following you."
+msgstr "te urmăreşte."
+
+#: templates/notifications/reported-as-fallacy.html:4
+#, python-format
+msgid "Your premise reported as <strong>%(label)s</strong>"
+msgstr "Premisa ta a fost raportă ca <strong>%(label)s</strong>."
+
+#: templates/notifications/supported-a-premise.html:6
+msgid "supported your premise"
+msgstr "ți-a susținut premisa"
+
+#: templates/nouns/channel_detail.html:15
+msgid "Regular users"
+msgstr "Utilizatori obişnuiţi"
+
+#: templates/nouns/detail.html:39 templates/nouns/partial.html:11
+msgid "add new relation"
+msgstr "adaugă o nouă relație"
+
+#: templates/nouns/detail.html:52
+msgid "create an argument"
+msgstr "creează un argument"
+
+#: templates/nouns/new_relation.html:10
+msgid "New Relation"
+msgstr "Relație Nouă"
+
+#: templates/nouns/new_relation.html:19
+msgid "Target noun (Singular)"
+msgstr "Substantiv (singular)"
+
+#: templates/nouns/new_relation.html:22
+msgid "Relation types"
+msgstr "Tipuri de relații"
+
+#: templates/nouns/new_relation.html:23
+msgid ""
+"<p><b>Is a (hypernym and hyponym)</b> A type-of relationship between two "
+"types. For example <i>Organic Process</i> is the hypernym of <i>Évolution</"
+"i>.</p>"
+msgstr ""
+"<p><b>Este un (hiperonim si hiponim)</b> Un tip de relație între două tipuri."
+"De exemplu, <i>Proces Organic</i> est hiperonimul <i>Evoluției</"
+"i>.</p>"
+
+#: templates/nouns/new_relation.html:27
+msgid ""
+"<p><b>Part of (holonymy and meronymy)</b> A part/whole relationship between "
+"two types. For example <i>Natural Selection</i> is the part of <i>Évolution</"
+"i></p>"
+msgstr ""
+"<p><b>Parte din (holonimie si meronimie)</b> O relație întreg-parte între"
+" două tipuri. De exemplu, <i>Selecția naturală</i> este parte din<i>Evoluție</i>"
+
+#: templates/nouns/new_relation.html:31
+msgid ""
+"<p><b>Opposite with (antonym)</b> The opposite meaning of the type. For "
+"example, <i>Évolution</i> and <i>DÉvolution</i></p>"
+msgstr ""
+"<p><b>Opusul lui (antonim)</b> Înțelesul opus al tipului. De "
+"exemplu, <i>Evoluție</i> si <i>Involuție</i></p>"
+
+#: templates/partials/channel_list.html:9
+msgid "all channels"
+msgstr "toate canalele"
+
+#: templates/partials/notifications.html:16
+msgid "See all"
+msgstr "Vezi tot"
+
+#: templates/premises/actions.html:3 templates/premises/list_view.html:13
+#: templates/premises/premise.html:90 templates/premises/thread.html:105
+#: templates/premises/tree_view.html:26
+msgid "add premise"
+msgstr "adauga premisă"
+
+#: templates/premises/actions.html:7 templates/premises/premise.html:96
+#: templates/premises/thread.html:97
+msgid "remove"
+msgstr "înlătură"
+
+#: templates/premises/base_contention.html:6
+msgid "Argument Map"
+msgstr "Diagrama Argumentelor"
+
+#: templates/premises/base_contention.html:33
+msgid "sender"
+msgstr "expeditor"
+
+#: templates/premises/base_contention.html:41
+msgid "source"
+msgstr "sursă"
+
+#: templates/premises/base_contention.html:47
+msgid "Unspecified"
+msgstr "Nespecificat"
+
+#: templates/premises/base_contention.html:54
+msgid "RANDOM"
+msgstr "ALEATORIU"
+
+#: templates/premises/base_contention.html:60
+msgid "RELATED ARGUMENTS"
+msgstr "ARGUMENTE LEGATE"
+
+#: templates/premises/base_contention.html:75
+msgid "share"
+msgstr "share"
+
+#: templates/premises/base_contention.html:82
+msgid "view"
+msgstr "vizualizare"
+
+#: templates/premises/base_contention.html:84
+msgid "Tree"
+msgstr "Arbore"
+
+#: templates/premises/base_contention.html:85
+msgid "List"
+msgstr "Listă"
+
+#: templates/premises/contention.html:11 templates/premises/premise.html:32
+msgid "sender:"
+msgstr "expeditor"
+
+#: templates/premises/contention_list.html:22
+#: templates/premises/tree_view.html:66
+msgid "objection rate"
+msgstr "procent de obiecţie"
+
+#: templates/premises/contention_list.html:25
+#: templates/premises/tree_view.html:61
+msgid "support rate"
+msgstr "procent de susţinere"
+
+#: templates/premises/contention_list.html:28
+#: templates/premises/tree_view.html:71
+msgid "Neutral support and objection rate."
+msgstr "Procent de susţinere și obiecţie neutru."
+
+#: templates/premises/contention_list.html:62
+msgid "No results found."
+msgstr "Nu am gasit niciun rezultat."
+
+#: templates/premises/edit_contention.html:8
+msgid "Edit Argument"
+msgstr "Editeaza argumentul"
+
+#: templates/premises/edit_contention.html:16
+msgid "Remove the argument"
+msgstr "Înlătură argumentul"
+
+#: templates/premises/edit_premise.html:7
+msgid "Edit Premise"
+msgstr "Editează premisa"
+
+#: templates/premises/examples/contention.html:2
+msgid ""
+"The main contention. It will be arguable with own premises. The Premises can "
+"prove or rebuttal this contention.<br> Examples: <ul> <li>Real art is for "
+"society, not for profit</li> <li>The meaning of life is 42</li> <li>Ethics "
+"man did what had to be done</li> </ul>"
+msgstr ""
+"Afirmația principală. Aceasta va fi contestabilă cu propriile premise. Premisele "
+"o pot confirma sau invalida.<br> Exemple:<ul><li>Adevarata artă este facută pentru"
+" societate, nu pentru profit</li><li>42 este sensul vietii.</li><li>Omul etic "
+"a făcut ce a trebuit să fie făcut.</li></ul>"
+
+#: templates/premises/examples/fallacy.html:2
+msgid ""
+"You have to choose a fallacy type. For more information, you can look at the "
+"<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia entry</"
+"a> for fallacies."
+msgstr ""
+"Trebuie să alegi un tip de eroare. Pentru mai multe informații poți consulta "
+"lista de pe <a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia</a>."
+
+#: templates/premises/examples/owner.html:2
+msgid ""
+"The owner of argument. It can be instutation, person, book, or a paper. "
+"Examples: <ul> <li>On the Origin of Species</li> <li>Friedrich Nietzsche</"
+"li> <li>Piet Mondiran</li> <li>The Guardian</li> </ul>"
+msgstr ""
+"Autorul argumentului. Poate fi o institutie, persoana, carte sau o lucrare. "
+"Exemple: <ul><li>Originea Speciilor</li><li>Friedrich Nietzsche"
+"</li><li>Guido Van Rossum</li><li>The Guardian</li></ul>"
+
+#: templates/premises/examples/premise.html:2
+msgid ""
+"Example: We define happiness as a state of well-being, starting with being "
+"alive instead of dead."
+msgstr ""
+"Exemplu: Definim fericirea ca o stare de bine, începând prin a fi în viață în loc să fim morți."
+
+#: templates/premises/examples/premise_source.html:2
+msgid "Example: Charles Darwin's The Origin of Species"
+msgstr "Exemplu: Charles Darwin - Originea speciilor"
+
+#: templates/premises/examples/premise_type.html:3
+msgid ""
+"The type of premise. It can be: <ul> <li> but: An objection against the "
+"contention. </li> <li> because: A reason for proof the contention. </li> "
+"<li> however: An additional situation for the premise. </li> </ul>"
+msgstr ""
+"Tipul premisei. Poate fi:<ul>\t<li>dar: O obiecție împotriva afirmației"
+" principale.</li>\t<li>pentru că: motivul care confirma afirmația </li>\t"
+"<li> totuşi: o situație suplimentară a premisei.</li></ul>"
+
+#: templates/premises/examples/sources.html:2
+msgid ""
+"The source of argument. It can be a URL, a book, or a newspaper. It is "
+"important for reliability of main contention."
+msgstr ""
+"Sursa argumentului. Poate fi un URL, o carte sau un ziar. Este importantă"
+"pentru credibilitatea afirmației principale."
+
+#: templates/premises/list_view.html:20
+msgid "Go to parent premise"
+msgstr "Mergi la premisa părinte"
+
+#: templates/premises/new_contention.html:9
+msgid "Save and continue to edit"
+msgstr "Salvează și continuă editarea"
+
+#: templates/premises/new_premise.html:9
+msgid "The parent premise:"
+msgstr "Premisa părinte:"
+
+#: templates/premises/new_premise.html:29
+msgid "Characters remaining: "
+msgstr "Caractere rămase: "
+
+#: templates/premises/new_premise.html:49
+msgid "(change)"
+msgstr "(schimba)"
+
+#: templates/premises/premise.html:12
+msgid "score:"
+msgstr "scor:"
+
+#: templates/premises/premise.html:28 templates/premises/thread.html:67
+msgid "sources:"
+msgstr "surse:"
+
+#: templates/premises/premise.html:46 templates/premises/thread.html:74
+#, python-format
+msgid "%(count)s fallacy reported."
+msgid_plural "%(count)s fallacies reported."
+msgstr[0] "%(count)s eroare raportată."
+msgstr[1] "%(count)s erori raportate."
+
+#: templates/premises/premise.html:60 templates/premises/premise.html.py:105
+#: templates/premises/premise.html:107 templates/premises/premise.html:111
+#: templates/premises/thread.html:113
+msgid "undo"
+msgstr "anulare"
+
+#: templates/premises/premise.html:79 templates/premises/thread.html:48
+#, python-format
+msgid "%(count)s supporter."
+msgid_plural "%(count)s supporters."
+msgstr[0] "%(count)s susţinător."
+msgstr[1] "%(count)s susţinători."
+
+#: templates/premises/premise.html:93 templates/premises/thread.html:90
+#: templates/premises/tree_view.html:24
+msgid "edit"
+msgstr "editează"
+
+#: templates/premises/premise.html:97 templates/premises/thread.html:98
+msgid "Are you sure to remove this premise?"
+msgstr "Esti sigur ca vrei să elimini această premisă?"
+
+#: templates/premises/premise.html:105 templates/premises/premise.html:111
+#: templates/premises/premise.html:113 templates/premises/thread.html:119
+msgid "support"
+msgstr "suport"
+
+#: templates/premises/premise.html:119 templates/premises/thread.html:124
+msgid "report fallacy"
+msgstr "semnalează o eroare"
+
+#: templates/premises/report.html:7
+msgid "The premise:"
+msgstr "Premisa:"
+
+#: templates/premises/report.html:13
+msgid "Report Fallacy"
+msgstr "Semnaleaza Eroare"
+
+#: templates/premises/thread.html:126
+msgid "open in tree view"
+msgstr "vizualizează structura arborescentă"
+
+#: templates/premises/tree.html:22
+msgid "branch"
+msgstr "ramură"
+
+#: templates/premises/tree_view.html:14
+msgid "You can use arrow keys to navigate in the map."
+msgstr "Poți folosi tastele săgeți pentru a naviga în diagramă."
+
+#: templates/premises/tree_view.html:16
+msgid "Loading tree..."
+msgstr "Se incarcă..."
+
+#: templates/premises/tree_view.html:39
+msgid "The argument have no premises."
+msgstr "Argumentul nu are premise."
+
+#: templates/premises/tree_view.html:41
+msgid "Add a premise"
+msgstr "Adaugă o premisă"
+
+#: templates/premises/tree_view.html:44
+msgid "Edit argument"
+msgstr "Editează argumentul"
+
+#: templates/premises/tree_view.html:52
+msgid "The argument is too complex. You can switch to list view."
+msgstr "Argumentul este prea complicat. Îl poți vizualiza sub formă de listă."
+
+#: templates/premises/tree_view.html:77
+msgid "last update:"
+msgstr "ultima actualizare:"
+
+#: templates/profiles/social_providers.html:3
+msgid "Login with Twitter"
+msgstr "Conectare cu Twitter"
+
+#: templates/search/contention.html:8 templates/stats/contention.html:8
+msgid "PARTICIPANT"
+msgstr "PARTICIPANT"
+
+#: templates/search/contention.html:12 templates/stats/contention.html:12
+msgid "BECAUSE"
+msgstr "PENTRU CĂ"
+
+#: templates/search/contention.html:16 templates/stats/contention.html:16
+msgid "BUT"
+msgstr "DAR"
+
+#: templates/search/contention.html:20 templates/stats/contention.html:20
+msgid "HOWEVER"
+msgstr "TOTUȘI"
+
+#: templates/search/profile.html:9 templates/stats/profile.html:9
+msgid "FOLLOWER"
+msgstr "URMĂRITOR"
+
+#: templates/search/profile.html:13 templates/stats/profile.html:13
+msgid "ARGUMENT"
+msgstr "ARGUMENT"
+
+#: templates/search/profile.html:17 templates/stats/profile.html:17
+msgid "PREMISE"
+msgstr "PREMISĂ"
+
+#: templates/search/profile.html:21
+msgid "SUPPORT"
+msgstr "SUPORT"
+
+#: templates/search/search.html:7
+msgid "Keywords:"
+msgstr "Cuvinte cheie:"
+
+#: templates/search/search.html:14
+msgid "contentions"
+msgstr "dezbateri"
+
+#: templates/search/search.html:17
+msgid "users"
+msgstr "utilizatori"
+
+#: templates/search/search.html:20
+msgid "premises"
+msgstr "premise"
+
+#: templates/stats.html:6 templates/tabs.html:13
+msgid "Statistics"
+msgstr "Statistici"
+
+#: templates/stats.html:9
+msgid "most active users"
+msgstr "cei mai activi utilizatori"
+
+#: templates/stats.html:10
+msgid "highest user karma"
+msgstr "utilizatorul cu cea mai mare karma"
+
+#: templates/stats.html:11
+msgid "most crowded arguments"
+msgstr "cele mai disputate discuții"
+
+#: templates/stats.html:12
+msgid "most supported premises"
+msgstr "cele mai susținute premise"
+
+#: templates/stats.html:13
+msgid "most fallacy premises"
+msgstr "cele mai eronate premise"
+
+#: templates/stats.html:18
+msgid "this week"
+msgstr "această săptămână"
+
+#: templates/stats.html:19
+msgid "this month"
+msgstr "această lună"
+
+#: templates/stats.html:20
+msgid "all time"
+msgstr "de la inceput"
+
+#: templates/stats/profile.html:21
+msgid "KARMA"
+msgstr "KARMA"
+
+#: templates/tabs.html:4
+msgid "Newsfeed"
+msgstr "Știri"
+
+#: templates/tabs.html:6
+msgid "Featured"
+msgstr "Recomandări"
+
+#: templates/tabs.html:8
+msgid "New"
+msgstr "Noutăți"
+
+#, fuzzy
+#~| msgid "most active users"
+#~ msgid "Active users"
+#~ msgstr "Utilisateurs actifs"
+
+#~ msgid "update"
+#~ msgstr "mettre à jour"
+
+#~ msgid "The feed seems to empty."
+#~ msgstr "Le fil d'actualité est vide."
+
+#~ msgid ""
+#~ "added a <span class=\"premise-type %(class)s\">%(label)s</span> premise "
+#~ "for a premise"
+#~ msgstr ""
+#~ "a ajouté une <span class=\"premise-type %(class)s\">"
+#~ "%(label)s</span> prémisse pour une prémisse"
+
+#~ msgid "You have no new notifications."
+#~ msgstr "Pas de nouvelle notification."
+
+#~ msgid "share:"
+#~ msgstr "partager&nbsp;:"
+
+#~ msgid "Recently Updated"
+#~ msgstr "Modifiés récemment"
+
+#~ msgid "Search"
+#~ msgstr "Recherche"
+
+#~ msgid "Argument Analysis Platform"
+#~ msgstr "Plateforme d'analyse d'arguments"
+
+#~ msgid "original discourse:"
+#~ msgstr "affirmation originel&nbsp;:"
+
+#~ msgid "Edit"
+#~ msgstr "Editer"
+
+#~ msgid "Unpublish"
+#~ msgstr "Dépublier"
+
+#~ msgid "Publish"
+#~ msgstr "Publier"
+
+#~ msgid "View"
+#~ msgstr "Voir"
+
+#~ msgid "last sender:"
+#~ msgstr "dernier émetteur&nbsp;:"
+
+#~ msgid "and 1 participant."
+#~ msgid_plural "and %(participants)s participants."
+#~ msgstr[0] "et un participant."
+#~ msgstr[1] "et de %(participants)s participants."
+
+#~ msgid "and others."
+#~ msgstr "et autres."
+
+#, fuzzy
+#~| msgid "Statistics"
+#~ msgid "Static Files"
+#~ msgstr "Statistiques"
+
+#, fuzzy
+#~| msgid "The feed seems to empty."
+#~ msgid "The submitted file is empty."
+#~ msgstr "Le fichier est vide."
+
+#, fuzzy
+#~| msgid "Featured"
+#~ msgid "Saturday"
+#~ msgstr "Mis en avant"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid "March"
+#~ msgstr "Recherche"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "abbrev. month"
+#~ msgid "March"
+#~ msgstr "Recherche"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "alt. month"
+#~ msgid "March"
+#~ msgstr "Recherche"
+
+#, fuzzy
+#~| msgid "this month"
+#~ msgid "%d month"
+#~ msgid_plural "%d months"
+#~ msgstr[0] "ce mois-ci"
+#~ msgstr[1] "ce mois-ci"
+
+#, fuzzy
+#~| msgid "this week"
+#~ msgid "%d week"
+#~ msgid_plural "%d weeks"
+#~ msgstr[0] "cette semaine"
+#~ msgstr[1] "ces semaines"
+
+#, fuzzy
+#~| msgid "this month"
+#~ msgid "%d minute"
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "ce mois-ci"
+#~ msgstr[1] "ce mois-ci"
+
+#, fuzzy
+#~| msgid "Unspecified"
+#~ msgid "No year specified"
+#~ msgstr "Non spécifié"
+
+#, fuzzy
+#~| msgid "Unspecified"
+#~ msgid "No month specified"
+#~ msgstr "Non spécifié"
+
+#, fuzzy
+#~| msgid "Unspecified"
+#~ msgid "No day specified"
+#~ msgstr "Non spécifié"
+
+#, fuzzy
+#~| msgid "Unspecified"
+#~ msgid "No week specified"
+#~ msgstr "Non spécifié"
+
+#, fuzzy
+#~| msgid "Notifications"
+#~ msgid "notification_email"
+#~ msgstr "Non spécifié"
+
+#~ msgid "Follow:"
+#~ msgstr "Suivre&nbsp;:"
