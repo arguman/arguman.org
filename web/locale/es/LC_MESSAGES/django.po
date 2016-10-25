@@ -1,0 +1,815 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Arguman\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-13 08:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Jorge Barata <jorge.barata.gonzalez@gmail.com> & Alejo Duque\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/admin.py:18
+msgid "Publish selected posts"
+msgstr "Publicar artículos seleccionados"
+
+#: blog/admin.py:22
+msgid "Mark as draft selected posts"
+msgstr "Marcar como borradores los artículos seleccionados"
+
+#: blog/models.py:21
+msgid "Name"
+msgstr "Nombre"
+
+#: blog/models.py:22
+msgid "Slug"
+msgstr "URL"
+
+#: blog/models.py:23
+msgid "Content"
+msgstr "Contenido"
+
+#: blog/models.py:26 premises/models.py:211
+msgid "Published"
+msgstr "Publicado"
+
+#: premises/models.py:31 templates/index.html:18
+#: templates/premises/contention.html:6
+msgid "but"
+msgstr "pero"
+
+#: premises/models.py:32 templates/index.html:17
+#: templates/premises/contention.html:5
+msgid "because"
+msgstr "porque"
+
+#: premises/models.py:33 templates/index.html:19
+#: templates/premises/contention.html:7
+msgid "however"
+msgstr "en cualquier caso"
+
+#: premises/models.py:37
+msgid "Begging The Question"
+msgstr "Petición de principio"
+
+#: premises/models.py:38
+msgid "Irrelevant Conclusion"
+msgstr "Conclusión irrelevante"
+
+#: premises/models.py:39
+msgid "Fallacy Of Irrelevant Purpose"
+msgstr "Falacia del Propósito irrelevante"
+
+#: premises/models.py:40
+msgid "Fallacy Of Red Herring"
+msgstr "Falacia del Red Herring"
+
+#: premises/models.py:41
+msgid "Argument Against TheMan"
+msgstr "Contra el hombre"
+
+#: premises/models.py:42
+msgid "Poisoning The Well"
+msgstr "Envenenamiento del pozo"
+
+#: premises/models.py:43
+msgid "Fallacy Of The Beard"
+msgstr "Falcia del Continuo"
+
+#: premises/models.py:44
+msgid "Fallacy Of Slippery Slope"
+msgstr "Falacia de la Pendiente resbaladiza"
+
+#: premises/models.py:45
+msgid "Fallacy Of False Cause"
+msgstr "Falacia de la Causa falsa"
+
+#: premises/models.py:46
+msgid "Fallacy Of Previous This"
+msgstr "Falacia del Historiador"
+
+#: premises/models.py:47
+msgid "Joint Effect"
+msgstr "Falacia de la Conjunción"
+
+#: premises/models.py:48
+msgid "Wrong Direction"
+msgstr "Sentido incorrecto"
+
+#: premises/models.py:49
+msgid "False Analogy"
+msgstr "Falsa Analogía"
+
+#: premises/models.py:50
+msgid "Slothful Induction"
+msgstr "Razonamiento engañoso"
+
+#: premises/models.py:51
+msgid "Appeal To Belief"
+msgstr "Apelación a creencia"
+
+#: premises/models.py:52
+msgid "Falacia pragmática"
+msgstr ""
+
+#: premises/models.py:53
+msgid "Fallacy Of Is To Ought"
+msgstr "Falacia debida"
+
+#: premises/models.py:54
+msgid "Argument From Force"
+msgstr "Argumento forzado"
+
+#: premises/models.py:55
+msgid "Argument To Pity"
+msgstr "Argumento a la compasión"
+
+#: premises/models.py:56
+msgid "Prejudicial Language"
+msgstr "Lneguage perjudicial"
+
+#: premises/models.py:57
+msgid "Fallacy Of Special Pleading"
+msgstr "Falacia de la defensa especial"
+
+#: premises/models.py:58
+msgid "Appeal To Authority"
+msgstr "Argumento de autoridad"
+
+#: premises/models.py:73
+msgid "Argument"
+msgstr "Argumento"
+
+#: premises/models.py:77
+msgid "Description"
+msgstr "Descripción"
+
+#: premises/models.py:81
+msgid "Original Discourse"
+msgstr "Discurso Original"
+
+#: premises/models.py:85 premises/models.py:209
+msgid "Sources"
+msgstr "Fuentes"
+
+#: premises/models.py:196
+msgid "Parent"
+msgstr "Padre"
+
+#: premises/models.py:197
+msgid ""
+"The parent of premise. If you don't choose anything, it will be a main "
+"premise."
+msgstr "El padre de la premisa. Si no eliges nada, será una premisa principal."
+
+#: premises/models.py:201
+msgid "Premise Type"
+msgstr "Tipo de Premisa"
+
+#: premises/models.py:205
+msgid "Premise Content"
+msgstr "Contenido de la Premisa"
+
+#: premises/models.py:314
+msgid "Fallacy Type"
+msgstr "Tipo de Falacia"
+
+#: profiles/forms.py:22
+msgid "Username"
+msgstr "Usuario"
+
+#: profiles/forms.py:24
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "Obligatorio. 30 caracteres o menos. Sólo letras, dígitos y @/./+/-/_"
+
+#: profiles/forms.py:26
+msgid "Invalid characters"
+msgstr "Caracteres no válidos"
+
+#: profiles/forms.py:54
+msgid "The two password fields didn't match."
+msgstr "Los passwords no coinciden."
+
+#: profiles/forms.py:61 templates/auth/password_reset_confirm.html:12
+msgid "New password"
+msgstr "Contraseña nueva"
+
+#: profiles/forms.py:65
+msgid "New password confirmation"
+msgstr "Confirmación de la contraseña nueva"
+
+#: templates/base.html:6
+msgid "Argument Analysis Platform"
+msgstr "Plataforma de Análisis de Argumentos"
+
+#: templates/base.html:23
+msgid "Announcement:"
+msgstr "Anuncio:"
+
+#: templates/base.html:34
+msgid "about"
+msgstr "acerca de"
+
+#: templates/base.html:35
+msgid "blog"
+msgstr "blog"
+
+#: templates/base.html:37
+msgid "register"
+msgstr "registrarse"
+
+#: templates/base.html:38
+msgid "login"
+msgstr "identificarse"
+
+#: templates/base.html:40
+msgid "new argument"
+msgstr "nuevo argumento"
+
+#: templates/base.html:42
+msgid "logout"
+msgstr "salir"
+
+#: templates/base.html:46
+msgid "search keywords"
+msgstr "buscar palabras clave"
+
+#: templates/base.html:51
+msgid "Languages:"
+msgstr "Lenguajes:"
+
+#: templates/base.html:53
+msgid "English"
+msgstr "Inglés"
+
+#: templates/base.html:55
+msgid "Turkish"
+msgstr "Turco"
+
+#: templates/base.html:56
+msgid "Follow on twitter:"
+msgstr "Seguir en twitter:"
+
+#: templates/base.html:68
+msgid ""
+"\n"
+"                arguman.org is an open-source project. you can follow the\n"
+"                <a href=\"http://github.com/arguman/arguman.org"
+"\">organization</a> on github.\n"
+"            "
+msgstr ""
+"\n"
+"                arguman.org es un proyecto de software libre. Puedes seguir la\n"
+"                organización <a href=\"http://github.com/arguman/arguman.org"
+"\">organization</a> en github.\n"
+"            "
+
+#: templates/base.html:74
+msgid "Terms of Service"
+msgstr "Términos de Uso"
+
+#: templates/base.html:75
+msgid "Feedback"
+msgstr "Contactar"
+
+#: templates/base.html:76
+msgid "Donate"
+msgstr "Donar"
+
+#: templates/home.html:8
+#, python-format
+msgid ""
+"\n"
+"    arguman.org is an <a href=\"%(about_url)s\">argument analysis</a> "
+"platform.\n"
+"    "
+msgstr ""
+"\n"
+"    arguman.org es una plataforma de <a href=\"%(about_url)s\">análisis de argumentos</a>.'n'"
+"    "
+
+#: templates/index.html:23
+msgid "last sender:"
+msgstr "Ultimo participante"
+
+#: templates/index.html:31
+msgid "No results found."
+msgstr "No se han encontrado resultados."
+
+#: templates/index.html:36 templates/newsfeed.html:39
+#: templates/auth/profile.html:63
+msgid "Load more"
+msgstr "Cargar más"
+
+#: templates/newsfeed.html:12
+msgid "What is going on here:"
+msgstr "Lo que está pasando:"
+
+#: templates/newsfeed.html:16
+msgid "Show only followed users activity."
+msgstr "Mostrar sólo actividad de los usuarios a los que sigo"
+
+#: templates/newsfeed.html:18
+msgid "Show all users activity."
+msgstr "Mostrar la actividad de todos los usuarios."
+
+#: templates/newsfeed.html:35
+msgid "Newsfeed seems empty."
+msgstr "Sin novedad."
+
+#: templates/notifications.html:8
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: templates/stats.html:7 templates/tabs.html:10
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#: templates/stats.html:10
+msgid "most active users"
+msgstr "usuarios más activos"
+
+#: templates/stats.html:11
+msgid "most supported users"
+msgstr "usuarios más apoyados"
+
+#: templates/stats.html:13
+msgid "most crowded arguments"
+msgstr "argumentos más concurridos"
+
+#: templates/stats.html:14
+msgid "most supported premises"
+msgstr "premisas más apoyadas"
+
+#: templates/stats.html:15
+msgid "most fallacy premises"
+msgstr "falacias más usadas"
+
+#: templates/stats.html:20
+msgid "this week"
+msgstr "última semana"
+
+#: templates/stats.html:21
+msgid "this month"
+msgstr "último mes"
+
+#: templates/stats.html:22
+msgid "all time"
+msgstr "siempre"
+
+#: templates/tabs.html:4
+msgid "Newsfeed"
+msgstr "Noticias"
+
+#: templates/tabs.html:6
+msgid "Featured"
+msgstr "Destacado"
+
+#: templates/tabs.html:8
+msgid "Recently Updated"
+msgstr "Mensajes Recientes"
+
+#: templates/tabs.html:12
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/auth/login.html:7 templates/auth/login.html.py:11
+#: templates/auth/password_reset_complete.html:9
+msgid "Login"
+msgstr "Inicio"
+
+#: templates/auth/login.html:7 templates/auth/register.html:7
+msgid "or login with twitter"
+msgstr "O, inicie via twitter"
+
+#: templates/auth/login.html:14
+msgid "Forgot your password?"
+msgstr "Olvido su contraseña"
+
+#: templates/auth/password_reset_complete.html:8
+msgid "The password changed successfully."
+msgstr "Cambio de clave exitoso"
+
+#: templates/auth/password_reset_confirm.html:7
+msgid "Enter your password"
+msgstr "Ingrese su clave"
+
+#: templates/auth/password_reset_confirm.html:17
+msgid "New password (again)"
+msgstr "Ingrese su clave (de nuevo)"
+
+#: templates/auth/password_reset_confirm.html:21
+msgid "Change my password"
+msgstr "Cambio de clave"
+
+#: templates/auth/password_reset_confirm.html:25
+msgid "Invalid password reset url."
+msgstr "Clave invalida"
+
+#: templates/auth/password_reset_done.html:8
+msgid ""
+"\n"
+"        We have sent an email to reset your password. Please check your "
+"inbox.\n"
+"    "
+msgstr "Hemos enviado un email para que cambie su clave, revise su cuenta de correos"
+
+#: templates/auth/password_reset_form.html:7
+msgid "Reset Password"
+msgstr "Cambio de clave"
+
+#: templates/auth/password_reset_form.html:10
+#: templates/premises/new_premise.html:15
+msgid "Submit"
+msgstr "Enviar"
+
+#: templates/auth/profile.html:15
+msgid "update"
+msgstr "actualizar"
+
+#: templates/auth/profile.html:20
+msgid "Unfollow"
+msgstr "Dejar de seguir"
+
+#: templates/auth/profile.html:22
+msgid "Follow"
+msgstr "seguir"
+
+#: templates/auth/profile.html:32 templates/search/profile.html:9
+#: templates/stats/profile.html:9
+msgid "FOLLOWER"
+msgstr "SEGUIDOR"
+
+#: templates/auth/profile.html:36 templates/search/profile.html:13
+#: templates/stats/profile.html:13
+msgid "ARGUMENT"
+msgstr "ARGUMENTO"
+
+#: templates/auth/profile.html:40 templates/search/profile.html:17
+#: templates/stats/profile.html:17
+msgid "PREMISE"
+msgstr "PREMISA"
+
+#: templates/auth/profile.html:44 templates/search/profile.html:21
+#: templates/stats/profile.html:21
+msgid "SUPPORT"
+msgstr "APOYO"
+
+#: templates/auth/profile.html:59
+msgid "The feed seems to empty."
+msgstr "Aparece vacio"
+
+#: templates/auth/register.html:7 templates/auth/register.html.py:17
+msgid "Register"
+msgstr "Registro"
+
+#: templates/auth/register.html:12 templates/auth/update.html:10
+msgid ""
+"\n"
+"                You can update your profile picture on <a href=\"http://"
+"gravatar.com\">gravatar.com</a>.\n"
+"                "
+msgstr "Puede actualizar la imagen en su perfil via <a href=\"http://"
+"gravatar.com\">gravatar.com</a>.\n"
+
+#: templates/auth/update.html:6
+msgid "Update Profile"
+msgstr "Actualizar Perfil"
+
+#: templates/auth/update.html:14 templates/premises/edit_contention.html:11
+#: templates/premises/edit_premise.html:10
+msgid "Update"
+msgstr "Actualizar"
+
+#: templates/newsfeed/contention.html:2
+msgid "created an argument:"
+msgstr "argumento creado"
+
+#: templates/newsfeed/fallacy.html:4
+#, python-format
+msgid ""
+"\n"
+"reported <strong>%(fallacy)s</strong> fallacy for a premise:\n"
+msgstr ""
+
+#: templates/newsfeed/following.html:2
+#, python-format
+msgid ""
+"\n"
+"    following <a href=\"%(profile_url)s\" class=\"contention-link\">"
+"%(username)s</a>\n"
+msgstr "    siguiendo <a href=\"%(profile_url)s\" class=\"contention-link\">"
+"%(username)s</a>\n"
+
+#: templates/notifications/added-premise-for-contention.html:7
+#, python-format
+msgid ""
+"\n"
+"    added a <span class=\"premise-type %(class)s\">%(label)s</span> premise\n"
+msgstr "    a agregado <span class=\"premise-type %(class)s\">%(label)s</span> premise\n"
+
+#: templates/notifications/added-premise-for-premise.html:8
+#, python-format
+msgid ""
+"\n"
+"    added a <span class=\"premise-type %(class)s\">%(label)s</span> premise "
+"for a premise\n"
+msgstr "    a agregado <span class=\"premise-type %(class)s\">%(label)s</span> premise "
+"for a premise\n"
+
+#: templates/notifications/followed.html:2
+msgid "is following you."
+msgstr "es un seguidor"
+
+#: templates/notifications/reported-as-fallacy.html:4
+#, python-format
+msgid ""
+"\n"
+"    Your premise reported as <strong>%(label)s</strong> \n"
+"    "
+msgstr ""
+
+#: templates/notifications/supported-a-premise.html:6
+msgid "supported your premise"
+msgstr "apoya su premisa"
+
+#: templates/partials/notifications.html:14
+#: templates/partials/notifications.html:21
+msgid "See all"
+msgstr "Ver todas"
+
+#: templates/partials/notifications.html:19
+msgid "You have no new notifications."
+msgstr "Ud. no tiene nuevas notificaciones"
+
+#: templates/premises/actions.html:3
+#: templates/premises/contention_detail.html:104
+#: templates/premises/tree_view.html:71
+msgid "add premise"
+msgstr "agrego una premisa"
+
+#: templates/premises/actions.html:7 templates/premises/tree_view.html:64
+msgid "remove"
+msgstr "borrar"
+
+#: templates/premises/contention.html:11
+#: templates/premises/contention_detail.html:21
+#: templates/premises/tree_view.html:21
+msgid "sender:"
+msgstr "enviado por:"
+
+#: templates/premises/contention_detail.html:24
+msgid "original discourse:"
+msgstr "discurso original:"
+
+#: templates/premises/contention_detail.html:28
+msgid "Unspecified"
+msgstr "Sin especificar"
+
+#: templates/premises/contention_detail.html:38
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/premises/contention_detail.html:43
+msgid "Unpublish"
+msgstr "Despublicar"
+
+#: templates/premises/contention_detail.html:48
+msgid "Publish"
+msgstr "Publicar"
+
+#: templates/premises/contention_detail.html:58
+msgid "View"
+msgstr "Vista"
+
+#: templates/premises/contention_detail.html:59
+msgid "Tree"
+msgstr "Arbol"
+
+#: templates/premises/contention_detail.html:60
+msgid "List"
+msgstr "Lista"
+
+#: templates/premises/contention_detail.html:66
+msgid "Share"
+msgstr "Compartir"
+
+#: templates/premises/contention_detail.html:86
+msgid "You can use arrow keys to navigate in the map."
+msgstr "Use las flechas del teclado para navegar el mapa."
+
+#: templates/premises/contention_detail.html:136
+#, python-format
+msgid ""
+"\n"
+"            <a href=\"%(login_url)s\">Login</a> or\n"
+"            <a href=\"%(register_url)s\">register</a>\n"
+"            to add a premise for this argument.\n"
+"        "
+msgstr ""
+"\n"
+"            <a href=\"%(login_url)s\">Inicio</a> or\n"
+"            <a href=\"%(register_url)s\">registro</a>\n"
+"            crear premisa para este argumento.\n"
+"        "
+
+#: templates/premises/edit_contention.html:8
+msgid "Edit Argument"
+msgstr "Editar argumento"
+
+#: templates/premises/edit_contention.html:16
+msgid "Remove the argument"
+msgstr "Borrar el argumento"
+
+#: templates/premises/edit_premise.html:7
+msgid "Edit Premise"
+msgstr "Editar premisa"
+
+#: templates/premises/new_contention.html:9
+msgid "Save and continue to edit"
+msgstr "Guardar y continuar editando"
+
+#: templates/premises/new_premise.html:9
+msgid "The parent premise:"
+msgstr "La premisa inicial"
+
+#: templates/premises/new_premise.html:27
+msgid "Characters remaining:"
+msgstr "Caracteres restantes"
+
+#: templates/premises/report.html:7
+msgid "The premise:"
+msgstr "La premisa"
+
+#: templates/premises/report.html:13
+msgid "Report Fallacy"
+msgstr "Reportar falacia"
+
+#: templates/premises/tree_view.html:17
+msgid "sources:"
+msgstr "fuentes"
+
+#: templates/premises/tree_view.html:30
+#, python-format
+msgid ""
+"\n"
+"                             %(count)s fallacy reported.\n"
+"                        "
+msgstr "Reporte exitoso"
+
+#: templates/premises/tree_view.html:44
+#, python-format
+msgid ""
+"\n"
+"                            %(count)s supporter.\n"
+"                        "
+msgstr ""
+
+#: templates/premises/tree_view.html:51
+msgid "and others."
+msgstr "otros."
+
+#: templates/premises/tree_view.html:61
+msgid "edit"
+msgstr "editar"
+
+#: templates/premises/tree_view.html:65
+msgid "Are you sure to remove this premise?"
+msgstr "Esta seguro quiere borrar esta premisa?"
+
+#: templates/premises/tree_view.html:76
+msgid "undo"
+msgstr "deshacer"
+
+#: templates/premises/tree_view.html:81
+msgid "support"
+msgstr "apoyar"
+
+#: templates/premises/tree_view.html:88
+msgid "report fallacy"
+msgstr "reportar falacia"
+
+#: templates/premises/examples/contention.html:2
+msgid ""
+"\n"
+"The main contention. It will be arguable with own premises.\n"
+"The Premises can prove or rebuttal this contention.<br>\n"
+"Examples:\n"
+"<ul>\n"
+"    <li>Real art is for society, not for profit</li>\n"
+"    <li>The meaning of life is 42</li>\n"
+"    <li>Ethics man did what had to be done</li>\n"
+"</ul>\n"
+msgstr ""
+
+#: templates/premises/examples/fallacy.html:2
+msgid ""
+"\n"
+"You have to choose a fallacy type.\n"
+"For more information, you can look at the\n"
+"<a href=\"https://en.wikipedia.org/wiki/List_of_fallacies\">wikipedia entry</"
+"a> for fallacies.\n"
+msgstr ""
+
+#: templates/premises/examples/owner.html:2
+msgid ""
+"\n"
+"The owner of argument. It can be instutation, person, book, or a paper.\n"
+"\n"
+"Examples:\n"
+"<ul>\n"
+"    <li>On the Origin of Species</li>\n"
+"    <li>Friedrich Nietzsche</li>\n"
+"    <li>Piet Mondiran</li>\n"
+"    <li>The Guardian</li>\n"
+"</ul>\n"
+msgstr ""
+
+#: templates/premises/examples/premise.html:2
+msgid ""
+"\n"
+"Example: We define happiness as a state of well-being, starting with being "
+"alive instead of dead.\n"
+msgstr ""
+
+#: templates/premises/examples/premise_source.html:2
+msgid ""
+"\n"
+"Example: Charles Darwin's The Origin of Species\n"
+msgstr ""
+
+#: templates/premises/examples/premise_type.html:3
+msgid ""
+"\n"
+"The type of premise. It can be:\n"
+"<ul>\n"
+"    <li>\n"
+"        but: An objection against the contention.\n"
+"    </li>\n"
+"    <li>\n"
+"        because: A reason for proof the contention.\n"
+"    </li>\n"
+"    <li>\n"
+"        however: An additional situation for the premise.\n"
+"    </li>\n"
+"</ul>\n"
+msgstr ""
+
+#: templates/premises/examples/sources.html:2
+msgid ""
+"\n"
+"The source of argument. It can be a URL, a book, or a newspaper.\n"
+"It is important for reliability of main contention.\n"
+msgstr ""
+
+#: templates/profiles/social_providers.html:3
+msgid "Login with Twitter"
+msgstr "Iniciar via Twitter"
+
+#: templates/search/contention.html:8 templates/stats/contention.html:8
+msgid "PARTICIPANT"
+msgstr "PARTICIPANTE"
+
+#: templates/search/contention.html:12 templates/stats/contention.html:12
+msgid "BECAUSE"
+msgstr "PORQUE"
+
+#: templates/search/contention.html:16 templates/stats/contention.html:16
+msgid "BUT"
+msgstr "PERO"
+
+#: templates/search/contention.html:20 templates/stats/contention.html:20
+msgid "HOWEVER"
+msgstr "SIN EMBARGO"
+
+#: templates/search/premise.html:11 templates/stats/premise.html:11
+msgid "supporter."
+msgstr "apoya."
+
+#: templates/search/premise.html:16 templates/stats/premise.html:16
+msgid "fallacy report."
+msgstr "reporte de falacia"
+
+#: templates/search/search.html:7
+msgid "Keywords:"
+msgstr "Palabras clave"
+
+#: templates/search/search.html:14
+msgid "contentions"
+msgstr "contenciones"
+
+#: templates/search/search.html:17
+msgid "users"
+msgstr "usuarios"
+
+#: templates/search/search.html:20
+msgid "premises"
+msgstr "premisas"
