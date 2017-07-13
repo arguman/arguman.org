@@ -21,3 +21,4 @@ textblob==0.10.0
 anora==0.1.2
 snowballstemmer==1.2.0
 django-typogrify==1.3.2
+networkx==1.11
