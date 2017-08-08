@@ -83,13 +83,6 @@ DATABASES = {
     }
 }
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "redis_cache.cache.RedisCache",
-#         "LOCATION": "127.0.0.1:6379:1"
-#     }
-# }
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
