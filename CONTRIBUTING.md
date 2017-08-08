@@ -42,7 +42,7 @@ Steps to create translation for a new language, assuming [language's code](https
 2. Add your language code to `AVAILABLE_LANGUAGES` setting in `web/main/settings.py`
 3. Copy `web/templates/about-en.md` file to `about-xx.md` and translate it
 4. Compile locale file by running `python manage.py compilemessages -l xx`
-5. Send the pull request with all the changes
+5. Send the pull request with all the changes  
 
 ### Writing Translatable Code
 
@@ -61,6 +61,12 @@ There are {{ count }} {{ name }} objects.
 
 Check [Django docs](https://docs.djangoproject.com/en/1.7/topics/i18n/translation/)
  and [Jinja2 template docs](http://jinja.pocoo.org/docs/2.9/templates/#i18n-in-templates) for detailed documentation regarding translations.
+
+### Language Corpus
+
+To properly create n-grams it is necessary to have corpus in given language. 
+While sending new language please suggest corpus that could be used for that. 
+You can start your search with http://www.nltk.org/data.html.
 
 ## Code of Conduct
 

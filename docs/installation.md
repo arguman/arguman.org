@@ -58,6 +58,12 @@ You need to clone project and install requirements
 Then you need to configure it. Copy and fill in the provided settings template:
 
     cp web/main/settings_local.py.ex web/main/settings_local.py
+    
+Finally download corpus database for building n-grams:
+
+    python -m textblob.download_corpora
+    
+See http://www.nltk.org/data.html for corpus in other languages. 
 
 ## MongoDB database
 
