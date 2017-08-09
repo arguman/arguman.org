@@ -23,9 +23,14 @@ Arguman.org’s aim is to map arguments successfully through the efforts of many
 ## Who are we
 
 arguman.org is an open source project which is developed by the community. If you want to contribute technically or intellectually please don’t hesitate.
+Check [contributing documentation](CONTRIBUTING.md) for hints how to do it.
 
 
-## Run arguman on your local
+## Installing Arguman
+
+If you are not sure which method to choose, choose the first one - Docker.
+
+### Docker
 
 - Fetch repository by `git clone git@github.com:arguman/arguman.org.git`
 - Make sure you have [docker](http://docker.io) and [docker-compose](https://docs.docker.com/compose/install/) installed and working
@@ -33,7 +38,17 @@ arguman.org is an open source project which is developed by the community. If yo
 - if you are using docker-machine or running docker on vagrant make sure you set proper addresses on `settings_local.py`
 - run `docker-compose up` under main project directory where `docker-compose.yml` is
 
+### Vagrant
 
+Go to [Docs: Vagrant Installation](docs/vagrant_installation.md) for details.
+ 
+### Manual install
+
+Go to [Docs: Installation](docs/installation.md) for details.
+
+## Contributing
+
+Go to [Contributing documentation](CONTRIBUTING.md) for details on how to contribute code or add new [translations](CONTRIBUTING.md#translations).
 
 ## Contributors
 
