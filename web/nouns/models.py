@@ -1,8 +1,10 @@
 from uuid import uuid4
 from unidecode import unidecode
 
+from adminsortable.models import SortableMixin
 from django.db import models
 from django.utils.encoding import smart_unicode
+from django.utils.translation import get_language
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.utils.functional import curry
@@ -16,7 +18,7 @@ from nouns.utils import get_synsets, get_lemmas, from_lemma
 class Noun(models.Model):
     text = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, blank=True)
-    language = models.CharField(max_length=25)
+    language = models.CharField(max_length=25, choices=settings.LANGUAGES, default=get_language)
     is_active = models.BooleanField(default=True)
 
     class Meta:
@@ -209,12 +211,16 @@ class Relation(models.Model):
 
 
 class Channel(models.Model):
+    class Meta:
+        ordering = ('order',)
+
     title = models.CharField(max_length=255)
     slug = models.CharField(max_length=255)
     nouns = models.ManyToManyField('Noun', null=True, blank=True)
-    order = models.IntegerField()
-    language = models.CharField(max_length=255, blank=True, null=True)
-    is_featured = models.BooleanField(max_length=255, default=False)
+    order = models.IntegerField(default=0)
+    language = models.CharField(max_length=255, choices=settings.LANGUAGES, default=get_language)
+    # Translators: this is a Channel's is_featured field
+    is_featured = models.BooleanField(max_length=255, default=False, help_text=_('If set this channel will be shown on the main page'))
 
     def save(self, *args, **kwargs):
         if not self.slug:

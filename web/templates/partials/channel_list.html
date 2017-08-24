@@ -1,11 +1,15 @@
 {% load i18n %}
-{% if channels.exists %}
+{% trans "Add channel" as add_channel %}
+{% if channels.exists or user.is_superuser %}
 <ul class="channel-list">
    {% for item in channels %}
        {% if item.is_featured %}
         <li{% if item == channel %} class="active"{% endif %}><a href="{{ item.get_absolute_url }}">{{ item }}</a></li>
        {% endif %}
    {% endfor %}
+    {% if user.is_superuser %}
+        <li><a title="{{ add_channel }}" href="{% url 'admin:nouns_channel_add' %}">+<span class="wcag_hide">{{ add_channel }}</span></a></li>
+    {% endif %}
     <li class="show-all-channels"><a href="#">{% trans "all channels" %}</a></li>
 </ul>
 

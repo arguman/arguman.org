@@ -1,3 +1,5 @@
+from adminsortable2.admin import SortableAdminMixin
+
 from django.contrib import admin
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -110,8 +112,9 @@ class NounAdmin(ActionInChangeFormMixin, admin.ModelAdmin):
         return qs.update(is_active=False)
 
 
-class ChannelAdmin(admin.ModelAdmin):
+class ChannelAdmin(SortableAdminMixin, admin.ModelAdmin):
     filter_horizontal = ('nouns', )
+    exclude = ('order',)
 
 
 admin.site.register(Noun, NounAdmin)

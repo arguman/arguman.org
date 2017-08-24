@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 """
 Django settings for arguman project.
 
@@ -42,7 +43,9 @@ INSTALLED_APPS = (
 
     'typogrify',
     'social_auth',
+    'adminsortable2',
     'django_gravatar',
+    'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
     'profiles',
@@ -102,12 +105,14 @@ DEFAULT_LANGUAGE = 'en'
 
 BASE_DOMAIN = 'arguman.org'
 
-AVAILABLE_LANGUAGES = (
-    'tr',
-    'en',
-    'ch',
-    'fr'
+LANGUAGES = (
+    ('tr', u'Türkçe'),
+    ('en', u'English'),
+    ('ch', u'中文'),
+    ('fr', u'Français')
 )
+
+AVAILABLE_LANGUAGES = [lang_code for lang_code, lang_name in LANGUAGES]
 
 LANGUAGE_CODE_MAPPING = {
     'ch': 'zh-Hans'

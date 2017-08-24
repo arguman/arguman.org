@@ -3678,3 +3678,17 @@ div.load-more {
     height: 200px;
     border-radius: 50%;
 }
+
+.wcag_hide {
+   position:absolute;
+   top:0;
+   left:-10000px;
+   width:1px;
+   height:1px;
+}
+
+.wcag_hide2 {
+    clip: rect(1px, 1px, 1px, 1px);
+    display: block;
+    position: absolute;
+}
