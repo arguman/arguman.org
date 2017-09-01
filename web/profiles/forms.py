@@ -8,7 +8,7 @@ from django.contrib.auth.forms import (UserCreationForm,
     AuthenticationForm as BaseAuthenticationForm)
 
 from profiles.models import Profile
-from django.utils.translation import ugettext_lazy as _
+
 
 class AuthenticationForm(BaseAuthenticationForm):
     def __init__(self, *args, **kwargs):
