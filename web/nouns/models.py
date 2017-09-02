@@ -4,7 +4,6 @@ from unidecode import unidecode
 from adminsortable.models import SortableMixin
 from django.db import models
 from django.utils.encoding import smart_unicode
-from django.utils.translation import get_language
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.utils.functional import curry
