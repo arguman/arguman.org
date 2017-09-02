@@ -1,7 +1,6 @@
 from uuid import uuid4
 from unidecode import unidecode
 
-from adminsortable.models import SortableMixin
 from django.db import models
 from django.utils.encoding import smart_unicode
 from django.conf import settings
