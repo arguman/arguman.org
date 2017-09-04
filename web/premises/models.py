@@ -90,9 +90,7 @@ class Contention(DeletePreventionMixin, models.Model):
     date_creation = models.DateTimeField(auto_now_add=True)
     date_modification = models.DateTimeField(auto_now_add=True)
     ip_address = models.CharField(max_length=255, null=True, blank=True)
-    language = models.CharField(max_length=5, null=True,
-                                choices=[(language, language) for language in
-                                         settings.AVAILABLE_LANGUAGES])
+    language = models.CharField(max_length=5, null=True, choices=settings.LANGUAGES)
     nouns = models.ManyToManyField('nouns.Noun', blank=True, null=True,
                                    related_name="contentions")
     related_nouns = models.ManyToManyField('nouns.Noun', blank=True, null=True,
