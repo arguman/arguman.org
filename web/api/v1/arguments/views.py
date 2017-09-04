@@ -26,7 +26,7 @@ class ContentionViewset(viewsets.ModelViewSet):
     paginate_by = 20
     filter_backends = (filters.SearchFilter, filters.DjangoFilterBackend,
                        filters.OrderingFilter)
-    search_fields = ('title',)
+    search_fields = ('title', 'slug',)
     filter_fields = ('is_featured',)
     ordering_fields = ('date_creation',)
 
