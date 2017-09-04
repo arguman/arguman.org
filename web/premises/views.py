@@ -216,6 +216,11 @@ class HomeView(TemplateView, PaginationMixin):
                        .filter(is_featured=True)
                        .order_by("-date_modification"))
 
+        if not contentions.exists():
+            contentions = Contention.objects.language().annotate(
+                premise_count=Sum("premises"),
+            ).order_by("-premise_count")
+
         if paginate:
             contentions = (contentions[self.get_offset(): self.get_limit()])
 
