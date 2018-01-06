@@ -47,6 +47,9 @@ Arguman.org açık kaynak bir proje olup topluluk tarafından geliştirilmektedi
 - [Samet Aydemir](https://twitter.com/samet_aydemir) ([chrome plugin](https://chrome.google.com/webstore/detail/arguman/infgfejecdecnalkcjfemcibiponjban/related?hl=tr))
 - [Çağlar Bozkurt](http://caglarbozkurt.com)
 - [Ray](https://github.com/tvvocold) (Çince Yerelleştirme)
+- [Jorge Barata](jorge.barata.gonzalez@gmail.com) (spanish translations)
+- Alejo Duque (spanish translations)
+- [Ricardo Casares](http://analogic.al) (spanish translations)
 
 
 Ayrıca arguman.org'un fikir aşamasındaki öneri ve destekleri için [Burak Arıkan](http://burak-arikan.com) ve [Kadir Akkara](https://dribbble.com/akkara)'ya teşekkürler.

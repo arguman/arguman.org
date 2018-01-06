@@ -34,6 +34,9 @@ Arguman.org 是一个组织的开源项目, 如果你想贡献技术或智慧请
 - [Samet Aydemir](https://twitter.com/samet_aydemir) ([chrome 插件](https://chrome.google.com/webstore/detail/arguman/infgfejecdecnalkcjfemcibiponjban/related?hl=tr))
 - [Çağlar Bozkurt](http://caglarbozkurt.com) (安卓开发者)
 - [Ray](https://github.com/tvvocold) （中文本土化志愿者）
+- [Jorge Barata](jorge.barata.gonzalez@gmail.com) (spanish translations)
+- Alejo Duque (spanish translations)
+- [Ricardo Casares](http://analogic.al) (spanish translations)
 
 一并感谢在开发 arguman.org 过程中做出贡献的 Burak Arıkan 和 Kadir Akkara.
 

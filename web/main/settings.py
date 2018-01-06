@@ -106,6 +106,7 @@ AVAILABLE_LANGUAGES = (
     'tr',
     'en',
     'ch',
+    'es',
     'fr'
 )
 
