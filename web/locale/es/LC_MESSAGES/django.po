@@ -268,8 +268,8 @@ msgstr "Olvidó su contraseña?"
 #: templates/auth/login_popup.html:6
 msgid "<a href=\"%(login_url)s\">Login</a> or <a href=\"%(register_url)s"
 "\">register</a> to add a premise for this argument."
-msgstr "<a href=\"%(login_url)s\">Entrar</a> or <a href=\"%(register_url)s"
-"\">Regístrese</a> para agregar una premisa a este argumento."
+msgstr "<a href=\"%(login_url)s\">Entre</a> o <a href=\"%(register_url)s"
+"\">regístrese</a> para agregar una premisa a este argumento."
 
 #: templates/auth/password_reset_complete.html:8
 msgid "The password changed successfully."
@@ -644,10 +644,8 @@ msgid "RELATED ARGUMENTS"
 msgstr "ARGUMENTOS RELACIONADOS"
 
 #: templates/premises/base_contention.html:75
-#, fuzzy
-#| msgid "Share"
 msgid "share"
-msgstr "Compartir"
+msgstr "compartir"
 
 #: templates/premises/base_contention.html:82
 msgid "view"
