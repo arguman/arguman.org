@@ -52,12 +52,15 @@
                 {% trans "Languages:" %}
                 <a {% if language == "en" %}class="active" {% endif %}
                     href="http://en.arguman.org">English</a>
+                <a {% if language == "es" %}class="active" {% endif %}
+                    href="http://es.arguman.org">Español</a>
+                <a {% if language == "fr" %}class="active" {% endif %}
+                    href="http://fr.arguman.org">{% trans "Français" %}</a>
                 <a {% if language == "tr" %}class="active" {% endif %}
                     href="http://tr.arguman.org">Türkçe</a>
                 <a {% if language == "zh-hans" %}class="active" {% endif %}
                     href="http://ch.arguman.org">{% trans "中文" %}</a>
-                <a {% if language == "fr" %}class="active" {% endif %}
-                    href="http://fr.arguman.org">{% trans "Français" %}</a><br>
+                <br>
                 {% trans "Follow on twitter:" %} <a href="https://twitter.com/argumentmapping" target="_blank">@argumentmapping</a> <br />
 		        Subreddit: <a href="https://www.reddit.com/r/arguman" target="_blank">/r/arguman</a>
             </li>
