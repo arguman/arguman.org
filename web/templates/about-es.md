@@ -25,6 +25,7 @@ Arguman.org es un proyecto de código abierto desarrollado por la comunidad. Si 
 - [Bahattin Çiniç](http://bahattincinic.com/) (desarrollador)
 - [Halil Kaya](http://halilkaya.net) (desarrollador app android)
 - [A. Liva Cengiz](https://livacengiz.github.io) (desarrollador front-end)
+- [Ricardo Casares](http://analogic.al) (development, spanish translations)
 
 ## Contribuidores
 - [Kağan Yaldızkaya](https://dribbble.com/kagan) (design)
@@ -33,10 +34,9 @@ Arguman.org es un proyecto de código abierto desarrollado por la comunidad. Si 
 - [Mehmet İnce](https://twitter.com/mdisec) (penetration test)
 - [Samet Aydemir](https://twitter.com/samet_aydemir) ([chrome plugin](https://chrome.google.com/webstore/detail/arguman/infgfejecdecnalkcjfemcibiponjban/related?hl=tr))
 - [Çağlar Bozkurt](http://caglarbozkurt.com) (android app developer)
-- [Ray](https://github.com/tvvocold) (Çince Yerelleştirme)
+- [Ray](https://github.com/tvvocold) (Chinese translations)
 - [Jorge Barata](jorge.barata.gonzalez@gmail.com) (spanish translations)
 - Alejo Duque (spanish translations)
-- [Ricardo Casares](http://analogic.al) (spanish translations)
 
 Agradecemos también por el soporte intelectual durante el desarrollo de arguman.org a to Burak Arıkan y Kadir Akkara.
 
@@ -50,6 +50,7 @@ Agradecemos también por el soporte intelectual durante el desarrollo de arguman
 
 ## Eventos
 - [Galatasaray University Debating Society](http://arguman.org/blog/galatasaray-universitesi-munazara-egitimi-gunlerindeydik/)
+- [FOSDEM 2016](https://archive.fosdem.org/2016/schedule/event/arguman/)
 
 ## Donaciones
 Si quieres donar para mantener los costos de nuestros servidores: <br>
