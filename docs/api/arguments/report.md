@@ -8,7 +8,7 @@ Reporting Fallacies
 | Authentication  | Yes                |
 
 
-#####Payload - Raw
+##### Payload - Raw
 
 | Paramether    | Type     | Required |
 | ------------- | ---------| ------------ |
@@ -20,7 +20,7 @@ Reporting Fallacies
 https://github.com/arguman/arguman.org/blob/master/web/premises/fallacies.json
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"

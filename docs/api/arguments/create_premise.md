@@ -8,7 +8,7 @@ Adding a Premise
 | Authentication  | Yes                |
 
 
-#####Payload - Raw
+##### Payload - Raw
 
 | Paramether    | Type     |  Required     |
 | ------------- | ---------| --------------|
@@ -18,15 +18,15 @@ Adding a Premise
 | sources       | String   |  No           |
 
 
-#####Additional Information1
+##### Additional Information1
 1. **premise_type:** can be 1,2 or 3. (0 for but, 1 for because, 2 for however)
 2. **text:** Premise itself. Maximum 300 characters.
 3. **parent:** ID of the parent premise. If empty, then it's a top level premise. 
 
 
-#####Adding a premise to an argument
+##### Adding a premise to an argument
 
-#####Request
+##### Request
 
 ```bash
 curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
@@ -59,9 +59,9 @@ curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
 ```
 
 
-#####Adding a premise to another premise
+##### Adding a premise to another premise
 
-#####Request
+##### Request
 
 ```bash
 curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"

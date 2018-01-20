@@ -8,7 +8,7 @@ Editing a Premise
 | Authentication  | Yes                |
 
 
-#####Payload - Raw
+##### Payload - Raw
 
 | Paramether    | Type     |  Required |
 | ------------- | ---------| --------------|
@@ -18,15 +18,15 @@ Editing a Premise
 | sources       | String   |  No           |
 
 
-#####Additional Info
+##### Additional Info
 1. **premise_type:** 0 for but, 1 for because, 2 for however.
 2. **text**: Content of the premise. Maximum 300 characters.
 3. **parent:** ID of the parent premise. If empty, then it's a top level premise. 
 4. Only the owner can delete a premise.
 
-#####Editing a premise
+##### Editing a premise
 
-#####Request
+##### Request
 
 ```bash
 curl -X PUT  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"

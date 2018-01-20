@@ -7,10 +7,10 @@ Deleting a premise
 | Content-Type    | application/json   |
 | Authentication  | Yes                |
 
-#####Additional Info
+##### Additional Info
 Only the owner can delete a premise.
 
-#####Request
+##### Request
 
 ```bash
 curl -X DELETE  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
@@ -18,6 +18,6 @@ curl -X DELETE  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f23990
                 http://arguman.org/api/v1/arguments/9/premises/10/
 ```
 
-#####Response (Status: 204 NO CONTENT)
+##### Response (Status: 204 NO CONTENT)
 
   `<Response body is empty>`
