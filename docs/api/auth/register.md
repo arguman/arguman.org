@@ -8,7 +8,7 @@ User Registration
 | Content-Type    | application/json   |
 
 
-#####Payload - raw
+##### Payload - raw
 
 | Paramether    | Type     | Required
 | ------------- | ---------|-----------------------|
@@ -16,7 +16,7 @@ User Registration
 | Password      | String   | Yes                   |
 | E-Mail        | String   | No                    |
 
-#####Request
+##### Request
 
 ```bash
 curl -X POST  -H "Content-Type: application/json"
@@ -24,7 +24,7 @@ curl -X POST  -H "Content-Type: application/json"
      http://arguman.org/api/v1/auth/register/
 ```
 
-#####Response (Status: 201 CREATED)
+##### Response (Status: 201 CREATED)
 
 ```json
 {"email": "bahattincinic@gmail.com", "username": "bahattincinic"}

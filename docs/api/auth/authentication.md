@@ -7,7 +7,7 @@ Authentication
 | Content-Type    | application/json   |
 
 
-#####Payload - Raw
+##### Payload - Raw
 
 | Paramether    | Type     | Required |
 | ------------- | ---------| ------------ |
@@ -15,7 +15,7 @@ Authentication
 | Password      | String   | Yes          |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X POST  -H "Content-Type: application/json"
@@ -23,7 +23,7 @@ curl -X POST  -H "Content-Type: application/json"
      http://arguman.org/api/v1/auth/login/
 ```
 
-#####Response (Status: 200 OK)
+##### Response (Status: 200 OK)
 
 ```json
 {
@@ -35,7 +35,7 @@ Using Tokens
 =========================
 You need to put the received token to headers like this:
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Authorization: Token 173f758803eb1fb0ffaf36a782caaa885bd42af2"
