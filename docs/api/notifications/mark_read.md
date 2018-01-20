@@ -8,7 +8,7 @@ Marking all notifications as read
 | Content-Type    | application/json   |
 | Authentication  | Yes                |
 
-#####Request
+##### Request
 
 ```bash
 curl -X PATCH -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
@@ -27,7 +27,7 @@ Marking a notification as read
 | Content-Type    | application/json   |
 | Authentication  | Yes                |
 
-#####Request
+##### Request
 
 ```bash
 curl -X PATCH -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"

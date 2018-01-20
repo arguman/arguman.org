@@ -9,7 +9,7 @@ Listing notifications
 | Authentication  | Yes                |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
