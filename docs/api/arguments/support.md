@@ -9,7 +9,7 @@ Supporting a premise
 | Authentication  | Yes                |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
@@ -17,7 +17,7 @@ curl -X POST  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
               http://arguman.org/api/v1/arguments/1/premises/1/support/
 ```
 
-#####Response (Status: 201 CREATED)
+##### Response (Status: 201 CREATED)
 
   `<Response body is empty>`
 
@@ -33,7 +33,7 @@ Unsupporting a premise
 | Authentication  | Yes                |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X DELETE  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
@@ -41,7 +41,7 @@ curl -X DELETE  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f23990
               http://arguman.org/api/v1/arguments/1/premises/1/support/
 ```
 
-#####Response (Status: 204 NO CONTENT)
+##### Response (Status: 204 NO CONTENT)
 
   `<Response body is empty>`
 
@@ -56,7 +56,7 @@ Getting the supporters of a premise
 | Content-Type    | application/json   |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"

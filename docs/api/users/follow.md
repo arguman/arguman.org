@@ -6,14 +6,14 @@ Followers of a user
 | Method          | GET                                                   |
 | Content-Type    | application/json                                      |
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET -H "Content-Type: application/json"
      http://arguman.org/api/v1/users/bahattincinic/followers/
 ```
 
-#####Response (Status: 200 OK)
+##### Response (Status: 200 OK)
 
 ```json
 {
@@ -45,14 +45,14 @@ Followed users
 | Method          | GET                                                   |
 | Content-Type    | application/json                                      |
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET -H "Content-Type: application/json"
      http://arguman.org/api/v1/users/bahattincinic/followings/
 ```
 
-#####Response (Status: 200 OK)
+##### Response (Status: 200 OK)
 
 ```json
 {
@@ -80,14 +80,14 @@ Following a user
 | Content-Type    | application/json                                      |
 | Authentication  | Yes                                                   |
 
-#####Request
+##### Request
 
 ```bash
 curl -X POST -H "Authorization: Token d2b443e34d64124dd6d20044c39f6a6c82fd0ee2"
      http://arguman.org/api/v1/users/bahattincinic/follow/
 ```
 
-#####Response (Status: 201 CREATED)
+##### Response (Status: 201 CREATED)
 
   `<Response body is empty>`
 
@@ -102,13 +102,13 @@ Unfollowing a user
 | Content-Type    | application/json                                      |
 | Authentication  | Yes                                                   |
 
-#####Request
+##### Request
 
 ```bash
 curl -X DELETE -H "Authorization: Token d2b443e34d64124dd6d20044c39f6a6c82fd0ee2"
      http://arguman.org/api/v1/users/bahattincinic/follow/
 ```
 
-#####Response (Status: 204 NO CONTENT)
+##### Response (Status: 204 NO CONTENT)
 
   `<Response body is empty>`

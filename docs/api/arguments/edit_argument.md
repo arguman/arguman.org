@@ -8,7 +8,7 @@ Editing an Argument
 | Authentication  | Yes                |
 
 
-#####Payload - Raw
+##### Payload - Raw
 
 | Paramether    | Type     |  Required |
 | ------------- | ---------| --------------|
@@ -17,10 +17,10 @@ Editing an Argument
 | owner         | String   |  No           |
 | is_published  | Boolean  |  Yes          |
 
-#####Additional Info
+##### Additional Info
 Only the owner can delete an argument.
 
-#####Request
+##### Request
 
 ```bash
 curl -X PUT  -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"

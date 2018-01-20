@@ -8,7 +8,7 @@ Getting the Argument List
 | Content-Type    | application/json   |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
@@ -192,7 +192,7 @@ Getting the details of the Argument list
 | Content-Type    | application/json   |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
@@ -210,7 +210,7 @@ Getting the premises of an argument
 | Content-Type    | application/json   |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
@@ -228,7 +228,7 @@ Listing arguments by their creation date
 | Content-Type    | application/json   |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
@@ -247,7 +247,7 @@ Listing Featured Arguments
 | Content-Type    | application/json   |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
@@ -265,7 +265,7 @@ Searching Arguments
 | Content-Type    | application/json   |
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"

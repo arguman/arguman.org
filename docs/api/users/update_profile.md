@@ -8,7 +8,7 @@ Updating User Profile
 | Authentication  | Yes                                                   |
 
 
-#####Payload - Raw
+##### Payload - Raw
 
 | Paramether    | Type     |  Required |
 | ------------- | ---------| --------------|
@@ -17,19 +17,19 @@ Updating User Profile
 | new_password1 | String   |  No           |
 | new_password2 | String   |  No           |
 
-#####Additional Info
+##### Additional Info
 1. new_password1 and new_password2 fields should both be provided to change the password.
 2. new_password1 and new_password2 fields should have the same value.
 
 
-#####Request
+##### Request
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{"username": "bahattincinic"}'
      http://arguman.org/api/v1/user/
 ```
 
-#####Response (Status: 200 OK)
+##### Response (Status: 200 OK)
 
 ```json
 {
@@ -40,7 +40,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{"username": "bahattincinic"
 }
 ```
 
-#####Change Password
+##### Change Password
 
 ```bash
 curl -X PUT -H "Content-Type: application/json"

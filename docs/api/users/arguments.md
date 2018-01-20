@@ -7,14 +7,14 @@
 | Status Codes    | 200                                                   |
 | Content-Type    | application/json                                      |
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET -H "Content-Type: application/json"
      http://arguman.org/api/v1/users/bahattincinic/arguments/owner/
 ```
 
-#####Response (Status: 200 OK)
+##### Response (Status: 200 OK)
 
 ```json
 {
@@ -39,14 +39,14 @@ All arguments a user contributed
 | Status Codes    | 200                                                   |
 | Content-Type    | application/json                                      |
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET -H "Content-Type: application/json"
      http://arguman.org/api/v1/users/bahattincinic/arguments/contributed/
 ```
 
-#####Response (Status: 200 OK)
+##### Response (Status: 200 OK)
 
 ```json
 {

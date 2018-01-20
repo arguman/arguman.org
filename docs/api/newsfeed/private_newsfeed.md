@@ -9,11 +9,11 @@ Getting the private newsfeed
 | Authentication  | Yes                |
 
 
-#####Additional Information
+##### Additional Information
 1. You can use `?page=<page_number>` to change pages.
 2. Default result limit is 20 per page. You can specify a custom limit by `?limit=<limit_number>`
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET   -H "Authorization: Token 66e84d2dd71ecb992c9baa331c72eca58f239909"
