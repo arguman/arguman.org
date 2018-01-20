@@ -8,11 +8,11 @@ Getting the public newsfeed
 | Content-Type    | application/json   |
 
 
-#####Additional Information
+##### Additional Information
 1. You can use `?page=<page_number>` to change pages.
 2. Default result limit is 20 per page. You can specify a custom limit by `?limit=<limit_number>`
 
-#####Request
+##### Request
 
 ```bash
 curl -X GET  -H "Content-Type: application/json"
