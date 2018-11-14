@@ -39,8 +39,7 @@ from i18n.utils import normalize_language_code
 
 
 def get_ip_address(request):
-    return (request.META.get('HTTP_X_FORWARDED_FOR') or
-            request.META.get('REMOTE_ADDR'))
+    return request.META.get('REMOTE_ADDR')
 
 
 class ContentionDetailView(DetailView):
