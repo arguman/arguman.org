@@ -235,6 +235,9 @@ BLOG_FEED_TITLE = "Arguman.org Blog'u"
 BLOG_FEED_DESCRIPTION = "Arguman analizi platformu"
 BLOG_URL = "http://arguman.org/blog"
 
+# default premise view: 'tree' or 'list'
+DEFAULT_PREMISE_VIEW = 'tree'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

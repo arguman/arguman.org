@@ -50,7 +50,10 @@ class ContentionDetailView(DetailView):
 
     def get_template_names(self):
         view = self.request.GET.get("view")
-        name = ("list_view" if view == "list" else "tree_view")
+        name = settings.DEFAULT_PREMISE_VIEW + "_view"
+        if view in ["list", "tree"]:
+            name = view + "_view"
+
         return ["premises/%s.html" % name]
 
     def get_parent(self):
