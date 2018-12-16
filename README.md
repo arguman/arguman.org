@@ -18,7 +18,7 @@ You can think of argument mappings as visual hierarchy mappings.
 
 Arguman.org’s aim is to map arguments successfully through the efforts of many users.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Whatley.png/800px-Whatley.png)
+![](https://raw.githubusercontent.com/arguman/arguman.org/master/argument-map.png)
 https://www.wikiwand.com/en/Argument_map
 
 ## Who are we
