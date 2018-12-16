@@ -6,7 +6,7 @@
 
 Users assert contentions to be discussed, supported, proved, or disproved, and argue with premises using because, but, or however conjunctions.
 
-![image](https://cloud.githubusercontent.com/assets/182906/10586355/674acef0-76a4-11e5-9902-3dd7184cb0b3.png)
+![image](https://raw.githubusercontent.com/arguman/arguman.org/master/example-argument.png)
 
 ## Benefits
 
@@ -49,29 +49,6 @@ Go to [Docs: Installation](docs/installation.md) for details.
 ## Contributing
 
 Go to [Contributing documentation](CONTRIBUTING.md) for details on how to contribute code or add new [translations](CONTRIBUTING.md#translations).
-
-## Contributors
-
-- Fatih Erikli
-- Tuna Vargı
-- Huseyin Mert
-- Erdem Ozkol
-- Aybars Badur
-- Can Göktaş
-- Bahattin Çiniç
-- Murat Çorlu
-- Cumhur Korkut
-- Serdar Dalgıç
-- Emir Karşıyakalı
-- Ali Barın
-- Halil Kaya
-- A. Liva Cengiz
-- Çağlar Bozkurt
-
-## Additional Thanks To
-
-- Burak Arıkan
-- Kadir Akkara Yardımcı
 
 ## Subreddit
 <https://www.reddit.com/r/arguman>
