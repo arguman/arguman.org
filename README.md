@@ -1,6 +1,6 @@
-![Argüman.org](http://arguman.org/static/img/logo.png)
+![Argüman.org](https://raw.githubusercontent.com/arguman/arguman.org/master/logo/logo-v2.png)
 ----
-[Arguman.org](http://arguman.org) is an argument analysis and [mapping](https://en.wikipedia.org/wiki/Argument_map) platform.
+[Arguman.org](https://arguman.org) is an argument analysis and [mapping](https://en.wikipedia.org/wiki/Argument_map) platform.
 
 ## How does it work
 
