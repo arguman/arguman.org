@@ -2,7 +2,7 @@
 ----
 [Arguman.org](http://arguman.org) is an argument analysis and [mapping](https://en.wikipedia.org/wiki/Argument_map) platform.
 
-## How it works
+## How does it work
 
 Users assert contentions to be discussed, supported, proved, or disproved, and argue with premises using because, but, or however conjunctions.
 
@@ -19,6 +19,7 @@ You can think of argument mappings as visual hierarchy mappings.
 Arguman.org’s aim is to map arguments successfully through the efforts of many users.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Whatley.png/800px-Whatley.png)
+https://www.wikiwand.com/en/Argument_map
 
 ## Who are we
 
