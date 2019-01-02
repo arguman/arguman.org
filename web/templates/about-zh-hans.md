@@ -24,7 +24,6 @@ Arguman.org 是一个组织的开源项目, 如果你想贡献技术或智慧请
 - [Tuna Vargı](http://tunavargi.com/) (开发者)
 - [Bahattin Çiniç](http://bahattincinic.com/) (开发者)
 - [Halil Kaya](http://halilkaya.net) (安卓开发者)
-- [A. Liva Cengiz](https://livacengiz.github.io) (前端开发者)
 
 ## 贡献者
 - [Kağan Yaldızkaya](https://dribbble.com/kagan) (设计)
