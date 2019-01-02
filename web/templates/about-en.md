@@ -25,7 +25,6 @@ Arguman.org is an open source project which developed by community, If you want 
 - [Tuna Vargı](http://tunavargi.com/) (developer)
 - [Bahattin Çiniç](http://bahattincinic.com/) (developer)
 - [Halil Kaya](http://halilkaya.net) (android app developer)
-- [A. Liva Cengiz](https://livacengiz.github.io) (front-end developer)
 
 ## Contributors
 - [Kağan Yaldızkaya](https://dribbble.com/kagan) (design)
