@@ -234,15 +234,15 @@ msgstr "Geçersiz karakterler."
 
 #: profiles/forms.py:54
 msgid "The two password fields didn't match."
-msgstr "Şifreler birbiriyle uyuşmuyor."
+msgstr "Parolalar birbiriyle uyuşmuyor."
 
 #: profiles/forms.py:62 templates/auth/password_reset_confirm.html:12
 msgid "New password"
-msgstr "Yeni şifre"
+msgstr "Yeni parola"
 
 #: profiles/forms.py:66
 msgid "New password confirmation"
-msgstr "Yeni şifre onayı"
+msgstr "Yeni parola onayı"
 
 #: profiles/models.py:22
 msgid "email notification"
@@ -265,7 +265,7 @@ msgstr "ya da twitter ile bağlan"
 
 #: templates/auth/login.html:14
 msgid "Forgot your password?"
-msgstr "Şifremi unuttum"
+msgstr "Parolamı unuttum"
 
 #: templates/auth/login_popup.html:6
 #, python-format
@@ -278,28 +278,28 @@ msgstr ""
 
 #: templates/auth/password_reset_complete.html:8
 msgid "The password changed successfully."
-msgstr "Şifre başarıyla değiştirildi."
+msgstr "Parola başarıyla değiştirildi."
 
 #: templates/auth/password_reset_confirm.html:7
 msgid "Enter your password"
-msgstr "Şifrenizi girin"
+msgstr "Parolanızı girin"
 
 #: templates/auth/password_reset_confirm.html:17
 msgid "New password (again)"
-msgstr "Yeni şifre (tekrar)"
+msgstr "Yeni parola (tekrar)"
 
 #: templates/auth/password_reset_confirm.html:21
 msgid "Change my password"
-msgstr "Şifremi değiştir"
+msgstr "Parolamı değiştir"
 
 #: templates/auth/password_reset_confirm.html:25
 msgid "Invalid password reset url."
-msgstr "Yanlış şifre sıfırlama URL'i."
+msgstr "Yanlış parola sıfırlama URL'i."
 
 #: templates/auth/password_reset_done.html:8
 msgid "We have sent an email to reset your password. Please check your inbox."
 msgstr ""
-"Şifrenizi sıfırlamanız için bir email gönderdik. Lütfen kontrol ediniz."
+"Parolanızı sıfırlamanız için bir email gönderdik. Lütfen kontrol ediniz."
 
 #: templates/auth/password_reset_email.html:2
 msgid ""
@@ -317,7 +317,7 @@ msgstr ""
 
 #: templates/auth/password_reset_form.html:7
 msgid "Reset Password"
-msgstr "Şifremi Unuttum"
+msgstr "Parolamı Unuttum"
 
 #: templates/auth/password_reset_form.html:10
 #: templates/nouns/new_relation.html:37 templates/premises/new_premise.html:15
