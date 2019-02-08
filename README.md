@@ -6,7 +6,7 @@
 
 Users assert contentions to be discussed, supported, proved, or disproved, and argue with premises using because, but, or however conjunctions.
 
-![image](https://raw.githubusercontent.com/arguman/arguman.org/master/example-argument.png)
+![image](https://raw.githubusercontent.com/arguman/arguman.org/master/example-argument.png?)
 
 ## Benefits
 
