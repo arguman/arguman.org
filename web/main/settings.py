@@ -107,7 +107,8 @@ AVAILABLE_LANGUAGES = (
     'en',
     'ch',
     'es',
-    'fr'
+    'fr',
+    'pl'
 )
 
 LANGUAGE_CODE_MAPPING = {
