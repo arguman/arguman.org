@@ -288,8 +288,6 @@
                     top: top,
                     display: visible ? "block": "none"
                 });
-		
-		$('html, body').width(width);
             }
 
             if (hasCollapsed) {
@@ -410,6 +408,7 @@
                 }
             }
 
+            this.setAppWidth();
             this.setAppHeight();
         },
 
@@ -441,6 +440,10 @@
                 marginLeft: left
             });
         },
+
+	setAppWidth: function () {
+	    $('#app').width(this.treeWidth);
+	},
 
         setAppHeight: function () {
             var premises = $(".tree-node"),
