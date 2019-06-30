@@ -288,6 +288,8 @@
                     top: top,
                     display: visible ? "block": "none"
                 });
+		
+		$('html, body').width(width);
             }
 
             if (hasCollapsed) {
