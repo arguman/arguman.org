@@ -1,4 +1,4 @@
-![Argüman.org](https://raw.githubusercontent.com/arguman/arguman.org/master/logo/logo-v2.png)
+![Argüman.org](https://avatars3.githubusercontent.com/u/9404651?s=200&v=4)
 ----
 [Arguman.org](https://arguman.org) is an argument analysis and [mapping](https://www.wikiwand.com/en/Argument_map) platform.
 
