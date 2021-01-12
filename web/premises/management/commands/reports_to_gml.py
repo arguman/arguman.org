@@ -57,9 +57,9 @@ class Command(BaseCommand):
             for premise in Premise.objects.filter(
                     reports__fallacy_type=fallacy_type):
 
-                #graph.add_node(premise.argument.pk, type="argument")
+                graph.add_node(premise.argument.pk, type="argument")
 
-                #graph.add_edge(premise.argument.pk, node, type="reported")
+                graph.add_edge(premise.argument.pk, node, type="reported")
 
                 if premise.argument.channel:
                     channel_node = unidecode(premise.argument.channel.title)
