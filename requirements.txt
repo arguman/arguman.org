@@ -1,4 +1,4 @@
-Django==1.7
+Django==1.11.29
 Unidecode==0.04.16
 django-social-auth==0.7.28
 httplib2==0.9
